@@ -68,21 +68,6 @@
           </button>
         </form>
 
-        <!-- Quick Fill Helper for Demo / Review -->
-        <div class="mt-6 pt-5 border-t border-slate-100">
-          <div class="flex items-center justify-between text-xs mb-2 text-slate-500">
-            <span>Quick Login Credentials:</span>
-            <span class="font-mono text-slate-700 bg-slate-100 px-2 py-0.5 rounded text-[11px]">Super Admin</span>
-          </div>
-          <button 
-            @click="fillDemoCredentials"
-            type="button" 
-            class="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors flex items-center justify-center gap-2 border border-slate-200/80"
-          >
-            <span>⚡ One-Click Fill: <code class="text-[#0F2A44] font-mono">admin@toplinkers.com / admin123</code></span>
-          </button>
-        </div>
-
         <!-- Back to Website Link -->
         <div class="mt-6 text-center">
           <router-link to="/" class="text-xs text-gray-400 hover:text-[#16B4E8] transition-colors inline-flex items-center gap-1">
@@ -113,34 +98,23 @@ const showPassword = ref(false)
 const loading = ref(false)
 const errorMessage = ref('')
 
-const fillDemoCredentials = () => {
-  email.value = 'admin@toplinkers.com'
-  password.value = 'admin123'
-}
-
 const handleLogin = async () => {
-  console.log('handleLogin called with email:', email.value, 'password:', password.value ? '***' : 'EMPTY')
   loading.value = true
   errorMessage.value = ''
   
   const result = await adminStore.login(email.value, password.value)
-  console.log('adminStore.login result:', JSON.stringify(result))
   loading.value = false
   
   if (result.success) {
     const canDash = adminStore.canAccessModule('dashboard')
-    console.log('canAccessModule dashboard:', canDash)
     if (canDash) {
-      console.log('Executing router.push to /admin/dashboard')
       router.push('/admin/dashboard').catch(err => console.error('Router push error:', err))
     } else {
       const firstAllowed = adminStore.allowedModules[0]
-      console.log('Executing router.push to fallback:', firstAllowed)
       router.push(firstAllowed ? `/admin/${firstAllowed}` : '/admin/leads')
     }
   } else {
     errorMessage.value = result.message || 'Authentication failed. Please verify email and password.'
-    console.log('Login failed message:', errorMessage.value)
   }
 }
 </script>
