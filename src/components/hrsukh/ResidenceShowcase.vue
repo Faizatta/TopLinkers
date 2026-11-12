@@ -401,20 +401,12 @@
           </div>
         </div>
 
-        <!-- 2x2 Architectural Action Buttons -->
+        <!-- Architectural Action Buttons -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
           <button
             type="button"
-            @click="flyToApartment"
-            class="py-3 px-4 rounded-lg border-2 border-[#0F2A44] bg-white hover:bg-[#0F2A44] text-[#0F2A44] hover:text-white text-[11px] font-black uppercase tracking-[0.12em] transition-all flex items-center justify-center gap-2"
-          >
-            <span>Fly to This Apartment</span>
-          </button>
-
-          <button
-            type="button"
             @click="enter3DWalkthrough"
-            class="py-3 px-4 rounded-lg bg-[#16B4E8] hover:bg-[#0F2A44] text-white text-[11px] font-black uppercase tracking-[0.12em] transition-all flex items-center justify-center gap-2 shadow-sm"
+            class="py-3 px-4 rounded-lg bg-[#16B4E8] hover:bg-[#0F2A44] text-white text-[11px] font-black uppercase tracking-[0.12em] transition-all flex items-center justify-center gap-2 shadow-sm sm:col-span-2"
           >
             <span>Walk Through in 3D</span>
             <CubeIcon class="w-4 h-4" />
