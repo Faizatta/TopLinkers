@@ -12,14 +12,14 @@
       </div>
 
       <!-- Residence Unit Tabs + Compare Modal Trigger -->
-      <div class="flex flex-wrap items-center gap-1.5">
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full sm:flex-wrap suites-scroll-track">
         <button
           v-for="unit in units"
           :key="unit.id"
           type="button"
           @click="selectUnit(unit.id)"
           :class="[
-            'px-3.5 py-2 rounded-lg text-[11px] font-bold uppercase tracking-wider transition-all border',
+            'px-3.5 py-2 rounded-lg text-[11px] font-bold uppercase tracking-wider transition-all border flex-shrink-0 whitespace-nowrap',
             activeUnitId === unit.id
               ? 'bg-[#0F2A44] text-white border-[#0F2A44] shadow-sm'
               : 'bg-white text-gray-700 border-gray-200 hover:border-[#16B4E8] hover:text-[#0F2A44]'
@@ -31,7 +31,7 @@
         <button
           type="button"
           @click="openCompareModal"
-          class="px-3.5 py-2 rounded-lg text-[11px] font-bold uppercase tracking-wider border border-[#16B4E8] bg-[#16B4E8]/10 hover:bg-[#16B4E8] text-[#0F2A44] hover:text-white transition-all inline-flex items-center gap-1.5 shadow-xs"
+          class="px-3.5 py-2 rounded-lg text-[11px] font-bold uppercase tracking-wider border border-[#16B4E8] bg-[#16B4E8]/10 hover:bg-[#16B4E8] text-[#0F2A44] hover:text-white transition-all inline-flex items-center gap-1.5 shadow-xs flex-shrink-0 whitespace-nowrap"
         >
           <span>Compare</span>
         </button>
@@ -97,15 +97,15 @@
             v-else-if="activeView === 'floorplan'"
             class="w-full h-full bg-white p-4 sm:p-6 flex flex-col justify-between text-[#0F2A44] overflow-hidden"
           >
-            <div class="flex items-center justify-between pr-40 sm:pr-56">
+            <div class="flex items-center justify-between pr-44 sm:pr-56">
               <div>
                 <span class="text-[9px] font-black uppercase tracking-widest text-[#16B4E8] block">Architectural Plan</span>
-                <span class="text-xs sm:text-sm font-extrabold text-[#0F2A44]">{{ activeUnit.code }} &bull; {{ activeUnit.sqft }} Sq Ft</span>
+                <span class="text-xs font-extrabold text-[#0F2A44] truncate block max-w-[140px] sm:max-w-none">{{ activeUnit.code }} &bull; {{ activeUnit.sqft }} Sq Ft</span>
               </div>
             </div>
 
-            <div class="flex-1 flex items-center justify-center my-2 min-h-0">
-              <svg viewBox="0 0 600 340" class="w-full h-full max-h-[250px] sm:max-h-[300px]" aria-label="Apartment architectural floor plan">
+            <div class="flex-1 flex items-center justify-start sm:justify-center my-2 min-h-0 overflow-x-auto pb-1.5 suites-scroll-track">
+              <svg viewBox="0 0 600 340" class="h-full min-w-[520px] sm:min-w-0 max-h-[250px] sm:max-h-[300px] flex-shrink-0" aria-label="Apartment architectural floor plan">
                 <!-- Outer Structural Slab -->
                 <rect x="20" y="20" width="560" height="300" rx="6" fill="#FFFFFF" stroke="#0F2A44" stroke-width="4" />
 
@@ -215,9 +215,9 @@
               </svg>
             </div>
 
-            <div class="flex items-center justify-between text-[10px] font-bold text-gray-500">
-              <span>Tap any room above or in the table to highlight</span>
-              <span class="uppercase tracking-wider">North &bull; Pine Facing</span>
+            <div class="flex items-center justify-between text-[10px] font-bold text-gray-500 pt-1 border-t border-gray-100">
+              <span class="truncate">Tap room to highlight <span class="sm:hidden text-[#16B4E8] font-black">&bull; Scroll plan &harr;</span></span>
+              <span class="uppercase tracking-wider flex-shrink-0">North &bull; Pine Facing</span>
             </div>
           </div>
 
@@ -1005,6 +1005,28 @@ const shareUnit = async () => {
 </script>
 
 <style scoped>
+.suites-scroll-track {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #16B4E8 #E2E8F0;
+}
+.suites-scroll-track::-webkit-scrollbar {
+  height: 6px;
+  display: block;
+}
+.suites-scroll-track::-webkit-scrollbar-track {
+  background: #F1F5F9;
+  border-radius: 9999px;
+}
+.suites-scroll-track::-webkit-scrollbar-thumb {
+  background: #16B4E8;
+  border-radius: 9999px;
+  border: 1.5px solid #F1F5F9;
+}
+.suites-scroll-track::-webkit-scrollbar-thumb:hover {
+  background: #0F2A44;
+}
+
 .perspective-3d {
   perspective: 900px;
 }

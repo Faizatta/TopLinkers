@@ -148,14 +148,14 @@
                 <h3 class="text-lg sm:text-2xl font-extrabold text-[#0F2A44] mt-1">Available Flat Suites &amp; Plans</h3>
               </div>
 
-              <!-- Horizontal Scroll Navigation when >3 Suite Cards -->
-              <div v-if="suitePlans.length > 3" class="flex items-center gap-2 self-end sm:self-auto">
-                <span class="text-[11px] font-semibold text-gray-400 mr-1">{{ suitePlans.length }} Plans</span>
+              <!-- Horizontal Scroll Navigation (Shown on mobile when >1 plan, and desktop when >3 plans) -->
+              <div v-if="suitePlans.length > 1" class="flex items-center gap-2 self-end sm:self-auto" :class="suitePlans.length <= 3 ? 'sm:hidden' : ''">
+                <span class="text-[11px] font-semibold text-gray-500 mr-1">{{ activeSuiteIndex + 1 }} / {{ suitePlans.length }} Layouts</span>
                 <button
                   type="button"
                   @click="scrollSuites(-1)"
                   aria-label="Scroll flat suites left"
-                  class="w-8 h-8 rounded-full border border-gray-200 bg-gray-50 hover:bg-[#0F2A44] hover:text-white text-gray-600 flex items-center justify-center transition-colors"
+                  class="w-8 h-8 rounded-full border border-gray-200 bg-gray-50 hover:bg-[#0F2A44] hover:text-white text-gray-600 flex items-center justify-center transition-colors active:scale-95 shadow-2xs"
                 >
                   <ChevronLeftIcon class="w-4 h-4" />
                 </button>
@@ -163,17 +163,41 @@
                   type="button"
                   @click="scrollSuites(1)"
                   aria-label="Scroll flat suites right"
-                  class="w-8 h-8 rounded-full border border-gray-200 bg-gray-50 hover:bg-[#0F2A44] hover:text-white text-gray-600 flex items-center justify-center transition-colors"
+                  class="w-8 h-8 rounded-full border border-gray-200 bg-gray-50 hover:bg-[#0F2A44] hover:text-white text-gray-600 flex items-center justify-center transition-colors active:scale-95 shadow-2xs"
                 >
                   <ChevronRightIcon class="w-4 h-4" />
                 </button>
               </div>
             </div>
 
-            <!-- Scrollable Snap Track (Fits 3 Cleanly on Desktop, Scrolls Smoothly When More Cards Added) -->
+            <!-- Mobile Horizontal Scroll Indicator & Layout Jump Dots -->
+            <div v-if="suitePlans.length > 1" class="flex sm:hidden items-center justify-between pt-1 pb-0.5 text-xs">
+              <span class="text-[11px] font-extrabold text-[#16B4E8] flex items-center gap-1.5 uppercase tracking-wider">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+                <span>Swipe Layouts Horizontally</span>
+              </span>
+              <div class="flex items-center gap-1.5">
+                <button
+                  v-for="(suite, sIdx) in suitePlans"
+                  :key="`dot-${sIdx}`"
+                  type="button"
+                  @click="scrollToSuiteIndex(sIdx)"
+                  :class="[
+                    'h-2 rounded-full transition-all duration-300 cursor-pointer',
+                    activeSuiteIndex === sIdx ? 'w-5 bg-[#16B4E8]' : 'w-2 bg-gray-300 hover:bg-gray-400'
+                  ]"
+                  :aria-label="`Go to ${suite.title}`"
+                />
+              </div>
+            </div>
+
+            <!-- Scrollable Snap Track (Preserves Horizontal Card Layout, Distinct Mobile Scrollbar) -->
             <div
               ref="suitesTrackRef"
-              class="flex gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-3 suites-scroll-track"
+              @scroll.passive="onSuitesScroll"
+              class="flex gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 suites-scroll-track"
             >
               <div
                 v-for="suite in suitePlans"
@@ -430,10 +454,33 @@ const suitePlans = computed(() => {
   ]
 })
 
+const activeSuiteIndex = ref(0)
+
+const onSuitesScroll = () => {
+  if (!suitesTrackRef.value) return
+  const track = suitesTrackRef.value
+  const card = track.firstElementChild
+  const cardWidth = card ? (card.getBoundingClientRect().width + 16) : 280
+  const index = Math.round(track.scrollLeft / cardWidth)
+  activeSuiteIndex.value = Math.min(Math.max(index, 0), suitePlans.value.length - 1)
+}
+
+const scrollToSuiteIndex = (idx) => {
+  if (!suitesTrackRef.value) return
+  const track = suitesTrackRef.value
+  const card = track.children[idx]
+  if (card) {
+    card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' })
+    activeSuiteIndex.value = idx
+  }
+}
+
 const scrollSuites = (dir) => {
   if (!suitesTrackRef.value) return
-  const step = Math.max(280, Math.round(suitesTrackRef.value.clientWidth * 0.72))
-  suitesTrackRef.value.scrollBy({ left: dir * step, behavior: 'smooth' })
+  const track = suitesTrackRef.value
+  const card = track.firstElementChild
+  const step = card ? (card.getBoundingClientRect().width + 16) : Math.max(280, Math.round(track.clientWidth * 0.8))
+  track.scrollBy({ left: dir * step, behavior: 'smooth' })
 }
 
 const form = ref({
@@ -481,20 +528,25 @@ onMounted(() => {
 
 <style scoped>
 .suites-scroll-track {
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
-  scrollbar-color: rgba(22, 180, 232, 0.35) transparent;
+  scrollbar-color: #16B4E8 #E2E8F0;
 }
 .suites-scroll-track::-webkit-scrollbar {
-  height: 6px;
+  height: 8px;
+  display: block;
 }
 .suites-scroll-track::-webkit-scrollbar-track {
-  background: transparent;
+  background: #F1F5F9;
+  border-radius: 9999px;
+  margin: 0 4px;
 }
 .suites-scroll-track::-webkit-scrollbar-thumb {
-  background: rgba(22, 180, 232, 0.35);
+  background: #16B4E8;
   border-radius: 9999px;
+  border: 2px solid #F1F5F9;
 }
 .suites-scroll-track::-webkit-scrollbar-thumb:hover {
-  background: rgba(22, 180, 232, 0.65);
+  background: #0F2A44;
 }
 </style>
