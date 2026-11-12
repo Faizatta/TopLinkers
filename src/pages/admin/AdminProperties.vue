@@ -679,7 +679,7 @@ import {
   PhotoIcon,
   ArrowTopRightOnSquareIcon
 } from '@heroicons/vue/24/outline'
-import L from 'leaflet'
+import L from '../../utils/leaflet'
 import propertiesData from '../../data/properties.json'
 import { useAdminStore } from '../../stores/admin'
 import { isPropertyOfferActive, getOfferRemainingLabel, calculateDiscount, formatPkrAmount } from '../../utils/offer'

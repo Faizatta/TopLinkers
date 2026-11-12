@@ -65,6 +65,8 @@
           <div class="relative rounded-2xl overflow-hidden shadow-2xl">
             <img
               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80"
+              :srcset="responsiveSrcset('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80', [600, 800, 1000])"
+              sizes="(max-width: 1023px) 100vw, 600px"
               alt="Luxury Interior by TopLinkers"
               loading="lazy"
               decoding="async"
@@ -100,4 +102,5 @@
 <script setup>
 import SectionHeading from '../ui/SectionHeading.vue'
 import CountUp from '../ui/CountUp.vue'
+import { responsiveSrcset } from '../../utils/images'
 </script>

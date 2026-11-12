@@ -10,7 +10,7 @@
         <!-- Top bar -->
         <div class="flex items-center justify-between px-6 py-4 bg-[#0F2A44] text-white">
           <div class="flex items-center gap-3">
-            <img src="/toplinkers-logo.png" alt="Top Linkers" class="w-8 h-8 object-contain" />
+            <img src="/toplinkers-logo-sm.png" alt="Top Linkers" class="w-8 h-8 object-contain" />
             <div>
               <h3 class="text-sm sm:text-base font-bold"><span class="text-[#E53935]">Top</span><span class="text-white">Linkers</span> Exclusive Project Portfolio</h3>
               <p class="text-[11px] text-[#16B4E8]">H&R Suites &bull; PHA Flats &bull; Faisal Town-II &bull; TopCity-1</p>
@@ -60,7 +60,7 @@
             <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
               <div class="md:col-span-7 bg-gray-100 rounded-lg overflow-hidden border border-gray-200 flex justify-center p-2">
                 <img
-                  src="/toplinkers-flyer-plan.jpg"
+                  src="/toplinkers-flyer-plan.webp"
                   alt="TopLinkers Official Portfolio Plan"
                   class="max-h-[500px] w-auto object-contain rounded"
                 />
@@ -99,7 +99,7 @@
             <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
               <div class="md:col-span-7 bg-gray-100 rounded-lg overflow-hidden border border-gray-200 flex justify-center p-2">
                 <img
-                  src="/toplinkers-pha-floorplans.jpg"
+                  src="/toplinkers-pha-floorplans.webp"
                   alt="PHA Flats Sector I-12 and I-16 Floor Plans"
                   class="max-h-[500px] w-auto object-contain rounded"
                 />

@@ -104,7 +104,7 @@ import {
   ChevronRightIcon,
   ArrowsPointingOutIcon
 } from '@heroicons/vue/24/outline'
-import L from 'leaflet'
+import L from '../../utils/leaflet'
 import { useUiStore } from '../../stores/ui'
 
 const props = defineProps({

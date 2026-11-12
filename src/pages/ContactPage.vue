@@ -19,7 +19,7 @@
           <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-card border border-gray-100">
             <!-- Header Brand -->
             <div class="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
-              <img src="/toplinkers-logo.png" alt="Top Linkers" class="h-11 w-auto object-contain flex-shrink-0" />
+              <img src="/toplinkers-logo-sm.png" alt="Top Linkers" width="129" height="168" class="h-11 w-auto object-contain flex-shrink-0" />
               <div>
                 <h3 class="text-base sm:text-lg font-black leading-tight">
                   <span class="text-[#E53935]">Top</span> <span class="text-black">Linkers</span> <span class="text-[#0F2A44] font-bold text-sm">Head Office</span>
@@ -286,7 +286,7 @@ import SectionHeading from '../components/ui/SectionHeading.vue'
 import { api } from '../services/api'
 import { useUiStore } from '../stores/ui'
 import { useAdminStore } from '../stores/admin'
-import L from 'leaflet'
+import L from '../utils/leaflet'
 
 const ui = useUiStore()
 const adminStore = useAdminStore()

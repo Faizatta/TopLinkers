@@ -15,12 +15,12 @@
           <!-- Logo & Brand Name -->
           <router-link to="/" class="inline-flex items-center gap-3 group">
             <img
-              src="/toplinkers-logo.webp"
+              src="/toplinkers-logo-sm.png"
               alt="Top Linkers"
               loading="lazy"
               decoding="async"
-              width="44"
-              height="44"
+              width="129"
+              height="168"
               class="h-11 w-auto object-contain flex-shrink-0 bg-white/95 rounded p-1 shadow-sm group-hover:scale-105 transition-transform"
             />
             <div>
@@ -292,7 +292,6 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import L from 'leaflet'
 import {
   MapPinIcon,
   PhoneIcon,
@@ -314,13 +313,20 @@ const openOfficeInGoogleMaps = () => {
 // Footer Mini Location Map State
 const footerMapEl = ref(null)
 let footerMapInstance = null
+let footerMapObserver = null
+let isUnmounted = false
 
-const initFooterMap = () => {
+const initFooterMap = async () => {
   if (!footerMapEl.value || footerMapInstance) return
   // Al Hameed Plaza, G-11 Markaz, Islamabad Coordinates
   const g11Coord = [33.6685, 72.9965]
 
   try {
+    // Leaflet (JS + CSS) is fetched only once the footer map is about to be seen,
+    // keeping ~45 KB of JS and its long init tasks off every page's critical path.
+    const { default: L } = await import('../../utils/leaflet')
+    if (isUnmounted || !footerMapEl.value || footerMapInstance) return
+
     footerMapInstance = L.map(footerMapEl.value, {
       scrollWheelZoom: false,
       zoomControl: false,
@@ -403,11 +409,29 @@ const typeLoop = () => {
 
 onMounted(() => {
   typeLoop()
-  initFooterMap()
+
+  if (!footerMapEl.value) return
+  if ('IntersectionObserver' in window) {
+    footerMapObserver = new IntersectionObserver((entries) => {
+      if (entries.some(e => e.isIntersecting)) {
+        footerMapObserver.disconnect()
+        footerMapObserver = null
+        initFooterMap()
+      }
+    }, { rootMargin: '300px 0px' })
+    footerMapObserver.observe(footerMapEl.value)
+  } else {
+    initFooterMap()
+  }
 })
 
 onUnmounted(() => {
+  isUnmounted = true
   if (timer) clearTimeout(timer)
+  if (footerMapObserver) {
+    footerMapObserver.disconnect()
+    footerMapObserver = null
+  }
   if (footerMapInstance) {
     footerMapInstance.remove()
     footerMapInstance = null

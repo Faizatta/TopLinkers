@@ -59,7 +59,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue'
-import L from 'leaflet'
+import L from '../../utils/leaflet'
 
 const props = defineProps({
   properties: {

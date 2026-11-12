@@ -37,6 +37,8 @@
           <div class="relative h-48 sm:h-52 w-full overflow-hidden bg-gray-100">
             <img
               :src="post.image"
+              :srcset="responsiveSrcset(post.image, [400, 600, 900])"
+              sizes="(max-width: 767px) 100vw, 400px"
               :alt="post.title"
               loading="lazy"
               decoding="async"
@@ -100,6 +102,7 @@
 <script setup>
 import { computed } from 'vue'
 import postsData from '../../data/posts.json'
+import { responsiveSrcset } from '../../utils/images'
 
 const featuredPosts = computed(() => {
   return postsData.slice(0, 3)

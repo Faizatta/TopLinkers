@@ -12,12 +12,11 @@
       <!-- Left: Logo without circle wrapper + Company Name & Subtitle -->
       <router-link to="/" class="flex items-center gap-2 sm:gap-3 focus:outline-none group min-w-0" aria-label="TopLinkers Home">
         <img
-          src="/toplinkers-logo.webp"
+          src="/toplinkers-logo-sm.png"
           alt="Top Linkers"
-          width="48"
-          height="48"
+          width="129"
+          height="168"
           decoding="async"
-          fetchpriority="high"
           class="h-10 sm:h-12 md:h-14 w-auto object-contain flex-shrink-0 transition-transform duration-300 group-hover:scale-105"
         />
         <div class="flex flex-col min-w-0">
@@ -297,10 +296,10 @@
             <div class="flex items-center justify-between p-5 border-b border-slate-100 flex-shrink-0 bg-white sticky top-0 z-10">
               <router-link to="/" class="flex items-center gap-2.5 min-w-0" @click="mobileDrawerOpen = false">
                 <img
-                  src="/toplinkers-logo.webp"
+                  src="/toplinkers-logo-sm.png"
                   alt="Top Linkers"
-                  width="40"
-                  height="40"
+                  width="129"
+                  height="168"
                   decoding="async"
                   class="h-10 w-auto object-contain flex-shrink-0"
                 />

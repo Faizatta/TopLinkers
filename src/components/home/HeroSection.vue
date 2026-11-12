@@ -1,90 +1,46 @@
 <template>
-  <div class="hero-swiper-container relative w-full h-[600px] sm:h-[660px] md:h-[740px] bg-gray-950 overflow-hidden select-none group">
-    <!-- Swiper Container with Horizontal Slide Animation (Houzez demo02 style) -->
-    <swiper
-      :modules="modules"
-      :slides-per-view="1"
-      :loop="true"
-      :speed="750"
-      :autoplay="{
-        delay: 2800,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: false
-      }"
-      class="w-full h-full"
+  <div
+    class="hero-swiper-container relative w-full h-[600px] sm:h-[660px] md:h-[740px] bg-gray-950 overflow-hidden select-none group"
+    @pointerdown.capture="requestCarousel"
+  >
+    <!--
+      The full Swiper carousel (all 5 slides) is loaded once the page is idle and
+      sits underneath the static first slide until it starts moving.
+    -->
+    <HeroCarousel
+      v-if="carouselRequested"
+      class="absolute inset-0 z-[1]"
+      :slides="slides"
+      @ready="carouselReady = true"
+      @handoff="staticVisible = false"
+      @slide-click="goToSlideLink"
+    />
+
+    <!--
+      Static first slide: identical markup to the carousel's first slide, rendered
+      immediately so the hero (the page's LCP element) never waits for the carousel
+      library or the other slides' images.
+    -->
+    <div
+      v-if="staticVisible"
+      class="hero-slide hero-static absolute inset-0 z-[2] w-full h-full cursor-pointer"
+      :class="{ 'swiper-slide-active': staticActive, 'pointer-events-none': carouselReady }"
+      :inert="carouselReady || undefined"
+      @click="goToSlideLink(slides[0].link)"
     >
-      <swiper-slide
-        v-for="(slide, index) in slides"
-        :key="slide.id"
-        class="hero-slide relative w-full h-full cursor-pointer"
-        @click="goToSlideLink(slide.link)"
-      >
-        <!-- Background Image with Soft Ken Burns Zoom -->
-        <div class="absolute inset-0 w-full h-full overflow-hidden">
-          <img
-            :src="slide.image"
-            :alt="`${slide.title} - TopLinkers Islamabad`"
-            :loading="index === 0 ? 'eager' : 'lazy'"
-            :fetchpriority="index === 0 ? 'high' : 'low'"
-            decoding="async"
-            width="1920"
-            height="1080"
-            class="slide-bg-image w-full h-full object-cover object-center"
-          />
-
-          <!-- Gradient Overlay: Rich subtle dark vignette on left & bottom for crisp Houzez-style typography -->
-          <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent sm:w-4/5 md:w-3/5 pointer-events-none"></div>
-          <div class="absolute inset-0 bg-black/40 sm:hidden pointer-events-none"></div>
-          <div class="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black/75 via-black/30 to-transparent pointer-events-none"></div>
-        </div>
-
-        <!-- Overlaid Content (Max 1280px Container, Left-Aligned Houzez Layout) -->
-        <div class="relative max-w-[1280px] mx-auto h-full px-4 sm:px-6 md:px-8 flex flex-col justify-center pb-32 sm:pb-40 md:pb-48 z-10 pointer-events-none">
-          <div class="max-w-xl text-left select-none pointer-events-auto">
-            <!-- 1. Specs Line (Animated entry: white specs with small cyan accent) -->
-            <div class="slide-specs mb-2 sm:mb-3">
-              <span class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wider text-white/95 uppercase drop-shadow">
-                <span class="w-2 h-2 rounded-full bg-[#16B4E8] shadow-sm"></span>
-                <span>{{ slide.specs }}</span>
-              </span>
-            </div>
-
-            <!-- 2. Main Title (Animated entry: large clean Houzez typography) -->
-            <h1 class="slide-title text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-medium tracking-tight text-white leading-[1.12] mb-2 sm:mb-3 drop-shadow-md">
-              {{ slide.title }}
-            </h1>
-
-            <!-- 3. Short Description / Excerpt (Animated entry) -->
-            <p class="slide-desc text-xs sm:text-sm md:text-base text-gray-200/90 font-normal leading-relaxed line-clamp-2 max-w-lg mb-4 sm:mb-6 drop-shadow">
-              {{ slide.description }}
-            </p>
-
-            <!-- 4. Action CTA (Animated entry) -->
-            <div class="slide-price-cta flex flex-wrap items-center gap-4 sm:gap-6 pt-1">
-              <router-link
-                :to="slide.link"
-                class="btn-arrow-slide px-5 sm:px-6 py-2.5 sm:py-3 bg-[#16B4E8] hover:bg-[#119ecf] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-[4px] shadow-lg shadow-cyan-500/25 transition-all flex items-center justify-center group flex-shrink-0"
-                @click.stop
-              >
-                <span>{{ slide.ctaText || 'View Details' }}</span>
-                <svg class="arrow-icon w-4 h-4 ml-1.5 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </router-link>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-    </swiper>
+      <HeroSlide :slide="slides[0]" :priority="true" />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
 import { useRouter } from 'vue-router'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Autoplay } from 'swiper/modules'
+import HeroSlide from './HeroSlide.vue'
+import { whenIdle } from '../../utils/idle'
 
-const modules = [Autoplay]
+const HeroCarousel = defineAsyncComponent(() => import('./HeroCarousel.vue'))
+
 const router = useRouter()
 
 const slides = [
@@ -145,11 +101,39 @@ const slides = [
   }
 ]
 
+const staticVisible = ref(true)
+const staticActive = ref(false)
+const carouselRequested = ref(false)
+const carouselReady = ref(false)
+
+const requestCarousel = () => {
+  carouselRequested.value = true
+}
+
 const goToSlideLink = (link) => {
   if (link) {
     router.push(link)
   }
 }
+
+let cancelIdle = null
+let rafId = null
+
+onMounted(() => {
+  // Start the entrance animation (text slide-up + Ken Burns zoom) after the first
+  // paint, exactly like the carousel does when a slide becomes active.
+  rafId = requestAnimationFrame(() => {
+    rafId = requestAnimationFrame(() => {
+      staticActive.value = true
+    })
+  })
+  cancelIdle = whenIdle(requestCarousel)
+})
+
+onUnmounted(() => {
+  if (cancelIdle) cancelIdle()
+  if (rafId) cancelAnimationFrame(rafId)
+})
 </script>
 
 <style>
@@ -213,5 +197,15 @@ const goToSlideLink = (link) => {
 
 .hero-swiper-container .swiper-slide-active .slide-bg-image {
   transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-swiper-container .hero-slide .slide-specs,
+  .hero-swiper-container .hero-slide .slide-title,
+  .hero-swiper-container .hero-slide .slide-desc,
+  .hero-swiper-container .hero-slide .slide-price-cta,
+  .hero-swiper-container .hero-slide .slide-bg-image {
+    transition: none;
+  }
 }
 </style>

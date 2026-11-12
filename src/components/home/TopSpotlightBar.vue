@@ -7,6 +7,8 @@
       <!-- Background subtle misty pine image overlay with gradient -->
       <img
         src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
+        :srcset="responsiveSrcset('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80', [400, 700, 1200])"
+        sizes="(max-width: 767px) 40vw, 624px"
         alt="Nathia Gali Pines"
         loading="lazy"
         decoding="async"
@@ -21,6 +23,8 @@
           <div class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-gray-900 border border-white/20 flex-shrink-0 shadow-md">
             <img
               src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80"
+              :srcset="responsiveSrcset('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80', [160, 300])"
+              sizes="80px"
               alt="Harsukh Residencies"
               loading="lazy"
               decoding="async"
@@ -69,4 +73,5 @@
 </template>
 
 <script setup>
+import { responsiveSrcset } from '../../utils/images'
 </script>

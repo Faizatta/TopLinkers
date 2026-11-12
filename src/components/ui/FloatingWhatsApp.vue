@@ -74,7 +74,7 @@
         <div class="bg-gradient-to-r from-[#0F2A44] to-[#128C7E] p-4 text-white relative">
           <div class="flex items-center gap-3">
             <div class="relative w-11 h-11 bg-white/95 rounded p-1 flex items-center justify-center flex-shrink-0">
-              <img src="/toplinkers-logo.png" alt="Top Linkers" class="w-full h-full object-contain" />
+              <img src="/toplinkers-logo-sm.png" alt="Top Linkers" class="w-full h-full object-contain" />
               <span class="absolute bottom-0 right-0 w-3 h-3 bg-[#25D366] border-2 border-white rounded-full"></span>
             </div>
 

@@ -19,6 +19,8 @@
       <div class="relative w-full h-full">
         <img
           :src="currentImage"
+          :srcset="currentSrcset"
+          :sizes="imageSizes"
           :alt="`${property.title} - ${property.address || property.city || 'Islamabad'}`"
           loading="lazy"
           decoding="async"
@@ -177,6 +179,7 @@ import {
 } from '@heroicons/vue/24/outline'
 import Badge from '../ui/Badge.vue'
 import { isPropertyOfferActive, getOfferRemainingLabel, formatPkrAmount } from '../../utils/offer'
+import { responsiveSrcset } from '../../utils/images'
 
 const props = defineProps({
   property: {
@@ -212,6 +215,12 @@ const originalPriceFormatted = computed(() => {
   if (!hasActiveOffer.value || !props.property?.offerPrice) return null
   return props.property?.priceFormatted || (props.property?.price ? `PKR ${formatPkrAmount(props.property.price)}` : null)
 })
+
+// Cards render ~350-540px wide; offer right-sized versions of the same photo.
+const currentSrcset = computed(() => responsiveSrcset(currentImage.value, [480, 800, 1200]))
+const imageSizes = computed(() => props.layout === 'list'
+  ? '(max-width: 767px) 92vw, 540px'
+  : '(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 420px')
 
 const currentImage = computed(() => {
   if (props.property.images && props.property.images.length > 0) {

@@ -20,6 +20,8 @@
           <div class="relative h-64 overflow-hidden bg-gray-100">
             <img
               :src="loc.image"
+              :srcset="responsiveSrcset(loc.image, [400, 600, 800])"
+              sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 300px"
               :alt="loc.name"
               loading="lazy"
               decoding="async"
@@ -57,6 +59,7 @@
 import { ref, onMounted } from 'vue'
 import SectionHeading from '../ui/SectionHeading.vue'
 import { api } from '../../services/api'
+import { responsiveSrcset } from '../../utils/images'
 
 const locations = ref([])
 

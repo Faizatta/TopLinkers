@@ -289,7 +289,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, shallowRef, computed, onMounted, onUnmounted } from 'vue'
 import {
   SparklesIcon,
   TicketIcon,
@@ -298,9 +298,19 @@ import {
   TagIcon,
   CheckCircleIcon
 } from '@heroicons/vue/24/outline'
-import { useAdminStore } from '../../stores/admin'
+import { whenIdle } from '../../utils/idle'
 
-const adminStore = useAdminStore()
+// The admin store (~40 KB with its seed data) is only needed for the optional
+// admin promo and for saving voucher leads, so it is loaded lazily instead of
+// blocking the homepage's first paint.
+const adminStore = shallowRef(null)
+const loadAdminStore = async () => {
+  if (!adminStore.value) {
+    const { useAdminStore } = await import('../../stores/admin')
+    adminStore.value = useAdminStore()
+  }
+  return adminStore.value
+}
 const dismissed = ref(false)
 
 // 5 Curated TopLinkers Discount Offers
@@ -358,7 +368,7 @@ const defaultOffers = [
 ]
 
 // Merge with backend promoStrip if admin configured custom text
-const promo = computed(() => adminStore.promoStrip || {})
+const promo = computed(() => adminStore.value?.promoStrip || {})
 
 const allOffers = computed(() => {
   const list = [...defaultOffers]
@@ -433,7 +443,8 @@ const handleClaimSubmit = async () => {
 
   // 1. Capture into adminStore.leads (non-blocking)
   try {
-    adminStore.addLead({
+    const store = await loadAdminStore()
+    store.addLead({
       name: claimForm.value.name.trim(),
       phone: claimForm.value.phone.trim(),
       email: '',
@@ -457,8 +468,15 @@ const handleClaimSubmit = async () => {
   claimSuccess.value = true
 }
 
+let cancelIdle = null
 onMounted(() => {
-  adminStore.syncFromBackend()
+  cancelIdle = whenIdle(async () => {
+    const store = await loadAdminStore()
+    store.syncFromBackend()
+  })
+})
+onUnmounted(() => {
+  if (cancelIdle) cancelIdle()
 })
 </script>
 

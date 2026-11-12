@@ -4,7 +4,7 @@
     <div class="flex items-center gap-3.5 pb-4 border-b border-gray-100">
       <div class="relative w-12 h-12 flex items-center justify-center flex-shrink-0">
         <img
-          src="/toplinkers-logo.png"
+          src="/toplinkers-logo-sm.png"
           alt="Top Linkers"
           class="w-full h-full object-contain"
         />

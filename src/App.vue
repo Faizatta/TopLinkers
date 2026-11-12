@@ -13,22 +13,22 @@
     </main>
 
     <!-- 2. Floating On-Screen WhatsApp Popup Interactive Widget (Bottom Left) -->
-    <FloatingWhatsApp v-if="!isAdminRoute" />
+    <FloatingWhatsApp v-if="!isAdminRoute && deferredUiReady" />
 
     <!-- 2b. Hot Selling Harsukh Nathia Gali Curiosity Popup & Teaser -->
-    <HRSukhPopup v-if="!isAdminRoute" />
+    <HRSukhPopup v-if="!isAdminRoute && deferredUiReady" />
 
     <!-- 3. Back To Top Button (Navy/Cyan Square, bottom right) -->
-    <BackToTop v-if="!isAdminRoute" />
+    <BackToTop v-if="!isAdminRoute && deferredUiReady" />
 
     <!-- 4. Global Footer (Navy) - Shown on all standard pages -->
     <AppFooter v-if="!isAdminRoute" />
 
-    <!-- 5. Global Modal Overlays -->
-    <AuthModal v-if="!isAdminRoute" />
-    <LightboxModal />
-    <ShareModal />
-    <FlyerModal />
+    <!-- 5. Global Modal Overlays (mounted once idle, or immediately if opened earlier) -->
+    <AuthModal v-if="!isAdminRoute && (deferredUiReady || ui.isAuthModalOpen)" />
+    <LightboxModal v-if="deferredUiReady || ui.isLightboxOpen" />
+    <ShareModal v-if="deferredUiReady || ui.isShareModalOpen" />
+    <FlyerModal v-if="deferredUiReady || ui.isFlyerModalOpen" />
 
     <!-- Global Toast Notifications -->
     <Toast />
@@ -36,34 +36,45 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
+import { ref, computed, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import AppHeader from './components/layout/AppHeader.vue'
-import AppFooter from './components/layout/AppFooter.vue'
-import BackToTop from './components/layout/BackToTop.vue'
-import FloatingWhatsApp from './components/ui/FloatingWhatsApp.vue'
-import HRSukhPopup from './components/ui/HRSukhPopup.vue'
 import Toast from './components/ui/Toast.vue'
+import { useUiStore } from './stores/ui'
+import { whenIdle } from './utils/idle'
+import { initLenis, destroyLenis } from './services/lenis'
 
-// Lazy-load non-critical global modals on demand to keep initial bundle ultra-light
+// The footer is always below the fold, so it ships as its own chunk and renders
+// as soon as that arrives (still on every page, still crawlable).
+const AppFooter = defineAsyncComponent(() => import('./components/layout/AppFooter.vue'))
+
+// Floating widgets and modals are not needed for the first paint. They are loaded
+// after the page has finished loading, so they never compete with the hero.
+const FloatingWhatsApp = defineAsyncComponent(() => import('./components/ui/FloatingWhatsApp.vue'))
+const HRSukhPopup = defineAsyncComponent(() => import('./components/ui/HRSukhPopup.vue'))
+const BackToTop = defineAsyncComponent(() => import('./components/layout/BackToTop.vue'))
 const AuthModal = defineAsyncComponent(() => import('./components/layout/AuthModal.vue'))
 const LightboxModal = defineAsyncComponent(() => import('./components/layout/LightboxModal.vue'))
 const ShareModal = defineAsyncComponent(() => import('./components/layout/ShareModal.vue'))
 const FlyerModal = defineAsyncComponent(() => import('./components/layout/FlyerModal.vue'))
 
-import { initLenis, destroyLenis, scrollTo } from './services/lenis'
-
 const route = useRoute()
+const ui = useUiStore()
 const isAdminRoute = computed(() => route.path.startsWith('/admin'))
+
+const deferredUiReady = ref(false)
+let cancelIdle = null
 
 onMounted(() => {
   if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
     window.history.scrollRestoration = 'auto'
   }
   initLenis()
+  cancelIdle = whenIdle(() => { deferredUiReady.value = true })
 })
 
 onUnmounted(() => {
+  if (cancelIdle) cancelIdle()
   destroyLenis()
 })
 </script>

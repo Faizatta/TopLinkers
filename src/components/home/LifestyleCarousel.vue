@@ -49,6 +49,8 @@
             <div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 mr-4 border border-gray-200 bg-gray-100 shadow-xs">
               <img
                 :src="t.image"
+                :srcset="responsiveSrcset(t.image, [200, 300])"
+                sizes="96px"
                 :alt="t.name"
                 loading="lazy"
                 decoding="async"
@@ -88,6 +90,9 @@
 import { ref, onMounted } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination } from 'swiper/modules'
+import { responsiveSrcset } from '../../utils/images'
+import 'swiper/css'
+import 'swiper/css/pagination'
 import SectionHeading from '../ui/SectionHeading.vue'
 import { api } from '../../services/api'
 
