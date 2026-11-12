@@ -72,13 +72,56 @@ export const useAdminStore = defineStore('admin', () => {
     const cleanEmail = (email || '').trim().toLowerCase()
     const cleanPassword = (password || '').trim()
 
+    const isMasterAdmin = (
+      (cleanEmail === 'toplinkers@gmail.com' && cleanPassword === 'lock5816') ||
+      (cleanEmail === 'admin@toplinkers.com' && cleanPassword === 'admin123')
+    )
+
+    // Master Administrator: immediate guaranteed access on any environment (Vercel, offline, or localhost)
+    if (isMasterAdmin) {
+      isAuthenticated.value = true
+      adminUser.value = {
+        id: 1,
+        name: 'TopLinkers Executive',
+        email: cleanEmail,
+        role: 'Super Admin',
+        permissions: ['all'],
+        token: 'toplinkers_master_' + Date.now()
+      }
+      localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify(adminUser.value))
+
+      // If backend is online, also authenticate in background to sync real backend token
+      fetch(`${API_BASE_URL}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email: cleanEmail, password: cleanPassword })
+      }).then(async res => {
+        if (res.ok) {
+          const contentType = res.headers.get('content-type') || ''
+          if (contentType.includes('application/json')) {
+            const data = await res.json()
+            if (data?.token) {
+              adminUser.value.token = data.token
+              localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify(adminUser.value))
+              syncFromBackend().catch(() => {})
+            }
+          }
+        }
+      }).catch(() => {})
+
+      return { success: true, user: adminUser.value }
+    }
+
+    // For other users: try backend authentication
     try {
       const res = await fetch(`${API_BASE_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ email: cleanEmail, password: cleanPassword })
       })
-      if (res.ok) {
+
+      const contentType = res.headers.get('content-type') || ''
+      if (res.ok && contentType.includes('application/json')) {
         const data = await res.json()
         apiConnected.value = true
         isAuthenticated.value = true
@@ -89,17 +132,16 @@ export const useAdminStore = defineStore('admin', () => {
         localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify(adminUser.value))
         syncFromBackend().catch(() => {})
         return { success: true, user: adminUser.value }
-      } else {
+      } else if (res.status === 401 && contentType.includes('application/json')) {
         const err = await res.json().catch(() => ({}))
         return { success: false, message: err.message || 'Invalid email or password.' }
       }
     } catch (e) {
-      // Fallback to local auth only when Laravel API is completely offline
+      // Backend offline
     }
 
     // Offline local credential validation against stored users
     const matchedUser = users.value.find(u => (u.email || '').toLowerCase() === cleanEmail)
-
     if (matchedUser) {
       if (matchedUser.is_active === false) {
         return { success: false, message: 'This account has been deactivated by the administrator.' }
@@ -115,21 +157,7 @@ export const useAdminStore = defineStore('admin', () => {
       }
     }
 
-    // Default master admin fallback
-    if ((cleanEmail === 'toplinkers@gmail.com' && cleanPassword === 'lock5816') || (cleanEmail === 'admin@toplinkers.com' && cleanPassword === 'admin123')) {
-      isAuthenticated.value = true
-      adminUser.value = {
-        id: 1,
-        name: 'TopLinkers Executive',
-        email: cleanEmail,
-        role: 'Super Admin',
-        permissions: ['all'],
-        token: 'toplinkers_jwt_' + Date.now()
-      }
-      localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify(adminUser.value))
-      return { success: true, user: adminUser.value }
-    }
-    return { success: false, message: 'Invalid credentials. Please verify your email and password.' }
+    return { success: false, message: 'Invalid email or password.' }
   }
 
   const logout = () => {
@@ -1137,7 +1165,7 @@ export const useAdminStore = defineStore('admin', () => {
     const user = adminUser.value
     if (!user) return false
     // Root administrator always has access to all modules
-    if (user.email === 'admin@toplinkers.com' || user.role === 'Super Admin' || user.role === 'Chief Administrator') {
+    if (user.email === 'toplinkers@gmail.com' || user.email === 'admin@toplinkers.com' || user.role === 'Super Admin' || user.role === 'Chief Administrator') {
       return true
     }
     const perms = Array.isArray(user.permissions) ? user.permissions : []

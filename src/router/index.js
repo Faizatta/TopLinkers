@@ -330,7 +330,8 @@ router.beforeEach((to, from, next) => {
 
     try {
       const user = JSON.parse(authData)
-      const isSuper = user?.email === 'admin@toplinkers.com' ||
+      const isSuper = user?.email === 'toplinkers@gmail.com' ||
+                      user?.email === 'admin@toplinkers.com' ||
                       user?.role === 'Super Admin' ||
                       user?.role === 'Chief Administrator' ||
                       (Array.isArray(user?.permissions) && (user.permissions.includes('all') || user.permissions.includes('*')))
