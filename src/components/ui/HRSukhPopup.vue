@@ -10,7 +10,7 @@
       leave-from-class="transform translate-y-0 opacity-100 scale-100"
       leave-to-class="transform translate-y-10 opacity-0 scale-95"
     >
-      <div v-if="showTeaser && !isOnNathiaGaliPage && !uiStore.isWhatsAppOpen">
+      <div v-if="showTeaser && !isHiddenRoute && !uiStore.isWhatsAppOpen">
         <!-- Mobile: Compact Floating Circle Badge (Bottom-Left) -->
         <div
           class="sm:hidden fixed left-4 z-40 select-none transition-[bottom] duration-200 ease-out"
@@ -180,19 +180,20 @@ const curiosityHooks = [
   }
 ]
 
-const isOnNathiaGaliPage = computed(() => {
-  return route.path === '/hr-sukh' || route.path === '/nathiagali'
+const isHiddenRoute = computed(() => {
+  const p = (route.path || '').toLowerCase()
+  return p === '/hr-sukh' || p === '/harsukh' || p === '/nathiagali' || p === '/compare' || p.startsWith('/admin')
 })
 
 const triggerPopup = () => {
   clearTimeout(showTimer)
-  if (isOnNathiaGaliPage.value) {
+  if (isHiddenRoute.value) {
     showTeaser.value = false
     return
   }
   showTeaser.value = false
   showTimer = setTimeout(() => {
-    if (!isOnNathiaGaliPage.value) {
+    if (!isHiddenRoute.value) {
       updateFooterClearance()
       showTeaser.value = true
     }

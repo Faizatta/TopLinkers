@@ -20,81 +20,77 @@
         </div>
 
         <!-- Top Quick Actions -->
-        <div class="flex items-center gap-2.5 flex-wrap">
+        <div class="flex items-center gap-2 flex-wrap">
           <button
             type="button"
             @click="openPropertySelector()"
-            class="text-xs px-4 py-2.5 bg-[#16B4E8] hover:bg-[#119fcb] text-white rounded-xl font-bold transition-all shadow-sm flex items-center gap-2"
+            class="text-xs px-4 py-2.5 bg-[#16B4E8] hover:bg-[#119fcb] text-white rounded-xl font-bold transition-all shadow-sm"
           >
-            <PlusIcon class="w-4 h-4 stroke-[2.5]" />
-            <span>Select Flats &amp; Plots</span>
+            + Add Properties
           </button>
 
           <button
             v-if="compareProperties.length"
             type="button"
             @click="queryModalOpen = true"
-            class="text-xs px-4 py-2.5 bg-[#0F2A44] hover:bg-slate-800 text-white rounded-xl font-bold transition-all shadow-sm flex items-center gap-1.5"
+            class="text-xs px-4 py-2.5 bg-[#0F2A44] hover:bg-slate-800 text-white rounded-xl font-bold transition-all shadow-sm"
           >
-            <span>Inquire on Comparison</span>
+            Inquire on Comparison
           </button>
 
           <button
             v-if="compareProperties.length"
             type="button"
             @click="clearAll"
-            class="text-xs px-3.5 py-2.5 bg-red-50 hover:bg-red-600 text-red-600 hover:text-white border border-red-200 rounded-xl font-bold transition-all shadow-xs flex items-center gap-1.5"
+            class="text-xs px-3.5 py-2.5 bg-red-50 hover:bg-red-600 text-red-600 hover:text-white border border-red-200 rounded-xl font-bold transition-all shadow-xs"
             title="Clear all selected properties"
           >
-            <XMarkIcon class="w-4 h-4" />
-            <span>Clear</span>
+            Clear
           </button>
         </div>
       </div>
 
-      <!-- 2. One-Click Instant Comparison Presets Bar -->
-      <div class="bg-white rounded-2xl p-3 sm:p-5 border border-gray-200/90 shadow-sm mb-5 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
+      <!-- 2. Instant Comparison Presets Bar (Clean, Zero Emojis/Icons) -->
+      <div class="bg-white rounded-2xl p-3 sm:p-4 border border-gray-200/90 shadow-sm mb-5 flex flex-col md:flex-row md:items-center justify-between gap-3">
         <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none flex-nowrap sm:flex-wrap">
-          <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-gray-400 mr-1 flex items-center gap-1 flex-shrink-0">
-            <SparklesIcon class="w-3.5 h-3.5 text-amber-500" />
-            <span class="hidden sm:inline">Instant Presets:</span>
-            <span class="sm:hidden">Presets:</span>
+          <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-slate-400 mr-1 flex-shrink-0">
+            Presets:
           </span>
 
           <button
             type="button"
             @click="loadPreset('flats')"
-            class="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all flex items-center gap-1.5 border flex-shrink-0 whitespace-nowrap"
+            class="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all border flex-shrink-0 whitespace-nowrap"
             :class="activePresetMode === 'flats' ? 'bg-[#0F2A44] text-white border-[#0F2A44] shadow-xs' : 'bg-slate-50 hover:bg-slate-100 text-[#0F2A44] border-slate-200'"
           >
-            <span>🏢 PHA Flats</span>
+            PHA Flats
           </button>
 
           <button
             type="button"
             @click="loadPreset('plots')"
-            class="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all flex items-center gap-1.5 border flex-shrink-0 whitespace-nowrap"
+            class="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all border flex-shrink-0 whitespace-nowrap"
             :class="activePresetMode === 'plots' ? 'bg-[#0F2A44] text-white border-[#0F2A44] shadow-xs' : 'bg-slate-50 hover:bg-slate-100 text-[#0F2A44] border-slate-200'"
           >
-            <span>📐 Moqa Plots</span>
+            Moqa Plots
           </button>
 
           <button
             type="button"
             @click="loadPreset('harsukh')"
-            class="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all flex items-center gap-1.5 border flex-shrink-0 whitespace-nowrap"
+            class="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all border flex-shrink-0 whitespace-nowrap"
             :class="activePresetMode === 'harsukh' ? 'bg-[#0F2A44] text-white border-[#0F2A44] shadow-xs' : 'bg-slate-50 hover:bg-slate-100 text-[#0F2A44] border-slate-200'"
           >
-            <span>🌲 Harsukh Suites</span>
+            Harsukh Suites
           </button>
 
           <button
             type="button"
             @click="loadPreset('villas')"
-            class="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all flex items-center gap-1.5 border flex-shrink-0 whitespace-nowrap"
+            class="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all border flex-shrink-0 whitespace-nowrap"
             :class="activePresetMode === 'villas' ? 'bg-[#0F2A44] text-white border-[#0F2A44] shadow-xs' : 'bg-slate-50 hover:bg-slate-100 text-[#0F2A44] border-slate-200'"
           >
-            <span>🏡 Designer Villas</span>
+            Designer Villas
           </button>
         </div>
 
@@ -102,67 +98,13 @@
         <button
           type="button"
           @click="openPropertySelector()"
-          class="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2 rounded-xl border border-[#16B4E8]/40 hover:border-[#16B4E8] bg-[#16B4E8]/5 hover:bg-[#16B4E8]/10 text-[11px] sm:text-xs font-extrabold text-[#0F2A44] hover:text-[#16B4E8] transition-all flex-shrink-0"
+          class="inline-flex items-center justify-center px-3 py-2 sm:px-4 sm:py-2 rounded-xl border border-[#16B4E8]/40 hover:border-[#16B4E8] bg-[#16B4E8]/5 hover:bg-[#16B4E8]/10 text-[11px] sm:text-xs font-extrabold text-[#0F2A44] hover:text-[#16B4E8] transition-all flex-shrink-0"
         >
-          <BuildingOffice2Icon class="w-4 h-4 text-[#16B4E8]" />
-          <span>Browse All Properties ({{ allAvailableProperties.length }})</span>
+          Browse All ({{ allAvailableProperties.length }})
         </button>
       </div>
 
-      <!-- 3. VISUAL COMPARISON SLOTS -->
-      <!-- MOBILE SLOTS BAR (sm:hidden) -->
-      <div class="sm:hidden mb-4">
-        <div class="flex items-center justify-between mb-2 px-1">
-          <div class="flex items-center gap-1.5">
-            <span class="text-[11px] font-black uppercase tracking-wider text-slate-500">Selected Slots:</span>
-            <span class="px-2 py-0.2 rounded-full text-[10px] font-black" :class="compareProperties.length === 4 ? 'bg-amber-100 text-amber-800' : 'bg-sky-100 text-sky-800'">
-              {{ compareProperties.length }} / 4
-            </span>
-          </div>
-          <button
-            type="button"
-            @click="openPropertySelector()"
-            class="text-[11px] font-extrabold text-[#16B4E8]"
-          >
-            + Add Properties
-          </button>
-        </div>
-
-        <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none flex-nowrap">
-          <div
-            v-for="(prop, index) in compareProperties"
-            :key="'mobile-chip-' + prop.id"
-            class="flex items-center gap-1.5 bg-white px-2.5 py-1.5 rounded-xl border border-slate-200 shadow-2xs flex-shrink-0"
-          >
-            <span class="w-4 h-4 rounded-full bg-[#0F2A44] text-white text-[9px] font-black flex items-center justify-center flex-shrink-0">
-              {{ index + 1 }}
-            </span>
-            <span class="text-[11px] font-bold text-[#0F2A44] max-w-[110px] truncate">
-              {{ prop.title }}
-            </span>
-            <button
-              type="button"
-              @click="remove(prop.id)"
-              class="w-4 h-4 rounded-full hover:bg-red-50 text-slate-400 hover:text-red-500 flex items-center justify-center flex-shrink-0"
-              title="Remove"
-            >
-              <XMarkIcon class="w-3 h-3" />
-            </button>
-          </div>
-
-          <button
-            v-if="compareProperties.length < 4"
-            type="button"
-            @click="openPropertySelector()"
-            class="flex items-center gap-1 px-3 py-1.5 rounded-xl border-2 border-dashed border-[#16B4E8]/50 text-[#16B4E8] bg-sky-50/40 text-[11px] font-bold whitespace-nowrap flex-shrink-0"
-          >
-            <PlusIcon class="w-3.5 h-3.5 stroke-[2.5]" />
-            <span>Add Slot {{ compareProperties.length + 1 }}</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- DESKTOP 4-SLOT DECK (hidden sm:block) -->
+      <!-- 3. VISUAL COMPARISON SLOTS (Desktop Deck) -->
       <div class="hidden sm:block mb-8">
         <div class="flex items-center justify-between mb-3 px-1">
           <div class="flex items-center gap-2">
@@ -214,9 +156,8 @@
               <h4 class="font-extrabold text-xs text-[#0F2A44] line-clamp-2 leading-snug mb-1 group-hover:text-[#16B4E8] transition-colors">
                 {{ prop.title }}
               </h4>
-              <p class="text-[11px] text-slate-500 truncate flex items-center gap-1 mb-2">
-                <MapPinIcon class="w-3 h-3 text-slate-400 flex-shrink-0" />
-                <span>{{ prop.society || prop.address || prop.city }}</span>
+              <p class="text-[11px] text-slate-500 truncate mb-2">
+                {{ prop.society || prop.address || prop.city }}
               </p>
             </div>
 
@@ -263,36 +204,60 @@
       <!-- 4. COMPARISON CONTAINER (Mobile Zero-Scroll + Desktop Table) -->
       <template v-if="compareProperties.length > 0">
         <!-- 4A. MOBILE ZERO-SCROLL HEAD-TO-HEAD COMPARISON (md:hidden) -->
-        <div class="md:hidden space-y-4 mb-8">
-          <!-- Quick Pair Switcher (when 3+ properties are compared) -->
-          <div v-if="compareProperties.length > 2" class="bg-white rounded-2xl p-3 border border-slate-200 shadow-2xs">
-            <div class="flex items-center justify-between gap-2 mb-2">
-              <span class="text-[10px] font-black uppercase tracking-wider text-slate-500 flex items-center gap-1">
-                <ArrowsRightLeftIcon class="w-3.5 h-3.5 text-[#16B4E8]" />
-                <span>Quick Head-to-Head:</span>
+        <div class="md:hidden space-y-3.5 mb-8">
+          <!-- Interactive Slot Tabs (when 2+ properties in comparison) -->
+          <div class="bg-white rounded-2xl p-3 border border-slate-200 shadow-2xs space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase tracking-wider text-[#0F2A44]">
+                Comparing ({{ compareProperties.length }}/4 Slots)
               </span>
-              <span class="text-[10px] text-slate-400">Tap to compare</span>
+              <button
+                v-if="compareProperties.length < 4"
+                type="button"
+                @click="openPropertySelector()"
+                class="text-xs font-bold text-[#16B4E8]"
+              >
+                + Add Property
+              </button>
             </div>
+
+            <!-- Tab strip: Switch Column B with 1 tap -->
             <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none flex-nowrap">
               <button
-                v-for="pair in mobileAvailablePairs"
-                :key="pair.label"
+                v-for="(prop, pIdx) in compareProperties"
+                :key="'tab-' + prop.id"
                 type="button"
-                @click="setMobilePair(pair.idxA, pair.idxB)"
-                class="px-2.5 py-1 rounded-lg text-[11px] font-extrabold transition-all border flex-shrink-0 whitespace-nowrap"
-                :class="mobileItemAIdx === pair.idxA && mobileItemBIdx === pair.idxB
-                  ? 'bg-[#0F2A44] text-white border-[#0F2A44] shadow-xs'
-                  : 'bg-slate-50 text-slate-700 hover:bg-slate-100 border-slate-200'"
+                @click="pIdx === mobileItemAIdx ? null : mobileItemBIdx = pIdx"
+                :class="[
+                  'px-3 py-1.5 rounded-xl text-xs font-bold transition-all border whitespace-nowrap flex-shrink-0 flex items-center gap-1.5',
+                  mobileItemAIdx === pIdx
+                    ? 'bg-[#0F2A44] text-white border-[#0F2A44] shadow-xs'
+                    : mobileItemBIdx === pIdx
+                      ? 'bg-[#16B4E8] text-white border-[#16B4E8] shadow-xs'
+                      : 'bg-slate-50 text-slate-700 hover:bg-slate-100 border-slate-200'
+                ]"
               >
-                {{ pair.label }}
+                <span class="w-4 h-4 rounded-full text-[9px] font-black flex items-center justify-center" :class="mobileItemAIdx === pIdx || mobileItemBIdx === pIdx ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'">
+                  {{ pIdx === mobileItemAIdx ? 'A' : pIdx === mobileItemBIdx ? 'B' : pIdx + 1 }}
+                </span>
+                <span class="max-w-[110px] truncate">{{ prop.title }}</span>
+              </button>
+
+              <button
+                v-if="compareProperties.length < 4"
+                type="button"
+                @click="openPropertySelector()"
+                class="px-2.5 py-1.5 rounded-xl border border-dashed border-[#16B4E8] text-[#16B4E8] bg-sky-50/50 text-xs font-bold whitespace-nowrap flex-shrink-0"
+              >
+                + Add Slot
               </button>
             </div>
           </div>
 
-          <!-- Head-to-Head Selector / Header Cards (Side-by-Side 50% / 50%) -->
+          <!-- Side-by-Side Property Header Cards (50% / 50%) -->
           <div class="bg-white rounded-2xl p-3 border border-slate-200 shadow-sm">
             <div class="grid grid-cols-2 gap-2.5">
-              <!-- Column A Header -->
+              <!-- Property A Card -->
               <div v-if="mobilePropA" class="flex flex-col justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200">
                 <div>
                   <div class="flex items-center justify-between gap-1 mb-1.5">
@@ -301,22 +266,22 @@
                     </span>
                     <select
                       v-model="mobileItemAIdx"
-                      class="w-full text-[10px] font-bold bg-white text-slate-700 border border-slate-200 rounded-md px-1.5 py-0.5 focus:outline-none focus:border-[#16B4E8] truncate"
+                      class="w-full text-[10px] font-bold bg-white text-slate-700 border border-slate-200 rounded-md px-1.5 py-1 focus:outline-none focus:border-[#16B4E8] truncate"
                     >
                       <option v-for="(p, i) in compareProperties" :key="'optA-' + p.id" :value="i">
-                        #{{ i + 1 }}: {{ p.title.slice(0, 18) }}
+                        #{{ i + 1 }}: {{ p.title }}
                       </option>
                     </select>
                   </div>
 
-                  <div class="relative h-20 rounded-lg overflow-hidden bg-slate-200 mb-1.5">
+                  <div class="relative h-24 rounded-lg overflow-hidden bg-slate-200 mb-1.5">
                     <img :src="getPropertyImage(mobilePropA)" :alt="mobilePropA.title" class="w-full h-full object-cover" />
-                    <span class="absolute bottom-1 left-1 px-1.5 py-0.2 rounded text-[8px] font-black uppercase bg-[#0F2A44]/90 text-white">
+                    <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded text-[8px] font-black uppercase bg-[#0F2A44]/90 text-white">
                       {{ mobilePropA.typeName || (mobilePropA.type === 'apartment' ? 'Flat' : 'Plot') }}
                     </span>
                   </div>
 
-                  <h4 class="font-extrabold text-[11px] text-[#0F2A44] line-clamp-2 leading-tight">
+                  <h4 class="font-extrabold text-xs text-[#0F2A44] line-clamp-2 leading-tight">
                     {{ mobilePropA.title }}
                   </h4>
                   <p class="text-[10px] text-slate-500 truncate mt-0.5">
@@ -324,22 +289,22 @@
                   </p>
                 </div>
 
-                <div class="mt-2 pt-1.5 border-t border-slate-200 flex items-center justify-between">
+                <div class="mt-2.5 pt-1.5 border-t border-slate-200 flex items-center justify-between">
                   <span class="text-xs font-black text-[#16B4E8]">
                     {{ mobilePropA.priceFormatted || `PKR ${mobilePropA.price?.toLocaleString()}` }}
                   </span>
                   <button
                     type="button"
                     @click="remove(mobilePropA.id)"
-                    class="text-slate-400 hover:text-red-500 p-0.5"
+                    class="text-[10px] font-bold text-red-500 hover:text-red-700 px-1 py-0.5 rounded hover:bg-red-50"
                     title="Remove"
                   >
-                    <XMarkIcon class="w-3.5 h-3.5" />
+                    Remove
                   </button>
                 </div>
               </div>
 
-              <!-- Column B Header -->
+              <!-- Property B Card -->
               <div v-if="mobilePropB" class="flex flex-col justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200">
                 <div>
                   <div class="flex items-center justify-between gap-1 mb-1.5">
@@ -348,22 +313,22 @@
                     </span>
                     <select
                       v-model="mobileItemBIdx"
-                      class="w-full text-[10px] font-bold bg-white text-slate-700 border border-slate-200 rounded-md px-1.5 py-0.5 focus:outline-none focus:border-[#16B4E8] truncate"
+                      class="w-full text-[10px] font-bold bg-white text-slate-700 border border-slate-200 rounded-md px-1.5 py-1 focus:outline-none focus:border-[#16B4E8] truncate"
                     >
                       <option v-for="(p, i) in compareProperties" :key="'optB-' + p.id" :value="i">
-                        #{{ i + 1 }}: {{ p.title.slice(0, 18) }}
+                        #{{ i + 1 }}: {{ p.title }}
                       </option>
                     </select>
                   </div>
 
-                  <div class="relative h-20 rounded-lg overflow-hidden bg-slate-200 mb-1.5">
+                  <div class="relative h-24 rounded-lg overflow-hidden bg-slate-200 mb-1.5">
                     <img :src="getPropertyImage(mobilePropB)" :alt="mobilePropB.title" class="w-full h-full object-cover" />
-                    <span class="absolute bottom-1 left-1 px-1.5 py-0.2 rounded text-[8px] font-black uppercase bg-[#16B4E8]/90 text-white">
+                    <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded text-[8px] font-black uppercase bg-[#16B4E8]/90 text-white">
                       {{ mobilePropB.typeName || (mobilePropB.type === 'apartment' ? 'Flat' : 'Plot') }}
                     </span>
                   </div>
 
-                  <h4 class="font-extrabold text-[11px] text-[#0F2A44] line-clamp-2 leading-tight">
+                  <h4 class="font-extrabold text-xs text-[#0F2A44] line-clamp-2 leading-tight">
                     {{ mobilePropB.title }}
                   </h4>
                   <p class="text-[10px] text-slate-500 truncate mt-0.5">
@@ -371,17 +336,17 @@
                   </p>
                 </div>
 
-                <div class="mt-2 pt-1.5 border-t border-slate-200 flex items-center justify-between">
+                <div class="mt-2.5 pt-1.5 border-t border-slate-200 flex items-center justify-between">
                   <span class="text-xs font-black text-[#16B4E8]">
                     {{ mobilePropB.priceFormatted || `PKR ${mobilePropB.price?.toLocaleString()}` }}
                   </span>
                   <button
                     type="button"
                     @click="remove(mobilePropB.id)"
-                    class="text-slate-400 hover:text-red-500 p-0.5"
+                    class="text-[10px] font-bold text-red-500 hover:text-red-700 px-1 py-0.5 rounded hover:bg-red-50"
                     title="Remove"
                   >
-                    <XMarkIcon class="w-3.5 h-3.5" />
+                    Remove
                   </button>
                 </div>
               </div>
@@ -392,142 +357,124 @@
                 @click="openPropertySelector()"
                 class="flex flex-col items-center justify-center p-3 rounded-xl border-2 border-dashed border-[#16B4E8]/50 bg-sky-50/40 text-center cursor-pointer min-h-[140px]"
               >
-                <div class="w-8 h-8 rounded-full bg-[#16B4E8]/10 text-[#16B4E8] flex items-center justify-center mb-1">
-                  <PlusIcon class="w-4 h-4 stroke-[2.5]" />
-                </div>
                 <span class="text-xs font-bold text-[#0F2A44]">+ Add 2nd Property</span>
-                <span class="text-[10px] text-slate-400">Compare side-by-side</span>
+                <span class="text-[10px] text-slate-400 mt-0.5">Compare side-by-side</span>
               </div>
             </div>
           </div>
 
-          <!-- SIDE-BY-SIDE METRICS (100% width, zero horizontal scroll) -->
-          <div v-if="mobilePropA && mobilePropB" class="space-y-3">
+          <!-- Unified Side-by-Side Comparison Matrix -->
+          <div v-if="mobilePropA && mobilePropB" class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
             <!-- SECTION 1: PRICE & PAYMENT -->
-            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
-              <div class="bg-slate-100/90 px-3.5 py-2 border-b border-slate-200">
-                <span class="text-[11px] font-black uppercase tracking-wider text-[#0F2A44]">💰 Price &amp; Payment Mode</span>
+            <div class="bg-[#0F2A44] px-3.5 py-2">
+              <span class="text-[11px] font-black uppercase tracking-wider text-white">Price &amp; Payment Mode</span>
+            </div>
+            <div class="divide-y divide-slate-100 text-xs">
+              <div class="p-2.5">
+                <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Total Demand / Price</div>
+                <div class="grid grid-cols-2 gap-2 text-center">
+                  <div class="font-black text-xs text-[#16B4E8] bg-sky-50/70 p-2 rounded-lg border border-sky-100">
+                    {{ mobilePropA.priceFormatted || ('PKR ' + mobilePropA.price?.toLocaleString()) }}
+                  </div>
+                  <div class="font-black text-xs text-[#16B4E8] bg-sky-50/70 p-2 rounded-lg border border-sky-100">
+                    {{ mobilePropB.priceFormatted || ('PKR ' + mobilePropB.price?.toLocaleString()) }}
+                  </div>
+                </div>
               </div>
-              <div class="divide-y divide-slate-100 text-xs">
-                <!-- Demand Rate -->
-                <div class="p-2.5">
-                  <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Total Demand / Price</div>
-                  <div class="grid grid-cols-2 gap-2 text-center">
-                    <div class="font-black text-xs text-[#16B4E8] bg-sky-50/60 p-1.5 rounded-lg border border-sky-100/80">
-                      {{ mobilePropA.priceFormatted || ('PKR ' + mobilePropA.price?.toLocaleString()) }}
-                    </div>
-                    <div class="font-black text-xs text-[#16B4E8] bg-sky-50/60 p-1.5 rounded-lg border border-sky-100/80">
-                      {{ mobilePropB.priceFormatted || ('PKR ' + mobilePropB.price?.toLocaleString()) }}
-                    </div>
+
+              <div class="p-2.5">
+                <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Payment Basis / Rate</div>
+                <div class="grid grid-cols-2 gap-2 text-center">
+                  <div class="text-[11px] font-bold text-slate-700 bg-slate-50 p-2 rounded-lg">
+                    {{ mobilePropA.pricePerSqft || (mobilePropA.type === 'plot' ? '100% Cash Registry' : 'Standard Rate') }}
+                  </div>
+                  <div class="text-[11px] font-bold text-slate-700 bg-slate-50 p-2 rounded-lg">
+                    {{ mobilePropB.pricePerSqft || (mobilePropB.type === 'plot' ? '100% Cash Registry' : 'Standard Rate') }}
                   </div>
                 </div>
+              </div>
 
-                <!-- Payment Basis -->
-                <div class="p-2.5">
-                  <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Payment Basis / Rate</div>
-                  <div class="grid grid-cols-2 gap-2 text-center">
-                    <div class="text-[11px] font-semibold text-slate-700 bg-slate-50 p-1.5 rounded-lg">
-                      {{ mobilePropA.pricePerSqft || (mobilePropA.type === 'plot' ? '100% Cash Registry' : 'Standard Rate') }}
-                    </div>
-                    <div class="text-[11px] font-semibold text-slate-700 bg-slate-50 p-1.5 rounded-lg">
-                      {{ mobilePropB.pricePerSqft || (mobilePropB.type === 'plot' ? '100% Cash Registry' : 'Standard Rate') }}
-                    </div>
+              <div class="p-2.5">
+                <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Installment / Booking Plan</div>
+                <div class="grid grid-cols-2 gap-2 text-center">
+                  <div class="text-[10px] font-bold p-2 rounded-lg" :class="mobilePropA.pricePostfix?.includes('Booking') || /installment/i.test(mobilePropA.title) ? 'bg-amber-50 text-amber-800' : 'bg-emerald-50 text-emerald-800'">
+                    {{ mobilePropA.pricePostfix || (mobilePropA.type === 'plot' ? 'Cash Demarcated' : 'Ready Possession') }}
                   </div>
-                </div>
-
-                <!-- Installment / Booking -->
-                <div class="p-2.5">
-                  <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Installment / Booking Plan</div>
-                  <div class="grid grid-cols-2 gap-2 text-center">
-                    <div class="text-[10px] font-bold p-1.5 rounded-lg" :class="mobilePropA.pricePostfix?.includes('Booking') || /installment/i.test(mobilePropA.title) ? 'bg-amber-50 text-amber-800' : 'bg-emerald-50 text-emerald-800'">
-                      {{ mobilePropA.pricePostfix || (mobilePropA.type === 'plot' ? 'Cash Demarcated' : 'Ready Possession') }}
-                    </div>
-                    <div class="text-[10px] font-bold p-1.5 rounded-lg" :class="mobilePropB.pricePostfix?.includes('Booking') || /installment/i.test(mobilePropB.title) ? 'bg-amber-50 text-amber-800' : 'bg-emerald-50 text-emerald-800'">
-                      {{ mobilePropB.pricePostfix || (mobilePropB.type === 'plot' ? 'Cash Demarcated' : 'Ready Possession') }}
-                    </div>
+                  <div class="text-[10px] font-bold p-2 rounded-lg" :class="mobilePropB.pricePostfix?.includes('Booking') || /installment/i.test(mobilePropB.title) ? 'bg-amber-50 text-amber-800' : 'bg-emerald-50 text-emerald-800'">
+                    {{ mobilePropB.pricePostfix || (mobilePropB.type === 'plot' ? 'Cash Demarcated' : 'Ready Possession') }}
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- SECTION 2: LOCATION & LEGAL -->
-            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
-              <div class="bg-slate-100/90 px-3.5 py-2 border-b border-slate-200">
-                <span class="text-[11px] font-black uppercase tracking-wider text-[#0F2A44]">📍 Society &amp; Verification</span>
-              </div>
-              <div class="divide-y divide-slate-100 text-xs">
-                <!-- Society / Area -->
-                <div class="p-2.5">
-                  <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Society / Sector</div>
-                  <div class="grid grid-cols-2 gap-2 text-center">
-                    <div class="font-bold text-xs text-[#0F2A44] bg-slate-50 p-1.5 rounded-lg">
-                      {{ mobilePropA.society || mobilePropA.areaName || mobilePropA.city }}
-                    </div>
-                    <div class="font-bold text-xs text-[#0F2A44] bg-slate-50 p-1.5 rounded-lg">
-                      {{ mobilePropB.society || mobilePropB.areaName || mobilePropB.city }}
-                    </div>
+            <!-- SECTION 2: LOCATION & LEGAL STATUS -->
+            <div class="bg-[#0F2A44] px-3.5 py-2">
+              <span class="text-[11px] font-black uppercase tracking-wider text-white">Location &amp; Legal Status</span>
+            </div>
+            <div class="divide-y divide-slate-100 text-xs">
+              <div class="p-2.5">
+                <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Society / Sector</div>
+                <div class="grid grid-cols-2 gap-2 text-center">
+                  <div class="font-bold text-xs text-[#0F2A44] bg-slate-50 p-2 rounded-lg">
+                    {{ mobilePropA.society || mobilePropA.areaName || mobilePropA.city }}
+                  </div>
+                  <div class="font-bold text-xs text-[#0F2A44] bg-slate-50 p-2 rounded-lg">
+                    {{ mobilePropB.society || mobilePropB.areaName || mobilePropB.city }}
                   </div>
                 </div>
+              </div>
 
-                <!-- Legal / NOC -->
-                <div class="p-2.5">
-                  <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Legal &amp; NOC Status</div>
-                  <div class="grid grid-cols-2 gap-2 text-center">
-                    <div class="text-[10px] font-bold text-emerald-700 bg-emerald-50 p-1.5 rounded-lg border border-emerald-100 flex items-center justify-center gap-1">
-                      <CheckIcon class="w-3 h-3 text-emerald-600 stroke-[3] flex-shrink-0" />
-                      <span>{{ mobilePropA.type === 'plot' ? 'Moqa Demarcated' : 'CDA Verified' }}</span>
-                    </div>
-                    <div class="text-[10px] font-bold text-emerald-700 bg-emerald-50 p-1.5 rounded-lg border border-emerald-100 flex items-center justify-center gap-1">
-                      <CheckIcon class="w-3 h-3 text-emerald-600 stroke-[3] flex-shrink-0" />
-                      <span>{{ mobilePropB.type === 'plot' ? 'Moqa Demarcated' : 'CDA Verified' }}</span>
-                    </div>
+              <div class="p-2.5">
+                <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Legal &amp; NOC Status</div>
+                <div class="grid grid-cols-2 gap-2 text-center">
+                  <div class="text-[10px] font-bold text-emerald-700 bg-emerald-50 p-2 rounded-lg border border-emerald-100">
+                    {{ mobilePropA.type === 'plot' ? 'Moqa Demarcated' : 'CDA / RDA Verified' }}
+                  </div>
+                  <div class="text-[10px] font-bold text-emerald-700 bg-emerald-50 p-2 rounded-lg border border-emerald-100">
+                    {{ mobilePropB.type === 'plot' ? 'Moqa Demarcated' : 'CDA / RDA Verified' }}
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- SECTION 3: AREA & ROOMS -->
-            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
-              <div class="bg-slate-100/90 px-3.5 py-2 border-b border-slate-200">
-                <span class="text-[11px] font-black uppercase tracking-wider text-[#0F2A44]">📐 Space &amp; Dimensions</span>
-              </div>
-              <div class="divide-y divide-slate-100 text-xs">
-                <!-- Covered / Plot Area -->
-                <div class="p-2.5">
-                  <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Covered Area / Plot Size</div>
-                  <div class="grid grid-cols-2 gap-2 text-center">
-                    <div class="font-black text-xs text-[#0F2A44] bg-slate-50 p-1.5 rounded-lg">
-                      {{ mobilePropA.areaText || ((mobilePropA.sqft ?? mobilePropA.area) ? `${(mobilePropA.sqft ?? mobilePropA.area).toLocaleString()} Sq Ft` : 'Standard') }}
-                      <span v-if="mobilePropA.marla" class="text-slate-500 font-normal block text-[10px]">({{ mobilePropA.marla }})</span>
-                    </div>
-                    <div class="font-black text-xs text-[#0F2A44] bg-slate-50 p-1.5 rounded-lg">
-                      {{ mobilePropB.areaText || ((mobilePropB.sqft ?? mobilePropB.area) ? `${(mobilePropB.sqft ?? mobilePropB.area).toLocaleString()} Sq Ft` : 'Standard') }}
-                      <span v-if="mobilePropB.marla" class="text-slate-500 font-normal block text-[10px]">({{ mobilePropB.marla }})</span>
-                    </div>
+            <!-- SECTION 3: SPACE & SPECIFICATIONS -->
+            <div class="bg-[#0F2A44] px-3.5 py-2">
+              <span class="text-[11px] font-black uppercase tracking-wider text-white">Space &amp; Dimensions</span>
+            </div>
+            <div class="divide-y divide-slate-100 text-xs">
+              <div class="p-2.5">
+                <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Covered Area / Plot Size</div>
+                <div class="grid grid-cols-2 gap-2 text-center">
+                  <div class="font-black text-xs text-[#0F2A44] bg-slate-50 p-2 rounded-lg">
+                    {{ mobilePropA.areaText || ((mobilePropA.sqft ?? mobilePropA.area) ? `${(mobilePropA.sqft ?? mobilePropA.area).toLocaleString()} Sq Ft` : 'Standard') }}
+                    <span v-if="mobilePropA.marla" class="text-slate-500 font-normal block text-[10px]">({{ mobilePropA.marla }})</span>
+                  </div>
+                  <div class="font-black text-xs text-[#0F2A44] bg-slate-50 p-2 rounded-lg">
+                    {{ mobilePropB.areaText || ((mobilePropB.sqft ?? mobilePropB.area) ? `${(mobilePropB.sqft ?? mobilePropB.area).toLocaleString()} Sq Ft` : 'Standard') }}
+                    <span v-if="mobilePropB.marla" class="text-slate-500 font-normal block text-[10px]">({{ mobilePropB.marla }})</span>
                   </div>
                 </div>
+              </div>
 
-                <!-- Bedrooms & Baths -->
-                <div class="p-2.5">
-                  <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Bedrooms &amp; Baths</div>
-                  <div class="grid grid-cols-2 gap-2 text-center">
-                    <div class="text-[11px] font-bold text-slate-800 bg-slate-50 p-1.5 rounded-lg">
-                      <span v-if="mobilePropA.beds || mobilePropA.bedrooms">{{ mobilePropA.beds || mobilePropA.bedrooms }} Beds ({{ mobilePropA.baths || mobilePropA.bathrooms || 1 }} Baths)</span>
-                      <span v-else class="text-slate-500">Plot Land / File</span>
-                    </div>
-                    <div class="text-[11px] font-bold text-slate-800 bg-slate-50 p-1.5 rounded-lg">
-                      <span v-if="mobilePropB.beds || mobilePropB.bedrooms">{{ mobilePropB.beds || mobilePropB.bedrooms }} Beds ({{ mobilePropB.baths || mobilePropB.bathrooms || 1 }} Baths)</span>
-                      <span v-else class="text-slate-500">Plot Land / File</span>
-                    </div>
+              <div class="p-2.5">
+                <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Bedrooms &amp; Baths</div>
+                <div class="grid grid-cols-2 gap-2 text-center">
+                  <div class="text-[11px] font-bold text-slate-800 bg-slate-50 p-2 rounded-lg">
+                    <span v-if="mobilePropA.beds || mobilePropA.bedrooms">{{ mobilePropA.beds || mobilePropA.bedrooms }} Beds ({{ mobilePropA.baths || mobilePropA.bathrooms || 1 }} Baths)</span>
+                    <span v-else class="text-slate-500">Plot Land / File</span>
+                  </div>
+                  <div class="text-[11px] font-bold text-slate-800 bg-slate-50 p-2 rounded-lg">
+                    <span v-if="mobilePropB.beds || mobilePropB.bedrooms">{{ mobilePropB.beds || mobilePropB.bedrooms }} Beds ({{ mobilePropB.baths || mobilePropB.bathrooms || 1 }} Baths)</span>
+                    <span v-else class="text-slate-500">Plot Land / File</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- SECTION 4: ACTIONS -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-3 shadow-2xs">
+            <div class="p-3 bg-slate-50 border-t border-slate-200">
               <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-2">Direct Inquiries</div>
-              <div class="grid grid-cols-2 gap-2">
+              <div class="grid grid-cols-2 gap-2.5">
                 <div class="space-y-1.5">
                   <router-link
                     :to="`/property/${mobilePropA.slug}`"
@@ -539,7 +486,7 @@
                     :href="`https://wa.me/923349522157?text=${encodeURIComponent('Hello TopLinkers, I am inquiring about ' + mobilePropA.title + ' from the comparison tool.')}`"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="block text-center py-1.5 px-1 bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold text-[10px] rounded-xl transition-colors shadow-xs"
+                    class="block text-center py-2 px-1 bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold text-[11px] rounded-xl transition-colors shadow-xs"
                   >
                     WhatsApp
                   </a>
@@ -556,7 +503,7 @@
                     :href="`https://wa.me/923349522157?text=${encodeURIComponent('Hello TopLinkers, I am inquiring about ' + mobilePropB.title + ' from the comparison tool.')}`"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="block text-center py-1.5 px-1 bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold text-[10px] rounded-xl transition-colors shadow-xs"
+                    class="block text-center py-2 px-1 bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold text-[11px] rounded-xl transition-colors shadow-xs"
                   >
                     WhatsApp
                   </a>
@@ -605,7 +552,7 @@
               <!-- SECTION 1: PRICE & TERMS -->
               <tr class="bg-slate-100/60 font-black text-slate-700 text-[11px] uppercase tracking-wider">
                 <td :colspan="compareProperties.length + 1" class="py-2.5 px-4 bg-slate-100 text-[#0F2A44]">
-                  💰 Pricing, Installments &amp; Payment Mode
+                  Pricing, Installments &amp; Payment Mode
                 </td>
               </tr>
 
@@ -655,7 +602,7 @@
               <!-- SECTION 2: LOCATION & LEGAL -->
               <tr class="bg-slate-100/60 font-black text-slate-700 text-[11px] uppercase tracking-wider">
                 <td :colspan="compareProperties.length + 1" class="py-2.5 px-4 bg-slate-100 text-[#0F2A44]">
-                  📍 Location, Society &amp; Verification
+                  Location, Society &amp; Verification
                 </td>
               </tr>
 
@@ -691,9 +638,8 @@
                   :key="'noc-' + prop.id"
                   class="p-4 border-l border-gray-200 font-bold text-emerald-700"
                 >
-                  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-[11px]">
-                    <CheckIcon class="w-3.5 h-3.5 text-emerald-600 stroke-[3]" />
-                    <span>{{ prop.type === 'plot' ? 'Moqa Ka Demarcated & Clean Title' : 'Allotment Letter / CDA Verified' }}</span>
+                  <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-[11px]">
+                    {{ prop.type === 'plot' ? 'Moqa Ka Demarcated & Clean Title' : 'Allotment Letter / CDA Verified' }}
                   </span>
                 </td>
               </tr>
@@ -701,7 +647,7 @@
               <!-- SECTION 3: LAYOUT & DIMENSIONS -->
               <tr class="bg-slate-100/60 font-black text-slate-700 text-[11px] uppercase tracking-wider">
                 <td :colspan="compareProperties.length + 1" class="py-2.5 px-4 bg-slate-100 text-[#0F2A44]">
-                  📐 Space, Dimensions &amp; Architecture
+                  Space, Dimensions &amp; Architecture
                 </td>
               </tr>
 
@@ -782,8 +728,8 @@
         v-else
         class="bg-white rounded-3xl p-12 sm:p-16 text-center border border-gray-200 shadow-sm max-w-xl mx-auto"
       >
-        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-sky-50 text-[#16B4E8] flex items-center justify-center border border-sky-100">
-          <BuildingOffice2Icon class="w-8 h-8" />
+        <div class="inline-block px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 text-[11px] font-black uppercase tracking-wider mb-4 border border-slate-200">
+          Comparison Queue Empty
         </div>
         <h3 class="text-xl font-black text-[#0F2A44] mb-2">No Properties Selected for Comparison</h3>
         <p class="text-xs sm:text-sm text-gray-500 mb-6 leading-relaxed">
@@ -793,10 +739,9 @@
           <button
             type="button"
             @click="openPropertySelector()"
-            class="px-6 py-3 bg-[#16B4E8] hover:bg-[#119fcb] text-white text-xs font-bold rounded-xl transition-all shadow flex items-center gap-2"
+            class="px-6 py-3 bg-[#16B4E8] hover:bg-[#119fcb] text-white text-xs font-bold rounded-xl transition-all shadow"
           >
-            <PlusIcon class="w-4 h-4 stroke-[2.5]" />
-            <span>Open Visual Property Picker</span>
+            <span>+ Open Visual Property Picker</span>
           </button>
           <button
             type="button"
@@ -913,7 +858,7 @@
               class="px-3.5 py-1.5 rounded-xl font-bold transition-all whitespace-nowrap border flex items-center gap-1.5"
               :class="selectorCategory === 'flats' ? 'bg-[#0F2A44] text-white border-[#0F2A44]' : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200'"
             >
-              <span>🏢 Flats &amp; Apartments</span>
+              <span>Flats &amp; Apartments</span>
               <span class="px-1.5 py-0.2 rounded text-[10px]" :class="selectorCategory === 'flats' ? 'bg-white/20' : 'bg-slate-200'">
                 {{ countByCategory('flats') }}
               </span>
@@ -925,7 +870,7 @@
               class="px-3.5 py-1.5 rounded-xl font-bold transition-all whitespace-nowrap border flex items-center gap-1.5"
               :class="selectorCategory === 'plots' ? 'bg-[#0F2A44] text-white border-[#0F2A44]' : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200'"
             >
-              <span>📐 Plots &amp; Land</span>
+              <span>Plots &amp; Land</span>
               <span class="px-1.5 py-0.2 rounded text-[10px]" :class="selectorCategory === 'plots' ? 'bg-white/20' : 'bg-slate-200'">
                 {{ countByCategory('plots') }}
               </span>
@@ -937,7 +882,7 @@
               class="px-3.5 py-1.5 rounded-xl font-bold transition-all whitespace-nowrap border flex items-center gap-1.5"
               :class="selectorCategory === 'villas' ? 'bg-[#0F2A44] text-white border-[#0F2A44]' : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200'"
             >
-              <span>🏡 Houses &amp; Villas</span>
+              <span>Houses &amp; Villas</span>
               <span class="px-1.5 py-0.2 rounded text-[10px]" :class="selectorCategory === 'villas' ? 'bg-white/20' : 'bg-slate-200'">
                 {{ countByCategory('villas') }}
               </span>
@@ -964,13 +909,12 @@
                 ? 'border-emerald-500 shadow-md ring-2 ring-emerald-500/20 bg-emerald-50/10' 
                 : 'border-slate-200 hover:border-[#16B4E8] hover:shadow-md'"
             >
-              <!-- Selected Checkmark Overlay Badge -->
+              <!-- Selected Overlay Badge -->
               <div
                 v-if="isSelected(item.id)"
-                class="absolute top-2.5 right-2.5 z-10 px-2 py-1 rounded-full bg-emerald-600 text-white text-[10px] font-black flex items-center gap-1 shadow-md"
+                class="absolute top-2.5 right-2.5 z-10 px-2.5 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-black uppercase tracking-wider shadow-md"
               >
-                <CheckIcon class="w-3.5 h-3.5 stroke-[3]" />
-                <span>Selected</span>
+                Selected
               </div>
 
               <div>
@@ -1151,14 +1095,9 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
 import {
-  BuildingOffice2Icon,
-  MapPinIcon,
-  CheckIcon,
   PlusIcon,
   XMarkIcon,
-  SparklesIcon,
-  MagnifyingGlassIcon,
-  ArrowsRightLeftIcon
+  MagnifyingGlassIcon
 } from '@heroicons/vue/24/outline'
 import { usePropertiesStore } from '../stores/properties'
 import { useUiStore } from '../stores/ui'
