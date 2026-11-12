@@ -17,9 +17,12 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $email = strtolower(trim($request->email));
+        $password = trim($request->password);
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        $user = User::whereRaw('LOWER(TRIM(email)) = ?', [$email])->first();
+
+        if (!$user || !Hash::check($password, $user->password)) {
             return response()->json([
                 'message' => 'Invalid email or password.'
             ], 401);

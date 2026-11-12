@@ -69,11 +69,14 @@ export const useAdminStore = defineStore('admin', () => {
   )
 
   const login = async (email, password) => {
+    const cleanEmail = (email || '').trim().toLowerCase()
+    const cleanPassword = (password || '').trim()
+
     try {
       const res = await fetch(`${API_BASE_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email: cleanEmail, password: cleanPassword })
       })
       if (res.ok) {
         const data = await res.json()
@@ -95,14 +98,13 @@ export const useAdminStore = defineStore('admin', () => {
     }
 
     // Offline local credential validation against stored users
-    const cleanEmail = (email || '').trim().toLowerCase()
     const matchedUser = users.value.find(u => (u.email || '').toLowerCase() === cleanEmail)
 
     if (matchedUser) {
       if (matchedUser.is_active === false) {
         return { success: false, message: 'This account has been deactivated by the administrator.' }
       }
-      if (password && password.length >= 6) {
+      if (cleanPassword && cleanPassword.length >= 6) {
         isAuthenticated.value = true
         adminUser.value = {
           ...matchedUser,
@@ -114,7 +116,7 @@ export const useAdminStore = defineStore('admin', () => {
     }
 
     // Default master admin fallback
-    if (cleanEmail === 'admin@toplinkers.com' && password === 'admin123') {
+    if (cleanEmail === 'admin@toplinkers.com' && cleanPassword === 'admin123') {
       isAuthenticated.value = true
       adminUser.value = {
         id: 1,
