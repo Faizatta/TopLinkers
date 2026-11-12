@@ -1,7 +1,7 @@
 <template>
-  <div class="h-screen w-full overflow-hidden bg-[#F8FAFC] text-slate-800 flex flex-col lg:flex-row font-sans antialiased">
+  <div class="min-h-screen lg:h-screen w-full lg:overflow-hidden bg-[#F8FAFC] text-slate-800 flex flex-col lg:flex-row font-sans antialiased">
     <!-- Mobile Header -->
-    <header class="lg:hidden flex-shrink-0 bg-[#0B192C] text-white px-4 py-3 flex items-center justify-between shadow-sm z-40">
+    <header class="lg:hidden sticky top-0 flex-shrink-0 bg-[#0B192C] text-white px-4 py-3 flex items-center justify-between shadow-sm z-40">
       <div class="flex items-center gap-2.5">
         <img
           src="/toplinkers-logo.jpg"
@@ -217,12 +217,12 @@
       </div>
     </aside>
 
-    <!-- Main Workspace Wrapper (Fixed Header + Scrollable Center Content) -->
-    <div class="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-      <!-- Fixed Top Action Bar -->
-      <header class="flex-shrink-0 bg-white border-b border-slate-200/80 px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 z-30">
+    <!-- Main Workspace Wrapper (Fixed Header on Desktop + Full Flow on Mobile) -->
+    <div class="flex-1 flex flex-col min-w-0 lg:h-full lg:overflow-hidden">
+      <!-- Top Action Bar -->
+      <header class="flex-shrink-0 bg-white border-b border-slate-200/80 px-4 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 z-30">
         <div>
-          <h2 class="text-lg font-bold text-[#0F2A44] tracking-tight">{{ currentTitle }}</h2>
+          <h2 class="text-base sm:text-lg font-bold text-[#0F2A44] tracking-tight">{{ currentTitle }}</h2>
           <p class="text-xs text-slate-500">Al Hameed Plaza, G-11 Markaz Islamabad</p>
         </div>
 
@@ -230,15 +230,15 @@
           <button
             v-if="adminStore.canAccessModule('leads')"
             @click="openAddLeadModal = true"
-            class="px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs"
+            class="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs text-center"
           >
             <span>Add Walk-in Lead</span>
           </button>
         </div>
       </header>
 
-      <!-- Scrollable Center Router View -->
-      <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 overscroll-contain" style="-webkit-overflow-scrolling: touch;">
+      <!-- Center Router View (Scrollable on Desktop, Native Flow on Mobile) -->
+      <main class="flex-1 lg:overflow-y-auto p-3.5 sm:p-6 lg:p-8 overscroll-contain" style="-webkit-overflow-scrolling: touch;">
         <router-view />
       </main>
     </div>

@@ -1,17 +1,17 @@
 <template>
   <div class="space-y-6">
     <!-- Top Segmented Navigation Tabs: Users vs Roles Matrix -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-      <div class="inline-flex p-1 bg-white border border-slate-200/90 rounded-xl shadow-xs">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+      <div class="grid grid-cols-2 w-full sm:w-auto p-1 bg-white border border-slate-200/90 rounded-xl shadow-xs">
         <button
           type="button"
           @click="activeMainTab = 'users'"
           :class="activeMainTab === 'users' ? 'bg-[#0F2A44] text-white shadow-xs font-bold' : 'text-slate-600 hover:text-slate-900 font-medium'"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs transition-colors"
+          class="inline-flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg text-xs transition-colors"
         >
-          <span>Portal Login Users</span>
+          <span>Portal Users</span>
           <span
-            class="px-2 py-0.5 rounded-full text-[10px] font-semibold"
+            class="px-1.5 py-0.2 rounded-full text-[10px] font-semibold"
             :class="activeMainTab === 'users' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-700'"
           >
             {{ adminStore.users.length }}
@@ -22,11 +22,11 @@
           type="button"
           @click="activeMainTab = 'roles'"
           :class="activeMainTab === 'roles' ? 'bg-[#0F2A44] text-white shadow-xs font-bold' : 'text-slate-600 hover:text-slate-900 font-medium'"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs transition-colors"
+          class="inline-flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg text-xs transition-colors"
         >
-          <span>Roles &amp; Permission Templates</span>
+          <span>Roles &amp; Matrix</span>
           <span
-            class="px-2 py-0.5 rounded-full text-[10px] font-semibold"
+            class="px-1.5 py-0.2 rounded-full text-[10px] font-semibold"
             :class="activeMainTab === 'roles' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-700'"
           >
             {{ adminStore.roles.length }}
@@ -35,30 +35,30 @@
       </div>
 
       <!-- Quick Action on Top Right -->
-      <div class="flex items-center gap-2.5">
+      <div class="flex items-center gap-2 w-full sm:w-auto">
         <button
           v-if="activeMainTab === 'users'"
           type="button"
           @click="openCreateUserModal()"
-          class="px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs"
+          class="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs text-center"
         >
-          <span>Create New User</span>
+          <span>+ Create New User</span>
         </button>
 
-        <div v-else class="flex items-center gap-2">
+        <div v-else class="grid grid-cols-2 sm:flex items-center gap-2 w-full sm:w-auto">
           <button
             type="button"
             @click="openPermissionModal()"
-            class="px-3.5 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium transition-colors shadow-xs"
+            class="px-3 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium transition-colors shadow-xs text-center"
           >
-            <span>Create Permission</span>
+            <span>+ Permission</span>
           </button>
           <button
             type="button"
             @click="openRoleModal()"
-            class="px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs"
+            class="px-3.5 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs text-center"
           >
-            <span>Create Role</span>
+            <span>+ Create Role</span>
           </button>
         </div>
       </div>
@@ -123,16 +123,125 @@
         </div>
       </div>
 
-      <!-- Users List Table -->
+      <!-- Users List (Mobile Cards + Desktop Table) -->
       <div class="bg-white rounded-xl border border-slate-200/90 shadow-xs overflow-hidden">
-        <div class="px-5 py-3.5 border-b border-slate-100 flex items-center justify-between">
+        <div class="px-4 sm:px-5 py-3.5 border-b border-slate-100 flex items-center justify-between">
           <span class="text-xs font-bold uppercase tracking-wider text-slate-600">
             Registered Accounts ({{ filteredUsers.length }})
           </span>
-          <span class="text-[11px] text-slate-400">Click Edit to change password or reconfigure assigned permissions</span>
+          <span class="text-[11px] text-slate-400 hidden sm:inline">Click Edit to change password or reconfigure assigned permissions</span>
         </div>
 
-        <div class="overflow-x-auto">
+        <!-- Mobile Users Cards List (md:hidden) -->
+        <div class="md:hidden divide-y divide-slate-100">
+          <div
+            v-for="user in filteredUsers"
+            :key="`m-user-${user.id}`"
+            class="p-4 space-y-3"
+          >
+            <!-- User Header -->
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div
+                  class="w-9 h-9 rounded-lg flex items-center justify-center font-bold text-xs uppercase flex-shrink-0 bg-slate-100 text-slate-700 border border-slate-200"
+                >
+                  {{ getUserInitials(user.name) }}
+                </div>
+                <div class="min-w-0">
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span class="font-bold text-[#0F2A44] text-xs">{{ user.name }}</span>
+                    <span
+                      v-if="user.email === 'admin@toplinkers.com' || user.id === 1"
+                      class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-slate-100 text-slate-700 border border-slate-200"
+                    >
+                      Root Admin
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-1 text-slate-500 text-[11px] mt-0.5">
+                    <span class="truncate">{{ user.email }}</span>
+                    <button
+                      type="button"
+                      @click="copyToClipboard(user.email)"
+                      class="text-slate-400 hover:text-slate-700 p-0.5"
+                      title="Copy email"
+                    >
+                      <DocumentDuplicateIcon class="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Status Badge -->
+              <span
+                class="px-2 py-0.5 rounded-md text-[10px] font-medium inline-flex items-center gap-1 border flex-shrink-0"
+                :class="user.is_active !== false && user.is_active !== 0 ? 'bg-slate-50 text-slate-700 border-slate-200' : 'bg-rose-50 text-rose-700 border-rose-200'"
+              >
+                <span class="w-1.5 h-1.5 rounded-full" :class="user.is_active !== false && user.is_active !== 0 ? 'bg-emerald-500' : 'bg-rose-500'"></span>
+                <span>{{ user.is_active !== false && user.is_active !== 0 ? 'Active' : 'Suspended' }}</span>
+              </span>
+            </div>
+
+            <!-- Role & Assigned Access Badges -->
+            <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 space-y-1.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-400 font-bold uppercase text-[10px]">Role:</span>
+                <span class="px-2 py-0.5 rounded text-[11px] font-semibold border" :class="getRoleBadgeClass(user.role)">
+                  {{ user.role || 'Restricted User' }}
+                </span>
+              </div>
+              <div>
+                <span class="text-slate-400 font-bold uppercase text-[10px] block mb-1">Access:</span>
+                <div class="flex flex-wrap gap-1">
+                  <template v-if="getUserAccessSummary(user).isFull">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-200/70 text-slate-800">
+                      Full Access (All Modules)
+                    </span>
+                  </template>
+                  <template v-else-if="getUserAccessSummary(user).badges.length">
+                    <span
+                      v-for="badge in getUserAccessSummary(user).badges"
+                      :key="badge"
+                      class="px-2 py-0.5 rounded text-[10px] font-medium bg-white text-slate-700 border border-slate-200"
+                    >
+                      {{ badge }}
+                    </span>
+                  </template>
+                  <template v-else>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-medium bg-rose-50 text-rose-700 border border-rose-200">
+                      No Modules Assigned
+                    </span>
+                  </template>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-2 pt-1">
+              <button
+                type="button"
+                @click="openEditUserModal(user)"
+                class="flex-1 py-2 px-3 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold text-center transition-colors shadow-2xs"
+              >
+                Edit Access &amp; Password
+              </button>
+              <button
+                v-if="user.email !== 'admin@toplinkers.com' && user.id !== 1"
+                type="button"
+                @click="adminStore.deleteUser(user.id)"
+                class="py-2 px-3 rounded-lg border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-medium transition-colors"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+
+          <div v-if="filteredUsers.length === 0" class="py-8 text-center text-slate-400 text-xs">
+            No users found matching "{{ userSearch }}".
+          </div>
+        </div>
+
+        <!-- Desktop Users Table (hidden md:block) -->
+        <div class="hidden md:block overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-slate-50 border-b border-slate-200/80 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
@@ -298,16 +407,65 @@
         </div>
       </div>
 
-      <!-- Admin Roles Table -->
+      <!-- Admin Roles (Mobile Cards + Desktop Table) -->
       <div class="bg-white rounded-xl border border-slate-200/90 shadow-xs overflow-hidden">
-        <div class="px-5 py-3.5 border-b border-slate-100 flex items-center justify-between">
+        <div class="px-4 sm:px-5 py-3.5 border-b border-slate-100 flex items-center justify-between">
           <span class="text-xs font-bold uppercase tracking-wider text-slate-600">
             System &amp; Custom Roles ({{ filteredRoles.length }})
           </span>
-          <span class="text-[11px] text-slate-400">Click any role row to view and manage its permission matrix below</span>
+          <span class="text-[11px] text-slate-400 hidden sm:inline">Click any role row to view and manage its permission matrix below</span>
         </div>
 
-        <div class="overflow-x-auto">
+        <!-- Mobile Roles Cards List (md:hidden) -->
+        <div class="md:hidden divide-y divide-slate-100">
+          <div
+            v-for="role in filteredRoles"
+            :key="`m-role-${role.id}`"
+            @click="selectRole(role, true)"
+            class="p-4 space-y-2.5 transition-colors cursor-pointer"
+            :class="selectedRole?.id === role.id ? 'bg-sky-50/50 ring-2 ring-[#0F2A44]/20' : 'hover:bg-slate-50'"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span
+                  class="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                  :class="selectedRole?.id === role.id ? 'bg-[#0F2A44]' : 'bg-slate-300'"
+                ></span>
+                <span class="font-bold text-[#0F2A44] text-sm">{{ role.name }}</span>
+                <span
+                  v-if="role.isSystem"
+                  class="px-1.5 py-0.2 rounded text-[9px] font-medium bg-slate-100 text-slate-600 border border-slate-200"
+                >
+                  System
+                </span>
+              </div>
+              <span
+                class="px-2 py-0.5 rounded text-[10px] font-semibold border flex-shrink-0"
+                :class="role.isActive !== false ? 'bg-slate-50 text-slate-700 border-slate-200' : 'bg-slate-100 text-slate-500 border-slate-200'"
+              >
+                {{ role.isActive !== false ? 'Active' : 'Disabled' }}
+              </span>
+            </div>
+
+            <p class="text-xs text-slate-600 leading-relaxed">{{ role.description || 'Custom admin portal role.' }}</p>
+
+            <div class="flex items-center justify-between pt-1.5 border-t border-slate-100">
+              <span class="text-[11px] font-medium text-slate-500">
+                Permissions: <strong class="text-[#0F2A44]">{{ (role.permissions || []).length }}</strong> / {{ adminStore.permissions.length }}
+              </span>
+              <button
+                type="button"
+                class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow-2xs"
+                :class="selectedRole?.id === role.id ? 'bg-[#0F2A44] text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'"
+              >
+                {{ selectedRole?.id === role.id ? 'Active Matrix ↓' : 'Edit Matrix ↓' }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop Roles Table (hidden md:block) -->
+        <div class="hidden md:block overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-slate-50 border-b border-slate-200/70 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
@@ -378,8 +536,8 @@
       </div>
 
       <!-- Permission Matrix Editor for Selected Role -->
-      <div v-if="selectedRole" class="bg-white rounded-xl border border-slate-200/90 shadow-xs p-6 space-y-5">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+      <div v-if="selectedRole" id="permission-matrix-editor" class="bg-white rounded-xl border border-slate-200/90 shadow-xs p-4 sm:p-6 space-y-4 sm:space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-4 border-b border-slate-100">
           <div>
             <div class="flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-[#0F2A44]"></span>
@@ -392,25 +550,25 @@
             </p>
           </div>
 
-          <div class="flex items-center gap-2">
+          <div class="grid grid-cols-2 sm:flex items-center gap-2 w-full sm:w-auto">
             <button
               type="button"
               @click="selectAllPermissions"
-              class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition-colors"
+              class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition-colors text-center"
             >
               Select All
             </button>
             <button
               type="button"
               @click="clearAllPermissions"
-              class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition-colors"
+              class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition-colors text-center"
             >
               Clear
             </button>
             <button
               type="button"
               @click="saveSelectedRolePermissions"
-              class="px-4 py-1.5 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs"
+              class="col-span-2 sm:col-span-1 px-4 py-1.5 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs text-center"
             >
               Save Changes
             </button>
@@ -1296,10 +1454,18 @@ const groupedPermissions = computed(() => {
   return Array.from(map.entries()).map(([module, items]) => ({ module, items }))
 })
 
-const selectRole = (role) => {
+const selectRole = (role, scroll = false) => {
   selectedRoleId.value = role.id
   draftPermissions.value = [...(role.permissions || [])]
   saveBanner.value = ''
+  if (scroll) {
+    setTimeout(() => {
+      const el = document.getElementById('permission-matrix-editor')
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }, 80)
+  }
 }
 
 const selectAllPermissions = () => {

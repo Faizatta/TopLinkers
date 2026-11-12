@@ -82,9 +82,111 @@
       </div>
     </div>
 
-    <!-- Clean Executive CRM Table -->
+    <!-- Clean Executive CRM Table & Mobile Cards -->
     <div v-if="filteredLeads.length > 0" class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
-      <div class="overflow-x-auto">
+      <!-- Mobile Cards View (md:hidden) -->
+      <div class="md:hidden divide-y divide-slate-100">
+        <div
+          v-for="lead in filteredLeads"
+          :key="`mobile-lead-${lead.id}`"
+          class="p-4 space-y-3 hover:bg-slate-50/70 transition-colors"
+        >
+          <!-- Client Header -->
+          <div class="flex items-start justify-between gap-2">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-9 h-9 rounded-xl bg-[#0F2A44] text-white font-bold text-xs flex items-center justify-center flex-shrink-0">
+                {{ getInitials(lead.name) }}
+              </div>
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <h4 class="font-bold text-[#0F2A44] text-sm truncate">{{ lead.name }}</h4>
+                  <span
+                    v-if="lead.priority === 'High'"
+                    class="px-1.5 py-0.2 rounded text-[9px] font-bold uppercase bg-rose-50 text-rose-600 border border-rose-200"
+                  >
+                    High
+                  </span>
+                </div>
+                <div class="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
+                  <a :href="`tel:${cleanPhone(lead.phone)}`" class="font-semibold text-slate-700 hover:text-[#16B4E8]">
+                    {{ lead.phone }}
+                  </a>
+                  <span v-if="lead.city">&bull; {{ lead.city }}</span>
+                </div>
+              </div>
+            </div>
+            <span v-if="lead.date" class="text-[10px] text-slate-400 font-medium whitespace-nowrap flex-shrink-0">
+              {{ lead.date }}
+            </span>
+          </div>
+
+          <!-- Project & Division Info Box -->
+          <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 space-y-1">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-50 text-[#0F2A44] border border-sky-100">
+                {{ lead.division }}
+              </span>
+              <span class="text-xs font-bold text-[#0F2A44] truncate">{{ lead.budget || 'Open Discussion' }}</span>
+            </div>
+            <p class="text-xs font-semibold text-slate-800 line-clamp-1">{{ lead.project || 'General Inquiry' }}</p>
+            <p v-if="lead.notes || lead.source" class="text-[11px] text-slate-500 line-clamp-2">
+              {{ lead.notes || lead.source }}
+            </p>
+          </div>
+
+          <!-- Pipeline Status Selector -->
+          <div class="flex items-center justify-between gap-2 pt-0.5">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Status:</span>
+            <select
+              :value="lead.status"
+              @change="handleStatusChange(lead.id, $event.target.value)"
+              class="flex-1 max-w-[210px] px-2.5 py-1.5 rounded-lg border text-xs font-semibold focus:outline-none focus:border-[#16B4E8] cursor-pointer"
+              :class="statusSelectClass(lead.status)"
+            >
+              <option value="New">New</option>
+              <option value="Contacted">Contacted</option>
+              <option value="Site Visit Scheduled">Site Visit Scheduled</option>
+              <option value="Negotiation">Negotiation / Token</option>
+              <option value="Closed / Won">Closed / Won</option>
+              <option value="Lost">Lost</option>
+            </select>
+          </div>
+
+          <!-- Quick Actions Grid (100% width, tap-friendly) -->
+          <div class="grid grid-cols-4 gap-1.5 pt-1">
+            <a
+              :href="`https://wa.me/${cleanPhone(lead.phone)}?text=${encodeURIComponent(`Assalam o Alaikum ${lead.name}, thank you for your inquiry with TopLinkers Real Estate regarding ${lead.project}.`)}`"
+              target="_blank"
+              class="py-2 px-1 bg-[#25D366] hover:bg-[#20ba59] text-white text-[11px] font-bold rounded-lg text-center shadow-2xs transition-colors"
+            >
+              WhatsApp
+            </a>
+            <a
+              :href="`tel:${cleanPhone(lead.phone)}`"
+              class="py-2 px-1 bg-[#0F2A44] hover:bg-slate-800 text-white text-[11px] font-bold rounded-lg text-center shadow-2xs transition-colors"
+            >
+              Call
+            </a>
+            <button
+              type="button"
+              @click="viewingLead = lead"
+              class="py-2 px-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold rounded-lg text-center border border-slate-200 transition-colors"
+            >
+              Details
+            </button>
+            <button
+              type="button"
+              @click="confirmDelete(lead.id)"
+              class="py-2 px-1 bg-red-50 hover:bg-red-100 text-red-600 text-[11px] font-semibold rounded-lg text-center border border-red-200 transition-colors"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop Table View (hidden md:block) -->
+      <div class="hidden md:block overflow-x-auto">
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-slate-50/80 border-b border-slate-200/80 text-[11px] font-bold uppercase tracking-wider text-slate-500">
