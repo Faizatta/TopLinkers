@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         // 1. Seed Chief Admin
         User::updateOrCreate(
-            ['email' => 'admin@toplinkers.com'],
+            ['email' => 'toplinkers@gmail.com'],
             [
                 'name' => 'TopLinkers Executive',
-                'password' => Hash::make('admin123'),
+                'password' => Hash::make('lock5816'),
             ]
         );
 

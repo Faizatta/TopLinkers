@@ -30,7 +30,7 @@
               v-model="email" 
               type="email" 
               required 
-              placeholder="admin@toplinkers.com"
+              placeholder="toplinkers@gmail.com"
               class="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 text-xs focus:outline-none focus:border-[#0F2A44] focus:bg-white transition-colors"
             />
           </div>

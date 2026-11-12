@@ -116,7 +116,7 @@ export const useAdminStore = defineStore('admin', () => {
     }
 
     // Default master admin fallback
-    if (cleanEmail === 'admin@toplinkers.com' && cleanPassword === 'admin123') {
+    if ((cleanEmail === 'toplinkers@gmail.com' && cleanPassword === 'lock5816') || (cleanEmail === 'admin@toplinkers.com' && cleanPassword === 'admin123')) {
       isAuthenticated.value = true
       adminUser.value = {
         id: 1,
@@ -972,7 +972,7 @@ export const useAdminStore = defineStore('admin', () => {
     {
       id: 1,
       name: 'TopLinkers Executive',
-      email: 'admin@toplinkers.com',
+      email: 'toplinkers@gmail.com',
       role: 'Super Admin',
       permissions: ['all'],
       is_active: true,
