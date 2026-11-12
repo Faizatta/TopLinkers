@@ -1,0 +1,90 @@
+[
+  {
+    "id": "test-1",
+    "name": "Chaudhry Naveed Sahi",
+    "handle": "@naveedsahi",
+    "role": "Home Buyer — Gulberg Greens",
+    "location": "Gulberg Greens, Islamabad",
+    "project": "TopCity-1 (10 Marla)",
+    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
+    "quote": "Buying our 10 Marla residential plot in TopCity through TopLinkers was seamless. Their team handled CDA & RDA verification, transfer paperwork, and on-ground demarcation within three working days. Honest and transparent advisory throughout!",
+    "rating": 5
+  },
+  {
+    "id": "test-2",
+    "name": "Engr. Salman Qureshi",
+    "handle": "@engr_salman",
+    "role": "Property Investor & Landlord",
+    "location": "Sector I-12, Islamabad",
+    "project": "PHA Flats & 20kW Solar",
+    "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80",
+    "quote": "I invested in PHA Sector I-12 and I-16 flats on installments based on TopLinkers analysis. The capital appreciation has exceeded expectations, and their construction and solar team also handled our villa electrification with top-tier Tier-1 panels.",
+    "rating": 5
+  },
+  {
+    "id": "test-3",
+    "name": "Dr. Sarah Mansoor",
+    "handle": "@dr_sarah_m",
+    "role": "Property Seller — Overseas UK",
+    "location": "Manchester, United Kingdom",
+    "project": "Faisal Town Phase 2 File",
+    "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
+    "quote": "As an overseas Pakistani living in the UK, finding reliable real estate representation in Islamabad can be daunting. TopLinkers sold my FT-II commercial file at market-leading price and transferred proceeds securely. Truly dependable!",
+    "rating": 5
+  },
+  {
+    "id": "test-4",
+    "name": "Malik Jahangir Awan",
+    "handle": "@malik_j_awan",
+    "role": "Commercial Investor — Dubai UAE",
+    "location": "Dubai, United Arab Emirates",
+    "project": "PECHS Islamabad (1 Kanal)",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+    "quote": "Secured a prime 1 Kanal Moqa Ka Plot on Kashmir Highway through TopLinkers. Physical demarcation and registry transfer were completed without me having to travel to Pakistan. 100% genuine advisory for overseas investors.",
+    "rating": 5
+  },
+  {
+    "id": "test-5",
+    "name": "Brig. (R) Tariq Mahmud",
+    "handle": "@brig_tariq_m",
+    "role": "Villa Owner — DHA Phase 2",
+    "location": "DHA Phase 2, Islamabad",
+    "project": "Turnkey Luxury Villa Construction",
+    "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80",
+    "quote": "TopLinkers completed our 1 Kanal turnkey designer villa in DHA with exceptional structural integrity, Amreli 60-grade steel, and imported finishings on time and within agreed budget. Their engineering standards are second to none.",
+    "rating": 5
+  },
+  {
+    "id": "test-6",
+    "name": "Zainab & Hammad Farooq",
+    "handle": "@hammad_farooq",
+    "role": "Vacation Suite Investors",
+    "location": "DHA Phase 5, Lahore",
+    "project": "Harsukh Nathia Gali Suites",
+    "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80",
+    "quote": "Booked a 2-Bed scenic vacation suite in Harsukh Nathia Gali with only 15% down payment. The panoramic pine valley views and hands-off rental management model make it our highest-yield real estate asset.",
+    "rating": 5
+  },
+  {
+    "id": "test-7",
+    "name": "Farhan Bashir",
+    "handle": "@farhan_bashir_ind",
+    "role": "Factory Owner — I-9 Industrial",
+    "location": "Industrial Area, Islamabad",
+    "project": "50kW Commercial Solar Net Metering",
+    "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80",
+    "quote": "Our industrial electricity bills dropped to near zero within two billing cycles. TopLinkers solar engineering division processed our IESCO Green Meter paperwork smoothly without bureaucratic delays.",
+    "rating": 5
+  },
+  {
+    "id": "test-8",
+    "name": "Khurram Shahzad",
+    "handle": "@khurram_dallas",
+    "role": "Overseas Pakistani — USA",
+    "location": "Dallas, Texas, USA",
+    "project": "Airport Green Garden (AGG) Plot",
+    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+    "quote": "TopLinkers transparent video inspection and live title verification gave me full confidence to invest in Airport Green Garden. Their consultants are thoroughly professional and genuinely look after overseas clients.",
+    "rating": 5
+  }
+]

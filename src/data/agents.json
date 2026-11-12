@@ -1,0 +1,57 @@
+[
+  {
+    "id": "agent-1",
+    "name": "Muhammad Tariq",
+    "role": "Principal Consultant \u2014 TopCity-1 & CDA Plots",
+    "experience": "14+ Years Experience",
+    "phone": "0334-9522157",
+    "email": "tariq@toplinkers.com",
+    "photo": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+    "specialty": "CDA & RDA Land Demarcation, TopCity-1 Block B Moqa Ka Plots",
+    "deals": 240
+  },
+  {
+    "id": "agent-2",
+    "name": "Kamran Akhtar",
+    "role": "Senior Sales Specialist \u2014 PHA Flats I-12 & I-16",
+    "experience": "11+ Years Experience",
+    "phone": "0332-4004884",
+    "email": "kamran@toplinkers.com",
+    "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+    "specialty": "PHA Housing Foundation Resale & Allotment Transfers",
+    "deals": 185
+  },
+  {
+    "id": "agent-3",
+    "name": "Zainab Rehman",
+    "role": "Overseas Client & Corporate Advisory",
+    "experience": "8+ Years Experience",
+    "phone": "0334-9522157",
+    "email": "zainab@toplinkers.com",
+    "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+    "specialty": "UK, UAE & US Expatriate Real Estate Portfolios",
+    "deals": 130
+  },
+  {
+    "id": "agent-4",
+    "name": "Engr. Asif Mahmood",
+    "role": "Chief Civil & Turnkey Construction Engineer",
+    "experience": "16+ Years (PEC Registered)",
+    "phone": "0334-9522157",
+    "email": "asif.engr@toplinkers.com",
+    "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
+    "specialty": "Turnkey A+ Grade Villa Construction & Soil Testing",
+    "deals": 95
+  },
+  {
+    "id": "agent-5",
+    "name": "Engr. Salman Qureshi",
+    "role": "Lead Solar & IESCO Net-Metering Engineer",
+    "experience": "10+ Years (PEC & AEDB Certified)",
+    "phone": "0332-4004884",
+    "email": "salman.solar@toplinkers.com",
+    "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80",
+    "specialty": "On-Grid & Hybrid Solar Net-Metering Installations",
+    "deals": 110
+  }
+]

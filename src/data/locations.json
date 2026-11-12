@@ -1,0 +1,53 @@
+[
+  {
+    "id": "g-11-markaz",
+    "name": "G-11 Markaz (Head Office)",
+    "city": "Islamabad",
+    "count": 12,
+    "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+    "lat": 33.6685,
+    "lng": 72.9986,
+    "tagline": "Top Linkers Head Office — Al Hameed Plaza, G-11 Markaz"
+  },
+  {
+    "id": "gulberg-islamabad",
+    "name": "Gulberg Islamabad",
+    "city": "Islamabad",
+    "count": 18,
+    "image": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+    "lat": 33.6015,
+    "lng": 73.1360,
+    "tagline": "D-Markaz Commercials & Luxury Greens"
+  },
+  {
+    "id": "top-city",
+    "name": "TopCity-1 & Residencia",
+    "city": "Islamabad",
+    "count": 15,
+    "image": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80",
+    "lat": 33.5560,
+    "lng": 72.8710,
+    "tagline": "Direct Airport Metro & High-Growth 10 Marla Plots"
+  },
+  {
+    "id": "nathia-gali",
+    "name": "Nathia Gali (Harsukh)",
+    "city": "Murree / Galyat",
+    "count": 6,
+    "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    "lat": 34.0722,
+    "lng": 73.3858,
+    "tagline": "Harsukh Residencies Luxury Hillside Vacation & Investment Flats",
+    "featuredLink": "/hr-sukh"
+  },
+  {
+    "id": "pha-sectors",
+    "name": "PHA Flats (I-12 & I-16)",
+    "city": "Islamabad",
+    "count": 14,
+    "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
+    "lat": 33.6450,
+    "lng": 73.0180,
+    "tagline": "Federal Govt Housing C-Type & B-Type Ready Apartments"
+  }
+]

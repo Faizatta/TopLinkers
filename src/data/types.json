@@ -1,0 +1,50 @@
+[
+  {
+    "id": "villa",
+    "slug": "villa",
+    "name": "Luxury Villas",
+    "count": 14,
+    "description": "5 Marla, 10 Marla and 1 Kanal custom luxury homes with designer architecture.",
+    "image": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "apartment",
+    "slug": "apartment",
+    "name": "PHA & Luxury Flats",
+    "count": 18,
+    "description": "2-bed and 3-bed apartments in PHA I-12, I-16 and Gulberg executive towers.",
+    "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "plot",
+    "slug": "plot",
+    "name": "Residential Plots",
+    "count": 26,
+    "description": "Balloted and ready-possession plots in TopCity, Faisal Town, PECHS and B-17.",
+    "image": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "commercial",
+    "slug": "commercial",
+    "name": "Commercial Plazas",
+    "count": 9,
+    "description": "Prime business plazas, retail shops, and corporate halls in D-Markaz Gulberg.",
+    "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "penthouse",
+    "slug": "penthouse",
+    "name": "Penthouses",
+    "count": 6,
+    "description": "Top-floor duplex penthouses with Margalla Hills and skyline panoramas.",
+    "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "farmhouse",
+    "slug": "farmhouse",
+    "name": "Luxury Farmhouses",
+    "count": 8,
+    "description": "4 Kanal to 16 Kanal countryside retreats in Gulberg Greens and Chak Shahzad.",
+    "image": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&q=80"
+  }
+]
