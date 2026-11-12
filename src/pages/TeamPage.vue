@@ -114,6 +114,23 @@
                       <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
                     </svg>
                   </a>
+
+                  <!-- Social Links on Card (Just Icons) -->
+                  <a
+                    v-for="social in getMemberSocials(ceo)"
+                    :key="social.key"
+                    :href="social.href"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    @click.stop
+                    :title="social.label"
+                    class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-xs"
+                    :class="social.chipClass"
+                  >
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                      <path :d="social.svgPath" />
+                    </svg>
+                  </a>
                 </div>
 
                 <!-- Subtle View Dossier Link on Card (Desktop / Tablet) -->
@@ -275,26 +292,6 @@
                   </p>
                 </div>
 
-                <!-- Strategic Portfolio Pillars for Executives -->
-                <div v-if="isExecutive(popupMember)" class="space-y-2">
-                  <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Key Leadership Responsibilities &amp; Pillars
-                  </h4>
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    <div
-                      v-for="item in getExecutiveHighlights(popupMember)"
-                      :key="item.title"
-                      class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 text-xs"
-                    >
-                      <div class="flex items-center gap-1.5 font-bold text-[#0F2A44] mb-0.5">
-                        <span>{{ item.icon }}</span>
-                        <span>{{ item.title }}</span>
-                      </div>
-                      <p class="text-[11px] text-slate-500 leading-snug">{{ item.desc }}</p>
-                    </div>
-                  </div>
-                </div>
-
                 <!-- Specialization Chips -->
                 <div class="space-y-1.5">
                   <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">
@@ -350,21 +347,22 @@
                   </div>
                 </div>
 
-                <!-- Social Links if configured -->
-                <div v-if="getMemberSocials(popupMember).length" class="flex flex-wrap items-center gap-2 pt-1">
-                  <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mr-1">Social:</span>
+                <!-- Social Links if configured (Just Icons) -->
+                <div v-if="getMemberSocials(popupMember).length" class="flex items-center gap-2 pt-1">
                   <a
                     v-for="social in getMemberSocials(popupMember)"
                     :key="social.key"
                     :href="social.href"
                     target="_blank"
                     rel="noopener noreferrer"
-                    :class="['px-3 py-1.5 rounded-xl border text-[11px] font-bold inline-flex items-center gap-1.5 transition-all', social.chipClass]"
+                    :title="social.label"
+                    :aria-label="social.label"
+                    class="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-slate-200 bg-slate-50 flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-xs"
+                    :class="social.chipClass"
                   >
-                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                       <path :d="social.svgPath" />
                     </svg>
-                    <span>{{ social.label }}</span>
                   </a>
                 </div>
               </div>
@@ -427,23 +425,6 @@ const updateViewportWidth = () => {
 }
 
 const isExecutive = (member) => ['ceo', 'founder', 'owner', 'partner'].includes(member?.category)
-
-const getExecutiveHighlights = (member) => {
-  if (member.id === 'ceo-1' || member.role?.toLowerCase().includes('real estate') || member.tag?.toLowerCase().includes('founder')) {
-    return [
-      { icon: '🏛️', title: '100% Title Verification', desc: 'CDA, RDA, and land revenue demarcation checks on all deals.' },
-      { icon: '📈', title: 'Moqa Ka Plot Acquisitions', desc: 'Securing ready-to-build residential and commercial plots.' },
-      { icon: '🌲', title: 'Harsukh Nathia Gali Portfolios', desc: 'Luxury vacation suites with hands-off rental returns.' },
-      { icon: '🌍', title: 'Overseas Investor Advisory', desc: 'Secure representation for overseas Pakistanis in UK, UAE & USA.' }
-    ]
-  }
-  return [
-    { icon: '🏗️', title: 'Turnkey A+ Construction', desc: 'Full architectural, structural, and finishing delivery with Amreli 60 steel.' },
-    { icon: '📐', title: 'PEC Civil Standards', desc: 'Engineering-led project management and transparent BOQ estimations.' },
-    { icon: '☀️', title: 'Tier-1 Solar Systems', desc: '10kW to 50kW residential and commercial net metering with IESCO.' },
-    { icon: '🏢', title: 'PHA Flats Trading', desc: 'Sector I-12 and I-16 verified allotment and cash transfers.' }
-  ]
-}
 
 const getExecutiveSpecialties = (member) => {
   if (member.id === 'ceo-1' || member.role?.toLowerCase().includes('real estate') || member.tag?.toLowerCase().includes('founder')) {

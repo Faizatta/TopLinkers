@@ -267,26 +267,49 @@ export const useAdminStore = defineStore('admin', () => {
     localStorage.setItem(STORAGE_KEYS.LEADS, JSON.stringify(leads.value))
   }
 
-  const syncFromBackend = async () => {
+  // Parse a response only when it really is JSON. Static hosting can answer unknown
+  // /api routes with the SPA's index.html (HTTP 200), which must not abort the sync.
+  const readJson = async (res) => {
+    if (!res || !res.ok) return undefined
+    const type = res.headers.get('content-type') || ''
+    if (!type.includes('json')) return undefined
     try {
-      const token = adminUser.value?.token
+      return await res.json()
+    } catch (e) {
+      return undefined
+    }
+  }
+
+  // Several components ask for a sync on mount. Concurrent or recent calls for the
+  // same session share one round of requests instead of firing 7+ requests each.
+  const SYNC_FRESH_MS = 30000
+  let syncInFlight = null
+  let lastSyncAt = 0
+  let lastSyncKey = ''
+
+  const runSync = async (token, isAdminSession) => {
+    try {
       const headers = {
         'Accept': 'application/json',
         ...(token ? { 'Authorization': `Bearer ${token}` } : {})
       }
+      const get = (path) => fetch(`${API_BASE_URL}${path}`, { headers }).catch(() => null)
 
-      const [leadsRes, ratesRes, teamRes, rolesRes, reviewsRes, promoRes, usersRes] = await Promise.all([
-        fetch(`${API_BASE_URL}/leads`, { headers }).catch(() => null),
-        fetch(`${API_BASE_URL}/rates`, { headers }).catch(() => null),
-        fetch(`${API_BASE_URL}/team`, { headers }).catch(() => null),
-        fetch(`${API_BASE_URL}/roles`, { headers }).catch(() => null),
-        fetch(`${API_BASE_URL}/reviews`, { headers }).catch(() => null),
-        fetch(`${API_BASE_URL}/promo-strip`, { headers }).catch(() => null),
-        fetch(`${API_BASE_URL}/users`, { headers }).catch(() => null)
+      // Public pages only display rates, team, reviews and the promo strip.
+      // Private CRM data (leads, users, roles, admin blog list) is requested
+      // only for a signed-in admin session.
+      const [ratesRes, teamRes, reviewsRes, promoRes, leadsRes, rolesRes, usersRes] = await Promise.all([
+        get('/rates'),
+        get('/team'),
+        get('/reviews'),
+        get('/promo-strip'),
+        isAdminSession ? get('/leads') : null,
+        isAdminSession ? get('/roles') : null,
+        isAdminSession ? get('/users') : null
       ])
 
-      if (leadsRes && leadsRes.ok) {
-        const data = await leadsRes.json()
+      const data = await readJson(leadsRes)
+      if (data !== undefined) {
         if (Array.isArray(data) && data.length > 0) {
           leads.value = data
           saveLeads()
@@ -294,8 +317,8 @@ export const useAdminStore = defineStore('admin', () => {
         apiConnected.value = true
       }
 
-      if (ratesRes && ratesRes.ok) {
-        const ratesData = await ratesRes.json()
+      const ratesData = await readJson(ratesRes)
+      if (ratesData !== undefined) {
         if (ratesData && Object.keys(ratesData).length > 0) {
           liveRates.value = { ...liveRates.value, ...ratesData }
           localStorage.setItem(STORAGE_KEYS.RATES, JSON.stringify(liveRates.value))
@@ -303,8 +326,8 @@ export const useAdminStore = defineStore('admin', () => {
         apiConnected.value = true
       }
 
-      if (teamRes && teamRes.ok) {
-        const teamData = await teamRes.json()
+      const teamData = await readJson(teamRes)
+      if (teamData !== undefined) {
         if (Array.isArray(teamData) && teamData.length > 0) {
           teamMembers.value = teamData
           localStorage.setItem(STORAGE_KEYS.TEAM, JSON.stringify(teamMembers.value))
@@ -312,8 +335,8 @@ export const useAdminStore = defineStore('admin', () => {
         apiConnected.value = true
       }
 
-      if (rolesRes && rolesRes.ok) {
-        const rolePayload = await rolesRes.json()
+      const rolePayload = await readJson(rolesRes)
+      if (rolePayload !== undefined) {
         if (rolePayload?.permissions && Array.isArray(rolePayload.permissions) && rolePayload.permissions.length > 0) {
           permissions.value = rolePayload.permissions
           localStorage.setItem(STORAGE_KEYS.PERMISSIONS, JSON.stringify(permissions.value))
@@ -325,8 +348,8 @@ export const useAdminStore = defineStore('admin', () => {
         apiConnected.value = true
       }
 
-      if (reviewsRes && reviewsRes.ok) {
-        const reviewData = await reviewsRes.json()
+      const reviewData = await readJson(reviewsRes)
+      if (reviewData !== undefined) {
         if (Array.isArray(reviewData) && reviewData.length > 0) {
           reviews.value = reviewData
           localStorage.setItem(STORAGE_KEYS.REVIEWS, JSON.stringify(reviews.value))
@@ -334,8 +357,8 @@ export const useAdminStore = defineStore('admin', () => {
         apiConnected.value = true
       }
 
-      if (promoRes && promoRes.ok) {
-        const promoData = await promoRes.json()
+      const promoData = await readJson(promoRes)
+      if (promoData !== undefined) {
         if (promoData && typeof promoData === 'object') {
           promoStrip.value = { ...defaultPromoStrip, ...promoData }
           localStorage.setItem(STORAGE_KEYS.PROMO_STRIP, JSON.stringify(promoStrip.value))
@@ -343,8 +366,8 @@ export const useAdminStore = defineStore('admin', () => {
         apiConnected.value = true
       }
 
-      if (usersRes && usersRes.ok) {
-        const usersData = await usersRes.json()
+      const usersData = await readJson(usersRes)
+      if (usersData !== undefined) {
         if (Array.isArray(usersData) && usersData.length > 0) {
           users.value = usersData
           saveUsersLocal()
@@ -352,10 +375,31 @@ export const useAdminStore = defineStore('admin', () => {
         apiConnected.value = true
       }
 
-      await fetchBlogs().catch(() => {})
+      if (isAdminSession) {
+        await fetchBlogs().catch(() => {})
+      }
     } catch (err) {
       // Running cleanly in offline localStorage mode
     }
+  }
+
+  const syncFromBackend = (options = {}) => {
+    const token = adminUser.value?.token
+    const isAdminSession = Boolean(isAuthenticated.value && token)
+    const key = `${isAdminSession ? 'admin' : 'public'}:${token || ''}`
+
+    if (!options.force && key === lastSyncKey) {
+      if (syncInFlight) return syncInFlight
+      if (Date.now() - lastSyncAt < SYNC_FRESH_MS) return Promise.resolve()
+    }
+
+    lastSyncKey = key
+    const run = runSync(token, isAdminSession).finally(() => {
+      if (syncInFlight === run) syncInFlight = null
+      lastSyncAt = Date.now()
+    })
+    syncInFlight = run
+    return run
   }
 
   // Store sync triggers at bottom after all refs are declared
@@ -615,6 +659,7 @@ export const useAdminStore = defineStore('admin', () => {
       phone: '0334-9522157',
       whatsapp: '923349522157',
       email: 'toplinkers12@gmail.com',
+      facebook: 'https://facebook.com/toplinkers',
       photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
       quote: 'At TopLinkers, our mission is straightforward: absolute transparency in property documentation, verified CDA/RDA titles, and rewarding real estate investments across Islamabad & Rawalpindi.',
       bio: 'Leading land acquisitions, TopCity-1, PECHS, Faisal Town Phase 2, and Harsukh Nathia Gali luxury developments.',
@@ -630,6 +675,7 @@ export const useAdminStore = defineStore('admin', () => {
       phone: '0332-4004884',
       whatsapp: '923324004884',
       email: 'toplinkers12@gmail.com',
+      facebook: 'https://facebook.com/toplinkers',
       photo: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80',
       quote: 'Precision engineering in turnkey residential construction and high-yield solar net metering execution defines every project we deliver at TopLinkers.',
       bio: 'Overseeing turnkey villa builds, PHA apartments trading, corporate joint ventures, and commercial solar infrastructure.',
