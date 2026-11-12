@@ -441,20 +441,10 @@
                   <span>Market Blog &amp; Insights</span>
                   <span class="text-xs text-slate-400">&rsaquo;</span>
                 </router-link>
-
-                <router-link
-                  to="/contact"
-                  class="px-3.5 py-2.5 rounded-xl text-slate-800 hover:text-[#16B4E8] hover:bg-slate-50 flex items-center justify-between transition-colors"
-                  :class="{ 'text-[#16B4E8] bg-slate-50 font-bold': $route.path === '/contact' }"
-                  @click="mobileDrawerOpen = false"
-                >
-                  <span>Contact</span>
-                  <span class="text-xs text-slate-400">&rsaquo;</span>
-                </router-link>
               </nav>
 
-              <!-- Drawer Bottom Contacts -->
-              <div class="pt-5 border-t border-slate-100 space-y-3 flex-shrink-0">
+              <!-- Drawer Bottom WhatsApp Action -->
+              <div class="pt-4 border-t border-slate-100 flex-shrink-0">
                 <a
                   href="https://wa.me/923349522157"
                   target="_blank"
@@ -466,12 +456,6 @@
                   </svg>
                   <span class="tracking-wide">WhatsApp: 0334-9522157</span>
                 </a>
-
-                <div class="text-[11px] text-slate-500 text-center leading-relaxed font-medium">
-                  <p class="font-semibold text-slate-700">TopLinkers Head Office</p>
-                  <p>2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad</p>
-                  <p class="text-[10px] text-slate-400 mt-0.5">UAN / Landline: 0332-4004884</p>
-                </div>
               </div>
             </div>
           </div>
