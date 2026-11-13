@@ -83,66 +83,6 @@
         </div>
       </div>
 
-      <!-- FULL-WIDTH SALE & DISCOUNT DEAL BANNER -->
-      <div
-        v-if="hasActiveOffer"
-        class="mb-6 rounded-2xl bg-gradient-to-r from-[#0F2A44] via-rose-950 to-amber-950 text-white p-5 border border-amber-500/40 shadow-lg relative overflow-hidden"
-      >
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div class="space-y-1">
-            <div class="flex items-center gap-2">
-              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-400 text-[#0F2A44] text-[11px] font-black uppercase tracking-wider shadow">
-                <svg class="w-3.5 h-3.5 text-[#0F2A44] animate-pulse" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.527.82-1.127 2.18-1.517 3.754a14.28 14.28 0 00-.387 2.176 9.38 9.38 0 00-.73-1.637 1 1 0 00-1.745.244 8.97 8.97 0 00-.547 3.328c0 3.866 3.134 7 7 7s7-3.134 7-7a8.97 8.97 0 00-2.884-6.52c-.676-.62-1.488-1.144-2.222-1.54a10.98 10.98 0 00-1.576-.75z" clip-rule="evenodd" />
-                </svg>
-                <span>{{ property.offerLabel || 'SPECIAL VERIFIED DISCOUNT' }}</span>
-              </span>
-              <span class="text-xs text-amber-200 font-bold">
-                Limited Time Opportunity
-              </span>
-            </div>
-            <p class="text-xs text-slate-300">
-              Verified rate reduction authorized by TopLinkers executive leadership for direct buyers.
-            </p>
-          </div>
-
-          <!-- Price comparison & Timer -->
-          <div class="flex flex-wrap items-center gap-3 sm:gap-4 bg-black/35 px-4 py-2.5 rounded-xl border border-white/10 w-full md:w-auto justify-between md:justify-start">
-            <div>
-              <span class="text-[10px] text-slate-400 uppercase font-semibold block">Previous Rate:</span>
-              <span class="text-xs text-slate-300 line-through font-bold">
-                PKR {{ formatPkrAmount(property.price) }}
-              </span>
-            </div>
-
-            <div class="text-amber-400 text-lg font-black">
-              &rarr;
-            </div>
-
-            <div>
-              <span class="text-[10px] text-amber-300 uppercase font-bold block">Current Rate:</span>
-              <span class="text-lg md:text-xl text-amber-400 font-black">
-                PKR {{ formatPkrAmount(property.offerPrice) }}
-              </span>
-            </div>
-
-            <div class="pl-3 border-l border-white/20">
-              <span class="text-[10px] text-rose-300 uppercase font-bold block">Direct Savings:</span>
-              <span class="text-xs font-black text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">
-                Save {{ discountInfo.savingsFormatted }} ({{ discountInfo.percent }}% OFF)
-              </span>
-            </div>
-
-            <div class="pl-3 border-l border-white/20 text-center">
-              <span class="text-[10px] text-slate-400 uppercase font-semibold block">Time Remaining:</span>
-              <span class="text-xs font-mono font-bold text-amber-200">
-                ⏳ {{ offerRemaining }}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Main Layout: 8 cols Left + 4 cols Sticky Advisory Desk Right -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <!-- Left 8 Columns -->
@@ -161,10 +101,10 @@
 
           <!-- Similar Properties (2 Cards) -->
           <div v-if="similarListings.length" class="pt-6 border-t border-gray-200">
-            <h3 class="text-lg font-bold text-[#0F2A44] mb-4 flex items-center gap-2">
+            <h2 class="text-lg font-bold text-[#0F2A44] mb-4 flex items-center gap-2">
               <span class="w-2.5 h-2.5 bg-[#16B4E8] rounded-full"></span>
               Similar Properties in this Sector
-            </h3>
+            </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <PropertyCard
                 v-for="sim in similarListings"
@@ -191,7 +131,7 @@ import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { MapPinIcon, ClockIcon } from '@heroicons/vue/24/outline'
 import { api } from '../services/api'
-import { isPropertyOfferActive, getOfferRemainingLabel, formatPkrAmount, calculateDiscount } from '../utils/offer'
+import { isPropertyOfferActive, getOfferRemainingLabel, formatPkrAmount } from '../utils/offer'
 import { scrollTo } from '../services/lenis'
 import Badge from '../components/ui/Badge.vue'
 import Skeleton from '../components/ui/Skeleton.vue'
@@ -212,7 +152,6 @@ const displayOfferLabel = computed(() => {
   const raw = property.value?.offerLabel || 'SPECIAL OFFER'
   return raw.replace(/^[\u{1F300}-\u{1F9FF}\s]+/u, '').trim() || raw
 })
-const discountInfo = computed(() => calculateDiscount(property.value?.price, property.value?.offerPrice))
 
 const updatePropertySEO = (prop) => {
   if (!prop || typeof document === 'undefined') return
