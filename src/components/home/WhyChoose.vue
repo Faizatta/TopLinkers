@@ -158,12 +158,12 @@
                 </span>
               </div>
 
-              <h4
+              <h3
                 class="text-base font-extrabold mb-1.5 transition-colors relative z-10"
                 :class="activeIndex === idx ? 'text-[#0F2A44]' : 'text-white'"
               >
                 {{ item.title }}
-              </h4>
+              </h3>
 
               <p
                 class="text-xs leading-relaxed relative z-10"

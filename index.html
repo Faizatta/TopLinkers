@@ -45,36 +45,31 @@
     <meta name="twitter:image" content="https://toplinkers.com/toplinkers-logo.jpg" />
 
     <!-- Preconnect & DNS-Prefetch for Core Web Vitals (LCP, Font & Image Acceleration) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    <!-- Property, blog and section photos come from Unsplash's CDN: open the connection early
+         (no crossorigin attribute: images are fetched without CORS, so this connection is reused) -->
+    <link rel="preconnect" href="https://images.unsplash.com" />
+
+    <!-- Self-hosted Plus Jakarta Sans (Latin subset, all weights in one variable file) -->
+    <link rel="preload" href="/src/assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
 
     <!--
-      Homepage LCP image preload. index.html is served for every route, so the hero is
-      only preloaded on "/", in the exact crop and format its <picture> will choose
-      (phones get a centre crop; AVIF-capable browsers only, others ignore type="image/avif").
+      Homepage first-paint skeleton (created by the inline script at the top of <body>).
+      It mirrors the promo strip band and the first hero slide at their exact positions,
+      so the hero image (the LCP element) paints as soon as this CSS is ready instead of
+      waiting for JavaScript. It sits behind the app (z-index:-1) and is covered the
+      moment Vue renders, then removed by HeroSection.
     -->
-    <script>
-      (function () {
-        if (location.pathname !== '/') return
-        var link = document.createElement('link')
-        link.rel = 'preload'
-        link.as = 'image'
-        link.type = 'image/avif'
-        link.href = window.matchMedia('(max-width: 639px)').matches
-          ? '/images/hero-real-estate-m.avif'
-          : '/images/hero-real-estate.avif'
-        link.setAttribute('fetchpriority', 'high')
-        document.head.appendChild(link)
-      })()
-    </script>
-
-    <!-- Non-blocking Google Fonts with Print-Media Swap & Preload -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;700&display=swap" media="print" onload="this.media='all'" />
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;700&display=swap" />
-    </noscript>
+    <style>
+      #lcp-shell{position:absolute;left:0;right:0;top:66px;z-index:-1;pointer-events:none}
+      #lcp-shell .band{height:44px;border-bottom:1px solid rgba(22,180,232,.25);background:linear-gradient(to right,#071320,#0e253d,#071320)}
+      #lcp-shell .hero{position:relative;height:600px;overflow:hidden;background:#030712}
+      #lcp-shell img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center}
+      #lcp-shell .g1{position:absolute;top:0;bottom:0;left:0;width:100%;background:linear-gradient(to right,rgba(0,0,0,.85),rgba(0,0,0,.45),rgba(0,0,0,0))}
+      #lcp-shell .g2{position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,.4)}
+      #lcp-shell .g3{position:absolute;left:0;right:0;bottom:0;height:13rem;background:linear-gradient(to top,rgba(0,0,0,.75),rgba(0,0,0,.3),rgba(0,0,0,0))}
+      @media (min-width:640px){#lcp-shell{top:80px}#lcp-shell .band{height:52px}#lcp-shell .hero{height:660px}#lcp-shell .g1{width:80%}#lcp-shell .g2{display:none}}
+      @media (min-width:768px){#lcp-shell .hero{height:740px}#lcp-shell .g1{width:60%}}
+    </style>
 
     <!-- Google Analytics 4 (GA4) / Google Tag Manager Setup Placeholder -->
     <!-- INSTRUCTION: Uncomment and replace G-XXXXXXXXXX with your Google Analytics 4 Measurement ID -->
@@ -153,6 +148,28 @@
     </script>
   </head>
   <body class="bg-[#F6F8FA] text-[#0F2A44] antialiased font-sans selection:bg-[#16B4E8] selection:text-white">
+    <!--
+      Homepage LCP skeleton: only on "/", in the exact crop and format the hero's <picture>
+      chooses (phones get a centre crop; AVIF first, WebP fallback).
+      SECURITY: vercel.json's Content-Security-Policy allows this script by sha256 hash.
+      Editing it, even whitespace, changes the hash and the browser will block it until
+      the hash in vercel.json is updated.
+    -->
+    <script>
+      (function () {
+        if (location.pathname !== '/') return
+        var shell = document.createElement('div')
+        shell.id = 'lcp-shell'
+        shell.setAttribute('aria-hidden', 'true')
+        shell.innerHTML = '<div class="band"></div><div class="hero"><picture>' +
+          '<source media="(max-width: 639px)" type="image/avif" srcset="/images/hero-real-estate-m.avif">' +
+          '<source media="(max-width: 639px)" type="image/webp" srcset="/images/hero-real-estate-m.webp">' +
+          '<source type="image/avif" srcset="/images/hero-real-estate.avif">' +
+          '<img src="/images/hero-real-estate.webp" alt="" width="1440" height="960" fetchpriority="high" decoding="sync">' +
+          '</picture><i class="g1"></i><i class="g2"></i><i class="g3"></i></div>'
+        document.body.appendChild(shell)
+      })()
+    </script>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>

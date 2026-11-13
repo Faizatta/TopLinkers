@@ -18,7 +18,9 @@
       </div>
 
       <!-- Carousel of horizontal property-type cards (Auto-sliding) -->
+      <!-- Created once the cards are available, so Swiper initialises (and builds its loop) only once -->
       <swiper
+        v-if="types.length"
         :modules="modules"
         :slides-per-view="1"
         :space-between="24"
@@ -39,6 +41,7 @@
           1024: { slidesPerView: 3, spaceBetween: 24 }
         }"
         class="w-full pb-4"
+        @swiper="onSwiper"
       >
         <swiper-slide v-for="t in types" :key="t.id">
           <router-link
@@ -62,9 +65,9 @@
 
             <!-- Type name plus property count on right -->
             <div class="flex-1 min-w-0">
-              <h4 class="text-base sm:text-lg font-black text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors truncate">
+              <h3 class="text-base sm:text-lg font-black text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors truncate">
                 {{ t.name }}
-              </h4>
+              </h3>
               <span class="inline-block text-xs font-extrabold text-[#16B4E8] mt-0.5">
                 {{ t.count }} Properties Available
               </span>
@@ -91,12 +94,13 @@ import { ref, onMounted } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination } from 'swiper/modules'
 import { responsiveSrcset } from '../../utils/images'
-import 'swiper/css'
-import 'swiper/css/pagination'
 import SectionHeading from '../ui/SectionHeading.vue'
 import { api } from '../../services/api'
+import { useAutoplayWhenVisible } from '../../composables/useAutoplayWhenVisible'
 
 const modules = [Autoplay, Pagination]
+// Autoplay only while the carousel is on screen (same behaviour when visible)
+const { onSwiper } = useAutoplayWhenVisible()
 const types = ref([])
 
 onMounted(async () => {

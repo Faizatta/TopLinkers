@@ -189,9 +189,9 @@
               <!-- Subtle Bottom Name Overlay on Hover / Active -->
               <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/80 via-black/35 to-transparent pointer-events-none"></div>
               <div class="absolute bottom-3 left-3.5 right-3.5 text-white">
-                <h4 class="text-sm font-bold leading-tight truncate drop-shadow-sm">
+                <h3 class="text-sm font-bold leading-tight truncate drop-shadow-sm">
                   {{ member.name }}
-                </h4>
+                </h3>
                 <p class="text-[11px] text-white/85 truncate font-medium">{{ member.role }}</p>
               </div>
             </div>

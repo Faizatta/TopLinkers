@@ -16,9 +16,9 @@
             />
           </div>
           <div>
-            <h4 class="text-base font-extrabold text-[#0F2A44] mb-1 group-hover:text-[#16B4E8] transition-colors">
+            <h3 class="text-base font-extrabold text-[#0F2A44] mb-1 group-hover:text-[#16B4E8] transition-colors">
               Wide Range of Properties
-            </h4>
+            </h3>
             <p class="text-xs text-gray-500 font-normal leading-relaxed">
               From PHA flats and 5 Marla plots to commercial floors and farmhouses across Islamabad.
             </p>
@@ -39,9 +39,9 @@
             />
           </div>
           <div>
-            <h4 class="text-base font-extrabold text-[#0F2A44] mb-1 group-hover:text-[#16B4E8] transition-colors">
+            <h3 class="text-base font-extrabold text-[#0F2A44] mb-1 group-hover:text-[#16B4E8] transition-colors">
               Trusted by Thousands
-            </h4>
+            </h3>
             <p class="text-xs text-gray-500 font-normal leading-relaxed">
               Proven credibility with overseas Pakistanis and corporate clients for zero-litigation transfers.
             </p>
@@ -62,9 +62,9 @@
             />
           </div>
           <div>
-            <h4 class="text-base font-extrabold text-[#0F2A44] mb-1 group-hover:text-[#16B4E8] transition-colors">
+            <h3 class="text-base font-extrabold text-[#0F2A44] mb-1 group-hover:text-[#16B4E8] transition-colors">
               Great Locations
-            </h4>
+            </h3>
             <p class="text-xs text-gray-500 font-normal leading-relaxed">
               Prime developments on Islamabad Expressway, Airport Metro, Kashmir Highway & M-2 Motorway.
             </p>
@@ -85,9 +85,9 @@
             />
           </div>
           <div>
-            <h4 class="text-base font-extrabold text-[#0F2A44] mb-1 group-hover:text-[#16B4E8] transition-colors">
+            <h3 class="text-base font-extrabold text-[#0F2A44] mb-1 group-hover:text-[#16B4E8] transition-colors">
               Expert Support
-            </h4>
+            </h3>
             <p class="text-xs text-gray-500 font-normal leading-relaxed">
               In-house architects, civil engineers, and solar consultants ready to advise you 7 days a week.
             </p>

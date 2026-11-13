@@ -2,10 +2,10 @@
   <div class="bg-white rounded-2xl shadow-card border border-gray-100 p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 divide-y divide-gray-100">
     <!-- 1. Key Highlights Grid -->
     <div>
-      <h3 class="text-base font-bold text-[#0F2A44] mb-4 sm:mb-5 flex items-center gap-2">
+      <h2 class="text-base font-bold text-[#0F2A44] mb-4 sm:mb-5 flex items-center gap-2">
         <span class="w-2.5 h-2.5 bg-[#16B4E8] rounded-full"></span>
         Property Overview & Key Specs
-      </h3>
+      </h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 sm:gap-4">
         <!-- Property Type -->
         <div class="bg-gray-50/80 p-3.5 rounded-xl border border-gray-100 flex items-center gap-3">
@@ -88,10 +88,10 @@
 
     <!-- 2. Detailed Description -->
     <div class="pt-6">
-      <h3 class="text-base font-bold text-[#0F2A44] mb-3 flex items-center gap-2">
+      <h2 class="text-base font-bold text-[#0F2A44] mb-3 flex items-center gap-2">
         <span class="w-2.5 h-2.5 bg-[#16B4E8] rounded-full"></span>
         Property Overview & Sector Description
-      </h3>
+      </h2>
       <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal whitespace-pre-line">
         {{ property.description }}
       </p>
@@ -99,10 +99,10 @@
 
     <!-- 3. Verified Features & Amenities -->
     <div v-if="property.features && property.features.length" class="pt-6">
-      <h3 class="text-base font-bold text-[#0F2A44] mb-4 flex items-center gap-2">
+      <h2 class="text-base font-bold text-[#0F2A44] mb-4 flex items-center gap-2">
         <span class="w-2.5 h-2.5 bg-[#16B4E8] rounded-full"></span>
         Verified Features & Amenities
-      </h3>
+      </h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
         <div
           v-for="feat in property.features"
@@ -118,10 +118,10 @@
     <!-- 4. Location Address -->
     <div class="pt-6">
       <div class="flex items-center justify-between mb-3">
-        <h3 class="text-base font-bold text-[#0F2A44] flex items-center gap-2">
+        <h2 class="text-base font-bold text-[#0F2A44] flex items-center gap-2">
           <span class="w-2.5 h-2.5 bg-[#16B4E8] rounded-full"></span>
           Location & Neighborhood
-        </h3>
+        </h2>
         <a
           :href="`https://maps.google.com/?q=${encodeURIComponent(property.address + ' ' + (property.cityName || 'Islamabad'))}`"
           target="_blank"

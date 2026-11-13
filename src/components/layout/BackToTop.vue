@@ -25,31 +25,16 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { ArrowUpIcon } from '@heroicons/vue/24/outline'
 import { scrollTo } from '../../services/lenis'
+import { useFooterClearance } from '../../composables/useFooterClearance'
 
 const showButton = ref(false)
-const bottomOffset = ref(24)
+// Shared, frame-throttled footer clearance (one measurement for all floating widgets)
+const { bottomOffset } = useFooterClearance()
 
-const updateFooterClearance = () => {
-  const footer = document.getElementById('site-footer')
-  if (!footer) {
-    bottomOffset.value = 24
-    return
-  }
-  const rect = footer.getBoundingClientRect()
-  const docHeight = document.documentElement.scrollHeight
-  const isScrolledNearBottom = (window.scrollY + window.innerHeight) >= (docHeight - 600)
 
-  if (isScrolledNearBottom && rect.top < window.innerHeight && rect.top > 0) {
-    const overlap = window.innerHeight - rect.top
-    bottomOffset.value = Math.max(24, overlap + 24)
-  } else {
-    bottomOffset.value = 24
-  }
-}
-
+// Reading scrollY does not force a layout, so this stays cheap on every scroll event
 const handleScroll = () => {
   showButton.value = window.scrollY > 350
-  updateFooterClearance()
 }
 
 const scrollToTop = () => {
@@ -57,13 +42,11 @@ const scrollToTop = () => {
 }
 
 onMounted(() => {
-  updateFooterClearance()
+  handleScroll()
   window.addEventListener('scroll', handleScroll, { passive: true })
-  window.addEventListener('resize', updateFooterClearance, { passive: true })
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
-  window.removeEventListener('resize', updateFooterClearance)
 })
 </script>

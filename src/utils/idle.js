@@ -55,34 +55,75 @@ export function whenIdle(callback, { timeout = 1500, maxWait = 4000 } = {}) {
   }
 }
 
+const INTERACTION_EVENTS = ['scroll', 'pointerdown', 'touchstart', 'keydown', 'wheel']
+
 /**
- * Like `whenIdle`, but also fires as soon as the visitor starts interacting
- * (scroll, touch, click or key press), so deferred content is already there
- * when they go looking for it.
+ * Run `callback` once, on the visitor's first scroll, touch, click or key press.
+ * Returns a cancel function.
  */
-export function whenIdleOrInteraction(callback, options) {
+export function onFirstInteraction(callback) {
   if (typeof window === 'undefined') return () => {}
-
-  const events = ['scroll', 'pointerdown', 'touchstart', 'keydown', 'wheel']
   let done = false
-
   const fire = () => {
     if (done) return
     done = true
     stop()
     callback()
   }
-
-  const cancelIdle = whenIdle(fire, options)
-  events.forEach(e => window.addEventListener(e, fire, { passive: true, once: true }))
-
   function stop() {
-    cancelIdle()
-    events.forEach(e => window.removeEventListener(e, fire))
+    INTERACTION_EVENTS.forEach(e => window.removeEventListener(e, fire))
   }
-
+  INTERACTION_EVENTS.forEach(e => window.addEventListener(e, fire, { passive: true, once: true }))
   return () => {
     done = true
     stop()
+  }
+}
+
+/**
+ * Like `whenIdle`, but also fires as soon as the visitor starts interacting,
+ * so deferred content is already there when they go looking for it.
+ */
+export function whenIdleOrInteraction(callback, options) {
+  if (typeof window === 'undefined') return () => {}
+  let done = false
+  const fire = () => {
+    if (done) return
+    done = true
+    cancelIdle()
+    cancelInteraction()
+    callback()
+  }
+  const cancelIdle = whenIdle(fire, options)
+  const cancelInteraction = onFirstInteraction(fire)
+  return () => {
+    done = true
+    cancelIdle()
+    cancelInteraction()
+  }
+}
+
+/**
+ * Schedule `callback` as its own macrotask during an idle period, so a series of
+ * deferred renders becomes several short tasks instead of one long one.
+ * Returns a cancel function.
+ */
+export function nextIdleTask(callback, { timeout = 500 } = {}) {
+  if (typeof window === 'undefined') return () => {}
+  let cancelled = false
+  let idleId = null
+  let timerId = null
+  const run = () => {
+    timerId = window.setTimeout(() => { if (!cancelled) callback() }, 0)
+  }
+  if ('requestIdleCallback' in window) {
+    idleId = window.requestIdleCallback(run, { timeout })
+  } else {
+    timerId = window.setTimeout(() => { if (!cancelled) callback() }, 16)
+  }
+  return () => {
+    cancelled = true
+    if (idleId !== null && 'cancelIdleCallback' in window) window.cancelIdleCallback(idleId)
+    if (timerId !== null) window.clearTimeout(timerId)
   }
 }

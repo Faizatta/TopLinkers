@@ -2,15 +2,15 @@
   <div class="hr-sukh-page pt-20 bg-[#F8FAFC] min-h-screen pb-16 sm:pb-20 select-none">
     <!-- 1. Hero Cover Banner with Alpine Misty Mountains -->
     <div class="relative min-h-[520px] sm:h-[540px] md:h-[600px] bg-gray-900 overflow-hidden flex items-end">
-      <img
-        src="/images/hero-harsukh.webp"
+      <LocalPicture
+        name="hero-harsukh"
         alt="Harsukh Residencies Nathia Gali Luxury Hillside Vacation Suites"
+        sizes="100vw"
         loading="eager"
         fetchpriority="high"
-        decoding="async"
-        width="1920"
-        height="1080"
-        class="absolute inset-0 w-full h-full object-cover transform scale-105"
+        mobile-crop
+        picture-class="absolute inset-0 block w-full h-full"
+        img-class="w-full h-full object-cover transform scale-105"
       />
       <!-- Dramatic Dark Forest Gradient -->
       <div class="absolute inset-0 bg-gradient-to-t from-[#0F2A44] via-[#0F2A44]/70 to-[#0F2A44]/30"></div>
@@ -313,8 +313,9 @@
               </div>
 
               <div>
-                <label class="block text-[11px] font-bold text-gray-600 mb-1">Interested Suite Layout</label>
+                <label for="hrsukh-suite" class="block text-[11px] font-bold text-gray-600 mb-1">Interested Suite Layout</label>
                 <select
+                  id="hrsukh-suite"
                   v-model="form.suite"
                   class="w-full text-xs p-2.5 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-[#16B4E8]"
                 >
@@ -358,6 +359,7 @@ import { ref, computed, onMounted } from 'vue'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/outline'
 import { useAdminStore } from '../stores/admin'
 import ResidenceShowcase from '../components/hrsukh/ResidenceShowcase.vue'
+import LocalPicture from '../components/ui/LocalPicture.vue'
 import { scrollTo } from '../services/lenis'
 
 const adminStore = useAdminStore()

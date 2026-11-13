@@ -38,12 +38,12 @@
         </svg>
 
         <!-- Unread Message Notification Dot -->
+        <!-- The "1" is drawn with CSS so it stays decorative: the button's label is its name -->
         <span
           v-if="!isOpen"
-          class="absolute -top-1 -right-1 w-4 h-4 bg-[#E53935] text-white text-[9px] font-black rounded-full flex items-center justify-center border-2 border-white shadow"
-        >
-          1
-        </span>
+          aria-hidden="true"
+          class="absolute -top-1 -right-1 w-4 h-4 bg-[#E53935] text-white text-[9px] font-black rounded-full flex items-center justify-center border-2 border-white shadow before:content-['1']"
+        ></span>
       </button>
 
       <!-- Small floating speech bubble helper (shown if closed) -->
@@ -152,48 +152,23 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { ref, watch } from 'vue'
 import { useUiStore } from '../../stores/ui'
+import { useFooterClearance } from '../../composables/useFooterClearance'
 
 const uiStore = useUiStore()
 const isOpen = ref(false)
 const customMessage = ref('')
 const primaryWhatsApp = '923349522157' // Land, Plots & Real Estate
 const engineeringWhatsApp = '923324004884' // Construction & Solar
-const bottomOffset = ref(24)
+// Shared, frame-throttled footer clearance (one measurement for all floating widgets)
+const { bottomOffset } = useFooterClearance()
 
 watch(isOpen, (val) => {
   uiStore.isWhatsAppOpen = val
 })
 
-const updateFooterClearance = () => {
-  const footer = document.getElementById('site-footer')
-  if (!footer) {
-    bottomOffset.value = 24
-    return
-  }
-  const rect = footer.getBoundingClientRect()
-  const docHeight = document.documentElement.scrollHeight
-  const isScrolledNearBottom = (window.scrollY + window.innerHeight) >= (docHeight - 600)
 
-  if (isScrolledNearBottom && rect.top < window.innerHeight && rect.top > 0) {
-    const overlap = window.innerHeight - rect.top
-    bottomOffset.value = Math.max(24, overlap + 24)
-  } else {
-    bottomOffset.value = 24
-  }
-}
-
-onMounted(() => {
-  updateFooterClearance()
-  window.addEventListener('scroll', updateFooterClearance, { passive: true })
-  window.addEventListener('resize', updateFooterClearance, { passive: true })
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', updateFooterClearance)
-  window.removeEventListener('resize', updateFooterClearance)
-})
 
 const topics = [
   {

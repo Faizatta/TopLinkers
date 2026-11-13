@@ -13,7 +13,9 @@
       </div>
 
       <!-- Swiper Carousel (Prominent 3-card layout on desktop with smooth Autoplay animation) -->
+      <!-- Created once the cards are available, so Swiper initialises (and builds its loop) only once -->
       <swiper
+        v-if="featuredProperties.length"
         :modules="modules"
         :slides-per-view="1"
         :space-between="28"
@@ -39,6 +41,7 @@
           1024: { slidesPerView: 3, spaceBetween: 28 }
         }"
         class="featured-swiper w-full pb-4"
+        @swiper="onSwiper"
         @click="onSwiperClick"
       >
         <swiper-slide v-for="prop in featuredProperties" :key="prop.id" class="!h-auto flex">
@@ -69,14 +72,15 @@ import { useRouter } from 'vue-router'
 import { ArrowRightIcon } from '@heroicons/vue/24/outline'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/pagination'
 import SectionHeading from '../ui/SectionHeading.vue'
 import PropertyCard from '../property/PropertyCard.vue'
 import { api } from '../../services/api'
+import { useAutoplayWhenVisible } from '../../composables/useAutoplayWhenVisible'
 
 const router = useRouter()
 const modules = [Autoplay, Pagination]
+// Autoplay only while the carousel is on screen (same behaviour when visible)
+const { onSwiper } = useAutoplayWhenVisible()
 const featuredProperties = ref([])
 
 const onSwiperClick = (swiper, event) => {

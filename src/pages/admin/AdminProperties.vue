@@ -682,6 +682,7 @@ import {
 import L from '../../utils/leaflet'
 import propertiesData from '../../data/properties.json'
 import { useAdminStore } from '../../stores/admin'
+import { API_BASE_URL } from '../../services/api'
 import { isPropertyOfferActive, getOfferRemainingLabel, calculateDiscount, formatPkrAmount } from '../../utils/offer'
 
 const adminStore = useAdminStore()
@@ -1186,7 +1187,7 @@ const saveProperty = () => {
 
   // Also sync to Laravel backend API silently
   try {
-    fetch('http://127.0.0.1:8000/api/properties', {
+    fetch(`${API_BASE_URL}/properties`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({

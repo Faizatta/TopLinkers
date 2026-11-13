@@ -21,9 +21,9 @@
             <div class="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
               <img src="/toplinkers-logo-sm.png" alt="Top Linkers" width="129" height="168" class="h-11 w-auto object-contain flex-shrink-0" />
               <div>
-                <h3 class="text-base sm:text-lg font-black leading-tight">
+                <h2 class="text-base sm:text-lg font-black leading-tight">
                   <span class="text-[#E53935]">Top</span> <span class="text-black">Linkers</span> <span class="text-[#0F2A44] font-bold text-sm">Head Office</span>
-                </h3>
+                </h2>
                 <p class="text-[11px] text-[#16B4E8] font-bold">Real Estate, Construction &amp; Solar</p>
               </div>
             </div>
@@ -172,11 +172,12 @@
               <!-- Row 2: Query Regarding (Division Dropdown) & Specific Project -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-xs font-bold uppercase text-gray-600 mb-1.5">
+                  <label for="contact-division" class="block text-xs font-bold uppercase text-gray-600 mb-1.5">
                     Query Regarding Division *
                   </label>
                   <div class="relative">
                     <select
+                      id="contact-division"
                       v-model="form.division"
                       required
                       class="w-full text-xs sm:text-sm p-3 rounded-xl border border-gray-200 bg-gray-50/50 focus:bg-white focus:outline-none focus:border-[#16B4E8] appearance-none pr-8 cursor-pointer font-bold text-[#0F2A44]"
@@ -195,9 +196,10 @@
                 </div>
 
                 <div>
-                  <label class="block text-xs font-bold uppercase text-gray-600 mb-1.5">Society or Location</label>
+                  <label for="contact-project" class="block text-xs font-bold uppercase text-gray-600 mb-1.5">Society or Location</label>
                   <div class="relative">
                     <select
+                      id="contact-project"
                       v-model="form.project"
                       class="w-full text-xs sm:text-sm p-3 rounded-xl border border-gray-200 bg-gray-50/50 focus:bg-white focus:outline-none focus:border-[#16B4E8] appearance-none pr-8 cursor-pointer font-medium text-[#0F2A44]"
                     >

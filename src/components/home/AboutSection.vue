@@ -88,7 +88,7 @@
                 <CountUp :end="1000" suffix="+" />
               </div>
             </div>
-            <h4 class="text-sm font-bold text-white">Happy Customers</h4>
+            <h3 class="text-sm font-bold text-white">Happy Customers</h3>
             <p class="text-[11px] text-gray-300 font-light mt-0.5">
               Across Pakistan & overseas expats investing in safe real estate.
             </p>

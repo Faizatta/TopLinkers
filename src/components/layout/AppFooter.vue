@@ -33,13 +33,13 @@
 
           <!-- Typewriter Changing Headline (Let's find [phrase]) -->
           <div class="pt-2">
-            <h3 class="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight min-h-[44px] flex flex-wrap items-baseline gap-x-2">
+            <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight min-h-[44px] flex flex-wrap items-baseline gap-x-2">
               <span>Let's find</span>
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#16B4E8] via-[#4fd5ff] to-[#8ce9ff]">
                 {{ currentText }}
               </span>
               <span class="inline-block w-0.5 h-6 bg-[#16B4E8] animate-pulse -mb-0.5"></span>
-            </h3>
+            </h2>
 
             <!-- Interactive Sublink -->
             <router-link
@@ -79,9 +79,9 @@
         <!-- Col 2: Services & Portfolios                            -->
         <!-- ======================================================== -->
         <div class="sm:col-span-1 md:col-span-1 lg:col-span-2 space-y-3.5">
-          <h4 class="text-xs font-black uppercase tracking-wider text-white">
+          <h3 class="text-xs font-black uppercase tracking-wider text-white">
             Services
-          </h4>
+          </h3>
           <ul class="space-y-2 text-xs text-slate-300">
             <li><router-link to="/services#plot" class="hover:text-[#16B4E8] hover:translate-x-1 transition-all duration-200 inline-block">Moqa Ka Plot (PECHS, FT-II)</router-link></li>
             <li><router-link to="/services#flats" class="hover:text-[#16B4E8] hover:translate-x-1 transition-all duration-200 inline-block">PHA Flats (I-12, I-16)</router-link></li>
@@ -97,9 +97,9 @@
         <!-- Col 3: Company Links                                     -->
         <!-- ======================================================== -->
         <div class="sm:col-span-1 md:col-span-1 lg:col-span-2 space-y-3.5">
-          <h4 class="text-xs font-black uppercase tracking-wider text-white">
+          <h3 class="text-xs font-black uppercase tracking-wider text-white">
             Company
-          </h4>
+          </h3>
           <ul class="space-y-2 text-xs text-slate-300">
             <li><router-link to="/about" class="hover:text-[#16B4E8] hover:translate-x-1 transition-all duration-200 inline-block">About Us</router-link></li>
             <li><router-link to="/team" class="hover:text-[#16B4E8] hover:translate-x-1 transition-all duration-200 inline-block">Founders &amp; Agents</router-link></li>
@@ -113,9 +113,9 @@
         <!-- Col 4: Legal & Information Section                      -->
         <!-- ======================================================== -->
         <div class="sm:col-span-1 md:col-span-1 lg:col-span-2 space-y-3.5">
-          <h4 class="text-xs font-black uppercase tracking-wider text-white">
+          <h3 class="text-xs font-black uppercase tracking-wider text-white">
             Legal &amp; Information
-          </h4>
+          </h3>
           <ul class="space-y-2 text-xs text-slate-300">
             <li>
               <router-link
@@ -164,9 +164,9 @@
         <!-- Col 5: Get In Touch (Exact Reference Style + Location)   -->
         <!-- ======================================================== -->
         <div class="sm:col-span-2 md:col-span-3 lg:col-span-3 space-y-3.5">
-          <h4 class="text-xs font-black uppercase tracking-wider text-white">
+          <h3 class="text-xs font-black uppercase tracking-wider text-white">
             Get in touch
-          </h4>
+          </h3>
 
           <ul class="space-y-2.5 text-xs text-slate-300">
             <!-- Email -->

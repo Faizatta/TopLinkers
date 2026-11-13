@@ -481,6 +481,7 @@
               <div v-if="availableToCompare.length && compareIds.length < 3" class="flex items-center gap-2 flex-wrap">
                 <select
                   v-model="selectedAddId"
+                  aria-label="Add a layout to compare"
                   @change="addFromDropdown"
                   class="text-xs font-bold text-[#0F2A44] bg-white border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#16B4E8] cursor-pointer"
                 >

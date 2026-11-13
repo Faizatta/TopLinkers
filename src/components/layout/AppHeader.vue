@@ -10,7 +10,7 @@
     <!-- Main Navigation Bar -->
     <div class="max-w-[1280px] mx-auto px-3 sm:px-4 flex items-center justify-between gap-2">
       <!-- Left: Logo without circle wrapper + Company Name & Subtitle -->
-      <router-link to="/" class="flex items-center gap-2 sm:gap-3 focus:outline-none group min-w-0" aria-label="TopLinkers Home">
+      <router-link to="/" class="flex items-center gap-2 sm:gap-3 focus:outline-none group min-w-0">
         <img
           src="/toplinkers-logo-sm.png"
           alt="Top Linkers"

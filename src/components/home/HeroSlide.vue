@@ -15,7 +15,7 @@
         :alt="`${slide.title} - TopLinkers Islamabad`"
         :loading="priority ? 'eager' : 'lazy'"
         :fetchpriority="priority ? 'high' : 'low'"
-        decoding="async"
+        :decoding="priority ? 'sync' : 'async'"
         width="1440"
         height="960"
         class="slide-bg-image w-full h-full object-cover object-center"

@@ -36,7 +36,10 @@
         <div class="relative h-[340px] sm:h-[420px] md:h-[460px] w-full overflow-hidden bg-gray-900">
           <img
             :src="post.image"
+            :srcset="responsiveSrcset(post.image, [600, 900])"
+            sizes="(max-width: 1023px) 100vw, 840px"
             :alt="post.title"
+            fetchpriority="high"
             class="w-full h-full object-cover"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent"></div>
@@ -84,13 +87,13 @@
               Navigating the twin cities real estate sector requires up-to-date verifiable market intelligence. At TopLinkers, our on-ground advisory team monitors policy directives from the Capital Development Authority (CDA), Rawalpindi Development Authority (RDA), and Federal Government Employees Housing Authority (FGEHA) to guide buyers and investors towards secure equity appreciation.
             </p>
 
-            <h3 class="text-xl font-bold text-[#0F2A44] pt-4">Key Investment Highlights & On-Ground Reality</h3>
+            <h2 class="text-xl font-bold text-[#0F2A44] pt-4">Key Investment Highlights & On-Ground Reality</h2>
             <p>
               Whether considering high-yield commercial floors in Gulberg Islamabad, residential plots in Faisal Town Phase 2, or turnkey apartments like the PHA I-12 and I-16 developments, analyzing utility availability, possession timelines, and developer track records is essential.
             </p>
 
             <div class="bg-[#F6F8FA] p-6 rounded-xl border border-gray-200 space-y-3">
-              <h4 class="text-sm font-bold text-[#0F2A44] uppercase tracking-wider">TopLinkers Verified Advisory Points:</h4>
+              <h3 class="text-sm font-bold text-[#0F2A44] uppercase tracking-wider">TopLinkers Verified Advisory Points:</h3>
               <ul class="list-disc list-inside space-y-2 text-xs sm:text-sm text-gray-600">
                 <li>Check NOC clearance directly with CDA/RDA before depositing down payments.</li>
                 <li>Compare payment schedules with actual development milestones achieved on site.</li>
@@ -102,7 +105,7 @@
             <!-- Direct Advisory Callout Box -->
             <div class="mt-8 p-6 bg-gradient-to-r from-[#0F2A44] to-[#143452] text-white rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-lg">
               <div>
-                <h4 class="text-base font-bold text-white mb-1">Need Verified Advice on This Topic?</h4>
+                <h3 class="text-base font-bold text-white mb-1">Need Verified Advice on This Topic?</h3>
                 <p class="text-xs text-gray-300">
                   Speak directly with Syed Usman Hammad and TopLinkers consultants for personalized guidance.
                 </p>
@@ -149,7 +152,7 @@
               class="w-16 h-16 rounded-full object-cover border-2 border-[#16B4E8] flex-shrink-0"
             />
             <div class="text-center sm:text-left">
-              <h4 class="text-sm font-bold text-[#0F2A44]">{{ post.author }}</h4>
+              <h3 class="text-sm font-bold text-[#0F2A44]">{{ post.author }}</h3>
               <p class="text-xs text-[#16B4E8] font-semibold mb-1">Senior Property Consultant @ TopLinkers</p>
               <p class="text-xs text-gray-500">
                 Specializing in CDA sector plot transfers, PHA flat allocations, and commercial high-rises across Gulberg and Faisal Town Phase 2.
@@ -161,7 +164,7 @@
 
       <!-- Related Articles Section -->
       <div v-if="relatedPosts.length > 0" class="mt-12 space-y-6">
-        <h3 class="text-lg font-bold text-[#0F2A44]">Related Market Guides</h3>
+        <h2 class="text-lg font-bold text-[#0F2A44]">Related Market Guides</h2>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <router-link
             v-for="rel in relatedPosts"
@@ -173,9 +176,9 @@
               <div class="text-[10px] font-bold text-[#16B4E8] uppercase tracking-wider mb-1">
                 {{ rel.category }}
               </div>
-              <h4 class="text-xs font-bold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors leading-snug line-clamp-2">
+              <h3 class="text-xs font-bold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors leading-snug line-clamp-2">
                 {{ rel.title }}
-              </h4>
+              </h3>
             </div>
             <div class="text-[11px] text-gray-400 mt-3 pt-2 border-t border-gray-100 flex justify-between items-center">
               <span>{{ rel.readTime }}</span>
@@ -203,6 +206,7 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { api } from '../services/api'
 import { useUiStore } from '../stores/ui'
+import { responsiveSrcset } from '../utils/images'
 
 const route = useRoute()
 const ui = useUiStore()
@@ -215,45 +219,70 @@ const relatedPosts = computed(() => {
   return allPosts.value.filter(p => p.id !== post.value.id).slice(0, 3)
 })
 
-const loadPost = async () => {
-  loading.value = true
-  const slug = route.params.slug
-  allPosts.value = await api.getPosts()
-  post.value = allPosts.value.find(p => p.slug === slug) || allPosts.value[0] || null
-  if (post.value) {
-    document.title = `${post.value.title} | TopLinkers Blog`
+// Title + BlogPosting JSON-LD for the article currently shown
+const applyPostSeo = () => {
+  document.title = `${post.value.title} | TopLinkers Blog`
 
-    // Inject BlogPosting Schema.org JSON-LD for Google Rich Snippets
-    const existing = document.getElementById('seo-blogpost-jsonld')
-    if (existing) existing.remove()
-    const script = document.createElement('script')
-    script.id = 'seo-blogpost-jsonld'
-    script.type = 'application/ld+json'
-    script.text = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      headline: post.value.title,
-      description: post.value.summary,
-      image: post.value.image,
-      datePublished: post.value.date,
-      author: {
-        '@type': 'Person',
-        name: post.value.author
-      },
-      publisher: {
-        '@type': 'Organization',
-        name: 'Top Linkers Real Estate, Construction & Solar',
-        logo: {
-          '@type': 'ImageObject',
-          url: 'https://toplinkers.com/toplinkers-logo.jpg'
-        }
-      },
-      mainEntityOfPage: {
-        '@type': 'WebPage',
-        '@id': `https://toplinkers.com/blog/${post.value.slug}`
+  // Inject BlogPosting Schema.org JSON-LD for Google Rich Snippets
+  const existing = document.getElementById('seo-blogpost-jsonld')
+  if (existing) existing.remove()
+  const script = document.createElement('script')
+  script.id = 'seo-blogpost-jsonld'
+  script.type = 'application/ld+json'
+  script.text = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.value.title,
+    description: post.value.summary,
+    image: post.value.image,
+    datePublished: post.value.date,
+    author: {
+      '@type': 'Person',
+      name: post.value.author
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Top Linkers Real Estate, Construction & Solar',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://toplinkers.com/toplinkers-logo.jpg'
       }
-    })
-    document.head.appendChild(script)
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://toplinkers.com/blog/${post.value.slug}`
+    }
+  })
+  document.head.appendChild(script)
+}
+
+// Show `slug` from `list`. With allowFallback, fall back to the first article
+// (previous behaviour when a slug is unknown).
+const showPosts = (list, slug, allowFallback) => {
+  const found = list.find(p => p.slug === slug)
+  const chosen = found || (allowFallback ? (list[0] || null) : null)
+  if (!chosen) return false
+  allPosts.value = list
+  post.value = chosen
+  applyPostSeo()
+  loading.value = false
+  return true
+}
+
+const loadPost = async () => {
+  const slug = route.params.slug
+  // Bundled articles render immediately (no loading skeleton, no network wait)...
+  const shownLocally = showPosts(api.getLocalPosts(), slug, false)
+  if (!shownLocally) loading.value = true
+
+  // ...and a live backend, when reachable, refreshes them (or provides articles
+  // that only exist there).
+  const livePosts = await api.getLivePosts()
+  if (route.params.slug !== slug) return
+  if (livePosts) {
+    showPosts(livePosts, slug, true)
+  } else if (!shownLocally) {
+    showPosts(api.getLocalPosts(), slug, true)
   }
   loading.value = false
 }

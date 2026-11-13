@@ -34,11 +34,12 @@
         <form @submit.prevent="submitSearch" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
           <!-- 1. Type -->
           <div>
-            <label class="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-1.5">
+            <label for="hero-search-type" class="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-1.5">
               Property Type
             </label>
             <div class="relative">
               <select
+                id="hero-search-type"
                 v-model="searchType"
                 class="w-full text-xs font-bold text-[#0F2A44] p-3 rounded-[4px] border border-gray-200 bg-white focus:outline-none focus:border-[#16B4E8] cursor-pointer appearance-none pr-8"
               >
@@ -58,11 +59,12 @@
 
           <!-- 2. Where (City / Area) -->
           <div>
-            <label class="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-1.5">
+            <label for="hero-search-where" class="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-1.5">
               Where (Location)
             </label>
             <div class="relative">
               <select
+                id="hero-search-where"
                 v-model="searchWhere"
                 class="w-full text-xs font-bold text-[#0F2A44] p-3 rounded-[4px] border border-gray-200 bg-white focus:outline-none focus:border-[#16B4E8] cursor-pointer appearance-none pr-8"
               >
@@ -84,11 +86,12 @@
 
           <!-- 3. Rooms -->
           <div>
-            <label class="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-1.5">
+            <label for="hero-search-rooms" class="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-1.5">
               Rooms / Beds
             </label>
             <div class="relative">
               <select
+                id="hero-search-rooms"
                 v-model="searchRooms"
                 class="w-full text-xs font-bold text-[#0F2A44] p-3 rounded-[4px] border border-gray-200 bg-white focus:outline-none focus:border-[#16B4E8] cursor-pointer appearance-none pr-8"
               >
@@ -106,11 +109,12 @@
 
           <!-- 4. Budget (PKR) -->
           <div>
-            <label class="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-1.5">
+            <label for="hero-search-budget" class="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-1.5">
               Budget (Max PKR)
             </label>
             <div class="relative">
               <select
+                id="hero-search-budget"
                 v-model="searchBudget"
                 class="w-full text-xs font-bold text-[#0F2A44] p-3 rounded-[4px] border border-gray-200 bg-white focus:outline-none focus:border-[#16B4E8] cursor-pointer appearance-none pr-8"
               >

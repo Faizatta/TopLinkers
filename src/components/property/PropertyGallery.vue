@@ -31,6 +31,8 @@
     <div v-show="activeView === 'photos'" class="relative h-[260px] sm:h-[380px] md:h-[500px] w-full bg-black">
       <img
         :src="currentImage"
+        :srcset="responsiveSrcset(currentImage, [600, 900, 1200])"
+        sizes="(max-width: 1023px) 100vw, 840px"
         :alt="`${title} - TopLinkers Real Estate Gallery`"
         loading="eager"
         fetchpriority="high"
@@ -71,7 +73,14 @@
             ]"
             @click="activeIdx = idx"
           >
-            <img :src="img" class="w-full h-full object-cover" alt="Thumb" />
+            <img
+              :src="img"
+              :srcset="responsiveSrcset(img, [120, 240])"
+              sizes="64px"
+              class="w-full h-full object-cover"
+              alt="Thumb"
+              decoding="async"
+            />
           </button>
         </div>
 
@@ -104,8 +113,8 @@ import {
   ChevronRightIcon,
   ArrowsPointingOutIcon
 } from '@heroicons/vue/24/outline'
-import L from '../../utils/leaflet'
 import { useUiStore } from '../../stores/ui'
+import { responsiveSrcset } from '../../utils/images'
 
 const props = defineProps({
   images: {
@@ -156,8 +165,13 @@ const openFullscreen = () => {
   ui.openLightbox(props.images, activeIdx.value)
 }
 
-const initMap = () => {
+const initMap = async () => {
   if (!mapContainer.value || leafletMap) return
+
+  // Leaflet (JS + CSS) is only fetched when the visitor opens the Map tab,
+  // so it no longer delays the property page's first render.
+  const { default: L } = await import('../../utils/leaflet')
+  if (!mapContainer.value || leafletMap || activeView.value !== 'map') return
 
   leafletMap = L.map(mapContainer.value).setView([props.lat, props.lng], 14)
 
@@ -183,7 +197,7 @@ watch(activeView, async (newView) => {
   if (newView === 'map') {
     await nextTick()
     if (!leafletMap) {
-      initMap()
+      await initMap()
     } else {
       leafletMap.invalidateSize()
     }

@@ -12,9 +12,9 @@
 
       <div class="flex-1 min-w-0">
         <div class="flex items-center gap-1.5">
-          <h4 class="text-sm font-black truncate">
+          <h3 class="text-sm font-black truncate">
             <span class="text-[#E53935]">Top</span><span class="text-black">Linkers</span> <span class="text-[#0F2A44] font-bold">Advisory Desk</span>
-          </h4>
+          </h3>
           <span class="w-2 h-2 rounded-full bg-[#25D366]"></span>
         </div>
         <p class="text-[11px] text-[#16B4E8] font-semibold">Direct Consultant Desk</p>
@@ -71,8 +71,9 @@
       </div>
 
       <div>
-        <label class="block text-[11px] font-bold text-gray-600 mb-1">Inquiry Purpose</label>
+        <label for="agent-inquiry-purpose" class="block text-[11px] font-bold text-gray-600 mb-1">Inquiry Purpose</label>
         <select
+          id="agent-inquiry-purpose"
           v-model="form.userRole"
           class="w-full text-xs p-2.5 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-[#16B4E8]"
         >

@@ -153,9 +153,9 @@
                 </span>
               </div>
 
-              <h4 class="font-extrabold text-xs text-[#0F2A44] line-clamp-2 leading-snug mb-1 group-hover:text-[#16B4E8] transition-colors">
+              <h2 class="font-extrabold text-xs text-[#0F2A44] line-clamp-2 leading-snug mb-1 group-hover:text-[#16B4E8] transition-colors">
                 {{ prop.title }}
-              </h4>
+              </h2>
               <p class="text-[11px] text-slate-500 truncate mb-2">
                 {{ prop.society || prop.address || prop.city }}
               </p>
@@ -266,6 +266,7 @@
                     </span>
                     <select
                       v-model="mobileItemAIdx"
+                      aria-label="Property A to compare"
                       class="w-full text-[10px] font-bold bg-white text-slate-700 border border-slate-200 rounded-md px-1.5 py-1 focus:outline-none focus:border-[#16B4E8] truncate"
                     >
                       <option v-for="(p, i) in compareProperties" :key="'optA-' + p.id" :value="i">
@@ -281,9 +282,9 @@
                     </span>
                   </div>
 
-                  <h4 class="font-extrabold text-xs text-[#0F2A44] line-clamp-2 leading-tight">
+                  <h2 class="font-extrabold text-xs text-[#0F2A44] line-clamp-2 leading-tight">
                     {{ mobilePropA.title }}
-                  </h4>
+                  </h2>
                   <p class="text-[10px] text-slate-500 truncate mt-0.5">
                     {{ mobilePropA.society || mobilePropA.city }}
                   </p>
@@ -313,6 +314,7 @@
                     </span>
                     <select
                       v-model="mobileItemBIdx"
+                      aria-label="Property B to compare"
                       class="w-full text-[10px] font-bold bg-white text-slate-700 border border-slate-200 rounded-md px-1.5 py-1 focus:outline-none focus:border-[#16B4E8] truncate"
                     >
                       <option v-for="(p, i) in compareProperties" :key="'optB-' + p.id" :value="i">
@@ -328,9 +330,9 @@
                     </span>
                   </div>
 
-                  <h4 class="font-extrabold text-xs text-[#0F2A44] line-clamp-2 leading-tight">
+                  <h2 class="font-extrabold text-xs text-[#0F2A44] line-clamp-2 leading-tight">
                     {{ mobilePropB.title }}
-                  </h4>
+                  </h2>
                   <p class="text-[10px] text-slate-500 truncate mt-0.5">
                     {{ mobilePropB.society || mobilePropB.city }}
                   </p>
@@ -541,9 +543,9 @@
                       <span>Remove</span>
                     </button>
                   </div>
-                  <h4 class="font-extrabold text-sm text-[#0F2A44] line-clamp-1 leading-snug">
+                  <h3 class="font-extrabold text-sm text-[#0F2A44] line-clamp-1 leading-snug">
                     {{ prop.title }}
-                  </h4>
+                  </h3>
                 </th>
               </tr>
             </thead>

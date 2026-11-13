@@ -40,9 +40,11 @@
               type="button"
               @click.stop="dismissTeaser"
               aria-label="Close Harsukh shortcut"
-              class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#0F2A44] text-white border border-white/40 flex items-center justify-center shadow"
+              class="absolute -top-1.5 -right-1.5 w-6 h-6 flex items-center justify-center"
             >
-              <XMarkIcon class="w-3 h-3" />
+              <span class="w-5 h-5 rounded-full bg-[#0F2A44] text-white border border-white/40 flex items-center justify-center shadow">
+                <XMarkIcon class="w-3 h-3" />
+              </span>
             </button>
           </div>
         </div>
@@ -136,31 +138,16 @@ import { useRoute, useRouter } from 'vue-router'
 import { XMarkIcon, ArrowRightIcon } from '@heroicons/vue/24/outline'
 import { useUiStore } from '../../stores/ui'
 import { scrollTo } from '../../services/lenis'
+import { useFooterClearance } from '../../composables/useFooterClearance'
 
 const uiStore = useUiStore()
 const route = useRoute()
 const router = useRouter()
 const showTeaser = ref(false)
 const activeHookIndex = ref(0)
-const bottomOffset = ref(24)
+// Shared, frame-throttled footer clearance (one measurement for all floating widgets)
+const { bottomOffset, updateFooterClearance } = useFooterClearance()
 
-const updateFooterClearance = () => {
-  const footer = document.getElementById('site-footer')
-  if (!footer) {
-    bottomOffset.value = 24
-    return
-  }
-  const rect = footer.getBoundingClientRect()
-  const docHeight = document.documentElement.scrollHeight
-  const isScrolledNearBottom = (window.scrollY + window.innerHeight) >= (docHeight - 600)
-
-  if (isScrolledNearBottom && rect.top < window.innerHeight && rect.top > 0) {
-    const overlap = window.innerHeight - rect.top
-    bottomOffset.value = Math.max(24, overlap + 24)
-  } else {
-    bottomOffset.value = 24
-  }
-}
 
 let showTimer = null
 let rotateTimer = null
@@ -219,17 +206,12 @@ watch(
 
 onMounted(() => {
   triggerPopup()
-  updateFooterClearance()
-  window.addEventListener('scroll', updateFooterClearance, { passive: true })
-  window.addEventListener('resize', updateFooterClearance, { passive: true })
   rotateTimer = setInterval(() => {
     activeHookIndex.value = (activeHookIndex.value + 1) % curiosityHooks.length
   }, 4000)
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', updateFooterClearance)
-  window.removeEventListener('resize', updateFooterClearance)
   clearTimeout(showTimer)
   clearInterval(rotateTimer)
 })

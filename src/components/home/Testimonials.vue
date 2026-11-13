@@ -53,9 +53,9 @@
                 {{ getFirstLetter(t.name) }}
               </div>
               <div class="min-w-0">
-                <h4 class="text-xs sm:text-sm font-extrabold text-[#0F2A44] leading-tight truncate group-hover:text-[#16B4E8] transition-colors">
+                <h3 class="text-xs sm:text-sm font-extrabold text-[#0F2A44] leading-tight truncate group-hover:text-[#16B4E8] transition-colors">
                   {{ t.name }}
-                </h4>
+                </h3>
                 <p class="text-[10px] text-gray-400 font-semibold truncate mt-0.5">
                   {{ t.role }}
                 </p>
@@ -106,9 +106,9 @@
                 {{ getFirstLetter(t.name) }}
               </div>
               <div class="min-w-0">
-                <h4 class="text-xs sm:text-sm font-extrabold text-[#0F2A44] leading-tight truncate group-hover:text-[#16B4E8] transition-colors">
+                <h3 class="text-xs sm:text-sm font-extrabold text-[#0F2A44] leading-tight truncate group-hover:text-[#16B4E8] transition-colors">
                   {{ t.name }}
-                </h4>
+                </h3>
                 <p class="text-[10px] text-gray-400 font-semibold truncate mt-0.5">
                   {{ t.location || t.role }}
                 </p>

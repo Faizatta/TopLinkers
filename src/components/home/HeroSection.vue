@@ -23,6 +23,7 @@
     -->
     <div
       v-if="staticVisible"
+      ref="staticSlideEl"
       class="hero-slide hero-static absolute inset-0 z-[2] w-full h-full cursor-pointer"
       :class="{ 'swiper-slide-active': staticActive, 'pointer-events-none': carouselReady }"
       :inert="carouselReady || undefined"
@@ -101,6 +102,7 @@ const slides = [
   }
 ]
 
+const staticSlideEl = ref(null)
 const staticVisible = ref(true)
 const staticActive = ref(false)
 const carouselRequested = ref(false)
@@ -119,7 +121,18 @@ const goToSlideLink = (link) => {
 let cancelIdle = null
 let rafId = null
 
+// index.html paints a static copy of this hero (#lcp-shell) before JavaScript runs.
+// It sits behind the app, so it is already covered; drop it once our own image is decoded.
+const removeLcpShell = () => {
+  const shell = document.getElementById('lcp-shell')
+  if (shell) shell.remove()
+}
+
 onMounted(() => {
+  const img = staticSlideEl.value && staticSlideEl.value.querySelector('img')
+  const decoded = img && typeof img.decode === 'function' ? img.decode() : Promise.resolve()
+  decoded.catch(() => {}).then(() => requestAnimationFrame(removeLcpShell))
+
   // Start the entrance animation (text slide-up + Ken Burns zoom) after the first
   // paint, exactly like the carousel does when a slide becomes active.
   rafId = requestAnimationFrame(() => {
@@ -131,12 +144,22 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  removeLcpShell()
   if (cancelIdle) cancelIdle()
   if (rafId) cancelAnimationFrame(rafId)
 })
 </script>
 
 <style>
+/*
+  The hero has an explicit height at every breakpoint and already clips its content,
+  so full containment is visually a no-op. It stops each carousel step (slide
+  re-ordering + class changes) from invalidating layout for the rest of the page.
+*/
+.hero-swiper-container {
+  contain: strict;
+}
+
 /* Houzez demo02 Signature Horizontal Slider Animations */
 
 /* 1. Inactive slide text initial state */

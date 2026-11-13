@@ -166,6 +166,7 @@
               <div class="sm:col-span-4 relative">
                 <select
                   v-model="quickPriceSelection"
+                  aria-label="Price range"
                   class="w-full h-full text-xs font-bold text-[#0F2A44] px-3 py-2 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#16B4E8] cursor-pointer appearance-none pr-8"
                   @change="handleQuickPriceChange"
                 >
@@ -184,6 +185,7 @@
               <div class="sm:col-span-3 relative">
                 <select
                   v-model="propertiesStore.filters.city"
+                  aria-label="City or area"
                   class="w-full h-full text-xs font-bold text-[#0F2A44] px-3 py-2 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#16B4E8] cursor-pointer appearance-none pr-8"
                   @change="handleQuickChange"
                 >
@@ -326,13 +328,13 @@
           <!-- 6. Pagination -->
           <div
             v-if="propertiesStore.totalPages > 1"
-            class="pt-6 flex items-center justify-center gap-2"
+            class="pt-6 flex flex-wrap items-center justify-center gap-2"
           >
             <button
               type="button"
               :disabled="propertiesStore.page === 1"
               :class="[
-                'px-3.5 py-2 text-xs font-bold rounded-lg border transition-colors',
+                'px-3.5 py-2 flex-shrink-0 text-xs font-bold rounded-lg border transition-colors',
                 propertiesStore.page === 1
                   ? 'border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50'
                   : 'border-gray-300 text-[#0F2A44] hover:border-[#16B4E8] hover:text-[#16B4E8] bg-white'
@@ -347,7 +349,7 @@
               :key="p"
               type="button"
               :class="[
-                'w-9 h-9 text-xs font-black rounded-lg transition-colors',
+                'w-9 h-9 flex-shrink-0 text-xs font-black rounded-lg transition-colors',
                 propertiesStore.page === p
                   ? 'bg-[#16B4E8] text-white shadow-sm'
                   : 'bg-white border border-gray-200 text-[#0F2A44] hover:border-[#16B4E8]'
@@ -361,7 +363,7 @@
               type="button"
               :disabled="propertiesStore.page === propertiesStore.totalPages"
               :class="[
-                'px-3.5 py-2 text-xs font-bold rounded-lg border transition-colors',
+                'px-3.5 py-2 flex-shrink-0 text-xs font-bold rounded-lg border transition-colors',
                 propertiesStore.page === propertiesStore.totalPages
                   ? 'border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50'
                   : 'border-gray-300 text-[#0F2A44] hover:border-[#16B4E8] hover:text-[#16B4E8] bg-white'

@@ -30,8 +30,8 @@
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay } from 'swiper/modules'
-import 'swiper/css'
 import HeroSlide from './HeroSlide.vue'
+import { useAutoplayWhenVisible } from '../../composables/useAutoplayWhenVisible'
 
 defineProps({
   slides: { type: Array, required: true }
@@ -39,6 +39,8 @@ defineProps({
 
 const emit = defineEmits(['ready', 'handoff', 'slide-click'])
 const modules = [Autoplay]
+// Pause autoplay while the visitor has scrolled the hero out of view
+const autoplayWhenVisible = useAutoplayWhenVisible()
 
 // The parent keeps an identical static first slide on top of this carousel until
 // the carousel actually starts moving (first autoplay transition or a user swipe).
@@ -51,7 +53,8 @@ const emitHandoff = () => {
   emit('handoff')
 }
 
-const onSwiper = () => {
+const onSwiper = (swiper) => {
+  autoplayWhenVisible.onSwiper(swiper)
   // Let Swiper apply its active classes before telling the parent we're ready.
   requestAnimationFrame(() => requestAnimationFrame(() => {
     isReady = true

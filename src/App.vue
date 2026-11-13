@@ -6,7 +6,7 @@
     <!-- Main Dynamic Route View with Fade Transitions -->
     <main class="flex-1 min-h-screen">
       <router-view v-slot="{ Component }">
-        <transition name="fade" mode="out-in">
+        <transition :name="pageTransition" mode="out-in">
           <component :is="Component" />
         </transition>
       </router-view>
@@ -37,7 +37,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import AppHeader from './components/layout/AppHeader.vue'
 import Toast from './components/ui/Toast.vue'
 import { useUiStore } from './stores/ui'
@@ -59,7 +59,17 @@ const ShareModal = defineAsyncComponent(() => import('./components/layout/ShareM
 const FlyerModal = defineAsyncComponent(() => import('./components/layout/FlyerModal.vue'))
 
 const route = useRoute()
+const router = useRouter()
 const ui = useUiStore()
+
+// The router renders nothing until the first navigation resolves, so the first page
+// would otherwise "enter" with the fade (opacity 0 + 6px slide), delaying the very
+// first paint of the hero. Show the first page instantly; fade between pages after.
+// ('page-initial' has no CSS rules, so Vue completes it immediately.)
+const pageTransition = ref('page-initial')
+router.isReady().then(() => {
+  setTimeout(() => { pageTransition.value = 'fade' }, 0)
+})
 const isAdminRoute = computed(() => route.path.startsWith('/admin'))
 
 const deferredUiReady = ref(false)

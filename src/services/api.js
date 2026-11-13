@@ -5,6 +5,23 @@ import typesData from '../data/types.json'
 import locationsData from '../data/locations.json'
 import testimonialsData from '../data/testimonials.json'
 
+// Same API base as the admin store: an explicit VITE_API_URL, the local Laravel
+// server during development, and a same-origin /api path in production.
+// (A hard-coded http://127.0.0.1 URL points at each visitor's own machine in
+// production, so those requests could never succeed and only logged errors.)
+export const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://127.0.0.1:8000/api' : '/api')
+
+// Static hosting may answer an /api route with the SPA's index.html (HTTP 200).
+const isJson = (res) => (res.headers.get('content-type') || '').includes('json')
+
+// For write operations: return the JSON body, or throw a readable error (the API's
+// own message when it sent one) instead of a raw JSON parse error.
+async function jsonOrThrow(res, fallbackMessage) {
+  if (res.ok && isJson(res)) return res.json()
+  const body = isJson(res) ? await res.json().catch(() => ({})) : {}
+  throw new Error(body.message || body.error || fallbackMessage)
+}
+
 const delay = (ms = 0) => (ms > 0 ? new Promise(resolve => setTimeout(resolve, ms)) : Promise.resolve())
 
 function getLivePropertyList() {
@@ -195,25 +212,37 @@ export const api = {
 
   // Blog Posts (Live Laravel Backend with local fallback)
   async getPosts(options = {}) {
+    const livePosts = await api.getLivePosts(options)
+    return livePosts || [...postsData]
+  },
+
+  // Bundled articles, available synchronously, so pages can render them without
+  // waiting for the network (no loading flash, no layout shift).
+  getLocalPosts() {
+    return [...postsData]
+  },
+
+  // Articles from the live backend, or null when it is not reachable / not deployed.
+  async getLivePosts(options = {}) {
     try {
-      const url = `http://127.0.0.1:8000/api/blogs${options.admin ? '?admin=1' : ''}`
+      const url = `${API_BASE_URL}/blogs${options.admin ? '?admin=1' : ''}`
       const res = await fetch(url)
-      if (res.ok) {
+      if (res.ok && isJson(res)) {
         const livePosts = await res.json()
         if (Array.isArray(livePosts) && livePosts.length > 0) {
           return livePosts
         }
       }
     } catch (e) {
-      // Fallback to local postsData if backend is unreachable
+      // Backend unreachable
     }
-    return [...postsData]
+    return null
   },
 
   async getPostBySlug(slug) {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/blogs/${encodeURIComponent(slug)}`)
-      if (res.ok) {
+      const res = await fetch(`${API_BASE_URL}/blogs/${encodeURIComponent(slug)}`)
+      if (res.ok && isJson(res)) {
         return await res.json()
       }
     } catch (e) {
@@ -225,51 +254,36 @@ export const api = {
   async uploadImage(file) {
     const formData = new FormData()
     formData.append('image', file)
-    const res = await fetch('http://127.0.0.1:8000/api/upload', {
+    const res = await fetch(`${API_BASE_URL}/upload`, {
       method: 'POST',
       body: formData
     })
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}))
-      throw new Error(err.message || err.error || 'Failed to upload image')
-    }
-    return await res.json()
+    return jsonOrThrow(res, 'Failed to upload image')
   },
 
   async createPost(postData) {
-    const res = await fetch('http://127.0.0.1:8000/api/blogs', {
+    const res = await fetch(`${API_BASE_URL}/blogs`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(postData)
     })
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}))
-      throw new Error(err.message || 'Failed to create blog post')
-    }
-    return await res.json()
+    return jsonOrThrow(res, 'Failed to create blog post')
   },
 
   async updatePost(id, postData) {
-    const res = await fetch(`http://127.0.0.1:8000/api/blogs/${id}`, {
+    const res = await fetch(`${API_BASE_URL}/blogs/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(postData)
     })
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}))
-      throw new Error(err.message || 'Failed to update blog post')
-    }
-    return await res.json()
+    return jsonOrThrow(res, 'Failed to update blog post')
   },
 
   async deletePost(id) {
-    const res = await fetch(`http://127.0.0.1:8000/api/blogs/${id}`, {
+    const res = await fetch(`${API_BASE_URL}/blogs/${id}`, {
       method: 'DELETE'
     })
-    if (!res.ok) {
-      throw new Error('Failed to delete blog post')
-    }
-    return await res.json()
+    return jsonOrThrow(res, 'Failed to delete blog post')
   },
 
   // Types & Locations

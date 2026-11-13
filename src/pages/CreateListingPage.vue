@@ -55,9 +55,9 @@
         <form @submit.prevent="handleNext">
           <!-- STEP 1: Basic Info & Type -->
           <div v-show="currentStep === 1" class="space-y-5">
-            <h3 class="text-base font-bold text-[#0B3B66] pb-2 border-b border-gray-100">
+            <h2 class="text-base font-bold text-[#0B3B66] pb-2 border-b border-gray-100">
               Step 1: Property Identity & Categorization
-            </h3>
+            </h2>
 
             <div>
               <label class="block text-xs font-semibold uppercase text-gray-700 mb-1">Listing Title *</label>
@@ -72,8 +72,9 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label class="block text-xs font-semibold uppercase text-gray-700 mb-1">Listing Status *</label>
+                <label for="create-listing-status" class="block text-xs font-semibold uppercase text-gray-700 mb-1">Listing Status *</label>
                 <select
+                  id="create-listing-status"
                   v-model="form.status"
                   required
                   class="w-full text-xs p-2.5 rounded border border-gray-200 bg-white focus:outline-none focus:border-[#00AEEF]"
@@ -84,8 +85,9 @@
               </div>
 
               <div>
-                <label class="block text-xs font-semibold uppercase text-gray-700 mb-1">Property Type *</label>
+                <label for="create-listing-type" class="block text-xs font-semibold uppercase text-gray-700 mb-1">Property Type *</label>
                 <select
+                  id="create-listing-type"
                   v-model="form.type"
                   required
                   class="w-full text-xs p-2.5 rounded border border-gray-200 bg-white focus:outline-none focus:border-[#00AEEF]"
@@ -114,9 +116,9 @@
 
           <!-- STEP 2: Price & Terms -->
           <div v-show="currentStep === 2" class="space-y-5">
-            <h3 class="text-base font-bold text-[#0B3B66] pb-2 border-b border-gray-100">
+            <h2 class="text-base font-bold text-[#0B3B66] pb-2 border-b border-gray-100">
               Step 2: Pricing & Lease Conditions
-            </h3>
+            </h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -166,9 +168,9 @@
 
           <!-- STEP 3: Media Upload with Preview -->
           <div v-show="currentStep === 3" class="space-y-5">
-            <h3 class="text-base font-bold text-[#0B3B66] pb-2 border-b border-gray-100">
+            <h2 class="text-base font-bold text-[#0B3B66] pb-2 border-b border-gray-100">
               Step 3: High-Resolution Photos & Video Link
-            </h3>
+            </h2>
 
             <div>
               <label class="block text-xs font-semibold uppercase text-gray-700 mb-1">Add Image URL (Unsplash or CDN)</label>
@@ -240,9 +242,9 @@
 
           <!-- STEP 4: Location -->
           <div v-show="currentStep === 4" class="space-y-5">
-            <h3 class="text-base font-bold text-[#0B3B66] pb-2 border-b border-gray-100">
+            <h2 class="text-base font-bold text-[#0B3B66] pb-2 border-b border-gray-100">
               Step 4: Location & Address
-            </h3>
+            </h2>
 
             <div>
               <label class="block text-xs font-semibold uppercase text-gray-700 mb-1">Street Address *</label>
@@ -257,8 +259,9 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label class="block text-xs font-semibold uppercase text-gray-700 mb-1">City *</label>
+                <label for="create-listing-city" class="block text-xs font-semibold uppercase text-gray-700 mb-1">City *</label>
                 <select
+                  id="create-listing-city"
                   v-model="form.city"
                   required
                   class="w-full text-xs p-2.5 rounded border border-gray-200 bg-white focus:outline-none focus:border-[#00AEEF]"
@@ -296,9 +299,9 @@
 
           <!-- STEP 5: Details & Amenities -->
           <div v-show="currentStep === 5" class="space-y-5">
-            <h3 class="text-base font-bold text-[#0B3B66] pb-2 border-b border-gray-100">
+            <h2 class="text-base font-bold text-[#0B3B66] pb-2 border-b border-gray-100">
               Step 5: Architectural Specs & Features Checklist
-            </h3>
+            </h2>
 
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div>
@@ -366,9 +369,9 @@
 
           <!-- STEP 6: Review & Submit -->
           <div v-show="currentStep === 6" class="space-y-5">
-            <h3 class="text-base font-bold text-[#0B3B66] pb-2 border-b border-gray-100">
+            <h2 class="text-base font-bold text-[#0B3B66] pb-2 border-b border-gray-100">
               Step 6: Review Summary & Publish
-            </h3>
+            </h2>
 
             <div class="bg-gray-50 rounded-lg p-5 text-xs space-y-3">
               <div class="flex justify-between border-b border-gray-200 pb-2">

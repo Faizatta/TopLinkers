@@ -84,8 +84,18 @@ Professional construction and architectural services across Pakistan, delivering
             :key="agent.id"
             class="bg-[#F6F8FA] rounded-xl p-6 text-center border border-gray-100 hover:shadow-md transition-all group"
           >
-            <img :src="agent.photo" :alt="agent.name" class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-[#16B4E8] mb-4" />
-            <h4 class="text-base font-bold text-[#0F2A44] group-hover:text-[#16B4E8]">{{ agent.name }}</h4>
+            <img
+              :src="agent.photo"
+              :srcset="responsiveSrcset(agent.photo, [200, 300])"
+              sizes="96px"
+              :alt="agent.name"
+              loading="lazy"
+              decoding="async"
+              width="96"
+              height="96"
+              class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-[#16B4E8] mb-4"
+            />
+            <h3 class="text-base font-bold text-[#0F2A44] group-hover:text-[#16B4E8]">{{ agent.name }}</h3>
             <p class="text-xs text-[#16B4E8] font-semibold mt-0.5">{{ agent.role }}</p>
             <p class="text-[11px] text-gray-500 mt-2 line-clamp-3 font-light">{{ agent.bio }}</p>
             <div class="mt-4 pt-3 border-t border-gray-200 text-xs font-bold text-[#0F2A44]">
@@ -97,26 +107,39 @@ Professional construction and architectural services across Pakistan, delivering
     </section>
 
     <!-- Testimonials -->
-    <Testimonials />
+    <!-- Below the fold: rendered once the page is idle (or the visitor scrolls) -->
+    <Testimonials v-if="showLowerSections" />
 
     <!-- CTA -->
-    <CtaBanner />
+    <CtaBanner v-if="showLowerSections" />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
 import SectionHeading from '../components/ui/SectionHeading.vue'
 import AboutSection from '../components/home/AboutSection.vue'
 import StatsBand from '../components/home/StatsBand.vue'
-import Testimonials from '../components/home/Testimonials.vue'
-import CtaBanner from '../components/home/CtaBanner.vue'
 import { api } from '../services/api'
+import { responsiveSrcset } from '../utils/images'
+import { whenIdleOrInteraction } from '../utils/idle'
+
+// The testimonials marquee (dozens of cards) and the CTA banner sit at the bottom of the
+// page; rendering them after the first paint keeps the initial render task short.
+const Testimonials = defineAsyncComponent(() => import('../components/home/Testimonials.vue'))
+const CtaBanner = defineAsyncComponent(() => import('../components/home/CtaBanner.vue'))
 
 const agents = ref([])
+const showLowerSections = ref(false)
+let cancelDeferred = null
 
 onMounted(async () => {
   document.title = 'About Us | TopLinkers Real Estate, Construction & Solar Islamabad'
+  cancelDeferred = whenIdleOrInteraction(() => { showLowerSections.value = true })
   agents.value = await api.getAgents()
+})
+
+onUnmounted(() => {
+  if (cancelDeferred) cancelDeferred()
 })
 </script>

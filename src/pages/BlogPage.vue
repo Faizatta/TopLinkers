@@ -19,15 +19,18 @@
         <div class="lg:col-span-8 space-y-8">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <article
-              v-for="post in filteredPosts"
+              v-for="(post, index) in filteredPosts"
               :key="post.id"
               class="bg-white rounded-xl overflow-hidden shadow-card hover:shadow-hover transition-all duration-300 border border-gray-100 flex flex-col group"
             >
               <div class="relative h-56 overflow-hidden bg-gray-100">
                 <img
                   :src="post.image"
+                  :srcset="responsiveSrcset(post.image, [400, 600, 900])"
+                  sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 400px"
                   :alt="post.title"
-                  loading="lazy"
+                  :loading="index === 0 ? 'eager' : 'lazy'"
+                  :fetchpriority="index === 0 ? 'high' : 'auto'"
                   decoding="async"
                   width="600"
                   height="224"
@@ -46,11 +49,11 @@
                     <span>{{ post.readTime }}</span>
                   </div>
 
-                  <h3 class="text-base font-bold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors leading-snug mb-3">
+                  <h2 class="text-base font-bold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors leading-snug mb-3">
                     <router-link :to="`/blog/${post.slug}`">
                       {{ post.title }}
                     </router-link>
-                  </h3>
+                  </h2>
 
                   <p class="text-xs text-gray-500 line-clamp-3 leading-relaxed mb-4 font-normal">
                     {{ post.summary }}
@@ -79,7 +82,7 @@
         <aside class="lg:col-span-4 space-y-6">
           <!-- Search Widget -->
           <div class="bg-white rounded-xl p-5 shadow-card border border-gray-100">
-            <h4 class="text-xs font-black uppercase tracking-wider text-[#0F2A44] mb-3">Search Blog</h4>
+            <h2 class="text-xs font-black uppercase tracking-wider text-[#0F2A44] mb-3">Search Blog</h2>
             <div class="relative">
               <input
                 v-model="searchQuery"
@@ -95,7 +98,7 @@
 
           <!-- Categories Widget -->
           <div class="bg-white rounded-xl p-5 shadow-card border border-gray-100">
-            <h4 class="text-xs font-black uppercase tracking-wider text-[#0F2A44] mb-3">Categories</h4>
+            <h2 class="text-xs font-black uppercase tracking-wider text-[#0F2A44] mb-3">Categories</h2>
             <ul class="space-y-2 text-xs">
               <li
                 v-for="cat in categories"
@@ -122,9 +125,13 @@ import { ref, computed, onMounted } from 'vue'
 import SectionHeading from '../components/ui/SectionHeading.vue'
 import { api } from '../services/api'
 import { useUiStore } from '../stores/ui'
+import { responsiveSrcset } from '../utils/images'
 
 const ui = useUiStore()
-const posts = ref([])
+// Bundled articles render immediately; a live backend (when reachable) refreshes them.
+// Waiting for the network first left the list empty, so the sidebar jumped down once
+// the posts arrived (a large layout shift).
+const posts = ref(api.getLocalPosts())
 const searchQuery = ref('')
 const selectedCategory = ref('')
 
@@ -149,6 +156,7 @@ const filteredPosts = computed(() => {
 
 onMounted(async () => {
   document.title = 'Real Estate Blog & Insights | TopLinkers Pakistan'
-  posts.value = await api.getPosts()
+  const livePosts = await api.getLivePosts()
+  if (livePosts) posts.value = livePosts
 })
 </script>

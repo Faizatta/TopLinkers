@@ -3,9 +3,21 @@
     <div class="max-w-[1280px] mx-auto px-4">
       <!-- Full-width rounded banner with dark photo background & overlay -->
       <div
-        class="relative rounded-2xl overflow-hidden p-10 md:p-16 text-center text-white shadow-2xl bg-cover bg-center"
-        style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80');"
+        class="relative rounded-2xl overflow-hidden p-10 md:p-16 text-center text-white shadow-2xl"
       >
+        <!-- Background photo (an <img> rather than a CSS background so it can lazy-load at the right size) -->
+        <img
+          :src="bannerImage"
+          :srcset="responsiveSrcset(bannerImage, [800, 1200, 1600])"
+          sizes="(max-width: 1279px) 100vw, 1248px"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          width="1600"
+          height="900"
+          class="absolute inset-0 w-full h-full object-cover object-center"
+        />
+
         <!-- Dark Navy Overlay -->
         <div class="absolute inset-0 bg-[#0F2A44]/90 backdrop-blur-xs"></div>
 
@@ -49,4 +61,7 @@
 </template>
 
 <script setup>
+import { responsiveSrcset } from '../../utils/images'
+
+const bannerImage = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80'
 </script>
