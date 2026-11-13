@@ -49,6 +49,28 @@
          (no crossorigin attribute: images are fetched without CORS, so this connection is reused) -->
     <link rel="preconnect" href="https://images.unsplash.com" />
 
+    <!--
+      Homepage LCP image: start downloading it right away. This script must stay in <head>,
+      before the stylesheet: inline scripts placed after a stylesheet wait for it to load,
+      which would delay the hero image. The <body> script below draws the skeleton.
+      SECURITY: allowed by sha256 hash in vercel.json's Content-Security-Policy; any edit
+      (even whitespace) changes the hash and must be mirrored there.
+    -->
+    <script>
+      (function () {
+        if (location.pathname !== '/') return
+        var link = document.createElement('link')
+        link.rel = 'preload'
+        link.as = 'image'
+        link.type = 'image/avif'
+        link.href = window.matchMedia('(max-width: 639px)').matches
+          ? '/images/hero-real-estate-m.avif'
+          : '/images/hero-real-estate.avif'
+        link.setAttribute('fetchpriority', 'high')
+        document.head.appendChild(link)
+      })()
+    </script>
+
     <!-- Self-hosted Plus Jakarta Sans (Latin subset, all weights in one variable file) -->
     <link rel="preload" href="/src/assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
 
