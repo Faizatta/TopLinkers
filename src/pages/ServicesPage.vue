@@ -25,11 +25,12 @@
       <div class="mb-10 sm:mb-12">
         <!-- Mobile Dropdown Selector (Compact, Intuitive & Clean) -->
         <div class="sm:hidden max-w-sm mx-auto">
-          <label class="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-1.5 text-center">
+          <label for="services-division" class="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-1.5 text-center">
             Select Core Division:
           </label>
           <div class="relative">
             <select
+              id="services-division"
               v-model="activeTab"
               class="w-full text-xs font-black text-[#0F2A44] py-3 pl-4 pr-10 rounded-xl border-2 border-[#16B4E8] bg-white shadow-sm focus:outline-none appearance-none cursor-pointer"
             >
@@ -136,14 +137,16 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
           <div class="lg:col-span-4 h-56 sm:h-64 rounded-2xl overflow-hidden bg-gray-900 border border-white/10 shadow-lg">
-            <img
-              src="/images/hero-harsukh.webp"
+            <!-- Near the top of the page (the LCP image on phones): loaded eagerly -->
+            <LocalPicture
+              name="hero-harsukh"
               alt="Harsukh Nathia Gali"
-              loading="lazy"
-              decoding="async"
-              width="800"
-              height="500"
-              class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              sizes="(max-width: 1023px) 100vw, 400px"
+              loading="eager"
+              fetchpriority="high"
+              :width="800"
+              :height="500"
+              img-class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
             />
           </div>
 
@@ -861,14 +864,13 @@
           <div class="bg-white rounded-2xl border border-gray-200/90 hover:border-[#16B4E8] shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group">
             <div>
               <div class="h-44 w-full relative overflow-hidden bg-gray-900">
-                <img
-                  src="/images/hero-construction.webp"
+                <LocalPicture
+                  name="hero-construction"
                   alt="Turnkey Luxury Construction"
-                  loading="lazy"
-                  decoding="async"
-                  width="600"
-                  height="352"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 300px"
+                  :width="600"
+                  :height="352"
+                  img-class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <span class="absolute top-3 left-3 bg-[#0F2A44]/80 backdrop-blur-md text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-md">
                   A+ Turnkey
@@ -1092,14 +1094,14 @@
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             <!-- Left Visual Card -->
             <div class="lg:col-span-5 relative h-60 sm:h-72 rounded-2xl overflow-hidden bg-slate-900 border border-white/15 shadow-xl group">
-              <img
-                src="/images/hero-solar.webp"
+              <LocalPicture
+                name="hero-solar"
                 alt="Earn From The Sun — TopLinkers Tier-1 Solar Systems"
-                loading="lazy"
-                decoding="async"
-                width="900"
-                height="500"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                sizes="(max-width: 1023px) 100vw, 520px"
+                :full-width="1376"
+                :width="900"
+                :height="500"
+                img-class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-[#071320]/90 via-transparent to-transparent"></div>
               <div class="absolute top-3.5 left-3.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/95 text-[#0F2A44] text-[10px] font-black uppercase tracking-wider shadow">
@@ -1353,131 +1355,134 @@
     <Teleport to="body">
       <div
         v-if="isInstallmentModalOpen"
-        class="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5"
+        class="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-hidden"
         @click.self="isInstallmentModalOpen = false"
       >
-        <div class="bg-white rounded-3xl w-full max-w-3xl overflow-hidden shadow-2xl border border-gray-100 animate-in fade-in zoom-in-95 duration-200">
-          <!-- Modal Header -->
-          <div class="bg-[#0F2A44] text-white p-5 sm:p-6 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-[#16B4E8]/20 text-[#16B4E8] flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <div class="bg-white rounded-t-3xl sm:rounded-3xl w-full max-w-2xl max-h-[92dvh] sm:max-h-[88vh] flex flex-col shadow-2xl border border-gray-100 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <!-- Modal Header (Sticky Top) -->
+          <div class="flex-shrink-0 bg-[#0F2A44] text-white px-4 py-3 sm:px-6 sm:py-4 flex items-center justify-between border-b border-white/10">
+            <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-[#16B4E8]/20 text-[#16B4E8] flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
               </div>
-              <div>
-                <h3 class="text-base sm:text-lg font-black tracking-tight">Verified Installment Schedules</h3>
-                <p class="text-xs text-gray-300">Official monthly &amp; quarterly schedules with transparent booking rates.</p>
+              <div class="min-w-0">
+                <h3 class="text-sm sm:text-base font-black tracking-tight truncate">Verified Installment Schedules</h3>
+                <p class="text-[11px] sm:text-xs text-gray-300 truncate">Official monthly &amp; quarterly payment plans.</p>
               </div>
             </div>
 
             <button
               type="button"
-              class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors text-lg"
+              aria-label="Close modal"
+              class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 text-white flex items-center justify-center transition-colors text-lg flex-shrink-0 ml-2"
               @click="isInstallmentModalOpen = false"
             >
               &times;
             </button>
           </div>
 
-          <!-- Project Selector Tabs -->
-          <div class="p-4 sm:p-6 pb-2 border-b border-gray-100 bg-gray-50/70">
-            <span class="block text-[10px] font-black uppercase tracking-wider text-gray-400 mb-2">Select Project / Society:</span>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              <button
-                v-for="p in installmentProjects"
-                :key="p.id"
-                type="button"
-                :class="[
-                  'py-2 px-3 rounded-xl text-xs font-black transition-all text-center border',
-                  selectedInstallmentProject === p.id
-                    ? 'bg-[#0F2A44] text-white border-[#0F2A44] shadow-xs'
-                    : 'bg-white text-gray-700 border-gray-200 hover:border-[#16B4E8]'
-                ]"
-                @click="setInstallmentProject(p.id)"
-              >
-                {{ p.name }}
-              </button>
+          <!-- Modal Body (Scrollable) -->
+          <div class="flex-1 overflow-y-auto p-3.5 sm:p-6 space-y-3.5 sm:space-y-4">
+            <!-- Project Selector Tabs -->
+            <div>
+              <span class="block text-[10px] font-black uppercase tracking-wider text-gray-400 mb-1.5">Select Project / Society:</span>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2">
+                <button
+                  v-for="p in installmentProjects"
+                  :key="p.id"
+                  type="button"
+                  :class="[
+                    'py-2 px-2 sm:px-3 rounded-xl text-[11px] sm:text-xs font-bold sm:font-black transition-all text-center border min-h-[38px] flex items-center justify-center',
+                    selectedInstallmentProject === p.id
+                      ? 'bg-[#0F2A44] text-white border-[#0F2A44] shadow-xs'
+                      : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-[#16B4E8] hover:bg-white'
+                  ]"
+                  @click="setInstallmentProject(p.id)"
+                >
+                  <span class="block leading-tight text-center">{{ p.tabName || p.name }}</span>
+                </button>
+              </div>
             </div>
-          </div>
 
-          <!-- Unit / Plot Size Pills -->
-          <div class="p-4 sm:p-6 pb-2">
-            <span class="block text-[10px] font-black uppercase tracking-wider text-gray-400 mb-2">Choose Category / Marla Size:</span>
-            <div class="flex items-center gap-2 flex-wrap">
-              <button
-                v-for="size in currentInstallmentProjectData.sizes"
-                :key="size.label"
-                type="button"
-                :class="[
-                  'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all border',
-                  selectedInstallmentSize === size.label
-                    ? 'bg-[#16B4E8] text-[#0F2A44] border-[#16B4E8] font-black'
-                    : 'bg-white text-gray-700 border-gray-200 hover:border-[#16B4E8]'
-                ]"
-                @click="selectedInstallmentSize = size.label"
-              >
-                {{ size.label }}
-              </button>
+            <!-- Unit / Plot Size Pills -->
+            <div>
+              <span class="block text-[10px] font-black uppercase tracking-wider text-gray-400 mb-1.5">Choose Category / Marla Size:</span>
+              <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 -mx-0.5 px-0.5 scrollbar-none">
+                <button
+                  v-for="size in currentInstallmentProjectData.sizes"
+                  :key="size.label"
+                  type="button"
+                  :class="[
+                    'px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-bold transition-all border whitespace-nowrap shrink-0',
+                    selectedInstallmentSize === size.label
+                      ? 'bg-[#16B4E8] text-[#0F2A44] border-[#16B4E8] font-black shadow-xs'
+                      : 'bg-white text-gray-700 border-gray-200 hover:border-[#16B4E8]'
+                  ]"
+                  @click="selectedInstallmentSize = size.label"
+                >
+                  {{ size.label }}
+                </button>
+              </div>
             </div>
-          </div>
 
-          <!-- Schedule Details Card & Table -->
-          <div class="p-4 sm:p-6 pt-2">
-            <div class="bg-slate-50 rounded-2xl p-4 sm:p-5 border border-gray-200/80 mb-5">
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-gray-200">
-                <div>
-                  <span class="text-[10px] font-black uppercase text-[#16B4E8]">Plan Breakdown</span>
-                  <h4 class="text-base font-black text-[#0F2A44]">
+            <!-- Schedule Details Card -->
+            <div class="bg-slate-50 rounded-2xl p-3.5 sm:p-5 border border-gray-200/80">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-gray-200">
+                <div class="min-w-0">
+                  <span class="text-[10px] font-black uppercase text-[#16B4E8] tracking-wider">Plan Breakdown</span>
+                  <h4 class="text-sm sm:text-base font-black text-[#0F2A44] leading-snug">
                     {{ currentInstallmentProjectData.name }} — {{ selectedInstallmentSizeData.label }}
                   </h4>
-                  <span class="text-xs text-gray-500">{{ currentInstallmentProjectData.duration }}</span>
+                  <span class="text-[11px] sm:text-xs text-gray-500">{{ currentInstallmentProjectData.duration }}</span>
                 </div>
 
-                <div class="sm:text-right">
-                  <span class="text-[10px] font-bold text-gray-400 uppercase block">Total Plot / Unit Cost</span>
-                  <span class="text-lg font-black text-[#0F2A44]">{{ selectedInstallmentSizeData.totalPrice }}</span>
+                <div class="flex items-baseline justify-between sm:block sm:text-right pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-200/60">
+                  <span class="text-[10px] font-bold text-gray-400 uppercase block sm:mb-0.5">Total Cost:</span>
+                  <span class="text-base sm:text-lg font-black text-[#0F2A44]">{{ selectedInstallmentSizeData.totalPrice }}</span>
                 </div>
               </div>
 
               <!-- Payment Table Breakdown -->
-              <div class="mt-4 space-y-2.5 text-xs">
-                <div class="flex items-center justify-between py-1.5 border-b border-gray-100">
-                  <span class="font-bold text-gray-600">Booking / Down Payment:</span>
-                  <span class="font-black text-[#16B4E8]">{{ selectedInstallmentSizeData.downPayment }}</span>
+              <div class="mt-2.5 space-y-1.5 sm:space-y-2 text-xs">
+                <div class="flex items-center justify-between py-1.5 border-b border-gray-200/60 gap-2">
+                  <span class="font-bold text-gray-600 text-[11px] sm:text-xs">Booking / Down Payment:</span>
+                  <span class="font-black text-[#16B4E8] text-[11px] sm:text-xs text-right">{{ selectedInstallmentSizeData.downPayment }}</span>
                 </div>
-                <div class="flex items-center justify-between py-1.5 border-b border-gray-100">
-                  <span class="font-bold text-gray-600">Installment Schedule:</span>
-                  <span class="font-bold text-[#0F2A44]">{{ selectedInstallmentSizeData.installmentRate }}</span>
+                <div class="flex items-center justify-between py-1.5 border-b border-gray-200/60 gap-2">
+                  <span class="font-bold text-gray-600 text-[11px] sm:text-xs">Installment Schedule:</span>
+                  <span class="font-bold text-[#0F2A44] text-[11px] sm:text-xs text-right">{{ selectedInstallmentSizeData.installmentRate }}</span>
                 </div>
-                <div v-if="selectedInstallmentSizeData.halfYearly" class="flex items-center justify-between py-1.5 border-b border-gray-100">
-                  <span class="font-bold text-gray-600">Semi-Annual / Balloon Payment:</span>
-                  <span class="font-bold text-[#0F2A44]">{{ selectedInstallmentSizeData.halfYearly }}</span>
+                <div v-if="selectedInstallmentSizeData.halfYearly" class="flex items-center justify-between py-1.5 border-b border-gray-200/60 gap-2">
+                  <span class="font-bold text-gray-600 text-[11px] sm:text-xs">Semi-Annual / Balloon:</span>
+                  <span class="font-bold text-[#0F2A44] text-[11px] sm:text-xs text-right">{{ selectedInstallmentSizeData.halfYearly }}</span>
                 </div>
-                <div class="flex items-center justify-between py-1.5">
-                  <span class="font-bold text-gray-600">Balloting / Possession Payment:</span>
-                  <span class="font-bold text-[#0F2A44]">{{ selectedInstallmentSizeData.possession }}</span>
+                <div class="flex items-center justify-between py-1.5 gap-2">
+                  <span class="font-bold text-gray-600 text-[11px] sm:text-xs">Balloting / Possession:</span>
+                  <span class="font-bold text-[#0F2A44] text-[11px] sm:text-xs text-right">{{ selectedInstallmentSizeData.possession }}</span>
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- Modal Action Buttons -->
-            <div class="flex flex-col sm:flex-row items-center gap-3">
-              <a
-                :href="generateInstallmentWhatsAppUrl()"
-                target="_blank"
-                class="w-full sm:flex-1 py-3 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-black uppercase tracking-wider rounded-xl text-center transition-all flex items-center justify-center gap-2 shadow-sm"
-              >
-                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                <span>Send This Schedule on WhatsApp</span>
-              </a>
+          <!-- Modal Footer Action Buttons (Sticky Bottom) -->
+          <div class="flex-shrink-0 p-3 sm:p-4 bg-white border-t border-gray-100 flex items-center gap-2">
+            <a
+              :href="generateInstallmentWhatsAppUrl()"
+              target="_blank"
+              class="flex-1 py-3 px-3 bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white text-xs font-black uppercase tracking-wider rounded-xl text-center transition-all flex items-center justify-center gap-2 shadow-xs"
+            >
+              <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+              <span class="truncate">WhatsApp Schedule</span>
+            </a>
 
-              <a
-                href="tel:03349522157"
-                class="w-full sm:w-auto px-5 py-3 bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-xs font-black uppercase tracking-wider rounded-xl text-center transition-all flex items-center justify-center gap-1.5"
-              >
-                <svg class="w-4 h-4 text-[#16B4E8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                <span>Call Consultant</span>
-              </a>
-            </div>
+            <a
+              href="tel:03349522157"
+              class="shrink-0 py-3 px-3.5 sm:px-5 bg-[#0F2A44] hover:bg-[#16B4E8] active:scale-[0.98] text-white text-xs font-black uppercase tracking-wider rounded-xl text-center transition-all flex items-center justify-center gap-1.5"
+            >
+              <svg class="w-4 h-4 text-[#16B4E8] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              <span class="hidden sm:inline">Call Consultant</span>
+              <span class="inline sm:hidden">Call</span>
+            </a>
           </div>
         </div>
       </div>
@@ -1489,33 +1494,34 @@
     <Teleport to="body">
       <div
         v-if="isSolarModalOpen"
-        class="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5"
+        class="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-hidden"
         @click.self="isSolarModalOpen = false"
       >
-        <div class="bg-white rounded-3xl w-full max-w-xl overflow-hidden shadow-2xl border border-gray-100 animate-in fade-in zoom-in-95 duration-200">
-          <!-- Modal Header -->
-          <div class="bg-[#0F2A44] text-white p-5 sm:p-6 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-[#16B4E8]/20 text-[#16B4E8] flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <div class="bg-white rounded-t-3xl sm:rounded-3xl w-full max-w-xl max-h-[92dvh] sm:max-h-[88vh] flex flex-col shadow-2xl border border-gray-100 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <!-- Modal Header (Sticky Top) -->
+          <div class="flex-shrink-0 bg-[#0F2A44] text-white px-4 py-3 sm:px-6 sm:py-4 flex items-center justify-between border-b border-white/10">
+            <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-[#16B4E8]/20 text-[#16B4E8] flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
               </div>
-              <div>
-                <h3 class="text-base sm:text-lg font-black tracking-tight">Solar Net Metering Inquiry Desk</h3>
-                <p class="text-xs text-gray-300">Fast-track turnkey quotes with IESCO Green Meter processing.</p>
+              <div class="min-w-0">
+                <h3 class="text-sm sm:text-base font-black tracking-tight truncate">Solar Net Metering Inquiry Desk</h3>
+                <p class="text-[11px] sm:text-xs text-gray-300 truncate">Fast-track turnkey quotes with IESCO Green Meter processing.</p>
               </div>
             </div>
 
             <button
               type="button"
-              class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors text-lg"
+              aria-label="Close modal"
+              class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 text-white flex items-center justify-center transition-colors text-lg flex-shrink-0 ml-2"
               @click="isSolarModalOpen = false"
             >
               &times;
             </button>
           </div>
 
-          <!-- Form Area -->
-          <div class="p-5 sm:p-6 space-y-4">
+          <!-- Form Area (Scrollable Body) -->
+          <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3.5 sm:space-y-4">
             <!-- Success Notification -->
             <div
               v-if="solarFormSubmitted"
@@ -1666,6 +1672,7 @@ import {
   EyeIcon
 } from '@heroicons/vue/24/outline'
 import { useAdminStore } from '../stores/admin'
+import LocalPicture from '../components/ui/LocalPicture.vue'
 
 const route = useRoute()
 const adminStore = useAdminStore()
@@ -1683,6 +1690,7 @@ const installmentProjects = [
   {
     id: 'faisal-town',
     name: 'Faisal Town Phase 2',
+    tabName: 'Faisal Town 2',
     duration: '4.5-Year (18 Quarterly Installments Plan)',
     sizes: [
       {
@@ -1722,6 +1730,7 @@ const installmentProjects = [
   {
     id: 'blue-world',
     name: 'Blue World City',
+    tabName: 'Blue World City',
     duration: '3 & 4-Year (Monthly & Semi-Annual Plan)',
     sizes: [
       {
@@ -1761,6 +1770,7 @@ const installmentProjects = [
   {
     id: 'banu-hafeez',
     name: 'Banu Hafeez Flats',
+    tabName: 'Banu Hafeez',
     duration: '3-Year Flexible Apartment Installment Plan',
     sizes: [
       {
@@ -1784,6 +1794,7 @@ const installmentProjects = [
   {
     id: 'hrsukh',
     name: 'Harsukh Residencies (Nathia Gali)',
+    tabName: 'Harsukh Nathia',
     duration: '3-Year Luxury Hillside Vacation Suites Plan',
     sizes: [
       {
