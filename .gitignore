@@ -25,6 +25,7 @@ dist-ssr
 
 # Temp audit & scratch
 scratch/
+*.zip
 cleanup_audit_report.json
 master_audit_results.json
 
