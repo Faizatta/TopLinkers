@@ -31,52 +31,56 @@ jobs:
       - name: 🏗️ Build Production Assets
         run: npm run build
 
-      - name: 🧹 Clean FTP Server Host
-        id: parse_server
-        shell: bash
-        run: |
-          # Strip protocol prefix (ftp://, ftps://) and trailing slashes if present
-          RAW="${{ secrets.FTP_SERVER }}"
-          CLEAN=$(echo "$RAW" | sed -E 's|^[a-zA-Z]+://||' | tr -d ' /')
-          echo "clean_server=$CLEAN" >> $GITHUB_OUTPUT
-
-      - name: 🔍 Test FTP Connection & Diagnostics
+      - name: 🔍 Detect Hostinger Target Directory & Clean Server
+        id: detect_dir
         shell: bash
         run: |
           python3 -c "
           import ftplib, ssl, os
-          server = '${{ steps.parse_server.outputs.clean_server }}'
+          
+          raw_server = os.environ.get('FTP_SERVER', '')
+          server = raw_server.replace('ftp://', '').replace('ftps://', '').replace('http://', '').replace('https://', '').strip(' /')
           user = os.environ.get('FTP_USER', '')
           pwd = os.environ.get('FTP_PASS', '')
-          print(f'Connecting to {server}:21 as {user}...')
-          try:
-              ftps = ftplib.FTP_TLS()
-              ftps.connect(server, 21, timeout=10)
-              print('TCP & TLS Socket connected!')
-              ftps.auth()
-              print('TLS Auth negotiated!')
-              ftps.login(user, pwd)
-              ftps.prot_p()
-              print('FTP Login SUCCESS! PWD:', ftps.pwd())
-              print('Directories/files:', ftps.nlst())
-              ftps.quit()
-          except Exception as e:
-              print('FTP Connection Diagnostic Error:', repr(e))
+          
+          ftps = ftplib.FTP_TLS()
+          ftps.connect(server, 21, timeout=15)
+          ftps.auth()
+          ftps.login(user, pwd)
+          ftps.prot_p()
+          
+          files = [f.lower() for f in ftps.nlst()]
+          print('FTP Root listing:', files)
+          
+          # If public_html exists and index.html is NOT in current listing, target is public_html/
+          if 'public_html' in files and 'index.html' not in files:
+              target_dir = 'public_html/'
+          else:
+              target_dir = './'
+              
+          print(f'Using target_dir: {target_dir}')
+          
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as out:
+              out.write(f'clean_server={server}\n')
+              out.write(f'target_dir={target_dir}\n')
+              
+          ftps.quit()
           "
         env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USER: ${{ secrets.FTP_USERNAME }}
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
 
       - name: 🚀 Sync Files to Hostinger via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ steps.parse_server.outputs.clean_server }}
+          server: ${{ steps.detect_dir.outputs.clean_server }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21
           security: loose
           local-dir: ./dist/
-          server-dir: public_html/
+          server-dir: ${{ steps.detect_dir.outputs.target_dir }}
           dangerous-clean-slate: false
           log-level: verbose
