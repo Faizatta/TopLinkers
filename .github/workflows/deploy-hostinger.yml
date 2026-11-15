@@ -40,6 +40,33 @@ jobs:
           CLEAN=$(echo "$RAW" | sed -E 's|^[a-zA-Z]+://||' | tr -d ' /')
           echo "clean_server=$CLEAN" >> $GITHUB_OUTPUT
 
+      - name: 🔍 Test FTP Connection & Diagnostics
+        shell: bash
+        run: |
+          python3 -c "
+          import ftplib, ssl, os
+          server = '${{ steps.parse_server.outputs.clean_server }}'
+          user = os.environ.get('FTP_USER', '')
+          pwd = os.environ.get('FTP_PASS', '')
+          print(f'Connecting to {server}:21 as {user}...')
+          try:
+              ftps = ftplib.FTP_TLS()
+              ftps.connect(server, 21, timeout=10)
+              print('TCP & TLS Socket connected!')
+              ftps.auth()
+              print('TLS Auth negotiated!')
+              ftps.login(user, pwd)
+              ftps.prot_p()
+              print('FTP Login SUCCESS! PWD:', ftps.pwd())
+              print('Directories/files:', ftps.nlst())
+              ftps.quit()
+          except Exception as e:
+              print('FTP Connection Diagnostic Error:', repr(e))
+          "
+        env:
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+
       - name: 🚀 Sync Files to Hostinger via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
