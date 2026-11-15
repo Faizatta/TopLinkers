@@ -4,6 +4,10 @@ import router from './router'
 import App from './App.vue'
 import './assets/main.css'
 import { initLenis } from './services/lenis'
+import { initWebMCP } from './services/webmcp'
+
+// Expose WebMCP tools to in-browser AI agents
+initWebMCP()
 
 // Enable standard hardware-accelerated scroll restoration
 if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {

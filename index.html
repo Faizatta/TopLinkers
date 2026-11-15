@@ -14,6 +14,11 @@
     <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
 
+    <!-- AI Agent & Machine-Readable Resource Discovery (RFC 8288 & SEP-1649) -->
+    <link rel="alternate" type="text/plain" href="https://toplinkersgroup.com/llms.txt" title="LLMs.txt Resource Index" />
+    <link rel="alternate" type="text/markdown" href="https://toplinkersgroup.com/index.md" title="Markdown Homepage Representation" />
+    <link rel="service-desc" type="application/json" href="https://toplinkersgroup.com/.well-known/mcp/server-card.json" title="Model Context Protocol (MCP) Server Card" />
+
     <!-- Primary SEO Meta Tags -->
     <title>TopLinkers | Premier Real Estate, Turnkey Construction &amp; Solar | Islamabad</title>
     <meta name="title" content="TopLinkers | Premier Real Estate, Turnkey Construction &amp; Solar | Islamabad" />
@@ -23,7 +28,7 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://toplinkers.com/" />
+    <link rel="canonical" href="https://toplinkersgroup.com/" />
 
     <!-- Local SEO Geo Meta Tags -->
     <meta name="geo.region" content="PK-IS" />
@@ -34,31 +39,23 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Top Linkers Real Estate &amp; Marketing" />
-    <meta property="og:url" content="https://toplinkers.com/" />
+    <meta property="og:url" content="https://toplinkersgroup.com/" />
     <meta property="og:title" content="TopLinkers | Premier Real Estate, Construction &amp; Solar | Islamabad" />
     <meta property="og:description" content="Verified CDA sector plots in TopCity &amp; PECHS, ready PHA apartments in I-12 / I-16, Harsukh Nathia Gali luxury suites, turnkey villa construction &amp; solar net metering." />
-    <meta property="og:image" content="https://toplinkers.com/toplinkers-logo.jpg" />
+    <meta property="og:image" content="https://toplinkersgroup.com/toplinkers-logo.jpg" />
     <meta property="og:locale" content="en_PK" />
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://toplinkers.com/" />
+    <meta name="twitter:url" content="https://toplinkersgroup.com/" />
     <meta name="twitter:title" content="TopLinkers | Premier Real Estate, Construction &amp; Solar" />
     <meta name="twitter:description" content="Verified plots in TopCity &amp; PECHS, PHA flats in I-12/I-16, Harsukh Nathia Gali hillside suites, turnkey construction and solar net metering." />
-    <meta name="twitter:image" content="https://toplinkers.com/toplinkers-logo.jpg" />
+    <meta name="twitter:image" content="https://toplinkersgroup.com/toplinkers-logo.jpg" />
 
-    <!-- Preconnect & DNS-Prefetch for Core Web Vitals (LCP, Font & Image Acceleration) -->
-    <!-- Property, blog and section photos come from Unsplash's CDN: open the connection early
-         (no crossorigin attribute: images are fetched without CORS, so this connection is reused) -->
+    <!-- Preconnect & DNS-Prefetch for Core Web Vitals -->
     <link rel="preconnect" href="https://images.unsplash.com" />
 
-    <!--
-      Homepage LCP image: start downloading it right away. This script must stay in <head>,
-      before the stylesheet: inline scripts placed after a stylesheet wait for it to load,
-      which would delay the hero image. The <body> script below draws the skeleton.
-      SECURITY: allowed by sha256 hash in vercel.json's Content-Security-Policy; any edit
-      (even whitespace) changes the hash and must be mirrored there.
-    -->
+    <!-- Homepage LCP image preload -->
     <script>
       (function () {
         if (location.pathname !== '/') return
@@ -74,16 +71,10 @@
       })()
     </script>
 
-    <!-- Self-hosted Plus Jakarta Sans (Latin subset, all weights in one variable file) -->
+    <!-- Self-hosted Plus Jakarta Sans Font -->
     <link rel="preload" href="/src/assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!--
-      Homepage first-paint skeleton (created by the inline script at the top of <body>).
-      It mirrors the promo strip band and the first hero slide at their exact positions,
-      so the hero image (the LCP element) paints as soon as this CSS is ready instead of
-      waiting for JavaScript. It sits behind the app (z-index:-1) and is covered the
-      moment Vue renders, then removed by HeroSection.
-    -->
+    <!-- First-paint LCP Skeleton Style -->
     <style>
       #lcp-shell{position:absolute;left:0;right:0;top:66px;z-index:-1;pointer-events:none}
       #lcp-shell .band{height:44px;border-bottom:1px solid rgba(22,180,232,.25);background:linear-gradient(to right,#071320,#0e253d,#071320)}
@@ -96,90 +87,177 @@
       @media (min-width:768px){#lcp-shell .hero{height:740px}#lcp-shell .g1{width:60%}}
     </style>
 
-    <!-- Google Analytics 4 (GA4) / Google Tag Manager Setup Placeholder -->
-    <!-- INSTRUCTION: Uncomment and replace G-XXXXXXXXXX with your Google Analytics 4 Measurement ID -->
-    <!--
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <!-- WebMCP (In-Browser Model Context Protocol) Early Agent Tool Registration -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
+      (function() {
+        if (typeof window === 'undefined') return;
+        if (!navigator.modelContext) {
+          navigator.modelContext = {
+            tools: new Map(),
+            registerTool: function(t) { if (t && t.name) this.tools.set(t.name, t); },
+            getTools: function() { return Array.from(this.tools.values()); }
+          };
+        }
+        navigator.modelContext.registerTool({
+          name: 'search_properties',
+          description: 'Search verified plots, PHA flats, and villas in Islamabad',
+          inputSchema: { type: 'object', properties: { query: { type: 'string' } } }
+        });
+        navigator.modelContext.registerTool({
+          name: 'calculate_solar_savings',
+          description: 'Calculate solar net metering capacity and bill savings under IESCO in Islamabad',
+          inputSchema: { type: 'object', properties: { monthlyBillPKR: { type: 'number' } }, required: ['monthlyBillPKR'] }
+        });
+        navigator.modelContext.registerTool({
+          name: 'calculate_installment_plan',
+          description: 'Calculate 3-year installment breakdown for Harsukh Residencies or plots',
+          inputSchema: { type: 'object', properties: { totalPricePKR: { type: 'number' } }, required: ['totalPricePKR'] }
+        });
+      })();
     </script>
-    -->
 
-    <!-- Schema.org JSON-LD Structured Data for LocalBusiness & RealEstateAgent -->
+    <!-- Schema.org Comprehensive Structured Data (Organization, LocalBusiness, RealEstateAgent, WebSite, Service, Product, FAQPage) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "RealEstateAgent",
-      "@id": "https://toplinkers.com/#organization",
-      "name": "Top Linkers Real Estate, Construction & Solar",
-      "alternateName": "TopLinkers Marketing",
-      "url": "https://toplinkers.com",
-      "logo": "https://toplinkers.com/toplinkers-logo.jpg",
-      "image": "https://toplinkers.com/toplinkers-logo.jpg",
-      "description": "Top Linkers is an authorized real estate agency, turnkey construction contractor, and solar net metering solutions provider headquartered in G-11 Markaz, Islamabad, Pakistan.",
-      "telephone": "+92-334-9522157",
-      "email": "toplinkers12@gmail.com",
-      "priceRange": "PKR",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz",
-        "addressLocality": "Islamabad",
-        "addressRegion": "Federal Capital",
-        "postalCode": "4004884",
-        "addressCountry": "PK"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 33.6685,
-        "longitude": 72.9965
-      },
-      "openingHoursSpecification": [
+      "@graph": [
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          "opens": "09:00",
-          "closes": "20:00"
-        }
-      ],
-      "founder": {
-        "@type": "Person",
-        "name": "Syed Usman Hammad",
-        "jobTitle": "CEO & Founder",
-        "telephone": "+92-334-9522157"
-      },
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Islamabad"
+          "@type": ["Organization", "LocalBusiness", "RealEstateAgent"],
+          "@id": "https://toplinkersgroup.com/#organization",
+          "name": "Top Linkers Real Estate, Construction & Solar",
+          "alternateName": "TopLinkers",
+          "url": "https://toplinkersgroup.com",
+          "logo": "https://toplinkersgroup.com/toplinkers-logo.jpg",
+          "image": "https://toplinkersgroup.com/toplinkers-logo.jpg",
+          "description": "Top Linkers is an authorized real estate agency, turnkey construction contractor, and Tier-1 solar net metering provider headquartered in G-11 Markaz, Islamabad, Pakistan.",
+          "telephone": "+92-334-9522157",
+          "email": "toplinkers12@gmail.com",
+          "priceRange": "PKR",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz",
+            "addressLocality": "Islamabad",
+            "addressRegion": "Federal Capital",
+            "postalCode": "44000",
+            "addressCountry": "PK"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 33.6685,
+            "longitude": 72.9965
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              "opens": "09:00",
+              "closes": "20:00"
+            }
+          ],
+          "founder": {
+            "@type": "Person",
+            "name": "Syed Usman Hammad",
+            "jobTitle": "CEO & Founder",
+            "telephone": "+92-334-9522157"
+          },
+          "areaServed": [
+            { "@type": "City", "name": "Islamabad" },
+            { "@type": "City", "name": "Rawalpindi" },
+            { "@type": "Place", "name": "Nathia Gali" }
+          ],
+          "sameAs": [
+            "https://www.facebook.com/",
+            "https://www.instagram.com/",
+            "https://www.linkedin.com/in/faiz-atta/"
+          ]
         },
         {
-          "@type": "City",
-          "name": "Rawalpindi"
+          "@type": "WebSite",
+          "@id": "https://toplinkersgroup.com/#website",
+          "url": "https://toplinkersgroup.com",
+          "name": "TopLinkers",
+          "publisher": { "@id": "https://toplinkersgroup.com/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://toplinkersgroup.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
         },
         {
-          "@type": "Place",
-          "name": "Nathia Gali"
+          "@type": "Service",
+          "@id": "https://toplinkersgroup.com/#service-realestate",
+          "name": "Verified Real Estate Advisory & Plot Sales",
+          "provider": { "@id": "https://toplinkersgroup.com/#organization" },
+          "serviceType": "Real Estate Advisory",
+          "description": "Verified CDA/RDA plot registry checks in TopCity-1, PECHS, and PHA executive flats in Sector I-12 and I-16 Islamabad.",
+          "areaServed": "Islamabad, Rawalpindi"
+        },
+        {
+          "@type": "Service",
+          "@id": "https://toplinkersgroup.com/#service-construction",
+          "name": "Turnkey House Construction",
+          "provider": { "@id": "https://toplinkersgroup.com/#organization" },
+          "serviceType": "Turnkey Civil Construction",
+          "description": "PEC-licensed grey structure and full turnkey luxury villa construction using Grade-60 steel in Islamabad."
+        },
+        {
+          "@type": "Service",
+          "@id": "https://toplinkersgroup.com/#service-solar",
+          "name": "Tier-1 Solar Net Metering Solutions",
+          "provider": { "@id": "https://toplinkersgroup.com/#organization" },
+          "serviceType": "Solar Net Metering",
+          "description": "Complete 10kW to 50kW on-grid solar systems with bi-directional green meter installation and IESCO approval."
+        },
+        {
+          "@type": "Product",
+          "@id": "https://toplinkersgroup.com/#product-harsukh",
+          "name": "Harsukh Residencies Luxury Vacation Suites Nathia Gali",
+          "description": "Furnished hillside studio, 1-bed and 2-bed holiday suites in Kuza Gali / Nathia Gali on 3-year easy installments.",
+          "category": "Real Estate Vacation Suites",
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "PKR",
+            "price": "16500000",
+            "availability": "https://schema.org/InStock",
+            "url": "https://toplinkersgroup.com/hr-sukh"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://toplinkersgroup.com/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is a Moqa Ka Plot in Islamabad real estate?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A Moqa Ka Plot is a 100% cash possession on-ground plot ready for immediate house construction with clean CDA allotment and underground utilities."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does solar net metering work with IESCO in Islamabad?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "IESCO net metering installs a bi-directional green meter that feeds surplus daytime solar electricity into the grid to offset your evening consumption."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What are the payment terms for Harsukh Residencies Nathia Gali?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Harsukh Residencies requires a 15% booking deposit with the remaining balance spread over 3 years in easy quarterly or monthly installments."
+              }
+            }
+          ]
         }
-      ],
-      "sameAs": [
-        "https://www.facebook.com/",
-        "https://www.instagram.com/",
-        "https://www.linkedin.com/in/faiz-atta/"
       ]
     }
     </script>
   </head>
   <body class="bg-[#F6F8FA] text-[#0F2A44] antialiased font-sans selection:bg-[#16B4E8] selection:text-white">
-    <!--
-      Homepage LCP skeleton: only on "/", in the exact crop and format the hero's <picture>
-      chooses (phones get a centre crop; AVIF first, WebP fallback).
-      SECURITY: vercel.json's Content-Security-Policy allows this script by sha256 hash.
-      Editing it, even whitespace, changes the hash and the browser will block it until
-      the hash in vercel.json is updated.
-    -->
+    <!-- Homepage LCP skeleton -->
     <script>
       (function () {
         if (location.pathname !== '/') return
@@ -195,7 +273,68 @@
         document.body.appendChild(shell)
       })()
     </script>
-    <div id="app"></div>
+
+    <!-- Vue App Mounting Target with Semantic Pre-Rendered Fallback for Agents & Crawlers -->
+    <div id="app">
+      <header style="background:#0F2A44;color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;">
+        <a href="/" aria-label="TopLinkers Home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font-weight:900;font-size:20px;">
+          <img src="/toplinkers-logo-sm.png" alt="Top Linkers" width="40" height="40" style="background:#fff;border-radius:4px;padding:2px;" />
+          <span><span style="color:#E53935;">Top</span> Linkers</span>
+        </a>
+        <nav aria-label="Primary Navigation" style="display:flex;gap:16px;">
+          <a href="/about" style="color:#16B4E8;text-decoration:none;font-weight:700;">About Us</a>
+          <a href="/services" style="color:#fff;text-decoration:none;font-weight:600;">Services</a>
+          <a href="/listings" style="color:#fff;text-decoration:none;font-weight:600;">Properties</a>
+          <a href="/contact" style="color:#fff;text-decoration:none;font-weight:600;">Contact</a>
+        </nav>
+      </header>
+
+      <main style="max-width:1200px;margin:32px auto;padding:0 20px;">
+        <h1 style="font-size:32px;font-weight:900;color:#0F2A44;margin-bottom:16px;line-height:1.2;">
+          TopLinkers | Premier Real Estate, Turnkey Construction &amp; Solar in Islamabad
+        </h1>
+        <p style="font-size:16px;line-height:1.6;color:#334155;margin-bottom:24px;">
+          Top Linkers Real Estate, Construction &amp; Solar offers verified CDA/RDA plots in TopCity-1 &amp; PECHS, cash possession Moqa Ka Plots, PHA flats in I-12 &amp; I-16, Harsukh Nathia Gali luxury suites, turnkey house construction, and Tier-1 solar net metering in Islamabad, Pakistan.
+        </p>
+
+        <section style="background:#fff;border-radius:8px;padding:24px;border:1px solid #E2E8F0;margin-bottom:32px;">
+          <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Verified Real Estate &amp; Engineering Portfolios</h2>
+          <ul style="line-height:2;color:#475569;">
+            <li><strong>Verified Plot &amp; Flat Listings:</strong> <a href="/listings" style="color:#16B4E8;text-decoration:none;">Browse TopCity, PECHS, and PHA Apartments</a></li>
+            <li><strong>Turnkey House Construction &amp; Solar:</strong> <a href="/services" style="color:#16B4E8;text-decoration:none;">PEC-Licensed Building &amp; IESCO Net Metering</a></li>
+            <li><strong>Harsukh Residencies Nathia Gali:</strong> <a href="/hr-sukh" style="color:#16B4E8;text-decoration:none;">Luxury Vacation Suites with 20%+ Rental Yield</a></li>
+            <li><strong>Executive Advisory Team:</strong> <a href="/team" style="color:#16B4E8;text-decoration:none;">Meet Our Property Consultants &amp; Engineers</a></li>
+          </ul>
+        </section>
+
+        <section style="background:#F1F5F9;border-radius:8px;padding:24px;border:1px solid #CBD5E1;">
+          <h2 style="font-size:18px;font-weight:700;color:#0F2A44;margin-bottom:8px;">Essential Company &amp; Legal Verification</h2>
+          <p style="font-size:14px;color:#64748B;margin-bottom:12px;">
+            Head Office: 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad | Phone: +92-334-9522157
+          </p>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:14px;">
+            <a href="/about" style="color:#0F2A44;font-weight:700;">About TopLinkers</a>
+            <a href="/contact" style="color:#0F2A44;font-weight:700;">Contact Us</a>
+            <a href="/terms-and-conditions" style="color:#0F2A44;font-weight:700;">Terms &amp; Conditions</a>
+            <a href="/privacy-policy" style="color:#0F2A44;font-weight:700;">Privacy Policy</a>
+            <a href="/disclaimer" style="color:#0F2A44;font-weight:700;">Legal Disclaimer</a>
+            <a href="/llms.txt" style="color:#16B4E8;font-weight:700;">llms.txt (Agent Guide)</a>
+          </div>
+        </section>
+      </main>
+
+      <footer style="background:#081322;color:#94A3B8;padding:24px;text-align:center;font-size:13px;margin-top:48px;">
+        <p>&copy; 2026 Top Linkers Real Estate, Construction &amp; Solar. Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan.</p>
+        <p style="margin-top:8px;">
+          <a href="/about" style="color:#38BDF8;text-decoration:none;margin:0 8px;">About</a> |
+          <a href="/contact" style="color:#38BDF8;text-decoration:none;margin:0 8px;">Contact</a> |
+          <a href="/terms-and-conditions" style="color:#38BDF8;text-decoration:none;margin:0 8px;">Terms &amp; Conditions</a> |
+          <a href="/privacy-policy" style="color:#38BDF8;text-decoration:none;margin:0 8px;">Privacy Policy</a> |
+          <a href="/llms.txt" style="color:#38BDF8;text-decoration:none;margin:0 8px;">llms.txt</a>
+        </p>
+      </footer>
+    </div>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

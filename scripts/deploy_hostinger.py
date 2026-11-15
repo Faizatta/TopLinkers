@@ -33,10 +33,13 @@ def upload_folder_recursive(ftps, local_dir):
             upload_folder_recursive(ftps, local_path)
             ftps.cwd('..')
         else:
-            with open(local_path, 'rb') as f:
-                ftps.storbinary(f"STOR {item}", f)
-                size_kb = round(os.path.getsize(local_path) / 1024, 1)
-                print(f"    ⬆️ {item} ({size_kb} KB)")
+            try:
+                with open(local_path, 'rb') as f:
+                    ftps.storbinary(f"STOR {item}", f, blocksize=65536)
+                    size_kb = round(os.path.getsize(local_path) / 1024, 1)
+                    print(f"    ⬆️ {item} ({size_kb} KB)")
+            except Exception as e:
+                print(f"    ⚠️ Warning uploading {item}: {e}")
 
 def main():
     raw_server = os.environ.get('FTP_SERVER', '')

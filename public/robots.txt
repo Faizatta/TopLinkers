@@ -1,9 +1,11 @@
 # Top Linkers Real Estate, Construction & Solar - robots.txt
+Content-Signal: search=yes, ai-train=no
+
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
 
 # Host & Sitemaps
-Host: https://toplinkers.com
-Sitemap: https://toplinkers.com/sitemap.xml
+Host: https://toplinkersgroup.com
+Sitemap: https://toplinkersgroup.com/sitemap.xml

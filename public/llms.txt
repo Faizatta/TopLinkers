@@ -1,0 +1,31 @@
+# TopLinkers | Real Estate, Turnkey Construction & Solar Islamabad
+
+> TopLinkers Real Estate, Construction & Solar is an authorized real estate agency, PEC-licensed turnkey builder, and Tier-1 on-grid solar net metering provider headquartered in G-11 Markaz, Islamabad, Pakistan. Specializing in verified CDA/RDA plots, PHA executive apartments in I-12 and I-16, Harsukh Residencies luxury vacation suites in Nathia Gali, turnkey Grade-60 steel villa construction, and IESCO bi-directional solar net metering.
+
+## Core Services & Portfolios
+
+- [Verified Property Listings](https://toplinkersgroup.com/listings): Browse verified residential plots, commercial plots, PHA executive flats in Sector I-12 & I-16, and luxury villas with 100% legal title verification.
+- [Moqa Ka Plots & TopCity-1](https://toplinkersgroup.com/property/corner-plot-topcity): Immediate cash possession plots in TopCity-1, PECHS, and Faisal Town Phase 2 with clean transfer and underground utility clearance.
+- [PHA Executive Flats I-12 & I-16](https://toplinkersgroup.com/listings?category=pha-flats): Ready possession 2-bed and 3-bed apartments in Islamabad with dual elevators, standby power, and clean CDA registry.
+- [Harsukh Residencies Nathia Gali](https://toplinkersgroup.com/hr-sukh): Hillside luxury studio, 1-bed, and 2-bed vacation suites in Kuza Gali / Nathia Gali on 3-year installments with 20%+ projected annual rental yields.
+- [Turnkey Construction & Solar Net Metering](https://toplinkersgroup.com/services): PEC-licensed grey structure and full turnkey house construction, plus complete 10kW to 50kW Tier-1 solar systems with IESCO green meter net metering.
+
+## Company & Leadership
+
+- [About TopLinkers](https://toplinkersgroup.com/about): 15+ years of verified CDA sector advisory, PEC-licensed engineering standards, and corporate leadership by Syed Usman Hammad.
+- [Executive Leadership & Engineering Team](https://toplinkersgroup.com/team): Senior property investment consultants, structural engineers, and solar net metering specialists.
+- [Contact & Head Office](https://toplinkersgroup.com/contact): Visit our head office at 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad or call +92-334-9522157.
+- [Real Estate Blog & Market Intelligence](https://toplinkersgroup.com/blog): In-depth market reports on Islamabad CDA plot ballots, construction material costs, and solar ROI guides.
+
+## Legal & Compliance
+
+- [Terms & Conditions](https://toplinkersgroup.com/terms-and-conditions): Service terms for real estate transactions, construction contracts, and website usage.
+- [Privacy Policy](https://toplinkersgroup.com/privacy-policy): Data privacy, client confidentiality, and visitor information practices.
+- [Advisory Disclaimer](https://toplinkersgroup.com/disclaimer): Legal disclosures regarding title verifications, investment estimates, and market rate fluctuations.
+
+## Machine-Readable Resources & Tools
+
+- [MCP Server Card](https://toplinkersgroup.com/.well-known/mcp/server-card.json): SEP-1649 Model Context Protocol server card publishing real estate search, solar calculation, and installment tools.
+- [Markdown Representation](https://toplinkersgroup.com/index.md): Full markdown representation of the TopLinkers portal for LLMs and autonomous agents.
+- [Robots.txt Policy](https://toplinkersgroup.com/robots.txt): Machine access directives and Content-Signal declarations.
+- [XML Sitemap](https://toplinkersgroup.com/sitemap.xml): Complete machine-readable index of all verified properties, services, and articles.

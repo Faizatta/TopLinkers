@@ -31,7 +31,14 @@
 
       <!-- White Card with 4 Labeled Selects + Wide Cyan Search Button -->
       <div class="bg-white rounded-[6px] sm:rounded-tl-none p-4 sm:p-5 md:p-6 shadow-2xl border border-gray-100">
-        <form @submit.prevent="submitSearch" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+        <form
+          @submit.prevent="submitSearch"
+          toolname="searchProperties"
+          tooldescription="Search verified plots, PHA apartments, villas, and commercial properties in Islamabad by type, location, and price"
+          data-toolname="searchProperties"
+          data-tooldescription="Search verified plots, PHA apartments, villas, and commercial properties in Islamabad by type, location, and price"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end"
+        >
           <!-- 1. Type -->
           <div>
             <label for="hero-search-type" class="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-1.5">

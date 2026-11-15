@@ -1,0 +1,46 @@
+# TopLinkers Real Estate, Construction & Solar | Comprehensive Agent Guide
+
+> TopLinkers is Islamabad's leading verified property consultancy, turnkey building contractor, and solar net metering provider. Headquartered at Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan.
+
+## Company Overview
+- **Name**: Top Linkers Real Estate, Construction & Solar
+- **Headquarters**: 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad, Federal Capital, Pakistan (Postal Code: 44000)
+- **Leadership**: Syed Usman Hammad (CEO & Founder)
+- **Direct Phone**: +92-334-9522157 / +92-332-4004884
+- **Official Email**: toplinkers12@gmail.com
+- **Website**: https://toplinkersgroup.com
+
+## Key Offerings & Details
+
+### 1. Moqa Ka Plots & Verified CDA/RDA Land
+- Locations: TopCity-1 (Block A, B, C, D), PECHS Islamabad (Block K, M), Faisal Town Phase 2, B-17 Multi Gardens.
+- Status: 100% cash possession plots on ground, direct transfer, no pending litigation or litigation risk.
+- Typical price ranges: 5 Marla (PKR 35 Lac - 75 Lac), 10 Marla (PKR 75 Lac - 1.50 Crore), 1 Kanal (PKR 1.40 Crore - 3.20 Crore).
+
+### 2. PHA Executive Flats (Sector I-12 & Sector I-16)
+- Ready possession federal apartments built by Pakistan Housing Authority (PHA).
+- Specifications: 2-Bed (1,150 sq ft) and 3-Bed (1,450 sq ft) executive layouts.
+- Amenities: Dual passenger and cargo elevators, dedicated parking, standby generator, gated 24/7 security.
+- Pricing: PKR 75 Lac to PKR 1.10 Crore.
+
+### 3. Harsukh Residencies (Nathia Gali / Kuza Gali)
+- Hillside luxury suites with panoramic forest and valley views.
+- Configurations: Executive Studio, 1-Bedroom, and 2-Bedroom furnished vacation apartments.
+- Payment Terms: 15% booking deposit, remainder spread across 3-year easy quarterly or monthly installments.
+- Investment Return: 20%+ projected annual rental yield via managed holiday-home leasing.
+
+### 4. Turnkey Construction & Grey Structure
+- Standards: A+ executive construction utilizing Grade-60 steel, OPC cement, solid brickwork, and earthquake-resistant structural designs.
+- Rates: Grey structure rates start at PKR 2,400 - 2,800/sq ft. Complete turnkey finishing starts at PKR 4,500 - 6,500/sq ft.
+- Supervision: In-house PEC-licensed civil and structural engineers with milestone-based inspection reports.
+
+### 5. Tier-1 On-Grid Solar Net Metering
+- System sizes: 5kW, 10kW, 15kW, 20kW, 30kW, and 50kW commercial setups.
+- Equipment: Tier-1 Bloomberg-listed bifacial N-type monocrystalline solar panels with high-efficiency on-grid string inverters (Huawei, Sungrow, Growatt).
+- Approvals: Complete turnkey end-to-end processing with IESCO (Islamabad Electric Supply Company) for bi-directional green net meters.
+- Payback: 2.5 to 3.5 years average return on investment, eliminating residential and commercial electricity tariffs.
+
+## API & Agent Integration
+- MCP Server: https://toplinkersgroup.com/.well-known/mcp/server-card.json
+- LLMs Index: https://toplinkersgroup.com/llms.txt
+- Markdown Alternate: https://toplinkersgroup.com/index.md

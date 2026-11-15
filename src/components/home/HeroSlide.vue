@@ -40,9 +40,9 @@
       </div>
 
       <!-- 2. Main Title (Animated entry: large clean Houzez typography) -->
-      <h1 class="slide-title text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-medium tracking-tight text-white leading-[1.12] mb-2 sm:mb-3 drop-shadow-md">
+      <h2 class="slide-title text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-medium tracking-tight text-white leading-[1.12] mb-2 sm:mb-3 drop-shadow-md">
         {{ slide.title }}
-      </h1>
+      </h2>
 
       <!-- 3. Short Description / Excerpt (Animated entry) -->
       <p class="slide-desc text-xs sm:text-sm md:text-base text-gray-200/90 font-normal leading-relaxed line-clamp-2 max-w-lg mb-4 sm:mb-6 drop-shadow">
