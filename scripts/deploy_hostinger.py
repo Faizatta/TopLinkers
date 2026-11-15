@@ -26,65 +26,93 @@ def main():
     root_items = [f.strip() for f in ftps.nlst()]
     print(f"📂 Root items found: {root_items}")
 
-    # Determine correct public_html path
-    target = ""
+    # Discover all possible web root destinations
+    candidates = []
+
+    # 1. Is root itself containing index.html or assets?
+    if any(f in [i.lower() for i in root_items] for f in ['index.html', 'default.php']):
+        candidates.append('')
+
+    # 2. Check public_html
+    if 'public_html' in root_items:
+        candidates.append('public_html')
+
+    # 3. Check domains/*
     if 'domains' in root_items:
         try:
-            doms = ftps.nlst('domains')
-            print(f"Found domains folder contents: {doms}")
-            # Look for toplinkersgroup.com
-            matching = [d for d in doms if 'toplinkersgroup' in d.lower()]
-            if matching:
-                target = f"{matching[0]}/public_html"
-            elif doms:
-                target = f"{doms[0]}/public_html"
+            dom_list = ftps.nlst('domains')
+            print(f"Domains folder listing: {dom_list}")
+            for d in dom_list:
+                candidates.append(f"{d}/public_html")
         except Exception as e:
             print("Notice scanning domains:", e)
 
-    if not target:
-        if 'public_html' in root_items and 'index.html' not in root_items:
-            target = 'public_html'
+    # De-duplicate while preserving order
+    unique_targets = []
+    for c in candidates:
+        if c not in unique_targets:
+            unique_targets.append(c)
 
-    if target:
-        print(f"👉 Navigating to target directory: {target}")
-        ftps.cwd(target)
-    
-    current_deploy_dir = ftps.pwd()
-    print(f"🎯 Verified live web directory: {current_deploy_dir}")
-    print(f"Existing files in target: {ftps.nlst()[:10]}...")
+    print(f"\n🎯 Target deployment paths identified: {unique_targets}")
 
     dist_dir = os.path.abspath('dist')
     if not os.path.exists(dist_dir):
-        print(f"❌ Error: {dist_dir} does not exist. Did npm run build succeed?")
+        print(f"❌ Error: {dist_dir} does not exist.")
         sys.exit(1)
 
-    print(f"\n🚀 Beginning sync of {dist_dir} -> {current_deploy_dir} ...")
+    summary_lines = [
+        f"### Hostinger FTPS Deployment Report",
+        f"- **FTP Server**: `{server}`",
+        f"- **FTP User**: `{user}`",
+        f"- **Target Directories**: `{unique_targets}`",
+        f""
+    ]
 
-    def upload_directory(local_path, remote_sub=""):
-        for item in os.listdir(local_path):
-            local_item = os.path.join(local_path, item)
-            remote_item = f"{remote_sub}/{item}".strip('/') if remote_sub else item
+    for target in unique_targets:
+        print(f"\n==========================================")
+        print(f"🚀 Deploying to: '{target or '/'}' ...")
+        print(f"==========================================")
+        
+        # Go back to initial root first
+        ftps.cwd(initial_pwd)
+        if target:
+            try:
+                ftps.cwd(target)
+            except Exception as e:
+                print(f"Failed to cwd to {target}: {e}")
+                continue
 
-            if os.path.isdir(local_item):
-                # Ensure directory exists on remote
-                try:
-                    ftps.mkd(remote_item)
-                    print(f"📁 Created remote directory: {remote_item}")
-                except Exception:
-                    # Directory likely already exists
-                    pass
-                upload_directory(local_item, remote_item)
-            else:
-                # Upload file in binary mode
-                with open(local_item, 'rb') as f:
-                    cmd = f"STOR {remote_item}"
-                    ftps.storbinary(cmd, f)
-                    size_kb = round(os.path.getsize(local_item) / 1024, 1)
-                    print(f"  ⬆️ Uploaded {remote_item} ({size_kb} KB)")
+        current_dir = ftps.pwd()
+        print(f"Currently inside: {current_dir}")
 
-    upload_directory(dist_dir)
-    print("\n🎉 ALL ASSETS SUCCESSFULLY DEPLOYED TO HOSTINGER!")
+        def upload_directory(local_path, remote_sub=""):
+            for item in os.listdir(local_path):
+                local_item = os.path.join(local_path, item)
+                remote_item = f"{remote_sub}/{item}".strip('/') if remote_sub else item
+
+                if os.path.isdir(local_item):
+                    try:
+                        ftps.mkd(remote_item)
+                    except Exception:
+                        pass
+                    upload_directory(local_item, remote_item)
+                else:
+                    with open(local_item, 'rb') as f:
+                        cmd = f"STOR {remote_item}"
+                        ftps.storbinary(cmd, f)
+                        print(f"  ⬆️ Uploaded {remote_item}")
+
+        upload_directory(dist_dir)
+        summary_lines.append(f"- ✅ Synced all files to `{current_dir}`")
+
     ftps.quit()
+    print("\n🎉 ALL DEPLOYMENTS COMPLETED SUCCESSFULLY!")
+
+    # Write summary for GitHub Actions
+    summary_file = os.environ.get('GITHUB_STEP_SUMMARY')
+    if summary_file:
+        with open(summary_file, 'a', encoding='utf-8') as f:
+            f.write("\n".join(summary_lines) + "\n")
 
 if __name__ == '__main__':
     main()
