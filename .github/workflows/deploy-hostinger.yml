@@ -31,10 +31,19 @@ jobs:
       - name: 🏗️ Build Production Assets
         run: npm run build
 
+      - name: 🧹 Clean FTP Server Host
+        id: parse_server
+        shell: bash
+        run: |
+          # Strip protocol prefix (ftp://, ftps://) and trailing slashes if present
+          RAW="${{ secrets.FTP_SERVER }}"
+          CLEAN=$(echo "$RAW" | sed -E 's|^[a-zA-Z]+://||' | tr -d ' /')
+          echo "clean_server=$CLEAN" >> $GITHUB_OUTPUT
+
       - name: 🚀 Sync Files to Hostinger via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          server: ${{ steps.parse_server.outputs.clean_server }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
