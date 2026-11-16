@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <footer id="site-footer" class="bg-[#081322] text-white pt-14 pb-8 border-t border-white/10 select-none relative overflow-hidden">
     <!-- Subtle Ambient TopLinkers Glow -->
     <div class="absolute -top-24 -left-24 w-96 h-96 bg-[#16B4E8]/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -170,11 +170,16 @@
 
           <ul class="space-y-2.5 text-xs text-slate-300">
             <!-- Email -->
-            <li class="flex items-center gap-2">
-              <EnvelopeIcon class="w-4 h-4 text-[#16B4E8] flex-shrink-0" />
-              <a href="mailto:toplinkers12@gmail.com" class="hover:text-[#16B4E8] transition-colors">
-                toplinkers12@gmail.com
-              </a>
+            <li class="flex items-start gap-2">
+              <EnvelopeIcon class="w-4 h-4 text-[#16B4E8] flex-shrink-0 mt-0.5" />
+              <div class="flex flex-col space-y-0.5">
+                <a href="mailto:toplinkers69@gmail.com" class="hover:text-[#16B4E8] transition-colors">
+                  toplinkers69@gmail.com
+                </a>
+                <a href="mailto:syedusman@toplinkersgroup.com" class="hover:text-[#16B4E8] transition-colors text-[11px] text-slate-400">
+                  syedusman@toplinkersgroup.com
+                </a>
+              </div>
             </li>
 
             <!-- Direct Phones -->

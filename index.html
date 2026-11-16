@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
@@ -9,11 +9,13 @@
     <meta name="google-site-verification" content="bIQ1rqAOIjpQlljC8t56ulqFjAVvLRsJJhDHaGhoNc8" />
     <meta name="google-adsense-account" content="ca-pub-9699786853848201" />
 
-    <!-- Favicon & Touch Icons -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/toplinkers-logo-sm.png?v=3" />
-    <link rel="icon" href="/favicon.ico?v=3" sizes="any" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3" />
+    <!-- Favicon & Touch Icons (Google Search requires 48x48 or multiple of 48px square) -->
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- AI Agent & Machine-Readable Resource Discovery (RFC 8288 & SEP-1649) -->
     <link rel="alternate" type="text/plain" href="https://toplinkersgroup.com/llms.txt" title="LLMs.txt Resource Index" />
@@ -127,7 +129,7 @@
           "image": "https://toplinkersgroup.com/toplinkers-logo.jpg",
           "description": "Top Linkers is an authorized real estate agency, turnkey construction contractor, and Tier-1 solar net metering provider headquartered in G-11 Markaz, Islamabad, Pakistan.",
           "telephone": "+92-334-9522157",
-          "email": "toplinkers12@gmail.com",
+          "email": "toplinkers69@gmail.com",
           "priceRange": "PKR",
           "address": {
             "@type": "PostalAddress",
@@ -263,7 +265,12 @@
         var shell = document.createElement('div')
         shell.id = 'lcp-shell'
         shell.setAttribute('aria-hidden', 'true')
-        shell.innerHTML = '<div class="band"></div><div class="hero"><picture>' +
+        var hasBand = false
+        try {
+          var p = localStorage.getItem('toplinkers_promo_strip')
+          if (p && JSON.parse(p).enabled === true) hasBand = true
+        } catch(e) {}
+        shell.innerHTML = (hasBand ? '<div class="band"></div>' : '') + '<div class="hero"><picture>' +
           '<source media="(max-width: 639px)" type="image/avif" srcset="/images/hero-real-estate-m.avif">' +
           '<source media="(max-width: 639px)" type="image/webp" srcset="/images/hero-real-estate-m.webp">' +
           '<source type="image/avif" srcset="/images/hero-real-estate.avif">' +

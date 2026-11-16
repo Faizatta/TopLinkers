@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="space-y-6">
     <!-- Header -->
     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -253,7 +253,7 @@
             </div>
             <div>
               <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email</label>
-              <input v-model="form.email" type="email" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs" placeholder="toplinkers12@gmail.com" />
+              <input v-model="form.email" type="email" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs" placeholder="toplinkers69@gmail.com" />
             </div>
             <div>
               <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Experience</label>
@@ -337,7 +337,7 @@ const form = ref({
   tag: 'Senior Agent',
   experience: '5+ Years',
   phone: '0323-5963375',
-  email: 'toplinkers12@gmail.com',
+  email: 'toplinkers69@gmail.com',
   photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80',
   bio: '',
   quote: '',
@@ -378,7 +378,7 @@ const openModalForCategory = (category) => {
     tag: category === 'ceo' ? 'Founder & CEO' : category === 'engineer' ? 'PEC Registered Engineer' : 'Verified Consultant',
     experience: '7+ Years',
     phone: '0323-5963375',
-    email: 'toplinkers12@gmail.com',
+    email: 'toplinkers69@gmail.com',
     photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80',
     bio: '',
     quote: '',

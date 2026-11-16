@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "https://modelcontextprotocol.io/schemas/server-card/v1.json",
   "name": "toplinkers-mcp-server",
   "displayName": "TopLinkers Real Estate, Construction & Solar MCP Server",
@@ -97,7 +97,7 @@
   "contact": {
     "organization": "Top Linkers Real Estate, Construction & Solar",
     "founder": "Syed Usman Hammad",
-    "email": "toplinkers12@gmail.com",
+    "email": "toplinkers69@gmail.com",
     "phone": "+92-334-9522157",
     "address": "2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan"
   }

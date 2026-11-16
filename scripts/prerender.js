@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Static Pre-Rendering Build Script for TopLinkers
  * Generates static HTML files for all public routes with route-specific:
  * - <title> (50-60 characters)
@@ -223,7 +223,7 @@ const staticRoutes = [
         <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
           Head Office: 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan.<br/>
           Direct Lines &amp; WhatsApp: 0334-9522157 / 0332-4004884<br/>
-          Email: toplinkers12@gmail.com
+          Email: toplinkers69@gmail.com
         </p>
       </section>
     `

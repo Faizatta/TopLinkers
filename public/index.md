@@ -1,11 +1,11 @@
-# TopLinkers | Premier Real Estate, Turnkey Construction & Solar in Islamabad
+﻿# TopLinkers | Premier Real Estate, Turnkey Construction & Solar in Islamabad
 
 Welcome to **TopLinkers** — Islamabad and Rawalpindi's premier verified real estate advisory, PEC-licensed turnkey builder, and Tier-1 solar net metering company.
 
 - **Head Office**: 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan
 - **CEO & Founder**: Syed Usman Hammad
 - **Direct Phone**: [+92-334-9522157](tel:+923349522157) / [+92-332-4004884](tel:+923324004884)
-- **Email**: [toplinkers12@gmail.com](mailto:toplinkers12@gmail.com)
+- **Email**: [toplinkers69@gmail.com](mailto:toplinkers69@gmail.com)
 - **Official Website**: [https://toplinkersgroup.com](https://toplinkersgroup.com)
 
 ---

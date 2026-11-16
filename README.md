@@ -1,4 +1,4 @@
-# TopLinkers — Real Estate, Construction & Solar Platform
+﻿# TopLinkers — Real Estate, Construction & Solar Platform
 
 A modern, production-quality real estate website built with **Vue 3** (Composition API, `<script setup>`), **Vite**, **Vue Router 4**, **Pinia**, **Tailwind CSS**, **Swiper.js**, and **Leaflet**.
 
@@ -22,7 +22,7 @@ The layout follows the clean luxury property architecture inspired by the **Houz
 ### 2. Authentic TopLinkers Assets & Integration
 - **Official Brand Logo:** [`/public/toplinkers-logo.jpg`](file:///C:/Users/faiiz/.gemini/antigravity/scratch/topliker/public/toplinkers-logo.jpg) featured in the sticky header, footer, modals, and contact channels.
 - **Head Office:** Office # 02, Ground Floor, Opal Square, D Markaz, Gulberg Islamabad, Pakistan (`33.6015, 73.1360`).
-- **Contact Helplines:** `0323-596-3375` (WhatsApp direct), `0334-952-2157`, `0332-400-4884`, `toplinkers12@gmail.com`.
+- **Contact Helplines:** `0323-596-3375` (WhatsApp direct), `0334-952-2157`, `0332-400-4884`, `toplinkers69@gmail.com`.
 - **Social Handles:** `@Linkerstop` (X/Twitter), `/Top-Linkers` (LinkedIn), `Top.Linkers` (Facebook/Instagram).
 - **Executive Project Flyer Modal (`FlyerModal.vue`):**
   - **Tab 1: Project Flyer & Services** ([`toplinkers-flyer-plan.jpg`](file:///C:/Users/faiiz/.gemini/antigravity/scratch/topliker/public/toplinkers-flyer-plan.jpg)) showcasing **H&R Suites**, **Faisal Town Phase 2 (FT-II)**, **TopCity-1** (10 Marla PKR 2.5 Cr / 75 Lac), **PECHS** (5 Marla PKR 25 Lac), **Blue World City**, **B-17**, and **Bano Qadeer**.

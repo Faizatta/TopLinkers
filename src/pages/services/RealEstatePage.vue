@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="service-detail-page pt-20 bg-[#F6F8FA]">
     <!-- Breadcrumb Bar -->
     <nav aria-label="Breadcrumb" class="bg-white border-b border-gray-200 py-3">
@@ -127,7 +127,7 @@
               </div>
               <div class="flex items-center gap-2">
                 <span class="text-[#16B4E8]">✉️</span>
-                <a href="mailto:toplinkers12@gmail.com" class="hover:text-[#16B4E8]">toplinkers12@gmail.com</a>
+                <a href="mailto:toplinkers69@gmail.com" class="hover:text-[#16B4E8]">toplinkers69@gmail.com</a>
               </div>
             </div>
             <router-link

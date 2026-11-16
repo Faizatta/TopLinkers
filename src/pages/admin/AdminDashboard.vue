@@ -72,9 +72,17 @@
           <p class="text-xs text-slate-500 mt-0.5">Announcement banner shown at the top of the website for campaigns</p>
         </div>
 
-        <label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer text-xs font-semibold text-slate-700">
-          <input v-model="promoForm.enabled" type="checkbox" class="rounded text-[#0F2A44] focus:ring-[#0F2A44]" />
-          <span>Show Strip on Front Page</span>
+        <label 
+          :class="promoForm.enabled ? 'bg-emerald-50 border-emerald-300 text-emerald-800' : 'bg-slate-100 border-slate-300 text-slate-600'"
+          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border cursor-pointer text-xs font-bold transition-all shadow-xs select-none"
+        >
+          <input
+            v-model="promoForm.enabled"
+            @change="savePromo"
+            type="checkbox"
+            class="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4 cursor-pointer"
+          />
+          <span>{{ promoForm.enabled ? '✓ Strip Active on Front Page' : '✗ Strip OFF (Hidden from Website)' }}</span>
         </label>
       </div>
 
@@ -287,7 +295,11 @@ watch(
 
 const savePromo = async () => {
   await adminStore.savePromoStrip({ ...promoForm.value })
-  adminStore.showToast('Front page offer strip updated & synced to backend!')
+  if (promoForm.value.enabled) {
+    adminStore.showToast('Top offer strip is now ACTIVE on the front page!')
+  } else {
+    adminStore.showToast('Top offer strip is now HIDDEN from the front page!')
+  }
 }
 
 const cleanPhone = (phone) => {

@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page">
+  <div class="home-page pt-[66px] sm:pt-[80px]">
     <h1 class="sr-only">TopLinkers | Premier Real Estate, Turnkey Construction &amp; Solar in Islamabad</h1>
     <!-- Top Customizable Limited-Time Offer Strip (Backend Controlled) -->
     <TopOfferStrip />

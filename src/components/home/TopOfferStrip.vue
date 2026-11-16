@@ -9,7 +9,7 @@
   >
     <div
       v-if="isVisible"
-      class="top-offer-fully-sliding-strip bg-gradient-to-r from-[#071320] via-[#0E253D] to-[#071320] text-white border-b border-[#16B4E8]/25 mt-[66px] sm:mt-[80px] relative z-30 shadow-md select-none group"
+      class="top-offer-fully-sliding-strip bg-gradient-to-r from-[#071320] via-[#0E253D] to-[#071320] text-white border-b border-[#16B4E8]/25 relative z-30 shadow-md select-none group"
     >
       <div class="w-full flex items-center py-2 sm:py-2.5">
         
@@ -367,8 +367,32 @@ const defaultOffers = [
   }
 ]
 
+// Read cached promo configuration immediately to prevent layout shifts
+const getStoredPromo = () => {
+  try {
+    const raw = localStorage.getItem('toplinkers_promo_strip')
+    if (raw) return JSON.parse(raw)
+  } catch (e) {}
+  return null
+}
+
+const localPromo = ref(getStoredPromo())
+
+// Cross-tab real-time sync when admin toggles the strip in dashboard
+const onStorageChange = (e) => {
+  if (e.key === 'toplinkers_promo_strip') {
+    localPromo.value = getStoredPromo()
+    if (adminStore.value && localPromo.value) {
+      adminStore.value.promoStrip = localPromo.value
+    }
+  }
+}
+
 // Merge with backend promoStrip if admin configured custom text
-const promo = computed(() => adminStore.value?.promoStrip || {})
+const promo = computed(() => {
+  if (adminStore.value?.promoStrip) return adminStore.value.promoStrip
+  return localPromo.value || { enabled: false }
+})
 
 const allOffers = computed(() => {
   const list = [...defaultOffers]
@@ -394,7 +418,9 @@ const allOffers = computed(() => {
 })
 
 const isVisible = computed(() => {
-  return !dismissed.value
+  if (dismissed.value) return false
+  if (!promo.value || promo.value.enabled !== true) return false
+  return true
 })
 
 // ============================================================================
@@ -470,13 +496,22 @@ const handleClaimSubmit = async () => {
 
 let cancelIdle = null
 onMounted(() => {
+  if (typeof window !== 'undefined') {
+    window.addEventListener('storage', onStorageChange)
+  }
   cancelIdle = whenIdle(async () => {
     const store = await loadAdminStore()
-    store.syncFromBackend()
+    await store.syncFromBackend()
+    if (store.promoStrip) {
+      localPromo.value = store.promoStrip
+    }
   })
 })
 onUnmounted(() => {
   if (cancelIdle) cancelIdle()
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('storage', onStorageChange)
+  }
 })
 </script>
 

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="contact-page pt-28 sm:pt-32 md:pt-36 pb-16 bg-[#F6F8FA] min-h-screen select-none">
     <div class="max-w-[1280px] mx-auto px-4 sm:px-6">
       <!-- Section Header -->
@@ -94,10 +94,13 @@
                 <div class="w-9 h-9 rounded-xl bg-blue-50 text-[#16B4E8] flex items-center justify-center flex-shrink-0 mt-0.5">
                   <EnvelopeIcon class="w-4 h-4" />
                 </div>
-                <div>
-                  <span class="font-bold text-[#0F2A44] block text-xs uppercase tracking-wider">Official Email</span>
-                  <a href="mailto:toplinkers12@gmail.com" class="text-gray-700 hover:text-[#16B4E8] font-semibold mt-1 block">
-                    toplinkers12@gmail.com
+                <div class="space-y-1">
+                  <span class="font-bold text-[#0F2A44] block text-xs uppercase tracking-wider">Official Inquiries &amp; CEO Desk</span>
+                  <a href="mailto:toplinkers69@gmail.com" class="text-gray-700 hover:text-[#16B4E8] font-semibold block transition-colors">
+                    toplinkers69@gmail.com
+                  </a>
+                  <a href="mailto:syedusman@toplinkersgroup.com" class="text-gray-700 hover:text-[#16B4E8] font-semibold block transition-colors">
+                    syedusman@toplinkersgroup.com
                   </a>
                 </div>
               </div>

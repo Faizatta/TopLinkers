@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Controllers\Api;
 
@@ -69,7 +69,7 @@ class TeamController extends Controller
                 'experience' => $validated['experience'] ?? '5+ Years',
                 'phone' => $validated['phone'] ?? '0323-5963375',
                 'whatsapp' => $validated['whatsapp'] ?? preg_replace('/[^0-9]/', '', $validated['phone'] ?? '923235963375'),
-                'email' => $validated['email'] ?? 'toplinkers12@gmail.com',
+                'email' => $validated['email'] ?? 'toplinkers69@gmail.com',
                 'photo' => $validated['photo'] ?? null,
                 'bio' => $validated['bio'] ?? '',
                 'quote' => $validated['quote'] ?? '',

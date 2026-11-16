@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="disclaimer-page pt-28 sm:pt-32 pb-20 bg-[#F8FAFC] min-h-screen">
     <!-- Breadcrumb -->
     <div class="max-w-[1200px] mx-auto px-4 sm:px-6 mb-6">
@@ -76,7 +76,7 @@
               We urge every property investor to execute physical title inspections and society ledger verification prior to financial transfers.
             </p>
             <div class="pt-1 text-xs space-y-1.5">
-              <div class="text-[#16B4E8] font-bold">toplinkers12@gmail.com</div>
+              <div class="text-[#16B4E8] font-bold">toplinkers69@gmail.com</div>
               <div class="text-white">0334-9522157 / 0332-4004884</div>
             </div>
           </div>
@@ -211,7 +211,7 @@
               <div class="bg-white/10 p-4 rounded-xl border border-white/15">
                 <span class="text-slate-400 block text-[10px] uppercase tracking-wider">Direct Verification Lines</span>
                 <strong class="text-white text-sm block mt-0.5">0334-9522157 &bull; 0332-4004884</strong>
-                <span class="text-[#16B4E8] text-[11px] block mt-1">toplinkers12@gmail.com</span>
+                <span class="text-[#16B4E8] text-[11px] block mt-1">toplinkers69@gmail.com</span>
               </div>
             </div>
           </section>

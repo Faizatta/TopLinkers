@@ -1,4 +1,4 @@
-import { api } from '../services/api.js'
+﻿import { api } from '../services/api.js'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
@@ -658,7 +658,7 @@ export const useAdminStore = defineStore('admin', () => {
       experience: '15+ Years',
       phone: '0334-9522157',
       whatsapp: '923349522157',
-      email: 'toplinkers12@gmail.com',
+      email: 'syedusman@toplinkersgroup.com',
       facebook: 'https://facebook.com/toplinkers',
       photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
       quote: 'At TopLinkers, our mission is straightforward: absolute transparency in property documentation, verified CDA/RDA titles, and rewarding real estate investments across Islamabad & Rawalpindi.',
@@ -674,7 +674,7 @@ export const useAdminStore = defineStore('admin', () => {
       experience: '14+ Years',
       phone: '0332-4004884',
       whatsapp: '923324004884',
-      email: 'toplinkers12@gmail.com',
+      email: 'toplinkers69@gmail.com',
       facebook: 'https://facebook.com/toplinkers',
       photo: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80',
       quote: 'Precision engineering in turnkey residential construction and high-yield solar net metering execution defines every project we deliver at TopLinkers.',
@@ -690,7 +690,7 @@ export const useAdminStore = defineStore('admin', () => {
       experience: '12+ Years',
       phone: '+92 334 9522157',
       whatsapp: '923349522157',
-      email: 'toplinkers12@gmail.com',
+      email: 'toplinkers69@gmail.com',
       photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80',
       bio: 'Senior property investment consultant with 12+ years in Islamabad CDA sectors, Moqa Ka Plots (PECHS, AGG, TopCity-1), and Gulberg Greens commercial plazas.',
       address: 'Al Hameed Plaza, G-11 Markaz, Islamabad'
@@ -704,7 +704,7 @@ export const useAdminStore = defineStore('admin', () => {
       experience: '9+ Years',
       phone: '+92 334 9522157',
       whatsapp: '923349522157',
-      email: 'toplinkers12@gmail.com',
+      email: 'toplinkers69@gmail.com',
       photo: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80',
       bio: 'Specialized in PHA apartments (I-12, I-16), Faisal Town Phase II (FT-II), Blue World City files, and fast verified transfers.',
       address: 'Al Hameed Plaza, G-11 Markaz, Islamabad'
@@ -718,7 +718,7 @@ export const useAdminStore = defineStore('admin', () => {
       experience: '7+ Years',
       phone: '+92 334 9522157',
       whatsapp: '923349522157',
-      email: 'toplinkers12@gmail.com',
+      email: 'toplinkers69@gmail.com',
       photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
       bio: 'Dedicated advisor for overseas Pakistani investors (UK, UAE, USA) seeking secure plots, Harsukh Nathia Gali suites, and luxury villas.',
       address: 'Al Hameed Plaza, G-11 Markaz, Islamabad'
@@ -732,7 +732,7 @@ export const useAdminStore = defineStore('admin', () => {
       experience: '11+ Years',
       phone: '+92 332 4004884',
       whatsapp: '923324004884',
-      email: 'toplinkers12@gmail.com',
+      email: 'toplinkers69@gmail.com',
       photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80',
       bio: 'PEC-licensed structural & turnkey construction engineer leading A+ grey structure quality, BOQ estimation, and modern villa finishing.',
       address: 'Al Hameed Plaza, G-11 Markaz, Islamabad'
@@ -746,7 +746,7 @@ export const useAdminStore = defineStore('admin', () => {
       experience: '8+ Years',
       phone: '+92 332 4004884',
       whatsapp: '923324004884',
-      email: 'toplinkers12@gmail.com',
+      email: 'toplinkers69@gmail.com',
       photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80',
       bio: 'Specialist in 10kW, 20kW, and 50kW Tier-1 hybrid & on-grid solar installations with turnkey IESCO green net-metering clearance.',
       address: 'Al Hameed Plaza, G-11 Markaz, Islamabad'
@@ -1515,7 +1515,7 @@ export const useAdminStore = defineStore('admin', () => {
 
   // 7. Front Page Top Offer Announcement Strip (Syncs with Laravel /api/promo-strip & TopOfferStrip.vue)
   const defaultPromoStrip = {
-    enabled: true,
+    enabled: false,
     badge: 'LIMITED OFFER',
     text: 'Flash Booking Offer: Special Reduced Rates on Selected PECHS / TopCity Plots & Harsukh Suites!',
     ctaLabel: 'Explore Offers',
@@ -1528,7 +1528,7 @@ export const useAdminStore = defineStore('admin', () => {
   )
 
   const savePromoStrip = async (data) => {
-    promoStrip.value = { ...defaultPromoStrip, ...data }
+    promoStrip.value = { ...defaultPromoStrip, ...data, enabled: Boolean(data.enabled) }
     localStorage.setItem(STORAGE_KEYS.PROMO_STRIP, JSON.stringify(promoStrip.value))
     try {
       const res = await fetch(`${API_BASE_URL}/promo-strip`, {

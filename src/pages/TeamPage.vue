@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="team-page pt-28 sm:pt-32 md:pt-36 pb-16 bg-[#F8FAFC] min-h-screen">
     <div class="max-w-[1260px] mx-auto px-4 sm:px-6">
       <!-- Page Title Header -->
@@ -328,8 +328,8 @@
                     </div>
                     <div class="min-w-0">
                       <span class="block text-[10px] font-bold uppercase text-slate-400">Official Email</span>
-                      <a :href="`mailto:${popupMember.email || 'toplinkers12@gmail.com'}`" class="text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] transition-colors truncate block">
-                        {{ popupMember.email || 'toplinkers12@gmail.com' }}
+                      <a :href="`mailto:${popupMember.email || 'toplinkers69@gmail.com'}`" class="text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] transition-colors truncate block">
+                        {{ popupMember.email || 'toplinkers69@gmail.com' }}
                       </a>
                     </div>
                   </div>
