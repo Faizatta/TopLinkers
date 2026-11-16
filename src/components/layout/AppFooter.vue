@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <footer id="site-footer" class="bg-[#081322] text-white pt-14 pb-8 border-t border-white/10 select-none relative overflow-hidden">
     <!-- Subtle Ambient TopLinkers Glow -->
     <div class="absolute -top-24 -left-24 w-96 h-96 bg-[#16B4E8]/10 rounded-full blur-3xl pointer-events-none"></div>

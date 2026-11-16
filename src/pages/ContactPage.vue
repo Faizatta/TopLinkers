@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="contact-page pt-28 sm:pt-32 md:pt-36 pb-16 bg-[#F6F8FA] min-h-screen select-none">
     <div class="max-w-[1280px] mx-auto px-4 sm:px-6">
       <!-- Section Header -->
@@ -95,13 +95,21 @@
                   <EnvelopeIcon class="w-4 h-4" />
                 </div>
                 <div class="space-y-1">
-                  <span class="font-bold text-[#0F2A44] block text-xs uppercase tracking-wider">Official Inquiries &amp; CEO Desk</span>
-                  <a href="mailto:toplinkers69@gmail.com" class="text-gray-700 hover:text-[#16B4E8] font-semibold block transition-colors">
-                    toplinkers69@gmail.com
-                  </a>
-                  <a href="mailto:syedusman@toplinkersgroup.com" class="text-gray-700 hover:text-[#16B4E8] font-semibold block transition-colors">
-                    syedusman@toplinkersgroup.com
-                  </a>
+                  <span class="font-bold text-[#0F2A44] block text-xs uppercase tracking-wider">Official Email Addresses</span>
+                  <div class="space-y-1 pt-0.5">
+                    <div class="flex items-center gap-2">
+                      <span class="text-[10px] font-extrabold uppercase text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">Inquiries</span>
+                      <a href="mailto:toplinkers69@gmail.com" class="text-gray-800 hover:text-[#16B4E8] font-semibold text-xs sm:text-sm transition-colors">
+                        toplinkers69@gmail.com
+                      </a>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="text-[10px] font-extrabold uppercase text-[#16B4E8] bg-blue-50 px-1.5 py-0.5 rounded">CEO Desk</span>
+                      <a href="mailto:syedusman@toplinkersgroup.com" class="text-gray-800 hover:text-[#16B4E8] font-semibold text-xs sm:text-sm transition-colors">
+                        syedusman@toplinkersgroup.com
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

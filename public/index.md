@@ -1,4 +1,4 @@
-﻿# TopLinkers | Premier Real Estate, Turnkey Construction & Solar in Islamabad
+# TopLinkers | Premier Real Estate, Turnkey Construction & Solar in Islamabad
 
 Welcome to **TopLinkers** — Islamabad and Rawalpindi's premier verified real estate advisory, PEC-licensed turnkey builder, and Tier-1 solar net metering company.
 

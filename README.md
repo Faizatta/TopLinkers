@@ -1,4 +1,4 @@
-﻿# TopLinkers — Real Estate, Construction & Solar Platform
+# TopLinkers — Real Estate, Construction & Solar Platform
 
 A modern, production-quality real estate website built with **Vue 3** (Composition API, `<script setup>`), **Vite**, **Vue Router 4**, **Pinia**, **Tailwind CSS**, **Swiper.js**, and **Leaflet**.
 

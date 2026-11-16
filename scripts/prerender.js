@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Static Pre-Rendering Build Script for TopLinkers
  * Generates static HTML files for all public routes with route-specific:
  * - <title> (50-60 characters)

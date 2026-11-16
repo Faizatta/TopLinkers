@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="service-detail-page pt-20 bg-[#F6F8FA]">
     <!-- Breadcrumb Bar -->
     <nav aria-label="Breadcrumb" class="bg-white border-b border-gray-200 py-3">

@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="team-page pt-28 sm:pt-32 md:pt-36 pb-16 bg-[#F8FAFC] min-h-screen">
     <div class="max-w-[1260px] mx-auto px-4 sm:px-6">
       <!-- Page Title Header -->

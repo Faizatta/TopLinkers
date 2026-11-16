@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Top Linkers Real Estate, Construction & Solar
  * Advanced Technical & Dynamic SEO Service
  */

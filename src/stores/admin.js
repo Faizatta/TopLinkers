@@ -1,4 +1,4 @@
-﻿import { api } from '../services/api.js'
+import { api } from '../services/api.js'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 

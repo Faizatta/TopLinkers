@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="disclaimer-page pt-28 sm:pt-32 pb-20 bg-[#F8FAFC] min-h-screen">
     <!-- Breadcrumb -->
     <div class="max-w-[1200px] mx-auto px-4 sm:px-6 mb-6">
