@@ -208,7 +208,8 @@ const routes = [
     name: 'Favorites',
     component: FavoritesPage,
     meta: {
-      title: 'My Saved Properties & Portfolios | TopLinkers'
+      title: 'My Saved Properties & Portfolios | TopLinkers',
+      noindex: true
     }
   },
   {
@@ -217,7 +218,8 @@ const routes = [
     component: ComparePage,
     meta: {
       title: 'Compare Real Estate Properties & Apartments | TopLinkers',
-      description: 'Compare prices, square footage, bedrooms, payment plans, and location amenities side by side across verified plots, PHA flats, and Harsukh suites.'
+      description: 'Compare prices, square footage, bedrooms, payment plans, and location amenities side by side across verified plots, PHA flats, and Harsukh suites.',
+      noindex: true
     }
   },
   {
@@ -226,7 +228,8 @@ const routes = [
     component: CreateListingPage,
     meta: {
       title: 'List Your Property for Sale or Rent | TopLinkers',
-      description: 'Submit your plot, house, apartment, or commercial property with TopLinkers for immediate verification, professional marketing, and verified buyer matching.'
+      description: 'Submit your plot, house, apartment, or commercial property with TopLinkers for immediate verification, professional marketing, and verified buyer matching.',
+      noindex: true
     }
   },
   // Real Estate Blog & Market Intelligence Routes (SEO Optimized)

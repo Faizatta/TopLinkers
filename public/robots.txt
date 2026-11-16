@@ -7,6 +7,9 @@ Disallow: /admin
 Disallow: /admin/
 Disallow: /api
 Disallow: /api/
+Disallow: /compare
+Disallow: /create-listing
+Disallow: /favorites
 
 # Host & Sitemaps
 Host: https://toplinkersgroup.com

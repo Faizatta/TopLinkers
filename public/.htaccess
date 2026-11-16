@@ -16,8 +16,19 @@ ErrorDocument 404 /404.html
   RewriteCond %{HTTP:Accept} text/markdown [NC]
   RewriteRule ^(index\.html)?$ /index.md [L]
 
-  # If requested path is an existing physical file or directory, serve directly
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  # If requested path is an existing physical file, serve directly
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # Pre-rendered HTML file match: /about -> about.html (200 OK, no 301 trailing slash redirect)
+  RewriteCond %{DOCUMENT_ROOT}/.html -f
+  RewriteRule ^(.*)/?$ .html [L]
+
+  # Pre-rendered folder index match: /about -> about/index.html (200 OK, no 301 redirect)
+  RewriteCond %{DOCUMENT_ROOT}//index.html -f
+  RewriteRule ^(.*)/?$ /index.html [L]
+
+  # If requested path is an existing directory with trailing slash, serve directly
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 

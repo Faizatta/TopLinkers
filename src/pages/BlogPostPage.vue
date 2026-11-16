@@ -245,12 +245,12 @@ const applyPostSeo = () => {
       name: 'Top Linkers Real Estate, Construction & Solar',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://toplinkers.com/toplinkers-logo.jpg'
+        url: 'https://toplinkersgroup.com/toplinkers-logo.jpg'
       }
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://toplinkers.com/blog/${post.value.slug}`
+      '@id': `https://toplinkersgroup.com/blog/${post.value.slug}`
     }
   })
   document.head.appendChild(script)

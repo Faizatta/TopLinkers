@@ -82,8 +82,9 @@ export const updateSEOMeta = (to) => {
   removeMetaTag('name', 'geo.position')
   removeMetaTag('name', 'ICBM')
 
-  // 3. Robots: Noindex for Admin & 404, Index & Follow for Public
-  if (isDarkAdmin || is404) {
+  // 3. Robots: Noindex for Admin, 404, or routes explicitly marked noindex; Index & Follow for Public
+  const shouldNoindex = isDarkAdmin || is404 || to.meta?.noindex === true
+  if (shouldNoindex) {
     setMetaTag('name', 'robots', 'noindex, nofollow')
   } else {
     setMetaTag('name', 'robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1')
