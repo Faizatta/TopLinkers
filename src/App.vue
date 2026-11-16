@@ -80,7 +80,10 @@ onMounted(() => {
     window.history.scrollRestoration = 'auto'
   }
   initLenis()
+  // Use a small fixed delay (200ms) so floating widgets appear promptly after
+  // first paint, without blocking the hero or waiting for a full idle callback.
   cancelIdle = whenIdle(() => { deferredUiReady.value = true })
+  setTimeout(() => { deferredUiReady.value = true }, 200)
 })
 
 onUnmounted(() => {

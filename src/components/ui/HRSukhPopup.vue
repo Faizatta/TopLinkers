@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div>
     <!-- Unique Floating Alpine Curiosity Spotlight (Bottom Right) -->
     <!-- Pops up cleanly on every page visit & route navigation (hidden only while already on /hr-sukh) -->
@@ -22,7 +22,7 @@
               type="button"
               @click="goToNathiaGaliPage"
               aria-label="Explore Harsukh Nathia Gali"
-              title="Harsukh • Nathia Gali"
+              title="Harsukh â€¢ Nathia Gali"
               class="relative w-14 h-14 rounded-full p-[2.5px] bg-gradient-to-tr from-[#0F2A44] via-[#16B4E8] to-emerald-400 shadow-[0_10px_25px_rgba(15,42,68,0.45)] active:scale-95 transition-transform"
             >
               <img
@@ -63,7 +63,7 @@
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
               </span>
-              <span>Harsukh • Nathia Gali</span>
+              <span>Harsukh â€¢ Nathia Gali</span>
             </div>
 
             <!-- Inner Dark-to-Navy Glass Card -->
@@ -155,15 +155,15 @@ let rotateTimer = null
 const curiosityHooks = [
   {
     title: 'Wake Up Above The Clouds?',
-    subtitle: 'Luxury pine-valley suites at 8,200 ft. Tap to explore →'
+    subtitle: 'Luxury pine-valley suites at 8,200 ft. Tap to explore â†’'
   },
   {
-    title: 'Earn PKR 25k–40k / Night Airbnb',
-    subtitle: 'Managed holiday suites in Nathia Gali • 15% Booking →'
+    title: 'Earn PKR 25kâ€“40k / Night Airbnb',
+    subtitle: 'Managed holiday suites in Nathia Gali â€¢ 15% Booking â†’'
   },
   {
     title: 'Limited Hillside Suites Remaining',
-    subtitle: 'Studio, 1-Bed & 2-Bed on 3-Yr Installments →'
+    subtitle: 'Studio, 1-Bed & 2-Bed on 3-Yr Installments â†’'
   }
 ]
 
@@ -184,7 +184,7 @@ const triggerPopup = () => {
       updateFooterClearance()
       showTeaser.value = true
     }
-  }, 700)
+  }, 0)
 }
 
 const goToNathiaGaliPage = () => {

@@ -20,7 +20,7 @@
       As soon as the visitor scrolls or taps, all remaining sections mount at once.
     -->
     <!-- 3. Top Spotlight Section: Harsukh Nathia Gali -->
-    <TopSpotlightBar v-if="mounted > 1" />
+    <TopSpotlightBar v-if="mounted > 0" />
 
     <!-- 4. Feature Highlights Row (4 items with small rounded images) -->
     <FeatureHighlights v-if="mounted > 2" />
