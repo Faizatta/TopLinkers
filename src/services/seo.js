@@ -3,8 +3,17 @@
  * Advanced Technical & Dynamic SEO Service
  */
 
-const BASE_URL = 'https://toplinkers.com'
-const DEFAULT_IMAGE = 'https://toplinkers.com/toplinkers-logo.jpg'
+const getBaseUrl = () => {
+  if (typeof window !== 'undefined' && window.location.origin) {
+    if (window.location.origin.includes('toplinkersgroup.com')) return 'https://toplinkersgroup.com'
+    if (window.location.origin.includes('vercel.app')) return 'https://top-linkers.vercel.app'
+    if (!window.location.origin.includes('localhost')) return window.location.origin
+  }
+  return import.meta.env.VITE_SITE_URL || 'https://toplinkersgroup.com'
+}
+
+const BASE_URL = getBaseUrl()
+const DEFAULT_IMAGE = `${BASE_URL}/toplinkers-logo.jpg`
 
 const setMetaTag = (attrName, attrValue, content) => {
   if (!content) return
@@ -15,6 +24,11 @@ const setMetaTag = (attrName, attrValue, content) => {
     document.head.appendChild(element)
   }
   element.setAttribute('content', content)
+}
+
+const removeMetaTag = (attrName, attrValue) => {
+  const el = document.querySelector(`meta[${attrName}="${attrValue}"]`)
+  if (el) el.remove()
 }
 
 const setCanonicalUrl = (path) => {
@@ -49,22 +63,24 @@ export const updateSEOMeta = (to) => {
 
   const isDarkAdmin = to.path.startsWith('/admin')
   const is404 = to.name === 'NotFound' || to.path === '/404'
-  const title = to.meta?.title || 'TopLinkers | Premier Real Estate, Turnkey Construction & Solar | Islamabad'
+  const title = to.meta?.title || 'TopLinkers | Real Estate, Construction & Solar Islamabad'
   const description =
     to.meta?.description ||
-    'Verified CDA sector plots in TopCity & PECHS, cash possession Moqa Ka Plots, PHA flats in I-12 & I-16, Harsukh Nathia Gali luxury suites, turnkey house construction & solar net metering in Islamabad.'
-  const keywords =
-    to.meta?.keywords ||
-    'Top Linkers, real estate Islamabad, plots in Islamabad, Moqa Ka Plot, TopCity-1, PECHS, PHA flats I-12, PHA flats I-16, Harsukh Nathia Gali, turnkey construction, solar net metering'
+    'Verified CDA sector plots, PHA flats, turnkey home construction & solar net metering in Islamabad. Contact TopLinkers for trusted property deals.'
   const ogImage = to.meta?.ogImage || DEFAULT_IMAGE
   const fullUrl = `${BASE_URL}${to.path}`
 
-  // 1. Update Document Title
+  // 1. Update Document Title (50-60 chars)
   document.title = title
 
-  // 2. Primary Meta Tags
+  // 2. Primary Meta Tags (No meta keywords tag as search engines ignore it)
   setMetaTag('name', 'description', description)
-  setMetaTag('name', 'keywords', keywords)
+  removeMetaTag('name', 'keywords')
+  removeMetaTag('name', 'title')
+  removeMetaTag('name', 'geo.region')
+  removeMetaTag('name', 'geo.placename')
+  removeMetaTag('name', 'geo.position')
+  removeMetaTag('name', 'ICBM')
 
   // 3. Robots: Noindex for Admin & 404, Index & Follow for Public
   if (isDarkAdmin || is404) {
@@ -73,12 +89,15 @@ export const updateSEOMeta = (to) => {
     setMetaTag('name', 'robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1')
   }
 
-  // 4. Open Graph / Facebook & WhatsApp Previews
-  setMetaTag('property', 'og:site_name', 'Top Linkers Real Estate & Marketing')
+  // 4. Open Graph / Facebook & WhatsApp Previews (Harmonized with title and domain)
+  setMetaTag('property', 'og:site_name', 'Top Linkers Real Estate, Construction & Solar')
   setMetaTag('property', 'og:title', title)
   setMetaTag('property', 'og:description', description)
   setMetaTag('property', 'og:url', fullUrl)
   setMetaTag('property', 'og:image', ogImage)
+  setMetaTag('property', 'og:image:width', '1200')
+  setMetaTag('property', 'og:image:height', '630')
+  setMetaTag('property', 'og:image:alt', 'Top Linkers Real Estate, Construction & Solar Islamabad')
   setMetaTag('property', 'og:type', to.path.startsWith('/property/') ? 'product' : 'website')
   setMetaTag('property', 'og:locale', 'en_PK')
 

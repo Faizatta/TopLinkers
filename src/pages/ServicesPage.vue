@@ -123,6 +123,20 @@
             <span>4. Solar Net Metering</span>
           </button>
         </div>
+
+        <!-- Dedicated Category SEO Landing Pages Navigation -->
+        <div class="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs text-gray-500 font-medium">
+          <span class="font-bold text-[#0F2A44]">Dedicated Service Guides:</span>
+          <router-link to="/services/real-estate" class="text-[#16B4E8] hover:underline font-bold">Real Estate Advisory</router-link>
+          <span>•</span>
+          <router-link to="/services/residential-plots" class="text-[#16B4E8] hover:underline font-bold">Plots Guide</router-link>
+          <span>•</span>
+          <router-link to="/services/apartments-flats" class="text-[#16B4E8] hover:underline font-bold">PHA Flats Guide</router-link>
+          <span>•</span>
+          <router-link to="/services/construction" class="text-[#16B4E8] hover:underline font-bold">Turnkey Construction</router-link>
+          <span>•</span>
+          <router-link to="/services/solar" class="text-[#16B4E8] hover:underline font-bold">Solar Net Metering</router-link>
+        </div>
       </div>
 
       <!-- ========================================== -->

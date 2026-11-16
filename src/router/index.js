@@ -5,6 +5,11 @@ import { scrollTo } from '../services/lenis'
 
 const AboutPage = () => import('../pages/AboutPage.vue')
 const ServicesPage = () => import('../pages/ServicesPage.vue')
+const RealEstatePage = () => import('../pages/services/RealEstatePage.vue')
+const PlotsPage = () => import('../pages/services/PlotsPage.vue')
+const FlatsPage = () => import('../pages/services/FlatsPage.vue')
+const ConstructionPage = () => import('../pages/services/ConstructionPage.vue')
+const SolarPage = () => import('../pages/services/SolarPage.vue')
 const TeamPage = () => import('../pages/TeamPage.vue')
 const ListingsPage = () => import('../pages/ListingsPage.vue')
 const PropertyPage = () => import('../pages/PropertyPage.vue')
@@ -39,7 +44,7 @@ const routes = [
     component: HomePage,
     meta: {
       title: 'TopLinkers | Premier Real Estate, Construction & Solar | Islamabad',
-      description: 'Explore verified CDA sector plots in TopCity & PECHS, cash possession Moqa Ka Plots, PHA flats in I-12 & I-16, Harsukh Nathia Gali luxury suites, turnkey house construction and solar net metering in Islamabad.',
+      description: 'Verified CDA sector plots, PHA flats, turnkey home construction & solar net metering in Islamabad. Contact TopLinkers for trusted property deals.',
       keywords: 'Top Linkers, real estate Islamabad, plots in Islamabad, Moqa Ka Plot, TopCity-1, PECHS, PHA flats I-12, PHA flats I-16, Harsukh Nathia Gali, turnkey construction, solar net metering'
     }
   },
@@ -59,9 +64,53 @@ const routes = [
     name: 'Services',
     component: ServicesPage,
     meta: {
-      title: 'Our Services: Plots, PHA Flats, Turnkey Construction & Solar | TopLinkers',
-      description: 'Comprehensive real estate and engineering services: Moqa Ka Plots, PHA Sector I-12 & I-16 flats, turnkey A+ grey structure villa construction, and 10kW–50kW solar net metering.',
-      keywords: 'Moqa Ka Plots, PHA flats I-12, PHA flats I-16, turnkey construction Islamabad, grey structure cost Pakistan, solar net metering Islamabad'
+      title: 'Services | Real Estate, Construction & Solar TopLinkers',
+      description: 'Comprehensive real estate & engineering: verified plots, PHA flats, turnkey house building & solar net metering in Islamabad. Contact our team.'
+    }
+  },
+  {
+    path: '/services/real-estate',
+    name: 'ServiceRealEstate',
+    component: RealEstatePage,
+    meta: {
+      title: 'Real Estate Advisory & Property Brokerage | TopLinkers',
+      description: 'TopLinkers offers verified property advisory in Islamabad. Buy, sell, and verify CDA sector files with complete legal diligence. Contact our consultants.'
+    }
+  },
+  {
+    path: '/services/residential-plots',
+    name: 'ServicePlots',
+    component: PlotsPage,
+    meta: {
+      title: 'Residential & Commercial Plots Islamabad | TopLinkers Deals',
+      description: 'Explore verified residential plots in TopCity-1, PECHS, and Faisal Town Phase 2 with cash possession and CDA/RDA approvals. Call TopLinkers today.'
+    }
+  },
+  {
+    path: '/services/apartments-flats',
+    name: 'ServiceFlats',
+    component: FlatsPage,
+    meta: {
+      title: 'PHA Flats & Luxury Apartments Islamabad | TopLinkers Deals',
+      description: 'Buy ready and under-construction PHA apartments in I-12 and I-16, plus Harsukh Nathia Gali luxury vacation suites. Inquire with TopLinkers today.'
+    }
+  },
+  {
+    path: '/services/construction',
+    name: 'ServiceConstruction',
+    component: ConstructionPage,
+    meta: {
+      title: 'Turnkey House Construction Islamabad | TopLinkers Building',
+      description: 'PEC-licensed turnkey home construction, modern architectural design & grey structure execution in Islamabad. Request your construction estimate now.'
+    }
+  },
+  {
+    path: '/services/solar',
+    name: 'ServiceSolar',
+    component: SolarPage,
+    meta: {
+      title: 'Solar Net Metering & Tier-1 Panels Islamabad | TopLinkers',
+      description: 'Authorized on-grid and hybrid solar installations (10kW, 20kW, 50kW) with IESCO net metering approval in Islamabad. Reduce electricity bills by 85%.'
     }
   },
   {

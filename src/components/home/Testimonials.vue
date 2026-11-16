@@ -127,14 +127,26 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { StarIcon, CheckBadgeIcon } from '@heroicons/vue/24/solid'
 import SectionHeading from '../ui/SectionHeading.vue'
-import { useAdminStore } from '../../stores/admin'
+import { defaultReviews } from '../../data/reviews'
 
-const adminStore = useAdminStore()
-
-const testimonials = computed(() => adminStore.reviews || [])
+// Use decoupled public reviews data (no dependency on 1,600+ line admin store on homepage)
+const testimonials = computed(() => {
+  if (typeof window !== 'undefined') {
+    try {
+      const stored = localStorage.getItem('toplinkers_client_reviews')
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed
+      }
+    } catch (e) {
+      // Fallback to static verified reviews
+    }
+  }
+  return defaultReviews
+})
 
 const reverseTestimonials = computed(() => {
   return [...testimonials.value].reverse()
@@ -145,8 +157,4 @@ const getFirstLetter = (name) => {
   const match = String(name).trim().match(/[a-zA-Z]/)
   return match ? match[0].toUpperCase() : String(name).trim().charAt(0).toUpperCase()
 }
-
-onMounted(() => {
-  adminStore.syncFromBackend()
-})
 </script>

@@ -28,6 +28,9 @@ scratch/
 *.zip
 cleanup_audit_report.json
 master_audit_results.json
+seo_audit_parsed.json
+__pycache__/
+*.pyc
 
 backend/vendor/
 backend/.env

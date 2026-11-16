@@ -3,7 +3,9 @@ Content-Signal: search=yes, ai-train=no
 
 User-agent: *
 Allow: /
+Disallow: /admin
 Disallow: /admin/
+Disallow: /api
 Disallow: /api/
 
 # Host & Sitemaps
