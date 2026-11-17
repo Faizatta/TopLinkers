@@ -54,6 +54,12 @@ ErrorDocument 404 /404.html
 </IfModule>
 
 # Content-Type & Agent Headers for Specific Endpoints
+<Files "ads.txt">
+  ForceType text/plain
+  Header set Content-Type "text/plain; charset=utf-8"
+  Header set Access-Control-Allow-Origin "*"
+</Files>
+
 <Files "llms.txt">
   ForceType text/plain
   Header set Content-Type "text/plain; charset=utf-8"
