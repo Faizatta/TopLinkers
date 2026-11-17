@@ -280,66 +280,64 @@
       })()
     </script>
 
-    <!-- Vue App Mounting Target with Semantic Pre-Rendered Fallback for Agents & Crawlers -->
-    <div id="app">
-      <header style="background:#0F2A44;color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;">
-        <a href="/" aria-label="TopLinkers Home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font-weight:900;font-size:20px;">
-          <img src="/toplinkers-logo-sm.png" alt="Top Linkers" width="40" height="40" style="background:#fff;border-radius:4px;padding:2px;" />
-          <span><span style="color:#E53935;">Top</span> Linkers</span>
-        </a>
-        <nav aria-label="Primary Navigation" style="display:flex;gap:16px;">
-          <a href="/about" style="color:#16B4E8;text-decoration:none;font-weight:700;">About Us</a>
-          <a href="/services" style="color:#fff;text-decoration:none;font-weight:600;">Services</a>
-          <a href="/listings" style="color:#fff;text-decoration:none;font-weight:600;">Properties</a>
-          <a href="/contact" style="color:#fff;text-decoration:none;font-weight:600;">Contact</a>
-        </nav>
-      </header>
+    <!-- Vue App Mounting Target (Clean for seamless Vue hydration & LCP shell) -->
+    <div id="app"></div>
 
-      <main style="max-width:1200px;margin:32px auto;padding:0 20px;">
-        <h1 style="font-size:32px;font-weight:900;color:#0F2A44;margin-bottom:16px;line-height:1.2;">
-          TopLinkers | Premier Real Estate, Turnkey Construction &amp; Solar in Islamabad
-        </h1>
-        <p style="font-size:16px;line-height:1.6;color:#334155;margin-bottom:24px;">
-          Top Linkers Real Estate, Construction &amp; Solar offers verified CDA/RDA plots in TopCity-1 &amp; PECHS, cash possession Moqa Ka Plots, PHA flats in I-12 &amp; I-16, Harsukh Nathia Gali luxury suites, turnkey house construction, and Tier-1 solar net metering in Islamabad, Pakistan.
-        </p>
+    <!-- Crawlable Semantic Fallback for Non-JS Crawlers & Search Engines -->
+    <noscript>
+      <div style="max-width:1200px;margin:32px auto;padding:0 20px;font-family:sans-serif;">
+        <header style="background:#0F2A44;color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;">
+          <a href="/" aria-label="TopLinkers Home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font-weight:900;font-size:20px;">
+            <img src="/toplinkers-logo-sm.png" alt="Top Linkers" width="40" height="40" style="background:#fff;border-radius:4px;padding:2px;" />
+            <span><span style="color:#E53935;">Top</span> Linkers</span>
+          </a>
+          <nav aria-label="Primary Navigation" style="display:flex;gap:16px;">
+            <a href="/about" style="color:#16B4E8;text-decoration:none;font-weight:700;">About Us</a>
+            <a href="/services" style="color:#fff;text-decoration:none;font-weight:600;">Services</a>
+            <a href="/listings" style="color:#fff;text-decoration:none;font-weight:600;">Properties</a>
+            <a href="/contact" style="color:#fff;text-decoration:none;font-weight:600;">Contact</a>
+          </nav>
+        </header>
 
-        <section style="background:#fff;border-radius:8px;padding:24px;border:1px solid #E2E8F0;margin-bottom:32px;">
-          <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Verified Real Estate &amp; Engineering Portfolios</h2>
-          <ul style="line-height:2;color:#475569;">
-            <li><strong>Verified Plot &amp; Flat Listings:</strong> <a href="/listings" style="color:#16B4E8;text-decoration:none;">Browse TopCity, PECHS, and PHA Apartments</a></li>
-            <li><strong>Turnkey House Construction &amp; Solar:</strong> <a href="/services" style="color:#16B4E8;text-decoration:none;">PEC-Licensed Building &amp; IESCO Net Metering</a></li>
-            <li><strong>Harsukh Residencies Nathia Gali:</strong> <a href="/hr-sukh" style="color:#16B4E8;text-decoration:none;">Luxury Vacation Suites with 20%+ Rental Yield</a></li>
-            <li><strong>Executive Advisory Team:</strong> <a href="/team" style="color:#16B4E8;text-decoration:none;">Meet Our Property Consultants &amp; Engineers</a></li>
-          </ul>
-        </section>
-
-        <section style="background:#F1F5F9;border-radius:8px;padding:24px;border:1px solid #CBD5E1;">
-          <h2 style="font-size:18px;font-weight:700;color:#0F2A44;margin-bottom:8px;">Essential Company &amp; Legal Verification</h2>
-          <p style="font-size:14px;color:#64748B;margin-bottom:12px;">
-            Head Office: 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad | Phone: +92-334-9522157
+        <main style="margin:24px 0;">
+          <h1 style="font-size:28px;font-weight:900;color:#0F2A44;margin-bottom:16px;line-height:1.2;">
+            TopLinkers | Premier Real Estate, Turnkey Construction &amp; Solar in Islamabad
+          </h1>
+          <p style="font-size:15px;line-height:1.6;color:#334155;margin-bottom:24px;">
+            Top Linkers Real Estate, Construction &amp; Solar offers verified CDA/RDA plots in TopCity-1 &amp; PECHS, cash possession Moqa Ka Plots, PHA flats in I-12 &amp; I-16, Harsukh Nathia Gali luxury suites, turnkey house construction, and Tier-1 solar net metering in Islamabad, Pakistan.
           </p>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:14px;">
-            <a href="/about" style="color:#0F2A44;font-weight:700;">About TopLinkers</a>
-            <a href="/contact" style="color:#0F2A44;font-weight:700;">Contact Us</a>
-            <a href="/terms-and-conditions" style="color:#0F2A44;font-weight:700;">Terms &amp; Conditions</a>
-            <a href="/privacy-policy" style="color:#0F2A44;font-weight:700;">Privacy Policy</a>
-            <a href="/disclaimer" style="color:#0F2A44;font-weight:700;">Legal Disclaimer</a>
-            <a href="/llms.txt" style="color:#16B4E8;font-weight:700;">llms.txt (Agent Guide)</a>
-          </div>
-        </section>
-      </main>
 
-      <footer style="background:#081322;color:#94A3B8;padding:24px;text-align:center;font-size:13px;margin-top:48px;">
-        <p>&copy; 2026 Top Linkers Real Estate, Construction &amp; Solar. Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan.</p>
-        <p style="margin-top:8px;">
-          <a href="/about" style="color:#38BDF8;text-decoration:none;margin:0 8px;">About</a> |
-          <a href="/contact" style="color:#38BDF8;text-decoration:none;margin:0 8px;">Contact</a> |
-          <a href="/terms-and-conditions" style="color:#38BDF8;text-decoration:none;margin:0 8px;">Terms &amp; Conditions</a> |
-          <a href="/privacy-policy" style="color:#38BDF8;text-decoration:none;margin:0 8px;">Privacy Policy</a> |
-          <a href="/llms.txt" style="color:#38BDF8;text-decoration:none;margin:0 8px;">llms.txt</a>
-        </p>
-      </footer>
-    </div>
+          <section style="background:#fff;border-radius:8px;padding:24px;border:1px solid #E2E8F0;margin-bottom:24px;">
+            <h2 style="font-size:18px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Verified Real Estate &amp; Engineering Portfolios</h2>
+            <ul style="line-height:2;color:#475569;">
+              <li><strong>Verified Plot &amp; Flat Listings:</strong> <a href="/listings" style="color:#16B4E8;text-decoration:none;">Browse TopCity, PECHS, and PHA Apartments</a></li>
+              <li><strong>Turnkey House Construction &amp; Solar:</strong> <a href="/services" style="color:#16B4E8;text-decoration:none;">PEC-Licensed Building &amp; IESCO Net Metering</a></li>
+              <li><strong>Harsukh Residencies Nathia Gali:</strong> <a href="/hr-sukh" style="color:#16B4E8;text-decoration:none;">Luxury Vacation Suites with 20%+ Rental Yield</a></li>
+              <li><strong>Executive Advisory Team:</strong> <a href="/team" style="color:#16B4E8;text-decoration:none;">Meet Our Property Consultants &amp; Engineers</a></li>
+            </ul>
+          </section>
+
+          <section style="background:#F1F5F9;border-radius:8px;padding:24px;border:1px solid #CBD5E1;">
+            <h2 style="font-size:16px;font-weight:700;color:#0F2A44;margin-bottom:8px;">Essential Company &amp; Legal Verification</h2>
+            <p style="font-size:13px;color:#64748B;margin-bottom:12px;">
+              Head Office: 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad | Phone: +92-334-9522157
+            </p>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:13px;">
+              <a href="/about" style="color:#0F2A44;font-weight:700;">About TopLinkers</a>
+              <a href="/contact" style="color:#0F2A44;font-weight:700;">Contact Us</a>
+              <a href="/terms-and-conditions" style="color:#0F2A44;font-weight:700;">Terms &amp; Conditions</a>
+              <a href="/privacy-policy" style="color:#0F2A44;font-weight:700;">Privacy Policy</a>
+              <a href="/disclaimer" style="color:#0F2A44;font-weight:700;">Legal Disclaimer</a>
+              <a href="/llms.txt" style="color:#16B4E8;font-weight:700;">llms.txt (Agent Guide)</a>
+            </div>
+          </section>
+        </main>
+
+        <footer style="background:#081322;color:#94A3B8;padding:20px;text-align:center;font-size:12px;margin-top:32px;">
+          <p>&copy; 2026 Top Linkers Real Estate, Construction &amp; Solar. Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan.</p>
+        </footer>
+      </div>
+    </noscript>
 
     <script type="module" src="/src/main.js"></script>
   </body>

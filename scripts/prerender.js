@@ -571,10 +571,9 @@ function prerender() {
     </div>
     `
 
-    const appIndex = html.indexOf('<div id="app">')
-    const bodyIndex = html.indexOf('</body>')
-    if (appIndex !== -1 && bodyIndex !== -1) {
-      html = html.substring(0, appIndex) + semanticFallback + '\n    ' + html.substring(bodyIndex)
+    // 7. Inject Semantic Fallback only for sub-routes (leave '/' clean for Vue hydration and LCP shell)
+    if (r.path !== '/') {
+      html = html.replace('<div id="app"></div>', semanticFallback)
     }
 
     // Write file to target destinations:
