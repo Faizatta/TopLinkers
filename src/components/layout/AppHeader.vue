@@ -111,6 +111,7 @@
               <router-link
                 to="/services#plot"
                 class="block px-3 py-1.5 rounded-lg text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] hover:bg-slate-50 transition-colors"
+                @click="onServiceClick('plot')"
               >
                 Plot Services
               </router-link>
@@ -118,6 +119,7 @@
               <router-link
                 to="/services#flats"
                 class="block px-3 py-1.5 rounded-lg text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] hover:bg-slate-50 transition-colors"
+                @click="onServiceClick('flats')"
               >
                 PHA &amp; Flats
               </router-link>
@@ -125,6 +127,7 @@
               <router-link
                 to="/services#construction"
                 class="block px-3 py-1.5 rounded-lg text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] hover:bg-slate-50 transition-colors"
+                @click="onServiceClick('construction')"
               >
                 Construction Services
               </router-link>
@@ -132,6 +135,7 @@
               <router-link
                 to="/services#solar"
                 class="block px-3 py-1.5 rounded-lg text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] hover:bg-slate-50 transition-colors"
+                @click="onServiceClick('solar')"
               >
                 Solar Services
               </router-link>
@@ -366,28 +370,28 @@
                     <router-link
                       to="/services#plot"
                       class="block px-3 py-2 rounded-lg text-slate-700 hover:text-[#16B4E8] hover:bg-slate-50 font-medium transition-colors"
-                      @click="mobileDrawerOpen = false"
+                      @click="onServiceClick('plot')"
                     >
                       Plot Services (TopCity, PECHS, CDA)
                     </router-link>
                     <router-link
                       to="/services#flats"
                       class="block px-3 py-2 rounded-lg text-slate-700 hover:text-[#16B4E8] hover:bg-slate-50 font-medium transition-colors"
-                      @click="mobileDrawerOpen = false"
+                      @click="onServiceClick('flats')"
                     >
                       PHA &amp; Flats (I-12 &amp; I-16)
                     </router-link>
                     <router-link
                       to="/services#construction"
                       class="block px-3 py-2 rounded-lg text-slate-700 hover:text-[#16B4E8] hover:bg-slate-50 font-medium transition-colors"
-                      @click="mobileDrawerOpen = false"
+                      @click="onServiceClick('construction')"
                     >
                       Construction &amp; Turnkey
                     </router-link>
                     <router-link
                       to="/services#solar"
                       class="block px-3 py-2 rounded-lg text-slate-700 hover:text-[#16B4E8] hover:bg-slate-50 font-medium transition-colors"
-                      @click="mobileDrawerOpen = false"
+                      @click="onServiceClick('solar')"
                     >
                       Solar Net Metering Solutions
                     </router-link>
@@ -480,6 +484,15 @@ const ui = useUiStore()
 const isScrolled = ref(false)
 const mobileDrawerOpen = ref(false)
 const mobileServicesOpen = ref(true)
+
+const onServiceClick = (section) => {
+  mobileDrawerOpen.value = false
+  if (route.path === '/services') {
+    window.dispatchEvent(
+      new CustomEvent('toplinkers:navigate-service', { detail: { section } })
+    )
+  }
+}
 
 const isHomePage = computed(() => route.path === '/')
 

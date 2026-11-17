@@ -1669,7 +1669,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watch, nextTick, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { scrollTo } from '../services/lenis'
 import {
@@ -1921,16 +1921,52 @@ const submitSolarForm = () => {
   solarFormSubmitted.value = true
 }
 
-onMounted(() => {
-  document.title = 'Our Services: Plots, PHA Flats, Turnkey Construction & Solar | TopLinkers'
-  if (route.hash) {
-    const section = route.hash.replace('#', '')
-    if (['plot', 'flats', 'construction', 'solar'].includes(section)) {
-      activeTab.value = section
-      setTimeout(() => {
-        scrollTo(`#${section}`, { offset: -90, duration: 1.2 })
-      }, 200)
+const handleSectionChange = (sectionId, smooth = true) => {
+  if (!sectionId) return
+  const id = sectionId.replace('#', '')
+  if (['all', 'plot', 'flats', 'construction', 'solar'].includes(id)) {
+    activeTab.value = id
+    if (id !== 'all') {
+      nextTick(() => {
+        setTimeout(() => {
+          const el = document.getElementById(id)
+          if (el) {
+            scrollTo(`#${id}`, { offset: -90, duration: smooth ? 1.0 : 0 })
+          }
+        }, 120)
+      })
     }
   }
+}
+
+// Watch for hash changes when navigating between services from mobile drawer or links
+watch(
+  () => route.hash,
+  (newHash) => {
+    if (newHash) {
+      handleSectionChange(newHash)
+    } else if (route.path === '/services') {
+      activeTab.value = 'all'
+    }
+  }
+)
+
+// Listen to custom navigation events from header / mobile drawer
+const onServiceNav = (e) => {
+  if (e.detail?.section) {
+    handleSectionChange(e.detail.section)
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('toplinkers:navigate-service', onServiceNav)
+  document.title = 'Our Services: Plots, PHA Flats, Turnkey Construction & Solar | TopLinkers'
+  if (route.hash) {
+    handleSectionChange(route.hash)
+  }
+})
+
+onUnmounted(() => {
+  window.removeEventListener('toplinkers:navigate-service', onServiceNav)
 })
 </script>
