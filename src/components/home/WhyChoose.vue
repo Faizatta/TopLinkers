@@ -26,8 +26,7 @@
           <!-- LEFT COLUMN: Dynamic Auto-Animated Spotlight & Core Narrative -->
           <div class="lg:col-span-5 space-y-6">
             <div class="flex items-center justify-between">
-              <div class="inline-flex items-center gap-2 px-3.5 py-1 bg-[#16B4E8]/15 border border-[#16B4E8]/30 text-[#16B4E8] text-[10px] font-black uppercase tracking-widest rounded-full">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#16B4E8] animate-ping"></span>
+              <div class="inline-flex items-center px-3.5 py-1 bg-[#16B4E8]/15 border border-[#16B4E8]/30 text-[#16B4E8] text-[10px] font-black uppercase tracking-widest rounded-full">
                 <span>Why Choose Top Linkers</span>
               </div>
 
