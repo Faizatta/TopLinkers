@@ -12,10 +12,10 @@
       <!-- Left: Logo without circle wrapper + Company Name & Subtitle -->
       <router-link to="/" class="flex items-center gap-2 sm:gap-3 focus:outline-none group min-w-0">
         <img
-          src="/toplinkers-logo-sm.png"
+          src="/toplinkers-logo-mark.webp"
           alt="Top Linkers"
-          width="129"
-          height="168"
+          width="367"
+          height="488"
           loading="eager"
           fetchpriority="high"
           decoding="async"
