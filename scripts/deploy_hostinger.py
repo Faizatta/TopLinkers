@@ -155,6 +155,9 @@ def main():
     if not targets:
         targets.append(initial_root)
 
+    # Prioritize primary live domain directory (/domains/toplinkersgroup.com/public_html) first
+    targets.sort(key=lambda t: 0 if 'toplinkers' in t.lower() else 1)
+
     print(f"\n🎯 Target Web Directories to Update: {targets}")
 
     dist_dir = os.path.abspath('dist')
