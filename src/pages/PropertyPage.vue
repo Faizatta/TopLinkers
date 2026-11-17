@@ -187,7 +187,7 @@ const updatePropertySEO = (prop) => {
   script.type = 'application/ld+json'
   script.text = JSON.stringify({
     '@context': 'https://schema.org',
-    '@type': prop.type === 'apartment' ? 'Apartment' : prop.type === 'house' ? 'SingleFamilyResidence' : 'Product',
+    '@type': prop.type === 'apartment' ? 'Apartment' : (prop.type === 'house' || prop.type === 'villa') ? 'SingleFamilyResidence' : 'RealEstateListing',
     'name': prop.title,
     'description': desc,
     'url': window.location.href,

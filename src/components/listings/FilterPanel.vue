@@ -195,6 +195,7 @@
             @change="emitSearch"
           >
             <option value="">Any Max</option>
+            <option value="3000000">PKR 30 Lac</option>
             <option value="5000000">PKR 50 Lac</option>
             <option value="10000000">PKR 1 Crore</option>
             <option value="25000000">PKR 2.5 Crore</option>
@@ -333,11 +334,15 @@ const popularLocations = [
   { value: 'PHA', label: 'PHA (I-12 / I-16)' },
   { value: 'PECHS', label: 'PECHS Society' },
   { value: 'Faisal', label: 'Faisal Town (FT-II)' },
+  { value: 'Blue', label: 'Blue World City' },
+  { value: 'DHA', label: 'DHA Islamabad' },
+  { value: 'Bahria', label: 'Bahria Town' },
   { value: 'Nathia', label: 'Nathia Gali' }
 ]
 
 const budgetPresets = [
   { label: 'Any Budget', min: '', max: '' },
+  { label: 'Under 30 Lac', min: '', max: 3000000 },
   { label: 'Under 50 Lac', min: '', max: 5000000 },
   { label: '50 Lac – 1.5 Cr', min: 5000000, max: 15000000 },
   { label: '1.5 Cr – 3 Cr', min: 15000000, max: 30000000 },

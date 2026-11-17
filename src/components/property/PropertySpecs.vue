@@ -58,7 +58,7 @@
           </div>
           <div class="min-w-0">
             <span class="block text-[10px] text-gray-400 uppercase font-black tracking-wider">City / Zone</span>
-            <span class="text-sm font-bold text-[#0F2A44] truncate block">{{ property.cityName || 'Islamabad' }}</span>
+            <span class="text-sm font-bold text-[#0F2A44] truncate block">{{ property.city || property.cityName || 'Islamabad' }}</span>
           </div>
         </div>
 
@@ -123,7 +123,7 @@
           Location & Neighborhood
         </h2>
         <a
-          :href="`https://maps.google.com/?q=${encodeURIComponent(property.address + ' ' + (property.cityName || 'Islamabad'))}`"
+          :href="`https://maps.google.com/?q=${encodeURIComponent(googleMapsSearchQuery)}`"
           target="_blank"
           rel="noopener noreferrer"
           class="text-xs font-bold text-[#16B4E8] hover:underline flex items-center gap-1"
@@ -134,13 +134,14 @@
       </div>
       <p class="text-xs text-gray-500 flex items-center gap-1.5">
         <MapPinIcon class="w-4 h-4 text-gray-400 flex-shrink-0" />
-        <span>{{ property.address }}, {{ property.cityName || 'Islamabad' }}, Pakistan</span>
+        <span>{{ property.address }}{{ (property.city || property.cityName) && !property.address?.toLowerCase().includes((property.city || property.cityName).toLowerCase()) ? ', ' + (property.city || property.cityName) : '' }}, Pakistan</span>
       </p>
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import {
   CheckIcon,
   ArrowTopRightOnSquareIcon,
@@ -153,10 +154,20 @@ import {
   ShieldCheckIcon
 } from '@heroicons/vue/24/outline'
 
-defineProps({
+const props = defineProps({
   property: {
     type: Object,
     required: true
   }
+})
+
+const googleMapsSearchQuery = computed(() => {
+  const p = props.property
+  if (!p) return 'Islamabad, Pakistan'
+  const city = p.city || p.cityName || ''
+  if (city && !p.address?.toLowerCase().includes(city.toLowerCase())) {
+    return `${p.address}, ${city}, Pakistan`
+  }
+  return `${p.address || city || 'Islamabad'}, Pakistan`
 })
 </script>

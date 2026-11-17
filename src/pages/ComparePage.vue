@@ -385,19 +385,19 @@
               </div>
 
               <div class="p-2.5">
-                <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Payment Basis / Rate</div>
+                <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Price per Sq Ft</div>
                 <div class="grid grid-cols-2 gap-2 text-center">
                   <div class="text-[11px] font-bold text-slate-700 bg-slate-50 p-2 rounded-lg">
-                    {{ mobilePropA.pricePerSqft || (mobilePropA.type === 'plot' ? '100% Cash Registry' : 'Standard Rate') }}
+                    {{ mobilePropA.pricePerSqft || (mobilePropA.sqft ? 'PKR ' + Math.round(mobilePropA.price / mobilePropA.sqft).toLocaleString() + '/sqft' : 'N/A') }}
                   </div>
                   <div class="text-[11px] font-bold text-slate-700 bg-slate-50 p-2 rounded-lg">
-                    {{ mobilePropB.pricePerSqft || (mobilePropB.type === 'plot' ? '100% Cash Registry' : 'Standard Rate') }}
+                    {{ mobilePropB.pricePerSqft || (mobilePropB.sqft ? 'PKR ' + Math.round(mobilePropB.price / mobilePropB.sqft).toLocaleString() + '/sqft' : 'N/A') }}
                   </div>
                 </div>
               </div>
 
               <div class="p-2.5">
-                <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Installment / Booking Plan</div>
+                <div class="text-[10px] font-bold uppercase text-slate-400 text-center mb-1">Payment Terms / Plan</div>
                 <div class="grid grid-cols-2 gap-2 text-center">
                   <div class="text-[10px] font-bold p-2 rounded-lg" :class="mobilePropA.pricePostfix?.includes('Booking') || /installment/i.test(mobilePropA.title) ? 'bg-amber-50 text-amber-800' : 'bg-emerald-50 text-emerald-800'">
                     {{ mobilePropA.pricePostfix || (mobilePropA.type === 'plot' ? 'Cash Demarcated' : 'Ready Possession') }}
@@ -570,21 +570,21 @@
                 </td>
               </tr>
 
-              <!-- Price Per Sq Ft / Rate Basis -->
+              <!-- Price Per Sq Ft -->
               <tr class="hover:bg-slate-50/50 transition-colors">
-                <td class="p-4 font-bold text-gray-600 uppercase text-[11px]">Payment Basis</td>
+                <td class="p-4 font-bold text-gray-600 uppercase text-[11px]">Price per Sq Ft</td>
                 <td
                   v-for="prop in compareProperties"
                   :key="'rate-basis-' + prop.id"
                   class="p-4 border-l border-gray-200 font-semibold text-slate-700"
                 >
-                  {{ prop.pricePerSqft || (prop.type === 'plot' ? '100% Cash Registry Demarcation' : 'Standard Rate') }}
+                  {{ prop.pricePerSqft || (prop.sqft ? 'PKR ' + Math.round(prop.price / prop.sqft).toLocaleString() + '/sqft' : 'N/A') }}
                 </td>
               </tr>
 
               <!-- Payment Schedule & Down Payment -->
               <tr class="hover:bg-slate-50/50 transition-colors">
-                <td class="p-4 font-bold text-gray-600 uppercase text-[11px]">Installment / Booking</td>
+                <td class="p-4 font-bold text-gray-600 uppercase text-[11px]">Payment Terms / Plan</td>
                 <td
                   v-for="prop in compareProperties"
                   :key="'installment-' + prop.id"
@@ -1031,8 +1031,9 @@
 
         <form @submit.prevent="submitComparisonQuery" class="space-y-4">
           <div>
-            <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Your Full Name *</label>
+            <label for="compare-name" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Your Full Name *</label>
             <input
+              id="compare-name"
               v-model="queryForm.name"
               type="text"
               required
@@ -1042,19 +1043,21 @@
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Phone / WhatsApp *</label>
+            <label for="compare-phone" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Phone / WhatsApp *</label>
             <input
+              id="compare-phone"
               v-model="queryForm.phone"
               type="tel"
               required
-              placeholder="0334-9522157 or 0332-4004884"
+              placeholder="0334-9522157 or +923349522157"
               class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#16B4E8]"
             />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Email (Optional)</label>
+            <label for="compare-email" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Email (Optional)</label>
             <input
+              id="compare-email"
               v-model="queryForm.email"
               type="email"
               placeholder="name@gmail.com"
@@ -1063,8 +1066,9 @@
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Notes / Requirements</label>
+            <label for="compare-message" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Notes / Requirements</label>
             <textarea
+              id="compare-message"
               v-model="queryForm.message"
               rows="3"
               placeholder="e.g. Any special questions regarding installment schedule, down payment, or title check..."
@@ -1290,34 +1294,63 @@ const clearAll = () => {
   } catch (e) {}
 }
 
+import { isValidPhone, isValidEmail } from '../utils/validation'
+
 const submitComparisonQuery = async () => {
+  if (querySubmitting.value) return
+
+  const cleanName = (queryForm.value.name || '').trim()
+  const cleanPhone = (queryForm.value.phone || '').trim()
+  const cleanEmail = (queryForm.value.email || '').trim()
+  const cleanMsg = (queryForm.value.message || '').trim()
+
+  if (!cleanName) {
+    ui.addToast({ type: 'error', title: 'Name Required', message: 'Please enter your full name.' })
+    return
+  }
+
+  if (!cleanPhone || !isValidPhone(cleanPhone)) {
+    ui.addToast({ type: 'error', title: 'Invalid Phone Number', message: 'Please enter a valid phone or WhatsApp number (e.g. 0334-9522157).' })
+    return
+  }
+
+  if (cleanEmail && !isValidEmail(cleanEmail)) {
+    ui.addToast({ type: 'error', title: 'Invalid Email', message: 'Please enter a valid email address.' })
+    return
+  }
+
   querySubmitting.value = true
   const comparedTitles = compareProperties.value.map(p => p.title).join(' vs ')
   const leadData = {
-    name: queryForm.value.name,
-    phone: queryForm.value.phone,
-    email: queryForm.value.email || '',
+    name: cleanName,
+    phone: cleanPhone,
+    email: cleanEmail,
     city: 'Islamabad (Comparison Inquirer)',
     division: 'Comparison',
     project: comparedTitles || 'Flats & Plots Comparison',
     budget: 'Comparison Consultation',
-    notes: queryForm.value.message || 'Client inquired via Compare Flats & Plots tool.',
+    notes: cleanMsg || 'Client inquired via Compare Flats & Plots tool.',
     source: 'Compare Flats & Plots Page'
   }
 
   try {
     await adminStore.addLead(leadData)
-  } catch (e) {}
-
-  querySubmitting.value = false
-  queryModalOpen.value = false
-  queryForm.value = { name: '', phone: '', email: '', message: '' }
-
-  ui.addToast({
-    type: 'success',
-    title: 'Inquiry Received',
-    message: 'Thank you! Our property advisory team will review your comparison and call you shortly.'
-  })
+    queryModalOpen.value = false
+    queryForm.value = { name: '', phone: '', email: '', message: '' }
+    ui.addToast({
+      type: 'success',
+      title: 'Inquiry Received',
+      message: 'Thank you! Our property advisory team will review your comparison and call you shortly.'
+    })
+  } catch (e) {
+    ui.addToast({
+      type: 'error',
+      title: 'Submission Failed',
+      message: 'Could not send comparison inquiry. Please contact us directly on WhatsApp.'
+    })
+  } finally {
+    querySubmitting.value = false
+  }
 }
 
 onMounted(async () => {

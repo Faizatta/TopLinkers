@@ -291,8 +291,9 @@
             <!-- Form -->
             <form @submit.prevent="submitInquiry" class="space-y-3">
               <div>
-                <label class="block text-[11px] font-bold text-gray-600 mb-1">Your Full Name</label>
+                <label for="hrsukh-name" class="block text-[11px] font-bold text-gray-600 mb-1">Your Full Name</label>
                 <input
+                  id="hrsukh-name"
                   v-model="form.name"
                   type="text"
                   required
@@ -302,12 +303,13 @@
               </div>
 
               <div>
-                <label class="block text-[11px] font-bold text-gray-600 mb-1">WhatsApp / Mobile Number</label>
+                <label for="hrsukh-phone" class="block text-[11px] font-bold text-gray-600 mb-1">WhatsApp / Mobile Number</label>
                 <input
+                  id="hrsukh-phone"
                   v-model="form.phone"
                   type="tel"
                   required
-                  placeholder="03XX-XXXXXXX"
+                  placeholder="03XX-XXXXXXX or +923001234567"
                   class="w-full text-xs p-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-[#16B4E8] bg-gray-50 focus:bg-white"
                 />
               </div>
@@ -330,8 +332,9 @@
               </div>
 
               <div>
-                <label class="block text-[11px] font-bold text-gray-600 mb-1">Description / Requirements Note (Optional)</label>
+                <label for="hrsukh-notes" class="block text-[11px] font-bold text-gray-600 mb-1">Description / Requirements Note (Optional)</label>
                 <textarea
+                  id="hrsukh-notes"
                   v-model="form.notes"
                   rows="2"
                   placeholder="e.g. Preferred floor, installment plan duration, or family requirements..."
@@ -502,13 +505,29 @@ const handleRequestUnitPrice = (unit) => {
   adminStore.showToast(`Selected ${unit?.name || 'Suite'} (${unit?.code || ''}) — enter your details for official pricing.`)
 }
 
+import { isValidPhone } from '../utils/validation'
+
 const submitInquiry = () => {
+  const cleanName = (form.value.name || '').trim()
+  const cleanPhone = (form.value.phone || '').trim()
+  const cleanNotes = (form.value.notes || '').trim()
+
+  if (!cleanName) {
+    adminStore.showToast('Please enter your full name.')
+    return
+  }
+
+  if (!cleanPhone || !isValidPhone(cleanPhone)) {
+    adminStore.showToast('Please enter a valid phone or WhatsApp number (e.g. 0334-9522157).')
+    return
+  }
+
   const chosen = suitePlans.value.find(s => (s.id || s.title) === form.value.suite) || suitePlans.value[0]
   const suiteName = chosen ? `${chosen.title} (${chosen.price})` : '1-Bed Alpine Flat (PKR 1.25 Cr)'
-  const noteDetails = form.value.notes?.trim() ? ` | Client Note: ${form.value.notes.trim()}` : ''
+  const noteDetails = cleanNotes ? ` | Client Note: ${cleanNotes}` : ''
   adminStore.addLead({
-    name: form.value.name || 'Harsukh Client',
-    phone: form.value.phone,
+    name: cleanName,
+    phone: cleanPhone,
     city: 'Nathia Gali Inquiry',
     division: 'Harsukh',
     project: `Harsukh Nathia Gali - ${suiteName}`,
@@ -518,8 +537,8 @@ const submitInquiry = () => {
     notes: `Requested official brochure & payment plan for ${suiteName}.${noteDetails}`
   })
   isSubmitted.value = true
-  const waNote = form.value.notes?.trim() ? ` Note/Requirements: ${form.value.notes.trim()}` : ''
-  window.open(`https://wa.me/923349522157?text=${encodeURIComponent(`Hello TopLinkers, my name is ${form.value.name} (${form.value.phone}). I would like to request the brochure and payment plan for Harsukh Nathia Gali (${suiteName}).${waNote}`)}`, '_blank')
+  const waNote = cleanNotes ? ` Note/Requirements: ${cleanNotes}` : ''
+  window.open(`https://wa.me/923349522157?text=${encodeURIComponent(`Hello TopLinkers, my name is ${cleanName} (${cleanPhone}). I would like to request the brochure and payment plan for Harsukh Nathia Gali (${suiteName}).${waNote}`)}`, '_blank')
 }
 
 onMounted(() => {

@@ -38,8 +38,9 @@
     <!-- Contact Form -->
     <form @submit.prevent="sendMessage" class="space-y-3">
       <div>
-        <label class="block text-[11px] font-bold text-gray-600 mb-1">Your Full Name</label>
+        <label for="agent-card-name" class="block text-[11px] font-bold text-gray-600 mb-1">Your Full Name</label>
         <input
+          id="agent-card-name"
           v-model="form.name"
           type="text"
           required
@@ -49,8 +50,9 @@
       </div>
 
       <div>
-        <label class="block text-[11px] font-bold text-gray-600 mb-1">WhatsApp / Phone Number</label>
+        <label for="agent-card-phone" class="block text-[11px] font-bold text-gray-600 mb-1">WhatsApp / Phone Number</label>
         <input
+          id="agent-card-phone"
           v-model="form.phone"
           type="tel"
           required
@@ -60,8 +62,9 @@
       </div>
 
       <div>
-        <label class="block text-[11px] font-bold text-gray-600 mb-1">Email Address</label>
+        <label for="agent-card-email" class="block text-[11px] font-bold text-gray-600 mb-1">Email Address</label>
         <input
+          id="agent-card-email"
           v-model="form.email"
           type="email"
           required
@@ -85,8 +88,9 @@
       </div>
 
       <div>
-        <label class="block text-[11px] font-bold text-gray-600 mb-1">Description / Inquiry Note</label>
+        <label for="agent-card-message" class="block text-[11px] font-bold text-gray-600 mb-1">Description / Inquiry Note</label>
         <textarea
+          id="agent-card-message"
           v-model="form.message"
           rows="3"
           required
@@ -151,26 +155,67 @@ const whatsappUrl = computed(() => {
   return `https://wa.me/${phone}?text=${text}`
 })
 
+import { isValidPhone, isValidEmail } from '../../utils/validation'
+
 const sendMessage = async () => {
+  if (isSending.value) return
+
+  const cleanName = (form.name || '').trim()
+  const cleanPhone = (form.phone || '').trim()
+  const cleanEmail = (form.email || '').trim()
+  const cleanMsg = (form.message || '').trim()
+
+  if (!cleanName) {
+    ui.addToast({ type: 'error', title: 'Name Required', message: 'Please enter your full name.' })
+    return
+  }
+
+  if (!cleanPhone || !isValidPhone(cleanPhone)) {
+    ui.addToast({
+      type: 'error',
+      title: 'Invalid Phone Number',
+      message: 'Please enter a valid phone or WhatsApp number (e.g. 0334-9522157).'
+    })
+    return
+  }
+
+  if (!cleanEmail || !isValidEmail(cleanEmail)) {
+    ui.addToast({
+      type: 'error',
+      title: 'Invalid Email',
+      message: 'Please enter a valid email address.'
+    })
+    return
+  }
+
+  if (!cleanMsg) {
+    ui.addToast({ type: 'error', title: 'Message Required', message: 'Please enter your message or question.' })
+    return
+  }
+
   isSending.value = true
   try {
     await api.submitInquiry({
       agentId: props.agent?.id || 'tl-advisory',
       agentName: agentName.value,
       propertyTitle: props.propertyTitle,
-      ...form
+      name: cleanName,
+      phone: cleanPhone,
+      email: cleanEmail,
+      userRole: form.userRole,
+      message: cleanMsg
     })
     adminStore.addLead({
-      name: form.name || 'Property Page Inquiry',
-      phone: form.phone,
-      email: form.email,
+      name: cleanName,
+      phone: cleanPhone,
+      email: cleanEmail,
       city: 'Islamabad',
       division: form.userRole === 'construction' ? 'Construction' : 'Plots',
       project: props.propertyTitle,
       budget: 'Inquiring on Listing',
       priority: 'High',
       source: 'Property Detail Page Form',
-      notes: form.message
+      notes: cleanMsg
     })
     ui.addToast({
       type: 'success',

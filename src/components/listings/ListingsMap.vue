@@ -60,6 +60,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import L from '../../utils/leaflet'
+import { isPropertyOfferActive, formatPkrAmount } from '../../utils/offer'
 
 const props = defineProps({
   properties: {
@@ -94,10 +95,12 @@ const initMap = () => {
 }
 
 const formatMarkerPrice = (p) => {
+  if (isPropertyOfferActive(p) && p.offerPrice) {
+    return `PKR ${formatPkrAmount(p.offerPrice)}`
+  }
   if (p.priceFormatted) return p.priceFormatted
-  if (p.price >= 10000000) return `PKR ${(p.price / 10000000).toFixed(1)} Cr`
-  if (p.price >= 100000) return `PKR ${Math.round(p.price / 100000)} Lac`
-  return `PKR ${p.price.toLocaleString()}`
+  if (p.price) return `PKR ${formatPkrAmount(p.price)}`
+  return 'Price on Request'
 }
 
 const renderMarkers = () => {

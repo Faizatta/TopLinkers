@@ -30,7 +30,9 @@ export const usePropertiesStore = defineStore('properties', {
 
   getters: {
     paginatedProperties: (state) => {
-      const start = (state.page - 1) * state.perPage
+      const totalP = Math.max(1, Math.ceil(state.properties.length / state.perPage))
+      const safePage = Math.min(Math.max(1, state.page), totalP)
+      const start = (safePage - 1) * state.perPage
       return state.properties.slice(start, start + state.perPage)
     },
     totalPages: (state) => Math.ceil(state.properties.length / state.perPage) || 1,
@@ -58,8 +60,12 @@ export const usePropertiesStore = defineStore('properties', {
       this.error = null
       try {
         const response = await api.getProperties(this.filters)
-        this.properties = response.data
-        this.total = response.total
+        this.properties = response.data || []
+        this.total = response.total !== undefined ? response.total : this.properties.length
+        const totalP = Math.max(1, Math.ceil(this.properties.length / this.perPage))
+        if (this.page > totalP) {
+          this.page = 1
+        }
       } catch (err) {
         this.error = 'Failed to load properties. Please try again.'
         console.error(err)
@@ -129,23 +135,23 @@ export const usePropertiesStore = defineStore('properties', {
     },
 
     syncFromQuery(query) {
-      if (query.keyword !== undefined) this.filters.keyword = query.keyword
-      if (query.status !== undefined) this.filters.status = query.status
-      if (query.beds !== undefined) this.filters.beds = query.beds
-      if (query.baths !== undefined) this.filters.baths = query.baths
-      if (query.minPrice !== undefined) this.filters.minPrice = query.minPrice
-      if (query.maxPrice !== undefined) this.filters.maxPrice = query.maxPrice
-      if (query.type !== undefined) this.filters.type = query.type
-      if (query.city !== undefined) this.filters.city = query.city
-      if (query.minArea !== undefined) this.filters.minArea = query.minArea
-      if (query.maxArea !== undefined) this.filters.maxArea = query.maxArea
-      if (query.sort !== undefined) this.filters.sort = query.sort
+      this.filters.keyword = query.keyword || ''
+      this.filters.status = query.status || 'all'
+      this.filters.beds = query.beds || 'any'
+      this.filters.baths = query.baths || 'any'
+      this.filters.minPrice = query.minPrice || ''
+      this.filters.maxPrice = query.maxPrice || ''
+      this.filters.type = query.type || 'all'
+      this.filters.city = query.city || 'all'
+      this.filters.minArea = query.minArea || ''
+      this.filters.maxArea = query.maxArea || ''
+      this.filters.sort = query.sort || 'newest'
       if (query.features) {
         this.filters.features = Array.isArray(query.features) ? query.features : [query.features]
+      } else {
+        this.filters.features = []
       }
-      if (query.page) {
-        this.page = parseInt(query.page, 10) || 1
-      }
+      this.page = query.page ? (parseInt(query.page, 10) || 1) : 1
     },
 
     toQueryObject() {

@@ -159,8 +159,9 @@
               <!-- Row 1: Name and WhatsApp -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-xs font-bold uppercase text-gray-600 mb-1.5">Your Full Name *</label>
+                  <label for="contact-name" class="block text-xs font-bold uppercase text-gray-600 mb-1.5">Your Full Name *</label>
                   <input
+                    id="contact-name"
                     v-model="form.name"
                     type="text"
                     required
@@ -169,12 +170,13 @@
                   />
                 </div>
                 <div>
-                  <label class="block text-xs font-bold uppercase text-gray-600 mb-1.5">Phone / WhatsApp *</label>
+                  <label for="contact-phone" class="block text-xs font-bold uppercase text-gray-600 mb-1.5">Phone / WhatsApp *</label>
                   <input
+                    id="contact-phone"
                     v-model="form.phone"
                     type="tel"
                     required
-                    placeholder="0334-9522157"
+                    placeholder="0334-9522157 or +923349522157"
                     class="w-full text-xs sm:text-sm p-3 rounded-xl border border-gray-200 bg-gray-50/50 focus:bg-white focus:outline-none focus:border-[#16B4E8] transition-colors"
                   />
                 </div>
@@ -234,8 +236,9 @@
 
               <!-- Row 3: Email Address -->
               <div>
-                <label class="block text-xs font-bold uppercase text-gray-600 mb-1.5">Email Address *</label>
+                <label for="contact-email" class="block text-xs font-bold uppercase text-gray-600 mb-1.5">Email Address *</label>
                 <input
+                  id="contact-email"
                   v-model="form.email"
                   type="email"
                   required
@@ -246,8 +249,9 @@
 
               <!-- Row 4: Message or Query Details -->
               <div>
-                <label class="block text-xs font-bold uppercase text-gray-600 mb-1.5">Description / Requirements Note / Message *</label>
+                <label for="contact-message" class="block text-xs font-bold uppercase text-gray-600 mb-1.5">Description / Requirements Note / Message *</label>
                 <textarea
+                  id="contact-message"
                   v-model="form.message"
                   rows="4"
                   required
@@ -256,17 +260,16 @@
                 ></textarea>
               </div>
 
-              <!-- Consent Checkbox -->
+              <!-- Consent Checkbox (Explicitly Optional Marketing Consent) -->
               <div class="flex items-start gap-2 pt-1">
                 <input
+                  id="consent"
                   v-model="form.consent"
                   type="checkbox"
-                  id="consent"
-                  required
                   class="w-4 h-4 mt-0.5 text-[#16B4E8] rounded focus:ring-0 cursor-pointer flex-shrink-0"
                 />
                 <label for="consent" class="text-xs text-gray-500 cursor-pointer leading-normal">
-                  I agree to receive verified property availability, payment schedules, and engineering details from TopLinkers via phone and WhatsApp.
+                  I agree to receive verified property availability, payment schedules, and engineering details from TopLinkers via phone and WhatsApp (Optional).
                 </label>
               </div>
 
@@ -313,6 +316,8 @@ const openOfficeInGoogleMaps = () => {
   window.open(googleMapsUrl, '_blank', 'noopener,noreferrer')
 }
 
+import { isValidPhone, isValidEmail } from '../utils/validation'
+
 const form = reactive({
   name: '',
   phone: '',
@@ -320,32 +325,82 @@ const form = reactive({
   division: 'Plots & Land',
   project: 'General Inquiry',
   message: '',
-  consent: true
+  consent: false
 })
 
 const submitForm = async () => {
+  if (submitting.value) return
+
+  // Trim whitespace
+  const cleanName = (form.name || '').trim()
+  const cleanPhone = (form.phone || '').trim()
+  const cleanEmail = (form.email || '').trim()
+  const cleanMsg = (form.message || '').trim()
+
+  if (!cleanName) {
+    ui.addToast({
+      type: 'error',
+      title: 'Name Required',
+      message: 'Please enter your full name.'
+    })
+    return
+  }
+
+  if (!cleanPhone || !isValidPhone(cleanPhone)) {
+    ui.addToast({
+      type: 'error',
+      title: 'Invalid Phone Number',
+      message: 'Please enter a valid Pakistani or international phone number (e.g. 0334-9522157 or +923349522157).'
+    })
+    return
+  }
+
+  if (!cleanEmail || !isValidEmail(cleanEmail)) {
+    ui.addToast({
+      type: 'error',
+      title: 'Invalid Email Address',
+      message: 'Please provide a valid email address.'
+    })
+    return
+  }
+
+  if (!cleanMsg) {
+    ui.addToast({
+      type: 'error',
+      title: 'Message Required',
+      message: 'Please describe your inquiry or requirements.'
+    })
+    return
+  }
+
   submitting.value = true
   try {
     await api.submitInquiry({
-      ...form,
+      name: cleanName,
+      phone: cleanPhone,
+      email: cleanEmail,
+      division: form.division,
+      project: form.project,
+      message: cleanMsg,
+      consent: form.consent,
       source: 'Contact Page Direct Form'
     })
     adminStore.addLead({
-      name: form.name || 'Website Visitor',
-      phone: form.phone,
-      email: form.email,
+      name: cleanName,
+      phone: cleanPhone,
+      email: cleanEmail,
       city: 'Islamabad / Inquiry',
       division: form.division || 'Plots',
       project: form.project || 'General Consultation',
       budget: 'Discuss on Call',
       priority: 'High',
       source: 'Contact Page Form',
-      notes: form.message || 'Contacted via TopLinkers official inquiry form.'
+      notes: cleanMsg
     })
     ui.addToast({
       type: 'success',
       title: 'Inquiry Submitted',
-      message: `Thank you ${form.name}. Our ${form.division} advisory desk will contact you via WhatsApp shortly.`
+      message: `Thank you ${cleanName}. Our ${form.division} advisory desk will contact you via WhatsApp shortly.`
     })
     form.name = ''
     form.phone = ''

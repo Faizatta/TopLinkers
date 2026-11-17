@@ -171,17 +171,19 @@
                   @change="handleQuickPriceChange"
                 >
                   <option value="all">Any Price</option>
+                  <option value="under-30l">Under PKR 30 Lac</option>
                   <option value="under-50l">Under PKR 50 Lac</option>
                   <option value="50l-1cr">PKR 50 Lac – 1 Crore</option>
                   <option value="1cr-2.5cr">PKR 1 Crore – 2.5 Crore</option>
                   <option value="above-2.5cr">Above PKR 2.5 Crore</option>
+                  <option v-if="isCustomPrice" value="custom">{{ customPriceLabel }}</option>
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-gray-400">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </div>
               </div>
 
-              <!-- Quick City Select -->
+              <!-- Quick City / Location Select -->
               <div class="sm:col-span-3 relative">
                 <select
                   v-model="propertiesStore.filters.city"
@@ -189,9 +191,17 @@
                   class="w-full h-full text-xs font-bold text-[#0F2A44] px-3 py-2 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#16B4E8] cursor-pointer appearance-none pr-8"
                   @change="handleQuickChange"
                 >
-                  <option value="all">All Cities</option>
+                  <option value="all">All Locations</option>
                   <option value="Islamabad">Islamabad</option>
                   <option value="Rawalpindi">Rawalpindi</option>
+                  <option value="PECHS">PECHS Society</option>
+                  <option value="TopCity">TopCity-1</option>
+                  <option value="PHA">PHA Flats (I-12 &amp; I-16)</option>
+                  <option value="Faisal">Faisal Town II (FT-II)</option>
+                  <option value="Gulberg">Gulberg Islamabad</option>
+                  <option value="Blue">Blue World City</option>
+                  <option value="DHA">DHA Islamabad</option>
+                  <option value="Bahria">Bahria Town</option>
                   <option value="Murree">Nathia Gali</option>
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-gray-400">
@@ -251,11 +261,11 @@
                 </span>
 
                 <span
-                  v-if="quickPriceSelection !== 'all'"
+                  v-if="propertiesStore.filters.minPrice || propertiesStore.filters.maxPrice"
                   class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#16B4E8]/10 text-[#0F2A44] text-[11px] font-bold"
                 >
-                  Price Filter
-                  <button type="button" @click="resetQuickPrice" class="hover:text-red-500 font-bold">&times;</button>
+                  {{ priceFilterBadgeLabel }}
+                  <button type="button" @click="resetQuickPrice" class="hover:text-red-500 font-bold" aria-label="Clear price filter">&times;</button>
                 </span>
 
                 <span
@@ -408,7 +418,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { scrollTo } from '../services/lenis'
 import {
@@ -472,9 +482,70 @@ const activeFilterCount = computed(() => {
   return count
 })
 
+const formatPriceBadge = (amount) => {
+  const n = Number(amount)
+  if (!n) return ''
+  if (n >= 10000000) {
+    const cr = n / 10000000
+    return `${cr % 1 === 0 ? cr.toFixed(0) : cr.toFixed(2).replace(/\.?0+$/, '')} Crore`
+  }
+  if (n >= 100000) {
+    const lac = n / 100000
+    return `${lac % 1 === 0 ? lac.toFixed(0) : lac.toFixed(2).replace(/\.?0+$/, '')} Lac`
+  }
+  return n.toLocaleString()
+}
+
+const priceFilterBadgeLabel = computed(() => {
+  const min = propertiesStore.filters.minPrice
+  const max = propertiesStore.filters.maxPrice
+  if (min && max) {
+    return `PKR ${formatPriceBadge(min)} – ${formatPriceBadge(max)}`
+  }
+  if (max) {
+    return `Max PKR ${formatPriceBadge(max)}`
+  }
+  if (min) {
+    return `Min PKR ${formatPriceBadge(min)}`
+  }
+  return 'Price Filter'
+})
+
+const isCustomPrice = computed(() => {
+  const val = quickPriceSelection.value
+  return val === 'custom' || (!['all', 'under-30l', 'under-50l', '50l-1cr', '1cr-2.5cr', 'above-2.5cr'].includes(val) && !!(propertiesStore.filters.minPrice || propertiesStore.filters.maxPrice))
+})
+
+const customPriceLabel = computed(() => {
+  return priceFilterBadgeLabel.value
+})
+
+const syncQuickPriceFromStore = () => {
+  const min = propertiesStore.filters.minPrice ? Number(propertiesStore.filters.minPrice) : null
+  const max = propertiesStore.filters.maxPrice ? Number(propertiesStore.filters.maxPrice) : null
+
+  if (!min && !max) {
+    quickPriceSelection.value = 'all'
+  } else if (!min && max === 3000000) {
+    quickPriceSelection.value = 'under-30l'
+  } else if (!min && max === 5000000) {
+    quickPriceSelection.value = 'under-50l'
+  } else if (min === 5000000 && max === 10000000) {
+    quickPriceSelection.value = '50l-1cr'
+  } else if (min === 10000000 && max === 25000000) {
+    quickPriceSelection.value = '1cr-2.5cr'
+  } else if (min === 25000000 && !max) {
+    quickPriceSelection.value = 'above-2.5cr'
+  } else {
+    quickPriceSelection.value = 'custom'
+  }
+}
+
 const handleQuickChange = () => {
   propertiesStore.page = 1
   propertiesStore.fetchProperties()
+  const query = propertiesStore.toQueryObject()
+  router.replace({ path: '/listings', query })
 }
 
 const clearKeyword = () => {
@@ -531,29 +602,32 @@ const setQuickType = (val) => {
 
 const handleQuickPriceChange = () => {
   const val = quickPriceSelection.value
-  if (val === 'under-50l') {
-    propertiesStore.filters.minPrice = null
-    propertiesStore.filters.maxPrice = 5000000
+  if (val === 'under-30l') {
+    propertiesStore.filters.minPrice = ''
+    propertiesStore.filters.maxPrice = '3000000'
+  } else if (val === 'under-50l') {
+    propertiesStore.filters.minPrice = ''
+    propertiesStore.filters.maxPrice = '5000000'
   } else if (val === '50l-1cr') {
-    propertiesStore.filters.minPrice = 5000000
-    propertiesStore.filters.maxPrice = 10000000
+    propertiesStore.filters.minPrice = '5000000'
+    propertiesStore.filters.maxPrice = '10000000'
   } else if (val === '1cr-2.5cr') {
-    propertiesStore.filters.minPrice = 10000000
-    propertiesStore.filters.maxPrice = 25000000
+    propertiesStore.filters.minPrice = '10000000'
+    propertiesStore.filters.maxPrice = '25000000'
   } else if (val === 'above-2.5cr') {
-    propertiesStore.filters.minPrice = 25000000
-    propertiesStore.filters.maxPrice = null
-  } else {
-    propertiesStore.filters.minPrice = null
-    propertiesStore.filters.maxPrice = null
+    propertiesStore.filters.minPrice = '25000000'
+    propertiesStore.filters.maxPrice = ''
+  } else if (val === 'all') {
+    propertiesStore.filters.minPrice = ''
+    propertiesStore.filters.maxPrice = ''
   }
   handleQuickChange()
 }
 
 const resetQuickPrice = () => {
   quickPriceSelection.value = 'all'
-  propertiesStore.filters.minPrice = null
-  propertiesStore.filters.maxPrice = null
+  propertiesStore.filters.minPrice = ''
+  propertiesStore.filters.maxPrice = ''
   handleQuickChange()
 }
 
@@ -566,32 +640,41 @@ const handleSort = (val) => {
   sortValue.value = val
   propertiesStore.setFilter('sort', val)
   propertiesStore.fetchProperties()
+  const query = propertiesStore.toQueryObject()
+  router.replace({ path: '/listings', query })
 }
 
 const handleDrawerApply = () => {
   isFilterDrawerOpen.value = false
   propertiesStore.page = 1
   propertiesStore.fetchProperties()
+  syncQuickPriceFromStore()
+  activeQuickType.value = propertiesStore.filters.type || 'all'
   const query = propertiesStore.toQueryObject()
-  router.push({ path: '/listings', query })
+  router.replace({ path: '/listings', query })
 }
 
 const handleDrawerReset = () => {
   propertiesStore.resetFilters()
   propertiesStore.fetchProperties()
-  router.push({ path: '/listings' })
+  syncQuickPriceFromStore()
+  activeQuickType.value = 'all'
+  router.replace({ path: '/listings' })
 }
 
 const resetAndFetch = () => {
   activeQuickType.value = 'all'
   quickPriceSelection.value = 'all'
   propertiesStore.resetFilters()
-  router.push({ path: '/listings' })
+  router.replace({ path: '/listings' })
   propertiesStore.fetchProperties()
 }
 
 const changePage = (p) => {
   propertiesStore.page = p
+  const query = propertiesStore.toQueryObject()
+  if (p > 1) query.page = p
+  router.replace({ path: '/listings', query })
   scrollTo('#results-anchor', { offset: -90, duration: 1.0 })
 }
 
@@ -605,11 +688,24 @@ const syncAndLoad = () => {
   } else {
     propertiesStore.syncFromQuery(route.query)
   }
+  syncQuickPriceFromStore()
+  activeQuickType.value = propertiesStore.filters.type || 'all'
   propertiesStore.fetchProperties()
 }
 
+const handleKeydown = (e) => {
+  if (e.key === 'Escape' && isFilterDrawerOpen.value) {
+    isFilterDrawerOpen.value = false
+  }
+}
+
 onMounted(() => {
+  window.addEventListener('keydown', handleKeydown)
   syncAndLoad()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown)
 })
 
 watch(() => route.fullPath, () => {

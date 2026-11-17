@@ -22,11 +22,11 @@ ErrorDocument 404 /404.html
 
   # If requested path has a pre-rendered .html file, serve it immediately with HTTP 200 OK
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
-  RewriteRule ^(.*)$ .html [L]
+  RewriteRule ^(.*)$ /$1.html [L,QSA]
 
   # If requested path without trailing slash has a subfolder index.html, serve that index.html
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
-  RewriteRule ^(.*)$ /index.html [L]
+  RewriteRule ^(.*)$ /$1/index.html [L,QSA]
 
   # If requested path is an existing directory, serve directly
   RewriteCond %{REQUEST_FILENAME} -d
