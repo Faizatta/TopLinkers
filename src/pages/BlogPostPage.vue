@@ -39,7 +39,11 @@
             :srcset="responsiveSrcset(post.image, [600, 900])"
             sizes="(max-width: 1023px) 100vw, 840px"
             :alt="post.title"
+            loading="eager"
             fetchpriority="high"
+            decoding="async"
+            width="840"
+            height="460"
             class="w-full h-full object-cover"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent"></div>

@@ -65,7 +65,11 @@
           <div v-if="activeView === 'interior'" class="relative w-full h-full">
             <img
               :src="activeUnit.image"
-              :alt="activeUnit.name"
+              :alt="`${activeUnit.name} - Harsukh Residencies Nathia Gali`"
+              loading="lazy"
+              decoding="async"
+              width="800"
+              height="550"
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/20 pointer-events-none"></div>

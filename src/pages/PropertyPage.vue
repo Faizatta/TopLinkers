@@ -158,14 +158,14 @@ const updatePropertySEO = (prop) => {
   document.title = `${prop.title} | TopLinkers Real Estate Islamabad`
 
   const desc = prop.shortDescription || prop.description || `${prop.title} in ${prop.address || 'Islamabad'}. Available through Top Linkers Real Estate.`
-  const img = prop.images?.[0] || 'https://toplinkers.com/toplinkers-logo.jpg'
+  const img = prop.images?.[0] || 'https://toplinkersgroup.com/toplinkers-logo.jpg'
 
   const setMeta = (name, val) => {
     let el = document.querySelector(`meta[name="${name}"], meta[property="${name}"]`)
     if (el) el.setAttribute('content', val)
   }
 
-  const canonicalUrl = `https://toplinkers.com/property/${encodeURIComponent(prop.slug)}`
+  const canonicalUrl = `https://toplinkersgroup.com/property/${encodeURIComponent(prop.slug)}`
 
   setMeta('description', desc)
   setMeta('og:title', `${prop.title} | TopLinkers`)
@@ -190,7 +190,7 @@ const updatePropertySEO = (prop) => {
     '@type': prop.type === 'apartment' ? 'Apartment' : (prop.type === 'house' || prop.type === 'villa') ? 'SingleFamilyResidence' : 'RealEstateListing',
     'name': prop.title,
     'description': desc,
-    'url': window.location.href,
+    'url': canonicalUrl,
     'image': prop.images || [img],
     'offers': {
       '@type': 'Offer',

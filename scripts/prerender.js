@@ -314,13 +314,18 @@ const postsFilePath = path.resolve(__dirname, '../src/data/posts.json')
 let dynamicBlogRoutes = []
 if (fs.existsSync(postsFilePath)) {
   const posts = JSON.parse(fs.readFileSync(postsFilePath, 'utf-8'))
-  dynamicBlogRoutes = posts.map(p => ({
-    path: `/blog/${p.slug}`,
-    title: `${p.title.length > 55 ? p.title.substring(0, 55) + '...' : p.title} | TopLinkers`,
-    description: p.summary.length > 155 ? p.summary.substring(0, 152) + '...' : p.summary,
-    h1: p.title,
-    isArticle: true,
-    articleData: p,
+  dynamicBlogRoutes = posts.map(p => {
+    const rawImg = p.image || '/toplinkers-logo.jpg'
+    const img = rawImg.startsWith('http') ? rawImg : `${BASE_URL}${rawImg.startsWith('/') ? '' : '/'}${rawImg}`
+
+    return {
+      path: `/blog/${p.slug}`,
+      title: `${p.title.length > 55 ? p.title.substring(0, 55) + '...' : p.title} | TopLinkers`,
+      description: p.summary.length > 155 ? p.summary.substring(0, 152) + '...' : p.summary,
+      h1: p.title,
+      isArticle: true,
+      articleData: p,
+      ogImage: img,
     content: `
       <article style="margin-bottom:24px;">
         <div style="background:#E0F2FE;border-left:4px solid #16B4E8;padding:12px 16px;margin-bottom:20px;border-radius:0 8px 8px 0;">
@@ -340,10 +345,68 @@ if (fs.existsSync(postsFilePath)) {
         </div>
       </article>
     `
-  }))
+    }
+  })
 }
 
-const allRoutes = [...staticRoutes, ...dynamicBlogRoutes]
+// Load dynamic properties from properties.json
+const propsFilePath = path.resolve(__dirname, '../src/data/properties.json')
+let dynamicPropertyRoutes = []
+if (fs.existsSync(propsFilePath)) {
+  const properties = JSON.parse(fs.readFileSync(propsFilePath, 'utf-8'))
+  dynamicPropertyRoutes = properties.map(p => {
+    const rawTitle = p.title || 'Verified Property Islamabad'
+    const title = `${rawTitle.length > 55 ? rawTitle.substring(0, 55) + '...' : rawTitle} | TopLinkers`
+    const rawDesc = p.shortDescription || p.description || `${rawTitle} in ${p.address || p.city || 'Islamabad'}. Verified CDA/RDA listing by TopLinkers.`
+    const description = rawDesc.length > 155 ? rawDesc.substring(0, 152) + '...' : rawDesc
+    const rawImg = p.images?.[0] || '/toplinkers-logo.jpg'
+    const img = rawImg.startsWith('http') ? rawImg : `${BASE_URL}${rawImg.startsWith('/') ? '' : '/'}${rawImg}`
+    const fullCanonical = `${BASE_URL}/property/${p.slug}`
+
+    return {
+      path: `/property/${p.slug}`,
+      title,
+      description,
+      h1: rawTitle,
+      isProperty: true,
+      propertyData: p,
+      ogImage: img,
+      content: `
+        <article style="margin-bottom:24px;">
+          <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:16px 20px;margin-bottom:20px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+              <div>
+                <span style="background:#16B4E8;color:#fff;font-size:11px;font-weight:800;padding:4px 8px;border-radius:4px;text-transform:uppercase;">${p.typeName || p.type || 'Property'}</span>
+                <span style="margin-left:8px;font-size:13px;color:#64748B;">${p.address || p.city || 'Islamabad'}</span>
+              </div>
+              <div style="font-size:20px;font-weight:900;color:#0F2A44;">
+                ${p.priceFormatted || `PKR ${p.price?.toLocaleString()}`}
+              </div>
+            </div>
+            <div style="display:flex;gap:16px;margin-top:12px;font-size:13px;color:#475569;border-top:1px solid #E2E8F0;padding-top:12px;">
+              ${p.beds ? `<span><strong>${p.beds}</strong> Beds</span> &bull;` : ''}
+              ${p.baths ? `<span><strong>${p.baths}</strong> Baths</span> &bull;` : ''}
+              ${p.sqft ? `<span><strong>${p.sqft}</strong> Sq Ft</span>` : ''}
+            </div>
+          </div>
+          <p style="font-size:15px;line-height:1.8;color:#334155;margin-bottom:16px;">
+            ${p.description || rawDesc}
+          </p>
+          <div style="margin-top:20px;padding:16px;background:#E0F2FE;border-radius:8px;border-left:4px solid #16B4E8;">
+            <p style="margin:0;font-size:14px;color:#0F2A44;font-weight:600;">
+              Interested in this verified listing? Call TopLinkers Advisory Desk at <strong>0334-9522157</strong> or <strong>0332-4004884</strong>, or visit our office at Al Hameed Plaza, G-11 Markaz Islamabad.
+            </p>
+          </div>
+          <div style="margin-top:20px;">
+            <a href="/listings" style="color:#16B4E8;font-weight:700;">&larr; Browse All Verified Properties in Islamabad</a>
+          </div>
+        </article>
+      `
+    }
+  })
+}
+
+const allRoutes = [...staticRoutes, ...dynamicBlogRoutes, ...dynamicPropertyRoutes]
 
 function prerender() {
   if (!fs.existsSync(templatePath)) {
@@ -386,7 +449,15 @@ function prerender() {
     html = html.replace(/<meta\s+name=["']twitter:url["']\s+content=["'].*?["']\s*\/?>/i,
       `<meta name="twitter:url" content="${fullCanonical}" />`)
 
-    // 6. Article JSON-LD for blog posts
+    // Override OG & Twitter image when specific image provided
+    if (r.ogImage) {
+      html = html.replace(/<meta\s+property=["']og:image["']\s+content=["'].*?["']\s*\/?>/i,
+        `<meta property="og:image" content="${r.ogImage}" />`)
+      html = html.replace(/<meta\s+name=["']twitter:image["']\s+content=["'].*?["']\s*\/?>/i,
+        `<meta name="twitter:image" content="${r.ogImage}" />`)
+    }
+
+    // 6A. Article JSON-LD for blog posts
     if (r.isArticle && r.articleData) {
       const articleJsonLd = `
     <script type="application/ld+json">
@@ -416,6 +487,37 @@ function prerender() {
     }
     </script>`
       html = html.replace('</head>', `${articleJsonLd}\n  </head>`)
+    }
+
+    // 6B. Real Estate Listing JSON-LD for property pages
+    if (r.isProperty && r.propertyData) {
+      const p = r.propertyData
+      const propType = p.type === 'apartment' ? 'Apartment' : (p.type === 'house' || p.type === 'villa') ? 'SingleFamilyResidence' : 'RealEstateListing'
+      const propJsonLd = `
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "${propType}",
+      "name": ${JSON.stringify(p.title)},
+      "description": ${JSON.stringify(r.description)},
+      "url": "${fullCanonical}",
+      "image": ${JSON.stringify(p.images?.[0] || 'https://toplinkersgroup.com/toplinkers-logo.jpg')},
+      "offers": {
+        "@type": "Offer",
+        "price": ${p.price || 0},
+        "priceCurrency": "PKR",
+        "availability": "https://schema.org/InStock"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": ${JSON.stringify(p.address || 'G-11 Markaz')},
+        "addressLocality": ${JSON.stringify(p.city || 'Islamabad')},
+        "addressRegion": "Federal Capital",
+        "addressCountry": "PK"
+      }
+    }
+    </script>`
+      html = html.replace('</head>', `${propJsonLd}\n  </head>`)
     }
 
     // 7. Infiltrate Semantic Fallback inside <div id="app">...</div>
@@ -500,6 +602,32 @@ function prerender() {
       console.log(`  ✅ Pre-rendered: ${r.path} -> dist/${cleanPath}.html & dist/${cleanPath}/index.html`)
     }
   }
+
+  // Generate sitemap.xml containing all canonical pre-rendered routes
+  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${allRoutes.map(r => {
+  const loc = `${BASE_URL}${r.path === '/' ? '/' : r.path}`
+  const priority = r.path === '/' ? '1.0' :
+    (r.path === '/hr-sukh' || r.path === '/listings' || r.path === '/services') ? '0.90' :
+    (r.path === '/team' || r.path === '/about' || r.path === '/contact' || r.path === '/blog') ? '0.85' :
+    (r.path.startsWith('/services/') || r.isArticle || r.isProperty) ? '0.80' : '0.70'
+  const freq = (r.path === '/' || r.path === '/listings') ? 'daily' :
+    (r.isProperty || r.isArticle || r.path === '/hr-sukh') ? 'weekly' : 'monthly'
+  return `  <url>
+    <loc>${loc}</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>${freq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`
+}).join('\n')}
+</urlset>
+`
+  const publicSitemap = path.resolve(__dirname, '../public/sitemap.xml')
+  const distSitemap = path.resolve(distDir, 'sitemap.xml')
+  fs.writeFileSync(publicSitemap, sitemapXml, 'utf-8')
+  fs.writeFileSync(distSitemap, sitemapXml, 'utf-8')
+  console.log(`  📄 Synchronized sitemap.xml with ${allRoutes.length} canonical URLs.`)
 
   console.log(`🎉 Pre-rendering completed successfully for all ${allRoutes.length} routes!`)
 }

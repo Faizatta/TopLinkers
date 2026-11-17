@@ -51,6 +51,10 @@
               <img
                 :src="ceo.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80'"
                 :alt="ceo.name"
+                loading="lazy"
+                decoding="async"
+                width="192"
+                height="240"
                 class="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.05] group-hover:scale-105 transition-transform duration-700 ease-out"
               />
               <div class="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
@@ -182,6 +186,10 @@
               <img
                 :src="member.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80'"
                 :alt="member.name"
+                loading="lazy"
+                decoding="async"
+                width="256"
+                height="320"
                 class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 draggable="false"
               />
@@ -229,6 +237,10 @@
               <img
                 :src="popupMember.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80'"
                 :alt="popupMember.name"
+                loading="lazy"
+                decoding="async"
+                width="320"
+                height="400"
                 class="absolute inset-0 w-full h-full object-cover object-top filter brightness-[1.03] transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-[#08121E]/95 via-[#08121E]/30 to-black/20"></div>

@@ -93,7 +93,7 @@
               1. Acceptance &amp; Agreement to Terms
             </h2>
             <p>
-              By accessing, browsing, or utilizing the website <strong>TopLinkers</strong> (located at <code>toplinkers.com</code>) or any associated subdomains, inquiry forms, and services, you agree to be bound by these Terms and Conditions and our Privacy Policy.
+              By accessing, browsing, or utilizing the website <strong>TopLinkers</strong> (located at <code>toplinkersgroup.com</code>) or any associated subdomains, inquiry forms, and services, you agree to be bound by these Terms and Conditions and our Privacy Policy.
             </p>
             <p>
               These Terms constitute a legally binding agreement between you ("User", "Client", or "Visitor") and <strong>TopLinkers</strong>, located at 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan (4004884). If you do not agree to all terms herein, you must immediately discontinue using our website and services.

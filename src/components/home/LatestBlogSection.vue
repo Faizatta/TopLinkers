@@ -79,6 +79,10 @@
                 <img
                   :src="post.authorPhoto"
                   :alt="post.author"
+                  loading="lazy"
+                  decoding="async"
+                  width="28"
+                  height="28"
                   class="w-7 h-7 rounded-full object-cover border border-gray-200"
                 />
                 <span class="text-xs font-bold text-[#0F2A44]">{{ post.author }}</span>

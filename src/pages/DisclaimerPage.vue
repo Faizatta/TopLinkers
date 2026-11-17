@@ -93,7 +93,7 @@
               1. General Informational Nature of Website Content
             </h2>
             <p>
-              The information, listings, pricing guides, investment projections, calculators, and architectural models published on <strong>TopLinkers</strong> (located at <code>toplinkers.com</code>) are compiled and presented exclusively for general informational, educational, and initial advisory purposes.
+              The information, listings, pricing guides, investment projections, calculators, and architectural models published on <strong>TopLinkers</strong> (located at <code>toplinkersgroup.com</code>) are compiled and presented exclusively for general informational, educational, and initial advisory purposes.
             </p>
             <p>
               Nothing contained on this website constitutes formal legal counsel, binding financial underwriting, or a legally finalized sales contract. While TopLinkers makes every reasonable effort to keep pricing, CDA sector updates, and building material indices accurate and current, we make no express or implied representations regarding absolute completeness or real-time market accuracy.

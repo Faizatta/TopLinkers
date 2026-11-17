@@ -28,6 +28,10 @@
               <img
                 src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80"
                 alt="Harsukh Nathia Gali"
+                loading="lazy"
+                decoding="async"
+                width="56"
+                height="56"
                 class="w-full h-full rounded-full object-cover border border-white/30"
               />
             </button>
@@ -88,6 +92,10 @@
                   <img
                     src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80"
                     alt="Harsukh Nathia Gali"
+                    loading="lazy"
+                    decoding="async"
+                    width="64"
+                    height="64"
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>

@@ -37,6 +37,8 @@
         loading="eager"
         fetchpriority="high"
         decoding="async"
+        width="840"
+        height="500"
         class="w-full h-full object-cover transition-opacity duration-300"
       />
 
@@ -78,8 +80,11 @@
               :srcset="responsiveSrcset(img, [120, 240])"
               sizes="64px"
               class="w-full h-full object-cover"
-              alt="Thumb"
+              alt="Thumbnail"
+              loading="lazy"
               decoding="async"
+              width="64"
+              height="48"
             />
           </button>
         </div>

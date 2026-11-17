@@ -16,6 +16,8 @@
           alt="Top Linkers"
           width="129"
           height="168"
+          loading="eager"
+          fetchpriority="high"
           decoding="async"
           class="h-10 sm:h-12 md:h-14 w-auto object-contain flex-shrink-0 transition-transform duration-300 group-hover:scale-105"
         />
@@ -304,6 +306,7 @@
                   alt="Top Linkers"
                   width="129"
                   height="168"
+                  loading="lazy"
                   decoding="async"
                   class="h-10 w-auto object-contain flex-shrink-0"
                 />

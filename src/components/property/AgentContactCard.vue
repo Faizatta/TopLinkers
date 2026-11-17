@@ -6,6 +6,10 @@
         <img
           src="/toplinkers-logo-sm.png"
           alt="Top Linkers"
+          width="48"
+          height="48"
+          loading="lazy"
+          decoding="async"
           class="w-full h-full object-contain"
         />
       </div>

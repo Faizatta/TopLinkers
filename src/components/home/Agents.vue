@@ -31,7 +31,11 @@
               <div class="relative flex-shrink-0">
                 <img
                   :src="agent.photo"
-                  :alt="agent.name"
+                  :alt="`${agent.name} - TopLinkers Advisory Team`"
+                  loading="lazy"
+                  decoding="async"
+                  width="64"
+                  height="64"
                   class="w-16 h-16 rounded-xl object-cover border border-gray-200 group-hover:border-[#16B4E8] transition-colors shadow-xs"
                 />
                 <!-- Verified Green Dot -->

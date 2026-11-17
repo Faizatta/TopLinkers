@@ -62,7 +62,15 @@
 
                 <div class="pt-4 border-t border-gray-100 flex items-center justify-between text-xs">
                   <div class="flex items-center gap-2">
-                    <img :src="post.authorPhoto" :alt="post.author" class="w-6 h-6 rounded-full object-cover" />
+                    <img
+                      :src="post.authorPhoto"
+                      :alt="post.author"
+                      loading="lazy"
+                      decoding="async"
+                      width="24"
+                      height="24"
+                      class="w-6 h-6 rounded-full object-cover"
+                    />
                     <span class="font-bold text-[#0F2A44] text-[11px]">{{ post.author }}</span>
                   </div>
 

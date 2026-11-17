@@ -145,6 +145,10 @@
                 <img
                   :src="getPropertyImage(prop)"
                   :alt="prop.title"
+                  loading="lazy"
+                  decoding="async"
+                  width="280"
+                  height="128"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none"></div>
@@ -276,7 +280,7 @@
                   </div>
 
                   <div class="relative h-24 rounded-lg overflow-hidden bg-slate-200 mb-1.5">
-                    <img :src="getPropertyImage(mobilePropA)" :alt="mobilePropA.title" class="w-full h-full object-cover" />
+                    <img :src="getPropertyImage(mobilePropA)" :alt="mobilePropA.title" loading="lazy" decoding="async" width="160" height="96" class="w-full h-full object-cover" />
                     <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded text-[8px] font-black uppercase bg-[#0F2A44]/90 text-white">
                       {{ mobilePropA.typeName || (mobilePropA.type === 'apartment' ? 'Flat' : 'Plot') }}
                     </span>
@@ -324,7 +328,7 @@
                   </div>
 
                   <div class="relative h-24 rounded-lg overflow-hidden bg-slate-200 mb-1.5">
-                    <img :src="getPropertyImage(mobilePropB)" :alt="mobilePropB.title" class="w-full h-full object-cover" />
+                    <img :src="getPropertyImage(mobilePropB)" :alt="mobilePropB.title" loading="lazy" decoding="async" width="160" height="96" class="w-full h-full object-cover" />
                     <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded text-[8px] font-black uppercase bg-[#16B4E8]/90 text-white">
                       {{ mobilePropB.typeName || (mobilePropB.type === 'apartment' ? 'Flat' : 'Plot') }}
                     </span>
@@ -925,6 +929,10 @@
                   <img
                     :src="getPropertyImage(item)"
                     :alt="item.title"
+                    loading="lazy"
+                    decoding="async"
+                    width="280"
+                    height="128"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none"></div>

@@ -211,7 +211,7 @@
               <swiper-slide v-for="feat in featuredItems" :key="feat.id">
                 <div class="group cursor-pointer" @click="goToListing(feat.slug)">
                   <div class="relative h-44 rounded overflow-hidden mb-3">
-                    <img :src="feat.images[0]" :alt="feat.title" class="w-full h-full object-cover card-hover-zoom" />
+                    <img :src="feat.images[0]" :alt="feat.title" loading="lazy" decoding="async" width="300" height="176" class="w-full h-full object-cover card-hover-zoom" />
                     <!-- Price Overlay -->
                     <div class="absolute bottom-2 left-2 bg-[#00AEEF] text-white text-xs font-bold px-2 py-0.5 rounded shadow">
                       ${{ feat.price.toLocaleString() }} {{ feat.pricePostfix }}
