@@ -49,3 +49,24 @@ export function responsiveSrcset(url, widths = [480, 800, 1200]) {
 
   return undefined
 }
+
+export const FALLBACK_PROPERTY_IMAGE = '/images/hero-real-estate-800.webp'
+export const FALLBACK_FLAT_IMAGE = '/images/hero-pha-flats-800.webp'
+export const FALLBACK_PLOT_IMAGE = '/images/hero-moqa-plot-800.webp'
+export const FALLBACK_CONSTRUCTION_IMAGE = '/images/hero-construction-800.webp'
+export const FALLBACK_SOLAR_IMAGE = '/images/hero-solar-800.webp'
+export const FALLBACK_HARSUKH_IMAGE = '/images/hero-harsukh-800.webp'
+
+/**
+ * Foolproof image fallback handler.
+ * If an image from Unsplash or remote CDN fails or times out,
+ * gracefully swap to a local WebP asset so the UI never displays broken boxes.
+ */
+export function handleImageFallback(event, fallback = FALLBACK_PROPERTY_IMAGE) {
+  const el = event?.target
+  if (!el || el.dataset.fallbackApplied) return
+  el.dataset.fallbackApplied = 'true'
+  el.removeAttribute('srcset')
+  el.src = fallback
+}
+

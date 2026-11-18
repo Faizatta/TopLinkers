@@ -27,6 +27,7 @@
           width="400"
           height="288"
           class="w-full h-full object-cover card-hover-zoom"
+          @error="onImageError"
         />
 
         <!-- Prev / Next Carousel Arrows (Appear on Hover) -->
@@ -179,7 +180,13 @@ import {
 } from '@heroicons/vue/24/outline'
 import Badge from '../ui/Badge.vue'
 import { isPropertyOfferActive, getOfferRemainingLabel, formatPkrAmount } from '../../utils/offer'
-import { responsiveSrcset } from '../../utils/images'
+import {
+  responsiveSrcset,
+  handleImageFallback,
+  FALLBACK_PROPERTY_IMAGE,
+  FALLBACK_FLAT_IMAGE,
+  FALLBACK_PLOT_IMAGE
+} from '../../utils/images'
 
 const props = defineProps({
   property: {
@@ -226,8 +233,18 @@ const currentImage = computed(() => {
   if (props.property.images && props.property.images.length > 0) {
     return props.property.images[activeImageIndex.value] || props.property.images[0]
   }
-  return 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80'
+  return FALLBACK_PROPERTY_IMAGE
 })
+
+const onImageError = (e) => {
+  const type = String(props.property?.type || props.property?.category || props.property?.typeName || '').toLowerCase()
+  const fallback = (type.includes('flat') || type.includes('apartment') || type.includes('pha'))
+    ? FALLBACK_FLAT_IMAGE
+    : (type.includes('plot') || type.includes('land'))
+    ? FALLBACK_PLOT_IMAGE
+    : FALLBACK_PROPERTY_IMAGE
+  handleImageFallback(e, fallback)
+}
 
 const prevImage = () => {
   if (!props.property.images?.length) return

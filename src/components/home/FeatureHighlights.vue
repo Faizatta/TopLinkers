@@ -13,6 +13,7 @@
               width="56"
               height="56"
               class="w-full h-full object-cover"
+              @error="e => handleImageFallback(e, FALLBACK_PROPERTY_IMAGE)"
             />
           </div>
           <div>
@@ -36,6 +37,7 @@
               width="56"
               height="56"
               class="w-full h-full object-cover"
+              @error="e => handleImageFallback(e, FALLBACK_PROPERTY_IMAGE)"
             />
           </div>
           <div>
@@ -59,6 +61,7 @@
               width="56"
               height="56"
               class="w-full h-full object-cover"
+              @error="e => handleImageFallback(e, FALLBACK_PROPERTY_IMAGE)"
             />
           </div>
           <div>
@@ -82,6 +85,7 @@
               width="56"
               height="56"
               class="w-full h-full object-cover"
+              @error="e => handleImageFallback(e, FALLBACK_PROPERTY_IMAGE)"
             />
           </div>
           <div>
@@ -99,4 +103,5 @@
 </template>
 
 <script setup>
+import { handleImageFallback, FALLBACK_PROPERTY_IMAGE } from '../../utils/images'
 </script>

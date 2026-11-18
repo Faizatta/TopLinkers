@@ -6,15 +6,14 @@
     >
       <!-- Background subtle misty pine image overlay with gradient -->
       <img
-        src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
-        :srcset="responsiveSrcset('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80', [400, 700, 1200])"
-        sizes="(max-width: 767px) 40vw, 624px"
+        src="/images/hero-harsukh-800.webp"
         alt="Nathia Gali Pines"
         loading="lazy"
         decoding="async"
         width="600"
         height="120"
         class="absolute right-0 inset-y-0 w-2/5 md:w-1/2 object-cover object-center opacity-30 mix-blend-overlay group-hover:scale-105 transition-transform duration-700 pointer-events-none"
+        @error="e => handleImageFallback(e, FALLBACK_HARSUKH_IMAGE)"
       />
 
       <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-5">
@@ -22,15 +21,14 @@
           <!-- Thumbnail with Hot Pulse -->
           <div class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-gray-900 border border-white/20 flex-shrink-0 shadow-md">
             <img
-              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80"
-              :srcset="responsiveSrcset('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80', [160, 300])"
-              sizes="80px"
+              src="/images/hero-harsukh-800.webp"
               alt="Harsukh Residencies"
               loading="lazy"
               decoding="async"
               width="80"
               height="80"
               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              @error="e => handleImageFallback(e, FALLBACK_HARSUKH_IMAGE)"
             />
             <span class="absolute top-1 left-1 bg-[#E53935] text-white text-[8px] font-black uppercase px-1.5 py-0.2 rounded shadow">
               HOT
@@ -73,5 +71,5 @@
 </template>
 
 <script setup>
-import { responsiveSrcset } from '../../utils/images'
+import { handleImageFallback, FALLBACK_HARSUKH_IMAGE } from '../../utils/images'
 </script>

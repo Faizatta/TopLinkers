@@ -39,14 +39,11 @@
 import { ref, computed, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AppHeader from './components/layout/AppHeader.vue'
+import AppFooter from './components/layout/AppFooter.vue'
 import Toast from './components/ui/Toast.vue'
 import { useUiStore } from './stores/ui'
 import { whenIdle } from './utils/idle'
 import { initLenis, destroyLenis } from './services/lenis'
-
-// The footer is always below the fold, so it ships as its own chunk and renders
-// as soon as that arrives (still on every page, still crawlable).
-const AppFooter = defineAsyncComponent(() => import('./components/layout/AppFooter.vue'))
 
 // Floating widgets and modals are not needed for the first paint. They are loaded
 // after the page has finished loading, so they never compete with the hero.

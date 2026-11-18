@@ -40,6 +40,7 @@
         width="840"
         height="500"
         class="w-full h-full object-cover transition-opacity duration-300"
+        @error="onImgError"
       />
 
       <!-- Left Arrow -->
@@ -85,6 +86,7 @@
               decoding="async"
               width="64"
               height="48"
+              @error="onImgError"
             />
           </button>
         </div>
@@ -119,7 +121,11 @@ import {
   ArrowsPointingOutIcon
 } from '@heroicons/vue/24/outline'
 import { useUiStore } from '../../stores/ui'
-import { responsiveSrcset } from '../../utils/images'
+import { responsiveSrcset, handleImageFallback, FALLBACK_PROPERTY_IMAGE } from '../../utils/images'
+
+const onImgError = (e) => {
+  handleImageFallback(e, FALLBACK_PROPERTY_IMAGE)
+}
 
 const props = defineProps({
   images: {

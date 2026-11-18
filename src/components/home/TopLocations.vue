@@ -28,6 +28,7 @@
               width="400"
               height="256"
               class="w-full h-full object-cover card-hover-zoom"
+              @error="e => handleImageFallback(e, FALLBACK_PROPERTY_IMAGE)"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
             <div class="absolute bottom-3 left-3 text-white">
@@ -59,7 +60,7 @@
 import { ref, onMounted } from 'vue'
 import SectionHeading from '../ui/SectionHeading.vue'
 import { api } from '../../services/api'
-import { responsiveSrcset } from '../../utils/images'
+import { responsiveSrcset, handleImageFallback, FALLBACK_PROPERTY_IMAGE } from '../../utils/images'
 
 const locations = ref([])
 

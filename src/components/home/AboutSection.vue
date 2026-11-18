@@ -73,6 +73,7 @@
               width="1000"
               height="520"
               class="w-full h-[290px] sm:h-[400px] md:h-[520px] object-cover"
+              @error="e => handleImageFallback(e, FALLBACK_CONSTRUCTION_IMAGE)"
             />
           </div>
 
@@ -102,5 +103,5 @@
 <script setup>
 import SectionHeading from '../ui/SectionHeading.vue'
 import CountUp from '../ui/CountUp.vue'
-import { responsiveSrcset } from '../../utils/images'
+import { responsiveSrcset, handleImageFallback, FALLBACK_CONSTRUCTION_IMAGE } from '../../utils/images'
 </script>

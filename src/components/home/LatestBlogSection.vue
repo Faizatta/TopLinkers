@@ -45,6 +45,7 @@
               width="400"
               height="208"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              @error="e => handleImageFallback(e, FALLBACK_PROPERTY_IMAGE)"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
             <span class="absolute top-3 left-3 bg-[#0F2A44]/90 backdrop-blur-sm text-[#16B4E8] border border-white/10 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md shadow">
@@ -106,7 +107,7 @@
 <script setup>
 import { computed } from 'vue'
 import postsData from '../../data/posts.json'
-import { responsiveSrcset } from '../../utils/images'
+import { responsiveSrcset, handleImageFallback, FALLBACK_PROPERTY_IMAGE } from '../../utils/images'
 
 const featuredPosts = computed(() => {
   return postsData.slice(0, 3)

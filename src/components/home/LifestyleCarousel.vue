@@ -60,6 +60,7 @@
                 width="96"
                 height="96"
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                @error="e => handleImageFallback(e, FALLBACK_PROPERTY_IMAGE)"
               />
             </div>
 
@@ -93,7 +94,7 @@
 import { ref, onMounted } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination } from 'swiper/modules'
-import { responsiveSrcset } from '../../utils/images'
+import { responsiveSrcset, handleImageFallback, FALLBACK_PROPERTY_IMAGE } from '../../utils/images'
 import SectionHeading from '../ui/SectionHeading.vue'
 import { api } from '../../services/api'
 import { useAutoplayWhenVisible } from '../../composables/useAutoplayWhenVisible'
