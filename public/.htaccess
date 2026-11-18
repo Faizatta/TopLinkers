@@ -16,9 +16,6 @@ ErrorDocument 404 /404.html
   RewriteCond %{HTTP:Accept} text/markdown [NC]
   RewriteRule ^(index\.html)?$ /index.md [L]
 
-  # Missing build chunks or static assets get genuine 404 immediately
-  RewriteRule ^assets/ - [R=404,L]
-
   # 2. Permanent 301 Redirects for Cleaned Canonical Property URLs (SEO preservation)
   RewriteRule ^property/luxury-corner-penthouse-bano-qadeer-heights-11/?$ /property/luxury-corner-penthouse-bano-qadeer-heights [R=301,L]
   RewriteRule ^property/executive-family-house-gulberg-greens-residencia-12/?$ /property/executive-family-house-gulberg-greens [R=301,L]
