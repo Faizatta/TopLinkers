@@ -36,19 +36,19 @@
         >
           <button
             type="button"
-            class="pointer-events-auto w-7 h-7 rounded-full bg-black/60 hover:bg-[#16B4E8] text-white flex items-center justify-center transition-colors shadow"
+            class="pointer-events-auto w-9 h-9 min-w-[36px] min-h-[36px] rounded-full bg-black/65 hover:bg-[#16B4E8] text-white flex items-center justify-center transition-colors shadow-md"
             aria-label="Previous photo"
             @click.stop="prevImage"
           >
-            <ChevronLeftIcon class="w-4 h-4" />
+            <ChevronLeftIcon class="w-5 h-5" />
           </button>
           <button
             type="button"
-            class="pointer-events-auto w-7 h-7 rounded-full bg-black/60 hover:bg-[#16B4E8] text-white flex items-center justify-center transition-colors shadow"
+            class="pointer-events-auto w-9 h-9 min-w-[36px] min-h-[36px] rounded-full bg-black/65 hover:bg-[#16B4E8] text-white flex items-center justify-center transition-colors shadow-md"
             aria-label="Next photo"
             @click.stop="nextImage"
           >
-            <ChevronRightIcon class="w-4 h-4" />
+            <ChevronRightIcon class="w-5 h-5" />
           </button>
         </div>
 

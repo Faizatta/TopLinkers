@@ -121,18 +121,7 @@ const goToSlideLink = (link) => {
 let cancelIdle = null
 let rafId = null
 
-// index.html paints a static copy of this hero (#lcp-shell) before JavaScript runs.
-// It sits behind the app, so it is already covered; drop it once our own image is decoded.
-const removeLcpShell = () => {
-  const shell = document.getElementById('lcp-shell')
-  if (shell) shell.remove()
-}
-
 onMounted(() => {
-  const img = staticSlideEl.value && staticSlideEl.value.querySelector('img')
-  const decoded = img && typeof img.decode === 'function' ? img.decode() : Promise.resolve()
-  decoded.catch(() => {}).then(() => requestAnimationFrame(removeLcpShell))
-
   // Start the entrance animation (text slide-up + Ken Burns zoom) after the first
   // paint, exactly like the carousel does when a slide becomes active.
   rafId = requestAnimationFrame(() => {
@@ -144,7 +133,6 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  removeLcpShell()
   if (cancelIdle) cancelIdle()
   if (rafId) cancelAnimationFrame(rafId)
 })

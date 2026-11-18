@@ -251,7 +251,12 @@
             <h3 class="text-lg font-bold text-[#0F2A44]">Log New Client Lead / Inquiry</h3>
             <p class="text-xs text-gray-500">Direct phone call or walk-in client inquiry</p>
           </div>
-          <button @click="openAddLeadModal = false" class="text-gray-400 hover:text-gray-600 p-1">
+          <button
+            type="button"
+            @click="openAddLeadModal = false"
+            class="text-gray-400 hover:text-gray-600 p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg"
+            aria-label="Close add lead modal"
+          >
             <XMarkIcon class="w-5 h-5" />
           </button>
         </div>
@@ -503,8 +508,13 @@ const handleOutsideClick = (e) => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
   document.addEventListener('click', handleOutsideClick)
+  // Verify server-side session authentication
+  const valid = await adminStore.checkServerSession()
+  if (!valid) {
+    router.replace('/admin/login')
+  }
 })
 
 onUnmounted(() => {

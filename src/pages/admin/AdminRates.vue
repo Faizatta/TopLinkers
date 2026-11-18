@@ -458,7 +458,12 @@
             <h3 class="text-base font-bold text-[#0F2A44]">{{ modalTitle }}</h3>
             <p class="text-xs text-slate-500">Enter details to add on screen and sync live to public pages.</p>
           </div>
-          <button type="button" @click="addModalOpen = false" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100">
+          <button
+            type="button"
+            @click="addModalOpen = false"
+            class="p-1.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100"
+            aria-label="Close add rate card modal"
+          >
             <XMarkIcon class="w-5 h-5" />
           </button>
         </div>

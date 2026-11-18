@@ -193,7 +193,14 @@
             </h3>
             <p class="text-[11px] text-gray-500">Syncs directly with Laravel database and reflects live on /team</p>
           </div>
-          <button @click="showModal = false" class="text-gray-400 hover:text-gray-700 p-1">✕</button>
+          <button
+            type="button"
+            @click="showModal = false"
+            class="text-gray-500 hover:text-gray-800 p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg"
+            aria-label="Close team member editor"
+          >
+            ✕
+          </button>
         </div>
 
         <form @submit.prevent="submitMember" class="space-y-4 pt-4">

@@ -650,7 +650,8 @@
           <button
             type="button"
             @click="userModalOpen = false"
-            class="text-white/70 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
+            class="text-white/80 hover:text-white p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors"
+            aria-label="Close user modal"
           >
             <XMarkIcon class="w-5 h-5" />
           </button>
@@ -879,7 +880,12 @@
       <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4 border border-slate-200">
         <div class="flex items-center justify-between pb-3 border-b border-slate-100">
           <h3 class="text-base font-bold text-[#0F2A44]">Create Admin Role</h3>
-          <button @click="roleModalOpen = false" class="text-slate-400 hover:text-slate-600">
+          <button
+            type="button"
+            @click="roleModalOpen = false"
+            class="text-slate-500 hover:text-slate-800 p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg"
+            aria-label="Close role modal"
+          >
             <XMarkIcon class="w-5 h-5" />
           </button>
         </div>
@@ -932,7 +938,12 @@
       <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4 border border-slate-200">
         <div class="flex items-center justify-between pb-3 border-b border-slate-100">
           <h3 class="text-base font-bold text-[#0F2A44]">Create Custom Permission</h3>
-          <button @click="permModalOpen = false" class="text-slate-400 hover:text-slate-600">
+          <button
+            type="button"
+            @click="permModalOpen = false"
+            class="text-slate-500 hover:text-slate-800 p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg"
+            aria-label="Close permission modal"
+          >
             <XMarkIcon class="w-5 h-5" />
           </button>
         </div>

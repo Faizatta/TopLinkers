@@ -98,7 +98,7 @@
       <!-- 2. DIRECTORY VIEW: All Verified Agents -->
       <div v-else>
         <div class="text-center mb-12">
-          <h1 class="section-title">TopLiker Verified Realtors & Brokers</h1>
+          <h2 class="section-title">TopLinkers Verified Realtors &amp; Brokers</h2>
           <p class="section-subtitle">
             Our advisors bring institutional knowledge, local mastery, and confidential concierge advisory to every transaction.
           </p>

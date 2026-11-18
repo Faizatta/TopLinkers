@@ -53,37 +53,12 @@
     <!-- Preconnect & DNS-Prefetch for Core Web Vitals -->
     <link rel="preconnect" href="https://images.unsplash.com" />
 
-    <!-- Homepage LCP image preload -->
-    <script>
-      (function () {
-        if (location.pathname !== '/') return
-        var link = document.createElement('link')
-        link.rel = 'preload'
-        link.as = 'image'
-        link.type = 'image/avif'
-        link.href = window.matchMedia('(max-width: 639px)').matches
-          ? '/images/hero-real-estate-m.avif'
-          : '/images/hero-real-estate.avif'
-        link.setAttribute('fetchpriority', 'high')
-        document.head.appendChild(link)
-      })()
-    </script>
+    <!-- Declarative High-Priority Responsive LCP Hero Image Preload -->
+    <link rel="preload" as="image" type="image/avif" href="/images/hero-real-estate-m.avif" media="(max-width: 639px)" fetchpriority="high" />
+    <link rel="preload" as="image" type="image/avif" href="/images/hero-real-estate.avif" media="(min-width: 640px)" fetchpriority="high" />
 
     <!-- Self-hosted Plus Jakarta Sans Font (served directly as static woff2 font) -->
     <link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-
-    <!-- First-paint LCP Skeleton Style -->
-    <style>
-      #lcp-shell{position:absolute;left:0;right:0;top:66px;z-index:-1;pointer-events:none}
-      #lcp-shell .band{height:44px;border-bottom:1px solid rgba(22,180,232,.25);background:linear-gradient(to right,#071320,#0e253d,#071320)}
-      #lcp-shell .hero{position:relative;height:600px;overflow:hidden;background:#030712}
-      #lcp-shell img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center}
-      #lcp-shell .g1{position:absolute;top:0;bottom:0;left:0;width:100%;background:linear-gradient(to right,rgba(0,0,0,.85),rgba(0,0,0,.45),rgba(0,0,0,0))}
-      #lcp-shell .g2{position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,.4)}
-      #lcp-shell .g3{position:absolute;left:0;right:0;bottom:0;height:13rem;background:linear-gradient(to top,rgba(0,0,0,.75),rgba(0,0,0,.3),rgba(0,0,0,0))}
-      @media (min-width:640px){#lcp-shell{top:80px}#lcp-shell .band{height:52px}#lcp-shell .hero{height:660px}#lcp-shell .g1{width:80%}#lcp-shell .g2{display:none}}
-      @media (min-width:768px){#lcp-shell .hero{height:740px}#lcp-shell .g1{width:60%}}
-    </style>
 
     <!-- WebMCP (In-Browser Model Context Protocol) Early Agent Tool Registration -->
     <script>
@@ -258,86 +233,8 @@
     </script>
   </head>
   <body class="bg-[#F6F8FA] text-[#0F2A44] antialiased font-sans selection:bg-[#16B4E8] selection:text-white">
-    <!-- Homepage LCP skeleton -->
-    <script>
-      (function () {
-        if (location.pathname !== '/') return
-        var shell = document.createElement('div')
-        shell.id = 'lcp-shell'
-        shell.setAttribute('aria-hidden', 'true')
-        var hasBand = false
-        try {
-          var p = localStorage.getItem('toplinkers_promo_strip')
-          if (p && JSON.parse(p).enabled === true) hasBand = true
-        } catch(e) {}
-        shell.innerHTML = (hasBand ? '<div class="band"></div>' : '') + '<div class="hero"><picture>' +
-          '<source media="(max-width: 639px)" type="image/avif" srcset="/images/hero-real-estate-m.avif">' +
-          '<source media="(max-width: 639px)" type="image/webp" srcset="/images/hero-real-estate-m.webp">' +
-          '<source type="image/avif" srcset="/images/hero-real-estate.avif">' +
-          '<img src="/images/hero-real-estate.webp" alt="" width="1440" height="960" fetchpriority="high" decoding="sync">' +
-          '</picture><i class="g1"></i><i class="g2"></i><i class="g3"></i></div>'
-        document.body.appendChild(shell)
-      })()
-    </script>
-
-    <!-- Vue App Mounting Target (Clean for seamless Vue hydration & LCP shell) -->
+    <!-- Vue App Mounting Target -->
     <div id="app"></div>
-
-    <!-- Crawlable Semantic Fallback for Non-JS Crawlers & Search Engines -->
-    <noscript>
-      <div style="max-width:1200px;margin:32px auto;padding:0 20px;font-family:sans-serif;">
-        <header style="background:#0F2A44;color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;">
-          <a href="/" aria-label="TopLinkers Home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font-weight:900;font-size:20px;">
-            <img src="/toplinkers-logo-sm.png" alt="Top Linkers" width="40" height="40" style="background:#fff;border-radius:4px;padding:2px;" />
-            <span><span style="color:#E53935;">Top</span> Linkers</span>
-          </a>
-          <nav aria-label="Primary Navigation" style="display:flex;gap:16px;">
-            <a href="/about" style="color:#16B4E8;text-decoration:none;font-weight:700;">About Us</a>
-            <a href="/services" style="color:#fff;text-decoration:none;font-weight:600;">Services</a>
-            <a href="/listings" style="color:#fff;text-decoration:none;font-weight:600;">Properties</a>
-            <a href="/contact" style="color:#fff;text-decoration:none;font-weight:600;">Contact</a>
-          </nav>
-        </header>
-
-        <main style="margin:24px 0;">
-          <h1 style="font-size:28px;font-weight:900;color:#0F2A44;margin-bottom:16px;line-height:1.2;">
-            TopLinkers | Premier Real Estate, Turnkey Construction &amp; Solar in Islamabad
-          </h1>
-          <p style="font-size:15px;line-height:1.6;color:#334155;margin-bottom:24px;">
-            Top Linkers Real Estate, Construction &amp; Solar offers verified CDA/RDA plots in TopCity-1 &amp; PECHS, cash possession Moqa Ka Plots, PHA flats in I-12 &amp; I-16, Harsukh Nathia Gali luxury suites, turnkey house construction, and Tier-1 solar net metering in Islamabad, Pakistan.
-          </p>
-
-          <section style="background:#fff;border-radius:8px;padding:24px;border:1px solid #E2E8F0;margin-bottom:24px;">
-            <h2 style="font-size:18px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Verified Real Estate &amp; Engineering Portfolios</h2>
-            <ul style="line-height:2;color:#475569;">
-              <li><strong>Verified Plot &amp; Flat Listings:</strong> <a href="/listings" style="color:#16B4E8;text-decoration:none;">Browse TopCity, PECHS, and PHA Apartments</a></li>
-              <li><strong>Turnkey House Construction &amp; Solar:</strong> <a href="/services" style="color:#16B4E8;text-decoration:none;">PEC-Licensed Building &amp; IESCO Net Metering</a></li>
-              <li><strong>Harsukh Residencies Nathia Gali:</strong> <a href="/hr-sukh" style="color:#16B4E8;text-decoration:none;">Luxury Vacation Suites with 20%+ Rental Yield</a></li>
-              <li><strong>Executive Advisory Team:</strong> <a href="/team" style="color:#16B4E8;text-decoration:none;">Meet Our Property Consultants &amp; Engineers</a></li>
-            </ul>
-          </section>
-
-          <section style="background:#F1F5F9;border-radius:8px;padding:24px;border:1px solid #CBD5E1;">
-            <h2 style="font-size:16px;font-weight:700;color:#0F2A44;margin-bottom:8px;">Essential Company &amp; Legal Verification</h2>
-            <p style="font-size:13px;color:#64748B;margin-bottom:12px;">
-              Head Office: 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad | Phone: +92-334-9522157
-            </p>
-            <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:13px;">
-              <a href="/about" style="color:#0F2A44;font-weight:700;">About TopLinkers</a>
-              <a href="/contact" style="color:#0F2A44;font-weight:700;">Contact Us</a>
-              <a href="/terms-and-conditions" style="color:#0F2A44;font-weight:700;">Terms &amp; Conditions</a>
-              <a href="/privacy-policy" style="color:#0F2A44;font-weight:700;">Privacy Policy</a>
-              <a href="/disclaimer" style="color:#0F2A44;font-weight:700;">Legal Disclaimer</a>
-              <a href="/llms.txt" style="color:#16B4E8;font-weight:700;">llms.txt (Agent Guide)</a>
-            </div>
-          </section>
-        </main>
-
-        <footer style="background:#081322;color:#94A3B8;padding:20px;text-align:center;font-size:12px;margin-top:32px;">
-          <p>&copy; 2026 Top Linkers Real Estate, Construction &amp; Solar. Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan.</p>
-        </footer>
-      </div>
-    </noscript>
 
     <script type="module" src="/src/main.js"></script>
   </body>

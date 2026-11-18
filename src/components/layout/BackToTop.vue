@@ -10,7 +10,7 @@
     <button
       v-show="showButton"
       type="button"
-      class="fixed right-4 sm:right-6 z-40 w-11 h-11 bg-[#0F2A44] hover:bg-[#16B4E8] text-white flex items-center justify-center rounded-full shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none border border-white/20"
+      class="fixed right-4 sm:right-6 z-40 w-11 h-11 sm:w-12 sm:h-12 min-w-[44px] min-h-[44px] bg-[#0F2A44] hover:bg-[#16B4E8] text-white flex items-center justify-center rounded-full shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none border border-white/20"
       :style="{ bottom: `${bottomOffset + 68}px` }"
       aria-label="Back to top"
       title="Back to top"

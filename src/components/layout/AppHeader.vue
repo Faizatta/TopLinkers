@@ -278,7 +278,7 @@
         <!-- Mobile Drawer Hamburger Icon -->
         <button
           type="button"
-          class="lg:hidden p-2 text-[#0F2A44] hover:bg-gray-100 rounded-lg focus:outline-none transition-colors"
+          class="lg:hidden p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-[#0F2A44] hover:bg-gray-100 rounded-lg focus:outline-none transition-colors"
           aria-label="Toggle mobile menu"
           @click="mobileDrawerOpen = true"
         >
@@ -322,7 +322,7 @@
 
               <button
                 type="button"
-                class="p-2 text-slate-400 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors"
+                class="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors"
                 aria-label="Close menu"
                 @click="mobileDrawerOpen = false"
               >

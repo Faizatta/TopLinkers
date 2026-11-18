@@ -1031,7 +1031,8 @@
           <button
             type="button"
             @click="queryModalOpen = false"
-            class="text-gray-400 hover:text-gray-600 p-1 rounded-lg"
+            class="text-gray-500 hover:text-gray-700 p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg"
+            aria-label="Close inquiry modal"
           >
             <XMarkIcon class="w-5 h-5" />
           </button>

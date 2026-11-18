@@ -166,7 +166,14 @@
             <h3 class="text-lg font-extrabold text-[#0F2A44]">{{ isEditing ? 'Edit Property Details' : 'Add New Property' }}</h3>
             <p class="text-[11px] text-gray-500">Configure society, plot/flat type, cash vs. installment terms, and multi-photo gallery</p>
           </div>
-          <button @click="showModal = false" class="text-gray-400 hover:text-gray-700 p-1.5 rounded-lg hover:bg-gray-100">✕</button>
+          <button
+            type="button"
+            @click="showModal = false"
+            class="text-gray-500 hover:text-gray-800 p-1.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-gray-100"
+            aria-label="Close property editor"
+          >
+            ✕
+          </button>
         </div>
 
         <form @submit.prevent="saveProperty" class="space-y-4 pt-4">

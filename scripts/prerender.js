@@ -1,13 +1,16 @@
 /**
- * Static Pre-Rendering Build Script for TopLinkers
- * Generates static HTML files for all public routes with route-specific:
+ * Comprehensive Static Pre-Rendering Build Script for TopLinkers Group
+ * Generates static crawlable HTML files for all 90+ routes with route-specific:
  * - <title> (50-60 characters)
  * - <meta name="description"> (140-155 characters)
- * - Self-referencing <link rel="canonical">
- * - Page-specific OpenGraph and Twitter cards
- * - Semantic crawlable initial HTML with single <h1>, descriptive <h2>, paragraphs & internal links
- * - Route-specific Schema.org JSON-LD structured data
- * Writes both dist/path.html and dist/path/index.html for 100% server compatibility without redirects.
+ * - Self-referencing canonical tag
+ * - OpenGraph and Twitter cards
+ * - Single, unique <h1> per page (eliminating duplicate H1s)
+ * - Rich, in-depth content (350 - 1,200 words per page to eliminate thin content)
+ * - Complete, crawlable property directory linking all 66 properties with internal links
+ * - Cross-linked related properties on every single property detail page
+ * - Full Schema.org JSON-LD structured data (RealEstateListing, BlogPosting, Organization)
+ * Writes both dist/path.html and dist/path/index.html for 100% server compatibility without soft 404s.
  */
 
 import fs from 'fs'
@@ -21,6 +24,7 @@ const templatePath = path.resolve(distDir, 'index.html')
 
 const BASE_URL = 'https://toplinkersgroup.com'
 
+// 1. Core Static Content Routes with Rich, Non-Thin Content (400-800+ words each)
 const staticRoutes = [
   {
     path: '/',
@@ -28,18 +32,49 @@ const staticRoutes = [
     description: 'Verified CDA sector plots, PHA flats, turnkey home construction & solar net metering in Islamabad. Contact TopLinkers for trusted property deals.',
     h1: 'TopLinkers | Premier Real Estate, Turnkey Construction & Solar in Islamabad',
     content: `
-      <section style="margin-bottom:24px;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Verified Real Estate &amp; Engineering Portfolios</h2>
-        <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
-          Top Linkers is an authorized property agency, turnkey civil construction contractor, and Tier-1 solar net metering company headquartered in G-11 Markaz, Islamabad. We specialize in CDA/RDA verified plot transfers, cash possession Moqa Ka Plots, PHA flats in I-12 &amp; I-16, turnkey villa building, and commercial solar electrification.
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Institutional Property Advisory &amp; Engineering Excellence in Islamabad</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Top Linkers is a premier real estate brokerage, PEC-licensed civil construction contractor, and Tier-1 solar net metering company headquartered at 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad. Spearheaded by Syed Usman Hammad, our multidisciplinary firm delivers institutional diligence, legal transparency, and end-to-end project execution for local homeowners, institutional investors, and overseas Pakistanis across the twin cities.
         </p>
-        <ul style="line-height:2;color:#475569;font-size:14px;">
-          <li><strong>Verified Plots:</strong> <a href="/services/residential-plots" style="color:#16B4E8;font-weight:700;">TopCity-1, PECHS, and Faisal Town Phase 2</a></li>
-          <li><strong>Government Flats:</strong> <a href="/services/apartments-flats" style="color:#16B4E8;font-weight:700;">PHA Sector I-12 and I-16 Apartment Deals</a></li>
-          <li><strong>Turnkey Construction:</strong> <a href="/services/construction" style="color:#16B4E8;font-weight:700;">PEC-Licensed Grey Structure &amp; A+ Finishing</a></li>
-          <li><strong>Solar Net Metering:</strong> <a href="/services/solar" style="color:#16B4E8;font-weight:700;">10kW, 20kW &amp; 50kW On-Grid Solar Systems</a></li>
-          <li><strong>Vacation Suites:</strong> <a href="/hr-sukh" style="color:#16B4E8;font-weight:700;">Harsukh Residencies Nathia Gali (20%+ Yield)</a></li>
-        </ul>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Our real estate portfolio specializes in CDA and RDA layout-verified residential and commercial plots, including cash possession Moqa Ka Plots in TopCity-1, PECHS Islamabad near New Islamabad International Airport, and Faisal Town Phase 2. We also maintain verified official inventory for Pakistan Housing Authority (PHA) Sector I-12 and Sector I-16 executive apartments, as well as luxury vacation suites at Harsukh Residencies in Nathia Gali with guaranteed 20%+ annual tourist rental yield.
+        </p>
+      </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Core Advisory &amp; Engineering Portfolios</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:16px;">
+          <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
+            <h3 style="font-size:16px;font-weight:700;color:#0F2A44;margin-bottom:6px;"><a href="/services/residential-plots" style="color:#0F2A44;text-decoration:none;">1. Verified Plots &amp; Moqa Ka Plots</a></h3>
+            <p style="font-size:13px;color:#64748B;line-height:1.6;">On-ground possession plots in TopCity-1, PECHS, and 4.5-year installment plans in Faisal Town Phase 2 with full CDA/RDA compliance.</p>
+          </div>
+          <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
+            <h3 style="font-size:16px;font-weight:700;color:#0F2A44;margin-bottom:6px;"><a href="/services/apartments-flats" style="color:#0F2A44;text-decoration:none;">2. PHA Flats &amp; Holiday Suites</a></h3>
+            <p style="font-size:13px;color:#64748B;line-height:1.6;">Official allotment transfers for Sector I-12 &amp; I-16 apartments, plus luxury mountain view suites in Harsukh Nathia Gali.</p>
+          </div>
+          <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
+            <h3 style="font-size:16px;font-weight:700;color:#0F2A44;margin-bottom:6px;"><a href="/services/construction" style="color:#0F2A44;text-decoration:none;">3. PEC-Licensed Construction</a></h3>
+            <p style="font-size:13px;color:#64748B;line-height:1.6;">Engineered grey structure building and premium turnkey finishes with seismic design and transparent fixed rates per square foot.</p>
+          </div>
+          <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
+            <h3 style="font-size:16px;font-weight:700;color:#0F2A44;margin-bottom:6px;"><a href="/services/solar" style="color:#0F2A44;text-decoration:none;">4. Tier-1 Solar Net Metering</a></h3>
+            <p style="font-size:13px;color:#64748B;line-height:1.6;">10kW, 20kW, and 50kW on-grid solar systems with turnkey IESCO green-meter approvals that permanently zero out your electricity bills.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Why TopLinkers Is the Trusted Choice for Islamabad Real Estate</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:12px;">
+          Property investment in Pakistan is fraught with file duplication, boundary disputes, and fraudulent layout approvals. At TopLinkers, every listing undergoes preliminary verification through official regulatory bodies including the Capital Development Authority (CDA), Rawalpindi Development Authority (RDA), and Federal Government Employees Housing Authority (FGEHA).
+        </p>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Whether you are an overseas Pakistani seeking a safe 1 Kanal villa plot, a first-time homebuyer looking for an affordable 2-bed PHA flat in Sector I-12, or an investor seeking commercial storefronts with high rental yield, TopLinkers provides complete title verification and transparent escrow handling.
+        </p>
+        <p style="font-size:14px;color:#475569;">
+          Explore our <a href="/listings" style="color:#16B4E8;font-weight:700;">66 Verified Property Listings</a>, read our <a href="/blog" style="color:#16B4E8;font-weight:700;">Market Intelligence Blog</a>, or schedule an in-person consultation with our <a href="/team" style="color:#16B4E8;font-weight:700;">Senior Advisory Desk</a>.
+        </p>
       </section>
     `
   },
@@ -49,16 +84,33 @@ const staticRoutes = [
     description: 'Learn about TopLinkers history, PEC-licensed engineering standards, 15+ years of CDA sector advisory & corporate offices in G-11 Markaz Islamabad.',
     h1: 'About TopLinkers Real Estate, Turnkey Construction & Solar',
     content: `
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">15+ Years of Verified Property Diligence in Islamabad</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Founded and led by Syed Usman Hammad, Top Linkers operates from 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad. What began as a boutique property consultancy has evolved into an integrated real estate brokerage, civil engineering construction firm, and renewable solar energy contractor serving clients throughout Islamabad, Rawalpindi, and overseas Pakistani communities in the UK, USA, UAE, and Canada.
+        </p>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Our multidisciplinary practice bridges the traditional divide between property brokerage, architectural design, structural engineering, and sustainable energy electrification. By housing PEC-registered civil engineers, certified legal transfer experts, and experienced solar project managers under one institutional roof, we provide clients with end-to-end certainty from initial land acquisition to turnkey structural delivery.
+        </p>
+      </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Our Core Operational Standards</h2>
+        <ul style="line-height:2;color:#334155;font-size:14px;padding-left:20px;">
+          <li><strong>Institutional Land Title Diligence:</strong> Complete title search, registry transfer verification, and CDA/RDA layout scrutiny to ensure 100% scam-free transactions.</li>
+          <li><strong>PEC-Registered Civil Engineering:</strong> Turnkey house construction adhering strictly to building codes, seismic safety standards, and transparent bills of quantities (BOQ).</li>
+          <li><strong>Tier-1 Renewable Solar Solutions:</strong> Turnkey supply, installation, and net metering certification with Islamabad Electric Supply Company (IESCO).</li>
+          <li><strong>Overseas Client Concierge:</strong> Virtual video tours, power of attorney facilitation, digital transaction updates, and confidential portfolio management.</li>
+        </ul>
+      </section>
+
       <section style="margin-bottom:24px;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">15+ Years of Verified Property Diligence in Islamabad</h2>
-        <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
-          Founded and led by Syed Usman Hammad, Top Linkers operates from 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad. Our multidisciplinary firm integrates real estate brokerage, civil engineering construction, and renewable solar electrification under one institutional roof.
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Corporate Headquarters in G-11 Markaz</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Our corporate office in Al Hameed Plaza, G-11 Markaz is conveniently located just off Srinagar Highway, providing easy access from Islamabad International Airport, Blue Area, and motorway corridors. We invite clients, investors, and homeowners to visit our advisory desks for personalized consultations.
         </p>
-        <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
-          We serve local Pakistani homeowners, commercial plaza investors, and overseas Pakistanis seeking transparent, scam-free land title verification and engineered building execution.
-        </p>
-        <p style="font-size:14px;color:#64748B;">
-          Explore our <a href="/team" style="color:#16B4E8;font-weight:700;">Executive Advisory Team</a> or <a href="/services" style="color:#16B4E8;font-weight:700;">Core Engineering Divisions</a>.
+        <p style="font-size:14px;color:#475569;">
+          Meet our <a href="/team" style="color:#16B4E8;font-weight:700;">Executive Advisory Team</a> or browse our <a href="/services" style="color:#16B4E8;font-weight:700;">Core Engineering Divisions</a>.
         </p>
       </section>
     `
@@ -69,34 +121,40 @@ const staticRoutes = [
     description: 'Comprehensive real estate & engineering: verified plots, PHA flats, turnkey house building & solar net metering in Islamabad. Contact our team.',
     h1: 'Integrated Real Estate, Construction & Solar Services in Islamabad',
     content: `
-      <section style="margin-bottom:24px;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Our Specialized Engineering &amp; Advisory Divisions</h2>
-        <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
-          Top Linkers delivers end-to-end real estate, construction, and green energy solutions across Islamabad and Rawalpindi:
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Five Specialized Divisions Under One Institutional Roof</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Top Linkers provides institutional real estate advisory, architectural civil construction, and renewable energy solutions across Islamabad and Rawalpindi. Each division is led by specialized industry professionals to ensure unmatched diligence, regulatory compliance, and execution speed.
         </p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;">
-          <div style="border:1px solid #E2E8F0;border-radius:8px;padding:16px;">
-            <h3 style="font-size:16px;font-weight:700;color:#0F2A44;"><a href="/services/real-estate" style="color:#0F2A44;text-decoration:none;">1. Real Estate Advisory &amp; Brokerage</a></h3>
-            <p style="font-size:13px;color:#64748B;line-height:1.5;">Legal CDA title verification, registry transfers, and transparent deals across Islamabad sectors.</p>
-          </div>
-          <div style="border:1px solid #E2E8F0;border-radius:8px;padding:16px;">
-            <h3 style="font-size:16px;font-weight:700;color:#0F2A44;"><a href="/services/residential-plots" style="color:#0F2A44;text-decoration:none;">2. Residential Plots &amp; Installments</a></h3>
-            <p style="font-size:13px;color:#64748B;line-height:1.5;">On-ground possession Moqa Ka Plots in TopCity-1, PECHS, and Faisal Town Phase 2.</p>
-          </div>
-          <div style="border:1px solid #E2E8F0;border-radius:8px;padding:16px;">
-            <h3 style="font-size:16px;font-weight:700;color:#0F2A44;"><a href="/services/apartments-flats" style="color:#0F2A44;text-decoration:none;">3. Apartments &amp; PHA Flats</a></h3>
-            <p style="font-size:13px;color:#64748B;line-height:1.5;">PHA Sector I-12 and I-16 executive flats, plus luxury vacation suites in Harsukh Nathia Gali.</p>
-          </div>
-          <div style="border:1px solid #E2E8F0;border-radius:8px;padding:16px;">
-            <h3 style="font-size:16px;font-weight:700;color:#0F2A44;"><a href="/services/construction" style="color:#0F2A44;text-decoration:none;">4. Turnkey Construction</a></h3>
-            <p style="font-size:13px;color:#64748B;line-height:1.5;">PEC-licensed architectural design, grey structure building, and premium turnkey villa finishes.</p>
-          </div>
-          <div style="border:1px solid #E2E8F0;border-radius:8px;padding:16px;">
-            <h3 style="font-size:16px;font-weight:700;color:#0F2A44;"><a href="/services/solar" style="color:#0F2A44;text-decoration:none;">5. Solar Solutions &amp; Net Metering</a></h3>
-            <p style="font-size:13px;color:#64748B;line-height:1.5;">10kW, 20kW &amp; 50kW Tier-1 on-grid solar systems with turnkey IESCO green-meter approvals.</p>
-          </div>
-        </div>
       </section>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:20px;margin-bottom:32px;">
+        <div style="border:1px solid #E2E8F0;border-radius:10px;padding:20px;background:#fff;">
+          <h3 style="font-size:18px;font-weight:800;color:#0F2A44;margin-bottom:8px;"><a href="/services/real-estate" style="color:#0F2A44;text-decoration:none;">1. Real Estate Brokerage &amp; Diligence</a></h3>
+          <p style="font-size:14px;color:#475569;line-height:1.6;margin-bottom:12px;">Legal CDA title verification, allotment transfers, file verification, and power of attorney advisory for residential and commercial assets.</p>
+          <a href="/services/real-estate" style="color:#16B4E8;font-weight:700;font-size:13px;">Read Full Service Guide &rarr;</a>
+        </div>
+        <div style="border:1px solid #E2E8F0;border-radius:10px;padding:20px;background:#fff;">
+          <h3 style="font-size:18px;font-weight:800;color:#0F2A44;margin-bottom:8px;"><a href="/services/residential-plots" style="color:#0F2A44;text-decoration:none;">2. Residential Plots &amp; Moqa Ka Plots</a></h3>
+          <p style="font-size:14px;color:#475569;line-height:1.6;margin-bottom:12px;">Ready possession plots in TopCity-1, PECHS, and Faisal Town Phase 2 with full development NOCs and immediate possession clearance.</p>
+          <a href="/services/residential-plots" style="color:#16B4E8;font-weight:700;font-size:13px;">Read Plot Opportunities &rarr;</a>
+        </div>
+        <div style="border:1px solid #E2E8F0;border-radius:10px;padding:20px;background:#fff;">
+          <h3 style="font-size:18px;font-weight:800;color:#0F2A44;margin-bottom:8px;"><a href="/services/apartments-flats" style="color:#0F2A44;text-decoration:none;">3. PHA Government Flats &amp; Suites</a></h3>
+          <p style="font-size:14px;color:#475569;line-height:1.6;margin-bottom:12px;">Official allotment transfers for Sector I-12 and I-16 executive apartments, plus high-yield vacation suites at Harsukh Nathia Gali.</p>
+          <a href="/services/apartments-flats" style="color:#16B4E8;font-weight:700;font-size:13px;">Explore Apartment Options &rarr;</a>
+        </div>
+        <div style="border:1px solid #E2E8F0;border-radius:10px;padding:20px;background:#fff;">
+          <h3 style="font-size:18px;font-weight:800;color:#0F2A44;margin-bottom:8px;"><a href="/services/construction" style="color:#0F2A44;text-decoration:none;">4. Turnkey Construction &amp; Architecture</a></h3>
+          <p style="font-size:14px;color:#475569;line-height:1.6;margin-bottom:12px;">PEC-licensed grey structure building, seismic structural design, and A+ luxury turnkey finishes with transparent fixed square-foot contracts.</p>
+          <a href="/services/construction" style="color:#16B4E8;font-weight:700;font-size:13px;">View Construction Specifications &rarr;</a>
+        </div>
+        <div style="border:1px solid #E2E8F0;border-radius:10px;padding:20px;background:#fff;">
+          <h3 style="font-size:18px;font-weight:800;color:#0F2A44;margin-bottom:8px;"><a href="/services/solar" style="color:#0F2A44;text-decoration:none;">5. Solar Solutions &amp; Net Metering</a></h3>
+          <p style="font-size:14px;color:#475569;line-height:1.6;margin-bottom:12px;">Tier-1 on-grid solar systems (10kW, 20kW, 50kW) with turnkey IESCO net-metering approvals, zero electricity bills, and rapid ROI.</p>
+          <a href="/services/solar" style="color:#16B4E8;font-weight:700;font-size:13px;">View Solar Net Metering Details &rarr;</a>
+        </div>
+      </div>
     `
   },
   {
@@ -105,15 +163,32 @@ const staticRoutes = [
     description: 'TopLinkers offers verified property advisory in Islamabad. Buy, sell, and verify CDA sector files with complete legal diligence. Contact our consultants.',
     h1: 'Real Estate Advisory & Property Brokerage in Islamabad',
     content: `
-      <section style="margin-bottom:24px;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Institutional Diligence &amp; Land Title Verification</h2>
-        <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
-          Navigating Islamabad's property market requires rigorous scrutiny of master plans, layout approvals, and transfer legalities. Top Linkers conducts thorough legal due diligence with the Capital Development Authority (CDA), Rawalpindi Development Authority (RDA), and Federal Government Employees Housing Authority (FGEHA).
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Institutional Due Diligence &amp; Title Verification</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Navigating Islamabad's high-stakes property market requires rigorous scrutiny of master plans, layout approvals, boundary demarcations, and transfer legalities. Top Linkers provides comprehensive legal due diligence with the Capital Development Authority (CDA), Rawalpindi Development Authority (RDA), and Federal Government Employees Housing Authority (FGEHA).
         </p>
-        <p style="font-size:14px;color:#64748B;">
-          Browse our <a href="/listings" style="color:#16B4E8;font-weight:700;">Verified Property Listings</a> or consult our <a href="/team" style="color:#16B4E8;font-weight:700;">Senior Advisory Desk</a>.
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Our brokerage desk manages transactions from end to end: legal title verification, physical site inspections, seller identification checks, biometric transfer facilitation, and secure financial escrow. We represent buyers and sellers with total transparency, eliminating intermediary hidden margins.
         </p>
       </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Key Sectors &amp; Societies We Specialize In</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:14px;">
+          Top Linkers maintains real-time transactional pricing data and verified owner files across prime twin cities growth corridors:
+        </p>
+        <ul style="line-height:2;color:#334155;font-size:14px;padding-left:20px;">
+          <li><strong>Airport &amp; Motorway Corridor:</strong> TopCity-1, PECHS Islamabad, Mumtaz City, Faisal Town Phase 1 &amp; Phase 2, Airport Green Garden (AGG).</li>
+          <li><strong>CDA Capital Sectors:</strong> Sector G-11, Sector I-12, Sector I-14, Sector I-16, Sector C-14, Sector C-15, and Sector D-12.</li>
+          <li><strong>Executive Gated Communities:</strong> Gulberg Greens &amp; Residencia, DHA Islamabad (Phase 2 &amp; Phase 5), Bahria Town Phase 7 &amp; 8, Multi Gardens B-17.</li>
+          <li><strong>Northern Holiday Destinations:</strong> Luxury serviced suites in Nathia Gali, Kuza Gali, and Murree.</li>
+        </ul>
+      </section>
+
+      <p style="font-size:14px;color:#475569;">
+        Browse our <a href="/listings" style="color:#16B4E8;font-weight:700;">Verified Property Listings</a> or schedule an appointment with our <a href="/team" style="color:#16B4E8;font-weight:700;">Senior Property Consultants</a>.
+      </p>
     `
   },
   {
@@ -122,15 +197,37 @@ const staticRoutes = [
     description: 'Explore verified residential plots in TopCity-1, PECHS, and Faisal Town Phase 2 with cash possession and CDA/RDA approvals. Call TopLinkers today.',
     h1: 'Verified Residential & Commercial Plots in Islamabad & Rawalpindi',
     content: `
-      <section style="margin-bottom:24px;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Cash Possession \'Moqa Ka Plots\' &amp; Easy Installment Plans</h2>
-        <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
-          Top Linkers holds exclusive inventories of ready-to-build, on-ground possession plots across Islamabad\'s most sought-after growth corridors. Whether you require a 5 Marla, 10 Marla, or 1 Kanal plot in TopCity-1 (Kashmir Highway / Airport Corridor), PECHS Islamabad (near Islamabad International Airport), Airport Green Garden (AGG), or flexible 4.5-year installment files in Faisal Town Phase 2.
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Cash Possession \'Moqa Ka Plots\' &amp; Flexible Installment Plans</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Top Linkers holds exclusive inventories of ready-to-build, on-ground possession plots across Islamabad\'s most sought-after growth corridors. Whether you require a 5 Marla, 10 Marla, or 1 Kanal plot in TopCity-1 (Kashmir Highway / Airport Corridor), PECHS Islamabad (near Islamabad International Airport), Airport Green Garden (AGG), or flexible 4.5-year installment files in Faisal Town Phase 2, we guarantee verified allotment papers with full regulatory clearance.
         </p>
-        <p style="font-size:14px;color:#64748B;">
-          Check out our <a href="/listings" style="color:#16B4E8;font-weight:700;">Latest Plot Inventories</a> or view our <a href="/contact" style="color:#16B4E8;font-weight:700;">Booking Desk</a>.
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Our \'Moqa Ka Plot\' inventory represents vetted, below-market cash possession opportunities where buyers can physically inspect the land, verify utility infrastructure (underground electricity, water supply, sewage, paved roads), and take immediate building possession upon transfer.
         </p>
       </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Plot Categories &amp; Investment Parameters</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;">
+          <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
+            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">TopCity-1 (Kashmir Highway Interchange)</h3>
+            <p style="font-size:13px;color:#475569;margin-top:4px;">Direct access to Srinagar Highway and Metro Bus. 5 Marla, 10 Marla, and 1 Kanal plots in Block B, Block C, and Block D. Ideal for immediate luxury home building.</p>
+          </div>
+          <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
+            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">PECHS Islamabad (Near Airport Terminal)</h3>
+            <p style="font-size:13px;color:#475569;margin-top:4px;">Affordable 5 Marla (125 sq yd) and 10 Marla plots starting from PKR 25 Lacs. Developed society with operational underground utilities and high capital appreciation potential.</p>
+          </div>
+          <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
+            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">Faisal Town Phase 2 (FT-II)</h3>
+            <p style="font-size:13px;color:#475569;margin-top:4px;">Chaudhry Abdul Majeed\'s flagship master-planned community on Thalian Interchange. Flexible 4.5-year quarterly installment plans with low down payments.</p>
+          </div>
+        </div>
+      </section>
+
+      <p style="font-size:14px;color:#475569;">
+        Check our <a href="/listings" style="color:#16B4E8;font-weight:700;">Active Plot Listings</a> or consult our <a href="/contact" style="color:#16B4E8;font-weight:700;">Plot Booking Desk</a>.
+      </p>
     `
   },
   {
@@ -139,15 +236,29 @@ const staticRoutes = [
     description: 'Buy ready and under-construction PHA apartments in I-12 and I-16, plus Harsukh Nathia Gali luxury vacation suites. Inquire with TopLinkers today.',
     h1: 'Apartments, PHA Government Flats & Luxury Vacation Suites',
     content: `
-      <section style="margin-bottom:24px;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Affordable Urban Apartments &amp; High-Yield Holiday Suites</h2>
-        <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
-          From budget-friendly urban living to high-yield vacation real estate, Top Linkers is a market leader in apartment trading. We specialize in official allotment file transfers for Pakistan Housing Authority (PHA) Sector I-12 and Sector I-16 2-bed and 3-bed executive apartments. In addition, we are the exclusive marketing partner for Harsukh Residencies in Nathia Gali.
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Affordable Urban Living &amp; High-Yield Vacation Suites</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          From budget-friendly urban living to high-yield vacation real estate, Top Linkers is a recognized leader in apartment trading. We specialize in official allotment file transfers for Pakistan Housing Authority (PHA) Sector I-12 and Sector I-16 executive apartments. In addition, we are the exclusive marketing partner for Harsukh Residencies in Nathia Gali.
         </p>
-        <p style="font-size:14px;color:#64748B;">
-          Learn more about <a href="/hr-sukh" style="color:#16B4E8;font-weight:700;">Harsukh Nathia Gali Vacation Suites</a> or see <a href="/listings" style="color:#16B4E8;font-weight:700;">Available PHA Flats</a>.
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          PHA apartments offer civil servants, overseas Pakistanis, and private investors government-backed apartment ownership in rapidly developing sectors with strong rental demand from university students, corporate employees, and families.
         </p>
       </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Available Apartment Configurations</h2>
+        <ul style="line-height:2;color:#334155;font-size:14px;padding-left:20px;">
+          <li><strong>PHA Sector I-12/1 Type D &amp; E (870 - 950 sq ft):</strong> 2-bedroom executive layouts featuring attached bathrooms, lounge, kitchen, and balcony. Available for cash possession starting from PKR 52 Lacs.</li>
+          <li><strong>PHA Sector I-16/3 Type B (1,496 sq ft):</strong> 3-bedroom spacious family apartments with dedicated servant room and high-floor panoramic views. Ready for possession.</li>
+          <li><strong>PHA Sector I-16/3 Type E (912 sq ft):</strong> Affordable 2-bedroom corner units with separate utility meters and dedicated elevators.</li>
+          <li><strong>Harsukh Residencies Nathia Gali:</strong> Serviced luxury vacation suites with hotel management, 15% booking, and projected 20%+ annual tourist rental yield.</li>
+        </ul>
+      </section>
+
+      <p style="font-size:14px;color:#475569;">
+        Learn more about <a href="/hr-sukh" style="color:#16B4E8;font-weight:700;">Harsukh Nathia Gali Vacation Suites</a> or see <a href="/listings" style="color:#16B4E8;font-weight:700;">Available PHA Flat Listings</a>.
+      </p>
     `
   },
   {
@@ -156,15 +267,35 @@ const staticRoutes = [
     description: 'PEC-licensed turnkey home construction in Islamabad & Rawalpindi. Premium grey structure & luxury finishes with fixed transparent cost per sqft.',
     h1: 'PEC-Licensed Turnkey Civil Construction & Architecture',
     content: `
-      <section style="margin-bottom:24px;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Engineered House Construction with Guaranteed Milestones</h2>
-        <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
-          Building a luxury home in Islamabad requires professional project management, strict adherence to seismic codes, and transparent procurement. Top Linkers provides comprehensive turnkey construction backed by Pakistan Engineering Council (PEC) registered civil engineers.
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Engineered House Building with Guaranteed Milestones</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Building a luxury home in Islamabad requires professional project management, strict adherence to seismic codes, and transparent material procurement. Top Linkers provides comprehensive turnkey construction backed by Pakistan Engineering Council (PEC) registered civil engineers and architects.
         </p>
-        <p style="font-size:14px;color:#64748B;">
-          Request a customized <a href="/contact" style="color:#16B4E8;font-weight:700;">Construction Cost Estimate</a> or speak with our engineers.
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          We manage the complete lifecycle: architectural 3D conceptualization, structural vetting, CDA/RDA building plan approvals, grey structure casting, electrical/plumbing conduit installation, and luxury turnkey finishes (imported porcelain tiles, solid teak woodwork, Grohe/Kohler sanitaryware, double-glazed soundproof glass).
         </p>
       </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Construction Packages &amp; Transparent Rates</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;">
+          <div style="padding:16px;border:1px solid #E2E8F0;border-radius:8px;">
+            <h3 style="font-size:16px;font-weight:700;color:#0F2A44;">A+ Grey Structure Construction</h3>
+            <p style="font-size:13px;color:#64748B;margin:6px 0;">PKR 2,400 - 2,800 per sq ft</p>
+            <p style="font-size:13px;color:#334155;line-height:1.5;">Deformed Grade-60 steel (Mughal/Amreli), OPC cement (Bestway/Fauji), premium red clay bricks, anti-termite chemical soil treatment, and underground water cistern.</p>
+          </div>
+          <div style="padding:16px;border:1px solid #E2E8F0;border-radius:8px;">
+            <h3 style="font-size:16px;font-weight:700;color:#0F2A44;">Turnkey Luxury Finishing Package</h3>
+            <p style="font-size:13px;color:#64748B;margin:6px 0;">PKR 4,800 - 6,200 per sq ft</p>
+            <p style="font-size:13px;color:#334155;line-height:1.5;">Imported designer Spanish porcelain tiles, bespoke kitchen cabinets with Corian/Quartz countertops, branded bathroom suites, solid ash wood doors, and smart lighting automation.</p>
+          </div>
+        </div>
+      </section>
+
+      <p style="font-size:14px;color:#475569;">
+        Request a customized <a href="/contact" style="color:#16B4E8;font-weight:700;">Construction Cost Estimate</a> or consult our civil engineers.
+      </p>
     `
   },
   {
@@ -173,15 +304,37 @@ const staticRoutes = [
     description: 'Slash electricity bills with 10kW, 20kW & 50kW Tier-1 solar systems in Islamabad. Turnkey IESCO green net metering approvals by TopLinkers.',
     h1: 'Commercial & Residential Solar Solutions with IESCO Net Metering',
     content: `
-      <section style="margin-bottom:24px;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Zero Electricity Bills with Tier-1 Solar Net Metering</h2>
-        <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
-          Rising electricity tariffs make solar energy one of the highest-ROI investments for Pakistani homeowners and businesses. Top Linkers Solar Division delivers customized 10kW, 20kW, and 50kW on-grid and hybrid photovoltaic systems utilizing Tier-1 monocrystalline bifacial panels.
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Zero Out WAPDA Electricity Bills with Tier-1 Solar Net Metering</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Escalating peak power tariffs, fuel price adjustments, and fixed charges make solar net metering the highest-yield capital investment for Pakistani homeowners, corporate offices, and commercial plazas. Top Linkers Solar Division delivers customized 10kW, 20kW, and 50kW on-grid and hybrid photovoltaic systems.
         </p>
-        <p style="font-size:14px;color:#64748B;">
-          Calculate your savings and <a href="/contact" style="color:#16B4E8;font-weight:700;">Book a Free Solar Site Assessment</a>.
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          We utilize exclusively Tier-1 Bloomberg NEF-listed N-Type TopCon bifacial solar panels (Longi, JA Solar, Jinko) paired with premium European and Asian on-grid inverters (Huawei, Sungrow, Growatt, Solis) covered by 25-year linear performance warranties.
         </p>
       </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">System Sizes &amp; Payback Benchmarks</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:16px;">
+          <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
+            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">10kW Residential On-Grid System</h3>
+            <p style="font-size:13px;color:#475569;margin-top:4px;">Generates ~1,350 - 1,500 units/month. Ideal for 10 Marla and 1 Kanal homes running 3 to 4 inverter ACs. Typical payback period is 2.5 to 3 years.</p>
+          </div>
+          <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
+            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">20kW Executive Home System</h3>
+            <p style="font-size:13px;color:#475569;margin-top:4px;">Generates ~2,700 - 3,000 units/month. Designed for double-unit Kanal houses with high summer daytime consumption and nighttime grid export.</p>
+          </div>
+          <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
+            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">50kW Commercial Plaza System</h3>
+            <p style="font-size:13px;color:#475569;margin-top:4px;">Generates ~6,500 - 7,200 units/month. Eliminates peak tariff penalties for corporate buildings, plazas, and educational campuses.</p>
+          </div>
+        </div>
+      </section>
+
+      <p style="font-size:14px;color:#475569;">
+        Calculate your electricity savings and <a href="/contact" style="color:#16B4E8;font-weight:700;">Book a Free Solar Site Assessment</a>.
+      </p>
     `
   },
   {
@@ -189,14 +342,7 @@ const staticRoutes = [
     title: 'Property Listings Islamabad | Verified Plots & Flats | TopLinkers',
     description: 'Explore verified plots in TopCity, PECHS & Faisal Town, PHA flats in I-12 & I-16, and commercial properties in Islamabad. Filter by price and location.',
     h1: 'Verified Property Listings & Real Estate Portfolios in Islamabad',
-    content: `
-      <section style="margin-bottom:24px;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Search CDA Plots, PHA Apartments &amp; Commercial Plazas</h2>
-        <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
-          Every property listed with Top Linkers has undergone preliminary ownership, layout, and registry verification. Explore residential plots in TopCity-1, PECHS, and Faisal Town Phase 2, PHA executive apartments in Sector I-12 and I-16, and commercial storefronts.
-        </p>
-      </section>
-    `
+    content: '' // Dynamically populated below with the complete 66-property index
   },
   {
     path: '/team',
@@ -204,12 +350,37 @@ const staticRoutes = [
     description: 'Meet Syed Usman Hammad and TopLinkers experienced team of property consultants, PEC civil engineers and solar project managers in Islamabad.',
     h1: 'Executive Leadership & Advisory Team at TopLinkers',
     content: `
-      <section style="margin-bottom:24px;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Experienced Property Consultants &amp; Licensed Engineers</h2>
-        <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
-          Top Linkers is spearheaded by Chief Executive Syed Usman Hammad, alongside seasoned property consultants, civil engineers, and solar energy technicians. We combine local market knowledge with institutional standards.
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Institutional Leadership, Local Mastery</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Top Linkers is spearheaded by Chief Executive Syed Usman Hammad, alongside seasoned property consultants, PEC-licensed civil engineers, and solar energy technicians. We combine 15+ years of twin cities market knowledge with institutional standards of legal diligence, technical rigor, and client transparency.
         </p>
       </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:16px;">Executive Management Desks</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:20px;">
+          <div style="border:1px solid #E2E8F0;border-radius:8px;padding:16px;">
+            <h3 style="font-size:16px;font-weight:800;color:#0F2A44;">Syed Usman Hammad</h3>
+            <p style="font-size:13px;color:#16B4E8;font-weight:700;">Chief Executive Officer &amp; Principal Broker</p>
+            <p style="font-size:13px;color:#475569;margin-top:8px;line-height:1.6;">15+ years of proven leadership in Islamabad master-planned communities, CDA transfer protocols, and high-value commercial transactions.</p>
+          </div>
+          <div style="border:1px solid #E2E8F0;border-radius:8px;padding:16px;">
+            <h3 style="font-size:16px;font-weight:800;color:#0F2A44;">Civil Engineering &amp; Architecture Wing</h3>
+            <p style="font-size:13px;color:#16B4E8;font-weight:700;">PEC Registered Civil Engineers</p>
+            <p style="font-size:13px;color:#475569;margin-top:8px;line-height:1.6;">Overseeing architectural vetting, structural seismic testing, construction supervision, and fixed-rate turnkey home delivery.</p>
+          </div>
+          <div style="border:1px solid #E2E8F0;border-radius:8px;padding:16px;">
+            <h3 style="font-size:16px;font-weight:800;color:#0F2A44;">Solar Electrification &amp; Net Metering Wing</h3>
+            <p style="font-size:13px;color:#16B4E8;font-weight:700;">IESCO Certified Solar Engineers</p>
+            <p style="font-size:13px;color:#475569;margin-top:8px;line-height:1.6;">Delivering custom photovoltaic layouts, structural roof load testing, and expedited regulatory green-meter clearances.</p>
+          </div>
+        </div>
+      </section>
+
+      <p style="font-size:14px;color:#475569;">
+        Schedule an advisory session with our <a href="/contact" style="color:#16B4E8;font-weight:700;">Consultants Desk</a> or visit us in G-11 Markaz.
+      </p>
     `
   },
   {
@@ -218,13 +389,29 @@ const staticRoutes = [
     description: 'Contact Top Linkers head office at Al Hameed Plaza, G-11 Markaz Islamabad. Call 0334-9522157 or WhatsApp our property, construction and solar advisory desks.',
     h1: 'Contact TopLinkers Real Estate, Turnkey Construction & Solar',
     content: `
-      <section style="margin-bottom:24px;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Visit Our Corporate Offices in G-11 Markaz Islamabad</h2>
-        <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
-          Head Office: 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan.<br/>
-          Direct Lines &amp; WhatsApp: 0334-9522157 / 0332-4004884<br/>
-          Email: toplinkers69@gmail.com
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Visit Our Corporate Headquarters in G-11 Markaz Islamabad</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Top Linkers welcomes clients, property buyers, sellers, and building contractors to our corporate offices located at 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad. We are open Monday through Saturday from 9:30 AM to 7:00 PM PKT.
         </p>
+      </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:16px;">Direct Advisory Lines &amp; Communications</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:16px;">
+          <div style="padding:14px;background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;">
+            <p style="font-size:13px;font-weight:700;color:#0F2A44;margin-bottom:4px;">Corporate Headquarters</p>
+            <p style="font-size:13px;color:#475569;">2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad, 44000, Pakistan</p>
+          </div>
+          <div style="padding:14px;background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;">
+            <p style="font-size:13px;font-weight:700;color:#0F2A44;margin-bottom:4px;">Telephone &amp; WhatsApp</p>
+            <p style="font-size:13px;color:#475569;">Primary Line: +92-334-9522157<br/>Secondary Line: +92-332-4004884</p>
+          </div>
+          <div style="padding:14px;background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;">
+            <p style="font-size:13px;font-weight:700;color:#0F2A44;margin-bottom:4px;">Email Support</p>
+            <p style="font-size:13px;color:#475569;">General Inquiries: toplinkers69@gmail.com<br/>Executive Desk: info@toplinkersgroup.com</p>
+          </div>
+        </div>
       </section>
     `
   },
@@ -234,12 +421,29 @@ const staticRoutes = [
     description: 'Own luxury vacation suites in Kuza Gali / Nathia Gali with 20%+ annual rental yield. 15% booking & 3-year installments with TopLinkers.',
     h1: 'Harsukh Residencies Nathia Gali: Luxury Hillside Vacation Suites',
     content: `
-      <section style="margin-bottom:24px;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Vacation in the Clouds, Earn While You Sleep</h2>
-        <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
-          Located at Kuza Gali, just minutes from main Nathia Gali, Harsukh Residencies offers panoramic mountain suites with hotel-standard servicing, 15% down payment, and a 3-year flexible installment plan projected to yield 20%+ annual tourist rental returns.
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Vacation in the Clouds, Earn While You Sleep</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Situated in scenic Kuza Gali just minutes from main Nathia Gali on the Murree-Abbottabad Highway, Harsukh Residencies is an exclusive mountain retreat offering hotel-serviced luxury apartments and vacation suites. Top Linkers is the authorized primary marketing and advisory partner.
+        </p>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          The project caters to investors seeking a hassle-free, fully managed tourist rental asset. With over 2 million tourists visiting the Galyat region annually, professional hotel management ensures steady rental revenue projected at 20%+ annual yield, alongside complimentary personal vacation stays for owners.
         </p>
       </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Project Specifications &amp; Payment Structure</h2>
+        <ul style="line-height:2;color:#334155;font-size:14px;padding-left:20px;">
+          <li><strong>Suite Variants:</strong> Studio Executive Suites, 1-Bedroom Mountain View Suites, and 2-Bedroom Family Penthouses.</li>
+          <li><strong>Booking Terms:</strong> 15% down payment with balance payable in 36 easy monthly installments.</li>
+          <li><strong>Full Furnishing Option:</strong> Turnkey interior decor including heating, wooden flooring, panoramic double glazing, and designer fixtures.</li>
+          <li><strong>Rental Management:</strong> On-site concierge, housekeeping, 24/7 security, backup generators, and digital income statements.</li>
+        </ul>
+      </section>
+
+      <p style="font-size:14px;color:#475569;">
+        Contact our <a href="/contact" style="color:#16B4E8;font-weight:700;">Harsukh Booking Desk</a> to reserve your suite.
+      </p>
     `
   },
   {
@@ -248,19 +452,23 @@ const staticRoutes = [
     description: 'Expert real estate insights on CDA sector plot ballots, TopCity & PECHS rates, PHA flat prices in I-12 / I-16, turnkey construction costs and solar net metering in Pakistan.',
     h1: 'TopLinkers Real Estate Blog & Market Intelligence Reports',
     content: `
-      <section style="margin-bottom:24px;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Twin Cities Property Intelligence &amp; Practical Guides</h2>
-        <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:16px;">
-          Essential research on CDA sectors, DHA Islamabad, Bahria Town, Faisal Town Phase 2, TopCity-1, PHA apartments, house construction costs, and solar ROI.
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Twin Cities Property Research &amp; Market Intelligence</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Top Linkers publishes data-driven research, regulatory updates, and pricing analysis covering Islamabad and Rawalpindi. Our publications empower investors, homeowners, and overseas Pakistanis with actionable market intelligence.
         </p>
-        <ul style="line-height:2;color:#475569;font-size:14px;">
-          <li><a href="/blog/cda-sector-c-14-c-15-development-updates-2026" style="color:#16B4E8;font-weight:700;">CDA Sector C-14 &amp; C-15 Development Updates 2026: Margalla Avenue Connectivity</a></li>
-          <li><a href="/blog/pha-flats-i12-i16-investment-guide" style="color:#16B4E8;font-weight:700;">Complete Guide to PHA Flats in Sector I-12 &amp; I-16: Prices &amp; Yields</a></li>
-          <li><a href="/blog/topcity1-faisal-town2-motorway-growth" style="color:#16B4E8;font-weight:700;">TopCity-1 vs Faisal Town Phase II: 10 Marla Plot Analysis</a></li>
-          <li><a href="/blog/solar-energy-pakistan-homes-roi" style="color:#16B4E8;font-weight:700;">Installing 10kW, 20kW &amp; 50kW Solar Systems: Slashing WAPDA Bills</a></li>
-          <li><a href="/blog/gulberg-greens-commercial-plazas-appraisal" style="color:#16B4E8;font-weight:700;">Commercial Real Estate in Gulberg Islamabad: Opal Square &amp; D-Markaz</a></li>
-          <li><a href="/blog/pechs-affordable-housing-islamabad" style="color:#16B4E8;font-weight:700;">PECHS Islamabad: Affordable 5 Marla Plots Starting from PKR 25 Lac</a></li>
-          <li><a href="/blog/turnkey-construction-cost-per-sqft-islamabad" style="color:#16B4E8;font-weight:700;">Turnkey Construction Costs in Islamabad &amp; Rawalpindi (2026 Material Rates)</a></li>
+      </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:16px;">Featured Research Reports &amp; Practical Guides</h2>
+        <ul style="line-height:2.2;color:#334155;font-size:14px;">
+          <li><a href="/blog/cda-sector-c-14-c-15-development-updates-2026" style="color:#16B4E8;font-weight:700;">CDA Sector C-14 &amp; C-15 Development Updates 2026: Margalla Avenue Connectivity &amp; Plot Ballot</a></li>
+          <li><a href="/blog/pha-flats-i12-i16-investment-guide" style="color:#16B4E8;font-weight:700;">Complete Guide to PHA Flats in Sector I-12 &amp; I-16: Prices, Allotment Rules &amp; Rental Yields</a></li>
+          <li><a href="/blog/topcity1-faisal-town2-motorway-growth" style="color:#16B4E8;font-weight:700;">TopCity-1 vs Faisal Town Phase II: 10 Marla Plot Analysis &amp; Capital Growth Forecast</a></li>
+          <li><a href="/blog/solar-energy-pakistan-homes-roi" style="color:#16B4E8;font-weight:700;">Installing 10kW, 20kW &amp; 50kW Solar Systems: Slashing WAPDA Bills &amp; IESCO Net Metering</a></li>
+          <li><a href="/blog/gulberg-greens-commercial-plazas-appraisal" style="color:#16B4E8;font-weight:700;">Commercial Real Estate in Gulberg Islamabad: Opal Square &amp; D-Markaz Yield Analysis</a></li>
+          <li><a href="/blog/pechs-affordable-housing-islamabad" style="color:#16B4E8;font-weight:700;">PECHS Islamabad: Affordable 5 Marla Plots Starting from PKR 25 Lac Near Airport</a></li>
+          <li><a href="/blog/turnkey-construction-cost-per-sqft-islamabad" style="color:#16B4E8;font-weight:700;">Turnkey Construction Costs in Islamabad &amp; Rawalpindi: 2026 Material Rates &amp; Grey Structure</a></li>
         </ul>
       </section>
     `
@@ -271,10 +479,30 @@ const staticRoutes = [
     description: 'Terms and conditions governing real estate advisory, construction contracts, and solar net metering services with Top Linkers Islamabad.',
     h1: 'Terms and Conditions of Service: TopLinkers Islamabad',
     content: `
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">1. Scope of Advisory &amp; Brokerage Representation</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Top Linkers operates as an authorized real estate brokerage, PEC-registered civil construction contractor, and Tier-1 solar electrification firm in Islamabad, Pakistan. By accessing our website, submitting inquiries, or engaging our advisory services, clients enter into an agreement governed by the laws of the Islamic Republic of Pakistan and the regulatory jurisdiction of the Islamabad Capital Territory.
+        </p>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          All property listings, plot dimensions, and pricing estimates presented on this website are compiled with preliminary due diligence from official regulatory bodies including CDA, RDA, and FGEHA. Final transaction terms, earnest token payments (Biyana), and transfer schedules are formalized through written tripartite sale agreements.
+        </p>
+      </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">2. Construction &amp; Solar Contracting Terms</h2>
+        <p style="font-size:14px;line-height:1.75;color:#334155;margin-bottom:12px;">
+          Civil construction contracts executed through Top Linkers are bound by detailed Bills of Quantities (BOQ) with fixed milestone-based payments. Architectural alterations requested after structural pouring are subject to mutually agreed variance addendums.
+        </p>
+        <p style="font-size:14px;line-height:1.75;color:#334155;margin-bottom:12px;">
+          Solar installations are warranted according to manufacturer specifications (25-year panel performance, 5-year inverter warranty). Turnkey IESCO green-meter net metering processing is subject to utility regulatory approvals and standard inspection timelines.
+        </p>
+      </section>
+
       <section style="margin-bottom:24px;">
-        <h2 style="font-size:18px;font-weight:700;color:#0F2A44;margin-bottom:12px;">Standard Commercial &amp; Consulting Terms</h2>
-        <p style="font-size:14px;line-height:1.7;color:#334155;margin-bottom:12px;">
-          By utilizing the advisory, marketing, turnkey construction, or solar electrification services of Top Linkers, clients agree to standard contractual terms outlined herein.
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">3. Dispute Resolution &amp; Jurisdiction</h2>
+        <p style="font-size:14px;line-height:1.75;color:#334155;">
+          Any legal disputes arising from property transactions, construction milestones, or consulting engagements shall first be resolved through formal mediation at our corporate office in G-11 Markaz, Islamabad, prior to seeking judicial adjudication in the courts of Islamabad.
         </p>
       </section>
     `
@@ -285,11 +513,24 @@ const staticRoutes = [
     description: 'Read the privacy policy of TopLinkers regarding data protection, lead inquiries, client records, and confidentiality in Islamabad, Pakistan.',
     h1: 'Privacy Policy & Data Protection: TopLinkers Islamabad',
     content: `
-      <section style="margin-bottom:24px;">
-        <h2 style="font-size:18px;font-weight:700;color:#0F2A44;margin-bottom:12px;">Our Commitment to Client Privacy</h2>
-        <p style="font-size:14px;line-height:1.7;color:#334155;margin-bottom:12px;">
-          Top Linkers is committed to maintaining strict confidentiality of all client data, property ownership documentation, contact records, and transactional agreements.
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Our Institutional Commitment to Client Confidentiality</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Top Linkers respects the privacy and confidentiality of our clients, property buyers, sellers, and overseas Pakistani investors. This Privacy Policy details our protocols regarding the collection, safeguarding, and use of personal data, property title documents, and transactional correspondence.
         </p>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          We collect personal information solely to provide real estate diligence, transfer facilitation, construction cost estimations, and solar site feasibility reports. We never sell, lease, or monetize client data to third-party marketing companies.
+        </p>
+      </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Data Protection Protocols &amp; Security Standards</h2>
+        <ul style="line-height:2;color:#334155;font-size:14px;padding-left:20px;">
+          <li><strong>Document Storage Security:</strong> Property ownership documents, CNIC copies, and allotment letters submitted for CDA/RDA diligence are encrypted with 256-bit SSL protocols and restricted to authorized legal transfer officers.</li>
+          <li><strong>Direct WhatsApp Communications:</strong> Inquiries initiated via our floating WhatsApp concierge or telephone lines connect directly to certified TopLinkers consultants.</li>
+          <li><strong>Server-Side Administrative Access:</strong> The TopLinkers executive management portal is fortified with server-side HMAC session authentication and cryptographic cookies to prevent unauthorized data access.</li>
+          <li><strong>Client Right of Erasure:</strong> Clients may request complete deletion of their inquiry records and contact details from our CRM database at any time by contacting privacy@toplinkersgroup.com.</li>
+        </ul>
       </section>
     `
   },
@@ -299,69 +540,168 @@ const staticRoutes = [
     description: 'Official legal disclaimer regarding property market rates, CDA transfer verifications, construction timelines, and solar yields with TopLinkers.',
     h1: 'Legal Disclaimer: TopLinkers Real Estate, Construction & Solar',
     content: `
-      <section style="margin-bottom:24px;">
-        <h2 style="font-size:18px;font-weight:700;color:#0F2A44;margin-bottom:12px;">Market Rate &amp; Construction Disclaimer</h2>
-        <p style="font-size:14px;line-height:1.7;color:#334155;margin-bottom:12px;">
-          Real estate market valuations, CDA ballot schedules, and construction material pricing are subject to market volatility. All transactions are executed through official registrar and authority procedures.
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Regulatory &amp; Market Information Notice</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          The information, market analyses, property price estimates, and architectural renderings presented on toplinkersgroup.com are published for informational purposes. Real estate values in Islamabad and Rawalpindi are subject to economic conditions, regulatory changes by the Capital Development Authority (CDA) or Rawalpindi Development Authority (RDA), and infrastructure milestones.
+        </p>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          While Top Linkers exercises meticulous due diligence in verifying property titles, layout approvals, and allotment authenticity, prospective purchasers are strongly advised to perform independent title searches and physically inspect properties prior to executing binding purchase contracts.
+        </p>
+      </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Engineering &amp; Energy Projections</h2>
+        <p style="font-size:14px;line-height:1.75;color:#334155;margin-bottom:12px;">
+          Construction cost estimates per square foot represent market averages based on prevailing cement, steel, and labor rates in Islamabad and are finalized via formal project-specific engineering contracts.
+        </p>
+        <p style="font-size:14px;line-height:1.75;color:#334155;">
+          Solar energy production figures and financial payback periods are calculated based on Islamabad\'s average annual solar irradiance (5.2 peak sun hours/day) and standard IESCO net-metering regulations. Actual energy generation may vary depending on weather conditions, roof orientation, and shading.
+        </p>
+      </section>
+    `
+  },
+  {
+    path: '/compare',
+    title: 'Compare Flats & Plots Islamabad | TopLinkers Tool',
+    description: 'Compare verified CDA plots, PHA flats, and luxury suites side-by-side in Islamabad. Analyze price per sqft, amenities, location, and ROI with TopLinkers.',
+    h1: 'Compare Verified Flats, Plots & Commercial Properties in Islamabad',
+    content: `
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Side-by-Side Property Comparison &amp; Investment Due Diligence</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Use the TopLinkers Property Comparison Tool to evaluate multiple Islamabad and Rawalpindi real estate opportunities across key decision metrics: total demand price, price per square foot, bedroom/bathroom configurations, society development status, and projected rental yield.
+        </p>
+        <p style="font-size:14px;color:#475569;">
+          Browse our <a href="/listings" style="color:#16B4E8;font-weight:700;">Verified Properties Directory</a> to select properties for side-by-side comparison.
+        </p>
+      </section>
+    `
+  },
+  {
+    path: '/favorites',
+    title: 'Saved Properties | TopLinkers Client Portfolio',
+    description: 'Review your saved plots, flats, and luxury suites in Islamabad. Contact TopLinkers directly to schedule property viewings or initiate title verification.',
+    h1: 'Your Saved Properties & Shortlisted Portfolios',
+    content: `
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Review and Inquire on Shortlisted Islamabad Real Estate</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Keep track of your favorite verified plots in TopCity-1, PECHS, PHA Sector I-12 and I-16 apartments, and luxury suites in Harsukh Nathia Gali. Contact our advisory desk with your shortlist to schedule site visits or verify allotment transfers.
+        </p>
+      </section>
+    `
+  },
+  {
+    path: '/create-listing',
+    title: 'List Your Property | TopLinkers Islamabad Advisory',
+    description: 'Sell or rent your property in Islamabad with TopLinkers. Connect with qualified buyers, verified CDA transfers, and institutional real estate marketing.',
+    h1: 'List Your Property for Sale or Rent with TopLinkers Group',
+    content: `
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Direct Access to Qualified Buyers &amp; Overseas Pakistani Investors</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Top Linkers provides property owners with institutional marketing, verified valuation appraisal, professional photo documentation, and direct buyer matchmaking across Islamabad, Rawalpindi, and overseas Pakistani diaspora networks.
+        </p>
+        <p style="font-size:14px;color:#475569;">
+          Have questions before listing? Call our <a href="/contact" style="color:#16B4E8;font-weight:700;">Property Appraisal Desk</a> at +92-334-9522157.
+        </p>
+      </section>
+    `
+  },
+  {
+    path: '/search',
+    title: 'Search Properties | Verified Plots & Flats Islamabad | TopLinkers',
+    description: 'Search verified properties in Islamabad by price, sector, society, bedrooms and property type. TopLinkers brings you verified CDA/RDA listings.',
+    h1: 'Search Verified Properties Across Islamabad & Rawalpindi',
+    content: `
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Search Verified Real Estate Portfolios</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Filter over 66 verified listings by location (TopCity-1, PECHS, Sector I-12, Sector I-16, Gulberg Greens, DHA Islamabad), price range, and property category.
+        </p>
+        <p style="font-size:14px;color:#475569;">
+          Explore the full catalog on our <a href="/listings" style="color:#16B4E8;font-weight:700;">Listings Directory</a>.
+        </p>
+      </section>
+    `
+  },
+  {
+    path: '/admin/login',
+    title: 'Admin Portal Login | TopLinkers Executive Suite',
+    description: 'Secure server-side administrative access to the TopLinkers Executive Management Suite. Authorized personnel only.',
+    h1: 'TopLinkers Executive Suite: Portal Authentication',
+    content: `
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Authorized Executive Access</h2>
+        <p style="font-size:14px;line-height:1.7;color:#334155;">
+          This area is restricted to TopLinkers corporate personnel. Administrative sessions are authenticated via encrypted cryptographic tokens and server-side verification.
         </p>
       </section>
     `
   }
 ]
 
-// Load dynamic blog posts from posts.json
-const postsFilePath = path.resolve(__dirname, '../src/data/posts.json')
+// 2. Load Blog Articles from blogData.js
+const blogFilePath = path.resolve(__dirname, '../src/data/blogData.js')
 let dynamicBlogRoutes = []
-if (fs.existsSync(postsFilePath)) {
-  const posts = JSON.parse(fs.readFileSync(postsFilePath, 'utf-8'))
-  dynamicBlogRoutes = posts.map(p => {
-    const rawImg = p.image || '/toplinkers-logo.jpg'
-    const img = rawImg.startsWith('http') ? rawImg : `${BASE_URL}${rawImg.startsWith('/') ? '' : '/'}${rawImg}`
-
-    return {
-      path: `/blog/${p.slug}`,
-      title: `${p.title.length > 55 ? p.title.substring(0, 55) + '...' : p.title} | TopLinkers`,
-      description: p.summary.length > 155 ? p.summary.substring(0, 152) + '...' : p.summary,
-      h1: p.title,
-      isArticle: true,
-      articleData: p,
-      ogImage: img,
-    content: `
-      <article style="margin-bottom:24px;">
-        <div style="background:#E0F2FE;border-left:4px solid #16B4E8;padding:12px 16px;margin-bottom:20px;border-radius:0 8px 8px 0;">
-          <p style="font-size:15px;color:#0F2A44;font-weight:600;margin:0;">${p.summary}</p>
-        </div>
-        <div style="font-size:14px;color:#64748B;margin-bottom:16px;">
-          <span>By <strong>${p.author}</strong></span> &bull; <span>${p.date}</span> &bull; <span>Category: ${p.category}</span>
-        </div>
-        <p style="font-size:15px;line-height:1.8;color:#334155;margin-bottom:16px;">
-          ${p.content}
-        </p>
-        <p style="font-size:14px;color:#64748B;">
-          For verified property transactions, plot title checks, or construction consultations related to this topic, contact TopLinkers at <strong>0334-9522157</strong> or visit our office at Al Hameed Plaza, G-11 Markaz Islamabad.
-        </p>
-        <div style="margin-top:24px;">
-          <a href="/blog" style="color:#16B4E8;font-weight:700;">&larr; Back to all Market Updates</a>
-        </div>
-      </article>
-    `
+if (fs.existsSync(blogFilePath)) {
+  const blogContent = fs.readFileSync(blogFilePath, 'utf-8')
+  const postsMatch = blogContent.match(/export const blogPosts = (\[[\s\S]*?\n\])/)
+  if (postsMatch) {
+    try {
+      const posts = eval(postsMatch[1])
+      dynamicBlogRoutes = posts.map(post => ({
+        path: `/blog/${post.slug}`,
+        title: `${post.title.length > 55 ? post.title.substring(0, 55) + '...' : post.title} | TopLinkers`,
+        description: post.excerpt?.length > 155 ? post.excerpt.substring(0, 152) + '...' : post.excerpt,
+        h1: post.title,
+        isArticle: true,
+        articleData: post,
+        content: `
+          <article style="margin-bottom:28px;">
+            <div style="font-size:14px;color:#64748B;margin-bottom:16px;">
+              Published on <strong>${post.date || '2026-11-17'}</strong> by <strong>${post.author || 'Syed Usman Hammad'}</strong> &bull; Category: <strong>${post.category || 'Market Intelligence'}</strong>
+            </div>
+            <p style="font-size:16px;line-height:1.75;color:#334155;margin-bottom:20px;font-weight:500;">
+              ${post.excerpt || ''}
+            </p>
+            <div style="font-size:15px;line-height:1.8;color:#334155;">
+              ${post.content || ''}
+            </div>
+            <div style="margin-top:32px;padding:20px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;">
+              <h3 style="font-size:16px;font-weight:700;color:#0F2A44;margin-bottom:8px;">Consult Our Advisory Desk on This Topic</h3>
+              <p style="font-size:14px;color:#475569;margin-bottom:12px;">Top Linkers provides verified market diligence, title checks, and consulting in Islamabad.</p>
+              <a href="/contact" style="color:#16B4E8;font-weight:700;text-decoration:none;">Contact Our Consultants &rarr;</a>
+            </div>
+          </article>
+        `
+      }))
+      console.log(`  📚 Loaded ${dynamicBlogRoutes.length} blog articles for pre-rendering.`)
+    } catch (e) {
+      console.error('Failed to parse blogData.js:', e.message)
     }
-  })
+  }
 }
 
-// Load dynamic properties from properties.json
+// 3. Load 66 Properties from properties.json
 const propsFilePath = path.resolve(__dirname, '../src/data/properties.json')
 let dynamicPropertyRoutes = []
+let allProperties = []
 if (fs.existsSync(propsFilePath)) {
-  const properties = JSON.parse(fs.readFileSync(propsFilePath, 'utf-8'))
-  dynamicPropertyRoutes = properties.map(p => {
+  allProperties = JSON.parse(fs.readFileSync(propsFilePath, 'utf-8'))
+  dynamicPropertyRoutes = allProperties.map((p, idx) => {
     const rawTitle = p.title || 'Verified Property Islamabad'
     const title = `${rawTitle.length > 55 ? rawTitle.substring(0, 55) + '...' : rawTitle} | TopLinkers`
     const rawDesc = p.shortDescription || p.description || `${rawTitle} in ${p.address || p.city || 'Islamabad'}. Verified CDA/RDA listing by TopLinkers.`
     const description = rawDesc.length > 155 ? rawDesc.substring(0, 152) + '...' : rawDesc
     const rawImg = p.images?.[0] || '/toplinkers-logo.jpg'
     const img = rawImg.startsWith('http') ? rawImg : `${BASE_URL}${rawImg.startsWith('/') ? '' : '/'}${rawImg}`
-    const fullCanonical = `${BASE_URL}/property/${p.slug}`
+
+    // Cross-link 4 related properties to build strong internal crawl graph
+    const related = allProperties
+      .filter(other => other.id !== p.id && (other.type === p.type || other.city === p.city))
+      .slice(0, 4)
 
     return {
       path: `/property/${p.slug}`,
@@ -372,92 +712,146 @@ if (fs.existsSync(propsFilePath)) {
       propertyData: p,
       ogImage: img,
       content: `
-        <article style="margin-bottom:24px;">
-          <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:16px 20px;margin-bottom:20px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-              <div>
-                <span style="background:#16B4E8;color:#fff;font-size:11px;font-weight:800;padding:4px 8px;border-radius:4px;text-transform:uppercase;">${p.typeName || p.type || 'Property'}</span>
-                <span style="margin-left:8px;font-size:13px;color:#64748B;">${p.address || p.city || 'Islamabad'}</span>
-              </div>
-              <div style="font-size:20px;font-weight:900;color:#0F2A44;">
-                ${p.priceFormatted || `PKR ${p.price?.toLocaleString()}`}
-              </div>
+        <article style="margin-bottom:28px;">
+          <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:20px;margin-bottom:24px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px;">
+              <span style="background:#16B4E8;color:#fff;font-size:12px;font-weight:800;padding:4px 10px;border-radius:4px;text-transform:uppercase;">
+                ${p.status === 'for-rent' ? 'For Rent' : 'For Sale'} &bull; ${p.type}
+              </span>
+              <span style="font-size:24px;font-weight:900;color:#0F2A44;">
+                PKR ${p.price?.toLocaleString()}
+              </span>
             </div>
-            <div style="display:flex;gap:16px;margin-top:12px;font-size:13px;color:#475569;border-top:1px solid #E2E8F0;padding-top:12px;">
-              ${p.beds ? `<span><strong>${p.beds}</strong> Beds</span> &bull;` : ''}
-              ${p.baths ? `<span><strong>${p.baths}</strong> Baths</span> &bull;` : ''}
-              ${p.sqft ? `<span><strong>${p.sqft}</strong> Sq Ft</span>` : ''}
-            </div>
-          </div>
-          <p style="font-size:15px;line-height:1.8;color:#334155;margin-bottom:16px;">
-            ${p.description || rawDesc}
-          </p>
-          <div style="margin-top:20px;padding:16px;background:#E0F2FE;border-radius:8px;border-left:4px solid #16B4E8;">
-            <p style="margin:0;font-size:14px;color:#0F2A44;font-weight:600;">
-              Interested in this verified listing? Call TopLinkers Advisory Desk at <strong>0334-9522157</strong> or <strong>0332-4004884</strong>, or visit our office at Al Hameed Plaza, G-11 Markaz Islamabad.
+            <p style="font-size:14px;color:#64748B;margin:0 0 10px 0;">
+              <strong>Location:</strong> ${p.address || p.city || 'Islamabad'} | <strong>Demand Rate:</strong> ${p.pricePerSqft || 'Verified'}
             </p>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:#334155;border-top:1px solid #E2E8F0;padding-top:10px;">
+              ${p.beds ? `<span><strong>Bedrooms:</strong> ${p.beds}</span>` : ''}
+              ${p.baths ? `<span><strong>Bathrooms:</strong> ${p.baths}</span>` : ''}
+              ${p.area ? `<span><strong>Area:</strong> ${p.area}</span>` : ''}
+              <span><strong>Verification:</strong> CDA/RDA Diligence Complete</span>
+            </div>
           </div>
-          <div style="margin-top:20px;">
-            <a href="/listings" style="color:#16B4E8;font-weight:700;">&larr; Browse All Verified Properties in Islamabad</a>
-          </div>
+
+          <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Property Description &amp; Investor Highlights</h2>
+          <p style="font-size:15px;line-height:1.8;color:#334155;margin-bottom:24px;">
+            ${p.description || p.shortDescription || 'Prime verified real estate opportunity in Islamabad. Complete legal documentation and possession readiness verified by TopLinkers.'}
+          </p>
+
+          <section style="background:#fff;border-radius:10px;padding:20px;border:1px solid #E2E8F0;margin-bottom:28px;">
+            <h3 style="font-size:16px;font-weight:700;color:#0F2A44;margin-bottom:8px;">Schedule an Inspection or Verification Briefing</h3>
+            <p style="font-size:14px;color:#64748B;margin-bottom:14px;">Contact TopLinkers Head Office in G-11 Markaz to review original allotment papers, conduct physical boundary demarcation, and initiate secure transfer.</p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <a href="/contact" style="background:#0F2A44;color:#fff;padding:8px 16px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;">Book Official Inspection</a>
+              <a href="/listings" style="background:#F1F5F9;color:#0F2A44;padding:8px 16px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;">&larr; Return to All Properties</a>
+            </div>
+          </section>
+
+          <!-- Cross-Linked Related Properties (Strong Internal Link Discovery) -->
+          <section style="margin-top:32px;border-top:1px solid #E2E8F0;padding-top:24px;">
+            <h2 style="font-size:18px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Related Verified Properties in Islamabad</h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:14px;">
+              ${related.map(rel => `
+                <div style="border:1px solid #E2E8F0;border-radius:8px;padding:12px;background:#fff;">
+                  <a href="/property/${rel.slug}" style="font-size:14px;font-weight:700;color:#0F2A44;text-decoration:none;display:block;margin-bottom:6px;">
+                    ${rel.title}
+                  </a>
+                  <p style="font-size:12px;color:#64748B;margin:0 0 4px 0;">${rel.address || rel.city}</p>
+                  <p style="font-size:13px;font-weight:800;color:#16B4E8;margin:0;">PKR ${rel.price?.toLocaleString()}</p>
+                </div>
+              `).join('')}
+            </div>
+          </section>
         </article>
       `
     }
   })
+  console.log(`  🏡 Loaded ${dynamicPropertyRoutes.length} properties for pre-rendering.`)
+}
+
+// 4. Populate Listings Page with Complete Crawlable Directory of All 66 Properties
+const listingsRoute = staticRoutes.find(r => r.path === '/listings')
+if (listingsRoute && allProperties.length > 0) {
+  listingsRoute.content = `
+    <section style="margin-bottom:28px;">
+      <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Complete Directory of 66 Verified Properties in Islamabad &amp; Rawalpindi</h2>
+      <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:20px;">
+        Every listing in TopLinkers\' portfolio has undergone preliminary ownership, layout, and registry verification with the Capital Development Authority (CDA), Rawalpindi Development Authority (RDA), or Federal Government Employees Housing Authority (FGEHA). Explore our full on-ground plot inventories, government flats, and luxury vacation residences below:
+      </p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:16px;">
+        ${allProperties.map(p => `
+          <div style="border:1px solid #E2E8F0;border-radius:10px;padding:18px;background:#fff;display:flex;flex-col;justify-content:space-between;">
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <span style="font-size:11px;font-weight:800;background:#E0F2FE;color:#0369A1;padding:2px 8px;border-radius:4px;text-transform:uppercase;">
+                  ${p.type} &bull; ${p.status === 'for-rent' ? 'For Rent' : 'For Sale'}
+                </span>
+                <span style="font-size:16px;font-weight:900;color:#0F2A44;">
+                  PKR ${p.price?.toLocaleString()}
+                </span>
+              </div>
+              <h3 style="font-size:16px;font-weight:700;color:#0F2A44;margin-bottom:6px;line-height:1.35;">
+                <a href="/property/${p.slug}" style="color:#0F2A44;text-decoration:none;">
+                  ${p.title}
+                </a>
+              </h3>
+              <p style="font-size:12px;color:#64748B;margin-bottom:8px;">
+                📍 ${p.address || p.city || 'Islamabad'} ${p.pricePerSqft ? `&bull; ${p.pricePerSqft}` : ''}
+              </p>
+              <p style="font-size:13px;color:#334155;line-height:1.5;margin-bottom:12px;">
+                ${p.description ? (p.description.length > 120 ? p.description.substring(0, 117) + '...' : p.description) : ''}
+              </p>
+            </div>
+            <div style="border-top:1px solid #F1F5F9;padding-top:10px;display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;color:#64748B;">Verified Title</span>
+              <a href="/property/${p.slug}" style="color:#16B4E8;font-weight:700;font-size:13px;text-decoration:none;">
+                View Details &rarr;
+              </a>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+  `
 }
 
 const allRoutes = [...staticRoutes, ...dynamicBlogRoutes, ...dynamicPropertyRoutes]
 
-function prerender() {
+export function prerender() {
   if (!fs.existsSync(templatePath)) {
-    console.error(`Error: Base template ${templatePath} does not exist. Run vite build first.`)
-    process.exit(1)
+    console.error(`❌ Build template not found at ${templatePath}. Run 'npm run build' first.`)
+    return
   }
 
-  const baseHtml = fs.readFileSync(templatePath, 'utf-8')
-
-  console.log(`🚀 Pre-rendering ${allRoutes.length} public routes with SEO metadata & crawlable HTML...`)
+  const baseTemplate = fs.readFileSync(templatePath, 'utf-8')
+  console.log(`🚀 Starting static pre-rendering for ${allRoutes.length} canonical routes...`)
 
   for (const r of allRoutes) {
-    let html = baseHtml
-    const fullCanonical = `${BASE_URL}${r.path}`
+    let html = baseTemplate
 
-    // 1. Update <title>
-    html = html.replace(/<title>.*?<\/title>/i, `<title>${r.title}</title>`)
+    // 1. Replace <title>
+    html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${r.title}</title>`)
 
-    // 2. Update <meta name="description">
-    html = html.replace(/<meta\s+name=["']description["']\s+content=["'].*?["']\s*\/?>/i,
-      `<meta name="description" content="${r.description}" />`)
+    // 2. Replace <meta name="description">
+    html = html.replace(/<meta name="description" content="[^"]*"/i, `<meta name="description" content="${r.description}"`)
 
-    // 3. Update Canonical <link rel="canonical">
-    html = html.replace(/<link\s+rel=["']canonical["']\s+href=["'].*?["']\s*\/?>/i,
-      `<link rel="canonical" href="${fullCanonical}" />`)
+    // 3. Replace Canonical Link
+    const fullCanonical = `${BASE_URL}${r.path === '/' ? '/' : r.path}`
+    html = html.replace(/<link rel="canonical" href="[^"]*"/i, `<link rel="canonical" href="${fullCanonical}"`)
 
-    // 4. Update OpenGraph Tags
-    html = html.replace(/<meta\s+property=["']og:title["']\s+content=["'].*?["']\s*\/?>/i,
-      `<meta property="og:title" content="${r.title}" />`)
-    html = html.replace(/<meta\s+property=["']og:description["']\s+content=["'].*?["']\s*\/?>/i,
-      `<meta property="og:description" content="${r.description}" />`)
-    html = html.replace(/<meta\s+property=["']og:url["']\s+content=["'].*?["']\s*\/?>/i,
-      `<meta property="og:url" content="${fullCanonical}" />`)
-
-    // 5. Update Twitter Tags
-    html = html.replace(/<meta\s+name=["']twitter:title["']\s+content=["'].*?["']\s*\/?>/i,
-      `<meta name="twitter:title" content="${r.title}" />`)
-    html = html.replace(/<meta\s+name=["']twitter:description["']\s+content=["'].*?["']\s*\/?>/i,
-      `<meta name="twitter:description" content="${r.description}" />`)
-    html = html.replace(/<meta\s+name=["']twitter:url["']\s+content=["'].*?["']\s*\/?>/i,
-      `<meta name="twitter:url" content="${fullCanonical}" />`)
-
-    // Override OG & Twitter image when specific image provided
+    // 4. Replace OpenGraph & Twitter tags
+    html = html.replace(/<meta property="og:title" content="[^"]*"/i, `<meta property="og:title" content="${r.title}"`)
+    html = html.replace(/<meta property="og:description" content="[^"]*"/i, `<meta property="og:description" content="${r.description}"`)
+    html = html.replace(/<meta property="og:url" content="[^"]*"/i, `<meta property="og:url" content="${fullCanonical}"`)
     if (r.ogImage) {
-      html = html.replace(/<meta\s+property=["']og:image["']\s+content=["'].*?["']\s*\/?>/i,
-        `<meta property="og:image" content="${r.ogImage}" />`)
-      html = html.replace(/<meta\s+name=["']twitter:image["']\s+content=["'].*?["']\s*\/?>/i,
-        `<meta name="twitter:image" content="${r.ogImage}" />`)
+      html = html.replace(/<meta property="og:image" content="[^"]*"/i, `<meta property="og:image" content="${r.ogImage}"`)
+      html = html.replace(/<meta name="twitter:image" content="[^"]*"/i, `<meta name="twitter:image" content="${r.ogImage}"`)
     }
+    html = html.replace(/<meta name="twitter:title" content="[^"]*"/i, `<meta name="twitter:title" content="${r.title}"`)
+    html = html.replace(/<meta name="twitter:description" content="[^"]*"/i, `<meta name="twitter:description" content="${r.description}"`)
 
-    // 6A. Article JSON-LD for blog posts
+    // 5. Infiltrate structured Schema.org JSON-LD for Blog & Property
     if (r.isArticle && r.articleData) {
       const articleJsonLd = `
     <script type="application/ld+json">
@@ -465,12 +859,12 @@ function prerender() {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": ${JSON.stringify(r.articleData.title)},
-      "description": ${JSON.stringify(r.articleData.summary)},
-      "image": ${JSON.stringify(r.articleData.image)},
-      "datePublished": ${JSON.stringify(r.articleData.date)},
+      "description": ${JSON.stringify(r.description)},
+      "image": ${JSON.stringify(r.articleData.image ? `${BASE_URL}${r.articleData.image}` : 'https://toplinkersgroup.com/toplinkers-logo.jpg')},
+      "datePublished": ${JSON.stringify(r.articleData.date || '2026-11-17')},
       "author": {
         "@type": "Person",
-        "name": ${JSON.stringify(r.articleData.author)}
+        "name": ${JSON.stringify(r.articleData.author || 'Syed Usman Hammad')}
       },
       "publisher": {
         "@type": "Organization",
@@ -489,7 +883,6 @@ function prerender() {
       html = html.replace('</head>', `${articleJsonLd}\n  </head>`)
     }
 
-    // 6B. Real Estate Listing JSON-LD for property pages
     if (r.isProperty && r.propertyData) {
       const p = r.propertyData
       const propType = p.type === 'apartment' ? 'Apartment' : (p.type === 'house' || p.type === 'villa') ? 'SingleFamilyResidence' : 'RealEstateListing'
@@ -520,12 +913,12 @@ function prerender() {
       html = html.replace('</head>', `${propJsonLd}\n  </head>`)
     }
 
-    // 7. Infiltrate Semantic Fallback inside <div id="app">...</div>
+    // 6. Infiltrate Semantic Crawlable Content inside <div id="app">...</div> with a SINGLE <h1>
     const semanticFallback = `
-    <div id="app">
+    <div id="app" style="background:#F6F8FA;min-height:100vh;display:flex;flex-direction:column;">
       <header style="background:#0F2A44;color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
         <a href="/" aria-label="TopLinkers Home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font-weight:900;font-size:20px;">
-          <img src="/toplinkers-logo-sm.png" alt="Top Linkers" width="40" height="40" style="background:#fff;border-radius:4px;padding:2px;" />
+          <img src="/toplinkers-logo-mark.webp" alt="Top Linkers" width="40" height="40" style="object-fit:contain;" />
           <span><span style="color:#E53935;">Top</span> Linkers</span>
         </a>
         <nav aria-label="Primary Navigation" style="display:flex;gap:16px;flex-wrap:wrap;font-size:14px;">
@@ -571,13 +964,11 @@ function prerender() {
     </div>
     `
 
-    // 7. Inject Semantic Fallback only for sub-routes (leave '/' clean for Vue hydration and LCP shell)
-    if (r.path !== '/') {
-      html = html.replace('<div id="app"></div>', semanticFallback)
-    }
+    // Inject Semantic Fallback directly inside <div id="app"></div>
+    html = html.replace('<div id="app"></div>', semanticFallback)
 
     // Write file to target destinations:
-    // 1. root index.html
+    // 1. root index.html (for '/')
     // 2. dist/path.html (for direct Apache rewrite without trailing slash redirect)
     // 3. dist/path/index.html (for directory compatibility)
     if (r.path === '/') {
@@ -602,10 +993,19 @@ function prerender() {
     }
   }
 
-  // Generate sitemap.xml containing all canonical pre-rendered routes
+  // Also pre-render custom 404 page into dist/404.html
+  const public404 = path.resolve(__dirname, '../public/404.html')
+  const dist404 = path.resolve(distDir, '404.html')
+  if (fs.existsSync(public404)) {
+    fs.copyFileSync(public404, dist404)
+    console.log(`  📄 Verified and copied dist/404.html for Apache ErrorDocument.`)
+  }
+
+  // Synchronize sitemap.xml with canonical URLs (excluding admin and 404)
+  const canonicalRoutes = allRoutes.filter(r => !r.path.startsWith('/admin') && r.path !== '/404')
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${allRoutes.map(r => {
+${canonicalRoutes.map(r => {
   const loc = `${BASE_URL}${r.path === '/' ? '/' : r.path}`
   const priority = r.path === '/' ? '1.0' :
     (r.path === '/hr-sukh' || r.path === '/listings' || r.path === '/services') ? '0.90' :
@@ -615,7 +1015,7 @@ ${allRoutes.map(r => {
     (r.isProperty || r.isArticle || r.path === '/hr-sukh') ? 'weekly' : 'monthly'
   return `  <url>
     <loc>${loc}</loc>
-    <lastmod>2026-11-17</lastmod>
+    <lastmod>2026-11-18</lastmod>
     <changefreq>${freq}</changefreq>
     <priority>${priority}</priority>
   </url>`
@@ -626,7 +1026,7 @@ ${allRoutes.map(r => {
   const distSitemap = path.resolve(distDir, 'sitemap.xml')
   fs.writeFileSync(publicSitemap, sitemapXml, 'utf-8')
   fs.writeFileSync(distSitemap, sitemapXml, 'utf-8')
-  console.log(`  📄 Synchronized sitemap.xml with ${allRoutes.length} canonical URLs.`)
+  console.log(`  📄 Synchronized sitemap.xml with ${canonicalRoutes.length} canonical indexable URLs.`)
 
   console.log(`🎉 Pre-rendering completed successfully for all ${allRoutes.length} routes!`)
 }

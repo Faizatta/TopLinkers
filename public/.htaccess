@@ -2,7 +2,7 @@
 # Top Linkers Real Estate, Construction & Solar - .htaccess
 # ========================================================
 
-# 1. Custom 404 Error Document (Agents receive real HTTP 404)
+# 1. Custom 404 Error Document (Returns genuine HTTP 404 status code)
 ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
@@ -16,32 +16,70 @@ ErrorDocument 404 /404.html
   RewriteCond %{HTTP:Accept} text/markdown [NC]
   RewriteRule ^(index\.html)?$ /index.md [L]
 
-  # If requested path is an existing physical file, serve directly
+  # Missing build chunks or static assets get genuine 404 immediately
+  RewriteRule ^assets/ - [R=404,L]
+
+  # 2. Permanent 301 Redirects for Cleaned Canonical Property URLs (SEO preservation)
+  RewriteRule ^property/luxury-corner-penthouse-bano-qadeer-heights-11/?$ /property/luxury-corner-penthouse-bano-qadeer-heights [R=301,L]
+  RewriteRule ^property/executive-family-house-gulberg-greens-residencia-12/?$ /property/executive-family-house-gulberg-greens [R=301,L]
+  RewriteRule ^property/commercial-retail-plaza-storefront-faisal-town-phase-ii-ft-ii-13/?$ /property/commercial-retail-storefront-faisal-town-phase-2 [R=301,L]
+  RewriteRule ^property/contemporary-farmhouse-estate-topcity-1-top-residencia-14/?$ /property/farmhouse-residential-plot-topcity-1 [R=301,L]
+  RewriteRule ^property/lake-view-duplex-apartment-pha-flats-sector-i-12-15/?$ /property/pha-flats-sector-i12-executive-apartment [R=301,L]
+  RewriteRule ^property/spanish-architecture-villa-pha-flats-sector-i-16-16/?$ /property/pha-flats-sector-i16-luxury-apartment [R=301,L]
+  RewriteRule ^property/prime-commercial-office-suite-pechs-society-17/?$ /property/prime-commercial-office-suite-pechs-islamabad [R=301,L]
+  RewriteRule ^property/scenic-hillside-residence-dha-phase-2-5-18/?$ /property/luxury-designer-villa-dha-phase-2 [R=301,L]
+  RewriteRule ^property/turnkey-furnished-townhouse-bahria-town-phase-7-8-19/?$ /property/furnished-luxury-townhouse-bahria-town-phase-8 [R=301,L]
+  RewriteRule ^property/modern-designer-villa-blue-world-city-20/?$ /property/overseas-executive-villa-blue-world-city [R=301,L]
+  RewriteRule ^property/luxury-corner-penthouse-b-17-multi-gardens-21/?$ /property/luxury-corner-penthouse-b17-multi-gardens [R=301,L]
+  RewriteRule ^property/executive-family-house-h-r-luxury-suites-gulberg-22/?$ /property/executive-luxury-suite-gulberg-greens [R=301,L]
+  RewriteRule ^property/commercial-retail-plaza-storefront-bano-qadeer-heights-23/?$ /property/commercial-retail-storefront-bano-qadeer-heights [R=301,L]
+  RewriteRule ^property/contemporary-farmhouse-estate-gulberg-greens-residencia-24/?$ /property/luxury-farmhouse-residence-gulberg-greens [R=301,L]
+  RewriteRule ^property/lake-view-duplex-apartment-faisal-town-phase-ii-ft-ii-25/?$ /property/luxury-duplex-apartment-faisal-town-phase-2 [R=301,L]
+  RewriteRule ^property/spanish-architecture-villa-topcity-1-top-residencia-26/?$ /property/spanish-designer-villa-topcity-1 [R=301,L]
+  RewriteRule ^property/prime-commercial-office-suite-pha-flats-sector-i-12-27/?$ /property/pha-sector-i12-commercial-shop [R=301,L]
+  RewriteRule ^property/scenic-hillside-residence-pha-flats-sector-i-16-28/?$ /property/pha-flats-sector-i16-corner-executive-flat [R=301,L]
+  RewriteRule ^property/turnkey-furnished-townhouse-pechs-society-29/?$ /property/furnished-executive-house-pechs-islamabad [R=301,L]
+  RewriteRule ^property/modern-designer-villa-dha-phase-2-5-30/?$ /property/contemporary-designer-villa-dha-phase-5 [R=301,L]
+  RewriteRule ^property/luxury-corner-penthouse-bahria-town-phase-7-8-31/?$ /property/luxury-corner-penthouse-bahria-town-phase-7 [R=301,L]
+  RewriteRule ^property/executive-family-house-blue-world-city-32/?$ /property/executive-family-home-blue-world-city [R=301,L]
+  RewriteRule ^property/commercial-retail-plaza-storefront-b-17-multi-gardens-33/?$ /property/commercial-retail-shop-b17-multi-gardens [R=301,L]
+  RewriteRule ^property/contemporary-farmhouse-estate-h-r-luxury-suites-gulberg-34/?$ /property/luxury-penthouse-suite-gulberg-greens [R=301,L]
+  RewriteRule ^property/lake-view-duplex-apartment-bano-qadeer-heights-35/?$ /property/executive-duplex-apartment-bano-qadeer-heights [R=301,L]
+  RewriteRule ^property/spanish-architecture-villa-gulberg-greens-residencia-36/?$ /property/spanish-luxury-villa-gulberg-greens [R=301,L]
+  RewriteRule ^property/prime-commercial-office-suite-faisal-town-phase-ii-ft-ii-37/?$ /property/prime-commercial-office-suite-faisal-town-phase-2 [R=301,L]
+  RewriteRule ^property/scenic-hillside-residence-topcity-1-top-residencia-38/?$ /property/prime-10-marla-residential-plot-topcity-1 [R=301,L]
+  RewriteRule ^property/turnkey-furnished-townhouse-pha-flats-sector-i-12-39/?$ /property/pha-flats-sector-i12-furnished-apartment [R=301,L]
+  RewriteRule ^property/modern-designer-villa-pha-flats-sector-i-16-40/?$ /property/pha-flats-sector-i16-modern-apartment [R=301,L]
+
+  # 3. Server-Side Protection for /admin Executive Suite
+  # Unauthenticated direct browser visits to protected admin pages are redirected to /admin/login
+  RewriteCond %{REQUEST_URI} ^/admin(/.*)?$
+  RewriteCond %{REQUEST_URI} !^/admin/login
+  RewriteCond %{HTTP_COOKIE} !tl_admin_session= [NC]
+  RewriteRule ^ /admin/login [R=302,L]
+
+  # 4. If requested path is an existing physical file, serve directly
   RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ - [L]
 
-  # If requested path has a pre-rendered .html file, serve it immediately with HTTP 200 OK
+  # 5. If requested path has a pre-rendered .html file, serve it immediately with HTTP 200 OK
   RewriteCond %{REQUEST_FILENAME}.html -f [OR]
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
   RewriteRule ^(.*)$ /$1.html [L,QSA]
 
-  # If requested path without trailing slash has a subfolder index.html, serve that index.html
+  # 6. If requested path has a subfolder index.html, serve that index.html with HTTP 200 OK
   RewriteCond %{REQUEST_FILENAME}/index.html -f [OR]
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
   RewriteRule ^(.*)$ /$1/index.html [L,QSA]
 
-  # If requested path is an existing directory, serve directly
+  # 7. If requested path is an existing directory, serve directly
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Missing build chunks or assets get real 404 immediately
-  RewriteRule ^assets/ - [R=404,L]
-
-  # Standard Vue Router HTML5 History Mode SPA Fallback:
-  # Serves /index.html with HTTP 200 for all client-side navigation routes
+  # 8. All other unknown/invalid URLs return genuine HTTP 404 response
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L,QSA]
+  RewriteRule ^ - [R=404,L]
 </IfModule>
 
 # Modern MIME Types

@@ -9,9 +9,10 @@
         <button
           type="button"
           :class="[
-            'px-3 py-1 rounded text-xs font-bold transition-all',
-            !mobileShowMap ? 'bg-white shadow text-[#0F2A44]' : 'text-gray-500'
+            'px-3.5 py-2 min-h-[44px] flex items-center justify-center rounded-lg text-xs font-bold transition-all',
+            !mobileShowMap ? 'bg-white shadow text-[#0F2A44]' : 'text-gray-600'
           ]"
+          aria-label="Switch to list view"
           @click="mobileShowMap = false"
         >
           List View
@@ -19,9 +20,10 @@
         <button
           type="button"
           :class="[
-            'px-3 py-1 rounded text-xs font-bold transition-all',
-            mobileShowMap ? 'bg-[#16B4E8] text-white shadow' : 'text-gray-500'
+            'px-3.5 py-2 min-h-[44px] flex items-center justify-center rounded-lg text-xs font-bold transition-all',
+            mobileShowMap ? 'bg-[#16B4E8] text-white shadow' : 'text-gray-600'
           ]"
+          aria-label="Switch to map view"
           @click="mobileShowMap = true"
         >
           Map View
@@ -344,11 +346,12 @@
               type="button"
               :disabled="propertiesStore.page === 1"
               :class="[
-                'px-3.5 py-2 flex-shrink-0 text-xs font-bold rounded-lg border transition-colors',
+                'px-4 py-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center flex-shrink-0 text-xs font-bold rounded-lg border transition-colors',
                 propertiesStore.page === 1
-                  ? 'border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50'
+                  ? 'border-gray-200 text-gray-400 cursor-not-allowed bg-gray-50'
                   : 'border-gray-300 text-[#0F2A44] hover:border-[#16B4E8] hover:text-[#16B4E8] bg-white'
               ]"
+              aria-label="Previous page"
               @click="changePage(propertiesStore.page - 1)"
             >
               &larr; Prev
@@ -359,11 +362,13 @@
               :key="p"
               type="button"
               :class="[
-                'w-9 h-9 flex-shrink-0 text-xs font-black rounded-lg transition-colors',
+                'min-w-[44px] min-h-[44px] flex items-center justify-center flex-shrink-0 text-xs font-black rounded-lg transition-colors',
                 propertiesStore.page === p
                   ? 'bg-[#16B4E8] text-white shadow-sm'
                   : 'bg-white border border-gray-200 text-[#0F2A44] hover:border-[#16B4E8]'
               ]"
+              :aria-label="`Page ${p}`"
+              :aria-current="propertiesStore.page === p ? 'page' : undefined"
               @click="changePage(p)"
             >
               {{ p }}
@@ -373,16 +378,29 @@
               type="button"
               :disabled="propertiesStore.page === propertiesStore.totalPages"
               :class="[
-                'px-3.5 py-2 flex-shrink-0 text-xs font-bold rounded-lg border transition-colors',
+                'px-4 py-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center flex-shrink-0 text-xs font-bold rounded-lg border transition-colors',
                 propertiesStore.page === propertiesStore.totalPages
-                  ? 'border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50'
+                  ? 'border-gray-200 text-gray-400 cursor-not-allowed bg-gray-50'
                   : 'border-gray-300 text-[#0F2A44] hover:border-[#16B4E8] hover:text-[#16B4E8] bg-white'
               ]"
+              aria-label="Next page"
               @click="changePage(propertiesStore.page + 1)"
             >
               Next &rarr;
             </button>
           </div>
+
+          <!-- 7. Crawlable Property Inventory Index (Available to Search Engines & Assistive Tech) -->
+          <nav aria-label="Complete Property Inventory Index" class="sr-only">
+            <h2>Complete Directory of Verified Islamabad Real Estate Properties</h2>
+            <ul>
+              <li v-for="propItem in propertiesStore.properties" :key="propItem.id">
+                <router-link :to="`/property/${propItem.slug}`">
+                  {{ propItem.title }} - {{ propItem.address || propItem.city }} - PKR {{ propItem.price }}
+                </router-link>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>

@@ -330,7 +330,12 @@
             </div>
             <p class="text-xs text-slate-500 mt-0.5">{{ viewingLead.phone }} &bull; {{ viewingLead.city || 'Islamabad' }}</p>
           </div>
-          <button @click="viewingLead = null" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100">
+          <button
+            type="button"
+            @click="viewingLead = null"
+            class="p-1.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100"
+            aria-label="Close lead details"
+          >
             <XMarkIcon class="w-5 h-5" />
           </button>
         </div>
@@ -384,7 +389,12 @@
       <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200">
         <div class="flex items-center justify-between pb-4 border-b border-slate-100">
           <h3 class="text-base font-bold text-[#0F2A44]">Create New Lead</h3>
-          <button @click="openAddModal = false" class="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100">
+          <button
+            type="button"
+            @click="openAddModal = false"
+            class="p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100"
+            aria-label="Close create lead dialog"
+          >
             <XMarkIcon class="w-5 h-5" />
           </button>
         </div>

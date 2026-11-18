@@ -72,97 +72,82 @@ export const useAdminStore = defineStore('admin', () => {
     const cleanEmail = (email || '').trim().toLowerCase()
     const cleanPassword = (password || '').trim()
 
-    const isMasterAdmin = (
-      (cleanEmail === 'toplinkers@gmail.com' && cleanPassword === 'lock5816') ||
-      (cleanEmail === 'admin@toplinkers.com' && cleanPassword === 'admin123')
-    )
-
-    // Master Administrator: immediate guaranteed access on any environment (Vercel, offline, or localhost)
-    if (isMasterAdmin) {
-      isAuthenticated.value = true
-      adminUser.value = {
-        id: 1,
-        name: 'TopLinkers Executive',
-        email: cleanEmail,
-        role: 'Super Admin',
-        permissions: ['all'],
-        token: 'toplinkers_master_' + Date.now()
-      }
-      localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify(adminUser.value))
-
-      // If backend is online, also authenticate in background to sync real backend token
-      fetch(`${API_BASE_URL}/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ email: cleanEmail, password: cleanPassword })
-      }).then(async res => {
-        if (res.ok) {
-          const contentType = res.headers.get('content-type') || ''
-          if (contentType.includes('application/json')) {
-            const data = await res.json()
-            if (data?.token) {
-              adminUser.value.token = data.token
-              localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify(adminUser.value))
-              syncFromBackend().catch(() => {})
-            }
-          }
-        }
-      }).catch(() => {})
-
-      return { success: true, user: adminUser.value }
-    }
-
-    // For other users: try backend authentication
+    // 1. Authenticate with secure server-side endpoint
     try {
-      const res = await fetch(`${API_BASE_URL}/login`, {
+      const res = await fetch('/api/admin_auth.php?action=login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ email: cleanEmail, password: cleanPassword })
       })
 
-      const contentType = res.headers.get('content-type') || ''
-      if (res.ok && contentType.includes('application/json')) {
+      if (res.ok) {
         const data = await res.json()
-        apiConnected.value = true
-        isAuthenticated.value = true
-        adminUser.value = {
-          ...data.user,
-          token: data.token
+        if (data?.success) {
+          apiConnected.value = true
+          isAuthenticated.value = true
+          adminUser.value = {
+            id: 1,
+            name: data.user.name,
+            email: data.user.email,
+            role: data.user.role,
+            permissions: data.user.permissions || ['all'],
+            token: data.token
+          }
+          localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify(adminUser.value))
+          syncFromBackend().catch(() => {})
+          return { success: true, user: adminUser.value }
         }
-        localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify(adminUser.value))
-        syncFromBackend().catch(() => {})
-        return { success: true, user: adminUser.value }
-      } else if (res.status === 401 && contentType.includes('application/json')) {
+      } else {
         const err = await res.json().catch(() => ({}))
         return { success: false, message: err.message || 'Invalid email or password.' }
       }
     } catch (e) {
-      // Backend offline
-    }
-
-    // Offline local credential validation against stored users
-    const matchedUser = users.value.find(u => (u.email || '').toLowerCase() === cleanEmail)
-    if (matchedUser) {
-      if (matchedUser.is_active === false) {
-        return { success: false, message: 'This account has been deactivated by the administrator.' }
-      }
-      if (cleanPassword && cleanPassword.length >= 6) {
-        isAuthenticated.value = true
-        adminUser.value = {
-          ...matchedUser,
-          token: 'offline_jwt_' + Date.now()
+      // If primary endpoint unreachable, try fallback Laravel API if configured
+      try {
+        const res = await fetch(`${API_BASE_URL}/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ email: cleanEmail, password: cleanPassword })
+        })
+        if (res.ok) {
+          const data = await res.json()
+          apiConnected.value = true
+          isAuthenticated.value = true
+          adminUser.value = { ...data.user, token: data.token }
+          localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify(adminUser.value))
+          return { success: true, user: adminUser.value }
         }
-        localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify(adminUser.value))
-        return { success: true, user: adminUser.value }
-      }
+      } catch (err2) {}
     }
 
-    return { success: false, message: 'Invalid email or password.' }
+    return { success: false, message: 'Invalid credentials or server unavailable.' }
+  }
+
+  const checkServerSession = async () => {
+    try {
+      const res = await fetch('/api/admin_auth.php?action=check', {
+        headers: { 'Accept': 'application/json' }
+      })
+      if (res.ok) {
+        const data = await res.json()
+        if (data?.authenticated) {
+          isAuthenticated.value = true
+          adminUser.value = {
+            ...adminUser.value,
+            ...data.user
+          }
+          localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify(adminUser.value))
+          return true
+        }
+      }
+    } catch (e) {}
+    return false
   }
 
   const logout = () => {
     isAuthenticated.value = false
     localStorage.removeItem(STORAGE_KEYS.AUTH)
+    fetch('/api/admin_auth.php?action=logout', { method: 'POST' }).catch(() => {})
   }
 
   // 2. Lead Generation & CRM Queries
@@ -1634,6 +1619,7 @@ export const useAdminStore = defineStore('admin', () => {
     adminUser,
     login,
     logout,
+    checkServerSession,
     leads,
     addLead,
     updateLeadStatus,
