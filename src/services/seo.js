@@ -259,7 +259,7 @@ export const updateSEOMeta = (to) => {
           '@type': 'RealEstateAgent',
           name: 'Top Linkers Head Office',
           telephone: '+92-334-9522157',
-          email: ['toplinkers69@gmail.com', 'syedusman@toplinkersgroup.com'],
+          email: 'toplinkers69@gmail.com',
           address: {
             '@type': 'PostalAddress',
             streetAddress: '2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz',

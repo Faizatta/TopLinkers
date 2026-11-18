@@ -72,18 +72,13 @@
                       </span>
                     </a>
                     <a
-                      href="https://wa.me/923324004884?text=Hello%20TopLinkers,%20I%20have%20an%20inquiry%20regarding%20Construction%20and%20Solar"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="flex items-center justify-between p-2.5 rounded-xl bg-cyan-50/70 hover:bg-cyan-100 text-[#0F2A44] transition-colors border border-cyan-200/50"
+                      href="tel:03324004884"
+                      class="flex items-center justify-between p-2.5 rounded-xl bg-gray-50 hover:bg-gray-100 text-black transition-colors border border-gray-200"
                     >
                       <div>
-                        <span class="text-xs sm:text-sm font-extrabold block">0332-4004884</span>
-                        <span class="text-[10px] text-gray-500 font-semibold block">Turnkey Construction &amp; Solar Solutions</span>
+                        <span class="text-xs sm:text-sm font-extrabold text-black block">0332-4004884</span>
+                        <span class="text-[10px] text-gray-600 font-semibold block">Turnkey Construction &amp; Solar Solutions</span>
                       </div>
-                      <span class="text-[10px] font-black uppercase text-[#16B4E8] bg-white px-2 py-0.5 rounded shadow-2xs">
-                        WhatsApp &rarr;
-                      </span>
                     </a>
                   </div>
                 </div>
@@ -95,20 +90,11 @@
                   <EnvelopeIcon class="w-4 h-4" />
                 </div>
                 <div class="space-y-1">
-                  <span class="font-bold text-[#0F2A44] block text-xs uppercase tracking-wider">Official Email Addresses</span>
-                  <div class="space-y-1 pt-0.5">
-                    <div class="flex items-center gap-2">
-                      <span class="text-[10px] font-extrabold uppercase text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">Inquiries</span>
-                      <a href="mailto:toplinkers69@gmail.com" class="text-gray-800 hover:text-[#16B4E8] font-semibold text-xs sm:text-sm transition-colors">
-                        toplinkers69@gmail.com
-                      </a>
-                    </div>
-                    <div class="flex items-center gap-2">
-                      <span class="text-[10px] font-extrabold uppercase text-[#16B4E8] bg-blue-50 px-1.5 py-0.5 rounded">CEO Desk</span>
-                      <a href="mailto:syedusman@toplinkersgroup.com" class="text-gray-800 hover:text-[#16B4E8] font-semibold text-xs sm:text-sm transition-colors">
-                        syedusman@toplinkersgroup.com
-                      </a>
-                    </div>
+                  <span class="font-bold text-[#0F2A44] block text-xs uppercase tracking-wider">Official Email Address</span>
+                  <div class="pt-0.5">
+                    <a href="mailto:toplinkers69@gmail.com" class="text-gray-800 hover:text-[#16B4E8] font-semibold text-xs sm:text-sm transition-colors block">
+                      toplinkers69@gmail.com
+                    </a>
                   </div>
                 </div>
               </div>
