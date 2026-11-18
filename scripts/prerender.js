@@ -913,29 +913,36 @@ export function prerender() {
       html = html.replace('</head>', `${propJsonLd}\n  </head>`)
     }
 
-    // 6. Infiltrate Semantic Crawlable Content inside <div id="app">...</div> with a SINGLE <h1>
+    // 6. Seamless Branded App Shell for Instant Visual Load + Crawlable Noscript for Bots (Zero FOUC, Zero Layout Shift)
     const semanticFallback = `
-    <div id="app" style="background:#F6F8FA;min-height:100vh;display:flex;flex-direction:column;">
-      <header style="background:#0F2A44;color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <div id="app" class="min-h-screen bg-[#F6F8FA] flex flex-col">
+      <header style="background:#0F2A44;color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1E293B;">
         <a href="/" aria-label="TopLinkers Home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font-weight:900;font-size:20px;">
           <img src="/toplinkers-logo-mark.webp" alt="Top Linkers" width="40" height="40" style="object-fit:contain;" />
-          <span><span style="color:#E53935;">Top</span> Linkers</span>
+          <div>
+            <div style="font-size:18px;font-weight:900;line-height:1;"><span style="color:#E53935;">TOP</span> <span>LINKERS</span></div>
+            <div style="font-size:10px;color:#94A3B8;letter-spacing:1px;text-transform:uppercase;margin-top:2px;">Real Estate &bull; Construction &bull; Solar</div>
+          </div>
         </a>
-        <nav aria-label="Primary Navigation" style="display:flex;gap:16px;flex-wrap:wrap;font-size:14px;">
-          <a href="/about" style="color:#16B4E8;text-decoration:none;font-weight:700;">About Us</a>
-          <a href="/services" style="color:#fff;text-decoration:none;font-weight:600;">Services</a>
-          <a href="/listings" style="color:#fff;text-decoration:none;font-weight:600;">Properties</a>
-          <a href="/team" style="color:#fff;text-decoration:none;font-weight:600;">Team</a>
-          <a href="/blog" style="color:#fff;text-decoration:none;font-weight:600;">Blog</a>
-          <a href="/contact" style="color:#fff;text-decoration:none;font-weight:600;">Contact</a>
+        <nav aria-label="Primary Navigation" style="display:flex;gap:18px;font-size:13px;font-weight:600;">
+          <a href="/about" style="color:#16B4E8;text-decoration:none;">About Us</a>
+          <a href="/services" style="color:#CBD5E1;text-decoration:none;">Services</a>
+          <a href="/listings" style="color:#CBD5E1;text-decoration:none;">Properties</a>
+          <a href="/team" style="color:#CBD5E1;text-decoration:none;">Team</a>
+          <a href="/blog" style="color:#CBD5E1;text-decoration:none;">Blog</a>
+          <a href="/contact" style="color:#CBD5E1;text-decoration:none;">Contact</a>
         </nav>
       </header>
+      <div style="background:#030712;height:550px;width:100%;"></div>
+    </div>
 
-      <main style="max-width:1200px;margin:32px auto;padding:0 20px;">
-        <h1 style="font-size:30px;font-weight:900;color:#0F2A44;margin-bottom:16px;line-height:1.25;">
+    <!-- Crawlable Semantic Fallback for Non-JS Search Engine Crawlers & Bots (Hidden from JS Browsers to Prevent FOUC) -->
+    <noscript>
+      <div style="max-width:1200px;margin:32px auto;padding:0 20px;font-family:sans-serif;">
+        <h1 style="font-size:28px;font-weight:900;color:#0F2A44;margin-bottom:16px;line-height:1.25;">
           ${r.h1}
         </h1>
-        <p style="font-size:16px;line-height:1.6;color:#334155;margin-bottom:24px;">
+        <p style="font-size:15px;line-height:1.6;color:#334155;margin-bottom:24px;">
           ${r.description}
         </p>
         ${r.content}
@@ -956,12 +963,11 @@ export function prerender() {
             <a href="/llms.txt" style="color:#16B4E8;font-weight:700;">llms.txt (Agent Guide)</a>
           </div>
         </section>
-      </main>
-
-      <footer style="background:#081322;color:#94A3B8;padding:24px;text-align:center;font-size:13px;margin-top:48px;">
-        <p>&copy; 2026 Top Linkers Real Estate, Construction &amp; Solar. Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan.</p>
-      </footer>
-    </div>
+        <footer style="background:#081322;color:#94A3B8;padding:24px;text-align:center;font-size:13px;margin-top:48px;">
+          <p>&copy; 2026 Top Linkers Real Estate, Construction &amp; Solar. Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan.</p>
+        </footer>
+      </div>
+    </noscript>
     `
 
     // Inject Semantic Fallback directly inside <div id="app"></div>
