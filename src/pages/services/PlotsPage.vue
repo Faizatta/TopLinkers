@@ -29,7 +29,7 @@
         <div class="mt-8 flex flex-wrap justify-center gap-3">
           <button
             type="button"
-            @click="activePlotFilter = 'cash'"
+            @click="activePlotFilter = activePlotFilter === 'cash' ? 'all' : 'cash'"
             class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 shadow-sm"
             :class="activePlotFilter === 'cash' ? 'bg-[#16B4E8] text-white ring-2 ring-white/30' : 'bg-white/10 hover:bg-white/20 text-white'"
           >
@@ -39,7 +39,7 @@
 
           <button
             type="button"
-            @click="activePlotFilter = 'installments'"
+            @click="activePlotFilter = activePlotFilter === 'installments' ? 'all' : 'installments'"
             class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 shadow-sm"
             :class="activePlotFilter === 'installments' ? 'bg-emerald-600 text-white ring-2 ring-white/30' : 'bg-white/10 hover:bg-white/20 text-white'"
           >
@@ -47,14 +47,7 @@
             <span class="text-[10px] bg-black/30 px-2 py-0.5 rounded-full font-black">Faisal Town Phase 2</span>
           </button>
 
-          <button
-            type="button"
-            @click="activePlotFilter = 'all'"
-            class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all text-slate-300 hover:text-white"
-            :class="{ 'underline font-black text-white': activePlotFilter === 'all' }"
-          >
-            View All
-          </button>
+
         </div>
       </div>
     </header>
