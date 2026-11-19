@@ -53,5 +53,16 @@
     "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80",
     "specialty": "On-Grid & Hybrid Solar Net-Metering Installations",
     "deals": 110
+  },
+  {
+    "id": "agent-6",
+    "name": "Engr. Asad Ur Rehman",
+    "role": "Lead Solar Energy & Photovoltaic Systems Engineer",
+    "experience": "9+ Years (PEC Certified Solar Eng.)",
+    "phone": "0332-4004884",
+    "email": "asad.solar@toplinkers.com",
+    "photo": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+    "specialty": "Solar PV Plant Design, Battery Storage & IESCO Grid Interconnection",
+    "deals": 120
   }
 ]

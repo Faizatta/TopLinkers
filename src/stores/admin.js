@@ -764,12 +764,41 @@ export const useAdminStore = defineStore('admin', () => {
       photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80',
       bio: 'Specialist in 10kW, 20kW, and 50kW Tier-1 hybrid & on-grid solar installations with turnkey IESCO green net-metering clearance.',
       address: 'Al Hameed Plaza, G-11 Markaz, Islamabad'
+    },
+    {
+      id: 'eng-3',
+      name: 'Engr. Asad Ur Rehman',
+      role: 'Lead Solar Energy & Photovoltaic Systems Engineer',
+      category: 'engineer',
+      tag: 'PEC Registered Solar Eng.',
+      experience: '9+ Years',
+      phone: '+92 332 4004884',
+      whatsapp: '923324004884',
+      email: 'toplinkers69@gmail.com',
+      photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+      bio: 'PEC-registered renewable energy engineer leading solar PV plant designs, industrial 50kW+ setups, hybrid battery storage integration, and IESCO net-metering grid interconnections. Specializes in optimal solar yield engineering and energy audits.',
+      quote: 'Designing sustainable, high-efficiency solar infrastructure that delivers lifetime energy independence and verified ROI for residential and commercial clients across Islamabad.',
+      address: 'Al Hameed Plaza, G-11 Markaz, Islamabad'
     }
   ]
 
-  const teamMembers = ref(
-    JSON.parse(localStorage.getItem(STORAGE_KEYS.TEAM) || 'null') || defaultTeamMembers
-  )
+  const loadInitialTeam = () => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEYS.TEAM) || 'null')
+      if (Array.isArray(stored) && stored.length > 0) {
+        const ids = stored.map(m => m.id)
+        defaultTeamMembers.forEach(defM => {
+          if (!ids.includes(defM.id)) {
+            stored.push(defM)
+          }
+        })
+        return stored
+      }
+    } catch (e) {}
+    return defaultTeamMembers
+  }
+
+  const teamMembers = ref(loadInitialTeam())
 
   const saveTeamLocal = () => {
     localStorage.setItem(STORAGE_KEYS.TEAM, JSON.stringify(teamMembers.value))

@@ -150,6 +150,137 @@
             </div>
           </section>
 
+          <!-- TopLinkers Certified Solar Engineering Leadership (Engr Asad Ur Rehman & Team) -->
+          <section class="bg-white p-7 sm:p-8 rounded-2xl border border-gray-200 shadow-xs space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-gray-100">
+              <div>
+                <span class="text-[10px] font-black uppercase tracking-wider text-[#6CC24A] bg-emerald-50 px-2.5 py-1 rounded-md">
+                  PEC REGISTERED TECHNICAL DIVISION
+                </span>
+                <h2 class="text-xl sm:text-2xl font-black text-[#0F2A44] mt-2">
+                  Certified Solar &amp; Net-Metering Engineers
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">
+                  Direct engineering oversight for load calculation, tier-1 inverters, and IESCO green meter approvals.
+                </p>
+              </div>
+              <router-link
+                to="/team"
+                class="text-xs font-bold text-[#16B4E8] hover:text-[#0F2A44] transition-colors flex items-center gap-1 self-start sm:self-auto"
+              >
+                <span>Full Engineering Directory</span>
+                <span>&rarr;</span>
+              </router-link>
+            </div>
+
+            <!-- Engineers Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <!-- Engr. Asad Ur Rehman -->
+              <div class="p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-sky-50/40 border border-slate-200/90 hover:border-[#16B4E8] transition-all flex flex-col justify-between space-y-4 group">
+                <div class="flex items-start gap-4">
+                  <div class="relative flex-shrink-0">
+                    <img
+                      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+                      alt="Engr. Asad Ur Rehman - Solar Engineer TopLinkers"
+                      class="w-16 h-16 rounded-xl object-cover border-2 border-white shadow-md group-hover:scale-105 transition-transform"
+                    />
+                    <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#25D366] border-2 border-white flex items-center justify-center text-white" title="PEC Active">
+                      <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    </span>
+                  </div>
+
+                  <div class="min-w-0 flex-1">
+                    <span class="text-[9px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded inline-block mb-1">
+                      PEC Registered Solar Eng.
+                    </span>
+                    <h3 class="text-base font-black text-[#0F2A44] leading-tight">
+                      Engr. Asad Ur Rehman
+                    </h3>
+                    <p class="text-xs font-bold text-[#16B4E8] mt-0.5 leading-snug">
+                      Lead Solar Energy &amp; Photovoltaic Systems Engineer
+                    </p>
+                    <span class="text-[11px] font-semibold text-slate-500 block mt-0.5">
+                      9+ Years Experience &bull; Energy Storage Specialist
+                    </span>
+                  </div>
+                </div>
+
+                <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                  Leads solar PV plant electrical architecture, rooftop structural stress testing, battery storage synchronizations, and utility-scale IESCO net-metering grid clearances.
+                </p>
+
+                <!-- Actions -->
+                <div class="pt-3 border-t border-slate-200/60 flex items-center justify-between gap-2">
+                  <a
+                    href="https://wa.me/923324004884?text=Hello%20Engr.%20Asad%20Ur%20Rehman,%20I%20need%20solar%20net%20metering%20engineering%20consultation"
+                    target="_blank"
+                    class="flex-1 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1.5 shadow-xs"
+                  >
+                    <span>WhatsApp Engr. Asad</span>
+                  </a>
+                  <a
+                    href="tel:+923324004884"
+                    class="px-3 py-2 rounded-xl border border-slate-300 hover:border-[#0F2A44] text-[#0F2A44] text-xs font-bold transition-colors"
+                  >
+                    Call
+                  </a>
+                </div>
+              </div>
+
+              <!-- Engr. Salman Qureshi -->
+              <div class="p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-sky-50/40 border border-slate-200/90 hover:border-[#16B4E8] transition-all flex flex-col justify-between space-y-4 group">
+                <div class="flex items-start gap-4">
+                  <div class="relative flex-shrink-0">
+                    <img
+                      src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80"
+                      alt="Engr. Salman Qureshi - Solar Engineer TopLinkers"
+                      class="w-16 h-16 rounded-xl object-cover border-2 border-white shadow-md group-hover:scale-105 transition-transform"
+                    />
+                    <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#25D366] border-2 border-white flex items-center justify-center text-white" title="PEC Active">
+                      <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    </span>
+                  </div>
+
+                  <div class="min-w-0 flex-1">
+                    <span class="text-[9px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded inline-block mb-1">
+                      PEC &amp; AEDB Certified
+                    </span>
+                    <h3 class="text-base font-black text-[#0F2A44] leading-tight">
+                      Engr. Salman Qureshi
+                    </h3>
+                    <p class="text-xs font-bold text-[#16B4E8] mt-0.5 leading-snug">
+                      Lead Solar &amp; IESCO Net-Metering Engineer
+                    </p>
+                    <span class="text-[11px] font-semibold text-slate-500 block mt-0.5">
+                      10+ Years Experience &bull; IESCO Liaison
+                    </span>
+                  </div>
+                </div>
+
+                <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                  Expert in 10kW to 50kW on-grid inverter commissioning (Huawei, Sungrow, Growatt), bi-directional green meter documentation, and sub-station approvals.
+                </p>
+
+                <!-- Actions -->
+                <div class="pt-3 border-t border-slate-200/60 flex items-center justify-between gap-2">
+                  <a
+                    href="https://wa.me/923324004884?text=Hello%20Engr.%20Salman%20Qureshi,%20I%20am%20inquiring%20about%20IESCO%20solar%20net%20metering"
+                    target="_blank"
+                    class="flex-1 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1.5 shadow-xs"
+                  >
+                    <span>WhatsApp Engr. Salman</span>
+                  </a>
+                  <a
+                    href="tel:+923324004884"
+                    class="px-3 py-2 rounded-xl border border-slate-300 hover:border-[#0F2A44] text-[#0F2A44] text-xs font-bold transition-colors"
+                  >
+                    Call
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <!-- FAQs -->
           <section class="bg-white p-8 rounded-2xl border border-gray-200 shadow-xs">
             <h2 class="text-xl font-bold text-[#0F2A44] mb-6">Frequently Asked Questions on Solar Net Metering</h2>
