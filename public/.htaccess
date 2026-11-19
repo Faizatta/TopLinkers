@@ -15,11 +15,52 @@ Options -Indexes
   # Allow direct access to .well-known for RFC 8615 and SEP-1649 MCP discovery
   RewriteRule ^\.well-known/ - [L]
 
+  # ----------------------------------------------------
+  # CANONICAL REDIRECTS (Resolves GSC "Alternate Page" Status)
+  # ----------------------------------------------------
+
+  # A. Force HTTPS (HTTP -> HTTPS 301 Redirect)
+  RewriteCond %{HTTPS} off [OR]
+  RewriteCond %{HTTP:X-Forwarded-Proto} =http
+  RewriteRule ^ https://toplinkersgroup.com%{REQUEST_URI} [R=301,L,NE]
+
+  # B. Force non-WWW (www -> non-www 301 Redirect)
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L,NE]
+
+  # C. Strip .html extension (e.g. /about.html -> /about 301 Redirect)
+  # Prevents search engines from indexing both .html and extensionless URLs
+  RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+  RewriteCond %{REQUEST_URI} !^/404\.html$
+  RewriteRule ^ /%1 [R=301,L,NE]
+
+  # D. Normalize Trailing Slashes (Strip trailing slash: /services/ -> /services 301 Redirect)
+  # Prevents search engines from indexing both trailing and non-trailing slash URLs
+  # Excludes root /, /api/, and /admin/
+  RewriteCond %{THE_REQUEST} \s/+(.+?)/+[\s?] [NC]
+  RewriteCond %{REQUEST_URI} !^/api/
+  RewriteCond %{REQUEST_URI} !^/admin/
+  RewriteRule ^ /%1 [R=301,L,NE]
+
+  # E. Common Legacy URL Aliases 301 Redirects
+  RewriteRule ^about-us/?$ /about [R=301,L]
+  RewriteRule ^contact-us/?$ /contact [R=301,L]
+  RewriteRule ^properties/?$ /listings [R=301,L]
+  RewriteRule ^property/?$ /listings [R=301,L]
+  RewriteRule ^terms/?$ /terms-and-conditions [R=301,L]
+  RewriteRule ^terms-conditions/?$ /terms-and-conditions [R=301,L]
+  RewriteRule ^privacy/?$ /privacy-policy [R=301,L]
+  RewriteRule ^disclaimer-policy/?$ /disclaimer [R=301,L]
+  RewriteRule ^harsukh/?$ /hr-sukh [R=301,L]
+  RewriteRule ^harsukh-residencies/?$ /hr-sukh [R=301,L]
+
   # Serve Markdown representation when agents request Accept: text/markdown
   RewriteCond %{HTTP:Accept} text/markdown [NC]
   RewriteRule ^(index\.html)?$ /index.md [L]
 
-  # 2. Permanent 301 Redirects for Cleaned Canonical Property URLs (SEO preservation)
+  # ----------------------------------------------------
+  # Legacy Property URL 301 Redirects (30 cleaned slugs)
+  # ----------------------------------------------------
   RewriteRule ^property/luxury-corner-penthouse-bano-qadeer-heights-11/?$ /property/luxury-corner-penthouse-bano-qadeer-heights [R=301,L]
   RewriteRule ^property/executive-family-house-gulberg-greens-residencia-12/?$ /property/executive-family-house-gulberg-greens [R=301,L]
   RewriteRule ^property/commercial-retail-plaza-storefront-faisal-town-phase-ii-ft-ii-13/?$ /property/commercial-retail-storefront-faisal-town-phase-2 [R=301,L]
@@ -51,40 +92,47 @@ Options -Indexes
   RewriteRule ^property/turnkey-furnished-townhouse-pha-flats-sector-i-12-39/?$ /property/pha-flats-sector-i12-furnished-apartment [R=301,L]
   RewriteRule ^property/modern-designer-villa-pha-flats-sector-i-16-40/?$ /property/pha-flats-sector-i16-modern-apartment [R=301,L]
 
+  # ----------------------------------------------------
   # 3. Server-Side Protection and Routing for /admin Executive Suite
-  # A. Direct visits to /admin/login serve the SPA application shell
+  # ----------------------------------------------------
+  # Direct visits to /admin/login serve the SPA application shell
   RewriteCond %{REQUEST_URI} ^/admin/login/?$ [NC]
   RewriteRule ^ /index.html [L]
 
-  # B. Unauthenticated visits to protected admin pages are redirected to /admin/login
+  # Unauthenticated visits to protected admin pages are redirected to /admin/login
   RewriteCond %{REQUEST_URI} ^/admin(/.*)?$ [NC]
   RewriteCond %{HTTP_COOKIE} !tl_admin_session= [NC]
   RewriteRule ^ /admin/login [R=302,L]
 
-  # C. Authenticated visits to ANY /admin or /admin/* route serve the SPA application shell
+  # Authenticated visits to ANY /admin or /admin/* route serve the SPA application shell
   RewriteCond %{REQUEST_URI} ^/admin(/.*)?$ [NC]
   RewriteRule ^ /index.html [L]
 
-  # 4. If requested path is an existing physical file, serve directly
+  # ----------------------------------------------------
+  # 4. Physical Files & Pre-rendered Static Pages Serving
+  # ----------------------------------------------------
+  # If requested path is an existing physical file, serve directly
   RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ - [L]
 
-  # 5. If requested path has a pre-rendered .html file, serve it immediately with HTTP 200 OK
+  # If requested path has a pre-rendered .html file, serve it immediately with HTTP 200 OK
   RewriteCond %{REQUEST_FILENAME}.html -f [OR]
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
   RewriteRule ^(.*)$ /$1.html [L,QSA]
 
-  # 6. If requested path has a subfolder index.html, serve that index.html with HTTP 200 OK
+  # If requested path has a subfolder index.html, serve that index.html with HTTP 200 OK
   RewriteCond %{REQUEST_FILENAME}/index.html -f [OR]
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
   RewriteRule ^(.*)$ /$1/index.html [L,QSA]
 
-  # 7. If requested path is an existing directory with an index.html, serve directly
+  # If requested path is an existing directory with an index.html, serve directly
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteCond %{REQUEST_FILENAME}/index.html -f
   RewriteRule ^ - [L]
 
-  # 8. All other unknown/invalid URLs return genuine HTTP 404 response
+  # ----------------------------------------------------
+  # 5. Genuine 404 Response for Unknown URLs
+  # ----------------------------------------------------
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^ - [R=404,L]
