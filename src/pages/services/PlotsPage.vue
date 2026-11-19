@@ -33,7 +33,7 @@
             class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 shadow-sm"
             :class="activePlotFilter === 'cash' ? 'bg-[#16B4E8] text-white ring-2 ring-white/30' : 'bg-white/10 hover:bg-white/20 text-white'"
           >
-            <span>💰 Section 1: Cash Possession (Moqa Ka Plot)</span>
+            <span>💰 Cash Possession (Moqa Ka Plot)</span>
             <span class="text-[10px] bg-black/30 px-2 py-0.5 rounded-full font-black">TopCity, AGG, PECHS</span>
           </button>
 
@@ -43,7 +43,7 @@
             class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 shadow-sm"
             :class="activePlotFilter === 'installments' ? 'bg-emerald-600 text-white ring-2 ring-white/30' : 'bg-white/10 hover:bg-white/20 text-white'"
           >
-            <span>📅 Section 2: Installment Plots</span>
+            <span>📅 Installment Plots</span>
             <span class="text-[10px] bg-black/30 px-2 py-0.5 rounded-full font-black">Faisal Town Phase 2</span>
           </button>
 
@@ -74,12 +74,12 @@
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
               <div class="p-4 rounded-2xl bg-sky-50/70 border border-sky-100">
-                <span class="text-xs font-black uppercase text-[#16B4E8] block mb-1">Section 1: 100% Cash Ready</span>
+                <span class="text-xs font-black uppercase text-[#16B4E8] block mb-1">100% Cash Ready</span>
                 <strong class="text-sm font-extrabold text-[#0F2A44] block">Immediate "Moqa Ka Plot"</strong>
                 <p class="text-xs text-slate-600 mt-1">Direct physical possession, boundary pillars, utility lines active in <strong>TopCity-1, AGG &amp; PECHS</strong>.</p>
               </div>
               <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-100">
-                <span class="text-xs font-black uppercase text-emerald-600 block mb-1">Section 2: Flexible Plan</span>
+                <span class="text-xs font-black uppercase text-emerald-600 block mb-1">Flexible Installment Plan</span>
                 <strong class="text-sm font-extrabold text-[#0F2A44] block">Easy Installment Files</strong>
                 <p class="text-xs text-slate-600 mt-1">4.5-year structured quarterly plans with confirmed computerized confirmation letters in <strong>Faisal Town Phase 2</strong>.</p>
               </div>
@@ -310,8 +310,8 @@
                 <thead>
                   <tr class="border-b border-gray-200 bg-slate-50 text-[11px] font-black uppercase text-slate-700">
                     <th class="py-3 px-4">Evaluation Factor</th>
-                    <th class="py-3 px-4">Section 1: Cash Moqa (TopCity/AGG/PECHS)</th>
-                    <th class="py-3 px-4">Section 2: Installments (Faisal Town Phase 2)</th>
+                    <th class="py-3 px-4">Cash Moqa (TopCity / AGG / PECHS)</th>
+                    <th class="py-3 px-4">Installments (Faisal Town Phase 2)</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 text-slate-700">
