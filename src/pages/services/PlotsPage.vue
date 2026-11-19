@@ -366,43 +366,207 @@
             </div>
           </div>
 
-          <!-- Quick Comparison Matrix between Cash and Installments -->
-          <section class="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200/90 shadow-xs">
-            <h3 class="text-lg sm:text-xl font-bold text-[#0F2A44] mb-3">
-              Near Airport Plots: Direct Decision Comparison
-            </h3>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr class="border-b border-gray-200 bg-slate-50 text-[11px] font-black uppercase text-slate-700">
-                    <th class="py-3 px-4">Evaluation Factor</th>
-                    <th class="py-3 px-4">Cash Moqa (TopCity / AGG / PECHS)</th>
-                    <th class="py-3 px-4">Installments (Faisal Town Phase 2)</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100 text-slate-700">
-                  <tr>
-                    <td class="py-3 px-4 font-bold text-[#0F2A44]">Possession Status</td>
-                    <td class="py-3 px-4 text-emerald-700 font-bold">100% Immediate Physical On-Ground</td>
-                    <td class="py-3 px-4 text-gray-600">Balloting &bull; Phased Possession</td>
-                  </tr>
-                  <tr>
-                    <td class="py-3 px-4 font-bold text-[#0F2A44]">Payment Structure</td>
-                    <td class="py-3 px-4">100% Cash / Swift Registry Transfer</td>
-                    <td class="py-3 px-4 text-emerald-700 font-bold">20% Down &bull; 18 Easy Quarterly Installments</td>
-                  </tr>
-                  <tr>
-                    <td class="py-3 px-4 font-bold text-[#0F2A44]">Construction Timeline</td>
-                    <td class="py-3 px-4 text-emerald-700 font-bold">Immediate House Construction Permitted</td>
-                    <td class="py-3 px-4">Long-term Investment &bull; Future Residence</td>
-                  </tr>
-                  <tr>
-                    <td class="py-3 px-4 font-bold text-[#0F2A44]">Capital Growth Driver</td>
-                    <td class="py-3 px-4">High Occupancy &bull; Established Families</td>
-                    <td class="py-3 px-4 text-emerald-700 font-bold">Rapid Land Value Escalation by Zedem</td>
-                  </tr>
-                </tbody>
-              </table>
+          <!-- Dedicated Head-to-Head Comparison: TopCity-1 vs Airport Green Garden (AGG) -->
+          <section class="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200/90 shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 pb-4 border-b border-gray-100">
+              <div>
+                <span class="text-[10px] font-black uppercase tracking-widest text-[#16B4E8] bg-sky-50 px-2.5 py-0.5 rounded-full inline-block mb-1">
+                  Airport Corridor Head-to-Head
+                </span>
+                <h3 class="text-xl sm:text-2xl font-black text-[#0F2A44]">
+                  TopCity-1 vs. Airport Green Garden (AGG) Comparison
+                </h3>
+                <p class="text-xs text-slate-500 mt-0.5">
+                  Side-by-side evaluation of 5 &amp; 10 Marla cash rates, exact location, utilities, and title status.
+                </p>
+              </div>
+
+              <!-- Comparison Mode Toggle -->
+              <div class="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 flex-shrink-0 self-start sm:self-auto text-xs font-bold">
+                <button
+                  type="button"
+                  @click="activeCompareView = 'topcity-agg'"
+                  class="px-3 py-1.5 rounded-lg transition-all"
+                  :class="activeCompareView === 'topcity-agg' ? 'bg-[#0F2A44] text-white shadow-xs' : 'text-slate-600 hover:text-[#0F2A44]'"
+                >
+                  TopCity vs AGG
+                </button>
+                <button
+                  type="button"
+                  @click="activeCompareView = 'cash-installments'"
+                  class="px-3 py-1.5 rounded-lg transition-all"
+                  :class="activeCompareView === 'cash-installments' ? 'bg-[#0F2A44] text-white shadow-xs' : 'text-slate-600 hover:text-[#0F2A44]'"
+                >
+                  Cash vs. Installments
+                </button>
+              </div>
+            </div>
+
+            <!-- View A: TopCity-1 vs. Airport Green Garden (AGG) Detailed Matrix -->
+            <div v-if="activeCompareView === 'topcity-agg'" class="space-y-4">
+              <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr class="border-b border-slate-200 bg-slate-50 text-[11px] font-black uppercase text-slate-700">
+                      <th class="py-3 px-4 w-1/4">Feature / Factor</th>
+                      <th class="py-3 px-4 w-3/8 bg-sky-50/50 text-[#0F2A44] border-l border-slate-200">
+                        <div class="flex items-center justify-between">
+                          <span>TopCity-1 Islamabad</span>
+                          <span class="text-[9px] font-black px-1.5 py-0.2 rounded bg-[#0F2A44] text-white">RDA Approved</span>
+                        </div>
+                      </th>
+                      <th class="py-3 px-4 w-3/8 bg-emerald-50/40 text-[#0F2A44] border-l border-slate-200">
+                        <div class="flex items-center justify-between">
+                          <span>Airport Green Garden (AGG)</span>
+                          <span class="text-[9px] font-black px-1.5 py-0.2 rounded bg-emerald-700 text-white">RDA Approved</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-100 text-slate-700">
+                    <!-- Location -->
+                    <tr class="hover:bg-slate-50/60">
+                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Location &amp; Access</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 font-semibold text-[#0F2A44]">
+                        Directly on Srinagar Highway opposite Airport Junction (1 min to terminal gate).
+                      </td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 font-semibold text-[#0F2A44]">
+                        Adjoining Airport Cargo boundary wall via Link Road / Fateh Jang (3 mins to Airport).
+                      </td>
+                    </tr>
+
+                    <!-- 5 Marla Rates -->
+                    <tr class="hover:bg-slate-50/60 bg-sky-50/20">
+                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">5 Marla Cash Moqa Rate</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 font-black text-[#16B4E8] text-sm">
+                        PKR 75 Lac &ndash; 95 Lac
+                        <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Ready for immediate house building</span>
+                      </td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 font-black text-emerald-700 text-sm">
+                        PKR 48 Lac &ndash; 55 Lac
+                        <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Budget entry ticket on airport belt</span>
+                      </td>
+                    </tr>
+
+                    <!-- 10 Marla Rates -->
+                    <tr class="hover:bg-slate-50/60 bg-sky-50/20">
+                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">10 Marla Cash Moqa Rate</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 font-black text-[#16B4E8] text-sm">
+                        PKR 1.35 Cr &ndash; 1.65 Cr
+                        <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Block B / C on-ground possession</span>
+                      </td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 font-black text-emerald-700 text-sm">
+                        PKR 88 Lac &ndash; 1.05 Cr
+                        <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Solid demarcated land &amp; pillars</span>
+                      </td>
+                    </tr>
+
+                    <!-- 1 Kanal Rates -->
+                    <tr class="hover:bg-slate-50/60">
+                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">1 Kanal Executive Rate</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 font-bold text-slate-800">
+                        PKR 2.25 Cr &ndash; 3.40 Cr
+                      </td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 font-bold text-slate-800">
+                        PKR 1.65 Cr &ndash; 2.10 Cr
+                      </td>
+                    </tr>
+
+                    <!-- Infrastructure & Utilities -->
+                    <tr class="hover:bg-slate-50/60">
+                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Utilities &amp; Grid</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 font-medium text-slate-700">
+                        100% Underground electricity cabling, Sui Gas network pipeline active, optical fiber internet.
+                      </td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 font-medium text-slate-700">
+                        Overhead electricity poles installed, groundwater boring available, wide paved roads.
+                      </td>
+                    </tr>
+
+                    <!-- Legal & Demarcation -->
+                    <tr class="hover:bg-slate-50/60">
+                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Possession &amp; Title</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 font-semibold text-emerald-700">
+                        Immediate Demarcation in Block B &bull; Direct Registry &amp; Societal Transfer
+                      </td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 font-semibold text-emerald-700">
+                        Immediate Physical Possession &bull; Clear Title Letter
+                      </td>
+                    </tr>
+
+                    <!-- Lifestyle & Buyer Profile -->
+                    <tr class="hover:bg-slate-50/60">
+                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Best Fit For</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 text-slate-600">
+                        Luxury residence seekers, airport executives, and immediate construction with all upscale amenities.
+                      </td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 text-slate-600">
+                        High-ROI investors and budget homebuilders looking for maximum capital growth with lower entry capital.
+                      </td>
+                    </tr>
+
+                    <!-- Direct Card Actions -->
+                    <tr class="bg-slate-50/70">
+                      <td class="py-3 px-4 font-bold text-[#0F2A44]">Direct Society Actions</td>
+                      <td class="py-3 px-4 border-l border-slate-200">
+                        <button
+                          type="button"
+                          @click="openPlotDetails('topcity')"
+                          class="px-3.5 py-1.5 rounded-lg bg-[#0F2A44] hover:bg-[#16B4E8] text-white font-bold text-[11px] transition-colors shadow-xs"
+                        >
+                          View TopCity-1 Details &rarr;
+                        </button>
+                      </td>
+                      <td class="py-3 px-4 border-l border-slate-200">
+                        <button
+                          type="button"
+                          @click="openPlotDetails('agg')"
+                          class="px-3.5 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[11px] transition-colors shadow-xs"
+                        >
+                          View AGG Details &rarr;
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- View B: Cash Ready vs. Installments -->
+            <div v-else class="space-y-4">
+              <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr class="border-b border-gray-200 bg-slate-50 text-[11px] font-black uppercase text-slate-700">
+                      <th class="py-3 px-4">Evaluation Factor</th>
+                      <th class="py-3 px-4 bg-sky-50/50 text-[#0F2A44] border-l border-slate-200">Cash Moqa (TopCity / AGG / PECHS)</th>
+                      <th class="py-3 px-4 bg-emerald-50/40 text-[#0F2A44] border-l border-slate-200">Installments (Faisal Town Phase 2)</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-100 text-slate-700">
+                    <tr>
+                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Possession Status</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 text-emerald-700 font-bold">100% Immediate Physical On-Ground</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 text-gray-600">Balloting &bull; Phased Possession</td>
+                    </tr>
+                    <tr>
+                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Payment Structure</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200">100% Cash / Swift Registry Transfer</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 text-emerald-700 font-bold">20% Down &bull; 18 Easy Quarterly Installments</td>
+                    </tr>
+                    <tr>
+                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Construction Timeline</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 text-emerald-700 font-bold">Immediate House Construction Permitted</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200">Long-term Investment &bull; Future Residence</td>
+                    </tr>
+                    <tr>
+                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Capital Growth Driver</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200">High Occupancy &bull; Established Families</td>
+                      <td class="py-3.5 px-4 border-l border-slate-200 text-emerald-700 font-bold">Rapid Land Value Escalation by Zedem</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </section>
 
@@ -599,6 +763,7 @@ import {
 const route = useRoute()
 const activePlotFilter = ref('all') // 'all' | 'cash' | 'installments'
 const selectedPlot = ref(null)
+const activeCompareView = ref('topcity-agg') // 'topcity-agg' | 'cash-installments'
 
 const plotsData = {
   topcity: {
