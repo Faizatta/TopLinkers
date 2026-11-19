@@ -321,6 +321,108 @@
       </div>
     </div>
 
+    <!-- 5. Service FAQs & Knowledge Base Manager -->
+    <div class="bg-white rounded-xl p-6 border border-slate-200/90 shadow-xs space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-black uppercase tracking-wider text-white bg-[#0F2A44] px-2 py-0.5 rounded">
+              Service FAQs
+            </span>
+            <h2 class="text-sm font-bold text-[#0F2A44] uppercase tracking-wide">
+              Service FAQs &amp; Knowledge Base Manager
+            </h2>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">
+            Edit, add, or toggle frequently asked questions displayed on public service pages (Plots, Flats, Construction, Solar, Real Estate).
+          </p>
+        </div>
+
+        <button
+          type="button"
+          @click="openAddFaqModal"
+          class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-colors shadow-xs flex-shrink-0"
+        >
+          <span>+ Add New FAQ</span>
+        </button>
+      </div>
+
+      <!-- Service Division Tabs -->
+      <div class="flex flex-wrap items-center gap-2 border-b border-slate-100 pb-3">
+        <button
+          v-for="srv in faqServices"
+          :key="srv.key"
+          type="button"
+          @click="activeFaqService = srv.key"
+          class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 select-none"
+          :class="activeFaqService === srv.key ? 'bg-[#0F2A44] text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
+        >
+          <span>{{ srv.label }}</span>
+          <span
+            class="text-[10px] px-2 py-0.5 rounded-full font-bold"
+            :class="activeFaqService === srv.key ? 'bg-[#16B4E8] text-[#0F2A44]' : 'bg-slate-200 text-slate-600'"
+          >
+            {{ getServiceFaqCount(srv.key) }}
+          </span>
+        </button>
+      </div>
+
+      <!-- FAQ Items List for Active Service -->
+      <div class="space-y-3">
+        <div
+          v-for="(faq, idx) in currentServiceFaqs"
+          :key="faq.id"
+          class="p-4 rounded-xl border border-slate-200/90 bg-slate-50/50 hover:bg-white hover:border-slate-300 transition-all space-y-2.5"
+        >
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+                <span class="text-[10px] font-mono text-slate-400 font-bold">#{{ idx + 1 }}</span>
+                <span
+                  class="text-[9px] font-black uppercase px-2 py-0.5 rounded"
+                  :class="faq.active !== false ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'"
+                >
+                  {{ faq.active !== false ? 'Live on Service Page' : 'Disabled (Hidden)' }}
+                </span>
+                <span class="text-[10px] text-slate-400 font-mono">Order: {{ faq.order || (idx + 1) }}</span>
+              </div>
+              <h4 class="text-xs sm:text-sm font-bold text-[#0F2A44] leading-snug">{{ faq.question }}</h4>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">{{ faq.answer }}</p>
+            </div>
+
+            <div class="flex items-center gap-2 flex-shrink-0 self-end sm:self-start">
+              <button
+                type="button"
+                @click="toggleFaqActive(faq)"
+                class="px-2.5 py-1.5 rounded-lg text-xs font-bold border transition-colors"
+                :class="faq.active !== false ? 'border-slate-200 hover:bg-slate-100 text-slate-600' : 'border-emerald-300 bg-emerald-50 text-emerald-700'"
+              >
+                {{ faq.active !== false ? 'Disable' : 'Enable' }}
+              </button>
+              <button
+                type="button"
+                @click="startEditFaq(faq)"
+                class="px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-50 text-sky-700 hover:bg-sky-100 transition-colors"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                @click="removeFaq(faq.id)"
+                class="px-2.5 py-1.5 rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 transition-colors"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="currentServiceFaqs.length === 0" class="text-center py-8 text-xs text-slate-400 bg-slate-50/50 rounded-xl border border-dashed border-slate-200">
+          No FAQs configured for this service division yet. Click "+ Add New FAQ" to create one.
+        </div>
+      </div>
+    </div>
+
     <!-- Recent Inquiries Table -->
     <div class="bg-white rounded-xl p-6 border border-slate-200/90 shadow-xs">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
@@ -393,11 +495,113 @@
         </table>
       </div>
     </div>
+
+    <!-- Add / Edit FAQ Modal Dialog -->
+    <div
+      v-if="faqModalOpen"
+      class="fixed inset-0 z-50 bg-[#0F2A44]/70 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
+      @click.self="faqModalOpen = false"
+    >
+      <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 border border-slate-200 space-y-4 animate-scale-up">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div>
+            <span class="text-[10px] font-black uppercase tracking-wider text-[#16B4E8]">Service Knowledge Base</span>
+            <h3 class="text-sm font-bold text-[#0F2A44] uppercase tracking-wide">
+              {{ editingFaqId ? 'Edit Service FAQ' : 'Add New Service FAQ' }}
+            </h3>
+          </div>
+          <button
+            type="button"
+            @click="faqModalOpen = false"
+            class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold transition-colors"
+          >
+            ✕
+          </button>
+        </div>
+
+        <form @submit.prevent="saveFaqForm" class="space-y-3.5">
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Target Service Division *</label>
+            <select
+              v-model="faqForm.service"
+              class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-bold text-[#0F2A44] focus:outline-none focus:border-[#0F2A44]"
+            >
+              <option value="plots">Plots Land Guide (TopCity, AGG, PECHS, Faisal Town)</option>
+              <option value="flats">PHA Flats &amp; Luxury Suites (I-12, I-16, G-11, Harsukh)</option>
+              <option value="construction">Turnkey House Construction &amp; Architecture</option>
+              <option value="solar">Tier-1 Solar Net Metering (IESCO)</option>
+              <option value="real-estate">Real Estate Advisory &amp; Verified Brokerage</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Question Headline *</label>
+            <input
+              v-model="faqForm.question"
+              type="text"
+              required
+              placeholder="e.g. What documents are required for cash plot transfer?"
+              class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-bold text-[#0F2A44] focus:outline-none focus:border-[#0F2A44]"
+            />
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Answer Text *</label>
+            <textarea
+              v-model="faqForm.answer"
+              rows="4"
+              required
+              placeholder="Provide a clear, detailed, and reassuring response for clients..."
+              class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs leading-relaxed focus:outline-none focus:border-[#0F2A44]"
+            ></textarea>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Display Sort Order</label>
+              <input
+                v-model.number="faqForm.order"
+                type="number"
+                min="1"
+                class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold focus:outline-none focus:border-[#0F2A44]"
+              />
+            </div>
+
+            <div class="flex items-end pb-1">
+              <label class="inline-flex items-center gap-2 cursor-pointer select-none text-xs font-bold text-slate-700">
+                <input
+                  v-model="faqForm.active"
+                  type="checkbox"
+                  class="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4 cursor-pointer"
+                />
+                <span>Active on Public Page</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-100">
+            <button
+              type="button"
+              @click="faqModalOpen = false"
+              class="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-semibold transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="px-5 py-2 rounded-xl bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-xs font-bold transition-colors shadow-xs"
+            >
+              {{ editingFaqId ? 'Save Changes' : 'Publish FAQ Live' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import {
   CurrencyDollarIcon,
   UsersIcon,
@@ -523,5 +727,79 @@ const cleanPhone = (phone) => {
   const digits = phone.replace(/[^0-9]/g, '')
   if (digits.startsWith('0')) return '92' + digits.substring(1)
   return digits
+}
+
+// ==========================================
+// Service FAQs Manager Logic
+// ==========================================
+const activeFaqService = ref('plots')
+const faqServices = [
+  { key: 'plots', label: 'Plots Land FAQs' },
+  { key: 'flats', label: 'PHA Flats FAQs' },
+  { key: 'construction', label: 'Construction FAQs' },
+  { key: 'solar', label: 'Solar Net Metering FAQs' },
+  { key: 'real-estate', label: 'Real Estate FAQs' }
+]
+
+const currentServiceFaqs = computed(() => adminStore.getAllFaqsByService(activeFaqService.value))
+const getServiceFaqCount = (key) => adminStore.getAllFaqsByService(key).length
+
+const faqModalOpen = ref(false)
+const editingFaqId = ref(null)
+const faqForm = ref({
+  service: 'plots',
+  question: '',
+  answer: '',
+  order: 1,
+  active: true
+})
+
+const openAddFaqModal = () => {
+  editingFaqId.value = null
+  faqForm.value = {
+    service: activeFaqService.value,
+    question: '',
+    answer: '',
+    order: currentServiceFaqs.value.length + 1,
+    active: true
+  }
+  faqModalOpen.value = true
+}
+
+const startEditFaq = (faq) => {
+  editingFaqId.value = faq.id
+  faqForm.value = { ...faq }
+  faqModalOpen.value = true
+}
+
+const saveFaqForm = async () => {
+  if (!faqForm.value.question?.trim() || !faqForm.value.answer?.trim()) {
+    adminStore.showToast('Please provide both question and answer', 'error')
+    return
+  }
+  if (editingFaqId.value) {
+    await adminStore.updateFaq(editingFaqId.value, { ...faqForm.value })
+    adminStore.showToast('FAQ updated successfully!')
+  } else {
+    await adminStore.addFaq({ ...faqForm.value })
+    adminStore.showToast('New FAQ added and published live!')
+  }
+  faqModalOpen.value = false
+}
+
+const toggleFaqActive = async (faq) => {
+  await adminStore.updateFaq(faq.id, { active: faq.active === false ? true : false })
+  adminStore.showToast(`FAQ status updated!`)
+}
+
+const removeFaq = async (id) => {
+  const confirmed = await adminStore.requestConfirm({
+    title: 'Delete FAQ',
+    message: 'Are you sure you want to delete this FAQ from the live service page?'
+  })
+  if (confirmed) {
+    await adminStore.deleteFaq(id)
+    adminStore.showToast('FAQ deleted.')
+  }
 }
 </script>

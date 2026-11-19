@@ -610,23 +610,13 @@
           <section class="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200/90 shadow-xs">
             <h2 class="text-xl font-bold text-[#0F2A44] mb-6">Frequently Asked Questions</h2>
             <div class="space-y-4">
-              <div class="border-b border-gray-100 pb-4">
-                <h3 class="font-bold text-sm text-[#0F2A44] mb-1">What is the transfer process for PHA flats in I-12, I-16, and G-11?</h3>
-                <p class="text-xs text-gray-600 leading-relaxed">
-                  Transfer takes place directly at the Ministry of Housing &amp; Works / PHA Foundation headquarters in Islamabad following biometric clearance, verification of original allotment letters, and NDC issuance.
-                </p>
-              </div>
-              <div class="border-b border-gray-100 pb-4">
-                <h3 class="font-bold text-sm text-[#0F2A44] mb-1">Are PHA flats in Sector I-16 and G-11 ready for immediate living?</h3>
-                <p class="text-xs text-gray-600 leading-relaxed">
-                  Yes, PHA Sector I-16/3 and Sector G-11 flats are fully constructed with active families residing, functional utilities, elevators, and dedicated parking.
-                </p>
-              </div>
-              <div>
-                <h3 class="font-bold text-sm text-[#0F2A44] mb-1">Can I generate rental income from Harsukh alpine suites?</h3>
-                <p class="text-xs text-gray-600 leading-relaxed">
-                  Yes, Harsukh offers an optional managed rental pool where your suite is leased to vacation travelers, delivering guaranteed seasonal returns credited directly to your bank account.
-                </p>
+              <div
+                v-for="faq in faqs"
+                :key="faq.id"
+                class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0"
+              >
+                <h3 class="font-bold text-sm text-[#0F2A44] mb-1">{{ faq.question }}</h3>
+                <p class="text-xs text-gray-600 leading-relaxed">{{ faq.answer }}</p>
               </div>
             </div>
           </section>
@@ -722,6 +712,10 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { useAdminStore } from '../../stores/admin'
+
+const adminStore = useAdminStore()
+const faqs = computed(() => adminStore.getFaqsByService('flats'))
 
 const route = useRoute()
 const activeMainTab = ref('all') // 'all' | 'pha' | 'luxury'

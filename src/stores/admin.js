@@ -16,6 +16,7 @@ const STORAGE_KEYS = {
   REVIEWS: 'toplinkers_client_reviews',
   PROMO_STRIP: 'toplinkers_promo_strip',
   SPOTLIGHT_POPUP: 'toplinkers_spotlight_popup',
+  FAQS: 'toplinkers_service_faqs',
   USERS: 'toplinkers_admin_users'
 }
 
@@ -285,14 +286,16 @@ export const useAdminStore = defineStore('admin', () => {
       // Public pages only display rates, team, reviews and the promo strip.
       // Private CRM data (leads, users, roles, admin blog list) is requested
       // only for a signed-in admin session.
-      const [ratesRes, teamRes, reviewsRes, promoRes, leadsRes, rolesRes, usersRes] = await Promise.all([
+      const [ratesRes, teamRes, reviewsRes, promoRes, leadsRes, rolesRes, usersRes, spotlightRes, faqsRes] = await Promise.all([
         get('/rates'),
         get('/team'),
         get('/reviews'),
         get('/promo-strip'),
         isAdminSession ? get('/leads') : null,
         isAdminSession ? get('/roles') : null,
-        isAdminSession ? get('/users') : null
+        isAdminSession ? get('/users') : null,
+        get('/spotlight-popup'),
+        get('/faqs')
       ])
 
       const data = await readJson(leadsRes)
@@ -351,6 +354,18 @@ export const useAdminStore = defineStore('admin', () => {
           localStorage.setItem(STORAGE_KEYS.PROMO_STRIP, JSON.stringify(promoStrip.value))
         }
         apiConnected.value = true
+      }
+
+      const spotlightData = await readJson(spotlightRes)
+      if (spotlightData !== undefined && spotlightData && typeof spotlightData === 'object' && Object.keys(spotlightData).length > 0) {
+        spotlightPopup.value = { ...defaultSpotlightPopup, ...spotlightData }
+        localStorage.setItem(STORAGE_KEYS.SPOTLIGHT_POPUP, JSON.stringify(spotlightPopup.value))
+      }
+
+      const faqsData = await readJson(faqsRes)
+      if (faqsData !== undefined && Array.isArray(faqsData) && faqsData.length > 0) {
+        faqs.value = faqsData
+        localStorage.setItem(STORAGE_KEYS.FAQS, JSON.stringify(faqs.value))
       }
 
       const usersData = await readJson(usersRes)
@@ -1609,6 +1624,193 @@ export const useAdminStore = defineStore('admin', () => {
     } catch (e) {}
   }
 
+  // 7.2 Service FAQs Management (Dynamic FAQs for Plots, Flats, Construction, Solar, Real Estate)
+  const defaultFaqs = [
+    // Plots FAQs
+    {
+      id: 'faq-plot-1',
+      service: 'plots',
+      question: 'What is the difference between TopCity-1 and AGG?',
+      answer: 'TopCity-1 is an ultra-modern master-planned community with underground cabling directly on Srinagar Highway. Airport Green Garden (AGG) offers lower entry ticket prices directly adjacent to the airport boundary.',
+      order: 1,
+      active: true
+    },
+    {
+      id: 'faq-plot-2',
+      service: 'plots',
+      question: 'Can overseas Pakistanis book Faisal Town Phase 2?',
+      answer: 'Yes, booking can be completed via online bank wire transfer or Roshan Digital Account with immediate computerized confirmation letters issued by Zedem International.',
+      order: 2,
+      active: true
+    },
+    {
+      id: 'faq-plot-3',
+      service: 'plots',
+      question: 'What is the transfer procedure for cash plots (Moqa Ka Plot)?',
+      answer: 'Direct transfer is completed through the respective society head office (e.g., TopCity-1 or AGG) after biometric verification, verification of original allotment, and full NDC clearance.',
+      order: 3,
+      active: true
+    },
+
+    // Flats FAQs
+    {
+      id: 'faq-flat-1',
+      service: 'flats',
+      question: 'What is the transfer process for PHA flats in I-12, I-16, and G-11?',
+      answer: 'Transfer takes place directly at the Ministry of Housing & Works / PHA Foundation headquarters in Islamabad following biometric clearance, verification of original allotment letters, and NDC issuance.',
+      order: 1,
+      active: true
+    },
+    {
+      id: 'faq-flat-2',
+      service: 'flats',
+      question: 'Are PHA flats in Sector I-16 and G-11 ready for immediate living?',
+      answer: 'Yes, PHA Sector I-16/3 and Sector G-11 flats are fully constructed with active families residing, functional utilities, elevators, and dedicated parking.',
+      order: 2,
+      active: true
+    },
+    {
+      id: 'faq-flat-3',
+      service: 'flats',
+      question: 'Can I generate rental income from Harsukh alpine suites?',
+      answer: 'Yes, Harsukh offers an optional managed rental pool where your suite is leased to vacation travelers, delivering guaranteed seasonal returns credited directly to your bank account.',
+      order: 3,
+      active: true
+    },
+
+    // Construction FAQs
+    {
+      id: 'faq-const-1',
+      service: 'construction',
+      question: 'How do you ensure material quality during construction?',
+      answer: 'Every batch of rebar and cement is verified by our PEC-certified site engineers. Cylinder compression tests and soil density tests are conducted and shared in your client portal.',
+      order: 1,
+      active: true
+    },
+    {
+      id: 'faq-const-2',
+      service: 'construction',
+      question: 'What is the payment schedule for turnkey projects?',
+      answer: 'Payments are divided across 10 transparent construction milestones (e.g., plinth beam, slab casting, masonry, plaster, finishing). You only pay after each phase is inspected and approved.',
+      order: 2,
+      active: true
+    },
+    {
+      id: 'faq-const-3',
+      service: 'construction',
+      question: 'What is the difference between Grey Structure and Turnkey Construction?',
+      answer: 'Grey structure covers the structural shell (earthwork, foundation, Grade-60 steel, brick masonry, plaster, concealed conduits). Turnkey includes 100% finishing: tiles, woodwork, sanitary fixtures, paint, and custom kitchens.',
+      order: 3,
+      active: true
+    },
+
+    // Solar FAQs
+    {
+      id: 'faq-solar-1',
+      service: 'solar',
+      question: 'How long does IESCO net metering approval take?',
+      answer: 'Our dedicated liaison desk completes the process in approximately 3 to 5 weeks, including load sanctioning, site testing, inspector sign-off, and green bidirectional meter installation.',
+      order: 1,
+      active: true
+    },
+    {
+      id: 'faq-solar-2',
+      service: 'solar',
+      question: 'What warranties are provided with solar hardware?',
+      answer: 'We exclusively install Tier-1 panels with 12-year product warranties and 25 to 30-year linear power output performance guarantees, plus 5 to 10-year manufacturer inverter warranties.',
+      order: 2,
+      active: true
+    },
+    {
+      id: 'faq-solar-3',
+      service: 'solar',
+      question: 'Can a 10kW solar system reduce my electricity bill to zero?',
+      answer: 'Yes. An engineered 10kW on-grid solar system produces 1,100 to 1,350 units per month. Any surplus units exported to the grid through IESCO net metering offset your night-time and winter consumption.',
+      order: 3,
+      active: true
+    },
+
+    // Real Estate FAQs
+    {
+      id: 'faq-re-1',
+      service: 'real-estate',
+      question: 'How does TopLinkers verify CDA and RDA property titles?',
+      answer: 'We conduct official record scrutiny at the CDA One-Window Directorate or RDA registrar, verifying original transfer letters, allotment entries, site plans, and mortgage clearances before any monetary transaction.',
+      order: 1,
+      active: true
+    },
+    {
+      id: 'faq-re-2',
+      service: 'real-estate',
+      question: 'What are the commission or consultancy charges?',
+      answer: 'We operate under standard 1% transparent market brokerage guidelines with zero hidden fees, comprehensive contract preparation, and end-to-end registry facilitation.',
+      order: 2,
+      active: true
+    }
+  ]
+
+  const faqs = ref(
+    JSON.parse(localStorage.getItem(STORAGE_KEYS.FAQS) || 'null') || defaultFaqs
+  )
+
+  const getFaqsByService = (service) => {
+    return faqs.value
+      .filter(f => f.service === service && f.active !== false)
+      .sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0))
+  }
+
+  const getAllFaqsByService = (service) => {
+    return faqs.value
+      .filter(f => f.service === service)
+      .sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0))
+  }
+
+  const saveFaqs = async (newFaqs) => {
+    faqs.value = Array.isArray(newFaqs) ? newFaqs : faqs.value
+    localStorage.setItem(STORAGE_KEYS.FAQS, JSON.stringify(faqs.value))
+    notifyDataChanged('faqs', faqs.value)
+    try {
+      const res = await fetch(`${API_BASE_URL}/faqs`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
+        body: JSON.stringify(faqs.value)
+      })
+      if (res.ok) {
+        apiConnected.value = true
+        notifyDataChanged('faqs', faqs.value)
+      }
+    } catch (e) {}
+  }
+
+  const addFaq = async (faqData) => {
+    const newFaq = {
+      id: `faq-${faqData.service}-${Date.now()}`,
+      service: faqData.service || 'plots',
+      question: faqData.question?.trim() || '',
+      answer: faqData.answer?.trim() || '',
+      order: Number(faqData.order) || (faqs.value.filter(f => f.service === faqData.service).length + 1),
+      active: faqData.active !== false
+    }
+    const updated = [...faqs.value, newFaq]
+    await saveFaqs(updated)
+    return newFaq
+  }
+
+  const updateFaq = async (id, updatedFields) => {
+    const updated = faqs.value.map(f => {
+      if (f.id === id) {
+        return { ...f, ...updatedFields }
+      }
+      return f
+    })
+    await saveFaqs(updated)
+  }
+
+  const deleteFaq = async (id) => {
+    const updated = faqs.value.filter(f => f.id !== id)
+    await saveFaqs(updated)
+  }
+
   // Metrics Computed
   const totalLeadsCount = computed(() => leads.value.length)
   const newLeadsCount = computed(() => leads.value.filter(l => l.status === 'New').length)
@@ -1742,6 +1944,15 @@ export const useAdminStore = defineStore('admin', () => {
     defaultSpotlightPopup,
     spotlightPopup,
     saveSpotlightPopup,
+    // Service FAQs Management
+    defaultFaqs,
+    faqs,
+    getFaqsByService,
+    getAllFaqsByService,
+    saveFaqs,
+    addFaq,
+    updateFaq,
+    deleteFaq,
     // Blog Management
     blogs,
     isBlogsLoading,

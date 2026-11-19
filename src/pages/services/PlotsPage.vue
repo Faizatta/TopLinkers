@@ -578,17 +578,13 @@
           <section class="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200/90 shadow-xs">
             <h3 class="text-xl font-bold text-[#0F2A44] mb-4">Frequently Asked Questions</h3>
             <div class="space-y-4">
-              <div class="border-b border-gray-100 pb-3">
-                <h4 class="font-bold text-sm text-[#0F2A44] mb-1">What is the difference between TopCity-1 and AGG?</h4>
-                <p class="text-xs text-gray-600 leading-relaxed">
-                  TopCity-1 is an ultra-modern master-planned community with underground cabling directly on Srinagar Highway. Airport Green Garden (AGG) offers lower entry ticket prices directly adjacent to the airport boundary.
-                </p>
-              </div>
-              <div>
-                <h4 class="font-bold text-sm text-[#0F2A44] mb-1">Can overseas Pakistanis book Faisal Town Phase 2?</h4>
-                <p class="text-xs text-gray-600 leading-relaxed">
-                  Yes, booking can be completed via online bank wire transfer or Roshan Digital Account with immediate computerized confirmation letters issued by Zedem International.
-                </p>
+              <div
+                v-for="faq in faqs"
+                :key="faq.id"
+                class="border-b border-gray-100 pb-3 last:border-b-0 last:pb-0"
+              >
+                <h4 class="font-bold text-sm text-[#0F2A44] mb-1">{{ faq.question }}</h4>
+                <p class="text-xs text-gray-600 leading-relaxed">{{ faq.answer }}</p>
               </div>
             </div>
           </section>
@@ -753,8 +749,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { useAdminStore } from '../../stores/admin'
 import {
   MapPinIcon,
   PhoneIcon,
@@ -763,6 +760,9 @@ import {
   CheckCircleIcon,
   ShieldCheckIcon
 } from '@heroicons/vue/24/outline'
+
+const adminStore = useAdminStore()
+const faqs = computed(() => adminStore.getFaqsByService('plots'))
 
 const route = useRoute()
 const activePlotFilter = ref('all') // 'all' | 'cash' | 'installments'

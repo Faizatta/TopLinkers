@@ -144,23 +144,13 @@
           <section class="bg-white p-8 rounded-2xl border border-gray-200 shadow-xs">
             <h2 class="text-xl font-bold text-[#0F2A44] mb-6">Frequently Asked Questions</h2>
             <div class="space-y-4">
-              <div class="border-b border-gray-100 pb-4">
-                <h3 class="font-bold text-sm text-[#0F2A44] mb-1">How does TopLinkers verify CDA property documents?</h3>
-                <p class="text-xs text-gray-600 leading-relaxed">
-                  We cross-examine the original allotment letter, transfer letters, payment challans, and computerized CDA records to confirm genuine ownership and zero litigation.
-                </p>
-              </div>
-              <div class="border-b border-gray-100 pb-4">
-                <h3 class="font-bold text-sm text-[#0F2A44] mb-1">What are the agency commission terms for property sales?</h3>
-                <p class="text-xs text-gray-600 leading-relaxed">
-                  We operate with standard Islamabad Real Estate Association guidelines (1% standard brokerage on residential and commercial transactions) with zero hidden markups.
-                </p>
-              </div>
-              <div>
-                <h3 class="font-bold text-sm text-[#0F2A44] mb-1">Can overseas Pakistanis purchase property without traveling?</h3>
-                <p class="text-xs text-gray-600 leading-relaxed">
-                  Yes, via attested Special Power of Attorney (SPA) from your local Pakistan Embassy/Consulate. Our corporate desk coordinates with the relevant authority.
-                </p>
+              <div
+                v-for="faq in faqs"
+                :key="faq.id"
+                class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0"
+              >
+                <h3 class="font-bold text-sm text-[#0F2A44] mb-1">{{ faq.question }}</h3>
+                <p class="text-xs text-gray-600 leading-relaxed">{{ faq.answer }}</p>
               </div>
             </div>
           </section>
@@ -232,5 +222,9 @@
 </template>
 
 <script setup>
-// SEO and metadata handled via vue-router updateSEOMeta
+import { computed } from 'vue'
+import { useAdminStore } from '../../stores/admin'
+
+const adminStore = useAdminStore()
+const faqs = computed(() => adminStore.getFaqsByService('real-estate'))
 </script>

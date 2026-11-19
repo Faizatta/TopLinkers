@@ -154,17 +154,13 @@
           <section class="bg-white p-8 rounded-2xl border border-gray-200 shadow-xs">
             <h2 class="text-xl font-bold text-[#0F2A44] mb-6">Frequently Asked Questions on Solar Net Metering</h2>
             <div class="space-y-4">
-              <div class="border-b border-gray-100 pb-4">
-                <h3 class="font-bold text-sm text-[#0F2A44] mb-1">How long does IESCO net metering approval take?</h3>
-                <p class="text-xs text-gray-600 leading-relaxed">
-                  Our dedicated liaison desk completes the process in approximately 3 to 5 weeks, including load sanctioning, site testing, inspector sign-off, and green bidirectional meter installation.
-                </p>
-              </div>
-              <div>
-                <h3 class="font-bold text-sm text-[#0F2A44] mb-1">What warranties are provided with solar hardware?</h3>
-                <p class="text-xs text-gray-600 leading-relaxed">
-                  We exclusively install Tier-1 panels with 12-year product warranties and 25 to 30-year linear power output performance guarantees, plus 5 to 10-year manufacturer inverter warranties.
-                </p>
+              <div
+                v-for="faq in faqs"
+                :key="faq.id"
+                class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0"
+              >
+                <h3 class="font-bold text-sm text-[#0F2A44] mb-1">{{ faq.question }}</h3>
+                <p class="text-xs text-gray-600 leading-relaxed">{{ faq.answer }}</p>
               </div>
             </div>
           </section>
@@ -179,11 +175,11 @@
             </p>
             <div class="space-y-3 text-xs mb-6">
               <div class="flex items-center gap-2">
-                <span class="text-[#6CC24A]">📍</span>
+                <MapPinIcon class="w-4 h-4 text-[#6CC24A] flex-shrink-0" />
                 <span>Al Hameed Plaza, G-11 Markaz, Islamabad</span>
               </div>
               <div class="flex items-center gap-2">
-                <span class="text-[#6CC24A]">📞</span>
+                <PhoneIcon class="w-4 h-4 text-[#6CC24A] flex-shrink-0" />
                 <a href="tel:+923349522157" class="hover:text-[#6CC24A] font-bold">+92-334-9522157</a>
               </div>
             </div>
@@ -201,4 +197,10 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { MapPinIcon, PhoneIcon } from '@heroicons/vue/24/outline'
+import { useAdminStore } from '../../stores/admin'
+
+const adminStore = useAdminStore()
+const faqs = computed(() => adminStore.getFaqsByService('solar'))
 </script>

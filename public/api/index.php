@@ -239,6 +239,48 @@ switch ($resource) {
         }
         break;
 
+    // 4.1 Spotlight Popup (Harsukh / High-ROI Feature Popup)
+    case 'spotlight-popup':
+        if ($method === 'GET') {
+            $stmt = $pdo->prepare("SELECT payload FROM market_rates WHERE key = 'spotlight_popup' LIMIT 1");
+            $stmt->execute();
+            $row = $stmt->fetch();
+            if (!headers_sent()) header('Cache-Control: public, max-age=60, stale-while-revalidate=300');
+            echo $row ? $row['payload'] : json_encode((object)[]);
+        } elseif ($method === 'POST') {
+            $payload = json_encode(getJsonInput());
+            $stmt = $pdo->prepare("INSERT INTO market_rates (key, payload, created_at, updated_at) 
+                VALUES ('spotlight_popup', :payload, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+                ON CONFLICT(key) DO UPDATE SET payload = :payload, updated_at = CURRENT_TIMESTAMP");
+            $stmt->execute([':payload' => $payload]);
+            echo $payload;
+        } else {
+            http_response_code(405);
+            echo json_encode(['error' => 'Method Not Allowed']);
+        }
+        break;
+
+    // 4.2 Service FAQs Manager (Dynamic FAQs for Plots, Flats, Construction, Solar, Real Estate)
+    case 'faqs':
+        if ($method === 'GET') {
+            $stmt = $pdo->prepare("SELECT payload FROM market_rates WHERE key = 'faqs' LIMIT 1");
+            $stmt->execute();
+            $row = $stmt->fetch();
+            if (!headers_sent()) header('Cache-Control: public, max-age=60, stale-while-revalidate=300');
+            echo $row ? $row['payload'] : json_encode([]);
+        } elseif ($method === 'POST') {
+            $payload = json_encode(getJsonInput());
+            $stmt = $pdo->prepare("INSERT INTO market_rates (key, payload, created_at, updated_at) 
+                VALUES ('faqs', :payload, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+                ON CONFLICT(key) DO UPDATE SET payload = :payload, updated_at = CURRENT_TIMESTAMP");
+            $stmt->execute([':payload' => $payload]);
+            echo $payload;
+        } else {
+            http_response_code(405);
+            echo json_encode(['error' => 'Method Not Allowed']);
+        }
+        break;
+
     // 5. Properties Manager
     case 'properties':
         if ($method === 'GET') {

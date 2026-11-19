@@ -155,17 +155,13 @@
           <section class="bg-white p-8 rounded-2xl border border-gray-200 shadow-xs">
             <h2 class="text-xl font-bold text-[#0F2A44] mb-6">Frequently Asked Questions on Construction</h2>
             <div class="space-y-4">
-              <div class="border-b border-gray-100 pb-4">
-                <h3 class="font-bold text-sm text-[#0F2A44] mb-1">How do you ensure material quality during construction?</h3>
-                <p class="text-xs text-gray-600 leading-relaxed">
-                  Every batch of rebar and cement is verified by our PEC-certified site engineers. Cylinder compression tests and soil density tests are conducted and shared in your client portal.
-                </p>
-              </div>
-              <div>
-                <h3 class="font-bold text-sm text-[#0F2A44] mb-1">What is the payment schedule for turnkey projects?</h3>
-                <p class="text-xs text-gray-600 leading-relaxed">
-                  Payments are divided across 10 transparent construction milestones (e.g., plinth beam, slab casting, masonry, plaster, finishing). You only pay after each phase is inspected and approved.
-                </p>
+              <div
+                v-for="faq in faqs"
+                :key="faq.id"
+                class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0"
+              >
+                <h3 class="font-bold text-sm text-[#0F2A44] mb-1">{{ faq.question }}</h3>
+                <p class="text-xs text-gray-600 leading-relaxed">{{ faq.answer }}</p>
               </div>
             </div>
           </section>
@@ -180,11 +176,11 @@
             </p>
             <div class="space-y-3 text-xs mb-6">
               <div class="flex items-center gap-2">
-                <span class="text-[#16B4E8]">📍</span>
+                <MapPinIcon class="w-4 h-4 text-[#16B4E8] flex-shrink-0" />
                 <span>Al Hameed Plaza, G-11 Markaz, Islamabad</span>
               </div>
               <div class="flex items-center gap-2">
-                <span class="text-[#16B4E8]">📞</span>
+                <PhoneIcon class="w-4 h-4 text-[#16B4E8] flex-shrink-0" />
                 <a href="tel:+923349522157" class="hover:text-[#16B4E8] font-bold">+92-334-9522157</a>
               </div>
             </div>
@@ -202,4 +198,10 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { MapPinIcon, PhoneIcon } from '@heroicons/vue/24/outline'
+import { useAdminStore } from '../../stores/admin'
+
+const adminStore = useAdminStore()
+const faqs = computed(() => adminStore.getFaqsByService('construction'))
 </script>
