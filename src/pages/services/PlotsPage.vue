@@ -11,43 +11,97 @@
       </div>
     </nav>
 
-    <!-- Hero Header -->
-    <header class="bg-[#0F2A44] text-white py-14 md:py-20 relative overflow-hidden">
-      <div class="absolute -right-20 -bottom-20 w-96 h-96 rounded-full bg-[#16B4E8]/10 pointer-events-none"></div>
+    <!-- Hero Header with Authentic Aerial Master-Plan Land Background -->
+    <header class="relative text-white py-16 md:py-24 overflow-hidden bg-[#071626]">
+      <!-- Background Hero Image with atmospheric gradients -->
+      <div class="absolute inset-0 pointer-events-none">
+        <img
+          src="/images/hero-moqa-plot.webp"
+          alt="Islamabad Airport Corridor Plots"
+          class="w-full h-full object-cover object-center opacity-30 transform scale-105"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <!-- Multi-layer depth overlays -->
+        <div class="absolute inset-0 bg-gradient-to-b from-[#071626]/80 via-[#071626]/90 to-[#071626]"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#071626]/95 via-transparent to-[#071626]/95"></div>
+        <div class="absolute -right-24 -bottom-24 w-96 h-96 rounded-full bg-[#16B4E8]/15 blur-3xl"></div>
+        <div class="absolute -left-24 -top-24 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl"></div>
+      </div>
+
       <div class="max-w-[1280px] mx-auto px-4 text-center relative z-10">
-        <span class="text-xs font-black uppercase tracking-widest text-[#16B4E8] bg-[#16B4E8]/10 px-3 py-1 rounded-full inline-block mb-3">
-          VERIFIED AIRPORT CORRIDOR LAND
-        </span>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 mb-4 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-[#16B4E8] animate-pulse"></span>
+          <span class="text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#16B4E8]">
+            VERIFIED AIRPORT CORRIDOR LAND
+          </span>
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight">
           Plots Near Islamabad Airport: Cash vs. Installments
         </h1>
-        <p class="text-sm md:text-base text-gray-300 max-w-2xl mx-auto mt-4 font-light leading-relaxed">
+
+        <p class="text-xs sm:text-sm md:text-base text-slate-300 max-w-2xl mx-auto mt-4 font-normal leading-relaxed">
           Direct inventory in prime societies adjoining Islamabad International Airport: immediate cash possession plots in TopCity-1, AGG &amp; PECHS, alongside flexible installment plots in Faisal Town Phase 2.
         </p>
 
-        <!-- Quick 2 Section Toggle Bar -->
-        <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <!-- Professional Segmented Option Selector (No Icons, High Contrast, Easy to Select) -->
+        <div class="mt-8 max-w-xl mx-auto p-1.5 bg-black/40 backdrop-blur-md rounded-2xl border border-white/15 shadow-2xl flex flex-col sm:flex-row gap-2">
+          <!-- Option 1: Cash Possession -->
           <button
             type="button"
-            @click="activePlotFilter = activePlotFilter === 'cash' ? 'all' : 'cash'"
-            class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 shadow-sm"
-            :class="activePlotFilter === 'cash' ? 'bg-[#16B4E8] text-white ring-2 ring-white/30' : 'bg-white/10 hover:bg-white/20 text-white'"
+            @click="activePlotFilter = 'cash'"
+            class="flex-1 py-3 px-4 rounded-xl text-left transition-all duration-200 select-none group"
+            :class="activePlotFilter === 'cash'
+              ? 'bg-gradient-to-r from-[#16B4E8] to-[#119ecf] text-[#0F2A44] shadow-lg ring-2 ring-white/30'
+              : 'hover:bg-white/10 text-white/90 hover:text-white'"
           >
-            <span>💰 Cash Possession (Moqa Ka Plot)</span>
-            <span class="text-[10px] bg-black/30 px-2 py-0.5 rounded-full font-black">TopCity, AGG, PECHS</span>
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs sm:text-sm font-black uppercase tracking-tight">
+                Cash Possession
+              </span>
+              <span
+                class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full tracking-wider"
+                :class="activePlotFilter === 'cash' ? 'bg-[#0F2A44] text-white' : 'bg-white/20 text-white'"
+              >
+                Moqa Ka Plot
+              </span>
+            </div>
+            <span
+              class="text-[11px] block mt-0.5 font-medium truncate"
+              :class="activePlotFilter === 'cash' ? 'text-[#0F2A44]/80 font-bold' : 'text-slate-300'"
+            >
+              TopCity-1 &bull; AGG &bull; PECHS
+            </span>
           </button>
 
+          <!-- Option 2: Easy Installments -->
           <button
             type="button"
-            @click="activePlotFilter = activePlotFilter === 'installments' ? 'all' : 'installments'"
-            class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 shadow-sm"
-            :class="activePlotFilter === 'installments' ? 'bg-emerald-600 text-white ring-2 ring-white/30' : 'bg-white/10 hover:bg-white/20 text-white'"
+            @click="activePlotFilter = 'installments'"
+            class="flex-1 py-3 px-4 rounded-xl text-left transition-all duration-200 select-none group"
+            :class="activePlotFilter === 'installments'
+              ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg ring-2 ring-white/30'
+              : 'hover:bg-white/10 text-white/90 hover:text-white'"
           >
-            <span>📅 Installment Plots</span>
-            <span class="text-[10px] bg-black/30 px-2 py-0.5 rounded-full font-black">Faisal Town Phase 2</span>
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs sm:text-sm font-black uppercase tracking-tight">
+                Easy Installments
+              </span>
+              <span
+                class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full tracking-wider"
+                :class="activePlotFilter === 'installments' ? 'bg-[#0F2A44] text-white' : 'bg-white/20 text-white'"
+              >
+                4.5-Yr Plan
+              </span>
+            </div>
+            <span
+              class="text-[11px] block mt-0.5 font-medium truncate"
+              :class="activePlotFilter === 'installments' ? 'text-white/90 font-bold' : 'text-slate-300'"
+            >
+              Faisal Town Phase 2
+            </span>
           </button>
-
-
         </div>
       </div>
     </header>
@@ -361,16 +415,16 @@
               Contact our sales directors for on-ground plot visits, boundary demarcations, or Faisal Town Phase 2 allotment bookings.
             </p>
             <div class="space-y-3.5 text-xs mb-6">
-              <div class="flex items-start gap-2">
-                <span class="text-[#16B4E8]">🏢</span>
+              <div class="flex items-start gap-2.5">
+                <MapPinIcon class="w-4 h-4 text-[#16B4E8] flex-shrink-0 mt-0.5" />
                 <span>Al Hameed Plaza, G-11 Markaz, Islamabad</span>
               </div>
-              <div class="flex items-center gap-2">
-                <span class="text-[#16B4E8]">📞</span>
+              <div class="flex items-center gap-2.5">
+                <PhoneIcon class="w-4 h-4 text-[#16B4E8] flex-shrink-0" />
                 <a href="tel:+923349522157" class="hover:text-[#16B4E8] font-bold">+92-334-9522157</a>
               </div>
-              <div class="flex items-center gap-2">
-                <span class="text-[#16B4E8]">💬</span>
+              <div class="flex items-center gap-2.5">
+                <ChatBubbleLeftRightIcon class="w-4 h-4 text-emerald-400 flex-shrink-0" />
                 <a href="https://wa.me/923349522157" target="_blank" class="hover:text-emerald-400 font-bold">WhatsApp Direct Desk</a>
               </div>
             </div>
@@ -390,6 +444,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { MapPinIcon, PhoneIcon, ChatBubbleLeftRightIcon } from '@heroicons/vue/24/outline'
 
 const route = useRoute()
 const activePlotFilter = ref('all') // 'all' | 'cash' | 'installments'
