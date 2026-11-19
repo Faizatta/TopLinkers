@@ -15,6 +15,19 @@
       </button>
 
       <button
+        v-if="videoUrl"
+        type="button"
+        :class="[
+          'px-3 py-1.5 text-xs font-semibold rounded transition-all flex items-center gap-1.5',
+          activeView === 'video' ? 'bg-rose-600 text-white shadow' : 'text-gray-300 hover:text-white'
+        ]"
+        @click="activeView = 'video'"
+      >
+        <span>▶</span>
+        <span>Video Tour</span>
+      </button>
+
+      <button
         type="button"
         :class="[
           'px-3 py-1.5 text-xs font-semibold rounded transition-all flex items-center gap-1.5',
@@ -107,6 +120,14 @@
       <div ref="mapContainer" class="w-full h-full"></div>
     </div>
 
+    <!-- VIEW 3: VIDEO (Optional) -->
+    <div v-if="videoUrl && activeView === 'video'" class="relative h-[260px] sm:h-[380px] md:h-[500px] w-full bg-black flex items-center justify-center">
+      <SiteVideoPlayer
+        :video-url="videoUrl"
+        :title="`${title} — Video Tour`"
+        class="w-full h-full rounded-none border-0 shadow-none"
+      />
+    </div>
 
   </div>
 </template>
@@ -122,6 +143,7 @@ import {
 } from '@heroicons/vue/24/outline'
 import { useUiStore } from '../../stores/ui'
 import { responsiveSrcset, handleImageFallback, FALLBACK_PROPERTY_IMAGE } from '../../utils/images'
+import SiteVideoPlayer from '../common/SiteVideoPlayer.vue'
 
 const onImgError = (e) => {
   handleImageFallback(e, FALLBACK_PROPERTY_IMAGE)
@@ -131,6 +153,10 @@ const props = defineProps({
   images: {
     type: Array,
     default: () => []
+  },
+  videoUrl: {
+    type: String,
+    default: ''
   },
   title: {
     type: String,

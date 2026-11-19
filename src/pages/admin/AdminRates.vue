@@ -151,6 +151,37 @@
               <input v-model="society.k1" type="text" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold" />
             </div>
           </div>
+
+          <!-- Site Land Walkthrough Video URL (User's choice to add or leave empty) -->
+          <div class="pt-2 border-t border-slate-100">
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-[10px] font-bold text-slate-700 uppercase flex items-center gap-1.5">
+                <span class="text-rose-600 font-black">▶</span>
+                <span>Reference Site / Land Walkthrough Video (Optional)</span>
+              </label>
+              <span class="text-[10px] text-slate-400">YouTube / Vimeo / MP4</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <input
+                v-model="society.videoUrl"
+                type="url"
+                placeholder="https://www.youtube.com/watch?v=... (Leave empty if no video)"
+                class="flex-1 px-3 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8] bg-slate-50/50 focus:bg-white"
+              />
+              <button
+                v-if="society.videoUrl"
+                type="button"
+                @click="previewVideo(society.videoUrl, society.name)"
+                class="px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-[10px] font-bold transition-colors whitespace-nowrap border border-rose-200 flex items-center gap-1"
+              >
+                <span>▶</span>
+                <span>Test Video</span>
+              </button>
+            </div>
+            <p class="text-[10px] text-slate-400 mt-0.5">
+              {{ society.videoUrl ? '✓ Active: Drone / ground walkthrough video will show on public society card and details modal' : 'Optional: Leave blank to hide video button from public card' }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -228,6 +259,37 @@
               <input v-model="plan.k1.down" type="text" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold" />
             </div>
           </div>
+
+          <!-- Installment Society Site / Earthwork Video URL -->
+          <div class="pt-2 border-t border-slate-100">
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-[10px] font-bold text-slate-700 uppercase flex items-center gap-1.5">
+                <span class="text-rose-600 font-black">▶</span>
+                <span>Reference Site / Earthwork Video URL (Optional)</span>
+              </label>
+              <span class="text-[10px] text-slate-400">YouTube / Vimeo / MP4</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <input
+                v-model="plan.videoUrl"
+                type="url"
+                placeholder="https://www.youtube.com/watch?v=... (Leave empty if no video)"
+                class="flex-1 px-3 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8] bg-slate-50/50 focus:bg-white"
+              />
+              <button
+                v-if="plan.videoUrl"
+                type="button"
+                @click="previewVideo(plan.videoUrl, plan.name)"
+                class="px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-[10px] font-bold transition-colors whitespace-nowrap border border-rose-200 flex items-center gap-1"
+              >
+                <span>▶</span>
+                <span>Test Video</span>
+              </button>
+            </div>
+            <p class="text-[10px] text-slate-400 mt-0.5">
+              {{ plan.videoUrl ? '✓ Active: Earthwork / development video will show on public project card' : 'Optional: Leave blank to hide video button from public card' }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -279,6 +341,37 @@
             <div>
               <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Specs</label>
               <input v-model="flat.specs" type="text" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-medium" />
+            </div>
+
+            <!-- Flat / Building Video Walkthrough URL -->
+            <div class="pt-2 border-t border-slate-100">
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-[10px] font-bold text-slate-700 uppercase flex items-center gap-1.5">
+                  <span class="text-rose-600 font-black">▶</span>
+                  <span>Reference Building / Flat Video URL (Optional)</span>
+                </label>
+                <span class="text-[10px] text-slate-400">YouTube / Vimeo / MP4</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <input
+                  v-model="flat.videoUrl"
+                  type="url"
+                  placeholder="https://www.youtube.com/watch?v=... (Leave empty if no video)"
+                  class="flex-1 px-3 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8] bg-slate-50/50 focus:bg-white"
+                />
+                <button
+                  v-if="flat.videoUrl"
+                  type="button"
+                  @click="previewVideo(flat.videoUrl, flat.name)"
+                  class="px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-[10px] font-bold transition-colors whitespace-nowrap border border-rose-200 flex items-center gap-1"
+                >
+                  <span>▶</span>
+                  <span>Test Video</span>
+                </button>
+              </div>
+              <p class="text-[10px] text-slate-400 mt-0.5">
+                {{ flat.videoUrl ? '✓ Active: Flat / building walkthrough video enabled' : 'Optional: Leave blank to hide video button from public card' }}
+              </p>
             </div>
           </div>
         </div>
@@ -497,6 +590,11 @@
                 <input v-model="draftItem.k1" type="text" required placeholder="PKR 1.5 - 2.2 Cr" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs" />
               </div>
             </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Reference Video Walkthrough URL (Optional)</label>
+              <input v-model="draftItem.videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=... (Leave blank if no video)" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8]" />
+              <p class="text-[10px] text-slate-400 mt-0.5">Optional: Leave empty if no video is available yet.</p>
+            </div>
           </template>
 
           <!-- 2. Installment Project Form -->
@@ -531,6 +629,11 @@
                 <input v-model="draftItem.k1Down" type="text" required placeholder="PKR 13.5 Lac" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs" />
               </div>
             </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Reference Video Walkthrough URL (Optional)</label>
+              <input v-model="draftItem.videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=... (Leave blank if no video)" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8]" />
+              <p class="text-[10px] text-slate-400 mt-0.5">Optional: Leave empty if no video is available yet.</p>
+            </div>
           </template>
 
           <!-- 3. PHA Flat Category Form -->
@@ -546,6 +649,11 @@
             <div>
               <label class="block text-xs font-semibold text-slate-700 mb-1">Specs *</label>
               <input v-model="draftItem.specs" type="text" required placeholder="e.g. 3 Bed • 4 Bath" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8]" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Reference Video Walkthrough URL (Optional)</label>
+              <input v-model="draftItem.videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=... (Leave blank if no video)" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8]" />
+              <p class="text-[10px] text-slate-400 mt-0.5">Optional: Leave empty if no video is available yet.</p>
             </div>
           </template>
 
@@ -618,6 +726,15 @@
         </form>
       </div>
     </div>
+
+    <!-- Video Preview Modal for Admin -->
+    <SiteVideoModal
+      :is-open="previewModalOpen"
+      :video-url="previewVideoUrl"
+      :title="previewVideoTitle"
+      subtitle="Previewing site land walkthrough video in admin"
+      @close="previewModalOpen = false"
+    />
   </div>
 </template>
 
@@ -625,10 +742,23 @@
 import { ref, reactive, computed } from 'vue'
 import { CheckIcon, CheckCircleIcon, ArrowTopRightOnSquareIcon, PlusIcon, TrashIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { useAdminStore } from '../../stores/admin'
+import SiteVideoModal from '../../components/common/SiteVideoModal.vue'
 
 const adminStore = useAdminStore()
 const activeTab = ref('moqa')
 const saveSuccess = ref(false)
+
+// Video preview state
+const previewModalOpen = ref(false)
+const previewVideoUrl = ref('')
+const previewVideoTitle = ref('')
+
+const previewVideo = (url, title) => {
+  if (!url) return
+  previewVideoUrl.value = url
+  previewVideoTitle.value = title || 'Society Site Land Walkthrough'
+  previewModalOpen.value = true
+}
 
 // Clone rates from store into editable reactive form
 const ratesForm = reactive(JSON.parse(JSON.stringify(adminStore.liveRates)))
@@ -655,11 +785,11 @@ const modalTitle = computed(() => {
 const openAddModal = (type) => {
   addModalType.value = type
   if (type === 'moqa') {
-    draftItem.value = { name: '', tag: 'Cash Possession', description: '', m5: '', m10: '', k1: '' }
+    draftItem.value = { name: '', tag: 'Cash Possession', description: '', m5: '', m10: '', k1: '', videoUrl: '' }
   } else if (type === 'installments') {
-    draftItem.value = { name: '', duration: '4-Year Flexible Quarterly Plan', m5Down: '', m5Total: '', m10Down: '', k1Down: '' }
+    draftItem.value = { name: '', duration: '4-Year Flexible Quarterly Plan', m5Down: '', m5Total: '', m10Down: '', k1Down: '', videoUrl: '' }
   } else if (type === 'flats') {
-    draftItem.value = { name: '', rate: '', specs: '' }
+    draftItem.value = { name: '', rate: '', specs: '', videoUrl: '' }
   } else if (type === 'solar') {
     draftItem.value = { name: '', quote: '', savings: '' }
   } else if (type === 'hrsukh') {
@@ -688,7 +818,8 @@ const submitAddModal = () => {
       tag: (d.tag || 'Cash Possession').trim(),
       m5: d.m5.trim(),
       m10: d.m10.trim(),
-      k1: d.k1.trim()
+      k1: d.k1.trim(),
+      videoUrl: (d.videoUrl || '').trim()
     }
     adminStore.saveLiveRates(ratesForm)
     adminStore.showToast(`Added "${d.name.trim()}" to Moqa Ka Plots.`)
@@ -700,7 +831,8 @@ const submitAddModal = () => {
       m5: { down: d.m5Down.trim(), total: (d.m5Total || 'On Request').trim(), quarterly: 'Quarterly Plan' },
       m8: { down: d.m5Down.trim(), total: (d.m5Total || 'On Request').trim(), quarterly: 'Quarterly Plan' },
       m10: { down: d.m10Down.trim(), total: 'On Request', quarterly: 'Quarterly Plan' },
-      k1: { down: d.k1Down.trim(), total: 'On Request', quarterly: 'Quarterly Plan' }
+      k1: { down: d.k1Down.trim(), total: 'On Request', quarterly: 'Quarterly Plan' },
+      videoUrl: (d.videoUrl || '').trim()
     }
     adminStore.saveLiveRates(ratesForm)
     adminStore.showToast(`Added "${d.name.trim()}" to Installment Plans.`)
@@ -709,7 +841,8 @@ const submitAddModal = () => {
     ratesForm.phaFlats[key] = {
       name: d.name.trim(),
       rate: d.rate.trim(),
-      specs: d.specs.trim()
+      specs: d.specs.trim(),
+      videoUrl: (d.videoUrl || '').trim()
     }
     adminStore.saveLiveRates(ratesForm)
     adminStore.showToast(`Added "${d.name.trim()}" to PHA Flats.`)

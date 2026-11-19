@@ -168,6 +168,17 @@
                     <span class="absolute top-2.5 left-2.5 bg-[#0F2A44] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
                       Srinagar Highway &bull; RDA Approved
                     </span>
+                    <!-- Video Badge (Optional: shown only when video is added in backend) -->
+                    <button
+                      v-if="getSocietyVideo('topcity')"
+                      type="button"
+                      @click.stop="openVideoModal('topcity')"
+                      class="absolute top-2.5 right-2.5 bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 transition-transform hover:scale-105 z-10"
+                      title="Watch TopCity-1 Site Video"
+                    >
+                      <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                      <span>▶ Watch Video</span>
+                    </button>
                     <span class="absolute bottom-2.5 right-2.5 bg-black/60 backdrop-blur-xs text-white text-[9px] font-bold px-2 py-0.5 rounded">
                       Click for Details &bull; Rates &rarr;
                     </span>
@@ -189,12 +200,22 @@
                     </div>
                   </div>
                 </div>
-                <div class="p-4 pt-0">
+                <div class="p-4 pt-0 flex items-center gap-2">
                   <button
                     type="button"
-                    class="block w-full text-center py-2.5 bg-[#0F2A44] group-hover:bg-[#16B4E8] text-white font-bold text-xs rounded-xl transition-all shadow-xs"
+                    class="flex-1 text-center py-2.5 bg-[#0F2A44] group-hover:bg-[#16B4E8] text-white font-bold text-xs rounded-xl transition-all shadow-xs"
                   >
                     View Details &amp; Rates &rarr;
+                  </button>
+                  <button
+                    v-if="getSocietyVideo('topcity')"
+                    type="button"
+                    @click.stop="openVideoModal('topcity')"
+                    class="px-3 py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs rounded-xl border border-rose-200 transition-colors flex items-center gap-1 flex-shrink-0"
+                    title="Watch Land Video"
+                  >
+                    <span>▶</span>
+                    <span class="hidden sm:inline">Video</span>
                   </button>
                 </div>
               </div>
@@ -213,6 +234,17 @@
                     <span class="absolute top-2.5 left-2.5 bg-[#16B4E8] text-[#0F2A44] text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
                       Adjacent Airport &bull; RDA Approved
                     </span>
+                    <!-- Video Badge (Optional: shown only when video is added in backend) -->
+                    <button
+                      v-if="getSocietyVideo('agg')"
+                      type="button"
+                      @click.stop="openVideoModal('agg')"
+                      class="absolute top-2.5 right-2.5 bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 transition-transform hover:scale-105 z-10"
+                      title="Watch AGG Site Video"
+                    >
+                      <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                      <span>▶ Watch Video</span>
+                    </button>
                     <span class="absolute bottom-2.5 right-2.5 bg-black/60 backdrop-blur-xs text-white text-[9px] font-bold px-2 py-0.5 rounded">
                       Click for Details &bull; Rates &rarr;
                     </span>
@@ -234,12 +266,22 @@
                     </div>
                   </div>
                 </div>
-                <div class="p-4 pt-0">
+                <div class="p-4 pt-0 flex items-center gap-2">
                   <button
                     type="button"
-                    class="block w-full text-center py-2.5 bg-[#0F2A44] group-hover:bg-[#16B4E8] text-white font-bold text-xs rounded-xl transition-all shadow-xs"
+                    class="flex-1 text-center py-2.5 bg-[#0F2A44] group-hover:bg-[#16B4E8] text-white font-bold text-xs rounded-xl transition-all shadow-xs"
                   >
                     View Details &amp; Rates &rarr;
+                  </button>
+                  <button
+                    v-if="getSocietyVideo('agg')"
+                    type="button"
+                    @click.stop="openVideoModal('agg')"
+                    class="px-3 py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs rounded-xl border border-rose-200 transition-colors flex items-center gap-1 flex-shrink-0"
+                    title="Watch Land Video"
+                  >
+                    <span>▶</span>
+                    <span class="hidden sm:inline">Video</span>
                   </button>
                 </div>
               </div>
@@ -258,6 +300,17 @@
                     <span class="absolute top-2.5 left-2.5 bg-indigo-600 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
                       Airport Runway &bull; CPEC Hakla
                     </span>
+                    <!-- Video Badge (Optional: shown only when video is added in backend) -->
+                    <button
+                      v-if="getSocietyVideo('pechs')"
+                      type="button"
+                      @click.stop="openVideoModal('pechs')"
+                      class="absolute top-2.5 right-2.5 bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 transition-transform hover:scale-105 z-10"
+                      title="Watch PECHS Site Video"
+                    >
+                      <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                      <span>▶ Watch Video</span>
+                    </button>
                     <span class="absolute bottom-2.5 right-2.5 bg-black/60 backdrop-blur-xs text-white text-[9px] font-bold px-2 py-0.5 rounded">
                       Click for Details &bull; Rates &rarr;
                     </span>
@@ -279,12 +332,22 @@
                     </div>
                   </div>
                 </div>
-                <div class="p-4 pt-0">
+                <div class="p-4 pt-0 flex items-center gap-2">
                   <button
                     type="button"
-                    class="block w-full text-center py-2.5 bg-[#0F2A44] group-hover:bg-[#16B4E8] text-white font-bold text-xs rounded-xl transition-all shadow-xs"
+                    class="flex-1 text-center py-2.5 bg-[#0F2A44] group-hover:bg-[#16B4E8] text-white font-bold text-xs rounded-xl transition-all shadow-xs"
                   >
                     View Details &amp; Rates &rarr;
+                  </button>
+                  <button
+                    v-if="getSocietyVideo('pechs')"
+                    type="button"
+                    @click.stop="openVideoModal('pechs')"
+                    class="px-3 py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs rounded-xl border border-rose-200 transition-colors flex items-center gap-1 flex-shrink-0"
+                    title="Watch Land Video"
+                  >
+                    <span>▶</span>
+                    <span class="hidden sm:inline">Video</span>
                   </button>
                 </div>
               </div>
@@ -318,6 +381,17 @@
                   <span class="absolute top-3 left-3 bg-emerald-600 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow">
                     Direct M-2 &bull; Airport Motorway Access
                   </span>
+                  <!-- Video Badge (Optional: shown only when video is added in backend) -->
+                  <button
+                    v-if="getSocietyVideo('faisal-town')"
+                    type="button"
+                    @click.stop="openVideoModal('faisal-town')"
+                    class="absolute top-3 right-3 bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 transition-transform hover:scale-105 z-10"
+                    title="Watch Faisal Town Phase 2 Earthwork Video"
+                  >
+                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                    <span>▶ Watch Earthwork Video</span>
+                  </button>
                 </div>
 
                 <div class="md:col-span-7 space-y-4">
@@ -356,6 +430,15 @@
                       class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition shadow-sm"
                     >
                       View Full Details &amp; Schedule &rarr;
+                    </button>
+                    <button
+                      v-if="getSocietyVideo('faisal-town')"
+                      type="button"
+                      @click="openVideoModal('faisal-town')"
+                      class="px-4 py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold text-xs rounded-xl transition shadow-xs flex items-center gap-1.5"
+                    >
+                      <span>▶</span>
+                      <span>Watch Earthwork Tour</span>
                     </button>
                     <a
                       href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20Faisal%20Town%20Phase%202%20Installment%20Payment%20Schedule."
@@ -506,6 +589,38 @@
                       </td>
                       <td class="py-3.5 px-4 border-l border-slate-200 text-slate-600">
                         High-ROI investors and budget homebuilders looking for maximum capital growth with lower entry capital.
+                      </td>
+                    </tr>
+
+                    <!-- Site Land & Drone Video Comparison Row -->
+                    <tr class="hover:bg-slate-50/60 bg-rose-50/30">
+                      <td class="py-3.5 px-4 font-bold text-[#0F2A44] flex items-center gap-1.5">
+                        <span class="text-rose-600 font-black">▶</span>
+                        <span>Site Land Video</span>
+                      </td>
+                      <td class="py-3.5 px-4 border-l border-slate-200">
+                        <button
+                          v-if="getSocietyVideo('topcity')"
+                          type="button"
+                          @click="openVideoModal('topcity')"
+                          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-[10px] uppercase shadow-xs transition-colors"
+                        >
+                          <span>▶</span>
+                          <span>Watch TopCity-1 Drone Tour</span>
+                        </button>
+                        <span v-else class="text-slate-400 text-[11px]">Physical on-ground visit available</span>
+                      </td>
+                      <td class="py-3.5 px-4 border-l border-slate-200">
+                        <button
+                          v-if="getSocietyVideo('agg')"
+                          type="button"
+                          @click="openVideoModal('agg')"
+                          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[10px] uppercase shadow-xs transition-colors"
+                        >
+                          <span>▶</span>
+                          <span>Watch AGG Site Tour</span>
+                        </button>
+                        <span v-else class="text-slate-400 text-[11px]">Physical on-ground visit available</span>
                       </td>
                     </tr>
 
@@ -665,6 +780,15 @@
 
         <!-- Scrollable Modal Body -->
         <div class="p-5 sm:p-6 overflow-y-auto space-y-5 text-xs text-slate-700">
+          <!-- Reference Site & Drone Video Walkthrough (Optional: choice to display based on backend videoUrl) -->
+          <div v-if="selectedPlotVideo">
+            <SiteVideoPlayer
+              :video-url="selectedPlotVideo"
+              :title="`${selectedPlot.title} — On-Ground Site &amp; Drone Tour`"
+              caption="Live demarcated land, access boulevards, and development progress."
+            />
+          </div>
+
           <!-- Overview Description -->
           <div>
             <h4 class="font-extrabold text-[#0F2A44] text-sm uppercase tracking-wide mb-1.5">Society Overview</h4>
@@ -745,6 +869,15 @@
         </div>
       </div>
     </div>
+
+    <!-- Standalone Video Tour Modal for Quick Society Walkthrough -->
+    <SiteVideoModal
+      :is-open="videoModalOpen"
+      :video-url="activeVideo.url"
+      :title="activeVideo.title"
+      :subtitle="activeVideo.subtitle"
+      @close="videoModalOpen = false"
+    />
   </div>
 </template>
 
@@ -752,6 +885,8 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAdminStore } from '../../stores/admin'
+import SiteVideoPlayer from '../../components/common/SiteVideoPlayer.vue'
+import SiteVideoModal from '../../components/common/SiteVideoModal.vue'
 import {
   MapPinIcon,
   PhoneIcon,
@@ -767,7 +902,45 @@ const faqs = computed(() => adminStore.getFaqsByService('plots'))
 const route = useRoute()
 const activePlotFilter = ref('all') // 'all' | 'cash' | 'installments'
 const selectedPlot = ref(null)
+const selectedPlotKey = ref('')
 const activeCompareView = ref('topcity-agg') // 'topcity-agg' | 'cash-installments'
+
+// Dedicated Video Modal State for Quick Play
+const videoModalOpen = ref(false)
+const activeVideo = ref({ url: '', title: '', subtitle: '' })
+
+const getSocietyVideo = (key) => {
+  if (key === 'topcity') {
+    return adminStore.liveRates?.moqaPlots?.topCity?.videoUrl ?? plotsData.topcity?.videoUrl ?? ''
+  }
+  if (key === 'agg') {
+    return adminStore.liveRates?.moqaPlots?.agg?.videoUrl ?? plotsData.agg?.videoUrl ?? ''
+  }
+  if (key === 'pechs') {
+    return adminStore.liveRates?.moqaPlots?.pechs?.videoUrl ?? plotsData.pechs?.videoUrl ?? ''
+  }
+  if (key === 'faisal-town') {
+    return adminStore.liveRates?.installmentPlans?.faisalTown?.videoUrl ?? plotsData['faisal-town']?.videoUrl ?? ''
+  }
+  return plotsData[key]?.videoUrl ?? ''
+}
+
+const selectedPlotVideo = computed(() => {
+  if (!selectedPlot.value || !selectedPlotKey.value) return ''
+  return getSocietyVideo(selectedPlotKey.value)
+})
+
+const openVideoModal = (key) => {
+  const plot = plotsData[key]
+  const url = getSocietyVideo(key)
+  if (!url) return
+  activeVideo.value = {
+    url,
+    title: `${plot?.title || 'Society'} — On-Ground Site Walkthrough`,
+    subtitle: plot?.location || 'Verified land demarcation & aerial view'
+  }
+  videoModalOpen.value = true
+}
 
 const plotsData = {
   topcity: {
@@ -777,6 +950,7 @@ const plotsData = {
     badge: 'Immediate Demarcation',
     badgeClass: 'bg-[#0F2A44] text-white',
     image: '/images/hero-moqa-plot.webp',
+    videoUrl: 'https://www.youtube.com/watch?v=F0f8u84_0c0',
     description: 'TopCity-1 is an ultra-modern gated community situated directly on Srinagar Highway opposite New Islamabad Airport. Direct physical possession is actively available in Blocks B, C & D with on-ground boundary demarcation, paved carpeted roads, underground electricity, and operational Sui Gas network. Ideal for buyers ready to begin construction immediately.',
     rates: [
       { size: '5 Marla (25x50)', terms: '100% Upfront Cash Possession', price: 'PKR 75 - 95 Lac' },
@@ -800,6 +974,7 @@ const plotsData = {
     badge: 'Adjacent Airport Cargo',
     badgeClass: 'bg-[#16B4E8] text-[#0F2A44]',
     image: '/images/hero-real-estate.webp',
+    videoUrl: 'https://www.youtube.com/watch?v=q6gS_u4z2-o',
     description: 'Airport Green Garden (AGG) directly adjoins the cargo and staff boundary of New Islamabad International Airport. AGG offers the most competitive per-Marla ticket price on the airport corridor with solid, naturally elevated ground, active utility poles, and zero legal disputes.',
     rates: [
       { size: '5 Marla (25x50)', terms: '100% Upfront Cash Possession', price: 'PKR 48 - 55 Lac' },
@@ -823,6 +998,7 @@ const plotsData = {
     badge: 'CPEC Hakla & Airport Runway',
     badgeClass: 'bg-indigo-600 text-white',
     image: '/images/hero-construction.webp',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     description: 'Pakistan Employees Cooperative Housing Society (PECHS) offers budget-friendly on-ground residential land adjacent to the airport runway and the CPEC Hakla-D.I. Khan Motorway interchange. An established community with existing families, operational schools, and active commercial markets.',
     rates: [
       { size: '5 Marla (25x50)', terms: '100% Cash Ready Plot', price: 'PKR 25 - 35 Lac' },
@@ -847,6 +1023,7 @@ const plotsData = {
     badge: '4.5-Year Installment Plan',
     badgeClass: 'bg-emerald-600 text-white',
     image: '/images/hero-moqa-plot.webp',
+    videoUrl: 'https://www.youtube.com/watch?v=fDvyuX8e370',
     description: 'Faisal Town Phase 2 is Zedem International flagship mega project led by Chaudhry Abdul Majeed. Featuring approved dedicated interchange access directly on the M-2 Motorway, rapid on-ground earth-moving machinery, and easy quarterly installments spread over 4.5 years with computerized confirmation letters.',
     rates: [
       { size: '5.56 Marla (25x50)', terms: 'Booking: PKR 595,000 | 18 Quarters of PKR 120,000', price: 'PKR 27.95 Lac Total' },
@@ -867,6 +1044,7 @@ const plotsData = {
 }
 
 const openPlotDetails = (key) => {
+  selectedPlotKey.value = key
   selectedPlot.value = plotsData[key] || null
 }
 

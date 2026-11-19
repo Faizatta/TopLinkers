@@ -638,6 +638,24 @@
             </div>
           </div>
 
+          <!-- Reference Site / Land Walkthrough Video Field (Optional choice) -->
+          <div class="p-3.5 rounded-xl border border-gray-200 bg-slate-50/70 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-extrabold text-[#0F2A44] uppercase flex items-center gap-1.5">
+                <span class="text-rose-600 font-bold">▶</span>
+                <span>Reference Site / Land Walkthrough Video URL (Optional)</span>
+              </label>
+              <span class="text-[10px] text-gray-400">YouTube / Vimeo / MP4</span>
+            </div>
+            <p class="text-[11px] text-gray-500">Attach drone footage or on-ground video tour for this plot, flat, or construction project. Leave empty if no video is available.</p>
+            <input
+              v-model="propertyForm.videoUrl"
+              type="url"
+              class="w-full px-3 py-2 rounded-xl border border-gray-200 bg-white text-xs focus:outline-none focus:border-[#16B4E8]"
+              placeholder="https://www.youtube.com/watch?v=... (Optional - choice to add or leave empty)"
+            />
+          </div>
+
           <!-- Description / Notes -->
           <div>
             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Description & Property Notes</label>
@@ -841,6 +859,7 @@ const propertyForm = ref({
   bedrooms: 0,
   bathrooms: 0,
   images: [],
+  videoUrl: '',
   featured: true,
   hotOffer: false,
   description: ''
@@ -1115,6 +1134,7 @@ const openCreateModal = () => {
     bedrooms: 0,
     bathrooms: 0,
     images: [],
+    videoUrl: '',
     featured: true,
     hotOffer: false,
     offerEnabled: false,
@@ -1151,6 +1171,7 @@ const editProperty = (prop) => {
     bedrooms: prop.beds ?? prop.bedrooms ?? 0,
     bathrooms: prop.baths ?? prop.bathrooms ?? 0,
     images: Array.isArray(prop.images) && prop.images.length > 0 ? [...prop.images] : (prop.image ? [prop.image] : []),
+    videoUrl: prop.videoUrl || prop.video || '',
     featured: Boolean(prop.featured),
     hotOffer: Boolean(prop.hotOffer),
     offerEnabled: Boolean(prop.offerEnabled),
@@ -1210,6 +1231,7 @@ const saveProperty = () => {
     bedrooms: Number(propertyForm.value.bedrooms) || 0,
     bathrooms: Number(propertyForm.value.bathrooms) || 0,
     images: finalImages,
+    videoUrl: propertyForm.value.videoUrl || '',
     featured: Boolean(propertyForm.value.featured),
     hotOffer: Boolean(propertyForm.value.hotOffer),
     offerEnabled: Boolean(propertyForm.value.offerEnabled),

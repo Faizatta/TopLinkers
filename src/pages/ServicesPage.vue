@@ -329,10 +329,21 @@
                 </div>
               </div>
 
+              <!-- Reference Video Button (Optional - shown only when videoUrl is configured in backend) -->
+              <button
+                v-if="society.videoUrl"
+                type="button"
+                @click="openServiceVideo(society.videoUrl, `${society.name} — On-Ground Site Tour`, society.description)"
+                class="mt-3 w-full py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-[11px] font-bold border border-rose-200 transition-colors flex items-center justify-center gap-1.5"
+              >
+                <span>▶</span>
+                <span>Watch Site Tour Video</span>
+              </button>
+
               <a
                 :href="`https://wa.me/923349522157?text=${encodeURIComponent(`Hello TopLinkers, I am inquiring about ${society.name} Moqa Ka Plot rates (100% Cash)`)}`"
                 target="_blank"
-                class="mt-4 w-full py-2.5 bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-xs font-bold uppercase rounded-xl text-center transition-all shadow-xs"
+                class="mt-3 w-full py-2.5 bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-xs font-bold uppercase rounded-xl text-center transition-all shadow-xs"
               >
                 Inquire {{ society.name }} Rates
               </a>
@@ -429,6 +440,16 @@
                   class="w-full sm:flex-1 py-2.5 bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-xs font-black uppercase tracking-wider rounded-xl text-center transition-all shadow-xs"
                 >
                   View Detailed Schedule
+                </button>
+                <button
+                  v-if="plan.videoUrl"
+                  type="button"
+                  @click="openServiceVideo(plan.videoUrl, `${plan.name} — Development &amp; Earthwork Tour`, plan.duration)"
+                  class="w-full sm:w-auto px-3.5 py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold uppercase rounded-xl text-center transition-all flex items-center justify-center gap-1.5"
+                  title="Watch Earthwork Video"
+                >
+                  <span>▶</span>
+                  <span>Video</span>
                 </button>
                 <a
                   :href="`https://wa.me/923349522157?text=${encodeURIComponent(`Hello TopLinkers, I want to get the ${plan.name} Installment Plan`)}`"
@@ -1720,6 +1741,15 @@
         </div>
       </div>
     </Teleport>
+
+    <!-- Standalone Video Tour Modal for Society Land Walkthrough -->
+    <SiteVideoModal
+      :is-open="videoModalOpen"
+      :video-url="activeVideo.url"
+      :title="activeVideo.title"
+      :subtitle="activeVideo.subtitle"
+      @close="videoModalOpen = false"
+    />
   </div>
 </template>
 
@@ -1727,6 +1757,7 @@
 import { ref, computed, watch, nextTick, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { scrollTo } from '../services/lenis'
+import SiteVideoModal from '../components/common/SiteVideoModal.vue'
 import {
   Squares2X2Icon,
   MapIcon,
@@ -1747,6 +1778,20 @@ const route = useRoute()
 const adminStore = useAdminStore()
 const activeTab = ref('all')
 const plotPaymentFilter = ref('all') // 'all' | 'cash' | 'installments'
+
+// Video Lightbox State for Societies & Packages
+const videoModalOpen = ref(false)
+const activeVideo = ref({ url: '', title: '', subtitle: '' })
+
+const openServiceVideo = (url, title, subtitle) => {
+  if (!url) return
+  activeVideo.value = {
+    url,
+    title: title || 'Society Site Land Tour',
+    subtitle: subtitle || 'Verified on-ground walkthrough & drone view'
+  }
+  videoModalOpen.value = true
+}
 
 // ==========================================
 // INSTALLMENT MODAL & SCHEDULE DATA

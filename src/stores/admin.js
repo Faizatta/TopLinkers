@@ -480,28 +480,32 @@ export const useAdminStore = defineStore('admin', () => {
         tag: 'Near New Airport',
         m5: 'PKR 25 - 45 Lac',
         m10: 'PKR 65 - 95 Lac',
-        k1: 'PKR 1.25 - 1.95 Cr'
+        k1: 'PKR 1.25 - 1.95 Cr',
+        videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
       },
       topCity: {
         name: 'TopCity-1',
         tag: 'Airport Metro Link',
         m5: 'PKR 65 - 90 Lac',
         m10: 'PKR 1.2 - 2.5 Cr',
-        k1: 'PKR 2.2 - 3.4 Cr'
+        k1: 'PKR 2.2 - 3.4 Cr',
+        videoUrl: 'https://www.youtube.com/watch?v=F0f8u84_0c0'
       },
       agg: {
         name: 'Airport Green Garden (AGG)',
         tag: 'Direct Interchange',
         m5: 'PKR 45 - 65 Lac',
         m10: 'PKR 85 - 1.25 Cr',
-        k1: 'PKR 1.7 - 2.4 Cr'
+        k1: 'PKR 1.7 - 2.4 Cr',
+        videoUrl: 'https://www.youtube.com/watch?v=q6gS_u4z2-o'
       },
       topResidencia: {
         name: 'Top Residencia',
         tag: 'Executive Enclave',
         m5: 'PKR 40 - 60 Lac',
         m10: 'PKR 80 - 1.2 Cr',
-        k1: 'PKR 1.6 - 2.2 Cr'
+        k1: 'PKR 1.6 - 2.2 Cr',
+        videoUrl: ''
       }
     },
     // Installment Plans
@@ -512,7 +516,8 @@ export const useAdminStore = defineStore('admin', () => {
         m5: { down: 'PKR 5.9 Lac', total: 'PKR 34.5 Lac', quarterly: 'PKR 130,000' },
         m8: { down: 'PKR 8.2 Lac', total: 'PKR 46.5 Lac', quarterly: 'PKR 175,000' },
         m10: { down: 'PKR 9.9 Lac', total: 'PKR 55.5 Lac', quarterly: 'PKR 215,000' },
-        k1: { down: 'PKR 14.5 Lac', total: 'PKR 98.5 Lac', quarterly: 'PKR 395,000' }
+        k1: { down: 'PKR 14.5 Lac', total: 'PKR 98.5 Lac', quarterly: 'PKR 395,000' },
+        videoUrl: 'https://www.youtube.com/watch?v=fDvyuX8e370'
       },
       blueWorld: {
         name: 'Blue World City',
@@ -520,7 +525,8 @@ export const useAdminStore = defineStore('admin', () => {
         m5: { down: 'PKR 1.49 Lac', total: 'PKR 14.9 Lac', monthly: 'PKR 14,900' },
         m7: { down: 'PKR 2.45 Lac', total: 'PKR 24.5 Lac', monthly: 'PKR 24,500' },
         m10: { down: 'PKR 3.25 Lac', total: 'PKR 32.5 Lac', monthly: 'PKR 32,500' },
-        k1: { down: 'PKR 5.8 Lac', total: 'PKR 58.0 Lac', monthly: 'PKR 58,000' }
+        k1: { down: 'PKR 5.8 Lac', total: 'PKR 58.0 Lac', monthly: 'PKR 58,000' },
+        videoUrl: ''
       }
     },
     // PHA Flats (Official Islamabad Projects & Categories)
@@ -528,22 +534,26 @@ export const useAdminStore = defineStore('admin', () => {
       i16_typeE: {
         name: 'Sector I-16/3 — Type E (912 Sq Ft)',
         rate: 'PKR 55 - 72 Lac',
-        specs: '~912 sq. ft. (2 beds, 2 baths) • G+6 Completed & Active Resale'
+        specs: '~912 sq. ft. (2 beds, 2 baths) • G+6 Completed & Active Resale',
+        videoUrl: ''
       },
       i16_typeB: {
         name: 'Sector I-16/3 — Type B (1,496 Sq Ft)',
         rate: 'PKR 1.15 - 1.45 Cr',
-        specs: '~1,496 sq. ft. (3 beds, servant quarter) • G+6 Completed Blocks'
+        specs: '~1,496 sq. ft. (3 beds, servant quarter) • G+6 Completed Blocks',
+        videoUrl: ''
       },
       i12_typeDE: {
         name: 'Sector I-12/1 — Type D & Type E',
         rate: 'PKR 58 - 82 Lac',
-        specs: '700–900+ sq. ft. (2-bed/2-bath) • 3,200 Units Nearing Completion'
+        specs: '700–900+ sq. ft. (2-bed/2-bath) • 3,200 Units Nearing Completion',
+        videoUrl: ''
       },
       kurri_g11: {
         name: 'G-11 / Kurri Road — Executive Residencia',
         rate: 'PKR 1.55 - 2.25 Cr',
-        specs: 'Multi-Bedroom • Senior Officers (BPS 20–22) & Select Public Quotas'
+        specs: 'Multi-Bedroom • Senior Officers (BPS 20–22) & Select Public Quotas',
+        videoUrl: ''
       }
     },
     // Major Islamabad PHA Projects & Categories

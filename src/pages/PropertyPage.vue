@@ -87,9 +87,10 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <!-- Left 8 Columns -->
         <div class="lg:col-span-8 space-y-6">
-          <!-- 1. Media Gallery (Photos / Map) -->
+          <!-- 1. Media Gallery (Photos / Video Tour / Map) -->
           <PropertyGallery
             :images="property.images"
+            :video-url="property.videoUrl || property.video || ''"
             :title="property.title"
             :address="property.address"
             :lat="property.lat || 33.6844"
