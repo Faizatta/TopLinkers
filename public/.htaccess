@@ -5,6 +5,9 @@
 # 1. Custom 404 Error Document (Returns genuine HTTP 404 status code)
 ErrorDocument 404 /404.html
 
+DirectoryIndex index.html index.php
+Options -Indexes
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
@@ -48,12 +51,19 @@ ErrorDocument 404 /404.html
   RewriteRule ^property/turnkey-furnished-townhouse-pha-flats-sector-i-12-39/?$ /property/pha-flats-sector-i12-furnished-apartment [R=301,L]
   RewriteRule ^property/modern-designer-villa-pha-flats-sector-i-16-40/?$ /property/pha-flats-sector-i16-modern-apartment [R=301,L]
 
-  # 3. Server-Side Protection for /admin Executive Suite
-  # Unauthenticated direct browser visits to protected admin pages are redirected to /admin/login
-  RewriteCond %{REQUEST_URI} ^/admin(/.*)?$
-  RewriteCond %{REQUEST_URI} !^/admin/login
+  # 3. Server-Side Protection and Routing for /admin Executive Suite
+  # A. Direct visits to /admin/login serve the SPA application shell
+  RewriteCond %{REQUEST_URI} ^/admin/login/?$ [NC]
+  RewriteRule ^ /index.html [L]
+
+  # B. Unauthenticated visits to protected admin pages are redirected to /admin/login
+  RewriteCond %{REQUEST_URI} ^/admin(/.*)?$ [NC]
   RewriteCond %{HTTP_COOKIE} !tl_admin_session= [NC]
   RewriteRule ^ /admin/login [R=302,L]
+
+  # C. Authenticated visits to ANY /admin or /admin/* route serve the SPA application shell
+  RewriteCond %{REQUEST_URI} ^/admin(/.*)?$ [NC]
+  RewriteRule ^ /index.html [L]
 
   # 4. If requested path is an existing physical file, serve directly
   RewriteCond %{REQUEST_FILENAME} -f
@@ -69,8 +79,9 @@ ErrorDocument 404 /404.html
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
   RewriteRule ^(.*)$ /$1/index.html [L,QSA]
 
-  # 7. If requested path is an existing directory, serve directly
+  # 7. If requested path is an existing directory with an index.html, serve directly
   RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
   RewriteRule ^ - [L]
 
   # 8. All other unknown/invalid URLs return genuine HTTP 404 response

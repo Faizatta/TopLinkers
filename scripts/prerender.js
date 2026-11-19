@@ -1007,6 +1007,18 @@ export function prerender() {
     console.log(`  📄 Verified and copied dist/404.html for Apache ErrorDocument.`)
   }
 
+  // Provide physical index.html inside dist/admin/ and dist/admin.html to guarantee Apache never throws 403 on /admin/
+  const adminDir = path.resolve(distDir, 'admin')
+  fs.mkdirSync(adminDir, { recursive: true })
+  fs.copyFileSync(templatePath, path.join(adminDir, 'index.html'))
+  fs.copyFileSync(templatePath, path.resolve(distDir, 'admin.html'))
+
+  const adminDashboardDir = path.resolve(adminDir, 'dashboard')
+  fs.mkdirSync(adminDashboardDir, { recursive: true })
+  fs.copyFileSync(templatePath, path.join(adminDashboardDir, 'index.html'))
+  fs.copyFileSync(templatePath, path.resolve(adminDir, 'dashboard.html'))
+  console.log(`  🛡️ Configured physical index.html shells for /admin and /admin/dashboard to prevent 403.`)
+
   // Synchronize sitemap.xml with canonical URLs (excluding admin and 404)
   const canonicalRoutes = allRoutes.filter(r => !r.path.startsWith('/admin') && r.path !== '/404')
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
