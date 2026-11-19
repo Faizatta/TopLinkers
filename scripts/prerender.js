@@ -929,30 +929,11 @@ export function prerender() {
       html = html.replace('</head>', `${propJsonLd}\n  </head>`)
     }
 
-    // 6. Seamless Branded App Shell for Instant Visual Load + Crawlable Noscript for Bots (Zero FOUC, Zero Layout Shift)
-    const semanticFallback = `
-    <div id="app" class="min-h-screen bg-[#F6F8FA] flex flex-col">
-      <header style="background:#0F2A44;color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1E293B;">
-        <a href="/" aria-label="TopLinkers Home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font-weight:900;font-size:20px;">
-          <img src="/toplinkers-logo-mark.webp" alt="Top Linkers" width="40" height="40" style="object-fit:contain;" />
-          <div>
-            <div style="font-size:18px;font-weight:900;line-height:1;"><span style="color:#E53935;">TOP</span> <span>LINKERS</span></div>
-            <div style="font-size:10px;color:#94A3B8;letter-spacing:1px;text-transform:uppercase;margin-top:2px;">Real Estate &bull; Construction &bull; Solar</div>
-          </div>
-        </a>
-        <nav aria-label="Primary Navigation" style="display:flex;gap:18px;font-size:13px;font-weight:600;">
-          <a href="/about" style="color:#16B4E8;text-decoration:none;">About Us</a>
-          <a href="/services" style="color:#CBD5E1;text-decoration:none;">Services</a>
-          <a href="/listings" style="color:#CBD5E1;text-decoration:none;">Properties</a>
-          <a href="/team" style="color:#CBD5E1;text-decoration:none;">Team</a>
-          <a href="/blog" style="color:#CBD5E1;text-decoration:none;">Blog</a>
-          <a href="/contact" style="color:#CBD5E1;text-decoration:none;">Contact</a>
-        </nav>
-      </header>
-      <div style="background:#030712;height:550px;width:100%;"></div>
-    </div>
+    // 6. Crawlable Semantic Fallback for Non-JS Search Engine Crawlers & Bots (Inside <noscript> so JS browsers never show FOUC)
+    const crawlableNoscript = `
+    <div id="app"></div>
 
-    <!-- Crawlable Semantic Fallback for Non-JS Search Engine Crawlers & Bots (Hidden from JS Browsers to Prevent FOUC) -->
+    <!-- Crawlable Semantic Fallback for Non-JS Search Engine Crawlers & Bots -->
     <noscript>
       <div style="max-width:1200px;margin:32px auto;padding:0 20px;font-family:sans-serif;">
         <h1 style="font-size:28px;font-weight:900;color:#0F2A44;margin-bottom:16px;line-height:1.25;">
@@ -983,11 +964,10 @@ export function prerender() {
           <p>&copy; 2026 Top Linkers Real Estate, Construction &amp; Solar. Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan.</p>
         </footer>
       </div>
-    </noscript>
-    `
+    </noscript>`
 
-    // Inject Semantic Fallback directly inside <div id="app"></div>
-    html = html.replace('<div id="app"></div>', semanticFallback)
+    // Inject Crawlable Noscript directly after clean <div id="app"></div>
+    html = html.replace('<div id="app"></div>', crawlableNoscript)
 
     // Write file to target destinations:
     // 1. root index.html (for '/')
