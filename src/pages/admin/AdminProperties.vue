@@ -689,7 +689,8 @@ import {
 import L from '../../utils/leaflet'
 import propertiesData from '../../data/properties.json'
 import { useAdminStore } from '../../stores/admin'
-import { API_BASE_URL } from '../../services/api'
+import { API_BASE_URL, invalidatePropertiesCache } from '../../services/api'
+import { notifyDataChanged } from '../../utils/syncBus'
 import { isPropertyOfferActive, getOfferRemainingLabel, calculateDiscount, formatPkrAmount } from '../../utils/offer'
 
 const adminStore = useAdminStore()
@@ -1236,6 +1237,13 @@ const saveProperty = () => {
     localStorage.setItem(CUSTOM_KEY, JSON.stringify(custom))
   }
 
+  // Instantly persist to server properties cache & notify cross-tab sync bus
+  try {
+    localStorage.setItem('toplinkers_server_properties', JSON.stringify(allProperties.value))
+    invalidatePropertiesCache()
+    notifyDataChanged('properties', item)
+  } catch (e) {}
+
   // Also sync to server database API
   try {
     const isEdit = isEditing.value
@@ -1243,7 +1251,7 @@ const saveProperty = () => {
     const reqMethod = isEdit ? 'PUT' : 'POST'
     fetch(endpoint, {
       method: reqMethod,
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
       body: JSON.stringify({
         id: item.id,
         slug: item.slug,
@@ -1264,7 +1272,10 @@ const saveProperty = () => {
         description: item.description
       })
     })
-    .then(() => syncPropertiesFromBackend())
+    .then(() => {
+      syncPropertiesFromBackend()
+      notifyDataChanged('properties', item)
+    })
     .catch(() => {})
   } catch (e) {}
 
@@ -1281,11 +1292,19 @@ const deleteProperty = async (idOrSlug) => {
   if (ok) {
     allProperties.value = allProperties.value.filter(p => p.id !== idOrSlug && p.slug !== idOrSlug)
 
+    try {
+      localStorage.setItem('toplinkers_server_properties', JSON.stringify(allProperties.value))
+      invalidatePropertiesCache()
+      notifyDataChanged('properties', { deleted: idOrSlug })
+    } catch (e) {}
+
     // Call server database to delete
     try {
       fetch(`${API_BASE_URL}/properties/${encodeURIComponent(idOrSlug)}`, {
         method: 'DELETE',
-        headers: { 'Accept': 'application/json' }
+        headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache' }
+      }).then(() => {
+        notifyDataChanged('properties', { deleted: idOrSlug })
       }).catch(() => {})
     } catch (e) {}
 

@@ -24,17 +24,39 @@ async function jsonOrThrow(res, fallbackMessage) {
 
 const delay = (ms = 0) => (ms > 0 ? new Promise(resolve => setTimeout(resolve, ms)) : Promise.resolve())
 
+import { onDataChanged } from '../utils/syncBus'
+
 let serverPropertiesCache = null
 let fetchInFlight = null
+let lastPropertiesSync = 0
+
 let serverTeamCache = null
 let fetchTeamInFlight = null
+let lastTeamSync = 0
 
-export async function syncServerProperties() {
-  if (serverPropertiesCache) return serverPropertiesCache
-  if (fetchInFlight) return fetchInFlight
+const STALE_TTL_MS = 15000 // 15 seconds max before background re-validation
+
+export function invalidatePropertiesCache() {
+  serverPropertiesCache = null
+  lastPropertiesSync = 0
+  fetchInFlight = null
+}
+
+export function invalidateTeamCache() {
+  serverTeamCache = null
+  lastTeamSync = 0
+  fetchTeamInFlight = null
+}
+
+export async function syncServerProperties({ force = false } = {}) {
+  const isStale = (Date.now() - lastPropertiesSync) > STALE_TTL_MS
+  if (!force && !isStale && serverPropertiesCache) return serverPropertiesCache
+  if (fetchInFlight && !force) return fetchInFlight
+
+  const url = `${API_BASE_URL}/properties?_t=${Date.now()}`
   try {
-    fetchInFlight = fetch(`${API_BASE_URL}/properties`, {
-      headers: { 'Accept': 'application/json' }
+    fetchInFlight = fetch(url, {
+      headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache' }
     })
       .then(res => (res.ok && isJson(res) ? res.json() : null))
       .then(data => {
@@ -62,28 +84,32 @@ export async function syncServerProperties() {
             offerPrice: Number(p.offer_price || 0),
             offerExpiresAt: p.offer_expires_at || ''
           }))
+          lastPropertiesSync = Date.now()
           try {
             localStorage.setItem('toplinkers_server_properties', JSON.stringify(serverPropertiesCache))
           } catch (e) {}
         }
         return serverPropertiesCache
       })
-      .catch(() => null)
+      .catch(() => serverPropertiesCache)
       .finally(() => {
         fetchInFlight = null
       })
     return fetchInFlight
   } catch (e) {
-    return null
+    return serverPropertiesCache
   }
 }
 
-export async function syncServerTeam() {
-  if (serverTeamCache) return serverTeamCache
-  if (fetchTeamInFlight) return fetchTeamInFlight
+export async function syncServerTeam({ force = false } = {}) {
+  const isStale = (Date.now() - lastTeamSync) > STALE_TTL_MS
+  if (!force && !isStale && serverTeamCache) return serverTeamCache
+  if (fetchTeamInFlight && !force) return fetchTeamInFlight
+
+  const url = `${API_BASE_URL}/team?_t=${Date.now()}`
   try {
-    fetchTeamInFlight = fetch(`${API_BASE_URL}/team`, {
-      headers: { 'Accept': 'application/json' }
+    fetchTeamInFlight = fetch(url, {
+      headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache' }
     })
       .then(res => (res.ok && isJson(res) ? res.json() : null))
       .then(data => {
@@ -112,25 +138,38 @@ export async function syncServerTeam() {
               isActive: m.isActive !== false
             }
           })
+          lastTeamSync = Date.now()
           try {
             localStorage.setItem('toplinkers_server_team', JSON.stringify(serverTeamCache))
           } catch (e) {}
         }
         return serverTeamCache
       })
-      .catch(() => null)
+      .catch(() => serverTeamCache)
       .finally(() => {
         fetchTeamInFlight = null
       })
     return fetchTeamInFlight
   } catch (e) {
-    return null
+    return serverTeamCache
   }
 }
 
 if (typeof window !== 'undefined') {
   setTimeout(() => { syncServerProperties() }, 150)
   setTimeout(() => { syncServerTeam() }, 200)
+
+  // Live Cross-Tab Synchronization Listener
+  onDataChanged((event) => {
+    if (event.topic === 'properties' || event.topic === 'all') {
+      invalidatePropertiesCache()
+      syncServerProperties({ force: true })
+    }
+    if (event.topic === 'team' || event.topic === 'all') {
+      invalidateTeamCache()
+      syncServerTeam({ force: true })
+    }
+  })
 }
 
 function getLivePropertyList() {
@@ -295,7 +334,7 @@ export const api = {
   },
 
   async getPropertyBySlug(slug) {
-    const list = getLivePropertyList()
+    let list = getLivePropertyList()
     const decoded = decodeURIComponent(slug || '').toLowerCase().trim()
 
     // 1. Direct slug or id match
@@ -306,6 +345,19 @@ export const api = {
       (p.id && p.id.toLowerCase().trim() === decoded) ||
       encodeURIComponent(p.slug || '') === slug
     )
+
+    // 1b. If not found in local cache, force-sync from server database in case recently created/edited
+    if (!found) {
+      await syncServerProperties({ force: true }).catch(() => null)
+      list = getLivePropertyList()
+      found = list.find(p => 
+        p.slug === slug || 
+        p.id === slug ||
+        (p.slug && p.slug.toLowerCase().trim() === decoded) ||
+        (p.id && p.id.toLowerCase().trim() === decoded) ||
+        encodeURIComponent(p.slug || '') === slug
+      )
+    }
 
     // 2. Common aliases fallback
     if (!found) {

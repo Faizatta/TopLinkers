@@ -156,9 +156,10 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { api } from '../services/api'
+import { onDataChanged } from '../utils/syncBus'
 import PropertyCard from '../components/property/PropertyCard.vue'
 
 const route = useRoute()
@@ -183,6 +184,20 @@ const loadData = async () => {
   }
 }
 
-onMounted(loadData)
+let unsubSync = null
+
+onMounted(() => {
+  loadData()
+  unsubSync = onDataChanged((topic) => {
+    if (topic === 'team' || topic === 'all' || topic === 'properties') {
+      loadData()
+    }
+  })
+})
+
+onUnmounted(() => {
+  if (unsubSync) unsubSync()
+})
+
 watch(() => route.params.slug, loadData)
 </script>

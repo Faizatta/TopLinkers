@@ -10,6 +10,9 @@ declare(strict_types=1);
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: SAMEORIGIN');
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0');
+header('Pragma: no-cache');
+header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 
 // Dynamic Server Secret Key for HMAC signature
 $secretKey = getenv('TL_ADMIN_SECRET') ?: 'toplinkers_secure_executive_hmac_2026_x7a9k2!';

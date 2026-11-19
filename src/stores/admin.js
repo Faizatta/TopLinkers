@@ -1,6 +1,7 @@
-import { api } from '../services/api.js'
+import { api, invalidateTeamCache } from '../services/api.js'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { notifyDataChanged } from '../utils/syncBus.js'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://127.0.0.1:8000/api' : '/api')
 
@@ -622,13 +623,17 @@ export const useAdminStore = defineStore('admin', () => {
   const saveLiveRates = async (newRates) => {
     liveRates.value = { ...liveRates.value, ...newRates }
     localStorage.setItem(STORAGE_KEYS.RATES, JSON.stringify(liveRates.value))
+    notifyDataChanged('rates', liveRates.value)
     try {
       const res = await fetch(`${API_BASE_URL}/rates`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
         body: JSON.stringify(liveRates.value)
       })
-      if (res.ok) apiConnected.value = true
+      if (res.ok) {
+        apiConnected.value = true
+        notifyDataChanged('rates', liveRates.value)
+      }
     } catch (e) {}
   }
 
@@ -782,14 +787,20 @@ export const useAdminStore = defineStore('admin', () => {
       teamMembers.value.push(item)
     }
     saveTeamLocal()
+    invalidateTeamCache()
+    notifyDataChanged('team', item)
 
     try {
       const res = await fetch(`${API_BASE_URL}/team`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
         body: JSON.stringify(item)
       })
-      if (res.ok) apiConnected.value = true
+      if (res.ok) {
+        apiConnected.value = true
+        invalidateTeamCache()
+        notifyDataChanged('team', item)
+      }
     } catch (e) {}
 
     return item
@@ -798,12 +809,18 @@ export const useAdminStore = defineStore('admin', () => {
   const deleteTeamMember = async (id) => {
     teamMembers.value = teamMembers.value.filter(m => m.id !== id)
     saveTeamLocal()
+    invalidateTeamCache()
+    notifyDataChanged('team', { deleted: id })
     try {
       const res = await fetch(`${API_BASE_URL}/team/${id}`, {
         method: 'DELETE',
-        headers: { 'Accept': 'application/json' }
+        headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache' }
       })
-      if (res.ok) apiConnected.value = true
+      if (res.ok) {
+        apiConnected.value = true
+        invalidateTeamCache()
+        notifyDataChanged('team', { deleted: id })
+      }
     } catch (e) {}
   }
 
@@ -1473,14 +1490,18 @@ export const useAdminStore = defineStore('admin', () => {
       reviews.value.unshift(item)
     }
     saveReviewsLocal()
+    notifyDataChanged('reviews', item)
 
     try {
       const res = await fetch(`${API_BASE_URL}/reviews`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
         body: JSON.stringify(item)
       })
-      if (res.ok) apiConnected.value = true
+      if (res.ok) {
+        apiConnected.value = true
+        notifyDataChanged('reviews', item)
+      }
     } catch (e) {}
 
     return item
@@ -1489,13 +1510,17 @@ export const useAdminStore = defineStore('admin', () => {
   const deleteReview = async (id) => {
     reviews.value = reviews.value.filter(r => r.id !== id)
     saveReviewsLocal()
+    notifyDataChanged('reviews', { deleted: id })
 
     try {
       const res = await fetch(`${API_BASE_URL}/reviews/${encodeURIComponent(id)}`, {
         method: 'DELETE',
-        headers: { 'Accept': 'application/json' }
+        headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache' }
       })
-      if (res.ok) apiConnected.value = true
+      if (res.ok) {
+        apiConnected.value = true
+        notifyDataChanged('reviews', { deleted: id })
+      }
     } catch (e) {}
   }
 
@@ -1516,13 +1541,17 @@ export const useAdminStore = defineStore('admin', () => {
   const savePromoStrip = async (data) => {
     promoStrip.value = { ...defaultPromoStrip, ...data, enabled: Boolean(data.enabled) }
     localStorage.setItem(STORAGE_KEYS.PROMO_STRIP, JSON.stringify(promoStrip.value))
+    notifyDataChanged('promostrip', promoStrip.value)
     try {
       const res = await fetch(`${API_BASE_URL}/promo-strip`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
         body: JSON.stringify(promoStrip.value)
       })
-      if (res.ok) apiConnected.value = true
+      if (res.ok) {
+        apiConnected.value = true
+        notifyDataChanged('promostrip', promoStrip.value)
+      }
     } catch (e) {}
   }
 

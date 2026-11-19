@@ -12,6 +12,9 @@ declare(strict_types=1);
 if (!headers_sent()) header('Content-Type: application/json; charset=utf-8');
 if (!headers_sent()) header('X-Content-Type-Options: nosniff');
 if (!headers_sent()) header('X-Frame-Options: SAMEORIGIN');
+if (!headers_sent()) header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0');
+if (!headers_sent()) header('Pragma: no-cache');
+if (!headers_sent()) header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 
 // CORS Headers for API flexibility
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '*';

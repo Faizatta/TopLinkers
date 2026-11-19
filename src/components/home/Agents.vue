@@ -108,12 +108,23 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { api } from '../../services/api'
+import { onDataChanged } from '../../utils/syncBus'
 
 const agents = ref([])
+let unsubscribeSync = null
 
 onMounted(async () => {
   agents.value = await api.getAgents()
+  unsubscribeSync = onDataChanged(async (event) => {
+    if (event.topic === 'team' || event.topic === 'all') {
+      agents.value = await api.getAgents()
+    }
+  })
+})
+
+onUnmounted(() => {
+  if (unsubscribeSync) unsubscribeSync()
 })
 </script>

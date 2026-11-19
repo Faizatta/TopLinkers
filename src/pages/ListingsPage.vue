@@ -451,6 +451,7 @@ import ResultsHeader from '../components/listings/ResultsHeader.vue'
 import PropertyCard from '../components/property/PropertyCard.vue'
 import Skeleton from '../components/ui/Skeleton.vue'
 import { usePropertiesStore } from '../stores/properties'
+import { onDataChanged } from '../utils/syncBus'
 
 const route = useRoute()
 const router = useRouter()
@@ -717,13 +718,21 @@ const handleKeydown = (e) => {
   }
 }
 
+let unsubscribeSync = null
+
 onMounted(() => {
   window.addEventListener('keydown', handleKeydown)
   syncAndLoad()
+  unsubscribeSync = onDataChanged((event) => {
+    if (event.topic === 'properties' || event.topic === 'all') {
+      propertiesStore.fetchProperties()
+    }
+  })
 })
 
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown)
+  if (unsubscribeSync) unsubscribeSync()
 })
 
 watch(() => route.fullPath, () => {

@@ -418,6 +418,7 @@ import {
   ArrowRightIcon
 } from '@heroicons/vue/24/outline'
 import { useAdminStore } from '../stores/admin'
+import { onDataChanged } from '../utils/syncBus'
 
 const adminStore = useAdminStore()
 
@@ -600,11 +601,20 @@ watch(filteredMembers, (newList) => {
   }
 })
 
+let unsubscribeSync = null
+
 onMounted(async () => {
   document.title = 'Our Founders, Agents & PEC Engineers | TopLinkers'
   try {
     await adminStore.syncFromBackend({ force: true })
   } catch (e) {}
+
+  unsubscribeSync = onDataChanged((event) => {
+    if (event.topic === 'team' || event.topic === 'all') {
+      adminStore.syncFromBackend({ force: true }).catch(() => {})
+    }
+  })
+
   window.addEventListener('resize', updateViewportWidth)
   window.addEventListener('keydown', handleKeyDown)
 
@@ -619,6 +629,7 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateViewportWidth)
   window.removeEventListener('keydown', handleKeyDown)
   if (autoScrollTimer) clearInterval(autoScrollTimer)
+  if (unsubscribeSync) unsubscribeSync()
 })
 </script>
 

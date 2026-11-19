@@ -139,6 +139,7 @@ import PropertyGallery from '../components/property/PropertyGallery.vue'
 import PropertySpecs from '../components/property/PropertySpecs.vue'
 import AgentContactCard from '../components/property/AgentContactCard.vue'
 import PropertyCard from '../components/property/PropertyCard.vue'
+import { onDataChanged } from '../utils/syncBus'
 
 const route = useRoute()
 
@@ -238,11 +239,19 @@ watch(
   }
 )
 
+let unsubscribeSync = null
+
 onMounted(() => {
   loadPropertyData(route.params.slug)
+  unsubscribeSync = onDataChanged((event) => {
+    if (event.topic === 'properties' || event.topic === 'all') {
+      loadPropertyData(route.params.slug)
+    }
+  })
 })
 
 onUnmounted(() => {
+  if (unsubscribeSync) unsubscribeSync()
   const existing = document.getElementById('seo-property-jsonld')
   if (existing) existing.remove()
 })

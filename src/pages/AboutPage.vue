@@ -123,6 +123,7 @@ import StatsBand from '../components/home/StatsBand.vue'
 import { api } from '../services/api'
 import { responsiveSrcset } from '../utils/images'
 import { whenIdleOrInteraction } from '../utils/idle'
+import { onDataChanged } from '../utils/syncBus'
 
 // The testimonials marquee (dozens of cards) and the CTA banner sit at the bottom of the
 // page; rendering them after the first paint keeps the initial render task short.
@@ -132,14 +133,21 @@ const CtaBanner = defineAsyncComponent(() => import('../components/home/CtaBanne
 const agents = ref([])
 const showLowerSections = ref(false)
 let cancelDeferred = null
+let unsubscribeSync = null
 
 onMounted(async () => {
   document.title = 'About Us | TopLinkers Real Estate, Construction & Solar Islamabad'
   cancelDeferred = whenIdleOrInteraction(() => { showLowerSections.value = true })
   agents.value = await api.getAgents()
+  unsubscribeSync = onDataChanged(async (event) => {
+    if (event.topic === 'team' || event.topic === 'all') {
+      agents.value = await api.getAgents()
+    }
+  })
 })
 
 onUnmounted(() => {
   if (cancelDeferred) cancelDeferred()
+  if (unsubscribeSync) unsubscribeSync()
 })
 </script>
