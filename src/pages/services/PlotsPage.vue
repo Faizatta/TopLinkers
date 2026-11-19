@@ -11,103 +11,107 @@
       </div>
     </nav>
 
-    <!-- Hero Header with Authentic Aerial Master-Plan Land Background -->
-    <header class="relative text-white py-16 md:py-24 overflow-hidden bg-[#071626]">
-      <!-- Background Hero Image with atmospheric gradients -->
-      <div class="absolute inset-0 pointer-events-none">
-        <img
-          src="/images/hero-moqa-plot.webp"
-          alt="Islamabad Airport Corridor Plots"
-          class="w-full h-full object-cover object-center opacity-30 transform scale-105"
-          loading="eager"
-          fetchpriority="high"
-        />
-        <!-- Multi-layer depth overlays -->
-        <div class="absolute inset-0 bg-gradient-to-b from-[#071626]/80 via-[#071626]/90 to-[#071626]"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-[#071626]/95 via-transparent to-[#071626]/95"></div>
-        <div class="absolute -right-24 -bottom-24 w-96 h-96 rounded-full bg-[#16B4E8]/15 blur-3xl"></div>
-        <div class="absolute -left-24 -top-24 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl"></div>
-      </div>
+    <!-- 1. Hero Cover Banner with Airport Master-Plan Land Background (Harsukh-Style) -->
+    <div class="relative min-h-[500px] sm:h-[540px] md:h-[600px] bg-gray-900 overflow-hidden flex items-end">
+      <img
+        src="/images/hero-moqa-plot.webp"
+        alt="Plots Near Islamabad Airport — TopCity, AGG, PECHS & Faisal Town Phase 2"
+        class="absolute inset-0 block w-full h-full object-cover transform scale-105"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <!-- Dramatic Atmospheric Gradient -->
+      <div class="absolute inset-0 bg-gradient-to-t from-[#0F2A44] via-[#0F2A44]/75 to-[#0F2A44]/35"></div>
 
-      <div class="max-w-[1280px] mx-auto px-4 text-center relative z-10">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 mb-4 shadow-sm">
-          <span class="w-2 h-2 rounded-full bg-[#16B4E8] animate-pulse"></span>
-          <span class="text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#16B4E8]">
-            VERIFIED AIRPORT CORRIDOR LAND
-          </span>
-        </div>
-
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight">
-          Plots Near Islamabad Airport: Cash vs. Installments
-        </h1>
-
-        <p class="text-xs sm:text-sm md:text-base text-slate-300 max-w-2xl mx-auto mt-4 font-normal leading-relaxed">
-          Direct inventory in prime societies adjoining Islamabad International Airport: immediate cash possession plots in TopCity-1, AGG &amp; PECHS, alongside flexible installment plots in Faisal Town Phase 2.
-        </p>
-
-        <!-- Professional Segmented Option Selector (No Icons, High Contrast, Easy to Select) -->
-        <div class="mt-8 max-w-xl mx-auto p-1.5 bg-black/40 backdrop-blur-md rounded-2xl border border-white/15 shadow-2xl flex flex-col sm:flex-row gap-2">
-          <!-- Option 1: Cash Possession -->
-          <button
-            type="button"
-            @click="activePlotFilter = 'cash'"
-            class="flex-1 py-3 px-4 rounded-xl text-left transition-all duration-200 select-none group"
-            :class="activePlotFilter === 'cash'
-              ? 'bg-gradient-to-r from-[#16B4E8] to-[#119ecf] text-[#0F2A44] shadow-lg ring-2 ring-white/30'
-              : 'hover:bg-white/10 text-white/90 hover:text-white'"
-          >
-            <div class="flex items-center justify-between gap-2">
-              <span class="text-xs sm:text-sm font-black uppercase tracking-tight">
-                Cash Possession
-              </span>
-              <span
-                class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full tracking-wider"
-                :class="activePlotFilter === 'cash' ? 'bg-[#0F2A44] text-white' : 'bg-white/20 text-white'"
-              >
-                Moqa Ka Plot
-              </span>
-            </div>
-            <span
-              class="text-[11px] block mt-0.5 font-medium truncate"
-              :class="activePlotFilter === 'cash' ? 'text-[#0F2A44]/80 font-bold' : 'text-slate-300'"
-            >
-              TopCity-1 &bull; AGG &bull; PECHS
+      <!-- Hero Header Content -->
+      <div class="relative max-w-[1280px] mx-auto px-4 sm:px-6 pt-24 sm:pt-28 pb-10 sm:pb-16 w-full text-white z-10">
+        <div class="max-w-3xl space-y-3.5">
+          <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+            <span class="bg-[#E53935] text-white text-[9px] sm:text-[10px] font-black uppercase tracking-wider px-2.5 sm:px-3 py-1 rounded shadow-md">
+              AIRPORT CORRIDOR LAND
             </span>
-          </button>
-
-          <!-- Option 2: Easy Installments -->
-          <button
-            type="button"
-            @click="activePlotFilter = 'installments'"
-            class="flex-1 py-3 px-4 rounded-xl text-left transition-all duration-200 select-none group"
-            :class="activePlotFilter === 'installments'
-              ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg ring-2 ring-white/30'
-              : 'hover:bg-white/10 text-white/90 hover:text-white'"
-          >
-            <div class="flex items-center justify-between gap-2">
-              <span class="text-xs sm:text-sm font-black uppercase tracking-tight">
-                Easy Installments
-              </span>
-              <span
-                class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full tracking-wider"
-                :class="activePlotFilter === 'installments' ? 'bg-[#0F2A44] text-white' : 'bg-white/20 text-white'"
-              >
-                4.5-Yr Plan
-              </span>
-            </div>
-            <span
-              class="text-[11px] block mt-0.5 font-medium truncate"
-              :class="activePlotFilter === 'installments' ? 'text-white/90 font-bold' : 'text-slate-300'"
-            >
-              Faisal Town Phase 2
+            <span class="bg-[#16B4E8] text-[#0F2A44] text-[9px] sm:text-[10px] font-black uppercase tracking-wider px-2.5 sm:px-3 py-1 rounded shadow-md">
+              100% Cash Ready &bull; Moqa Ka Plot
             </span>
-          </button>
+            <span class="bg-white/20 backdrop-blur-md text-white text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded">
+              4.5-Year Installment Files
+            </span>
+          </div>
+
+          <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+            Plots Near Islamabad Airport: Cash vs. Installments
+          </h1>
+
+          <p class="text-xs sm:text-sm md:text-base text-gray-200 leading-relaxed max-w-2xl font-medium">
+            Direct on-ground inventory adjoining Islamabad International Airport: immediate physical possession plots in <strong class="text-white">TopCity-1, AGG &amp; PECHS</strong> alongside flexible 4.5-year installment files in <strong class="text-white">Faisal Town Phase 2</strong>.
+          </p>
+
+          <!-- Direct Actions (Harsukh-Style: WhatsApp & Comparison trigger) -->
+          <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4">
+            <a
+              href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20inquiring%20about%20Plots%20near%20Islamabad%20Airport%20(TopCity,%20AGG,%20PECHS,%20Faisal%20Town)."
+              target="_blank"
+              class="px-6 sm:px-8 py-3.5 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs sm:text-sm font-black uppercase tracking-wider rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
+            >
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+              <span>Instant WhatsApp Inquiry</span>
+            </a>
+
+            <!-- Professional Category Switcher Pills -->
+            <div class="inline-flex p-1 bg-black/40 backdrop-blur-md rounded-xl border border-white/20 text-xs">
+              <button
+                type="button"
+                @click="activePlotFilter = 'cash'"
+                class="px-4 py-2 rounded-lg font-bold transition-all"
+                :class="activePlotFilter === 'cash' ? 'bg-[#16B4E8] text-[#0F2A44] shadow' : 'text-slate-300 hover:text-white'"
+              >
+                Cash Possession Plots
+              </button>
+              <button
+                type="button"
+                @click="activePlotFilter = 'installments'"
+                class="px-4 py-2 rounded-lg font-bold transition-all"
+                :class="activePlotFilter === 'installments' ? 'bg-emerald-500 text-white shadow' : 'text-slate-300 hover:text-white'"
+              >
+                Installment Plans
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </header>
+    </div>
+
+    <!-- 2. Floating 4-Metric Fast-Facts Highlights Dock (Harsukh-Style Overlapping Bar) -->
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 -mt-6 sm:-mt-8 relative z-20">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 bg-white rounded-2xl p-3.5 sm:p-6 shadow-xl border border-gray-100 mb-8 sm:mb-12">
+        <div class="text-center p-3 sm:p-4 rounded-xl bg-gray-50/80 border border-gray-100">
+          <span class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase block">Cash Demarcation</span>
+          <span class="text-base sm:text-2xl font-black text-[#16B4E8] block mt-0.5">Moqa Ka Plot</span>
+          <span class="text-[9px] sm:text-[10px] text-gray-500 block mt-0.5">TopCity, AGG &bull; Ready</span>
+        </div>
+
+        <div class="text-center p-3 sm:p-4 rounded-xl bg-gray-50/80 border border-gray-100">
+          <span class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase block">Easy Installments</span>
+          <span class="text-base sm:text-2xl font-black text-emerald-600 block mt-0.5">4.5-Year Plan</span>
+          <span class="text-[9px] sm:text-[10px] text-gray-500 block mt-0.5">Faisal Town Phase 2</span>
+        </div>
+
+        <div class="text-center p-3 sm:p-4 rounded-xl bg-gray-50/80 border border-gray-100">
+          <span class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase block">Entry Rates</span>
+          <span class="text-base sm:text-2xl font-black text-[#0F2A44] block mt-0.5">PKR 25 Lac+</span>
+          <span class="text-[9px] sm:text-[10px] text-gray-500 block mt-0.5">5, 7, 10 Marla &amp; 1 Kanal</span>
+        </div>
+
+        <div class="text-center p-3 sm:p-4 rounded-xl bg-gray-50/80 border border-gray-100">
+          <span class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase block">Airport Proximity</span>
+          <span class="text-base sm:text-2xl font-black text-[#0F2A44] block mt-0.5">1–3 Mins</span>
+          <span class="text-[9px] sm:text-[10px] text-gray-500 block mt-0.5">Srinagar Hwy &amp; Motorway</span>
+        </div>
+      </div>
+    </div>
 
     <!-- Content Section -->
-    <main class="max-w-[1280px] mx-auto px-4 py-12 sm:py-16">
+    <main class="max-w-[1280px] mx-auto px-4 pb-12 sm:pb-16">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <article class="lg:col-span-2 space-y-12">
 
