@@ -1,5 +1,5 @@
 <template>
-  <div class="services-page pt-28 sm:pt-32 md:pt-36 pb-16 bg-[#F8FAFC] min-h-screen">
+  <div class="services-page pt-28 sm:pt-32 md:pt-36 pb-32 sm:pb-20 bg-[#F8FAFC] min-h-screen">
     <div class="max-w-[1280px] mx-auto px-4">
       <!-- Breadcrumb Navigation -->
       <nav class="flex items-center text-xs text-gray-500 gap-2 mb-6" aria-label="Breadcrumb">
@@ -32,6 +32,7 @@
             <select
               id="services-division"
               v-model="activeTab"
+              @change="handleSectionChange(activeTab)"
               class="w-full text-xs font-black text-[#0F2A44] py-3 pl-4 pr-10 rounded-xl border-2 border-[#16B4E8] bg-white shadow-sm focus:outline-none appearance-none cursor-pointer"
             >
               <option value="all">All Core Divisions (Plots, Flats, Construction, Solar)</option>
@@ -209,16 +210,16 @@
       <section
         v-if="activeTab === 'all' || activeTab === 'plot'"
         id="plot"
-        class="mb-16 scroll-mt-28"
+        class="mb-16 scroll-mt-36 sm:scroll-mt-32 pt-4 sm:pt-0"
       >
         <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 pb-5 border-b border-gray-200">
           <div>
             <span class="text-[10px] font-black uppercase tracking-widest text-[#16B4E8]">Division 01 &bull; Verified Land Portfolios</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0F2A44] mt-1">
-              Plots: 100% Cash Ready vs. Easy Installments
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#0F2A44] mt-1.5 tracking-tight">
+              Plots: Cash Possession (Moqa) vs. Installments
             </h2>
-            <p class="text-xs sm:text-sm text-gray-500 mt-1 max-w-2xl">
-              Clearly segregated land options: choose between immediate on-ground physical possession or flexible 3 to 4-year installment files.
+            <p class="text-xs sm:text-sm text-gray-500 mt-1 max-w-2xl leading-relaxed">
+              Clearly segregated land options: choose between immediate on-ground physical possession (TopCity-1, AGG, PECHS) or flexible 4.5-year installment files (Faisal Town Phase 2).
             </p>
           </div>
 
@@ -443,32 +444,32 @@
       </section>
 
       <!-- ========================================== -->
-      <!-- 2. FLATS & APARTMENTS (OPTION 1: PHA & OPTION 2: LUXURY) -->
+      <!-- 2. FLATS & APARTMENTS (PHA CASH & LUXURY)  -->
       <!-- ========================================== -->
       <section
         v-if="activeTab === 'all' || activeTab === 'flats'"
         id="flats"
-        class="mb-16 scroll-mt-28"
+        class="mb-16 scroll-mt-36 sm:scroll-mt-32 pt-4 sm:pt-0"
       >
         <div class="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-gray-200">
           <div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 flex-wrap">
               <span class="text-[10px] font-black uppercase tracking-widest text-[#16B4E8]">Division 02</span>
               <span class="text-[10px] font-black uppercase tracking-wider bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-full border border-blue-100">
-                2 Core Options: PHA &amp; Luxury Flats
+                PHA Govt &amp; Luxury Suites
               </span>
             </div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0F2A44] mt-1">
-              Flats &amp; Apartments — PHA &amp; Luxury Flats
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#0F2A44] mt-1.5 tracking-tight">
+              Flats &amp; Apartments — PHA &amp; Luxury Suites
             </h2>
-            <p class="text-xs sm:text-sm text-gray-500 mt-1">
+            <p class="text-xs sm:text-sm text-gray-500 mt-1 max-w-2xl leading-relaxed">
               Authorized PHA government flats in Sector I-12, Sector I-16 &amp; Sector G-11, plus luxury suites (Banu Hafeez &amp; Harsukh Residencies).
             </p>
           </div>
-          <div class="flex items-center gap-2 flex-shrink-0">
+          <div class="flex items-center gap-2 flex-shrink-0 w-full sm:w-auto">
             <router-link
               to="/services/apartments-flats"
-              class="text-xs font-bold text-white bg-[#0F2A44] hover:bg-[#16B4E8] px-3.5 py-2 rounded-xl transition-all shadow-sm flex items-center gap-1.5"
+              class="w-full sm:w-auto justify-center text-xs font-bold text-white bg-[#0F2A44] hover:bg-[#16B4E8] px-4 py-2.5 rounded-xl transition-all shadow-sm flex items-center gap-1.5"
             >
               <span>Dedicated Flats Portal</span>
               <span>&rarr;</span>
@@ -477,10 +478,10 @@
         </div>
 
         <!-- Official PHA Foundation Mandate & SECP Registration Box -->
-        <div class="mb-8 bg-gradient-to-r from-blue-50/80 via-white to-emerald-50/50 rounded-2xl border border-blue-100 p-5 shadow-xs">
+        <div class="mb-8 bg-gradient-to-r from-blue-50/80 via-white to-emerald-50/50 rounded-2xl border border-blue-100 p-4 sm:p-5 shadow-xs">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div class="space-y-1.5">
-              <div class="flex items-center gap-2">
+              <div class="flex items-center gap-2 flex-wrap">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 <span class="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100/70 px-2 py-0.5 rounded">
                   Implementing Arm • Ministry of Housing &amp; Works
@@ -489,8 +490,8 @@
                   SECP Section 42 Registered
                 </span>
               </div>
-              <p class="text-xs text-slate-700 leading-relaxed font-medium pt-1">
-                <strong>PHA Foundation is a Public Company registered with Securities and Exchange Commission of Pakistan under Section 42 of the Companies Ordinance, 1984. Being one of the implementing arms of Ministry of Housing &amp; Works, PHA Foundation is consistently striving to eliminate shelterlessness and to reduce the housing shortfall in Pakistan.</strong>
+              <p class="text-[11px] sm:text-xs text-slate-700 leading-relaxed font-normal pt-1">
+                <strong>PHA Foundation is a Public Company registered with Securities and Exchange Commission of Pakistan under Section 42 of the Companies Ordinance, 1984.</strong> Being one of the implementing arms of Ministry of Housing &amp; Works, PHA Foundation is consistently striving to eliminate shelterlessness and reduce the housing shortfall in Pakistan.
               </p>
             </div>
             <div class="bg-white p-3 rounded-xl border border-blue-100 shadow-2xs text-center flex-shrink-0">
@@ -908,13 +909,22 @@
       <section
         v-if="activeTab === 'all' || activeTab === 'construction'"
         id="construction"
-        class="mb-16 scroll-mt-28"
+        class="mb-16 scroll-mt-36 sm:scroll-mt-32 pt-4 sm:pt-0"
       >
         <div class="mb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-gray-200">
           <div>
             <span class="text-[10px] font-black uppercase tracking-widest text-[#16B4E8]">Division 03</span>
-            <h2 class="text-2xl font-extrabold text-[#0F2A44] mt-1">Turnkey Architectural &amp; Civil Construction</h2>
-            <p class="text-xs text-gray-500 mt-1">Complete design, grey structure, luxury finishing, and commercial plazas.</p>
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#0F2A44] mt-1.5 tracking-tight">Turnkey Architectural &amp; Civil Construction</h2>
+            <p class="text-xs sm:text-sm text-gray-500 mt-1 max-w-2xl leading-relaxed">Complete architectural design, grey structure, luxury finishing, and commercial plazas across Islamabad &amp; Rawalpindi.</p>
+          </div>
+          <div class="flex items-center gap-2 flex-shrink-0 w-full sm:w-auto">
+            <router-link
+              to="/services/construction"
+              class="w-full sm:w-auto justify-center text-xs font-bold text-white bg-[#0F2A44] hover:bg-[#16B4E8] px-4 py-2.5 rounded-xl transition-all shadow-sm flex items-center gap-1.5"
+            >
+              <span>Dedicated Construction Portal</span>
+              <span>&rarr;</span>
+            </router-link>
           </div>
         </div>
 
@@ -1142,7 +1152,7 @@
       <section
         v-if="activeTab === 'all' || activeTab === 'solar'"
         id="solar"
-        class="mb-16 scroll-mt-28"
+        class="mb-16 scroll-mt-36 sm:scroll-mt-32 pt-4 sm:pt-0"
       >
         <!-- Unique Solar Executive Spotlight Banner ("Earn From The Sun") -->
         <div class="mb-10 bg-gradient-to-br from-[#071320] via-[#0F2A44] to-[#0B2239] text-white rounded-3xl p-6 sm:p-10 shadow-2xl border border-amber-400/20 relative overflow-hidden">
@@ -1976,7 +1986,9 @@ const handleSectionChange = (sectionId, smooth = true) => {
         setTimeout(() => {
           const el = document.getElementById(id)
           if (el) {
-            scrollTo(`#${id}`, { offset: -90, duration: smooth ? 1.0 : 0 })
+            const isMobile = typeof window !== 'undefined' && window.innerWidth < 640
+            const offset = isMobile ? -140 : -100
+            scrollTo(`#${id}`, { offset, duration: smooth ? 0.8 : 0 })
           }
         }, 120)
       })

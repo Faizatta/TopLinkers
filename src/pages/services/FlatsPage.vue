@@ -132,7 +132,7 @@
               </div>
 
               <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0F2A44] mb-3">
-                Option 1: PHA Government Flats
+                PHA Government Flats
               </h2>
 
               <!-- Official Mandate Description (Word-for-Word as mandated by SECP & Ministry) -->
@@ -524,7 +524,7 @@
               </div>
 
               <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0F2A44] mb-3">
-                Option 2: Luxury Flats &amp; Mountain Suites
+                Luxury Flats &amp; Mountain Suites
               </h2>
               <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
                 Premium urban executive residences in prime Islamabad sectors along with scenic alpine holiday suites in Nathia Gali delivering up to 20%+ managed tourism rental returns.

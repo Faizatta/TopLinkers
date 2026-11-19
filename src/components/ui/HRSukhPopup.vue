@@ -13,7 +13,7 @@
       <div v-if="adminStore.spotlightPopup?.enabled && showTeaser && !isHiddenRoute && !uiStore.isWhatsAppOpen">
         <!-- Mobile: Compact Floating Circle Badge (Bottom-Left) -->
         <div
-          class="sm:hidden fixed left-4 z-40 select-none transition-[bottom] duration-200 ease-out"
+          class="sm:hidden fixed left-3 z-40 select-none transition-[bottom] duration-200 ease-out"
           :style="{ bottom: `${bottomOffset}px` }"
         >
           <div class="relative">
@@ -23,20 +23,20 @@
               @click="goToSpotlightPage"
               :aria-label="spotlight.tag || 'Explore Spotlight Investment'"
               :title="spotlight.tag || 'High-ROI Investment Spotlight'"
-              class="relative w-14 h-14 rounded-full p-[2.5px] bg-gradient-to-tr from-[#0F2A44] via-[#16B4E8] to-emerald-400 shadow-[0_10px_25px_rgba(15,42,68,0.45)] active:scale-95 transition-transform"
+              class="relative w-11 h-11 rounded-full p-[2px] bg-gradient-to-tr from-[#0F2A44] via-[#16B4E8] to-emerald-400 shadow-[0_8px_20px_rgba(15,42,68,0.4)] active:scale-95 transition-transform"
             >
               <img
                 :src="spotlight.image || 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80'"
                 :alt="spotlight.tag || 'Spotlight Property'"
                 loading="lazy"
                 decoding="async"
-                width="56"
-                height="56"
+                width="44"
+                height="44"
                 class="w-full h-full rounded-full object-cover border border-white/30"
               />
             </button>
 
-            <span class="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap px-1.5 py-0.5 rounded-full bg-[#0F2A44] text-[#16B4E8] border border-[#16B4E8]/50 text-[8px] font-black uppercase tracking-wider shadow max-w-[70px] truncate">
+            <span class="pointer-events-none absolute -bottom-1.5 left-1/2 -translate-x-1/2 whitespace-nowrap px-1 py-0.5 rounded-full bg-[#0F2A44] text-[#16B4E8] border border-[#16B4E8]/50 text-[7px] font-black uppercase tracking-wider shadow max-w-[65px] truncate">
               {{ spotlight.tag?.split('|')[0]?.trim() || 'Spotlight' }}
             </span>
 
@@ -44,10 +44,10 @@
               type="button"
               @click.stop="dismissTeaser"
               aria-label="Close spotlight shortcut"
-              class="absolute -top-1.5 -right-1.5 w-6 h-6 flex items-center justify-center"
+              class="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center"
             >
-              <span class="w-5 h-5 rounded-full bg-[#0F2A44] text-white border border-white/40 flex items-center justify-center shadow">
-                <XMarkIcon class="w-3 h-3" />
+              <span class="w-4 h-4 rounded-full bg-[#0F2A44] text-white border border-white/40 flex items-center justify-center shadow">
+                <XMarkIcon class="w-2.5 h-2.5" />
               </span>
             </button>
           </div>
