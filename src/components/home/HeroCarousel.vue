@@ -20,7 +20,7 @@
       v-for="(slide, index) in slides"
       :key="slide.id"
       class="hero-slide relative w-full h-full cursor-pointer"
-      @click="$emit('slide-click', slide.link)"
+      @click="$emit('slide-click', slide.listingLink || slide.link)"
     >
       <HeroSlide :slide="slide" :priority="index === 0" />
     </swiper-slide>

@@ -27,7 +27,7 @@
       class="hero-slide hero-static absolute inset-0 z-[2] w-full h-full cursor-pointer"
       :class="{ 'swiper-slide-active': staticActive, 'pointer-events-none': carouselReady }"
       :inert="carouselReady || undefined"
-      @click="goToSlideLink(slides[0].link)"
+      @click="goToSlideLink(slides[0].listingLink || slides[0].link)"
     >
       <HeroSlide :slide="slides[0]" :priority="true" />
     </div>
@@ -47,58 +47,75 @@ const router = useRouter()
 const slides = [
   {
     id: 1,
-    title: 'Executive Modern Villa',
-    specs: '5 Beds - 6 Baths - 1 Kanal (500 Sq Yds)',
-    description: 'Architectural masterpiece in Gulberg Greens with designer Italian kitchen, private landscaped lawn, 20kW solar net metering, and servant quarters.',
-    price: 'PKR 7.50 Crore',
-    postfix: '',
-    ctaText: 'View Property',
-    link: '/property/executive-designer-villa-gulberg',
-    image: '/images/hero-real-estate.webp'
-  },
-  {
-    id: 2,
-    title: 'Renovated PHA Luxury Flats',
-    specs: '3 Beds - 2 Baths - 1,450 Sq Ft',
-    description: 'Ready possession PHA executive apartments in Sector I-12 & I-16 with dual elevators, standby power, 24/7 security, and clean CDA registry.',
-    price: 'PKR 95 Lac',
-    postfix: '',
-    ctaText: 'Browse Flats',
-    link: '/listings?category=pha-flats',
-    image: '/images/hero-pha-flats.webp'
-  },
-  {
-    id: 3,
-    title: 'Prime Moqa Ka Plot',
-    specs: '10 Marla - Ready Possession - CDA Clean',
-    description: '100% cash ready possession plot in TopCity-1 Block B. Clean registry, ready for immediate house construction with all underground utilities.',
+    title: 'Prime Moqa Ka Plot in TopCity-1 (Block B)',
+    specs: '10 Marla • Immediate Physical Possession • RDA Approved',
+    badge: 'Cash Moqa Ready',
+    description: 'Direct on-ground demarcated plot adjoining New Islamabad Airport gate & Srinagar Highway. Immediate physical possession with swift registry transfer.',
     price: 'PKR 1.25 Crore',
-    postfix: '',
-    ctaText: 'View Plot',
+    ctaText: 'View Plot in Listings',
+    listingLink: '/listings?keyword=TopCity&type=plot',
     link: '/property/corner-plot-topcity',
     image: '/images/hero-moqa-plot.webp'
   },
   {
-    id: 4,
-    title: 'Harsukh Hilltop Luxury Suites',
-    specs: '2 Beds - 2 Baths - 1,150 Sq Ft',
-    description: 'Wake up above the clouds in serene Nathia Gali pine forests. Prime vacation retreat with 15% booking and 20%+ annual tourist rental yield.',
-    price: 'PKR 1.65 Crore',
-    postfix: '',
-    ctaText: 'Explore Harsukh',
+    id: 2,
+    title: 'PHA Official Apartments (Sector I-12 & I-16)',
+    specs: '2 & 3 Bed Apartments • Ready Possession & Installments',
+    badge: 'Government Housing',
+    description: 'Authorized government-allocated PHA flats in Islamabad with fast CDA transfer, dual elevators, 24/7 security, and verified allotment files.',
+    price: 'PKR 55 Lac – 1.45 Crore',
+    ctaText: 'View Flats in Listings',
+    listingLink: '/listings?keyword=PHA&type=apartment',
+    link: '/property/pha-flats-sector-i12-furnished-apartment',
+    image: '/images/pha/pha-i12-elevation.jpg'
+  },
+  {
+    id: 3,
+    title: 'Harsukh Residencies — Nathia Gali Suites',
+    specs: 'Furnished Mountain Suites & Penthouses • 8,200 Ft',
+    badge: '20%+ Rental ROI',
+    description: 'Wake up above the clouds in serene Nathia Gali pine forests. Timber-and-stone luxury suites with thermal terrace pools and hands-off rental management.',
+    price: 'PKR 1.65 Crore (3-Yr Plan)',
+    ctaText: 'View in Listings',
+    listingLink: '/listings?keyword=Harsukh',
     link: '/hr-sukh',
     image: '/images/hero-harsukh.webp'
   },
   {
+    id: 4,
+    title: 'Banu Hafeez Executive Residences (G-11 Markaz)',
+    specs: '1, 2 & 3 Bed Luxury Suites • 20% Down • 2.5-Yr Plan',
+    badge: '18% Expected Yield',
+    description: 'Premier modern architecture in the commercial core of Islamabad G-11 Markaz. Dedicated basement parking, high-speed elevators, and Margalla views.',
+    price: 'PKR 1.45 Cr – 3.20 Cr',
+    ctaText: 'View in Listings',
+    listingLink: '/listings?keyword=Banu+Hafeez',
+    link: '/featured-building',
+    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=85'
+  },
+  {
     id: 5,
-    title: 'Turnkey Solar Smart Villa',
-    specs: '4 Beds - 4 Baths - 10kW On-Grid Solar',
-    description: 'Turnkey A+ construction with IESCO bi-directional green meter net metering, cutting monthly electricity bills to zero with Grade-60 steel.',
-    price: 'PKR 4.80 Crore',
-    postfix: '',
-    ctaText: 'Solar & Turnkey',
-    link: '/services#solar',
-    image: '/images/hero-solar.webp'
+    title: 'Spanish Architecture Luxury Villa (Gulberg Greens)',
+    specs: '1 Kanal (500 Sq Yds) • 5 Beds • 20kW Tier-1 Solar Net Metering',
+    badge: 'Turnkey Ready',
+    description: 'Custom turnkey designer residence with Italian kitchen, landscaped private lawn, Grade-60 steel seismic structure, and zero electricity bills via solar.',
+    price: 'PKR 7.50 Crore',
+    ctaText: 'View Villa in Listings',
+    listingLink: '/listings?keyword=Gulberg',
+    link: '/property/spanish-luxury-villa-gulberg-greens',
+    image: '/images/hero-real-estate.webp'
+  },
+  {
+    id: 6,
+    title: 'Airport Green Garden (AGG) & PECHS Moqa Plots',
+    specs: '5 & 10 Marla • 100% On-Ground Cash Moqa • RDA Approved',
+    badge: 'Airport Corridor',
+    description: 'Direct demarcated on-ground plot inventory adjoining Islamabad Airport cargo boundary and CPEC Hakla interchange with swift registry transfer.',
+    price: 'PKR 25 Lac – 1.05 Crore',
+    ctaText: 'View Plots in Listings',
+    listingLink: '/listings?keyword=AGG&type=plot',
+    link: '/property/agg-airport-green-garden-5-marla-moqa-ka-plot',
+    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=85'
   }
 ]
 
