@@ -16,6 +16,7 @@ const STORAGE_KEYS = {
   REVIEWS: 'toplinkers_client_reviews',
   PROMO_STRIP: 'toplinkers_promo_strip',
   SPOTLIGHT_POPUP: 'toplinkers_spotlight_popup',
+  CUSTOM_BUILDING: 'toplinkers_custom_building',
   FAQS: 'toplinkers_service_faqs',
   USERS: 'toplinkers_admin_users'
 }
@@ -286,7 +287,7 @@ export const useAdminStore = defineStore('admin', () => {
       // Public pages only display rates, team, reviews and the promo strip.
       // Private CRM data (leads, users, roles, admin blog list) is requested
       // only for a signed-in admin session.
-      const [ratesRes, teamRes, reviewsRes, promoRes, leadsRes, rolesRes, usersRes, spotlightRes, faqsRes] = await Promise.all([
+      const [ratesRes, teamRes, reviewsRes, promoRes, leadsRes, rolesRes, usersRes, spotlightRes, customBuildingRes, faqsRes] = await Promise.all([
         get('/rates'),
         get('/team'),
         get('/reviews'),
@@ -295,6 +296,7 @@ export const useAdminStore = defineStore('admin', () => {
         isAdminSession ? get('/roles') : null,
         isAdminSession ? get('/users') : null,
         get('/spotlight-popup'),
+        get('/custom-building'),
         get('/faqs')
       ])
 
@@ -360,6 +362,12 @@ export const useAdminStore = defineStore('admin', () => {
       if (spotlightData !== undefined && spotlightData && typeof spotlightData === 'object' && Object.keys(spotlightData).length > 0) {
         spotlightPopup.value = { ...defaultSpotlightPopup, ...spotlightData }
         localStorage.setItem(STORAGE_KEYS.SPOTLIGHT_POPUP, JSON.stringify(spotlightPopup.value))
+      }
+
+      const customBuildingData = await readJson(customBuildingRes)
+      if (customBuildingData !== undefined && customBuildingData && typeof customBuildingData === 'object' && Object.keys(customBuildingData).length > 0) {
+        customBuilding.value = { ...defaultCustomBuilding, ...customBuildingData }
+        localStorage.setItem(STORAGE_KEYS.CUSTOM_BUILDING, JSON.stringify(customBuilding.value))
       }
 
       const faqsData = await readJson(faqsRes)
@@ -1624,6 +1632,68 @@ export const useAdminStore = defineStore('admin', () => {
     } catch (e) {}
   }
 
+  // 7.15 Custom Building / Project Spotlight (Separate 2nd Popup & Details Modal)
+  const defaultCustomBuilding = {
+    enabled: true,
+    name: 'Banu Hafeez Executive Residences',
+    tag: 'G-11 Markaz | Islamabad',
+    badge: '18% Expected Yield',
+    downPayment: '20% Down',
+    price: 'PKR 1.45 Cr – 3.20 Cr',
+    location: 'Sector G-11 Markaz, Islamabad',
+    title: 'Executive Luxury Suites & Penthouses',
+    subtitle: 'Modern architecture with dedicated basement parking, high-speed elevators & backup power generator.',
+    description: 'Banu Hafeez Residences offers premier urban luxury in the heart of Islamabad G-11 Markaz. Featuring modern 1-bed, 2-bed and 3-bed executive apartments with imported Spanish porcelain flooring, designer kitchens, Grohe sanitary fittings, and expansive balconies overlooking the Margalla Hills.',
+    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
+    link: '/services/apartments-flats',
+    gallery: [
+      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80'
+    ],
+    specs: [
+      { label: 'Units', value: '1, 2 & 3 Bed' },
+      { label: 'Down Payment', value: '20% Down' },
+      { label: 'Installments', value: '2.5 Years' },
+      { label: 'Possession', value: 'Dec 2027' }
+    ],
+    features: [
+      'Prime G-11 Markaz commercial proximity',
+      'Earthquake resistant seismic structure',
+      'Double basement dedicated reserved parking',
+      'Dual high-speed passenger & cargo elevators',
+      '24/7 CCTV surveillance & armed security',
+      'Dedicated power backup generator'
+    ],
+    whatsappMsg: 'Hello TopLinkers, I am inquiring about the featured building project: Banu Hafeez Executive Residences.',
+    phone: '0334-9522157'
+  }
+
+  const customBuilding = ref(
+    JSON.parse(localStorage.getItem(STORAGE_KEYS.CUSTOM_BUILDING) || 'null') || defaultCustomBuilding
+  )
+
+  const saveCustomBuilding = async (data) => {
+    customBuilding.value = {
+      ...defaultCustomBuilding,
+      ...data,
+      enabled: Boolean(data.enabled)
+    }
+    localStorage.setItem(STORAGE_KEYS.CUSTOM_BUILDING, JSON.stringify(customBuilding.value))
+    notifyDataChanged('custombuilding', customBuilding.value)
+    try {
+      const res = await fetch(`${API_BASE_URL}/custom-building`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
+        body: JSON.stringify(customBuilding.value)
+      })
+      if (res.ok) {
+        apiConnected.value = true
+        notifyDataChanged('custombuilding', customBuilding.value)
+      }
+    } catch (e) {}
+  }
+
   // 7.2 Service FAQs Management (Dynamic FAQs for Plots, Flats, Construction, Solar, Real Estate)
   const defaultFaqs = [
     // Plots FAQs
@@ -1944,6 +2014,10 @@ export const useAdminStore = defineStore('admin', () => {
     defaultSpotlightPopup,
     spotlightPopup,
     saveSpotlightPopup,
+    // Custom Building / Project Spotlight (Separate 2nd Popup)
+    defaultCustomBuilding,
+    customBuilding,
+    saveCustomBuilding,
     // Service FAQs Management
     defaultFaqs,
     faqs,

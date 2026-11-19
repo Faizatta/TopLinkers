@@ -256,6 +256,250 @@
       </form>
     </div>
 
+    <!-- FEATURED BUILDING / PROJECT SPOTLIGHT (POPUP 2 & DETAILS MODAL) -->
+    <!-- Separate from Harsukh: User can upload building picture directly from browser, configure details modal & dedicated page -->
+    <div class="bg-white rounded-xl p-6 border-2 border-amber-400/30 shadow-xs space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-black uppercase tracking-wider text-[#0F2A44] bg-amber-400 px-2.5 py-0.5 rounded shadow-xs">
+              Popup 2 &bull; Separate Feature
+            </span>
+            <h2 class="text-sm font-bold text-[#0F2A44] uppercase tracking-wide">
+              Custom Building / Plaza Spotlight Manager (Popup 2)
+            </h2>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">
+            Independent 2nd popup with instant modal view and dedicated details page. Upload building pictures directly from your browser/computer, set price, down payment, ROI, and specifications.
+          </p>
+        </div>
+
+        <!-- Master ON / OFF Switch for Popup 2 -->
+        <label
+          :class="customBuildingForm.enabled ? 'bg-amber-50 border-amber-400 text-amber-900 ring-2 ring-amber-500/20' : 'bg-slate-100 border-slate-300 text-slate-600'"
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border cursor-pointer text-xs font-bold transition-all shadow-xs select-none flex-shrink-0"
+        >
+          <input
+            v-model="customBuildingForm.enabled"
+            @change="saveCustomBuildingToggle"
+            type="checkbox"
+            class="rounded text-amber-500 focus:ring-amber-400 w-4 h-4 cursor-pointer"
+          />
+          <span>{{ customBuildingForm.enabled ? '✓ Building Popup 2 ACTIVE on Screen' : '✗ Building Popup 2 OFF (Hidden from Visitors)' }}</span>
+        </label>
+      </div>
+
+      <!-- Quick 1-Click Building Presets -->
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <label class="text-[11px] font-bold text-slate-600 uppercase">
+            Quick 1-Click Building Presets:
+          </label>
+          <span class="text-[10px] text-slate-400">Click to quickly load commercial plaza / executive apartments</span>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <button
+            v-for="bPreset in buildingPresets"
+            :key="bPreset.key"
+            type="button"
+            @click="applyBuildingPreset(bPreset.key)"
+            class="p-2.5 rounded-xl border border-slate-200 hover:border-amber-400 bg-slate-50 hover:bg-amber-50/50 text-left transition-all group"
+          >
+            <div class="flex items-center justify-between text-[10px] font-extrabold text-[#0F2A44] group-hover:text-amber-600">
+              <span class="truncate">{{ bPreset.name }}</span>
+            </div>
+            <span class="text-[9px] font-bold text-amber-800 bg-amber-100/80 px-1.5 py-0.2 rounded mt-1 inline-block">
+              {{ bPreset.badge }}
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <form @submit.prevent="saveCustomBuilding" class="space-y-4 pt-1">
+        <!-- Grid 1: Basic Identifiers -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Building / Plaza Name *</label>
+            <input v-model="customBuildingForm.name" type="text" required placeholder="e.g. Banu Hafeez Residences" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-bold text-[#0F2A44] focus:outline-none focus:border-amber-500" />
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Elevation Tag / Location *</label>
+            <input v-model="customBuildingForm.tag" type="text" required placeholder="e.g. G-11 Markaz | Islamabad" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold focus:outline-none focus:border-amber-500" />
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">ROI / Highlight Badge</label>
+            <input v-model="customBuildingForm.badge" type="text" placeholder="e.g. 18% Expected Yield" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold focus:outline-none focus:border-amber-500" />
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Down Payment / Terms Tag</label>
+            <input v-model="customBuildingForm.downPayment" type="text" placeholder="e.g. 20% Down or 2.5-Yr Plan" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold focus:outline-none focus:border-amber-500" />
+          </div>
+        </div>
+
+        <!-- Grid 2: Pricing, Phone & Route -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Price Range</label>
+            <input v-model="customBuildingForm.price" type="text" placeholder="e.g. PKR 1.45 Cr – 3.20 Cr" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold focus:outline-none focus:border-amber-500" />
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Direct Advisory Phone</label>
+            <input v-model="customBuildingForm.phone" type="text" placeholder="0334-9522157" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold focus:outline-none focus:border-amber-500" />
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Target Dedicated Page / Route</label>
+            <input v-model="customBuildingForm.link" type="text" placeholder="/featured-building" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-medium focus:outline-none focus:border-amber-500" />
+          </div>
+        </div>
+
+        <!-- Grid 3: Headline & Subtitle -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+          <div class="md:col-span-5">
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Headline Hook / Title *</label>
+            <input v-model="customBuildingForm.title" type="text" required placeholder="e.g. Executive Luxury Suites & Penthouses" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-bold text-[#0F2A44] focus:outline-none focus:border-amber-500" />
+          </div>
+
+          <div class="md:col-span-7">
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Subtitle / Teaser Hook *</label>
+            <input v-model="customBuildingForm.subtitle" type="text" required placeholder="e.g. Modern architecture with dedicated basement parking, fast elevators & backup power generator" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-amber-500" />
+          </div>
+        </div>
+
+        <!-- Direct Browser File Picker & Image Upload Area -->
+        <div class="p-4 rounded-xl border border-dashed border-amber-300 bg-amber-50/40 space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <label class="block text-[11px] font-bold text-[#0F2A44] uppercase">
+                Building Picture (Upload Directly From Your Browser / Computer)
+              </label>
+              <p class="text-[10px] text-slate-500">
+                Select any photo from your computer (JPG, PNG, WebP). It will be saved directly to the server and shown on the popup &amp; details page.
+              </p>
+            </div>
+            <button
+              type="button"
+              @click="triggerBuildingImagePicker"
+              :disabled="isUploadingBuildingImage"
+              class="px-4 py-2 rounded-xl bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-2 cursor-pointer flex-shrink-0"
+            >
+              <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+              <span>{{ isUploadingBuildingImage ? 'Uploading Image...' : 'Browse Computer / Browser' }}</span>
+            </button>
+            <input
+              type="file"
+              ref="buildingImageInput"
+              accept="image/*"
+              class="hidden"
+              @change="onBuildingImagePicked"
+            />
+          </div>
+
+          <!-- Dual Mode: File Preview & Fallback Image URL Input -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+            <div class="md:col-span-8">
+              <label class="block text-[10px] font-semibold text-slate-500 uppercase mb-0.5">Or Paste Direct Image URL</label>
+              <input
+                v-model="customBuildingForm.image"
+                type="text"
+                placeholder="https://... or /uploads/blogs/..."
+                class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-amber-500 bg-white"
+              />
+            </div>
+
+            <div class="md:col-span-4 flex items-center gap-3">
+              <div class="relative w-14 h-14 rounded-lg overflow-hidden border border-amber-300 shadow-sm bg-slate-900 flex-shrink-0">
+                <img :src="customBuildingForm.image || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=200&q=80'" alt="Preview" class="w-full h-full object-cover" />
+              </div>
+              <div class="text-[11px] leading-tight">
+                <span class="font-bold text-[#0F2A44] block">Building Picture</span>
+                <span class="text-[10px] text-emerald-600 font-semibold block">✓ Ready for Popup</span>
+                <button
+                  type="button"
+                  @click="triggerBuildingImagePicker"
+                  class="text-[10px] text-amber-700 hover:underline font-bold mt-0.5 block"
+                >
+                  Change Photo &rarr;
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Overview & Features -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Project Description *</label>
+            <textarea
+              v-model="customBuildingForm.description"
+              rows="3"
+              required
+              placeholder="Detailed description of the building project, specifications, elevator, parking, Margalla view..."
+              class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-amber-500"
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Features &amp; Amenities (Comma Separated)</label>
+            <textarea
+              v-model="customBuildingForm.featuresText"
+              rows="3"
+              placeholder="e.g. Prime Markaz location, Dedicated basement parking, High-speed elevators, 24/7 armed security, Power backup generator"
+              class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-amber-500"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Live Preview Bar with Test Modal & Save Actions -->
+        <div class="p-3.5 bg-gradient-to-r from-[#0B1D30] via-[#0F2A44] to-[#142D42] rounded-xl text-white flex flex-col lg:flex-row items-center justify-between gap-4 border border-amber-400/30">
+          <div class="flex items-center gap-3">
+            <img :src="customBuildingForm.image || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=150&q=80'" alt="Preview" class="w-12 h-12 rounded-lg object-cover border border-amber-400/40 flex-shrink-0" />
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-[9px] font-black uppercase text-amber-300">{{ customBuildingForm.tag || 'Building Spotlight' }}</span>
+                <span class="text-[9px] font-extrabold text-[#0F2A44] bg-amber-400 px-1.5 py-0.2 rounded">{{ customBuildingForm.badge || '18% Yield' }}</span>
+                <span class="text-[9px] font-bold text-emerald-400">{{ customBuildingForm.downPayment || '20% Down' }}</span>
+              </div>
+              <p class="text-xs font-black truncate max-w-sm text-white mt-0.5">{{ customBuildingForm.title || customBuildingForm.name }}</p>
+              <p class="text-[10px] text-slate-300 truncate max-w-sm">{{ customBuildingForm.subtitle || 'Modern architecture with basement parking' }}</p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2.5 flex-shrink-0">
+            <!-- Test / Preview Modal Button -->
+            <button
+              type="button"
+              @click="openBuildingPreviewModal"
+              class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all flex items-center gap-1.5"
+            >
+              <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              <span>Test / Preview Modal</span>
+            </button>
+
+            <!-- Link to Dedicated Page -->
+            <router-link
+              to="/featured-building"
+              target="_blank"
+              class="px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-semibold border border-white/10 transition-all"
+            >
+              View Page &rarr;
+            </router-link>
+
+            <button
+              type="submit"
+              class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-[#0F2A44] text-xs font-black uppercase tracking-wider transition-all shadow-md"
+            >
+              Save Building Spotlight
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
     <!-- Live Rates Glance Box -->
     <div class="bg-white rounded-xl p-6 border border-slate-200/90 shadow-xs">
       <div class="flex items-center justify-between pb-4 border-b border-slate-100">
@@ -597,6 +841,13 @@
         </form>
       </div>
     </div>
+
+    <!-- Interactive Building Details Modal Preview for Admin -->
+    <BuildingDetailsModal
+      :is-open="showBuildingPreviewModal"
+      :building="customBuildingPreviewData"
+      @close="showBuildingPreviewModal = false"
+    />
   </div>
 </template>
 
@@ -611,6 +862,7 @@ import {
   SparklesIcon
 } from '@heroicons/vue/24/outline'
 import { useAdminStore } from '../../stores/admin'
+import BuildingDetailsModal from '../../components/ui/BuildingDetailsModal.vue'
 
 const adminStore = useAdminStore()
 
@@ -710,6 +962,199 @@ const saveSpotlight = async () => {
     adminStore.showToast('Spotlight Popup is now ACTIVE on website screen!')
   } else {
     adminStore.showToast('Spotlight Popup is now TURNED OFF (Hidden from website)!')
+  }
+}
+
+// =========================================================================
+// CUSTOM BUILDING / PROJECT SPOTLIGHT (POPUP 2 & DETAILS MODAL)
+// =========================================================================
+const formatFeaturesForForm = (feats) => {
+  if (Array.isArray(feats)) return feats.join(', ')
+  return feats || ''
+}
+
+const customBuildingForm = ref({
+  enabled: adminStore.customBuilding?.enabled ?? true,
+  name: adminStore.customBuilding?.name || 'Banu Hafeez Executive Residences',
+  tag: adminStore.customBuilding?.tag || 'G-11 Markaz | Islamabad',
+  badge: adminStore.customBuilding?.badge || '18% Expected Yield',
+  downPayment: adminStore.customBuilding?.downPayment || '20% Down',
+  price: adminStore.customBuilding?.price || 'PKR 1.45 Cr – 3.20 Cr',
+  location: adminStore.customBuilding?.location || 'Sector G-11 Markaz, Islamabad',
+  title: adminStore.customBuilding?.title || 'Executive Luxury Suites & Penthouses',
+  subtitle: adminStore.customBuilding?.subtitle || 'Modern architecture with dedicated basement parking, high-speed elevators & backup power generator.',
+  description: adminStore.customBuilding?.description || 'Banu Hafeez Residences offers premier urban luxury in the heart of Islamabad G-11 Markaz. Featuring modern executive apartments with imported porcelain flooring, designer kitchens, Grohe sanitary fittings, and expansive balconies overlooking the Margalla Hills.',
+  image: adminStore.customBuilding?.image || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
+  link: adminStore.customBuilding?.link || '/featured-building',
+  featuresText: formatFeaturesForForm(adminStore.customBuilding?.features),
+  phone: adminStore.customBuilding?.phone || '0334-9522157',
+  whatsappMsg: adminStore.customBuilding?.whatsappMsg || 'Hello TopLinkers, I am inquiring about the featured building project: Banu Hafeez Executive Residences.'
+})
+
+watch(
+  () => adminStore.customBuilding,
+  (val) => {
+    if (val) {
+      customBuildingForm.value = {
+        ...val,
+        featuresText: formatFeaturesForForm(val.features)
+      }
+    }
+  },
+  { deep: true }
+)
+
+const buildingPresets = [
+  {
+    key: 'banu_hafeez',
+    name: 'Banu Hafeez Residences',
+    tag: 'G-11 Markaz | Islamabad',
+    badge: '18% Expected Yield',
+    downPayment: '20% Down',
+    price: 'PKR 1.45 Cr – 3.20 Cr',
+    location: 'Sector G-11 Markaz, Islamabad',
+    title: 'Executive Luxury Suites & Penthouses',
+    subtitle: 'Modern architecture with dedicated basement parking & fast elevators',
+    description: 'Banu Hafeez Residences offers premier urban luxury in the heart of Islamabad G-11 Markaz. Featuring modern executive apartments with imported porcelain flooring, designer kitchens, Grohe sanitary fittings, and expansive balconies overlooking the Margalla Hills.',
+    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
+    features: 'Prime G-11 Markaz commercial proximity, Earthquake resistant seismic structure, Double basement dedicated reserved parking, Dual high-speed passenger & cargo elevators, 24/7 CCTV surveillance & armed security, Dedicated power backup generator'
+  },
+  {
+    key: 'airport_plaza',
+    name: 'Airport Commercial Complex',
+    tag: 'TopCity-1 | Airport Gate',
+    badge: '22% Commercial ROI',
+    downPayment: '25% Down',
+    price: 'PKR 85 Lac – 2.40 Cr',
+    location: 'Main Blvd, TopCity-1 Airport Corridor',
+    title: 'Prime Commercial Shops & Executive Offices',
+    subtitle: 'High footfall airport corridor retail outlets with 3-year installment flexibility',
+    description: 'Strategically located on the main entrance avenue of TopCity-1 near New Islamabad Airport. Ground floor retail shops and upper-floor corporate office suites with glass facades and modern high-speed infrastructure.',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
+    features: 'Main Boulevard frontage, 24/7 generator backup, High-speed capsule elevators, Dedicated corporate lobby, Underground parking, 100% legal RDA approved'
+  },
+  {
+    key: 'margalla_suites',
+    name: 'Margalla Executive Suites',
+    tag: 'Sector D-12 | Margalla',
+    badge: 'Margalla Hill View',
+    downPayment: '30% Down',
+    price: 'PKR 1.80 Cr – 3.90 Cr',
+    location: 'Sector D-12/1 Islamabad',
+    title: 'Scenic Panorama Luxury Residences',
+    subtitle: 'Boutique hill-view apartments adjoining the Margalla Hills National Park',
+    description: 'Experience tranquil luxury living in Sector D-12 Islamabad. Exclusive boutique suites with floor-to-ceiling glass windows, smart home automation, Italian kitchenettes, and uninterrupted panoramic views of the Margallas.',
+    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+    features: 'Direct Margalla views, Smart home automation, Italian fitted kitchens, Rooftop barbecue terrace, 24/7 manned security, Dedicated covered parking'
+  },
+  {
+    key: 'al_hameed_tower',
+    name: 'Al-Hameed Business Tower',
+    tag: 'G-11 Markaz | Islamabad',
+    badge: 'Corporate Ready',
+    downPayment: '100% Cash / Swift',
+    price: 'PKR 2.10 Cr – 4.50 Cr',
+    location: 'Al Hameed Plaza, G-11 Markaz Islamabad',
+    title: 'Grade-A Corporate Headquarters & Offices',
+    subtitle: 'Ready-to-move corporate executive offices with dedicated fiber optic & parking',
+    description: 'Premier commercial business hub in G-11 Markaz Islamabad. Fully completed Grade-A corporate office suites suitable for multinational companies, software houses, engineering consultancies, and financial firms.',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+    features: 'Centrally air-conditioned lobby, Redundant high-speed fiber internet, Dual commercial elevators, Secure access control, Ample plaza visitor parking, Bank and pharmacy on ground floor'
+  }
+]
+
+const applyBuildingPreset = (presetKey) => {
+  const p = buildingPresets.find(item => item.key === presetKey)
+  if (!p) return
+  customBuildingForm.value.name = p.name
+  customBuildingForm.value.tag = p.tag
+  customBuildingForm.value.badge = p.badge
+  customBuildingForm.value.downPayment = p.downPayment
+  customBuildingForm.value.price = p.price
+  customBuildingForm.value.location = p.location
+  customBuildingForm.value.title = p.title
+  customBuildingForm.value.subtitle = p.subtitle
+  customBuildingForm.value.description = p.description
+  customBuildingForm.value.image = p.image
+  customBuildingForm.value.featuresText = p.features
+  adminStore.showToast(`Loaded building preset: ${p.name}`)
+}
+
+// Browser File Picker & Image Upload Handler
+const buildingImageInput = ref(null)
+const isUploadingBuildingImage = ref(false)
+
+const triggerBuildingImagePicker = () => {
+  buildingImageInput.value?.click()
+}
+
+const onBuildingImagePicked = async (event) => {
+  const file = event.target.files?.[0]
+  if (!file) return
+
+  // 1. Instant local preview from browser memory via FileReader
+  const reader = new FileReader()
+  reader.onload = (e) => {
+    if (e.target?.result) {
+      customBuildingForm.value.image = e.target.result
+    }
+  }
+  reader.readAsDataURL(file)
+
+  // 2. Upload file directly to server backend
+  isUploadingBuildingImage.value = true
+  try {
+    const uploadedUrl = await adminStore.uploadImage(file)
+    if (uploadedUrl) {
+      customBuildingForm.value.image = uploadedUrl
+      adminStore.showToast('Building picture uploaded & linked successfully!')
+    }
+  } catch (err) {
+    adminStore.showToast('Photo selected from browser! Saving with spotlight form.')
+  } finally {
+    isUploadingBuildingImage.value = false
+    // Reset file input so re-selecting same file triggers @change
+    if (event.target) event.target.value = ''
+  }
+}
+
+// Admin Preview Modal State
+const showBuildingPreviewModal = ref(false)
+
+const customBuildingPreviewData = computed(() => {
+  const feats = customBuildingForm.value.featuresText
+    ? customBuildingForm.value.featuresText.split(',').map(s => s.trim()).filter(Boolean)
+    : []
+  return {
+    ...customBuildingForm.value,
+    features: feats
+  }
+})
+
+const openBuildingPreviewModal = () => {
+  showBuildingPreviewModal.value = true
+}
+
+const saveCustomBuildingToggle = async () => {
+  await saveCustomBuilding()
+}
+
+const saveCustomBuilding = async () => {
+  const feats = customBuildingForm.value.featuresText
+    ? customBuildingForm.value.featuresText.split(',').map(s => s.trim()).filter(Boolean)
+    : []
+
+  const payload = {
+    ...customBuildingForm.value,
+    features: feats
+  }
+
+  await adminStore.saveCustomBuilding(payload)
+
+  if (customBuildingForm.value.enabled) {
+    adminStore.showToast('Building Spotlight (Popup 2) is now ACTIVE on website!')
+  } else {
+    adminStore.showToast('Building Spotlight (Popup 2) is now TURNED OFF!')
   }
 }
 

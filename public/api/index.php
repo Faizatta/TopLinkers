@@ -281,6 +281,27 @@ switch ($resource) {
         }
         break;
 
+    // 4.3 Custom Building / Project Spotlight (Separate 2nd Popup & Details Modal)
+    case 'custom-building':
+        if ($method === 'GET') {
+            $stmt = $pdo->prepare("SELECT payload FROM market_rates WHERE key = 'custom_building' LIMIT 1");
+            $stmt->execute();
+            $row = $stmt->fetch();
+            if (!headers_sent()) header('Cache-Control: public, max-age=60, stale-while-revalidate=300');
+            echo $row ? $row['payload'] : json_encode((object)[]);
+        } elseif ($method === 'POST') {
+            $payload = json_encode(getJsonInput());
+            $stmt = $pdo->prepare("INSERT INTO market_rates (key, payload, created_at, updated_at) 
+                VALUES ('custom_building', :payload, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+                ON CONFLICT(key) DO UPDATE SET payload = :payload, updated_at = CURRENT_TIMESTAMP");
+            $stmt->execute([':payload' => $payload]);
+            echo $payload;
+        } else {
+            http_response_code(405);
+            echo json_encode(['error' => 'Method Not Allowed']);
+        }
+        break;
+
     // 5. Properties Manager
     case 'properties':
         if ($method === 'GET') {

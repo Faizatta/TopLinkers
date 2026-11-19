@@ -15,8 +15,11 @@
     <!-- 2. Floating On-Screen WhatsApp Popup Interactive Widget (Bottom Left) -->
     <FloatingWhatsApp v-if="!isAdminRoute && deferredUiReady" />
 
-    <!-- 2b. Hot Selling Harsukh Nathia Gali Curiosity Popup & Teaser -->
+    <!-- 2b. Hot Selling Harsukh Nathia Gali Curiosity Popup & Teaser (Popup 1) -->
     <HRSukhPopup v-if="!isAdminRoute && deferredUiReady" />
+
+    <!-- 2c. Custom Building / Project Spotlight Floating Popup (Popup 2) -->
+    <BuildingSpotlightPopup v-if="!isAdminRoute && deferredUiReady" />
 
     <!-- 3. Back To Top Button (Navy/Cyan Square, bottom right) -->
     <BackToTop v-if="!isAdminRoute && deferredUiReady" />
@@ -29,6 +32,12 @@
     <LightboxModal v-if="deferredUiReady || ui.isLightboxOpen" />
     <ShareModal v-if="deferredUiReady || ui.isShareModalOpen" />
     <FlyerModal v-if="deferredUiReady || ui.isFlyerModalOpen" />
+    <BuildingDetailsModal
+      v-if="deferredUiReady || ui.isBuildingModalOpen"
+      :is-open="ui.isBuildingModalOpen"
+      :building="adminStore.customBuilding"
+      @close="ui.closeBuildingModal"
+    />
 
     <!-- Global Toast Notifications -->
     <Toast />
@@ -42,6 +51,7 @@ import AppHeader from './components/layout/AppHeader.vue'
 import AppFooter from './components/layout/AppFooter.vue'
 import Toast from './components/ui/Toast.vue'
 import { useUiStore } from './stores/ui'
+import { useAdminStore } from './stores/admin'
 import { whenIdle } from './utils/idle'
 import { initLenis, destroyLenis } from './services/lenis'
 
@@ -49,15 +59,18 @@ import { initLenis, destroyLenis } from './services/lenis'
 // after the page has finished loading, so they never compete with the hero.
 const FloatingWhatsApp = defineAsyncComponent(() => import('./components/ui/FloatingWhatsApp.vue'))
 const HRSukhPopup = defineAsyncComponent(() => import('./components/ui/HRSukhPopup.vue'))
+const BuildingSpotlightPopup = defineAsyncComponent(() => import('./components/ui/BuildingSpotlightPopup.vue'))
 const BackToTop = defineAsyncComponent(() => import('./components/layout/BackToTop.vue'))
 const AuthModal = defineAsyncComponent(() => import('./components/layout/AuthModal.vue'))
 const LightboxModal = defineAsyncComponent(() => import('./components/layout/LightboxModal.vue'))
 const ShareModal = defineAsyncComponent(() => import('./components/layout/ShareModal.vue'))
 const FlyerModal = defineAsyncComponent(() => import('./components/layout/FlyerModal.vue'))
+const BuildingDetailsModal = defineAsyncComponent(() => import('./components/ui/BuildingDetailsModal.vue'))
 
 const route = useRoute()
 const router = useRouter()
 const ui = useUiStore()
+const adminStore = useAdminStore()
 
 // The router renders nothing until the first navigation resolves, so the first page
 // would otherwise "enter" with the fade (opacity 0 + 6px slide), delaying the very

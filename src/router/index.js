@@ -18,6 +18,7 @@ const FavoritesPage = () => import('../pages/FavoritesPage.vue')
 const ComparePage = () => import('../pages/ComparePage.vue')
 const CreateListingPage = () => import('../pages/CreateListingPage.vue')
 const HRSukhPage = () => import('../pages/HRSukhPage.vue')
+const FeaturedBuildingPage = () => import('../pages/FeaturedBuildingPage.vue')
 const BlogPage = () => import('../pages/BlogPage.vue')
 const BlogPostPage = () => import('../pages/BlogPostPage.vue')
 const PrivacyPolicyPage = () => import('../pages/PrivacyPolicyPage.vue')
@@ -195,6 +196,16 @@ const routes = [
   {
     path: '/hr-suites',
     redirect: '/hr-sukh'
+  },
+  {
+    path: '/featured-building',
+    alias: ['/featured-project', '/building-spotlight'],
+    name: 'FeaturedBuilding',
+    component: FeaturedBuildingPage,
+    meta: {
+      title: 'Featured Building & Commercial Project | TopLinkers Islamabad',
+      description: 'Explore premier featured building projects in Islamabad: executive luxury suites, commercial plazas, verified titles, and high-ROI installment plans.'
+    }
   },
   {
     path: '/contact',

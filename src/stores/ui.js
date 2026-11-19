@@ -39,6 +39,8 @@ export const useUiStore = defineStore('ui', {
     shareTargetTitle: '',
     // H&R Suites / Flyer Plan Pop-up modal
     isFlyerModalOpen: false,
+    // Custom Building Spotlight Modal (Popup 2)
+    isBuildingModalOpen: false,
     isWhatsAppOpen: false
   }),
 
@@ -192,6 +194,15 @@ export const useUiStore = defineStore('ui', {
 
     closeFlyerModal() {
       this.isFlyerModalOpen = false
+    },
+
+    // Custom Building Spotlight Modal
+    openBuildingModal() {
+      this.isBuildingModalOpen = true
+    },
+
+    closeBuildingModal() {
+      this.isBuildingModalOpen = false
     }
   }
 })
