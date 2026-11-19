@@ -150,8 +150,11 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-              <!-- Card 1: TopCity-1 -->
-              <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
+              <!-- Card 1: TopCity-1 (Clickable to show details) -->
+              <div
+                @click="openPlotDetails('topcity')"
+                class="bg-white rounded-2xl border border-gray-200 hover:border-[#16B4E8] overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col justify-between group cursor-pointer"
+              >
                 <div>
                   <div class="h-40 w-full overflow-hidden relative bg-slate-100">
                     <picture>
@@ -161,9 +164,12 @@
                     <span class="absolute top-2.5 left-2.5 bg-[#0F2A44] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
                       Srinagar Highway &bull; RDA Approved
                     </span>
+                    <span class="absolute bottom-2.5 right-2.5 bg-black/60 backdrop-blur-xs text-white text-[9px] font-bold px-2 py-0.5 rounded">
+                      Click for Details &bull; Rates &rarr;
+                    </span>
                   </div>
                   <div class="p-4">
-                    <h4 class="font-extrabold text-[#0F2A44] text-base mb-1">TopCity-1 Islamabad</h4>
+                    <h4 class="font-extrabold text-[#0F2A44] text-base mb-1 group-hover:text-[#16B4E8] transition-colors">TopCity-1 Islamabad</h4>
                     <p class="text-xs text-slate-600 leading-relaxed mb-3">
                       Premium gated community at Airport Junction. Direct possession in Blocks B, C &amp; D. Underground electricity, fiber internet, gas network, and lush parks.
                     </p>
@@ -180,17 +186,20 @@
                   </div>
                 </div>
                 <div class="p-4 pt-0">
-                  <router-link
-                    to="/listings?search=TopCity"
-                    class="block w-full text-center py-2.5 bg-[#0F2A44] hover:bg-[#16B4E8] text-white font-bold text-xs rounded-xl transition-colors"
+                  <button
+                    type="button"
+                    class="block w-full text-center py-2.5 bg-[#0F2A44] group-hover:bg-[#16B4E8] text-white font-bold text-xs rounded-xl transition-all shadow-xs"
                   >
-                    View TopCity Plots &rarr;
-                  </router-link>
+                    View Details &amp; Rates &rarr;
+                  </button>
                 </div>
               </div>
 
-              <!-- Card 2: Airport Green Garden (AGG) -->
-              <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
+              <!-- Card 2: Airport Green Garden (AGG) (Clickable to show details) -->
+              <div
+                @click="openPlotDetails('agg')"
+                class="bg-white rounded-2xl border border-gray-200 hover:border-[#16B4E8] overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col justify-between group cursor-pointer"
+              >
                 <div>
                   <div class="h-40 w-full overflow-hidden relative bg-slate-100">
                     <picture>
@@ -200,9 +209,12 @@
                     <span class="absolute top-2.5 left-2.5 bg-[#16B4E8] text-[#0F2A44] text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
                       Adjacent Airport &bull; RDA Approved
                     </span>
+                    <span class="absolute bottom-2.5 right-2.5 bg-black/60 backdrop-blur-xs text-white text-[9px] font-bold px-2 py-0.5 rounded">
+                      Click for Details &bull; Rates &rarr;
+                    </span>
                   </div>
                   <div class="p-4">
-                    <h4 class="font-extrabold text-[#0F2A44] text-base mb-1">Airport Green Garden (AGG)</h4>
+                    <h4 class="font-extrabold text-[#0F2A44] text-base mb-1 group-hover:text-[#16B4E8] transition-colors">Airport Green Garden (AGG)</h4>
                     <p class="text-xs text-slate-600 leading-relaxed mb-3">
                       Directly adjoining the New Islamabad International Airport cargo boundary. Fully demarcated on-ground "Moqa Ka Plot" inventory with zero litigation.
                     </p>
@@ -219,17 +231,20 @@
                   </div>
                 </div>
                 <div class="p-4 pt-0">
-                  <router-link
-                    to="/listings?search=Airport"
-                    class="block w-full text-center py-2.5 bg-[#0F2A44] hover:bg-[#16B4E8] text-white font-bold text-xs rounded-xl transition-colors"
+                  <button
+                    type="button"
+                    class="block w-full text-center py-2.5 bg-[#0F2A44] group-hover:bg-[#16B4E8] text-white font-bold text-xs rounded-xl transition-all shadow-xs"
                   >
-                    View AGG Plots &rarr;
-                  </router-link>
+                    View Details &amp; Rates &rarr;
+                  </button>
                 </div>
               </div>
 
-              <!-- Card 3: PECHS Islamabad -->
-              <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
+              <!-- Card 3: PECHS Islamabad (Clickable to show details) -->
+              <div
+                @click="openPlotDetails('pechs')"
+                class="bg-white rounded-2xl border border-gray-200 hover:border-[#16B4E8] overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col justify-between group cursor-pointer"
+              >
                 <div>
                   <div class="h-40 w-full overflow-hidden relative bg-slate-100">
                     <picture>
@@ -239,9 +254,12 @@
                     <span class="absolute top-2.5 left-2.5 bg-indigo-600 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
                       Airport Runway &bull; CPEC Hakla
                     </span>
+                    <span class="absolute bottom-2.5 right-2.5 bg-black/60 backdrop-blur-xs text-white text-[9px] font-bold px-2 py-0.5 rounded">
+                      Click for Details &bull; Rates &rarr;
+                    </span>
                   </div>
                   <div class="p-4">
-                    <h4 class="font-extrabold text-[#0F2A44] text-base mb-1">PECHS Islamabad</h4>
+                    <h4 class="font-extrabold text-[#0F2A44] text-base mb-1 group-hover:text-[#16B4E8] transition-colors">PECHS Islamabad</h4>
                     <p class="text-xs text-slate-600 leading-relaxed mb-3">
                       High-appreciation budget residential plots near Airport runway and CPEC interchange. Genuine boundary demarcation with swift registry transfer.
                     </p>
@@ -258,12 +276,12 @@
                   </div>
                 </div>
                 <div class="p-4 pt-0">
-                  <router-link
-                    to="/listings?search=PECHS"
-                    class="block w-full text-center py-2.5 bg-[#0F2A44] hover:bg-[#16B4E8] text-white font-bold text-xs rounded-xl transition-colors"
+                  <button
+                    type="button"
+                    class="block w-full text-center py-2.5 bg-[#0F2A44] group-hover:bg-[#16B4E8] text-white font-bold text-xs rounded-xl transition-all shadow-xs"
                   >
-                    View PECHS Plots &rarr;
-                  </router-link>
+                    View Details &amp; Rates &rarr;
+                  </button>
                 </div>
               </div>
             </div>
@@ -328,12 +346,13 @@
                   </div>
 
                   <div class="pt-2 flex flex-wrap items-center gap-3">
-                    <router-link
-                      to="/listings?search=Faisal"
+                    <button
+                      type="button"
+                      @click="openPlotDetails('faisal-town')"
                       class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition shadow-sm"
                     >
-                      View Faisal Town Phase 2 Files &rarr;
-                    </router-link>
+                      View Full Details &amp; Schedule &rarr;
+                    </button>
                     <a
                       href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20Faisal%20Town%20Phase%202%20Installment%20Payment%20Schedule."
                       target="_blank"
@@ -438,16 +457,249 @@
         </aside>
       </div>
     </main>
+
+    <!-- ================================================================= -->
+    <!-- INTERACTIVE PLOT DETAILS MODAL (FULL SOCIETY & INVENTORY BREAKDOWN) -->
+    <!-- ================================================================= -->
+    <div
+      v-if="selectedPlot"
+      class="fixed inset-0 z-50 bg-[#07111D]/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+      @click.self="selectedPlot = null"
+    >
+      <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[92vh] flex flex-col overflow-hidden border border-slate-200 animate-scale-up">
+        <!-- Modal Top Image Banner -->
+        <div class="relative h-48 sm:h-56 w-full bg-slate-900 flex-shrink-0">
+          <img :src="selectedPlot.image" :alt="selectedPlot.title" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+          
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider text-white shadow-md" :class="selectedPlot.badgeClass || 'bg-[#16B4E8] text-[#0F2A44]'">
+            {{ selectedPlot.badge }}
+          </span>
+
+          <button
+            type="button"
+            @click="selectedPlot = null"
+            class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/60 hover:bg-red-600 text-white flex items-center justify-center transition-colors shadow-md z-10"
+            aria-label="Close details"
+          >
+            <XMarkIcon class="w-5 h-5" />
+          </button>
+
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <span class="text-[10px] font-bold text-[#16B4E8] uppercase tracking-wider block mb-0.5">
+              {{ selectedPlot.tag }}
+            </span>
+            <h3 class="text-xl sm:text-2xl font-black text-white leading-tight">
+              {{ selectedPlot.title }}
+            </h3>
+            <p class="text-xs text-slate-300 flex items-center gap-1.5 mt-1">
+              <MapPinIcon class="w-3.5 h-3.5 text-[#16B4E8] flex-shrink-0" />
+              <span>{{ selectedPlot.location }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Scrollable Modal Body -->
+        <div class="p-5 sm:p-6 overflow-y-auto space-y-5 text-xs text-slate-700">
+          <!-- Overview Description -->
+          <div>
+            <h4 class="font-extrabold text-[#0F2A44] text-sm uppercase tracking-wide mb-1.5">Society Overview</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              {{ selectedPlot.description }}
+            </p>
+          </div>
+
+          <!-- Cutting Sizes & Live Rates Table -->
+          <div>
+            <h4 class="font-extrabold text-[#0F2A44] text-sm uppercase tracking-wide mb-2">Verified Sizes &amp; Price Breakdown</h4>
+            <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-2xs">
+              <table class="w-full text-left text-xs">
+                <thead>
+                  <tr class="bg-slate-50 text-[10px] font-black uppercase text-slate-500 border-b border-slate-200">
+                    <th class="py-2.5 px-3.5">Plot Size</th>
+                    <th class="py-2.5 px-3.5">Payment Terms</th>
+                    <th class="py-2.5 px-3.5 text-right">Demand / Rate</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 font-medium">
+                  <tr v-for="(rate, rIdx) in selectedPlot.rates" :key="rIdx" class="hover:bg-slate-50/60">
+                    <td class="py-2.5 px-3.5 font-bold text-[#0F2A44]">{{ rate.size }}</td>
+                    <td class="py-2.5 px-3.5 text-slate-500">{{ rate.terms }}</td>
+                    <td class="py-2.5 px-3.5 font-black text-[#16B4E8] text-right">{{ rate.price }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Infrastructure & Features Grid -->
+          <div>
+            <h4 class="font-extrabold text-[#0F2A44] text-sm uppercase tracking-wide mb-2">Approved Infrastructure &amp; Amenities</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div v-for="(feat, fIdx) in selectedPlot.features" :key="fIdx" class="flex items-center gap-2 p-2 rounded-xl bg-slate-50 border border-slate-100">
+                <CheckCircleIcon class="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                <span class="text-[11px] font-bold text-slate-700">{{ feat }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Legal & Verification Notice -->
+          <div class="p-3.5 rounded-2xl bg-sky-50/70 border border-sky-100 flex items-start gap-3">
+            <ShieldCheckIcon class="w-5 h-5 text-[#16B4E8] flex-shrink-0 mt-0.5" />
+            <div>
+              <span class="font-black text-[#0F2A44] block text-xs">TopLinkers Ownership &amp; Title Verification</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed mt-0.5">
+                Every plot is physically inspected with boundary pillars demarcated. We coordinate societal transfer, CVT, stamp duty, and computer transfer slips directly with official management.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sticky Modal Footer Actions -->
+        <div class="p-4 sm:p-5 border-t border-slate-200 bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-3 flex-shrink-0">
+          <div class="text-[11px] text-slate-500 text-center sm:text-left">
+            <span>Direct Advisory:</span> <strong class="text-[#0F2A44]">0334-9522157</strong>
+          </div>
+
+          <div class="flex items-center gap-2.5 w-full sm:w-auto">
+            <router-link
+              :to="selectedPlot.listingsLink"
+              @click="selectedPlot = null"
+              class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl border border-slate-300 hover:border-[#0F2A44] bg-white text-[#0F2A44] text-xs font-bold text-center transition-all"
+            >
+              Browse in Listings &rarr;
+            </router-link>
+
+            <a
+              :href="`https://wa.me/923349522157?text=${encodeURIComponent(selectedPlot.whatsappMsg)}`"
+              target="_blank"
+              class="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1ebd59] text-white text-xs font-black uppercase tracking-wider text-center transition-all shadow"
+            >
+              WhatsApp Inquire
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { MapPinIcon, PhoneIcon, ChatBubbleLeftRightIcon } from '@heroicons/vue/24/outline'
+import {
+  MapPinIcon,
+  PhoneIcon,
+  ChatBubbleLeftRightIcon,
+  XMarkIcon,
+  CheckCircleIcon,
+  ShieldCheckIcon
+} from '@heroicons/vue/24/outline'
 
 const route = useRoute()
 const activePlotFilter = ref('all') // 'all' | 'cash' | 'installments'
+const selectedPlot = ref(null)
+
+const plotsData = {
+  topcity: {
+    title: 'TopCity-1 Islamabad (Cash Possession Plots)',
+    tag: 'Srinagar Highway • RDA Approved • 100% Cash Ready',
+    location: 'Airport Junction, Srinagar Highway, Islamabad',
+    badge: 'Immediate Demarcation',
+    badgeClass: 'bg-[#0F2A44] text-white',
+    image: '/images/hero-moqa-plot.webp',
+    description: 'TopCity-1 is an ultra-modern gated community situated directly on Srinagar Highway opposite New Islamabad Airport. Direct physical possession is actively available in Blocks B, C & D with on-ground boundary demarcation, paved carpeted roads, underground electricity, and operational Sui Gas network. Ideal for buyers ready to begin construction immediately.',
+    rates: [
+      { size: '5 Marla (25x50)', terms: '100% Upfront Cash Possession', price: 'PKR 75 - 95 Lac' },
+      { size: '10 Marla (35x70)', terms: 'Immediate Demarcation & Transfer', price: 'PKR 1.35 - 1.65 Cr' },
+      { size: '1 Kanal (50x90)', terms: 'Executive / Main Boulevard', price: 'PKR 2.25 - 3.40 Cr' }
+    ],
+    features: [
+      'Underground Electricity & Gas Pipeline Active',
+      'Direct Srinagar Highway & M-1/M-2 Motorway Interchange',
+      'Immediate House Construction Permitted',
+      '24/7 Gated Security & Rapid Societal Transfer',
+      'Lush Community Parks & Commercial Business Hub'
+    ],
+    whatsappMsg: 'Hello TopLinkers, I am inquiring about TopCity-1 Cash Possession plots (5 Marla, 10 Marla, 1 Kanal) and would like an on-ground site visit.',
+    listingsLink: '/listings?search=TopCity'
+  },
+  agg: {
+    title: 'Airport Green Garden (AGG) Islamabad',
+    tag: 'Direct Airport Boundary • RDA Approved • Solid Land',
+    location: 'Adjacent New Islamabad Airport Cargo Access Road',
+    badge: 'Adjacent Airport Cargo',
+    badgeClass: 'bg-[#16B4E8] text-[#0F2A44]',
+    image: '/images/hero-real-estate.webp',
+    description: 'Airport Green Garden (AGG) directly adjoins the cargo and staff boundary of New Islamabad International Airport. AGG offers the most competitive per-Marla ticket price on the airport corridor with solid, naturally elevated ground, active utility poles, and zero legal disputes.',
+    rates: [
+      { size: '5 Marla (25x50)', terms: '100% Upfront Cash Possession', price: 'PKR 48 - 55 Lac' },
+      { size: '10 Marla (35x70)', terms: 'On-Ground Demarcated Cash', price: 'PKR 88 Lac - 1.05 Cr' },
+      { size: '1 Kanal (50x90)', terms: 'Boulevard & Prime Locations', price: 'PKR 1.65 - 2.10 Cr' }
+    ],
+    features: [
+      'Adjoining Airport Boundary Wall with Direct Approach',
+      'Ready On-Ground Physical Possession (Moqa Ka Plot)',
+      'Electricity Network Installed with Wide Paved Streets',
+      'Lowest Entry Budget in the Airport Sector Belt',
+      'Swift Registry Transfer and Direct Demarcation Slips'
+    ],
+    whatsappMsg: 'Hello TopLinkers, I want details and current rate sheet for Airport Green Garden (AGG) cash plots.',
+    listingsLink: '/listings?search=Airport'
+  },
+  pechs: {
+    title: 'PECHS Islamabad (Airport Runway Plots)',
+    tag: 'CPEC Hakla Interchange • RDA / TMA Approved • Established Society',
+    location: 'Next to Airport Runway & CPEC Motorway Interchange, Islamabad',
+    badge: 'CPEC Hakla & Airport Runway',
+    badgeClass: 'bg-indigo-600 text-white',
+    image: '/images/hero-construction.webp',
+    description: 'Pakistan Employees Cooperative Housing Society (PECHS) offers budget-friendly on-ground residential land adjacent to the airport runway and the CPEC Hakla-D.I. Khan Motorway interchange. An established community with existing families, operational schools, and active commercial markets.',
+    rates: [
+      { size: '5 Marla (25x50)', terms: '100% Cash Ready Plot', price: 'PKR 25 - 35 Lac' },
+      { size: '7 Marla (30x60)', terms: 'Demarcated Sector Plot', price: 'PKR 35 - 48 Lac' },
+      { size: '10 Marla (35x70)', terms: 'Prime Developed Blocks', price: 'PKR 45 - 68 Lac' },
+      { size: '1 Kanal (50x90)', terms: 'Boulevard & General Plots', price: 'PKR 85 Lac - 1.25 Cr' }
+    ],
+    features: [
+      'Closest Society to CPEC Hakla-D.I. Khan Interchange',
+      'Established Gated Community with Active Residents',
+      'Electricity, Water Supply & Local Commercial Hubs',
+      'High Future Capital Gain ROI Potential',
+      'Registered Cooperative Society with Clean Record'
+    ],
+    whatsappMsg: 'Hello TopLinkers, I am inquiring about PECHS Islamabad cash plots and on-ground demarcation.',
+    listingsLink: '/listings?search=PECHS'
+  },
+  'faisal-town': {
+    title: 'Faisal Town Phase 2 (FT-II) — Installments',
+    tag: 'Zedem International • Direct M-2 Motorway Interchange • 4.5-Year Schedule',
+    location: 'Between Thalian Interchange & Islamabad Airport, M-2 Motorway',
+    badge: '4.5-Year Installment Plan',
+    badgeClass: 'bg-emerald-600 text-white',
+    image: '/images/hero-moqa-plot.webp',
+    description: 'Faisal Town Phase 2 is Zedem International flagship mega project led by Chaudhry Abdul Majeed. Featuring approved dedicated interchange access directly on the M-2 Motorway, rapid on-ground earth-moving machinery, and easy quarterly installments spread over 4.5 years with computerized confirmation letters.',
+    rates: [
+      { size: '5.56 Marla (25x50)', terms: 'Booking: PKR 595,000 | 18 Quarters of PKR 120,000', price: 'PKR 27.95 Lac Total' },
+      { size: '8 Marla (30x60)', terms: 'Booking: PKR 725,000 | 18 Quarters of PKR 170,000', price: 'PKR 38.25 Lac Total' },
+      { size: '10.89 Marla (35x70)', terms: 'Booking: PKR 845,000 | 18 Quarters of PKR 225,000', price: 'PKR 49.25 Lac Total' },
+      { size: '1 Kanal (50x90)', terms: 'Booking: PKR 1,265,000 | 18 Quarters of PKR 375,000', price: 'PKR 80.95 Lac Total' }
+    ],
+    features: [
+      'Direct Approved M-2 Motorway Interchange Access',
+      'Backed by Zedem International Track Record (Faisal Town, B-17, Faisal Hills)',
+      '18 Easy Quarterly Installments over 4.5 Years',
+      'Heavy On-Ground Machinery & Round-The-Clock Development',
+      'Computerized Online Verification for Overseas Pakistanis'
+    ],
+    whatsappMsg: 'Hello TopLinkers, I want to book a plot file in Faisal Town Phase 2 (FT-II) on 4.5-year installments.',
+    listingsLink: '/listings?search=Faisal'
+  }
+}
+
+const openPlotDetails = (key) => {
+  selectedPlot.value = plotsData[key] || null
+}
 
 const applyRouteFilter = () => {
   if (route.query.filter === 'cash' || route.hash === '#cash') {
@@ -468,3 +720,20 @@ watch(
   }
 )
 </script>
+
+<style scoped>
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+</style>
