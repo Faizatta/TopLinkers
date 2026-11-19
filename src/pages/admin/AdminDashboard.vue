@@ -129,6 +129,133 @@
       </form>
     </div>
 
+    <!-- High-ROI Spotlight Investment Popup Manager (Backend ON / OFF & Custom Property) -->
+    <div class="bg-white rounded-xl p-6 border border-slate-200/90 shadow-xs space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-black uppercase tracking-wider text-white bg-[#0F2A44] px-2 py-0.5 rounded">
+              High-ROI Feature
+            </span>
+            <h2 class="text-sm font-bold text-[#0F2A44] uppercase tracking-wide">
+              Spotlight Investment Popup Manager
+            </h2>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">
+            Floating curiosity popup (like Harsukh / High-ROI plots) that pops up on website screen. Toggle ON/OFF and select the featured property.
+          </p>
+        </div>
+
+        <!-- Master ON / OFF Switch -->
+        <label
+          :class="spotlightForm.enabled ? 'bg-emerald-50 border-emerald-300 text-emerald-800 ring-2 ring-emerald-500/20' : 'bg-slate-100 border-slate-300 text-slate-600'"
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border cursor-pointer text-xs font-bold transition-all shadow-xs select-none flex-shrink-0"
+        >
+          <input
+            v-model="spotlightForm.enabled"
+            @change="saveSpotlight"
+            type="checkbox"
+            class="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4 cursor-pointer"
+          />
+          <span>{{ spotlightForm.enabled ? '✓ Spotlight Popup ACTIVE on Screen' : '✗ Spotlight Popup OFF (Hidden from Visitors)' }}</span>
+        </label>
+      </div>
+
+      <!-- Quick 1-Click Property Presets -->
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <label class="text-[11px] font-bold text-slate-600 uppercase">
+            Quick 1-Click Presets:
+          </label>
+          <span class="text-[10px] text-slate-400">Click to quickly load details into form</span>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <button
+            v-for="preset in spotlightPresets"
+            :key="preset.key"
+            type="button"
+            @click="applySpotlightPreset(preset.key)"
+            class="p-2.5 rounded-xl border border-slate-200 hover:border-[#16B4E8] bg-slate-50 hover:bg-sky-50/50 text-left transition-all group"
+          >
+            <div class="flex items-center justify-between text-[10px] font-extrabold text-[#0F2A44] group-hover:text-[#16B4E8]">
+              <span class="truncate">{{ preset.name }}</span>
+            </div>
+            <span class="text-[9px] font-bold text-emerald-700 bg-emerald-100/70 px-1.5 py-0.2 rounded mt-1 inline-block">
+              {{ preset.badgeText }}
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <form @submit.prevent="saveSpotlight" class="space-y-4 pt-1">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Elevation Tag / Header *</label>
+            <input v-model="spotlightForm.tag" type="text" required placeholder="e.g. Harsukh | Nathia Gali" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold focus:outline-none focus:border-[#0F2A44]" />
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">ROI / Highlight Badge</label>
+            <input v-model="spotlightForm.badge" type="text" placeholder="e.g. 20%+ Rental ROI" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold focus:outline-none focus:border-[#0F2A44]" />
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Down Payment / Terms Tag</label>
+            <input v-model="spotlightForm.downPayment" type="text" placeholder="e.g. 15% Down or 100% Cash Ready" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold focus:outline-none focus:border-[#0F2A44]" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+          <div class="md:col-span-5">
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Headline Hook / Title *</label>
+            <input v-model="spotlightForm.title" type="text" required placeholder="e.g. Wake Up Above The Clouds?" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-bold text-[#0F2A44] focus:outline-none focus:border-[#0F2A44]" />
+          </div>
+
+          <div class="md:col-span-7">
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Subtitle / Teaser Hook *</label>
+            <input v-model="spotlightForm.subtitle" type="text" required placeholder="e.g. Luxury pine-valley suites at 8,200 ft. Tap to explore ->" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-[#0F2A44]" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Target Page URL / Route</label>
+            <input v-model="spotlightForm.link" type="text" required placeholder="e.g. /hr-sukh, /services/apartments-flats, /services/residential-plots" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-medium focus:outline-none focus:border-[#0F2A44]" />
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Thumbnail Image URL</label>
+            <input v-model="spotlightForm.image" type="text" required placeholder="https://..." class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-[#0F2A44]" />
+          </div>
+        </div>
+
+        <!-- Live Preview Box -->
+        <div class="p-3.5 bg-slate-900 rounded-xl text-white flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <img :src="spotlightForm.image || 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=150&q=80'" alt="Preview" class="w-12 h-12 rounded-lg object-cover border border-white/20" />
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-[9px] font-black uppercase text-[#16B4E8]">{{ spotlightForm.tag || 'Spotlight' }}</span>
+                <span class="text-[9px] font-extrabold text-emerald-400 bg-emerald-500/20 px-1.5 py-0.2 rounded">{{ spotlightForm.badge || '20%+ ROI' }}</span>
+              </div>
+              <p class="text-xs font-black truncate max-w-sm text-white mt-0.5">{{ spotlightForm.title || 'Headline' }}</p>
+              <p class="text-[10px] text-slate-300 truncate max-w-sm">{{ spotlightForm.subtitle || 'Subtitle' }}</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 flex-shrink-0">
+            <span class="text-[10px] text-slate-400">Links to: <code class="text-cyan-300 font-mono">{{ spotlightForm.link || '/hr-sukh' }}</code></span>
+            <button
+              type="submit"
+              class="px-5 py-2.5 rounded-xl bg-[#16B4E8] hover:bg-[#119ecf] text-[#0F2A44] text-xs font-black uppercase tracking-wider transition-all shadow"
+            >
+              Save Spotlight Popup
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
     <!-- Live Rates Glance Box -->
     <div class="bg-white rounded-xl p-6 border border-slate-200/90 shadow-xs">
       <div class="flex items-center justify-between pb-4 border-b border-slate-100">
@@ -292,6 +419,95 @@ watch(
   },
   { deep: true }
 )
+
+// Spotlight Popup State and Quick Presets
+const spotlightForm = ref({ ...adminStore.spotlightPopup })
+
+watch(
+  () => adminStore.spotlightPopup,
+  (val) => {
+    if (val) spotlightForm.value = { ...val }
+  },
+  { deep: true }
+)
+
+const spotlightPresets = [
+  {
+    key: 'harsukh',
+    name: 'Harsukh Nathia Gali',
+    badgeText: '20%+ Rental ROI',
+    tag: 'Harsukh | Nathia Gali',
+    badge: '20%+ Rental ROI',
+    downPayment: '15% Down',
+    planText: '3-Yr Plan',
+    title: 'Wake Up Above The Clouds?',
+    subtitle: 'Luxury pine-valley suites at 8,200 ft. Tap to explore ->',
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80',
+    link: '/hr-sukh'
+  },
+  {
+    key: 'topcity',
+    name: 'TopCity-1 Moqa Plot',
+    badgeText: 'Cash Ready',
+    tag: 'TopCity-1 | Airport Gate',
+    badge: 'Immediate Possession',
+    downPayment: '100% Cash Ready',
+    planText: 'Block B Demarcated',
+    title: 'Own On-Ground Land at Airport Gate',
+    subtitle: 'Direct registry & ready demarcation in prime TopCity-1 ->',
+    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=300&q=80',
+    link: '/services/residential-plots#cash'
+  },
+  {
+    key: 'faisal_town',
+    name: 'Faisal Town Phase 2',
+    badgeText: 'Installment File',
+    tag: 'Faisal Town II | Motorway',
+    badge: 'High Growth ROI',
+    downPayment: 'Rs. 595,000 Down',
+    planText: '4.5-Yr Plan',
+    title: 'High-ROI Motorway Interchange Plots',
+    subtitle: 'Zedem International project with flexible quarterly files ->',
+    image: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=300&q=80',
+    link: '/services/residential-plots#installments'
+  },
+  {
+    key: 'banu_hafeez',
+    name: 'Banu Hafeez Suites',
+    badgeText: '18% Yield',
+    tag: 'Banu Hafeez | Islamabad',
+    badge: '18% Expected Yield',
+    downPayment: '20% Down',
+    planText: 'Cash & Installment',
+    title: 'Executive Luxury Suites & Penthouses',
+    subtitle: 'Modern architecture with dedicated parking & fast elevator ->',
+    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=300&q=80',
+    link: '/services/apartments-flats'
+  }
+]
+
+const applySpotlightPreset = (presetKey) => {
+  const p = spotlightPresets.find(item => item.key === presetKey)
+  if (!p) return
+  spotlightForm.value.tag = p.tag
+  spotlightForm.value.badge = p.badge
+  spotlightForm.value.downPayment = p.downPayment
+  spotlightForm.value.planText = p.planText
+  spotlightForm.value.title = p.title
+  spotlightForm.value.subtitle = p.subtitle
+  spotlightForm.value.image = p.image
+  spotlightForm.value.link = p.link
+  adminStore.showToast(`Loaded preset: ${p.name}`)
+}
+
+const saveSpotlight = async () => {
+  await adminStore.saveSpotlightPopup({ ...spotlightForm.value })
+  if (spotlightForm.value.enabled) {
+    adminStore.showToast('Spotlight Popup is now ACTIVE on website screen!')
+  } else {
+    adminStore.showToast('Spotlight Popup is now TURNED OFF (Hidden from website)!')
+  }
+}
 
 const savePromo = async () => {
   await adminStore.savePromoStrip({ ...promoForm.value })

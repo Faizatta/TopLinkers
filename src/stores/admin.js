@@ -15,6 +15,7 @@ const STORAGE_KEYS = {
   PERMISSIONS: 'toplinkers_admin_permissions',
   REVIEWS: 'toplinkers_client_reviews',
   PROMO_STRIP: 'toplinkers_promo_strip',
+  SPOTLIGHT_POPUP: 'toplinkers_spotlight_popup',
   USERS: 'toplinkers_admin_users'
 }
 
@@ -1555,6 +1556,59 @@ export const useAdminStore = defineStore('admin', () => {
     } catch (e) {}
   }
 
+  // 8. High-ROI Spotlight Investment Popup (e.g. Harsukh Residencies, TopCity, FT-II - Toggled ON/OFF from Admin)
+  const defaultSpotlightPopup = {
+    enabled: true,
+    propertyId: 'tl-hrsukh',
+    tag: 'Harsukh | Nathia Gali',
+    badge: '20%+ Rental ROI',
+    downPayment: '15% Down',
+    planText: '3-Yr Plan',
+    title: 'Wake Up Above The Clouds?',
+    subtitle: 'Luxury pine-valley suites at 8,200 ft. Tap to explore ->',
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80',
+    link: '/hr-sukh',
+    hooks: [
+      {
+        title: 'Wake Up Above The Clouds?',
+        subtitle: 'Luxury pine-valley suites at 8,200 ft. Tap to explore ->'
+      },
+      {
+        title: 'Earn PKR 25k-40k / Night Airbnb',
+        subtitle: 'Managed holiday suites in Nathia Gali | 15% Booking ->'
+      },
+      {
+        title: 'Limited Hillside Suites Remaining',
+        subtitle: 'Studio, 1-Bed & 2-Bed on 3-Yr Installments ->'
+      }
+    ]
+  }
+
+  const spotlightPopup = ref(
+    JSON.parse(localStorage.getItem(STORAGE_KEYS.SPOTLIGHT_POPUP) || 'null') || defaultSpotlightPopup
+  )
+
+  const saveSpotlightPopup = async (data) => {
+    spotlightPopup.value = {
+      ...defaultSpotlightPopup,
+      ...data,
+      enabled: Boolean(data.enabled)
+    }
+    localStorage.setItem(STORAGE_KEYS.SPOTLIGHT_POPUP, JSON.stringify(spotlightPopup.value))
+    notifyDataChanged('spotlightpopup', spotlightPopup.value)
+    try {
+      const res = await fetch(`${API_BASE_URL}/spotlight-popup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
+        body: JSON.stringify(spotlightPopup.value)
+      })
+      if (res.ok) {
+        apiConnected.value = true
+        notifyDataChanged('spotlightpopup', spotlightPopup.value)
+      }
+    } catch (e) {}
+  }
+
   // Metrics Computed
   const totalLeadsCount = computed(() => leads.value.length)
   const newLeadsCount = computed(() => leads.value.filter(l => l.status === 'New').length)
@@ -1685,6 +1739,9 @@ export const useAdminStore = defineStore('admin', () => {
     deleteReview,
     promoStrip,
     savePromoStrip,
+    defaultSpotlightPopup,
+    spotlightPopup,
+    saveSpotlightPopup,
     // Blog Management
     blogs,
     isBlogsLoading,

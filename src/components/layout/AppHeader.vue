@@ -107,37 +107,42 @@
 
           <!-- Compact Solid Text-Only Services Dropdown -->
           <div
-            class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-48 opacity-0 translate-y-2 pointer-events-none group-hover/menu:opacity-100 group-hover/menu:translate-y-0 group-hover/menu:pointer-events-auto transition-all duration-200 ease-out z-50"
+            class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-52 opacity-0 translate-y-2 pointer-events-none group-hover/menu:opacity-100 group-hover/menu:translate-y-0 group-hover/menu:pointer-events-auto transition-all duration-200 ease-out z-50"
           >
             <div class="bg-white rounded-xl shadow-[0_14px_40px_-8px_rgba(15,42,68,0.22)] border border-gray-100 p-1.5 space-y-0.5">
               <router-link
-                to="/services#plot"
+                to="/services/residential-plots"
                 class="block px-3 py-1.5 rounded-lg text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] hover:bg-slate-50 transition-colors"
-                @click="onServiceClick('plot')"
               >
                 Plot Services
               </router-link>
 
               <router-link
-                to="/services#flats"
-                class="block px-3 py-1.5 rounded-lg text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] hover:bg-slate-50 transition-colors"
-                @click="onServiceClick('flats')"
+                to="/services/apartments-flats?option=pha"
+                class="block px-3 py-1.5 rounded-lg text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] hover:bg-slate-50 transition-colors flex items-center justify-between"
               >
-                PHA &amp; Flats
+                <span>PHA Flats (I-12, I-16, G-11)</span>
+                <span class="text-[9px] bg-blue-50 text-[#16B4E8] px-1.5 py-0.5 rounded font-black">Govt</span>
               </router-link>
 
               <router-link
-                to="/services#construction"
+                to="/services/apartments-flats?option=luxury"
+                class="block px-3 py-1.5 rounded-lg text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] hover:bg-slate-50 transition-colors flex items-center justify-between"
+              >
+                <span>Luxury Flats &amp; Suites</span>
+                <span class="text-[9px] bg-amber-50 text-amber-700 px-1.5 py-0.5 rounded font-black">Luxury</span>
+              </router-link>
+
+              <router-link
+                to="/services/construction"
                 class="block px-3 py-1.5 rounded-lg text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] hover:bg-slate-50 transition-colors"
-                @click="onServiceClick('construction')"
               >
                 Construction Services
               </router-link>
 
               <router-link
-                to="/services#solar"
+                to="/services/solar"
                 class="block px-3 py-1.5 rounded-lg text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] hover:bg-slate-50 transition-colors"
-                @click="onServiceClick('solar')"
               >
                 Solar Services
               </router-link>
@@ -147,6 +152,13 @@
                 class="block px-3 py-1.5 rounded-lg text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] hover:bg-slate-50 transition-colors border-t border-gray-100 mt-0.5 pt-1.5"
               >
                 Harsukh (Nathia Gali)
+              </router-link>
+
+              <router-link
+                to="/services"
+                class="block px-3 py-1.5 rounded-lg text-[11px] font-semibold text-slate-500 hover:text-[#16B4E8] hover:bg-slate-50 transition-colors border-t border-gray-100 mt-0.5 pt-1.5"
+              >
+                All Services Overview &rarr;
               </router-link>
             </div>
           </div>
@@ -371,30 +383,46 @@
 
                   <div v-show="mobileServicesOpen" class="px-3 pb-2.5 pt-1 space-y-1 text-xs border-t border-slate-100 bg-white">
                     <router-link
-                      to="/services#plot"
+                      to="/services"
+                      class="block px-3 py-2 rounded-lg text-slate-700 hover:text-[#16B4E8] hover:bg-slate-50 font-bold transition-colors border-b border-slate-100 mb-1"
+                      @click="mobileDrawerOpen = false"
+                    >
+                      All Services Overview &rarr;
+                    </router-link>
+                    <router-link
+                      to="/services/residential-plots"
                       class="block px-3 py-2 rounded-lg text-slate-700 hover:text-[#16B4E8] hover:bg-slate-50 font-medium transition-colors"
-                      @click="onServiceClick('plot')"
+                      @click="mobileDrawerOpen = false"
                     >
                       Plot Services (TopCity, PECHS, CDA)
                     </router-link>
                     <router-link
-                      to="/services#flats"
-                      class="block px-3 py-2 rounded-lg text-slate-700 hover:text-[#16B4E8] hover:bg-slate-50 font-medium transition-colors"
-                      @click="onServiceClick('flats')"
+                      to="/services/apartments-flats?option=pha"
+                      class="block px-3 py-2 rounded-lg text-slate-700 hover:text-[#16B4E8] hover:bg-slate-50 font-medium transition-colors flex items-center justify-between"
+                      @click="mobileDrawerOpen = false"
                     >
-                      PHA &amp; Flats (I-12 &amp; I-16)
+                      <span>PHA Flats (I-12, I-16, G-11)</span>
+                      <span class="text-[9px] bg-blue-50 text-[#16B4E8] px-1.5 py-0.5 rounded font-bold">Option 1</span>
                     </router-link>
                     <router-link
-                      to="/services#construction"
+                      to="/services/apartments-flats?option=luxury"
+                      class="block px-3 py-2 rounded-lg text-slate-700 hover:text-[#16B4E8] hover:bg-slate-50 font-medium transition-colors flex items-center justify-between"
+                      @click="mobileDrawerOpen = false"
+                    >
+                      <span>Luxury Flats (Banu Hafeez &amp; Suites)</span>
+                      <span class="text-[9px] bg-amber-50 text-amber-700 px-1.5 py-0.5 rounded font-bold">Option 2</span>
+                    </router-link>
+                    <router-link
+                      to="/services/construction"
                       class="block px-3 py-2 rounded-lg text-slate-700 hover:text-[#16B4E8] hover:bg-slate-50 font-medium transition-colors"
-                      @click="onServiceClick('construction')"
+                      @click="mobileDrawerOpen = false"
                     >
                       Construction &amp; Turnkey
                     </router-link>
                     <router-link
-                      to="/services#solar"
+                      to="/services/solar"
                       class="block px-3 py-2 rounded-lg text-slate-700 hover:text-[#16B4E8] hover:bg-slate-50 font-medium transition-colors"
-                      @click="onServiceClick('solar')"
+                      @click="mobileDrawerOpen = false"
                     >
                       Solar Net Metering Solutions
                     </router-link>

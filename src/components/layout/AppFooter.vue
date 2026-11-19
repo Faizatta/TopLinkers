@@ -83,11 +83,11 @@
             Services
           </h3>
           <ul class="space-y-2 text-xs text-slate-300">
-            <li><router-link to="/services#plot" class="hover:text-[#16B4E8] hover:translate-x-1 transition-all duration-200 inline-block">Moqa Ka Plot (PECHS, FT-II)</router-link></li>
-            <li><router-link to="/services#flats" class="hover:text-[#16B4E8] hover:translate-x-1 transition-all duration-200 inline-block">PHA Flats (I-12, I-16)</router-link></li>
+            <li><router-link to="/services/residential-plots" class="hover:text-[#16B4E8] hover:translate-x-1 transition-all duration-200 inline-block">Moqa Ka Plot (PECHS, FT-II)</router-link></li>
+            <li><router-link to="/services/apartments-flats" class="hover:text-[#16B4E8] hover:translate-x-1 transition-all duration-200 inline-block">PHA Flats (I-12, I-16)</router-link></li>
             <li><router-link to="/hr-sukh" class="text-amber-300 font-semibold hover:text-amber-200 hover:translate-x-1 transition-all duration-200 inline-block">Harsukh Nathia Gali</router-link></li>
-            <li><router-link to="/services#construction" class="hover:text-[#16B4E8] hover:translate-x-1 transition-all duration-200 inline-block">Turnkey Construction</router-link></li>
-            <li><router-link to="/services#solar" class="hover:text-[#16B4E8] hover:translate-x-1 transition-all duration-200 inline-block">Solar Net Metering</router-link></li>
+            <li><router-link to="/services/construction" class="hover:text-[#16B4E8] hover:translate-x-1 transition-all duration-200 inline-block">Turnkey Construction</router-link></li>
+            <li><router-link to="/services/solar" class="hover:text-[#16B4E8] hover:translate-x-1 transition-all duration-200 inline-block">Solar Net Metering</router-link></li>
             <li><router-link to="/compare" class="text-cyan-300 font-semibold hover:text-[#16B4E8] hover:translate-x-1 transition-all duration-200 inline-block">Compare Flats &amp; Plots</router-link></li>
             <li><router-link to="/listings" class="hover:text-[#16B4E8] hover:translate-x-1 transition-all duration-200 inline-block">All Listings (40+)</router-link></li>
           </ul>

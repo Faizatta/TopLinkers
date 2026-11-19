@@ -68,11 +68,11 @@ export const useUiStore = defineStore('ui', {
       if (index > -1) {
         this.compareList.splice(index, 1)
       } else {
-        if (this.compareList.length >= 4) {
+        if (this.compareList.length >= 2) {
           this.addToast({
             type: 'warning',
             title: 'Compare Limit Reached',
-            message: 'You can compare up to 4 properties simultaneously.'
+            message: 'You can compare up to 2 properties side-by-side.'
           })
           return false
         }

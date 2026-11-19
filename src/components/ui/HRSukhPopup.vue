@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!-- Unique Floating Alpine Curiosity Spotlight (Bottom Right) -->
-    <!-- Pops up cleanly on every page visit & route navigation (hidden only while already on /hr-sukh) -->
+    <!-- Dynamic High-ROI Investment Spotlight Popup (Bottom Left) -->
+    <!-- Controlled ON/OFF and configured dynamically from the Admin Dashboard -->
     <transition
       enter-active-class="transition-all duration-500 ease-out"
       enter-from-class="transform translate-y-10 opacity-0 scale-95"
@@ -10,7 +10,7 @@
       leave-from-class="transform translate-y-0 opacity-100 scale-100"
       leave-to-class="transform translate-y-10 opacity-0 scale-95"
     >
-      <div v-if="showTeaser && !isHiddenRoute && !uiStore.isWhatsAppOpen">
+      <div v-if="adminStore.spotlightPopup?.enabled && showTeaser && !isHiddenRoute && !uiStore.isWhatsAppOpen">
         <!-- Mobile: Compact Floating Circle Badge (Bottom-Left) -->
         <div
           class="sm:hidden fixed left-4 z-40 select-none transition-[bottom] duration-200 ease-out"
@@ -20,14 +20,14 @@
             <span class="absolute -inset-1 rounded-full bg-gradient-to-tr from-[#16B4E8] to-emerald-400 opacity-60 animate-ping"></span>
             <button
               type="button"
-              @click="goToNathiaGaliPage"
-              aria-label="Explore Harsukh Nathia Gali"
-              title="Harsukh | Nathia Gali"
+              @click="goToSpotlightPage"
+              :aria-label="spotlight.tag || 'Explore Spotlight Investment'"
+              :title="spotlight.tag || 'High-ROI Investment Spotlight'"
               class="relative w-14 h-14 rounded-full p-[2.5px] bg-gradient-to-tr from-[#0F2A44] via-[#16B4E8] to-emerald-400 shadow-[0_10px_25px_rgba(15,42,68,0.45)] active:scale-95 transition-transform"
             >
               <img
-                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80"
-                alt="Harsukh Nathia Gali"
+                :src="spotlight.image || 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80'"
+                :alt="spotlight.tag || 'Spotlight Property'"
                 loading="lazy"
                 decoding="async"
                 width="56"
@@ -36,14 +36,14 @@
               />
             </button>
 
-            <span class="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap px-1.5 py-0.5 rounded-full bg-[#0F2A44] text-[#16B4E8] border border-[#16B4E8]/50 text-[8px] font-black uppercase tracking-wider shadow">
-              Harsukh
+            <span class="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap px-1.5 py-0.5 rounded-full bg-[#0F2A44] text-[#16B4E8] border border-[#16B4E8]/50 text-[8px] font-black uppercase tracking-wider shadow max-w-[70px] truncate">
+              {{ spotlight.tag?.split('|')[0]?.trim() || 'Spotlight' }}
             </span>
 
             <button
               type="button"
               @click.stop="dismissTeaser"
-              aria-label="Close Harsukh shortcut"
+              aria-label="Close spotlight shortcut"
               class="absolute -top-1.5 -right-1.5 w-6 h-6 flex items-center justify-center"
             >
               <span class="w-5 h-5 rounded-full bg-[#0F2A44] text-white border border-white/40 flex items-center justify-center shadow">
@@ -57,7 +57,7 @@
         <div
           class="hidden sm:block fixed left-6 w-[390px] z-40 cursor-pointer group select-none transition-[bottom] duration-200 ease-out"
           :style="{ bottom: `${bottomOffset}px` }"
-          @click="goToNathiaGaliPage"
+          @click="goToSpotlightPage"
         >
           <!-- Outer Animated Gradient Halo Frame -->
           <div class="relative rounded-2xl p-[2px] bg-gradient-to-r from-[#0F2A44] via-[#16B4E8] to-emerald-400 shadow-[0_20px_50px_-10px_rgba(15,42,68,0.45)] group-hover:shadow-[0_25px_60px_-8px_rgba(22,180,232,0.55)] transition-all duration-300 group-hover:-translate-y-1.5">
@@ -67,7 +67,7 @@
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
               </span>
-              <span>Harsukh | Nathia Gali</span>
+              <span>{{ spotlight.tag || 'High-ROI Investment Spotlight' }}</span>
             </div>
 
             <!-- Inner Dark-to-Navy Glass Card -->
@@ -87,11 +87,11 @@
               </button>
 
               <div class="flex items-center gap-3.5 relative z-10">
-                <!-- Scenic Thumbnail with Live Booking Tag -->
+                <!-- Scenic Thumbnail with Live Down Payment Tag -->
                 <div class="relative w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-white/20 shadow-lg bg-slate-900">
                   <img
-                    src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80"
-                    alt="Harsukh Nathia Gali"
+                    :src="spotlight.image || 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80'"
+                    :alt="spotlight.tag || 'Spotlight Property'"
                     loading="lazy"
                     decoding="async"
                     width="64"
@@ -100,7 +100,7 @@
                   />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
                   <span class="absolute bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap text-[8px] font-black uppercase text-[#0F2A44] bg-[#16B4E8] px-1.5 py-0.5 rounded shadow">
-                    15% Down
+                    {{ spotlight.downPayment || '15% Down' }}
                   </span>
                 </div>
 
@@ -108,9 +108,9 @@
                 <div class="flex-1 min-w-0 pr-4">
                   <div class="flex items-center gap-1.5 mb-1">
                     <span class="text-[9px] font-extrabold uppercase tracking-wider text-emerald-300 bg-emerald-500/15 border border-emerald-400/30 px-1.5 py-0.5 rounded">
-                      20%+ Rental ROI
+                      {{ spotlight.badge || '20%+ Rental ROI' }}
                     </span>
-                    <span class="text-[9px] font-bold text-cyan-300">3-Yr Plan</span>
+                    <span class="text-[9px] font-bold text-cyan-300">{{ spotlight.planText || '3-Yr Plan' }}</span>
                   </div>
 
                   <transition name="fade-slide" mode="out-in">
@@ -118,12 +118,12 @@
                       :key="activeHookIndex"
                       class="text-xs sm:text-sm font-black text-white group-hover:text-[#16B4E8] transition-colors leading-snug truncate"
                     >
-                      {{ curiosityHooks[activeHookIndex].title }}
+                      {{ currentHook.title }}
                     </h4>
                   </transition>
 
                   <p class="text-[11px] text-slate-300 line-clamp-1 mt-0.5 leading-tight">
-                    {{ curiosityHooks[activeHookIndex].subtitle }}
+                    {{ currentHook.subtitle }}
                   </p>
                 </div>
 
@@ -145,10 +145,12 @@ import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { XMarkIcon, ArrowRightIcon } from '@heroicons/vue/24/outline'
 import { useUiStore } from '../../stores/ui'
+import { useAdminStore } from '../../stores/admin'
 import { scrollTo } from '../../services/lenis'
 import { useFooterClearance } from '../../composables/useFooterClearance'
 
 const uiStore = useUiStore()
+const adminStore = useAdminStore()
 const route = useRoute()
 const router = useRouter()
 const showTeaser = ref(false)
@@ -156,48 +158,56 @@ const activeHookIndex = ref(0)
 // Shared, frame-throttled footer clearance (one measurement for all floating widgets)
 const { bottomOffset, updateFooterClearance } = useFooterClearance()
 
-
 let showTimer = null
 let rotateTimer = null
 
-const curiosityHooks = [
-  {
-    title: 'Wake Up Above The Clouds?',
-    subtitle: 'Luxury pine-valley suites at 8,200 ft. Tap to explore ->'
-  },
-  {
-    title: 'Earn PKR 25k-40k / Night Airbnb',
-    subtitle: 'Managed holiday suites in Nathia Gali | 15% Booking ->'
-  },
-  {
-    title: 'Limited Hillside Suites Remaining',
-    subtitle: 'Studio, 1-Bed & 2-Bed on 3-Yr Installments ->'
+const spotlight = computed(() => {
+  return adminStore.spotlightPopup || {}
+})
+
+const currentHook = computed(() => {
+  const hooks = spotlight.value.hooks
+  if (Array.isArray(hooks) && hooks.length > 0) {
+    const idx = activeHookIndex.value % hooks.length
+    return hooks[idx]
   }
-]
+  return {
+    title: spotlight.value.title || 'Wake Up Above The Clouds?',
+    subtitle: spotlight.value.subtitle || 'Luxury pine-valley suites at 8,200 ft. Tap to explore ->'
+  }
+})
 
 const isHiddenRoute = computed(() => {
   const p = (route.path || '').toLowerCase()
+  const target = (spotlight.value.link || '/hr-sukh').toLowerCase()
+  // Hide if user is currently on the destination page
+  if (target.startsWith('/') && p === target) return true
   return p === '/hr-sukh' || p === '/harsukh' || p === '/nathiagali' || p === '/compare' || p === '/contact' || p.startsWith('/admin')
 })
 
 const triggerPopup = () => {
   clearTimeout(showTimer)
-  if (isHiddenRoute.value) {
+  if (!adminStore.spotlightPopup?.enabled || isHiddenRoute.value) {
     showTeaser.value = false
     return
   }
   showTeaser.value = false
   showTimer = setTimeout(() => {
-    if (!isHiddenRoute.value) {
+    if (adminStore.spotlightPopup?.enabled && !isHiddenRoute.value) {
       updateFooterClearance()
       showTeaser.value = true
     }
   }, 0)
 }
 
-const goToNathiaGaliPage = () => {
-  router.push('/hr-sukh')
-  scrollTo(0, { immediate: true })
+const goToSpotlightPage = () => {
+  const target = spotlight.value.link || '/hr-sukh'
+  if (target.startsWith('http')) {
+    window.open(target, '_blank')
+  } else {
+    router.push(target)
+    scrollTo(0, { immediate: true })
+  }
 }
 
 const dismissTeaser = () => {
@@ -212,10 +222,22 @@ watch(
   }
 )
 
+watch(
+  () => adminStore.spotlightPopup?.enabled,
+  (enabled) => {
+    if (!enabled) {
+      showTeaser.value = false
+    } else {
+      triggerPopup()
+    }
+  }
+)
+
 onMounted(() => {
   triggerPopup()
   rotateTimer = setInterval(() => {
-    activeHookIndex.value = (activeHookIndex.value + 1) % curiosityHooks.length
+    const hooksCount = Array.isArray(spotlight.value.hooks) && spotlight.value.hooks.length > 0 ? spotlight.value.hooks.length : 3
+    activeHookIndex.value = (activeHookIndex.value + 1) % hooksCount
   }, 4000)
 })
 

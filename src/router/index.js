@@ -79,6 +79,7 @@ const routes = [
   },
   {
     path: '/services/residential-plots',
+    alias: ['/services/plots', '/services/plot'],
     name: 'ServicePlots',
     component: PlotsPage,
     meta: {
@@ -88,6 +89,7 @@ const routes = [
   },
   {
     path: '/services/apartments-flats',
+    alias: ['/services/flats', '/services/apartments', '/services/pha-flats'],
     name: 'ServiceFlats',
     component: FlatsPage,
     meta: {
@@ -97,6 +99,7 @@ const routes = [
   },
   {
     path: '/services/construction',
+    alias: ['/services/turnkey-construction'],
     name: 'ServiceConstruction',
     component: ConstructionPage,
     meta: {
@@ -106,6 +109,7 @@ const routes = [
   },
   {
     path: '/services/solar',
+    alias: ['/services/solar-net-metering'],
     name: 'ServiceSolar',
     component: SolarPage,
     meta: {

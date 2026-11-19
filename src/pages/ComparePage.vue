@@ -109,14 +109,14 @@
         <div class="flex items-center justify-between mb-3 px-1">
           <div class="flex items-center gap-2">
             <span class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Comparison Slots:</span>
-            <span class="px-2 py-0.5 rounded-full text-[11px] font-black" :class="compareProperties.length === 4 ? 'bg-amber-100 text-amber-800' : 'bg-sky-100 text-sky-800'">
-              {{ compareProperties.length }} / 4 Selected
+            <span class="px-2 py-0.5 rounded-full text-[11px] font-black" :class="compareProperties.length === 2 ? 'bg-amber-100 text-amber-800' : 'bg-sky-100 text-sky-800'">
+              {{ compareProperties.length }} / 2 Selected
             </span>
           </div>
-          <span class="text-xs text-slate-400">Compare up to 4 flats, apartments, or plots side-by-side</span>
+          <span class="text-xs text-slate-400">Compare 2 flats, apartments, or plots side-by-side (1-on-1 evaluation)</span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
           <!-- Filled Slots -->
           <div
             v-for="(prop, index) in compareProperties"
@@ -187,7 +187,7 @@
 
           <!-- Empty Slots (Invite User to Add Property) -->
           <div
-            v-for="emptyIdx in (4 - compareProperties.length)"
+            v-for="emptyIdx in (2 - compareProperties.length)"
             :key="`empty-slot-${emptyIdx}`"
             @click="openPropertySelector()"
             class="border-2 border-dashed border-slate-300 hover:border-[#16B4E8] rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-pointer bg-slate-50/60 hover:bg-sky-50/40 transition-all duration-200 group min-h-[190px]"
@@ -213,10 +213,10 @@
           <div class="bg-white rounded-2xl p-3 border border-slate-200 shadow-2xs space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-xs font-black uppercase tracking-wider text-[#0F2A44]">
-                Comparing ({{ compareProperties.length }}/4 Slots)
+                Comparing ({{ compareProperties.length }}/2 Slots)
               </span>
               <button
-                v-if="compareProperties.length < 4"
+                v-if="compareProperties.length < 2"
                 type="button"
                 @click="openPropertySelector()"
                 class="text-xs font-bold text-[#16B4E8]"
@@ -248,7 +248,7 @@
               </button>
 
               <button
-                v-if="compareProperties.length < 4"
+                v-if="compareProperties.length < 2"
                 type="button"
                 @click="openPropertySelector()"
                 class="px-2.5 py-1.5 rounded-xl border border-dashed border-[#16B4E8] text-[#16B4E8] bg-sky-50/50 text-xs font-bold whitespace-nowrap flex-shrink-0"
@@ -519,7 +519,7 @@
           </div>
         </div>
 
-        <!-- 4B. DESKTOP 4-COLUMN COMPARISON TABLE (hidden md:block) -->
+        <!-- 4B. DESKTOP 2-COLUMN COMPARISON TABLE (hidden md:block) -->
         <div class="hidden md:block bg-white rounded-3xl shadow-sm border border-gray-200 overflow-hidden">
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse text-xs">
@@ -532,7 +532,7 @@
                 <th
                   v-for="prop in compareProperties"
                   :key="`header-${prop.id}`"
-                  class="p-4 min-w-[240px] max-w-[280px] align-top relative border-l border-gray-200"
+                  class="p-4 sm:w-1/2 min-w-[280px] align-top relative border-l border-gray-200"
                 >
                   <div class="flex items-center justify-between gap-2 mb-1.5">
                     <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-[#0F2A44]/10 text-[#0F2A44]">
@@ -806,7 +806,7 @@
                 Visual Property Picker
               </span>
               <span class="text-xs font-bold text-slate-500">
-                {{ ui.compareList.length }} / 4 Selected
+                {{ ui.compareList.length }} / 2 Selected
               </span>
             </div>
             <h3 class="text-xl sm:text-2xl font-black text-[#0F2A44] tracking-tight">
@@ -990,7 +990,7 @@
           <div class="flex items-center gap-2">
             <span class="text-xs font-bold text-slate-700">Currently Comparing:</span>
             <span class="font-black text-sm text-[#0F2A44]">
-              {{ ui.compareList.length }} of 4 Selected
+              {{ ui.compareList.length }} of 2 Selected
             </span>
           </div>
 
@@ -1273,20 +1273,41 @@ const toggleSelection = (property) => {
 
 const loadPreset = (mode) => {
   activePresetMode.value = mode
-  let pool = []
+  let targetIds = []
+
   if (mode === 'flats') {
-    pool = allAvailableProperties.value.filter(p => ['apartment', 'penthouse', 'suite'].includes(p.type) || /flat|suite|apartment/i.test(`${p.title} ${p.typeName}`))
+    // 1-on-1 Head-to-Head: PHA Sector I-12 vs PHA Sector I-16 (from Zameen.com & official PHA matrix)
+    targetIds = ['tl-101', 'tl-103']
   } else if (mode === 'plots') {
-    pool = allAvailableProperties.value.filter(p => p.type === 'plot' || /plot|marla|kanal/i.test(`${p.title} ${p.typeName}`))
+    // 1-on-1 Head-to-Head: Cash Possession (TopCity-1) vs Installment Plan (Faisal Town Phase 2)
+    targetIds = ['tl-hero-topcity', 'tl-ft-phase2-plan']
   } else if (mode === 'harsukh') {
-    pool = allAvailableProperties.value.filter(p => /harsukh|h&r|suite/i.test(`${p.title} ${p.slug}`))
+    // 1-on-1 Head-to-Head: Harsukh Residencies Nathia Gali vs Banu Hafeez Suites Islamabad
+    targetIds = ['tl-hrsukh', 'tl-banu-hafeez']
   } else if (mode === 'villas') {
-    pool = allAvailableProperties.value.filter(p => ['house', 'villa'].includes(p.type) || /villa|house|turnkey/i.test(`${p.title} ${p.typeName}`))
+    // 1-on-1 Head-to-Head: Executive Designer Villa vs Designer Penthouse
+    targetIds = ['tl-hero-villa', 'tl-111']
   }
 
-  const chosen = (pool.length >= 2 ? pool : allAvailableProperties.value).slice(0, 4)
-  if (!chosen.length) return
-  ui.compareList = chosen.map(p => p.id)
+  let chosen = allAvailableProperties.value.filter(p => targetIds.includes(p.id))
+
+  if (chosen.length < 2) {
+    let pool = []
+    if (mode === 'flats') {
+      pool = allAvailableProperties.value.filter(p => ['apartment', 'penthouse', 'suite'].includes(p.type) || /flat|suite|apartment/i.test(`${p.title} ${p.typeName}`))
+    } else if (mode === 'plots') {
+      pool = allAvailableProperties.value.filter(p => p.type === 'plot' || /plot|marla|kanal/i.test(`${p.title} ${p.typeName}`))
+    } else if (mode === 'harsukh') {
+      pool = allAvailableProperties.value.filter(p => /harsukh|h&r|suite/i.test(`${p.title} ${p.slug}`))
+    } else if (mode === 'villas') {
+      pool = allAvailableProperties.value.filter(p => ['house', 'villa'].includes(p.type) || /villa|house|turnkey/i.test(`${p.title} ${p.typeName}`))
+    }
+    chosen = (pool.length >= 2 ? pool : allAvailableProperties.value).slice(0, 2)
+  }
+
+  const selectedTwo = chosen.slice(0, 2)
+  if (!selectedTwo.length) return
+  ui.compareList = selectedTwo.map(p => p.id)
   try {
     localStorage.setItem('toplinkers_compare', JSON.stringify(ui.compareList))
   } catch (e) {}

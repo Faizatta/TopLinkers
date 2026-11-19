@@ -443,7 +443,7 @@
       </section>
 
       <!-- ========================================== -->
-      <!-- 2. FLATS & APARTMENTS (PHA CASH & BANU HAFEEZ) -->
+      <!-- 2. FLATS & APARTMENTS (OPTION 1: PHA & OPTION 2: LUXURY) -->
       <!-- ========================================== -->
       <section
         v-if="activeTab === 'all' || activeTab === 'flats'"
@@ -452,21 +452,52 @@
       >
         <div class="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-gray-200">
           <div>
-            <span class="text-[10px] font-black uppercase tracking-widest text-[#16B4E8]">Division 02</span>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-black uppercase tracking-widest text-[#16B4E8]">Division 02</span>
+              <span class="text-[10px] font-black uppercase tracking-wider bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-full border border-blue-100">
+                2 Core Options: PHA &amp; Luxury Flats
+              </span>
+            </div>
             <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0F2A44] mt-1">
-              Flats &amp; Apartments — PHA (100% Cash) &amp; Banu Hafeez
+              Flats &amp; Apartments — PHA &amp; Luxury Flats
             </h2>
             <p class="text-xs sm:text-sm text-gray-500 mt-1">
-              Verified apartments in Sector I-12, Sector I-16, Banu Hafeez &amp; scenic suites in Nathia Gali (Harsukh Residencies).
+              Authorized PHA government flats in Sector I-12, Sector I-16 &amp; Sector G-11, plus luxury suites (Banu Hafeez &amp; Harsukh Residencies).
             </p>
           </div>
-          <router-link
-            to="/listings?type=apartment"
-            class="text-xs font-bold text-[#16B4E8] hover:underline flex items-center gap-1 flex-shrink-0"
-          >
-            <span>Browse All Flats In Listings</span>
-            <span>&rarr;</span>
-          </router-link>
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <router-link
+              to="/services/apartments-flats"
+              class="text-xs font-bold text-white bg-[#0F2A44] hover:bg-[#16B4E8] px-3.5 py-2 rounded-xl transition-all shadow-sm flex items-center gap-1.5"
+            >
+              <span>Dedicated Flats Portal</span>
+              <span>&rarr;</span>
+            </router-link>
+          </div>
+        </div>
+
+        <!-- Official PHA Foundation Mandate & SECP Registration Box -->
+        <div class="mb-8 bg-gradient-to-r from-blue-50/80 via-white to-emerald-50/50 rounded-2xl border border-blue-100 p-5 shadow-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="space-y-1.5">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100/70 px-2 py-0.5 rounded">
+                  Implementing Arm • Ministry of Housing &amp; Works
+                </span>
+                <span class="text-[10px] font-bold text-slate-500">
+                  SECP Section 42 Registered
+                </span>
+              </div>
+              <p class="text-xs text-slate-700 leading-relaxed font-medium pt-1">
+                <strong>PHA Foundation is a Public Company registered with Securities and Exchange Commission of Pakistan under Section 42 of the Companies Ordinance, 1984. Being one of the implementing arms of Ministry of Housing &amp; Works, PHA Foundation is consistently striving to eliminate shelterlessness and to reduce the housing shortfall in Pakistan.</strong>
+              </p>
+            </div>
+            <div class="bg-white p-3 rounded-xl border border-blue-100 shadow-2xs text-center flex-shrink-0">
+              <div class="text-[10px] font-black uppercase tracking-wider text-[#16B4E8]">TopLinkers Primary Sectors</div>
+              <div class="text-xs font-black text-[#0F2A44] mt-0.5">We Deal in I-12, I-16 &amp; G-11</div>
+            </div>
+          </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -673,12 +704,19 @@
                 <!-- Row 1: Sector I-16/3 -->
                 <tr class="hover:bg-slate-50/70 transition-colors group">
                   <td class="py-5 px-6 align-top">
-                    <div class="font-bold text-[#0F2A44] text-sm group-hover:text-[#16B4E8] transition-colors flex items-center gap-1.5">
-                      <span>Sector I-16/3</span>
+                    <div class="flex items-start gap-3">
+                      <router-link to="/services/apartments-flats" class="flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border border-slate-200 bg-slate-100 block group-hover:ring-2 group-hover:ring-[#16B4E8] transition-all">
+                        <img src="/images/pha/pha-i16-ext-1.webp" alt="Sector I-16 PHA Flats" class="w-full h-full object-cover" />
+                      </router-link>
+                      <div>
+                        <div class="font-bold text-[#0F2A44] text-sm group-hover:text-[#16B4E8] transition-colors flex items-center gap-1.5">
+                          <span>Sector I-16/3</span>
+                        </div>
+                        <span class="inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
+                          G+6 Blocks &bull; Ready
+                        </span>
+                      </div>
                     </div>
-                    <span class="inline-block mt-1.5 px-2.5 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
-                      G+6 Blocks &bull; Ready
-                    </span>
                   </td>
                   <td class="py-5 px-6 align-top">
                     <div class="font-extrabold text-[#0F2A44] text-xs">
@@ -714,12 +752,19 @@
                 <!-- Row 2: Sector I-12/1 -->
                 <tr class="hover:bg-slate-50/70 transition-colors group">
                   <td class="py-5 px-6 align-top">
-                    <div class="font-bold text-[#0F2A44] text-sm group-hover:text-[#16B4E8] transition-colors flex items-center gap-1.5">
-                      <span>Sector I-12/1</span>
+                    <div class="flex items-start gap-3">
+                      <router-link to="/services/apartments-flats" class="flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border border-slate-200 bg-slate-100 block group-hover:ring-2 group-hover:ring-[#16B4E8] transition-all">
+                        <img src="/images/pha/pha-i12-ext-1.webp" alt="Sector I-12 PHA Flats" class="w-full h-full object-cover" />
+                      </router-link>
+                      <div>
+                        <div class="font-bold text-[#0F2A44] text-sm group-hover:text-[#16B4E8] transition-colors flex items-center gap-1.5">
+                          <span>Sector I-12/1</span>
+                        </div>
+                        <span class="inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-100">
+                          3,200 Units Project
+                        </span>
+                      </div>
                     </div>
-                    <span class="inline-block mt-1.5 px-2.5 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-100">
-                      3,200 Units Project
-                    </span>
                   </td>
                   <td class="py-5 px-6 align-top">
                     <div class="font-extrabold text-[#0F2A44] text-xs">
@@ -752,14 +797,14 @@
                   </td>
                 </tr>
 
-                <!-- Row 3: G-11 / Kurri Road -->
+                <!-- Row 3: Sector G-11/3 & G-11/4 -->
                 <tr class="hover:bg-slate-50/70 transition-colors group">
                   <td class="py-5 px-6 align-top">
                     <div class="font-bold text-[#0F2A44] text-sm group-hover:text-[#16B4E8] transition-colors flex items-center gap-1.5">
-                      <span>G-11 / Kurri Road</span>
+                      <span>Sector G-11/3 &amp; G-11/4</span>
                     </div>
-                    <span class="inline-block mt-1.5 px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-100">
-                      Officers Residencia
+                    <span class="inline-block mt-1.5 px-2.5 py-0.5 rounded text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-100">
+                      Type C &amp; E &bull; Prime Markaz
                     </span>
                   </td>
                   <td class="py-5 px-6 align-top">
