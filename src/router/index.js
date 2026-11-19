@@ -286,15 +286,21 @@ const routes = [
   // Executive Admin Portal Routes (Noindex for SEO safety)
   {
     path: '/admin/login',
+    alias: ['/admin/login/'],
     name: 'AdminLogin',
     component: AdminLogin,
     meta: { title: 'Admin Portal Login | TopLinkers Executive Suite' }
   },
   {
     path: '/admin',
+    alias: ['/admin/'],
     component: AdminLayout,
     redirect: '/admin/dashboard',
     children: [
+      {
+        path: '',
+        redirect: '/admin/dashboard'
+      },
       {
         path: 'dashboard',
         name: 'AdminDashboard',

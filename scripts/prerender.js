@@ -21,6 +21,22 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const distDir = path.resolve(__dirname, '../dist')
 const templatePath = path.resolve(distDir, 'index.html')
+// Preserve the pristine Vite SPA shell before homepage pre-rendering overwrites dist/index.html
+const rawViteTemplate = fs.readFileSync(templatePath, 'utf-8')
+
+const adminLoadingHtml = `<div id="app">
+  <div style="min-height:100vh;background:#0B192C;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#fff;padding:20px;text-align:center;">
+    <div style="background:#fff;padding:8px;border-radius:18px;box-shadow:0 10px 25px -5px rgba(0,0,0,0.5);margin-bottom:20px;">
+      <img src="/toplinkers-logo.jpg" alt="TopLinkers" width="60" height="60" style="display:block;border-radius:12px;object-fit:contain;" />
+    </div>
+    <div style="font-size:18px;font-weight:800;letter-spacing:0.5px;color:#fff;margin-bottom:6px;">TopLinkers Executive Portal</div>
+    <div style="font-size:12px;color:#94A3B8;letter-spacing:0.5px;">Initializing secure management suite...</div>
+    <div style="margin-top:24px;width:32px;height:32px;border:3px solid rgba(255,255,255,0.15);border-top-color:#16B4E8;border-radius:50%;animation:tl-spin 0.8s linear infinite;"></div>
+    <style>@keyframes tl-spin { to { transform: rotate(360deg); } }</style>
+  </div>
+</div>`
+
+const adminShellHtml = rawViteTemplate.replace('<div id="app"></div>', adminLoadingHtml)
 
 const BASE_URL = 'https://toplinkersgroup.com'
 
@@ -1007,17 +1023,23 @@ export function prerender() {
     console.log(`  📄 Verified and copied dist/404.html for Apache ErrorDocument.`)
   }
 
-  // Provide physical index.html inside dist/admin/ and dist/admin.html to guarantee Apache never throws 403 on /admin/
+  // Provide dedicated executive admin SPA shells to eliminate homepage FOUC and layout clash on /admin
   const adminDir = path.resolve(distDir, 'admin')
   fs.mkdirSync(adminDir, { recursive: true })
-  fs.copyFileSync(templatePath, path.join(adminDir, 'index.html'))
-  fs.copyFileSync(templatePath, path.resolve(distDir, 'admin.html'))
+  fs.writeFileSync(path.join(adminDir, 'index.html'), adminShellHtml, 'utf-8')
+  fs.writeFileSync(path.resolve(distDir, 'admin.html'), adminShellHtml, 'utf-8')
+  fs.writeFileSync(path.resolve(distDir, 'admin-shell.html'), adminShellHtml, 'utf-8')
 
   const adminDashboardDir = path.resolve(adminDir, 'dashboard')
   fs.mkdirSync(adminDashboardDir, { recursive: true })
-  fs.copyFileSync(templatePath, path.join(adminDashboardDir, 'index.html'))
-  fs.copyFileSync(templatePath, path.resolve(adminDir, 'dashboard.html'))
-  console.log(`  🛡️ Configured physical index.html shells for /admin and /admin/dashboard to prevent 403.`)
+  fs.writeFileSync(path.join(adminDashboardDir, 'index.html'), adminShellHtml, 'utf-8')
+  fs.writeFileSync(path.resolve(adminDir, 'dashboard.html'), adminShellHtml, 'utf-8')
+
+  const adminLoginDir = path.resolve(adminDir, 'login')
+  fs.mkdirSync(adminLoginDir, { recursive: true })
+  fs.writeFileSync(path.join(adminLoginDir, 'index.html'), adminShellHtml, 'utf-8')
+  fs.writeFileSync(path.resolve(adminDir, 'login.html'), adminShellHtml, 'utf-8')
+  console.log(`  🛡️ Configured dedicated executive admin shells for /admin, /admin/login, and /admin/dashboard.`)
 
   // Ensure public/api files and database are mirrored into dist/api
   const publicApiDir = path.resolve(__dirname, '../public/api')
