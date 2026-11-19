@@ -117,10 +117,3 @@ onMounted(async () => {
   agents.value = await api.getAgents()
 })
 </script>
-
-const agents = ref([])
-
-onMounted(async () => {
-  agents.value = await api.getAgents()
-})
-</script>

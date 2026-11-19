@@ -381,28 +381,93 @@ switch ($resource) {
         } elseif ($method === 'POST') {
             $in = getJsonInput();
             $code = $in['id'] ?? ('TM-' . time());
-            $stmt = $pdo->prepare("INSERT INTO team_members 
-                (member_code, name, role, category, tag, experience, phone, whatsapp, email, photo, bio, quote, address, instagram, facebook, linkedin, is_active, created_at, updated_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
-            $stmt->execute([
-                $code, $in['name'] ?? '', $in['role'] ?? '', $in['category'] ?? 'agent', $in['tag'] ?? '',
-                $in['experience'] ?? '', $in['phone'] ?? '', $in['whatsapp'] ?? '', $in['email'] ?? '',
-                $in['photo'] ?? '', $in['bio'] ?? '', $in['quote'] ?? '', $in['address'] ?? '',
-                $in['instagram'] ?? null, $in['facebook'] ?? null, $in['linkedin'] ?? null,
-                !empty($in['isActive']) ? 1 : 0
-            ]);
-            $in['db_id'] = (int)$pdo->lastInsertId();
+
+            // Check if member already exists by member_code or id (UPSERT)
+            $checkStmt = $pdo->prepare("SELECT id FROM team_members WHERE member_code = ? OR id = ? LIMIT 1");
+            $checkStmt->execute([$code, $code]);
+            $existingId = $checkStmt->fetchColumn();
+
+            if ($existingId) {
+                $stmt = $pdo->prepare("UPDATE team_members SET 
+                    name = :name, role = :role, category = :category, tag = :tag,
+                    experience = :experience, phone = :phone, whatsapp = :whatsapp,
+                    email = :email, photo = :photo, bio = :bio, quote = :quote,
+                    address = :address, instagram = :instagram, facebook = :facebook,
+                    linkedin = :linkedin, is_active = :is_active, updated_at = CURRENT_TIMESTAMP
+                    WHERE id = :id");
+                $stmt->execute([
+                    ':name' => $in['name'] ?? '',
+                    ':role' => $in['role'] ?? '',
+                    ':category' => $in['category'] ?? 'agent',
+                    ':tag' => $in['tag'] ?? '',
+                    ':experience' => $in['experience'] ?? '',
+                    ':phone' => $in['phone'] ?? '',
+                    ':whatsapp' => $in['whatsapp'] ?? '',
+                    ':email' => $in['email'] ?? '',
+                    ':photo' => $in['photo'] ?? '',
+                    ':bio' => $in['bio'] ?? '',
+                    ':quote' => $in['quote'] ?? '',
+                    ':address' => $in['address'] ?? '',
+                    ':instagram' => $in['instagram'] ?? null,
+                    ':facebook' => $in['facebook'] ?? null,
+                    ':linkedin' => $in['linkedin'] ?? null,
+                    ':is_active' => isset($in['isActive']) ? ($in['isActive'] ? 1 : 0) : 1,
+                    ':id' => $existingId
+                ]);
+                $in['db_id'] = (int)$existingId;
+            } else {
+                $stmt = $pdo->prepare("INSERT INTO team_members 
+                    (member_code, name, role, category, tag, experience, phone, whatsapp, email, photo, bio, quote, address, instagram, facebook, linkedin, is_active, created_at, updated_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+                $stmt->execute([
+                    $code, $in['name'] ?? '', $in['role'] ?? '', $in['category'] ?? 'agent', $in['tag'] ?? '',
+                    $in['experience'] ?? '', $in['phone'] ?? '', $in['whatsapp'] ?? '', $in['email'] ?? '',
+                    $in['photo'] ?? '', $in['bio'] ?? '', $in['quote'] ?? '', $in['address'] ?? '',
+                    $in['instagram'] ?? null, $in['facebook'] ?? null, $in['linkedin'] ?? null,
+                    isset($in['isActive']) ? ($in['isActive'] ? 1 : 0) : 1
+                ]);
+                $in['db_id'] = (int)$pdo->lastInsertId();
+            }
             echo json_encode($in);
         } elseif ($method === 'PUT' && $subResource) {
             $in = getJsonInput();
             $stmt = $pdo->prepare("UPDATE team_members SET 
-                name = COALESCE(?, name), role = COALESCE(?, role), phone = COALESCE(?, phone), 
-                email = COALESCE(?, email), photo = COALESCE(?, photo), is_active = COALESCE(?, is_active),
-                updated_at = CURRENT_TIMESTAMP WHERE member_code = ? OR id = ?");
+                name = COALESCE(:name, name),
+                role = COALESCE(:role, role),
+                category = COALESCE(:category, category),
+                tag = COALESCE(:tag, tag),
+                experience = COALESCE(:experience, experience),
+                phone = COALESCE(:phone, phone),
+                whatsapp = COALESCE(:whatsapp, whatsapp),
+                email = COALESCE(:email, email),
+                photo = COALESCE(:photo, photo),
+                bio = COALESCE(:bio, bio),
+                quote = COALESCE(:quote, quote),
+                address = COALESCE(:address, address),
+                instagram = COALESCE(:instagram, instagram),
+                facebook = COALESCE(:facebook, facebook),
+                linkedin = COALESCE(:linkedin, linkedin),
+                is_active = COALESCE(:is_active, is_active),
+                updated_at = CURRENT_TIMESTAMP
+                WHERE member_code = :target OR id = :target");
             $stmt->execute([
-                $in['name'] ?? null, $in['role'] ?? null, $in['phone'] ?? null,
-                $in['email'] ?? null, $in['photo'] ?? null, isset($in['isActive']) ? ($in['isActive'] ? 1 : 0) : null,
-                $subResource, $subResource
+                ':name' => $in['name'] ?? null,
+                ':role' => $in['role'] ?? null,
+                ':category' => $in['category'] ?? null,
+                ':tag' => $in['tag'] ?? null,
+                ':experience' => $in['experience'] ?? null,
+                ':phone' => $in['phone'] ?? null,
+                ':whatsapp' => $in['whatsapp'] ?? null,
+                ':email' => $in['email'] ?? null,
+                ':photo' => $in['photo'] ?? null,
+                ':bio' => $in['bio'] ?? null,
+                ':quote' => $in['quote'] ?? null,
+                ':address' => $in['address'] ?? null,
+                ':instagram' => $in['instagram'] ?? null,
+                ':facebook' => $in['facebook'] ?? null,
+                ':linkedin' => $in['linkedin'] ?? null,
+                ':is_active' => isset($in['isActive']) ? ($in['isActive'] ? 1 : 0) : null,
+                ':target' => $subResource
             ]);
             echo json_encode(['success' => true]);
         } elseif ($method === 'DELETE' && $subResource) {

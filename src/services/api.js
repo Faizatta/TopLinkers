@@ -26,6 +26,8 @@ const delay = (ms = 0) => (ms > 0 ? new Promise(resolve => setTimeout(resolve, m
 
 let serverPropertiesCache = null
 let fetchInFlight = null
+let serverTeamCache = null
+let fetchTeamInFlight = null
 
 export async function syncServerProperties() {
   if (serverPropertiesCache) return serverPropertiesCache
@@ -76,8 +78,59 @@ export async function syncServerProperties() {
   }
 }
 
+export async function syncServerTeam() {
+  if (serverTeamCache) return serverTeamCache
+  if (fetchTeamInFlight) return fetchTeamInFlight
+  try {
+    fetchTeamInFlight = fetch(`${API_BASE_URL}/team`, {
+      headers: { 'Accept': 'application/json' }
+    })
+      .then(res => (res.ok && isJson(res) ? res.json() : null))
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          serverTeamCache = data.map(m => {
+            const rawSlug = (m.name || m.id || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+            return {
+              id: m.id || ('TM-' + m.db_id),
+              slug: m.slug || rawSlug || m.id,
+              name: m.name || '',
+              role: m.role || '',
+              category: m.category || 'agent',
+              tag: m.tag || '',
+              experience: m.experience || '',
+              phone: m.phone || '0334-9522157',
+              whatsapp: m.whatsapp || '923349522157',
+              email: m.email || '',
+              photo: m.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80',
+              bio: m.bio || '',
+              quote: m.quote || '',
+              address: m.address || 'Al Hameed Plaza, G-11 Markaz, Islamabad',
+              company: 'TopLinkers',
+              verified: true,
+              deals: m.deals || 180,
+              specialty: m.tag || m.role || 'Property Advisory',
+              isActive: m.isActive !== false
+            }
+          })
+          try {
+            localStorage.setItem('toplinkers_server_team', JSON.stringify(serverTeamCache))
+          } catch (e) {}
+        }
+        return serverTeamCache
+      })
+      .catch(() => null)
+      .finally(() => {
+        fetchTeamInFlight = null
+      })
+    return fetchTeamInFlight
+  } catch (e) {
+    return null
+  }
+}
+
 if (typeof window !== 'undefined') {
   setTimeout(() => { syncServerProperties() }, 150)
+  setTimeout(() => { syncServerTeam() }, 200)
 }
 
 function getLivePropertyList() {
@@ -99,6 +152,45 @@ function getLivePropertyList() {
     return [...custom, ...baseMapped]
   } catch (e) {
     return [...propertiesData]
+  }
+}
+
+function getLiveTeamList() {
+  try {
+    const cachedServer = serverTeamCache || (typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('toplinkers_server_team') || 'null') : null)
+    if (Array.isArray(cachedServer) && cachedServer.length > 0) {
+      return cachedServer.filter(m => m.isActive !== false)
+    }
+
+    const adminTeam = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('toplinkers_team_members') || 'null') : null
+    if (Array.isArray(adminTeam) && adminTeam.length > 0) {
+      return adminTeam.filter(m => m.isActive !== false).map(m => {
+        const rawSlug = (m.name || m.id || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+        return {
+          id: m.id,
+          slug: m.slug || rawSlug || m.id,
+          name: m.name,
+          role: m.role,
+          category: m.category,
+          tag: m.tag,
+          experience: m.experience,
+          phone: m.phone,
+          whatsapp: m.whatsapp,
+          email: m.email,
+          photo: m.photo,
+          bio: m.bio,
+          company: 'TopLinkers',
+          verified: true,
+          specialty: m.tag || m.role,
+          deals: m.deals || 150,
+          isActive: m.isActive !== false
+        }
+      })
+    }
+
+    return agentsData
+  } catch (e) {
+    return agentsData
   }
 }
 
@@ -261,11 +353,20 @@ export const api = {
 
   // Agents
   async getAgents() {
-    return [...agentsData]
+    await syncServerTeam().catch(() => null)
+    return getLiveTeamList()
   },
 
   async getAgentBySlug(slug) {
-    return agentsData.find(a => a.slug === slug || a.id === slug) || null
+    if (!slug) return null
+    await syncServerTeam().catch(() => null)
+    const list = getLiveTeamList()
+    const decoded = decodeURIComponent(slug).toLowerCase()
+    return list.find(a =>
+      (a.slug && a.slug.toLowerCase() === decoded) ||
+      (a.id && a.id.toLowerCase() === decoded) ||
+      (a.name && a.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') === decoded)
+    ) || agentsData.find(a => a.slug === slug || a.id === slug) || null
   },
 
   async getAgentProperties(agentId) {

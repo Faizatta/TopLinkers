@@ -744,6 +744,7 @@ export const useAdminStore = defineStore('admin', () => {
 
   const saveTeamLocal = () => {
     localStorage.setItem(STORAGE_KEYS.TEAM, JSON.stringify(teamMembers.value))
+    localStorage.setItem('toplinkers_server_team', JSON.stringify(teamMembers.value))
   }
 
   const ceos = computed(() =>

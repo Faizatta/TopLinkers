@@ -600,8 +600,11 @@ watch(filteredMembers, (newList) => {
   }
 })
 
-onMounted(() => {
+onMounted(async () => {
   document.title = 'Our Founders, Agents & PEC Engineers | TopLinkers'
+  try {
+    await adminStore.syncFromBackend({ force: true })
+  } catch (e) {}
   window.addEventListener('resize', updateViewportWidth)
   window.addEventListener('keydown', handleKeyDown)
 
