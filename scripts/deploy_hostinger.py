@@ -75,6 +75,12 @@ def upload_folder_recursive(ftps, local_dir, is_assets=False):
             local_size = os.path.getsize(local_path)
             _, ext = os.path.splitext(item.lower())
 
+            # Never overwrite existing live SQLite database on production once created
+            if ext in ('.sqlite', '.sqlite3', '.db') and item in remote_map:
+                print(f"    🔒 Preserving existing live production database: {item}")
+                skipped_count += 1
+                continue
+
             # Skip immutable files (images, fonts) or hashed assets if remote size matches exactly
             can_skip = False
             if (ext in IMMUTABLE_EXTS or is_assets) and item in remote_map:

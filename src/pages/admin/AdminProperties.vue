@@ -673,7 +673,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, nextTick, onUnmounted } from 'vue'
+import { ref, computed, watch, nextTick, onMounted, onUnmounted } from 'vue'
 import {
   PlusIcon,
   MagnifyingGlassIcon,
@@ -743,6 +743,50 @@ const loadMergedProperties = () => {
 }
 
 const allProperties = ref(loadMergedProperties())
+
+const syncPropertiesFromBackend = async () => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/properties`, {
+      headers: { 'Accept': 'application/json' }
+    })
+    if (res.ok) {
+      const data = await res.json()
+      if (Array.isArray(data) && data.length > 0) {
+        // Map backend properties to admin format
+        const mapped = data.map(p => ({
+          id: p.id,
+          slug: p.slug,
+          title: p.title,
+          price: Number(p.price || 0),
+          type: p.type || 'plot',
+          typeName: p.type === 'apartment' ? 'Flat / Apartment' : p.type === 'house' ? 'House / Villa' : 'Plot / File',
+          purpose: p.purpose || 'for-sale',
+          status: p.purpose || 'for-sale',
+          address: p.location || 'Islamabad',
+          city: p.location?.includes('Rawalpindi') ? 'Rawalpindi' : p.location?.includes('Nathia Gali') ? 'Murree & Galyat' : 'Islamabad',
+          area: p.area || '10 Marla',
+          beds: Number(p.bedrooms || 0),
+          baths: Number(p.bathrooms || 0),
+          images: p.image ? [p.image] : ['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80'],
+          featured: Boolean(p.featured),
+          description: p.description || '',
+          offerEnabled: Boolean(p.offer_enabled),
+          offerLabel: p.offer_label || '',
+          offerPrice: Number(p.offer_price || 0),
+          offerExpiresAt: p.offer_expires_at || ''
+        }))
+        allProperties.value = mapped
+        try {
+          localStorage.setItem('toplinkers_server_properties', JSON.stringify(mapped))
+        } catch (e) {}
+      }
+    }
+  } catch (e) {}
+}
+
+onMounted(() => {
+  syncPropertiesFromBackend()
+})
 
 const categoryMap = {
   plot: [
@@ -1192,12 +1236,16 @@ const saveProperty = () => {
     localStorage.setItem(CUSTOM_KEY, JSON.stringify(custom))
   }
 
-  // Also sync to Laravel backend API silently
+  // Also sync to server database API
   try {
-    fetch(`${API_BASE_URL}/properties`, {
-      method: 'POST',
+    const isEdit = isEditing.value
+    const endpoint = isEdit ? `${API_BASE_URL}/properties/${encodeURIComponent(item.slug || item.id)}` : `${API_BASE_URL}/properties`
+    const reqMethod = isEdit ? 'PUT' : 'POST'
+    fetch(endpoint, {
+      method: reqMethod,
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
+        id: item.id,
         slug: item.slug,
         title: item.title,
         price: item.price,
@@ -1207,7 +1255,7 @@ const saveProperty = () => {
         area: item.area,
         bedrooms: item.beds,
         bathrooms: item.baths,
-        image: item.images[0]?.startsWith('http') ? item.images[0] : null,
+        image: item.images?.[0]?.startsWith('http') ? item.images[0] : null,
         featured: item.featured,
         offer_enabled: item.offerEnabled,
         offer_label: item.offerLabel,
@@ -1215,7 +1263,9 @@ const saveProperty = () => {
         offer_expires_at: item.offerExpiresAt,
         description: item.description
       })
-    }).catch(() => {})
+    })
+    .then(() => syncPropertiesFromBackend())
+    .catch(() => {})
   } catch (e) {}
 
   showModal.value = false
@@ -1230,6 +1280,14 @@ const deleteProperty = async (idOrSlug) => {
   })
   if (ok) {
     allProperties.value = allProperties.value.filter(p => p.id !== idOrSlug && p.slug !== idOrSlug)
+
+    // Call server database to delete
+    try {
+      fetch(`${API_BASE_URL}/properties/${encodeURIComponent(idOrSlug)}`, {
+        method: 'DELETE',
+        headers: { 'Accept': 'application/json' }
+      }).catch(() => {})
+    } catch (e) {}
 
     const isBase = propertiesData.some(d => d.id === idOrSlug || d.slug === idOrSlug)
     if (isBase) {

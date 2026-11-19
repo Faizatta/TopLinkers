@@ -1019,6 +1019,14 @@ export function prerender() {
   fs.copyFileSync(templatePath, path.resolve(adminDir, 'dashboard.html'))
   console.log(`  🛡️ Configured physical index.html shells for /admin and /admin/dashboard to prevent 403.`)
 
+  // Ensure public/api files and database are mirrored into dist/api
+  const publicApiDir = path.resolve(__dirname, '../public/api')
+  const distApiDir = path.resolve(distDir, 'api')
+  if (fs.existsSync(publicApiDir)) {
+    fs.cpSync(publicApiDir, distApiDir, { recursive: true })
+    console.log(`  💾 Synchronized SQLite API Engine and database into dist/api.`)
+  }
+
   // Synchronize sitemap.xml with canonical URLs (excluding admin and 404)
   const canonicalRoutes = allRoutes.filter(r => !r.path.startsWith('/admin') && r.path !== '/404')
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>

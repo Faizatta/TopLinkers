@@ -1,0 +1,6 @@
+# Deny all direct web access to raw SQLite database files
+<FilesMatch "\.(sqlite|sqlite3|db|env|log)$">
+    Require all denied
+</FilesMatch>
+
+Options -Indexes

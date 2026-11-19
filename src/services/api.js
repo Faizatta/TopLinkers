@@ -24,8 +24,70 @@ async function jsonOrThrow(res, fallbackMessage) {
 
 const delay = (ms = 0) => (ms > 0 ? new Promise(resolve => setTimeout(resolve, ms)) : Promise.resolve())
 
+let serverPropertiesCache = null
+let fetchInFlight = null
+
+export async function syncServerProperties() {
+  if (serverPropertiesCache) return serverPropertiesCache
+  if (fetchInFlight) return fetchInFlight
+  try {
+    fetchInFlight = fetch(`${API_BASE_URL}/properties`, {
+      headers: { 'Accept': 'application/json' }
+    })
+      .then(res => (res.ok && isJson(res) ? res.json() : null))
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          serverPropertiesCache = data.map(p => ({
+            id: p.id,
+            propertyId: p.slug || ('TL-' + p.id),
+            slug: p.slug,
+            title: p.title,
+            price: Number(p.price || 0),
+            type: p.type || 'plot',
+            typeName: p.type === 'apartment' ? 'Flat / Apartment' : p.type === 'house' ? 'House / Villa' : 'Plot / File',
+            purpose: p.purpose || 'for-sale',
+            status: p.purpose || 'for-sale',
+            address: p.location || 'Islamabad',
+            city: p.location?.includes('Rawalpindi') ? 'Rawalpindi' : p.location?.includes('Nathia Gali') ? 'Murree & Galyat' : 'Islamabad',
+            area: p.area || '10 Marla',
+            beds: Number(p.bedrooms || 0),
+            baths: Number(p.bathrooms || 0),
+            images: p.image ? [p.image] : ['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80'],
+            featured: Boolean(p.featured),
+            description: p.description || '',
+            offerEnabled: Boolean(p.offer_enabled),
+            offerLabel: p.offer_label || '',
+            offerPrice: Number(p.offer_price || 0),
+            offerExpiresAt: p.offer_expires_at || ''
+          }))
+          try {
+            localStorage.setItem('toplinkers_server_properties', JSON.stringify(serverPropertiesCache))
+          } catch (e) {}
+        }
+        return serverPropertiesCache
+      })
+      .catch(() => null)
+      .finally(() => {
+        fetchInFlight = null
+      })
+    return fetchInFlight
+  } catch (e) {
+    return null
+  }
+}
+
+if (typeof window !== 'undefined') {
+  setTimeout(() => { syncServerProperties() }, 150)
+}
+
 function getLivePropertyList() {
   try {
+    const cachedServer = serverPropertiesCache || (typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('toplinkers_server_properties') || 'null') : null)
+    if (Array.isArray(cachedServer) && cachedServer.length > 0) {
+      const deleted = JSON.parse(localStorage.getItem('toplinkers_deleted_properties') || '[]')
+      return cachedServer.filter(p => !deleted.includes(p.id) && !deleted.includes(p.slug))
+    }
+
     const custom = JSON.parse(localStorage.getItem('toplinkers_custom_properties') || '[]')
     const overrides = JSON.parse(localStorage.getItem('toplinkers_property_overrides') || '{}')
     const deleted = JSON.parse(localStorage.getItem('toplinkers_deleted_properties') || '[]')
