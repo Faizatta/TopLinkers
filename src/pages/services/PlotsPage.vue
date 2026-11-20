@@ -228,8 +228,8 @@
                 <div>
                   <div class="h-40 w-full overflow-hidden relative bg-slate-100">
                     <picture>
-                      <source srcset="/images/hero-real-estate.webp" type="image/webp" />
-                      <img src="/images/hero-real-estate.jpg" alt="Airport Green Garden Plots" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <source srcset="/images/agg/agg-plots-hero.webp" type="image/webp" />
+                      <img src="/images/agg/agg-plots-hero.webp" alt="Airport Green Garden Plots" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     </picture>
                     <span class="absolute top-2.5 left-2.5 bg-[#16B4E8] text-[#0F2A44] text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
                       Adjacent Airport &bull; RDA Approved
