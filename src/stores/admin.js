@@ -1674,38 +1674,46 @@ export const useAdminStore = defineStore('admin', () => {
   // 7.15 Custom Building / Project Spotlight (Separate 2nd Popup & Details Modal)
   const defaultCustomBuilding = {
     enabled: true,
-    name: 'Banu Hafeez Executive Residences',
-    tag: 'G-11 Markaz | Islamabad',
-    badge: '18% Expected Yield',
-    downPayment: '20% Down',
-    price: 'PKR 1.45 Cr – 3.20 Cr',
-    location: 'Sector G-11 Markaz, Islamabad',
-    title: 'Executive Luxury Suites & Penthouses',
-    subtitle: 'Modern architecture with dedicated basement parking, high-speed elevators & backup power generator.',
-    description: 'Banu Hafeez Residences offers premier urban luxury in the heart of Islamabad G-11 Markaz. Featuring modern 1-bed, 2-bed and 3-bed executive apartments with imported Spanish porcelain flooring, designer kitchens, Grohe sanitary fittings, and expansive balconies overlooking the Margalla Hills.',
-    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
+    name: 'Banu Hafeez Luxury Apartments',
+    tag: 'TopCity-1 | 17-Storey Landmark | RDA Approved',
+    badge: '15% Down • 3-Yr Plan',
+    downPayment: '15% Booking',
+    price: 'PKR 98.3 Lac – 3.38 Cr',
+    location: 'Top City-1, Islamabad (15 min from Airport)',
+    title: '17-Storey Luxury Residences on 3-Year Plan',
+    subtitle: 'Approved 17-storey landmark by Waheed Group of Companies in TopCity-1, featuring swimming pool, modern gym, 2 basements parking for 281 cars, and 2-year possession.',
+    description: 'Banu Hafeez Luxury Apartments is an approved 17-storey landmark residential tower developed by Waheed Group of Companies (Chairman Mr. Abdul Waheed Sheikh, CEO Mr. Faad Waheed) in Top City-1, Islamabad. Perfectly connected via M-1/M-2 Motorways and Srinagar Highway, just 15 minutes from Islamabad Airport. Offering high-end 1-Bedroom (546 sq.ft.), 2-Bedroom (1,089–1,215 sq.ft.), and 3-Bedroom (1,881–2,010 sq.ft.) residences on a 3-year flexible installment plan with 15% booking and possession in 2 years. Features an exclusive resident swimming pool, modern gym, 2 basements parking (281 cars, 41 servant quarters), high-speed elevators, and 24/7 RFID security.',
+    image: 'https://banuhafeez.com/assets/building.jpg',
     link: '/featured-building',
-    videoUrl: 'https://www.youtube.com/watch?v=ScMzIvxBSi4',
+    videoUrl: 'https://banuhafeez.com/assets/bh-video.mp4',
     gallery: [
-      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80'
+      'https://banuhafeez.com/assets/building.jpg',
+      'https://banuhafeez.com/assets/bh-real-2.jpg',
+      'https://banuhafeez.com/assets/bh-real-6.jpg',
+      'https://banuhafeez.com/assets/pool.jpg',
+      'https://banuhafeez.com/assets/bh-real-a.jpg',
+      'https://banuhafeez.com/assets/bh-real-4.jpg',
+      'https://banuhafeez.com/assets/bh-real-7.jpg',
+      'https://banuhafeez.com/assets/bh-real-b.jpg',
+      'https://banuhafeez.com/assets/bh-3bed.jpg'
     ],
     specs: [
-      { label: 'Units', value: '1, 2 & 3 Bed' },
-      { label: 'Down Payment', value: '20% Down' },
-      { label: 'Installments', value: '2.5 Years' },
-      { label: 'Possession', value: 'Dec 2027' }
+      { label: '1 Bedroom', value: '546 Sq.Ft · PKR 9.83M' },
+      { label: '2 Bedroom', value: '1,089-1,215 Sq.Ft · PKR 19.6M' },
+      { label: '3 Bedroom', value: '1,881-2,010 Sq.Ft · PKR 33.8M' },
+      { label: 'Payment Terms', value: '15% Down · 3-Yr Plan' }
     ],
     features: [
-      'Prime G-11 Markaz commercial proximity',
-      'Earthquake resistant seismic structure',
-      'Double basement dedicated reserved parking',
-      'Dual high-speed passenger & cargo elevators',
-      '24/7 CCTV surveillance & armed security',
-      'Dedicated power backup generator'
+      'RDA, CAA, Rescue & Building Control Department Approved',
+      '17-Storey Landmark Tower by Waheed Group of Companies',
+      'Exclusive Residents Swimming Pool & Modern Equipped Gym',
+      'Two Basements Parking for 281 Cars & 41 Servant Quarters',
+      'High-Speed Elevators Serving All Residential Floors',
+      '24/7 CCTV Surveillance, RFID Entry & Backup Generator',
+      'In-House Daily Essentials Grocery Mart & Concierge',
+      'Possession Planned Within 2 Years of Booking'
     ],
-    whatsappMsg: 'Hello TopLinkers, I am inquiring about the featured building project: Banu Hafeez Executive Residences.',
+    whatsappMsg: 'Hello TopLinkers, I am inquiring about Banu Hafeez Luxury Apartments in Top City-1 (1-Bed, 2-Bed, or 3-Bed unit).',
     phone: '0334-9522157'
   }
 

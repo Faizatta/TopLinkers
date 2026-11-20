@@ -407,105 +407,6 @@
                 </table>
               </div>
             </section>
-
-            <!-- Verified Photo Gallery for I-12 & I-16 -->
-            <section class="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200/90 shadow-sm">
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
-                <div>
-                  <span class="text-[10px] font-black uppercase tracking-widest text-[#16B4E8] bg-sky-50 px-2.5 py-0.5 rounded-full inline-block mb-1">
-                    Authentic On-Ground Gallery
-                  </span>
-                  <h3 class="text-xl sm:text-2xl font-extrabold text-[#0F2A44]">
-                    Sector I-12 &amp; I-16 Apartment Photos
-                  </h3>
-                  <p class="text-xs text-gray-500 mt-0.5">
-                    Real, verified on-ground photos of towers, street access, building elevations, and apartment interior finishes.
-                  </p>
-                </div>
-
-                <!-- Filter Tabs -->
-                <div class="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl self-start sm:self-auto">
-                  <button
-                    type="button"
-                    @click="activeGalleryTab = 'all'"
-                    :class="[
-                      'px-3 py-1.5 rounded-lg text-xs font-bold transition-all',
-                      activeGalleryTab === 'all'
-                        ? 'bg-[#0F2A44] text-white shadow-xs'
-                        : 'text-gray-600 hover:text-[#0F2A44]'
-                    ]"
-                  >
-                    All (16)
-                  </button>
-                  <button
-                    type="button"
-                    @click="activeGalleryTab = 'i12'"
-                    :class="[
-                      'px-3 py-1.5 rounded-lg text-xs font-bold transition-all',
-                      activeGalleryTab === 'i12'
-                        ? 'bg-[#0F2A44] text-white shadow-xs'
-                        : 'text-gray-600 hover:text-[#0F2A44]'
-                    ]"
-                  >
-                    Sector I-12 (8)
-                  </button>
-                  <button
-                    type="button"
-                    @click="activeGalleryTab = 'i16'"
-                    :class="[
-                      'px-3 py-1.5 rounded-lg text-xs font-bold transition-all',
-                      activeGalleryTab === 'i16'
-                        ? 'bg-[#0F2A44] text-white shadow-xs'
-                        : 'text-gray-600 hover:text-[#0F2A44]'
-                    ]"
-                  >
-                    Sector I-16 (8)
-                  </button>
-                </div>
-              </div>
-
-              <!-- Photos Grid -->
-              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5">
-                <div
-                  v-for="photo in filteredPhotos"
-                  :key="photo.id"
-                  class="group relative rounded-xl overflow-hidden border border-gray-200 bg-slate-50 cursor-pointer shadow-xs hover:shadow-md transition-all duration-300"
-                  @click="openLightbox(photo)"
-                >
-                  <div class="aspect-[4/3] w-full overflow-hidden bg-slate-200">
-                    <picture>
-                      <source :srcset="photo.webp" type="image/webp" />
-                      <img
-                        :src="photo.jpg"
-                        :alt="photo.title"
-                        loading="lazy"
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </picture>
-                  </div>
-
-                  <div class="absolute top-2 left-2">
-                    <span
-                      :class="[
-                        'text-[9px] font-black uppercase px-2 py-0.5 rounded shadow-sm text-white',
-                        photo.sector === 'Sector I-12' ? 'bg-[#16B4E8]' : 'bg-emerald-600'
-                      ]"
-                    >
-                      {{ photo.sector }}
-                    </span>
-                  </div>
-
-                  <div class="p-2.5 bg-white">
-                    <div class="text-[11px] font-bold text-[#0F2A44] truncate group-hover:text-[#16B4E8] transition-colors">
-                      {{ photo.title }}
-                    </div>
-                    <div class="text-[9px] text-gray-500 truncate mt-0.5">
-                      {{ photo.tag }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
           </div>
 
           <!-- ======================================================== -->
@@ -568,38 +469,42 @@
               <!-- Banu Hafeez Luxury Suites -->
               <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
                 <div>
-                  <div class="h-48 w-full overflow-hidden relative bg-slate-100">
-                    <picture>
-                      <source srcset="/images/hero-pha-flats.webp" type="image/webp" />
-                      <img src="/images/hero-pha-flats.jpg" alt="Banu Hafeez Luxury Suites" class="w-full h-full object-cover" />
-                    </picture>
+                  <div class="h-48 w-full overflow-hidden relative bg-slate-900">
+                    <img src="https://banuhafeez.com/assets/building.jpg" alt="Banu Hafeez Luxury Apartments TopCity-1" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                     <span class="absolute top-3 left-3 bg-[#0F2A44] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow">
-                      100% Cash &bull; Flexible Installments
+                      15% Booking &bull; 3-Year Plan
+                    </span>
+                    <span class="absolute top-3 right-3 bg-amber-400 text-[#0F2A44] text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
+                      17-Storey Tower
                     </span>
                   </div>
                   <div class="p-6">
-                    <h3 class="font-bold text-[#0F2A44] text-lg mb-2">Banu Hafeez Luxury Suites</h3>
+                    <h3 class="font-bold text-[#0F2A44] text-lg mb-2">Banu Hafeez Luxury Apartments</h3>
                     <p class="text-xs text-gray-600 leading-relaxed mb-4">
-                      High-end modern apartments in central urban locations with subterranean parking, gymnasiums, and round-the-clock facility maintenance.
+                      Approved 17-storey landmark by Waheed Group of Companies in TopCity-1 (15 mins to Airport). Featuring swimming pool, gym, 2 basements parking (281 cars), servant quarters, and 2-year possession.
                     </p>
                     <div class="space-y-2 text-xs mb-4">
                       <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
-                        <span class="font-bold text-[#0F2A44]">2-Bed Executive Suite</span>
-                        <span class="text-[#16B4E8] font-black">PKR 85 - 98 Lac</span>
+                        <span class="font-bold text-[#0F2A44]">1-Bed Suite (546 sq.ft.)</span>
+                        <span class="text-[#16B4E8] font-black">PKR 9.83M <span class="text-[9px] text-slate-400 font-normal">(1.47M down)</span></span>
                       </div>
                       <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
-                        <span class="font-bold text-[#0F2A44]">3-Bed Family Unit</span>
-                        <span class="text-[#16B4E8] font-black">PKR 1.25 - 1.55 Cr</span>
+                        <span class="font-bold text-[#0F2A44]">2-Bed Suite (1,089–1,215 sq.ft.)</span>
+                        <span class="text-[#16B4E8] font-black">PKR 19.60M <span class="text-[9px] text-slate-400 font-normal">(2.94M down)</span></span>
+                      </div>
+                      <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+                        <span class="font-bold text-[#0F2A44]">3-Bed Suite (1,881–2,010 sq.ft.)</span>
+                        <span class="text-[#16B4E8] font-black">PKR 33.86M <span class="text-[9px] text-slate-400 font-normal">(5.07M down)</span></span>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="p-6 pt-0">
                   <router-link
-                    to="/listings?search=Banu"
+                    to="/featured-building"
                     class="block w-full text-center py-3 bg-[#0F2A44] hover:bg-[#16B4E8] text-white font-bold text-xs uppercase rounded-xl transition shadow-sm"
                   >
-                    View Banu Hafeez Units &rarr;
+                    Explore Banu Hafeez Project &rarr;
                   </router-link>
                 </div>
               </div>
@@ -665,47 +570,6 @@
         </aside>
       </div>
     </main>
-
-    <!-- Lightbox Modal for Full View -->
-    <div
-      v-if="selectedPhoto"
-      class="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
-      @click.self="selectedPhoto = null"
-    >
-      <div class="relative max-w-4xl w-full bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-        <button
-          type="button"
-          class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/60 text-white hover:bg-black flex items-center justify-center transition"
-          @click="selectedPhoto = null"
-          aria-label="Close photo"
-        >
-          ✕
-        </button>
-        <div class="w-full max-h-[75vh] flex items-center justify-center bg-black">
-          <picture>
-            <source :srcset="selectedPhoto.webp" type="image/webp" />
-            <img
-              :src="selectedPhoto.jpg"
-              :alt="selectedPhoto.title"
-              class="max-h-[75vh] w-auto object-contain mx-auto"
-            />
-          </picture>
-        </div>
-        <div class="p-4 bg-slate-900 text-white flex items-center justify-between border-t border-white/10">
-          <div>
-            <div class="text-sm font-bold">{{ selectedPhoto.title }}</div>
-            <div class="text-xs text-gray-400 mt-0.5">{{ selectedPhoto.sector }} &bull; {{ selectedPhoto.tag }}</div>
-          </div>
-          <a
-            :href="selectedPhoto.jpg"
-            target="_blank"
-            class="text-xs text-[#16B4E8] hover:underline font-bold"
-          >
-            Open Full Size ↗
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -719,8 +583,6 @@ const faqs = computed(() => adminStore.getFaqsByService('flats'))
 
 const route = useRoute()
 const activeMainTab = ref('all') // 'all' | 'pha' | 'luxury'
-const activeGalleryTab = ref('all')
-const selectedPhoto = ref(null)
 
 const applyRouteTab = () => {
   if (route.query.option === 'pha' || route.hash === '#pha') {
@@ -740,152 +602,4 @@ watch(
     applyRouteTab()
   }
 )
-
-const photos = [
-  // Sector I-12
-  {
-    id: 'i12-1',
-    sector: 'Sector I-12',
-    title: 'PHA Multi-Story Towers Elevation',
-    tag: 'Exterior & Main Gate',
-    webp: '/images/pha/pha-i12-ext-1.webp',
-    jpg: '/images/pha/pha-i12-ext-1.jpg'
-  },
-  {
-    id: 'i12-2',
-    sector: 'Sector I-12',
-    title: 'Tower Complex View',
-    tag: 'Building Facade & Balconies',
-    webp: '/images/pha/pha-i12-ext-2.webp',
-    jpg: '/images/pha/pha-i12-ext-2.jpg'
-  },
-  {
-    id: 'i12-3',
-    sector: 'Sector I-12',
-    title: 'Central Street Corridor',
-    tag: 'Access Roadway',
-    webp: '/images/pha/pha-i12-street.webp',
-    jpg: '/images/pha/pha-i12-street.jpg'
-  },
-  {
-    id: 'i12-4',
-    sector: 'Sector I-12',
-    title: 'Direct Tower Elevation',
-    tag: 'Facade & Architecture',
-    webp: '/images/pha/pha-i12-elevation.webp',
-    jpg: '/images/pha/pha-i12-elevation.jpg'
-  },
-  {
-    id: 'i12-5',
-    sector: 'Sector I-12',
-    title: 'Apartment Blocks Perspective',
-    tag: 'Residential Towers',
-    webp: '/images/pha/pha-i12-ext-3.webp',
-    jpg: '/images/pha/pha-i12-ext-3.jpg'
-  },
-  {
-    id: 'i12-6',
-    sector: 'Sector I-12',
-    title: 'Living Lounge & Tiled Flooring',
-    tag: 'Interior Finishes',
-    webp: '/images/pha/pha-i12-int-2.webp',
-    jpg: '/images/pha/pha-i12-int-2.jpg'
-  },
-  {
-    id: 'i12-7',
-    sector: 'Sector I-12',
-    title: 'Bedrooms & Woodwork',
-    tag: 'Interior Bedroom Layout',
-    webp: '/images/pha/pha-i12-int-1.webp',
-    jpg: '/images/pha/pha-i12-int-1.jpg'
-  },
-  {
-    id: 'i12-8',
-    sector: 'Sector I-12',
-    title: 'Room Space & Natural Light',
-    tag: 'Family Bedroom',
-    webp: '/images/pha/pha-i12-int-3.webp',
-    jpg: '/images/pha/pha-i12-int-3.jpg'
-  },
-
-  // Sector I-16
-  {
-    id: 'i16-1',
-    sector: 'Sector I-16',
-    title: 'Sector I-16 Apartment Building',
-    tag: 'G+6 Tower Complex',
-    webp: '/images/pha/pha-i16-ext-1.webp',
-    jpg: '/images/pha/pha-i16-ext-1.jpg'
-  },
-  {
-    id: 'i16-2',
-    sector: 'Sector I-16',
-    title: 'Completed Block Elevation',
-    tag: 'Ready Possession Towers',
-    webp: '/images/pha/pha-i16-elevation.webp',
-    jpg: '/images/pha/pha-i16-elevation.jpg'
-  },
-  {
-    id: 'i16-3',
-    sector: 'Sector I-16',
-    title: 'Apartment Blocks Cluster',
-    tag: 'Sector I-16/3 Gated Society',
-    webp: '/images/pha/pha-i16-blocks.webp',
-    jpg: '/images/pha/pha-i16-blocks.jpg'
-  },
-  {
-    id: 'i16-4',
-    sector: 'Sector I-16',
-    title: 'Main Living Room & Dining',
-    tag: 'Tile Finish & Ceiling Fans',
-    webp: '/images/pha/pha-i16-int-1.webp',
-    jpg: '/images/pha/pha-i16-int-1.jpg'
-  },
-  {
-    id: 'i16-5',
-    sector: 'Sector I-16',
-    title: 'Spacious Family Lounge',
-    tag: 'Interior Architecture',
-    webp: '/images/pha/pha-i16-int-2.webp',
-    jpg: '/images/pha/pha-i16-int-2.jpg'
-  },
-  {
-    id: 'i16-6',
-    sector: 'Sector I-16',
-    title: 'Bedroom with Window Daylight',
-    tag: 'Executive Bedroom',
-    webp: '/images/pha/pha-i16-int-3.webp',
-    jpg: '/images/pha/pha-i16-int-3.jpg'
-  },
-  {
-    id: 'i16-7',
-    sector: 'Sector I-16',
-    title: 'Private Balcony View',
-    tag: 'Outdoor Safety Railing',
-    webp: '/images/pha/pha-i16-balcony.webp',
-    jpg: '/images/pha/pha-i16-balcony.jpg'
-  },
-  {
-    id: 'i16-8',
-    sector: 'Sector I-16',
-    title: 'Building Exterior Corner',
-    tag: 'Street & Parking Grounds',
-    webp: '/images/pha/pha-i16-ext-2.webp',
-    jpg: '/images/pha/pha-i16-ext-2.jpg'
-  }
-]
-
-const filteredPhotos = computed(() => {
-  if (activeGalleryTab.value === 'i12') {
-    return photos.filter(p => p.sector === 'Sector I-12')
-  }
-  if (activeGalleryTab.value === 'i16') {
-    return photos.filter(p => p.sector === 'Sector I-16')
-  }
-  return photos
-})
-
-const openLightbox = (photo) => {
-  selectedPhoto.value = photo
-}
 </script>
