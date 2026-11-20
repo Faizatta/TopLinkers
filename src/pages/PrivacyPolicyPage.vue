@@ -155,13 +155,45 @@
             </p>
           </section>
 
-          <!-- 4. Third-Party Integrations -->
-          <section id="third-party-services" class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/90 shadow-xs space-y-4 scroll-mt-28">
+          <!-- 4. Google AdSense & DoubleClick DART Cookies Policy -->
+          <section id="google-adsense" class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/90 shadow-xs space-y-4 scroll-mt-28">
             <div class="flex items-center gap-2 text-[#16B4E8] text-xs font-black uppercase tracking-wider">
               <span>Section 04</span>
             </div>
             <h2 class="text-lg sm:text-xl font-extrabold text-[#0F2A44]">
-              4. Third-Party Services &amp; Integrations
+              4. Google AdSense &amp; DoubleClick DART Cookies
+            </h2>
+            <p>
+              Google is a third-party vendor on our site. Google uses cookies, known as <strong>DART cookies</strong>, to serve advertisements to visitors of TopLinkers based on their browsing history across <em>toplinkersgroup.com</em> and other websites across the Internet.
+            </p>
+            <div class="p-4 bg-sky-50/70 rounded-xl border border-sky-200 text-sky-950 space-y-2">
+              <strong class="text-xs font-bold block text-sky-900">User Advertising Choices &amp; Opt-Out Mechanisms:</strong>
+              <p class="text-xs leading-relaxed">
+                Visitors may opt out of personalized advertising and the use of the DoubleClick DART cookie at any time by visiting the official 
+                <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" class="text-[#16B4E8] font-bold underline hover:text-[#0F2A44]">Google Ad &amp; Content Network Privacy Policy</a> or managing preferences in 
+                <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" class="text-[#16B4E8] font-bold underline hover:text-[#0F2A44]">Google Ads Settings</a>.
+              </p>
+              <p class="text-xs leading-relaxed">
+                Alternatively, you can opt out of third-party vendor cookies for personalized advertising by visiting the 
+                <a href="http://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" class="text-[#16B4E8] font-bold underline hover:text-[#0F2A44]">Digital Advertising Alliance (DAA) Consumer Choice Page</a> or the 
+                <a href="http://www.networkadvertising.org/choices/" target="_blank" rel="noopener noreferrer" class="text-[#16B4E8] font-bold underline hover:text-[#0F2A44]">Network Advertising Initiative (NAI) Opt-Out Portal</a>.
+              </p>
+            </div>
+            <p>
+              Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons in their respective advertisements and links that appear on TopLinkers, which are sent directly to users' browsers. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.
+            </p>
+            <p class="text-xs text-gray-500 italic">
+              <strong>Notice:</strong> TopLinkers has no access to or control over these cookies that are used by third-party advertisers. We encourage you to consult the respective Privacy Policies of these third-party ad servers for more detailed information.
+            </p>
+          </section>
+
+          <!-- 5. Third-Party Integrations -->
+          <section id="third-party-services" class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/90 shadow-xs space-y-4 scroll-mt-28">
+            <div class="flex items-center gap-2 text-[#16B4E8] text-xs font-black uppercase tracking-wider">
+              <span>Section 05</span>
+            </div>
+            <h2 class="text-lg sm:text-xl font-extrabold text-[#0F2A44]">
+              5. Third-Party Services &amp; Integrations
             </h2>
             <p>
               To offer a complete user experience, our website integrates specific third-party tools that operate under their respective privacy policies:
@@ -173,13 +205,13 @@
             </ul>
           </section>
 
-          <!-- 5. How We Use Collected Data -->
+          <!-- 6. How We Use Collected Data -->
           <section id="data-usage" class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/90 shadow-xs space-y-4 scroll-mt-28">
             <div class="flex items-center gap-2 text-[#16B4E8] text-xs font-black uppercase tracking-wider">
-              <span>Section 05</span>
+              <span>Section 06</span>
             </div>
             <h2 class="text-lg sm:text-xl font-extrabold text-[#0F2A44]">
-              5. How We Use Your Information
+              6. How We Use Your Information
             </h2>
             <p>
               TopLinkers uses the data collected strictly for legitimate business and client advisory operations:
@@ -193,13 +225,13 @@
             </ul>
           </section>
 
-          <!-- 6. Data Security -->
+          <!-- 7. Data Security -->
           <section id="data-security" class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/90 shadow-xs space-y-4 scroll-mt-28">
             <div class="flex items-center gap-2 text-[#16B4E8] text-xs font-black uppercase tracking-wider">
-              <span>Section 06</span>
+              <span>Section 07</span>
             </div>
             <h2 class="text-lg sm:text-xl font-extrabold text-[#0F2A44]">
-              6. Data Protection &amp; Security Standards
+              7. Data Protection &amp; Security Standards
             </h2>
             <p>
               We implement comprehensive technical, operational, and administrative measures to safeguard the security and integrity of your data:
@@ -211,28 +243,76 @@
             </ul>
           </section>
 
-          <!-- 7. User Rights -->
-          <section id="user-rights" class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/90 shadow-xs space-y-4 scroll-mt-28">
+          <!-- 8. GDPR Data Protection Rights -->
+          <section id="gdpr-rights" class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/90 shadow-xs space-y-4 scroll-mt-28">
             <div class="flex items-center gap-2 text-[#16B4E8] text-xs font-black uppercase tracking-wider">
-              <span>Section 07</span>
+              <span>Section 08</span>
             </div>
             <h2 class="text-lg sm:text-xl font-extrabold text-[#0F2A44]">
-              7. Your Privacy Rights &amp; Data Control
+              8. GDPR Data Protection Rights (EU / UK Visitors)
             </h2>
             <p>
-              As a visitor or client, you maintain the following rights regarding personal data provided to TopLinkers:
+              We want to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following under General Data Protection Regulation (GDPR) standards:
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
+                <strong class="text-xs text-[#0F2A44] block mb-0.5">Right to Access</strong>
+                <span class="text-xs text-gray-600">You have the right to request copies of your personal data held by TopLinkers.</span>
+              </div>
+              <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
+                <strong class="text-xs text-[#0F2A44] block mb-0.5">Right to Rectification</strong>
+                <span class="text-xs text-gray-600">You have the right to request that we correct any information you believe is inaccurate.</span>
+              </div>
+              <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
+                <strong class="text-xs text-[#0F2A44] block mb-0.5">Right to Erasure</strong>
+                <span class="text-xs text-gray-600">You have the right to request that we erase your personal data under certain conditions.</span>
+              </div>
+              <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
+                <strong class="text-xs text-[#0F2A44] block mb-0.5">Right to Data Portability</strong>
+                <span class="text-xs text-gray-600">You have the right to request transfer of your collected data to another organization.</span>
+              </div>
+            </div>
+            <p class="pt-1">
+              If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact our compliance desk at <strong>toplinkers69@gmail.com</strong>.
+            </p>
+          </section>
+
+          <!-- 9. CCPA/CPRA California Privacy Rights -->
+          <section id="ccpa-rights" class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/90 shadow-xs space-y-4 scroll-mt-28">
+            <div class="flex items-center gap-2 text-[#16B4E8] text-xs font-black uppercase tracking-wider">
+              <span>Section 09</span>
+            </div>
+            <h2 class="text-lg sm:text-xl font-extrabold text-[#0F2A44]">
+              9. CCPA/CPRA Privacy Rights (Do Not Sell My Personal Information)
+            </h2>
+            <p>
+              Under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA), California consumers are granted specific rights regarding their personal information:
             </p>
             <ul class="list-disc list-inside space-y-1.5 pl-1 text-gray-600">
-              <li><strong>Access &amp; Inquiries:</strong> You may request confirmation of whether TopLinkers holds any personal contact records submitted by you.</li>
-              <li><strong>Correction &amp; Updates:</strong> You may request corrections to any outdated contact details or inquiry requests.</li>
-              <li><strong>Deletion / Opt-Out:</strong> You may request that your phone number or email be expunged from our direct communication lists at any time by contacting our office.</li>
+              <li><strong>Right to Know:</strong> Request disclosure of the categories and specific pieces of personal information a business has collected about consumers.</li>
+              <li><strong>Right to Delete:</strong> Request deletion of any personal information about the consumer that a business has collected.</li>
+              <li><strong>Right to Opt-Out of Sale / Sharing:</strong> Request that a business that sells or shares a consumer's personal data, not sell or share the consumer's personal data. <strong>TopLinkers does not sell, trade, or monetize personal information.</strong></li>
+              <li><strong>Right to Non-Discrimination:</strong> We will never discriminate against you for exercising any of your CCPA/CPRA privacy rights.</li>
             </ul>
           </section>
 
-          <!-- 8. Contact Section -->
+          <!-- 10. Children's Information -->
+          <section id="children-information" class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/90 shadow-xs space-y-4 scroll-mt-28">
+            <div class="flex items-center gap-2 text-[#16B4E8] text-xs font-black uppercase tracking-wider">
+              <span>Section 10</span>
+            </div>
+            <h2 class="text-lg sm:text-xl font-extrabold text-[#0F2A44]">
+              10. Children's Online Privacy Protection (COPPA)
+            </h2>
+            <p>
+              Protecting children's privacy online is especially important to us. TopLinkers does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you believe that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will promptly remove such information from our records.
+            </p>
+          </section>
+
+          <!-- 11. Contact Section -->
           <section id="contact-compliance" class="bg-gradient-to-r from-[#0F2A44] via-[#143452] to-[#0F2A44] text-white rounded-2xl p-6 sm:p-8 shadow-md space-y-4 scroll-mt-28">
             <h2 class="text-lg sm:text-xl font-extrabold text-white">
-              8. Privacy Questions &amp; Legal Compliance Contact
+              11. Privacy Questions &amp; Legal Compliance Contact
             </h2>
             <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
               If you have any questions about this Privacy Policy, cookie management, or data protection practices, please contact TopLinkers directly:
@@ -266,10 +346,13 @@ const sections = [
   { id: 'introduction', title: '1. Introduction & Identity' },
   { id: 'information-collected', title: '2. Information We Collect' },
   { id: 'cookies-advertising', title: '3. Cookies & Tracking Tech' },
-  { id: 'third-party-services', title: '4. Third-Party Integrations' },
-  { id: 'data-usage', title: '5. How We Use Data' },
-  { id: 'data-security', title: '6. Data Protection Standards' },
-  { id: 'user-rights', title: '7. Your Privacy Rights' },
-  { id: 'contact-compliance', title: '8. Legal Contact' }
+  { id: 'google-adsense', title: '4. Google AdSense & DART Cookies' },
+  { id: 'third-party-services', title: '5. Third-Party Integrations' },
+  { id: 'data-usage', title: '6. How We Use Data' },
+  { id: 'data-security', title: '7. Data Protection Standards' },
+  { id: 'gdpr-rights', title: '8. GDPR Privacy Rights' },
+  { id: 'ccpa-rights', title: '9. CCPA/CPRA Privacy Rights' },
+  { id: 'children-information', title: '10. Children\'s Privacy (COPPA)' },
+  { id: 'contact-compliance', title: '11. Legal Contact' }
 ]
 </script>

@@ -529,7 +529,7 @@ const staticRoutes = [
   {
     path: '/blog',
     title: 'Real Estate Blog & Market Intelligence | TopLinkers Islamabad',
-    description: 'Expert real estate insights on CDA sector plot ballots, TopCity & PECHS rates, PHA flat prices in I-12 / I-16, turnkey construction costs and solar net metering in Pakistan.',
+    description: 'Expert real estate insights on CDA sector plot ballots, TopCity & PECHS rates, PHA flat prices, turnkey construction costs and solar net metering in Pakistan.',
     h1: 'TopLinkers Real Estate Blog & Market Intelligence Reports',
     content: `
       <section style="margin-bottom:28px;">
@@ -600,6 +600,29 @@ const staticRoutes = [
         </p>
         <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
           We collect personal information solely to provide real estate diligence, transfer facilitation, construction cost estimations, and solar site feasibility reports. We never sell, lease, or monetize client data to third-party marketing companies.
+        </p>
+      </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Google AdSense &amp; DoubleClick DART Cookies Policy</h2>
+        <p style="font-size:14px;line-height:1.75;color:#334155;margin-bottom:12px;">
+          Google is a third-party vendor on our website. Google uses cookies, known as DART cookies, to serve advertisements to our site visitors based upon their visit to toplinkersgroup.com and other sites on the Internet.
+        </p>
+        <p style="font-size:14px;line-height:1.75;color:#334155;margin-bottom:12px;">
+          Users may opt out of the use of the DART cookie and manage personalized advertising choices by visiting the <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" style="color:#16B4E8;font-weight:700;">Google Ad and Content Network Privacy Policy</a> or <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" style="color:#16B4E8;font-weight:700;">Google Ads Settings</a>.
+        </p>
+        <p style="font-size:14px;line-height:1.75;color:#334155;margin-bottom:12px;">
+          Additionally, you can opt out of third-party interest-based advertising via the <a href="http://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" style="color:#16B4E8;font-weight:700;">Digital Advertising Alliance (DAA)</a> or the <a href="http://www.networkadvertising.org/choices/" target="_blank" rel="noopener noreferrer" style="color:#16B4E8;font-weight:700;">Network Advertising Initiative (NAI)</a>.
+        </p>
+      </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">GDPR &amp; CCPA Privacy Rights (EU &amp; California Visitors)</h2>
+        <p style="font-size:14px;line-height:1.75;color:#334155;margin-bottom:12px;">
+          Under the General Data Protection Regulation (GDPR) and California Consumer Privacy Act (CCPA/CPRA), visitors possess clear legal rights to access, rectify, request erasure of their personal data, restrict data processing, and request data portability.
+        </p>
+        <p style="font-size:14px;line-height:1.75;color:#334155;">
+          <strong>Do Not Sell My Personal Information:</strong> TopLinkers does not sell, barter, or transfer personal records to third parties. To exercise any data subject rights, contact toplinkers69@gmail.com.
         </p>
       </section>
 
@@ -709,7 +732,7 @@ const staticRoutes = [
   {
     path: '/admin/login',
     title: 'Admin Portal Login | TopLinkers Executive Suite',
-    description: 'Secure server-side administrative access to the TopLinkers Executive Management Suite. Authorized personnel only.',
+    description: 'Secure server-side administrative access to the TopLinkers Executive Management Suite in Islamabad. Authorized personnel and administrators only.',
     h1: 'TopLinkers Executive Suite: Portal Authentication',
     content: `
       <section style="margin-bottom:28px;">
@@ -993,6 +1016,82 @@ export function prerender() {
       html = html.replace('</head>', `${propJsonLd}\n  </head>`)
     }
 
+    // BreadcrumbList JSON-LD for rich snippets on search results
+    if (r.path !== '/') {
+      const breadcrumbItems = [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": `${BASE_URL}/`
+        }
+      ]
+
+      if (r.isProperty && r.propertyData) {
+        breadcrumbItems.push(
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Listings",
+            "item": `${BASE_URL}/listings`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": r.propertyData.title,
+            "item": fullCanonical
+          }
+        )
+      } else if (r.isArticle && r.articleData) {
+        breadcrumbItems.push(
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": `${BASE_URL}/blog`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": r.articleData.title,
+            "item": fullCanonical
+          }
+        )
+      } else if (r.path.startsWith('/services/')) {
+        breadcrumbItems.push(
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": `${BASE_URL}/services`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": r.title.split('|')[0].trim(),
+            "item": fullCanonical
+          }
+        )
+      } else {
+        breadcrumbItems.push({
+          "@type": "ListItem",
+          "position": 2,
+          "name": r.title.split('|')[0].trim(),
+          "item": fullCanonical
+        })
+      }
+
+      const breadcrumbJsonLd = `
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": ${JSON.stringify(breadcrumbItems, null, 2)}
+    }
+    </script>`
+      html = html.replace('</head>', `${breadcrumbJsonLd}\n  </head>`)
+    }
+
     // 6. Crawlable Semantic Content injected directly inside <div id="app">
     // Gives search engine crawlers, bots, and speed auditors an immediate, full-page semantic DOM
     // with genuine <h1>, content sections, and internal links.
@@ -1210,9 +1309,10 @@ export function prerender() {
     console.log(`  💾 Synchronized SQLite API Engine and database into dist/api.`)
   }
 
-  // Synchronize sitemap.xml with canonical URLs (excluding admin and 404)
+  // Synchronize sitemap.xml with canonical URLs (excluding admin, 404, and disallowed utility tools)
   const todayIso = new Date().toISOString().split('T')[0]
-  const canonicalRoutes = allRoutes.filter(r => !r.path.startsWith('/admin') && r.path !== '/404')
+  const disallowedPaths = new Set(['/404', '/compare', '/create-listing', '/favorites', '/search'])
+  const canonicalRoutes = allRoutes.filter(r => !r.path.startsWith('/admin') && !disallowedPaths.has(r.path))
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${canonicalRoutes.map(r => {
