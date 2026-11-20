@@ -968,7 +968,7 @@ const spotlightPresets = [
     key: 'banu_hafeez',
     name: 'Banu Hafeez Suites',
     badgeText: '18% Yield',
-    tag: 'Banu Hafeez | Islamabad',
+    tag: 'Banu Hafeez | TopCity-1',
     badge: '18% Expected Yield',
     downPayment: '20% Down',
     planText: 'Cash & Installment',

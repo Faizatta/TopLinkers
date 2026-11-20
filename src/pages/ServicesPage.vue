@@ -484,7 +484,7 @@
               Flats &amp; Apartments — PHA &amp; Luxury Suites
             </h2>
             <p class="text-xs sm:text-sm text-gray-500 mt-1 max-w-2xl leading-relaxed">
-              Authorized PHA government flats in Sector I-12, Sector I-16 &amp; Sector G-11, plus luxury suites (Banu Hafeez &amp; Harsukh Residencies).
+              Authorized PHA government flats in Sector I-12 &amp; Sector I-16, alongside premier luxury apartment projects: Banu Hafeez (TopCity-1), Faisal Heights (Zedem) &amp; Harsukh Residencies.
             </p>
           </div>
           <div class="flex items-center gap-2 flex-shrink-0 w-full sm:w-auto">
