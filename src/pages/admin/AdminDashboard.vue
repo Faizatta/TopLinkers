@@ -1130,19 +1130,19 @@ watch(
 const buildingPresets = [
   {
     key: 'banu_hafeez',
-    name: 'Banu Hafeez Luxury Apartments',
-    tag: 'TopCity-1 | 17-Storey Landmark | RDA Approved',
+    name: 'Banu Hafeez Residences',
+    tag: 'Block B, TopCity-1 | Waheed Group | RDA Approved',
     badge: '15% Down • 3-Yr Plan',
     downPayment: '15% Booking',
     price: 'PKR 98.3 Lac – 3.38 Cr',
-    location: 'Top City-1, Islamabad (15 min from Airport)',
-    title: '17-Storey Luxury Residences on 3-Year Plan',
-    subtitle: 'Approved 17-storey landmark by Waheed Group of Companies with swimming pool, gym & 2 basements parking',
-    description: 'Banu Hafeez Luxury Apartments is an approved 17-storey landmark residential tower developed by Waheed Group of Companies in Top City-1, Islamabad. Offering 1-Bed (546 sq.ft.), 2-Bed (1,089-1,215 sq.ft.), and 3-Bed (1,881-2,010 sq.ft.) residences on a 3-year plan with 15% booking and possession in 2 years. Features swimming pool, gym, 2 basements parking for 281 cars, and 24/7 RFID security.',
-    image: 'https://banuhafeez.com/assets/building.jpg',
+    location: 'Block B, TopCity-1, Islamabad (near Srinagar Highway)',
+    title: 'Banu Hafeez Residences — TopCity-1 Modern Apartments',
+    subtitle: 'Modern apartment living in Block B, TopCity-1, Islamabad, near Srinagar Highway. Developed by Waheed Group of Companies.',
+    description: 'Banu Hafeez Residences offers modern apartment living in Block B, TopCity-1, Islamabad, near Srinagar Highway. Developed by Waheed Group of Companies, this residential project features thoughtfully designed 1-bed, 2-bed and 3-bed apartments, with spacious layouts, contemporary kitchens, balconies and terraces. Enjoy convenient access to Islamabad International Airport, major motorways and key destinations across the twin cities.',
+    image: '/images/banu-hafeez/bh-hero.webp',
     link: '/featured-building',
     videoUrl: 'https://banuhafeez.com/assets/bh-video.mp4',
-    features: 'RDA CAA & Rescue Approved, 17-Storey Landmark Tower, Residents Swimming Pool & Gym, 2 Basements Parking (281 Cars), High-Speed Elevators, 24/7 RFID Security & Backup Generator, In-House Grocery Mart, 2-Year Possession'
+    features: 'Prime Location in Block B, TopCity-1, Islamabad, Modern Earthquake-Resistant Structural Design*, Two Dedicated Basement Parking Floors, Modern Passenger & Service Elevators, 24/7 CCTV Surveillance & Security Arrangements, Backup Power Generator for Added Convenience'
   },
   {
     key: 'airport_plaza',

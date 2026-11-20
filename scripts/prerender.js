@@ -463,6 +463,49 @@ const staticRoutes = [
     `
   },
   {
+    path: '/featured-building',
+    title: 'Banu Hafeez Residences TopCity-1 | Modern Apartments Islamabad',
+    description: 'Banu Hafeez Residences offers modern 1, 2 & 3-bed apartment living in Block B, TopCity-1, Islamabad, near Srinagar Highway. Developed by Waheed Group of Companies.',
+    h1: 'Banu Hafeez Residences — Modern Apartment Living in Block B, TopCity-1',
+    content: `
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Comprehensive Project Description</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Banu Hafeez Residences offers modern apartment living in Block B, TopCity-1, Islamabad, near Srinagar Highway. Developed by Waheed Group of Companies, this residential project features thoughtfully designed 1-bed, 2-bed and 3-bed apartments, with spacious layouts, contemporary kitchens, balconies and terraces. Enjoy convenient access to Islamabad International Airport, major motorways and key destinations across the twin cities.
+        </p>
+      </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Features &amp; Amenities</h2>
+        <ul style="line-height:2.2;color:#334155;font-size:14px;padding-left:20px;">
+          <li>Prime Location in Block B, TopCity-1, Islamabad</li>
+          <li>Modern Earthquake-Resistant Structural Design*</li>
+          <li>Two Dedicated Basement Parking Floors</li>
+          <li>Modern Passenger &amp; Service Elevators</li>
+          <li>24/7 CCTV Surveillance &amp; Security Arrangements</li>
+          <li>Backup Power Generator for Added Convenience</li>
+        </ul>
+        <p style="font-size:11px;color:#94a3b8;font-style:italic;margin-top:12px;padding-top:12px;border-top:1px solid #e2e8f0;">
+          *Subject to confirmation through approved structural specifications.
+        </p>
+      </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Unit Specifications &amp; Payment Breakdown</h2>
+        <ul style="line-height:2;color:#334155;font-size:14px;padding-left:20px;">
+          <li><strong>Units:</strong> 1, 2 &amp; 3 Bed Executive Apartments</li>
+          <li><strong>Down Payment:</strong> 15% Booking</li>
+          <li><strong>Installments:</strong> 3-Year Flexible Payment Plan</li>
+          <li><strong>Possession:</strong> Planned within 2 Years</li>
+        </ul>
+      </section>
+
+      <p style="font-size:14px;color:#475569;">
+        Contact our <a href="/contact" style="color:#16B4E8;font-weight:700;">TopCity-1 Advisory Desk</a> to schedule a site visit or reserve your unit.
+      </p>
+    `
+  },
+  {
     path: '/blog',
     title: 'Real Estate Blog & Market Intelligence | TopLinkers Islamabad',
     description: 'Expert real estate insights on CDA sector plot ballots, TopCity & PECHS rates, PHA flat prices in I-12 / I-16, turnkey construction costs and solar net metering in Pakistan.',

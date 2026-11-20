@@ -203,6 +203,9 @@
                 <span>{{ feat }}</span>
               </li>
             </ul>
+            <p class="text-[11px] text-slate-400 italic mt-4 pt-3 border-t border-slate-100 leading-normal">
+              {{ building.structuralDisclaimer || defaultDisclaimer }}
+            </p>
           </div>
 
           <!-- Direct Advisory Card -->
@@ -264,19 +267,21 @@ const whatsappUrl = computed(() => {
 
 const defaultSpecs = [
   { label: 'Units', value: '1, 2 & 3 Bed' },
-  { label: 'Down Payment', value: '20% Down' },
-  { label: 'Installments', value: '2.5 Years' },
-  { label: 'Possession', value: 'Dec 2027' }
+  { label: 'Down Payment', value: '15% Booking' },
+  { label: 'Installments', value: '3 Years' },
+  { label: 'Possession', value: '2 Years' }
 ]
 
 const defaultFeatures = [
-  'Prime Markaz commercial proximity',
-  'Earthquake resistant seismic structure',
-  'Double basement dedicated reserved parking',
-  'Dual high-speed passenger & cargo elevators',
-  '24/7 CCTV surveillance & armed security',
-  'Dedicated power backup generator'
+  'Prime Location in Block B, TopCity-1, Islamabad',
+  'Modern Earthquake-Resistant Structural Design*',
+  'Two Dedicated Basement Parking Floors',
+  'Modern Passenger & Service Elevators',
+  '24/7 CCTV Surveillance & Security Arrangements',
+  'Backup Power Generator for Added Convenience'
 ]
+
+const defaultDisclaimer = '*Subject to confirmation through approved structural specifications.'
 
 onMounted(() => {
   updateSEOMeta({

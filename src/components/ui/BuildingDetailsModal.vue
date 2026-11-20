@@ -114,6 +114,9 @@
                   <span>{{ feat }}</span>
                 </div>
               </div>
+              <p v-if="building.structuralDisclaimer" class="text-[10px] text-slate-400 italic pt-2 leading-normal">
+                {{ building.structuralDisclaimer }}
+              </p>
             </div>
           </div>
 

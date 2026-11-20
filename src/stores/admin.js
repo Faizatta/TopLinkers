@@ -1680,53 +1680,59 @@ export const useAdminStore = defineStore('admin', () => {
   // 7.15 Custom Building / Project Spotlight (Separate 2nd Popup & Details Modal)
   const defaultCustomBuilding = {
     enabled: true,
-    name: 'Banu Hafeez Luxury Apartments',
-    tag: 'TopCity-1 | 17-Storey Landmark | RDA Approved',
+    name: 'Banu Hafeez Residences',
+    tag: 'Block B, TopCity-1 | Waheed Group | RDA Approved',
     badge: '15% Down • 3-Yr Plan',
     downPayment: '15% Booking',
     price: 'PKR 98.3 Lac – 3.38 Cr',
-    location: 'Top City-1, Islamabad (15 min from Airport)',
-    title: '17-Storey Luxury Residences on 3-Year Plan',
-    subtitle: 'Approved 17-storey landmark by Waheed Group of Companies in TopCity-1, featuring swimming pool, modern gym, 2 basements parking for 281 cars, and 2-year possession.',
-    description: 'Banu Hafeez Luxury Apartments is an approved 17-storey landmark residential tower developed by Waheed Group of Companies (Chairman Mr. Abdul Waheed Sheikh, CEO Mr. Faad Waheed) in Top City-1, Islamabad. Perfectly connected via M-1/M-2 Motorways and Srinagar Highway, just 15 minutes from Islamabad Airport. Offering high-end 1-Bedroom (546 sq.ft.), 2-Bedroom (1,089–1,215 sq.ft.), and 3-Bedroom (1,881–2,010 sq.ft.) residences on a 3-year flexible installment plan with 15% booking and possession in 2 years. Features an exclusive resident swimming pool, modern gym, 2 basements parking (281 cars, 41 servant quarters), high-speed elevators, and 24/7 RFID security.',
-    image: 'https://banuhafeez.com/assets/building.jpg',
+    location: 'Block B, TopCity-1, Islamabad (near Srinagar Highway)',
+    title: 'Banu Hafeez Residences — TopCity-1 Modern Apartments',
+    subtitle: 'Banu Hafeez Residences offers modern apartment living in Block B, TopCity-1, Islamabad, near Srinagar Highway. Developed by Waheed Group of Companies.',
+    description: 'Banu Hafeez Residences offers modern apartment living in Block B, TopCity-1, Islamabad, near Srinagar Highway. Developed by Waheed Group of Companies, this residential project features thoughtfully designed 1-bed, 2-bed and 3-bed apartments, with spacious layouts, contemporary kitchens, balconies and terraces. Enjoy convenient access to Islamabad International Airport, major motorways and key destinations across the twin cities.',
+    structuralDisclaimer: '*Subject to confirmation through approved structural specifications.',
+    image: '/images/banu-hafeez/bh-hero.webp',
     link: '/featured-building',
     showVideo: true,
     videoUrl: 'https://banuhafeez.com/assets/bh-video.mp4',
     gallery: [
-      'https://banuhafeez.com/assets/building.jpg',
-      'https://banuhafeez.com/assets/bh-real-2.jpg',
-      'https://banuhafeez.com/assets/bh-real-6.jpg',
-      'https://banuhafeez.com/assets/pool.jpg',
-      'https://banuhafeez.com/assets/bh-real-a.jpg',
-      'https://banuhafeez.com/assets/bh-real-4.jpg',
-      'https://banuhafeez.com/assets/bh-real-7.jpg',
-      'https://banuhafeez.com/assets/bh-real-b.jpg',
-      'https://banuhafeez.com/assets/bh-3bed.jpg'
+      '/images/banu-hafeez/bh-hero.webp',
+      '/images/banu-hafeez/bh-tower.webp',
+      '/images/banu-hafeez/bh-interior.webp',
+      '/images/banu-hafeez/bh-living.webp',
+      '/images/banu-hafeez/bh-plan.webp'
     ],
     specs: [
-      { label: '1 Bedroom', value: '546 Sq.Ft · PKR 9.83M' },
-      { label: '2 Bedroom', value: '1,089-1,215 Sq.Ft · PKR 19.6M' },
-      { label: '3 Bedroom', value: '1,881-2,010 Sq.Ft · PKR 33.8M' },
-      { label: 'Payment Terms', value: '15% Down · 3-Yr Plan' }
+      { label: 'Units', value: '1, 2 & 3 Bed' },
+      { label: 'Down Payment', value: '15% Booking' },
+      { label: 'Installments', value: '3 Years' },
+      { label: 'Possession', value: '2 Years' }
     ],
     features: [
-      'RDA, CAA, Rescue & Building Control Department Approved',
-      '17-Storey Landmark Tower by Waheed Group of Companies',
-      'Exclusive Residents Swimming Pool & Modern Equipped Gym',
-      'Two Basements Parking for 281 Cars & 41 Servant Quarters',
-      'High-Speed Elevators Serving All Residential Floors',
-      '24/7 CCTV Surveillance, RFID Entry & Backup Generator',
-      'In-House Daily Essentials Grocery Mart & Concierge',
-      'Possession Planned Within 2 Years of Booking'
+      'Prime Location in Block B, TopCity-1, Islamabad',
+      'Modern Earthquake-Resistant Structural Design*',
+      'Two Dedicated Basement Parking Floors',
+      'Modern Passenger & Service Elevators',
+      '24/7 CCTV Surveillance & Security Arrangements',
+      'Backup Power Generator for Added Convenience'
     ],
-    whatsappMsg: 'Hello TopLinkers, I am inquiring about Banu Hafeez Luxury Apartments in Top City-1 (1-Bed, 2-Bed, or 3-Bed unit).',
+    whatsappMsg: 'Hello TopLinkers, I am inquiring about Banu Hafeez Residences in Block B, TopCity-1 (1-Bed, 2-Bed, or 3-Bed unit).',
     phone: '0334-9522157'
   }
 
-  const customBuilding = ref(
-    JSON.parse(localStorage.getItem(STORAGE_KEYS.CUSTOM_BUILDING) || 'null') || defaultCustomBuilding
-  )
+  const getInitialCustomBuilding = () => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEYS.CUSTOM_BUILDING) || 'null')
+      if (stored && typeof stored === 'object' && stored.location?.includes('TopCity-1') && !stored.description?.includes('G-11') && stored.features?.some(f => f.includes('Block B'))) {
+        return { ...defaultCustomBuilding, ...stored }
+      }
+    } catch (e) {}
+    try {
+      localStorage.setItem(STORAGE_KEYS.CUSTOM_BUILDING, JSON.stringify(defaultCustomBuilding))
+    } catch (e) {}
+    return defaultCustomBuilding
+  }
+
+  const customBuilding = ref(getInitialCustomBuilding())
 
   const saveCustomBuilding = async (data) => {
     customBuilding.value = {
