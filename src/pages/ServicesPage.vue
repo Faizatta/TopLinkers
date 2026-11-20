@@ -599,7 +599,24 @@
                 <span class="text-xs font-bold text-gray-400">TopCity-1 &bull; 17 Storeys</span>
               </div>
 
-              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors">Banu Hafeez Luxury Apartments</h3>
+              <!-- Few Images Preview Row (Banu Hafeez TopCity-1) -->
+              <div class="mb-4 rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
+                <div class="h-36 w-full overflow-hidden relative cursor-pointer" @click="openInstallmentModal('banu-hafeez')">
+                  <img src="/images/banu-hafeez/bh-hero.webp" alt="Banu Hafeez 17-Storey Tower TopCity-1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  <span class="absolute bottom-2 right-2 bg-black/75 text-white text-[9px] font-bold px-2 py-0.5 rounded backdrop-blur-xs flex items-center gap-1">
+                    <span>📸</span>
+                    <span>Few Images &bull; 5 Photos</span>
+                  </span>
+                </div>
+                <div class="p-1.5 flex items-center gap-1.5 overflow-x-auto bg-slate-100/70">
+                  <img src="/images/banu-hafeez/bh-hero.webp" alt="Tower Façade" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
+                  <img src="/images/banu-hafeez/bh-tower.webp" alt="17-Storey Elevation" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
+                  <img src="/images/banu-hafeez/bh-interior.webp" alt="Luxury Suite Interior" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
+                  <img src="/images/banu-hafeez/bh-plan.webp" alt="Floor Layout Plan" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
+                </div>
+              </div>
+
+              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors cursor-pointer" @click="openInstallmentModal('banu-hafeez')">Banu Hafeez Luxury Apartments</h3>
               <p class="text-xs text-gray-500 mt-1 leading-relaxed">
                 Approved 17-storey landmark tower by Waheed Group in TopCity-1, Islamabad (15 min from Airport). 1, 2 &amp; 3 Bed suites on a 3-year flexible installment plan with resident swimming pool, gym &amp; 2 basements parking.
               </p>
@@ -659,7 +676,24 @@
                 <span class="text-xs font-bold text-gray-400">Zedem &bull; Luxury Living</span>
               </div>
 
-              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-emerald-600 transition-colors">Faisal Heights Luxury Apartments</h3>
+              <!-- Few Images Preview Row (Faisal Heights Zedem) -->
+              <div class="mb-4 rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
+                <div class="h-36 w-full overflow-hidden relative cursor-pointer" @click="openInstallmentModal('faisal-heights')">
+                  <img src="/images/faisal-heights/fh-building.webp" alt="Faisal Heights Luxury Residential Tower" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  <span class="absolute bottom-2 right-2 bg-black/75 text-white text-[9px] font-bold px-2 py-0.5 rounded backdrop-blur-xs flex items-center gap-1">
+                    <span>📸</span>
+                    <span>Few Images &bull; 6 Photos</span>
+                  </span>
+                </div>
+                <div class="p-1.5 flex items-center gap-1.5 overflow-x-auto bg-slate-100/70">
+                  <img src="/images/faisal-heights/fh-building.webp" alt="Tower Overview" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('faisal-heights')" />
+                  <img src="/images/faisal-heights/fh-elevation.webp" alt="High-Rise Façade" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('faisal-heights')" />
+                  <img src="/images/faisal-heights/fh-4bed.webp" alt="Executive Loft Plan" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('faisal-heights')" />
+                  <img src="/images/faisal-heights/fh-2bed.webp" alt="2-Bed Luxury Suite" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('faisal-heights')" />
+                </div>
+              </div>
+
+              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-emerald-600 transition-colors cursor-pointer" @click="openInstallmentModal('faisal-heights')">Faisal Heights Luxury Apartments</h3>
               <p class="text-xs text-gray-500 mt-1 leading-relaxed">
                 Purely luxury residential tower project spanning over 1 Million Sq.Ft by Zedem / Faisal Town. Studio to 4-Bed Lofts with private theater, pool, gym, café, and rooftop garden.
               </p>
@@ -692,12 +726,19 @@
             </div>
 
             <div class="mt-6 pt-4 border-t border-gray-100 flex items-center gap-2">
+              <button
+                type="button"
+                @click="openInstallmentModal('faisal-heights')"
+                class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase rounded-xl text-center transition-all shadow-sm"
+              >
+                View Schedule
+              </button>
               <a
                 href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20Faisal%20Heights%20Luxury%20Apartments"
                 target="_blank"
-                class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase rounded-xl text-center transition-all shadow-sm"
+                class="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-[#0F2A44] font-bold text-xs uppercase rounded-xl text-center transition-all"
               >
-                Inquire Faisal Heights
+                WhatsApp
               </a>
             </div>
           </div>
@@ -712,7 +753,24 @@
                 <span class="text-xs font-bold text-[#16B4E8]">Kuza Gali • Nathia Gali</span>
               </div>
 
-              <h3 class="text-lg font-extrabold text-white group-hover:text-[#16B4E8] transition-colors">Harsukh Residencies</h3>
+              <!-- Few Images Preview Row (Harsukh Residencies Nathia Gali) -->
+              <div class="mb-4 rounded-xl overflow-hidden border border-white/10 bg-white/5">
+                <div class="h-36 w-full overflow-hidden relative cursor-pointer" @click="openInstallmentModal('hrsukh')">
+                  <img src="/images/harsukh/harsukh-valley.webp" alt="Harsukh Residencies Pine Valley Nathia Gali" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  <span class="absolute bottom-2 right-2 bg-black/75 text-white text-[9px] font-bold px-2 py-0.5 rounded backdrop-blur-xs flex items-center gap-1">
+                    <span>📸</span>
+                    <span>Few Images &bull; 4 Photos</span>
+                  </span>
+                </div>
+                <div class="p-1.5 flex items-center gap-1.5 overflow-x-auto bg-black/30">
+                  <img src="/images/harsukh/harsukh-valley.webp" alt="Pine Valley View" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('hrsukh')" />
+                  <img src="/images/harsukh/harsukh-exterior.webp" alt="Alpine Chalet Exterior" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('hrsukh')" />
+                  <img src="/images/harsukh/harsukh-interior.webp" alt="Luxury Suite Interior" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('hrsukh')" />
+                  <img src="/images/harsukh/harsukh-balcony.webp" alt="Mountain Deck Balcony" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('hrsukh')" />
+                </div>
+              </div>
+
+              <h3 class="text-lg font-extrabold text-white group-hover:text-[#16B4E8] transition-colors cursor-pointer" @click="openInstallmentModal('hrsukh')">Harsukh Residencies</h3>
               <p class="text-xs text-gray-300 mt-1 leading-relaxed">
                 Hot selling holiday flats at the highest elevation in Nathia Gali. Designed for family vacations and high-yield tourist rental income.
               </p>

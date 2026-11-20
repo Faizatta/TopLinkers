@@ -1030,6 +1030,7 @@ export function prerender() {
   }
 
   // Synchronize sitemap.xml with canonical URLs (excluding admin and 404)
+  const todayIso = new Date().toISOString().split('T')[0]
   const canonicalRoutes = allRoutes.filter(r => !r.path.startsWith('/admin') && r.path !== '/404')
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -1043,7 +1044,7 @@ ${canonicalRoutes.map(r => {
     (r.isProperty || r.isArticle || r.path === '/hr-sukh') ? 'weekly' : 'monthly'
   return `  <url>
     <loc>${loc}</loc>
-    <lastmod>2026-11-18</lastmod>
+    <lastmod>${todayIso}</lastmod>
     <changefreq>${freq}</changefreq>
     <priority>${priority}</priority>
   </url>`
