@@ -14,8 +14,8 @@
         </p>
       </div>
 
-      <!-- 4 Minimalist Professional Agent Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Professional Advisory & Engineering Cards (3-column responsive grid) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div
           v-for="(agent, idx) in agents"
           :key="agent.id"
@@ -40,7 +40,7 @@
                 />
                 <!-- Verified Green Dot -->
                 <span
-                  v-if="agent.verified"
+                  v-if="agent.verified !== false"
                   class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#25D366] border-2 border-white flex items-center justify-center text-white"
                   title="Verified Consultant"
                 >
@@ -52,29 +52,37 @@
 
               <div class="min-w-0 flex-1">
                 <h3 class="text-base font-extrabold text-[#0F2A44] truncate group-hover:text-[#16B4E8] transition-colors">
-                  <router-link :to="`/agent/${agent.slug}`">
+                  <router-link :to="`/agent/${agent.slug || agent.id}`">
                     {{ agent.name }}
                   </router-link>
                 </h3>
                 <p class="text-[11px] font-bold text-[#16B4E8] leading-tight line-clamp-1 mt-0.5">
                   {{ agent.role }}
                 </p>
-                <p class="text-[10px] text-gray-400 truncate mt-0.5">
-                  {{ agent.company }}
-                </p>
+                <div class="mt-1">
+                  <span v-if="agent.role?.toLowerCase().includes('solar')" class="inline-block px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-amber-100 text-amber-800">
+                    Solar Engineering Division
+                  </span>
+                  <span v-else-if="agent.role?.toLowerCase().includes('civil')" class="inline-block px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800">
+                    Civil &amp; Turnkey Division
+                  </span>
+                  <span v-else class="inline-block px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-sky-100 text-[#0F2A44]">
+                    Property Advisory
+                  </span>
+                </div>
               </div>
             </div>
 
             <!-- Short Bio -->
             <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed mb-4 font-normal">
-              {{ agent.bio }}
+              {{ agent.bio || agent.specialty }}
             </p>
           </div>
 
           <!-- Bottom Actions: WhatsApp & Profile Link -->
           <div class="pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
             <a
-              :href="`https://wa.me/${agent.whatsapp}?text=Hello%20${encodeURIComponent(agent.name)},%20I%20am%20inquiring%20through%20TopLinkers%20website`"
+              :href="`https://wa.me/${agent.whatsapp || '923349522157'}?text=Hello%20${encodeURIComponent(agent.name)},%20I%20am%20inquiring%20through%20TopLinkers%20website`"
               target="_blank"
               class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-[#25D366] text-[#25D366] hover:text-white rounded-lg text-[11px] font-bold transition-colors"
             >
@@ -83,7 +91,7 @@
             </a>
 
             <router-link
-              :to="`/agent/${agent.slug}`"
+              :to="`/agent/${agent.slug || agent.id}`"
               class="text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] transition-colors flex items-center gap-1 group/link"
             >
               <span>View Profile</span>

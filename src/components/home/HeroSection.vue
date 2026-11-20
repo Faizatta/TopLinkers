@@ -107,15 +107,15 @@ const slides = [
   },
   {
     id: 6,
-    title: 'Airport Green Garden (AGG) & PECHS Moqa Plots',
-    specs: '5 & 10 Marla • 100% On-Ground Cash Moqa • RDA Approved',
-    badge: 'Airport Corridor',
-    description: 'Direct demarcated on-ground plot inventory adjoining Islamabad Airport cargo boundary and CPEC Hakla interchange with swift registry transfer.',
-    price: 'PKR 25 Lac – 1.05 Crore',
-    ctaText: 'View Plots in Listings',
+    title: 'Airport Green Garden (AGG) Moqa Plots',
+    specs: '5, 8, 10 Marla & 1 Kanal • 3,700 Plots Possession • RDA Approved',
+    badge: '7 KM to Airport • Kashmir Highway',
+    description: 'RDA-approved master-planned community adjoining New Islamabad Airport & Kashmir Highway. 1,500 plots possession delivered with 2,200 more in Dec 2026. Wide carpeted boulevards & underground utilities.',
+    price: 'PKR 35 Lac – 1.85 Crore',
+    ctaText: 'View AGG Plots in Listings',
     listingLink: '/listings?keyword=AGG&type=plot',
     link: '/property/agg-airport-green-garden-5-marla-moqa-ka-plot',
-    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=85'
+    image: '/images/agg/agg-plots-hero.webp'
   }
 ]
 

@@ -154,7 +154,7 @@
       <!-- + CLICK CARD TO SHOW PHOTO ON LEFT & ANIMATED DETAILS ON RIGHT         -->
       <!-- ====================================================================== -->
       <section>
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 pb-3 border-b border-gray-200/80 gap-2">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 pb-3 border-b border-gray-200/80 gap-3">
           <div>
             <span class="inline-block text-[10px] font-black uppercase tracking-wider text-[#16B4E8] bg-[#16B4E8]/10 px-2.5 py-1 rounded-md mb-2">
               FIELD ADVISORS &amp; TECHNICAL DIVISION
@@ -162,6 +162,34 @@
             <h2 class="text-xl sm:text-2xl font-extrabold text-[#0F2A44]">
               Real Estate Agents &amp; Registered Engineers
             </h2>
+          </div>
+
+          <!-- Category Filter Tabs -->
+          <div class="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-bold self-start sm:self-auto">
+            <button
+              type="button"
+              @click="activeFilter = 'all'; activeIndex = 0"
+              class="px-3.5 py-1.5 rounded-lg transition-all"
+              :class="activeFilter === 'all' ? 'bg-[#0F2A44] text-white shadow-xs' : 'text-slate-600 hover:text-[#0F2A44]'"
+            >
+              All Field Team ({{ fieldTeam.length }})
+            </button>
+            <button
+              type="button"
+              @click="activeFilter = 'agent'; activeIndex = 0"
+              class="px-3.5 py-1.5 rounded-lg transition-all"
+              :class="activeFilter === 'agent' ? 'bg-[#0F2A44] text-white shadow-xs' : 'text-slate-600 hover:text-[#0F2A44]'"
+            >
+              Property Agents ({{ agentsList.length }})
+            </button>
+            <button
+              type="button"
+              @click="activeFilter = 'engineer'; activeIndex = 0"
+              class="px-3.5 py-1.5 rounded-lg transition-all"
+              :class="activeFilter === 'engineer' ? 'bg-[#0F2A44] text-white shadow-xs' : 'text-slate-600 hover:text-[#0F2A44]'"
+            >
+              PEC Engineers ({{ engineersList.length }})
+            </button>
           </div>
         </div>
 

@@ -39,7 +39,7 @@
           </div>
 
           <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
-            Plots Near Islamabad Airport: Cash vs. Installments
+            Plots Near Islamabad Airport: TopCity-1, AGG &amp; Faisal Town Phase 2
           </h1>
 
           <p class="text-xs sm:text-sm md:text-base text-gray-200 leading-relaxed max-w-2xl font-medium">
@@ -915,27 +915,30 @@ const plotsData = {
   },
   agg: {
     title: 'Airport Green Garden (AGG) Islamabad',
-    tag: 'Direct Airport Boundary • RDA Approved • Solid Land',
-    location: 'Adjacent New Islamabad Airport Cargo Access Road',
-    badge: 'Adjacent Airport Cargo',
-    badgeClass: 'bg-[#16B4E8] text-[#0F2A44]',
-    image: '/images/hero-real-estate.webp',
+    tag: 'RDA Approved • 3,700 Plots Possession • Near Airport & CPEC',
+    location: 'Adjacent New Islamabad Airport (7 KM) & Kashmir Highway',
+    badge: '1,500 Delivered • 2,200 Dec 2026',
+    badgeClass: 'bg-emerald-600 text-white',
+    image: '/images/agg/agg-plots-hero.webp',
     videoUrl: 'https://www.youtube.com/watch?v=q6gS_u4z2-o',
-    description: 'Airport Green Garden (AGG) directly adjoins the cargo and staff boundary of New Islamabad International Airport. AGG offers the most competitive per-Marla ticket price on the airport corridor with solid, naturally elevated ground, active utility poles, and zero legal disputes.',
+    description: 'Airport Green Garden (AGG) is an RDA-approved master-planned gated housing community by Airport Green Garden Pvt. Ltd., located adjacent to New Islamabad International Airport with direct access via Kashmir Highway (Srinagar Highway) and CPEC Cargo Road. 1,500 plots have already been handed over possession, with an additional 2,200 plots possession in December 2026. Featuring Jamia Mosque Abu Bakar Siddique, 24/7 underground electrification (zero load shedding), gated security with CCTV, and wide winding boulevards.',
     rates: [
-      { size: '5 Marla (25x50)', terms: '100% Upfront Cash Possession', price: 'PKR 48 - 55 Lac' },
-      { size: '10 Marla (35x70)', terms: 'On-Ground Demarcated Cash', price: 'PKR 88 Lac - 1.05 Cr' },
-      { size: '1 Kanal (50x90)', terms: 'Boulevard & Prime Locations', price: 'PKR 1.65 - 2.10 Cr' }
+      { size: '5 Marla (25x50)', terms: 'Non-Possession: PKR 35 - 40 Lac | Ready Moqa: PKR 55 - 65 Lac', price: 'PKR 35 - 65 Lac' },
+      { size: '8 Marla (30x60)', terms: 'Non-Possession: PKR 50 - 60 Lac | On-Ground: PKR 68 - 82 Lac', price: 'PKR 50 - 82 Lac' },
+      { size: '10 Marla (35x80)', terms: 'Non-Possession: PKR 55 - 68 Lac | On-Ground: PKR 75 Lac - 1.05 Cr', price: 'PKR 55 Lac - 1.05 Cr' },
+      { size: '1 Kanal (50x90)', terms: 'Non-Possession: PKR 1.10 - 1.35 Cr | Prime Boulevard: PKR 1.45 - 1.85 Cr', price: 'PKR 1.10 - 1.85 Cr' }
     ],
     features: [
-      'Adjoining Airport Boundary Wall with Direct Approach',
-      'Ready On-Ground Physical Possession (Moqa Ka Plot)',
-      'Electricity Network Installed with Wide Paved Streets',
-      'Lowest Entry Budget in the Airport Sector Belt',
-      'Swift Registry Transfer and Direct Demarcation Slips'
+      '1,500 Plots Possession Delivered + 2,200 More Coming Dec 2026',
+      '7 KM Drive to New Islamabad International Airport via Srinagar Highway',
+      'Direct Link to CPEC Cargo Road & Thalian Interchange (M-2 Motorway)',
+      'Dedicated Metro Bus Service Stop for Seamless Daily Transit',
+      '24/7 Underground Electricity Network with Zero Load Shedding',
+      'On-Ground Operational Jamia Mosque Abu Bakar Siddique & Green Parks',
+      'RDA Approved Layout Plan with Transparent Biometric Transfer'
     ],
-    whatsappMsg: 'Hello TopLinkers, I want details and current rate sheet for Airport Green Garden (AGG) cash plots.',
-    listingsLink: '/listings?search=Airport'
+    whatsappMsg: 'Hello TopLinkers, I want details and current rate sheet for Airport Green Garden (AGG) plots.',
+    listingsLink: '/listings?keyword=AGG&type=plot'
   },
   pechs: {
     title: 'PECHS Islamabad (Airport Runway Plots)',
@@ -963,29 +966,32 @@ const plotsData = {
     listingsLink: '/listings?search=PECHS'
   },
   'faisal-town': {
-    title: 'Faisal Town Phase 2 (FT-II) — Installments',
-    tag: 'Zedem International • Direct M-2 Motorway Interchange • 4.5-Year Schedule',
-    location: 'Between Thalian Interchange & Islamabad Airport, M-2 Motorway',
-    badge: '4.5-Year Installment Plan',
+    title: 'Faisal Town Phase 2 (FT-II) — Plots on Installments',
+    tag: 'Zedem International • Direct M-2 Motorway Interchange • 42 Monthly Installments',
+    location: 'Between Thalian Interchange & Rawalpindi Ring Road, M-2 Motorway',
+    badge: '4.5-Year Plots Plan • 15% Cash Discount',
     badgeClass: 'bg-emerald-600 text-white',
-    image: '/images/hero-moqa-plot.webp',
+    image: '/images/faisal-town-2/ft2-sector-w-plan.webp',
     videoUrl: 'https://www.youtube.com/watch?v=fDvyuX8e370',
-    description: 'Faisal Town Phase 2 is Zedem International flagship mega project led by Chaudhry Abdul Majeed. Featuring approved dedicated interchange access directly on the M-2 Motorway, rapid on-ground earth-moving machinery, and easy quarterly installments spread over 4.5 years with computerized confirmation letters.',
+    description: 'Faisal Town Phase 2 is Zedem International premier master-planned PLOTS community by Chaudhry Abdul Majeed, located along the M-2 Motorway near the Rawalpindi Ring Road and Chakri Road interchange. Offering purely residential & commercial plots on an affordable 4.5-year schedule (42 monthly installments) with 15% discount on lump-sum payments and all development charges included in plot cost.',
     rates: [
-      { size: '5.56 Marla (25x50)', terms: 'Booking: PKR 595,000 | 18 Quarters of PKR 120,000', price: 'PKR 27.95 Lac Total' },
-      { size: '8 Marla (30x60)', terms: 'Booking: PKR 725,000 | 18 Quarters of PKR 170,000', price: 'PKR 38.25 Lac Total' },
-      { size: '10.89 Marla (35x70)', terms: 'Booking: PKR 845,000 | 18 Quarters of PKR 225,000', price: 'PKR 49.25 Lac Total' },
-      { size: '1 Kanal (50x90)', terms: 'Booking: PKR 1,265,000 | 18 Quarters of PKR 375,000', price: 'PKR 80.95 Lac Total' }
+      { size: '5.56 Marla (25x50)', terms: 'Down Payment: PKR 14.75 Lac | 42 Monthly: PKR 60,000 | 15% Cash Disc: PKR 33.80 Lac', price: 'PKR 39.95 Lac Total' },
+      { size: '8 Marla (30x60)', terms: 'Down Payment: PKR 19.20 Lac | 42 Monthly: PKR 85,000 | 15% Cash Disc: PKR 46.50 Lac', price: 'PKR 54.90 Lac Total' },
+      { size: '10.89 Marla (35x70)', terms: 'Down Payment: PKR 26.30 Lac | 42 Monthly: PKR 110,000 | 15% Cash Disc: PKR 61.50 Lac', price: 'PKR 72.50 Lac Total' },
+      { size: '14.22 Marla (40x80)', terms: 'Down Payment: PKR 32.10 Lac | 42 Monthly: PKR 140,000 | 15% Cash Disc: PKR 76.90 Lac', price: 'PKR 90.90 Lac Total' },
+      { size: '1 Kanal (50x90)', terms: 'Down Payment: PKR 43.10 Lac | 42 Monthly: PKR 190,000 | 15% Cash Disc: PKR 1.039 Cr', price: 'PKR 1.229 Cr Total' },
+      { size: '2 Kanal (75x120)', terms: 'Down Payment: PKR 88.10 Lac | 42 Monthly: PKR 385,000 | 15% Cash Disc: PKR 2.119 Cr', price: 'PKR 2.498 Cr Total' }
     ],
     features: [
-      'Direct Approved M-2 Motorway Interchange Access',
-      'Backed by Zedem International Track Record (Faisal Town, B-17, Faisal Hills)',
-      '18 Easy Quarterly Installments over 4.5 Years',
-      'Heavy On-Ground Machinery & Round-The-Clock Development',
-      'Computerized Online Verification for Overseas Pakistanis'
+      'Purely Master-Planned Residential & Commercial Plots (No Flats)',
+      'Direct Approved M-2 Motorway & Ring Road Interchange Access',
+      'Backed by Zedem International Proven Track Record (Chaudhry Abdul Majeed)',
+      '42 Easy Monthly Installments over 4.5 Years with 15% Lump Sum Discount',
+      'All Development Charges Included in Total Plot Price',
+      'Round-The-Clock On-Ground Heavy Development & Online Biometric Verification'
     ],
-    whatsappMsg: 'Hello TopLinkers, I want to book a plot file in Faisal Town Phase 2 (FT-II) on 4.5-year installments.',
-    listingsLink: '/listings?search=Faisal'
+    whatsappMsg: 'Hello TopLinkers, I want to book a residential plot file in Faisal Town Phase 2 (FT-II) on 42-month installments.',
+    listingsLink: '/listings?keyword=Faisal&type=plot'
   }
 }
 

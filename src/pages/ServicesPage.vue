@@ -522,7 +522,7 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <!-- Card 1: PHA Flats (100% Cash Ready) -->
           <div class="bg-white rounded-2xl border border-gray-200/90 hover:border-[#16B4E8] shadow-sm hover:shadow-lg transition-all p-6 flex flex-col justify-between group">
             <div>
@@ -625,7 +625,60 @@
             </div>
           </div>
 
-          <!-- Card 3: Harsukh Residencies Nathia Gali -->
+          <!-- Card 3: Faisal Heights Luxury Apartments (Zedem International) -->
+          <div class="bg-white rounded-2xl border border-gray-200/90 hover:border-emerald-500 shadow-sm hover:shadow-lg transition-all p-6 flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="bg-emerald-600 text-white text-[9px] font-black uppercase px-2.5 py-0.5 rounded">
+                  NOC Approved &bull; 1M Sq.Ft
+                </span>
+                <span class="text-xs font-bold text-gray-400">Zedem &bull; Luxury Living</span>
+              </div>
+
+              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-emerald-600 transition-colors">Faisal Heights Luxury Apartments</h3>
+              <p class="text-xs text-gray-500 mt-1 leading-relaxed">
+                Purely luxury residential tower project spanning over 1 Million Sq.Ft by Zedem / Faisal Town. Studio to 4-Bed Lofts with private theater, pool, gym, café, and rooftop garden.
+              </p>
+
+              <div class="mt-5 space-y-2.5 text-xs">
+                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                  <div class="flex items-center justify-between font-bold text-[#0F2A44]">
+                    <span>Studio Apartments</span>
+                    <span class="text-emerald-700 font-black">495 – 537 Sq.Ft</span>
+                  </div>
+                  <p class="text-[11px] text-gray-500 mt-0.5">Contemporary open-plan layouts with designer finishes</p>
+                </div>
+
+                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                  <div class="flex items-center justify-between font-bold text-[#0F2A44]">
+                    <span>1 &amp; 2-Bed Luxury Suites</span>
+                    <span class="text-emerald-700 font-black">880 – 1,905 Sq.Ft</span>
+                  </div>
+                  <p class="text-[11px] text-gray-500 mt-0.5">Balcony views, modern kitchen &amp; dedicated parking</p>
+                </div>
+
+                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                  <div class="flex items-center justify-between font-bold text-[#0F2A44]">
+                    <span>3-Bed &amp; 4-Bed Executive Lofts</span>
+                    <span class="text-emerald-700 font-black">1,815 – 2,654+ Sq.Ft</span>
+                  </div>
+                  <p class="text-[11px] text-gray-500 mt-0.5">Spacious double-height living &amp; sky terrace suites</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-gray-100 flex items-center gap-2">
+              <a
+                href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20Faisal%20Heights%20Luxury%20Apartments"
+                target="_blank"
+                class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase rounded-xl text-center transition-all shadow-sm"
+              >
+                Inquire Faisal Heights
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 4: Harsukh Residencies Nathia Gali -->
           <div class="bg-[#0F2A44] text-white rounded-2xl shadow-sm hover:shadow-lg transition-all p-6 flex flex-col justify-between relative overflow-hidden group">
             <div class="relative z-10">
               <div class="flex items-center justify-between mb-3">
@@ -1803,41 +1856,105 @@ const selectedInstallmentSize = ref('5.56 Marla')
 const installmentProjects = [
   {
     id: 'faisal-town',
-    name: 'Faisal Town Phase 2',
-    tabName: 'Faisal Town 2',
-    duration: '4.5-Year (18 Quarterly Installments Plan)',
+    name: 'Faisal Town Phase 2 (Plots)',
+    tabName: 'Faisal Town 2 (Plots)',
+    duration: '4.5-Year Schedule (42 Monthly Installments • 15% Lump Sum Discount)',
     sizes: [
       {
-        label: '5.56 Marla',
-        totalPrice: 'PKR 3,450,000',
-        downPayment: 'PKR 595,000 (Booking)',
-        installmentRate: 'PKR 130,000 (18 Quarterly)',
+        label: '5.56 Marla (25x50)',
+        totalPrice: 'PKR 3,995,000 (Lump sum: PKR 3.38M)',
+        downPayment: 'PKR 1,475,000 (Down Payment)',
+        installmentRate: 'PKR 60,000 / month (42 Monthly)',
         halfYearly: null,
-        possession: 'PKR 515,000'
+        possession: 'Included in Total Price'
       },
       {
-        label: '8 Marla',
-        totalPrice: 'PKR 4,650,000',
-        downPayment: 'PKR 825,000 (Booking)',
-        installmentRate: 'PKR 175,000 (18 Quarterly)',
+        label: '8 Marla (30x60)',
+        totalPrice: 'PKR 5,490,000 (Lump sum: PKR 4.65M)',
+        downPayment: 'PKR 1,920,000 (Down Payment)',
+        installmentRate: 'PKR 85,000 / month (42 Monthly)',
         halfYearly: null,
-        possession: 'PKR 675,000'
+        possession: 'Included in Total Price'
       },
       {
-        label: '10 Marla',
-        totalPrice: 'PKR 5,550,000',
-        downPayment: 'PKR 995,000 (Booking)',
-        installmentRate: 'PKR 215,000 (18 Quarterly)',
+        label: '10.89 Marla (35x70)',
+        totalPrice: 'PKR 7,250,000 (Lump sum: PKR 6.15M)',
+        downPayment: 'PKR 2,630,000 (Down Payment)',
+        installmentRate: 'PKR 110,000 / month (42 Monthly)',
         halfYearly: null,
-        possession: 'PKR 685,000'
+        possession: 'Included in Total Price'
       },
       {
-        label: '1 Kanal (20 Marla)',
-        totalPrice: 'PKR 9,850,000',
-        downPayment: 'PKR 1,455,000 (Booking)',
-        installmentRate: 'PKR 395,000 (18 Quarterly)',
+        label: '14.22 Marla (40x80)',
+        totalPrice: 'PKR 9,090,000 (Lump sum: PKR 7.69M)',
+        downPayment: 'PKR 3,210,000 (Down Payment)',
+        installmentRate: 'PKR 140,000 / month (42 Monthly)',
         halfYearly: null,
-        possession: 'PKR 1,285,000'
+        possession: 'Included in Total Price'
+      },
+      {
+        label: '1 Kanal (50x90)',
+        totalPrice: 'PKR 12,290,000 (Lump sum: PKR 10.39M)',
+        downPayment: 'PKR 4,310,000 (Down Payment)',
+        installmentRate: 'PKR 190,000 / month (42 Monthly)',
+        halfYearly: null,
+        possession: 'Included in Total Price'
+      },
+      {
+        label: '2 Kanal (75x120)',
+        totalPrice: 'PKR 24,980,000 (Lump sum: PKR 21.19M)',
+        downPayment: 'PKR 8,810,000 (Down Payment)',
+        installmentRate: 'PKR 385,000 / month (42 Monthly)',
+        halfYearly: null,
+        possession: 'Included in Total Price'
+      }
+    ]
+  },
+  {
+    id: 'faisal-heights',
+    name: 'Faisal Heights (Luxury Apartments)',
+    tabName: 'Faisal Heights (Flats)',
+    duration: 'Purely Luxury High-Rise Residences by Zedem (NOC Approved)',
+    sizes: [
+      {
+        label: 'Studio Apartment (495–537 Sq Ft)',
+        totalPrice: 'Contact for Unit Quotation',
+        downPayment: 'Flexible Booking',
+        installmentRate: 'Easy Monthly Schedule',
+        halfYearly: 'Balcony & Scenic Views',
+        possession: 'Underground Dedicated Parking'
+      },
+      {
+        label: '1-Bed Luxury Suite (880–1,290 Sq Ft)',
+        totalPrice: 'Contact for Floor Selection',
+        downPayment: 'Convenient Down Payment',
+        installmentRate: 'Structured Installment Plan',
+        halfYearly: 'High-Speed Elevators',
+        possession: 'Access to Resident Gym & Theater'
+      },
+      {
+        label: '2-Bed Luxury Suite (1,210–1,905 Sq Ft)',
+        totalPrice: 'Executive Family Unit',
+        downPayment: 'Flexible Down Payment',
+        installmentRate: 'Quarterly / Monthly Terms',
+        halfYearly: 'Attached Baths & Kitchen',
+        possession: 'Access to Swimming Pool & Sky Garden'
+      },
+      {
+        label: '3-Bed Royal Suite (1,815–2,145 Sq Ft)',
+        totalPrice: 'Panoramic Landmark Suite',
+        downPayment: 'Booking on Request',
+        installmentRate: 'Tailored Payment Plan',
+        halfYearly: 'Spacious Family Dining Lounge',
+        possession: 'Multi-Level Car Parking Included'
+      },
+      {
+        label: '4-Bed Executive Loft (2,654+ Sq Ft)',
+        totalPrice: 'Crown Luxury Loft Penthouse',
+        downPayment: 'Exclusive Allotment',
+        installmentRate: 'VIP Payment Structure',
+        halfYearly: 'Double-Height Living & Terrace',
+        possession: 'Full 24/7 Smart Concierge & RFID'
       }
     ]
   },

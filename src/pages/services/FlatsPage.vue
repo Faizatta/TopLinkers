@@ -433,7 +433,7 @@
             </section>
 
             <!-- Luxury Projects Cards -->
-            <section class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <!-- Harsukh Residencies Nathia Gali -->
               <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
                 <div>
@@ -470,7 +470,7 @@
               <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
                 <div>
                   <div class="h-48 w-full overflow-hidden relative bg-slate-900">
-                    <img src="https://banuhafeez.com/assets/building.jpg" alt="Banu Hafeez Luxury Apartments TopCity-1" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                    <img src="/images/banu-hafeez-hero.webp" alt="Banu Hafeez Luxury Apartments TopCity-1" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                     <span class="absolute top-3 left-3 bg-[#0F2A44] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow">
                       15% Booking &bull; 3-Year Plan
                     </span>
@@ -506,6 +506,50 @@
                   >
                     Explore Banu Hafeez Project &rarr;
                   </router-link>
+                </div>
+              </div>
+
+              <!-- Faisal Heights Luxury Apartments (Zedem International) -->
+              <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
+                <div>
+                  <div class="h-48 w-full overflow-hidden relative bg-slate-900">
+                    <img src="/images/faisal-heights/fh-building.webp" alt="Faisal Heights Luxury Apartments" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                    <span class="absolute top-3 left-3 bg-[#0F2A44] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow">
+                      NOC Approved &bull; 1M Sq.Ft
+                    </span>
+                    <span class="absolute top-3 right-3 bg-emerald-500 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
+                      Pure Luxury Flats
+                    </span>
+                  </div>
+                  <div class="p-6">
+                    <h3 class="font-bold text-[#0F2A44] text-lg mb-2">Faisal Heights Luxury Apartments</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                      Purely luxury residential tower project spanning over 1 Million Sq.Ft by Zedem / Faisal Town. Featuring Studio to 4-Bed lofts with private theater, resident pool, gym, café, rooftop sky garden, and dedicated multi-level parking.
+                    </p>
+                    <div class="space-y-2 text-xs mb-4">
+                      <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+                        <span class="font-bold text-[#0F2A44]">Studio Apartments</span>
+                        <span class="text-emerald-700 font-black">495 – 537 Sq.Ft</span>
+                      </div>
+                      <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+                        <span class="font-bold text-[#0F2A44]">1 &amp; 2-Bed Luxury Suites</span>
+                        <span class="text-emerald-700 font-black">880 – 1,905 Sq.Ft</span>
+                      </div>
+                      <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+                        <span class="font-bold text-[#0F2A44]">3-Bed &amp; 4-Bed Executive Lofts</span>
+                        <span class="text-emerald-700 font-black">1,815 – 2,654+ Sq.Ft</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-6 pt-0">
+                  <a
+                    href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20inquiring%20about%20Faisal%20Heights%20Luxury%20Apartments%20(Studio,%201-Bed,%202-Bed,%203-Bed%20or%20Loft)."
+                    target="_blank"
+                    class="block w-full text-center py-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs uppercase rounded-xl transition shadow-sm"
+                  >
+                    Inquire Faisal Heights on WhatsApp &rarr;
+                  </a>
                 </div>
               </div>
             </section>

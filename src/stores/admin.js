@@ -493,10 +493,10 @@ export const useAdminStore = defineStore('admin', () => {
       },
       agg: {
         name: 'Airport Green Garden (AGG)',
-        tag: 'Direct Interchange',
-        m5: 'PKR 45 - 65 Lac',
-        m10: 'PKR 85 - 1.25 Cr',
-        k1: 'PKR 1.7 - 2.4 Cr',
+        tag: '7 KM to Airport • 3,700 Plots Possession',
+        m5: 'PKR 35 - 65 Lac',
+        m10: 'PKR 55 Lac - 1.05 Cr',
+        k1: 'PKR 1.10 - 1.85 Cr',
         videoUrl: 'https://www.youtube.com/watch?v=q6gS_u4z2-o'
       },
       topResidencia: {
@@ -511,12 +511,12 @@ export const useAdminStore = defineStore('admin', () => {
     // Installment Plans
     installmentPlans: {
       faisalTown: {
-        name: 'Faisal Town Phase 2',
-        duration: '4.5-Year Easy Plan (18 Quarterly)',
-        m5: { down: 'PKR 5.9 Lac', total: 'PKR 34.5 Lac', quarterly: 'PKR 130,000' },
-        m8: { down: 'PKR 8.2 Lac', total: 'PKR 46.5 Lac', quarterly: 'PKR 175,000' },
-        m10: { down: 'PKR 9.9 Lac', total: 'PKR 55.5 Lac', quarterly: 'PKR 215,000' },
-        k1: { down: 'PKR 14.5 Lac', total: 'PKR 98.5 Lac', quarterly: 'PKR 395,000' },
+        name: 'Faisal Town Phase 2 (Plots)',
+        duration: '4.5-Year Schedule (42 Monthly Installments)',
+        m5: { down: 'PKR 14.75 Lac', total: 'PKR 39.95 Lac', quarterly: 'PKR 60,000/mo', lumpSum: 'PKR 33.80 Lac' },
+        m8: { down: 'PKR 19.20 Lac', total: 'PKR 54.90 Lac', quarterly: 'PKR 85,000/mo', lumpSum: 'PKR 46.50 Lac' },
+        m10: { down: 'PKR 26.30 Lac', total: 'PKR 72.50 Lac', quarterly: 'PKR 110,000/mo', lumpSum: 'PKR 61.50 Lac' },
+        k1: { down: 'PKR 43.10 Lac', total: 'PKR 1.229 Cr', quarterly: 'PKR 190,000/mo', lumpSum: 'PKR 1.039 Cr' },
         videoUrl: 'https://www.youtube.com/watch?v=fDvyuX8e370'
       },
       blueWorld: {
