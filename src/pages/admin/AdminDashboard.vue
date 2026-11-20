@@ -454,6 +454,33 @@
           </div>
         </div>
 
+        <!-- Optional Site / Project Walkthrough Video URL -->
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+          <div class="flex items-center justify-between">
+            <label class="block text-[11px] font-bold text-slate-700 uppercase flex items-center gap-1.5">
+              <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-rose-600 text-white text-[9px]">▶</span>
+              <span>Project Site Video Walkthrough (Optional YouTube, Vimeo, or MP4)</span>
+            </label>
+            <span class="text-[10px] text-slate-500 font-semibold">User choice to show/hide on full page</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <input
+              v-model="customBuildingForm.videoUrl"
+              type="url"
+              placeholder="e.g. https://www.youtube.com/watch?v=ScMzIvxBSi4 or direct MP4 link"
+              class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-amber-500 bg-white"
+            />
+            <button
+              v-if="customBuildingForm.videoUrl"
+              type="button"
+              @click="previewVideo(customBuildingForm.videoUrl, customBuildingForm.title || customBuildingForm.name)"
+              class="px-3.5 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold whitespace-nowrap flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+            >
+              <span>▶ Test Video</span>
+            </button>
+          </div>
+        </div>
+
         <!-- Live Preview Bar with Test Modal & Save Actions -->
         <div class="p-3.5 bg-gradient-to-r from-[#0B1D30] via-[#0F2A44] to-[#142D42] rounded-xl text-white flex flex-col lg:flex-row items-center justify-between gap-4 border border-amber-400/30">
           <div class="flex items-center gap-3">
@@ -848,6 +875,15 @@
       :building="customBuildingPreviewData"
       @close="showBuildingPreviewModal = false"
     />
+
+    <!-- Video Walkthrough Preview Lightbox for Admin -->
+    <SiteVideoModal
+      :is-open="previewModalOpen"
+      :video-url="previewVideoUrl"
+      :title="previewVideoTitle"
+      subtitle="Testing project site video walkthrough before publishing"
+      @close="previewModalOpen = false"
+    />
   </div>
 </template>
 
@@ -863,6 +899,7 @@ import {
 } from '@heroicons/vue/24/outline'
 import { useAdminStore } from '../../stores/admin'
 import BuildingDetailsModal from '../../components/ui/BuildingDetailsModal.vue'
+import SiteVideoModal from '../../components/common/SiteVideoModal.vue'
 
 const adminStore = useAdminStore()
 
@@ -965,6 +1002,18 @@ const saveSpotlight = async () => {
   }
 }
 
+// Video Preview Modal State for Admin Walkthrough Testing
+const previewModalOpen = ref(false)
+const previewVideoUrl = ref('')
+const previewVideoTitle = ref('')
+
+const previewVideo = (url, title) => {
+  if (!url) return
+  previewVideoUrl.value = url
+  previewVideoTitle.value = title || 'Project Site Video Walkthrough'
+  previewModalOpen.value = true
+}
+
 // =========================================================================
 // CUSTOM BUILDING / PROJECT SPOTLIGHT (POPUP 2 & DETAILS MODAL)
 // =========================================================================
@@ -986,6 +1035,7 @@ const customBuildingForm = ref({
   description: adminStore.customBuilding?.description || 'Banu Hafeez Residences offers premier urban luxury in the heart of Islamabad G-11 Markaz. Featuring modern executive apartments with imported porcelain flooring, designer kitchens, Grohe sanitary fittings, and expansive balconies overlooking the Margalla Hills.',
   image: adminStore.customBuilding?.image || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
   link: adminStore.customBuilding?.link || '/featured-building',
+  videoUrl: adminStore.customBuilding?.videoUrl || 'https://www.youtube.com/watch?v=ScMzIvxBSi4',
   featuresText: formatFeaturesForForm(adminStore.customBuilding?.features),
   phone: adminStore.customBuilding?.phone || '0334-9522157',
   whatsappMsg: adminStore.customBuilding?.whatsappMsg || 'Hello TopLinkers, I am inquiring about the featured building project: Banu Hafeez Executive Residences.'
@@ -1017,6 +1067,8 @@ const buildingPresets = [
     subtitle: 'Modern architecture with dedicated basement parking & fast elevators',
     description: 'Banu Hafeez Residences offers premier urban luxury in the heart of Islamabad G-11 Markaz. Featuring modern executive apartments with imported porcelain flooring, designer kitchens, Grohe sanitary fittings, and expansive balconies overlooking the Margalla Hills.',
     image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
+    link: '/featured-building',
+    videoUrl: 'https://www.youtube.com/watch?v=ScMzIvxBSi4',
     features: 'Prime G-11 Markaz commercial proximity, Earthquake resistant seismic structure, Double basement dedicated reserved parking, Dual high-speed passenger & cargo elevators, 24/7 CCTV surveillance & armed security, Dedicated power backup generator'
   },
   {
@@ -1031,6 +1083,8 @@ const buildingPresets = [
     subtitle: 'High footfall airport corridor retail outlets with 3-year installment flexibility',
     description: 'Strategically located on the main entrance avenue of TopCity-1 near New Islamabad Airport. Ground floor retail shops and upper-floor corporate office suites with glass facades and modern high-speed infrastructure.',
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
+    link: '/featured-building',
+    videoUrl: 'https://www.youtube.com/watch?v=ScMzIvxBSi4',
     features: 'Main Boulevard frontage, 24/7 generator backup, High-speed capsule elevators, Dedicated corporate lobby, Underground parking, 100% legal RDA approved'
   },
   {
@@ -1045,6 +1099,8 @@ const buildingPresets = [
     subtitle: 'Boutique hill-view apartments adjoining the Margalla Hills National Park',
     description: 'Experience tranquil luxury living in Sector D-12 Islamabad. Exclusive boutique suites with floor-to-ceiling glass windows, smart home automation, Italian kitchenettes, and uninterrupted panoramic views of the Margallas.',
     image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+    link: '/featured-building',
+    videoUrl: 'https://www.youtube.com/watch?v=ScMzIvxBSi4',
     features: 'Direct Margalla views, Smart home automation, Italian fitted kitchens, Rooftop barbecue terrace, 24/7 manned security, Dedicated covered parking'
   },
   {
@@ -1059,6 +1115,8 @@ const buildingPresets = [
     subtitle: 'Ready-to-move corporate executive offices with dedicated fiber optic & parking',
     description: 'Premier commercial business hub in G-11 Markaz Islamabad. Fully completed Grade-A corporate office suites suitable for multinational companies, software houses, engineering consultancies, and financial firms.',
     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+    link: '/featured-building',
+    videoUrl: 'https://www.youtube.com/watch?v=ScMzIvxBSi4',
     features: 'Centrally air-conditioned lobby, Redundant high-speed fiber internet, Dual commercial elevators, Secure access control, Ample plaza visitor parking, Bank and pharmacy on ground floor'
   }
 ]
@@ -1076,6 +1134,8 @@ const applyBuildingPreset = (presetKey) => {
   customBuildingForm.value.subtitle = p.subtitle
   customBuildingForm.value.description = p.description
   customBuildingForm.value.image = p.image
+  customBuildingForm.value.link = p.link || '/featured-building'
+  customBuildingForm.value.videoUrl = p.videoUrl || ''
   customBuildingForm.value.featuresText = p.features
   adminStore.showToast(`Loaded building preset: ${p.name}`)
 }

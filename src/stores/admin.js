@@ -1684,7 +1684,8 @@ export const useAdminStore = defineStore('admin', () => {
     subtitle: 'Modern architecture with dedicated basement parking, high-speed elevators & backup power generator.',
     description: 'Banu Hafeez Residences offers premier urban luxury in the heart of Islamabad G-11 Markaz. Featuring modern 1-bed, 2-bed and 3-bed executive apartments with imported Spanish porcelain flooring, designer kitchens, Grohe sanitary fittings, and expansive balconies overlooking the Margalla Hills.',
     image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
-    link: '/services/apartments-flats',
+    link: '/featured-building',
+    videoUrl: 'https://www.youtube.com/watch?v=ScMzIvxBSi4',
     gallery: [
       'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80',

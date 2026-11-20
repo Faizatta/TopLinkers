@@ -20,7 +20,7 @@
             <span class="absolute -inset-1 rounded-full bg-gradient-to-tr from-amber-400 to-[#16B4E8] opacity-60 animate-ping"></span>
             <button
               type="button"
-              @click="openModal"
+              @click="goToBuildingPage"
               :aria-label="building.name || 'View Featured Building'"
               :title="building.name || 'Featured Building Spotlight'"
               class="relative w-11 h-11 rounded-full p-[2px] bg-gradient-to-tr from-[#0F2A44] via-amber-400 to-[#16B4E8] shadow-[0_8px_20px_rgba(15,42,68,0.4)] active:scale-95 transition-transform"
@@ -57,7 +57,7 @@
         <div
           class="hidden sm:block fixed left-6 w-[390px] z-40 cursor-pointer group select-none transition-[bottom] duration-200 ease-out"
           :style="{ bottom: `${desktopBottom}px` }"
-          @click="openModal"
+          @click="goToBuildingPage"
         >
           <!-- Outer Animated Gradient Frame -->
           <div class="relative rounded-2xl p-[2px] bg-gradient-to-r from-amber-500 via-[#16B4E8] to-[#0F2A44] shadow-[0_20px_50px_-10px_rgba(15,42,68,0.45)] group-hover:shadow-[0_25px_60px_-8px_rgba(245,158,11,0.45)] transition-all duration-300 group-hover:-translate-y-1.5">
@@ -122,7 +122,7 @@
                   </p>
 
                   <div class="flex items-center gap-1 mt-1 text-[10px] font-bold text-[#16B4E8] group-hover:translate-x-1 transition-transform">
-                    <span>Explore Building Details</span>
+                    <span>Explore Full Project Page &rarr;</span>
                     <ArrowRightIcon class="w-3 h-3" />
                   </div>
                 </div>
@@ -137,15 +137,17 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { XMarkIcon, ArrowRightIcon } from '@heroicons/vue/24/outline'
 import { useUiStore } from '../../stores/ui'
 import { useAdminStore } from '../../stores/admin'
 import { useFooterClearance } from '../../composables/useFooterClearance'
+import { scrollTo } from '../../services/lenis'
 
 const uiStore = useUiStore()
 const adminStore = useAdminStore()
 const route = useRoute()
+const router = useRouter()
 const showTeaser = ref(false)
 
 const { bottomOffset, updateFooterClearance } = useFooterClearance()
@@ -191,8 +193,17 @@ const triggerPopup = () => {
   }, 100)
 }
 
-const openModal = () => {
-  uiStore.openBuildingModal()
+const goToBuildingPage = () => {
+  const target = (building.value.link && building.value.link !== '/services/apartments-flats')
+    ? building.value.link
+    : '/featured-building'
+
+  if (target.startsWith('http')) {
+    window.open(target, '_blank')
+  } else {
+    router.push(target)
+    scrollTo(0, { immediate: true })
+  }
 }
 
 const dismissTeaser = () => {

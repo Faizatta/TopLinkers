@@ -138,6 +138,30 @@
         </div>
       </section>
 
+      <!-- Optional Ground Progress / Site Video Walkthrough -->
+      <section v-if="building.videoUrl" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+        <div class="mb-5">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-rose-100 text-rose-700 border border-rose-200">
+              Live Site Footage
+            </span>
+            <span class="text-xs text-slate-400 font-semibold">• 100% On-Ground Progress &amp; Elevation Tour</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-[#0F2A44]">
+            {{ building.name || building.title }} — On-Site Video Walkthrough
+          </h2>
+          <p class="text-xs text-slate-500 mt-1">
+            Watch the high-definition architectural elevation and on-ground development realities.
+          </p>
+        </div>
+
+        <SiteVideoPlayer
+          :video-url="building.videoUrl"
+          :title="`${building.title || building.name} — Architecture & Development Tour`"
+          :caption="`${building.location || 'Islamabad'} • Verified Ground Realities`"
+        />
+      </section>
+
       <!-- Overview and Detailed Narrative -->
       <section class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         <div class="lg:col-span-2 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
@@ -207,6 +231,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useAdminStore } from '../stores/admin'
 import { useUiStore } from '../stores/ui'
 import { updateSEOMeta } from '../services/seo'
+import SiteVideoPlayer from '../components/common/SiteVideoPlayer.vue'
 
 const adminStore = useAdminStore()
 const uiStore = useUiStore()
