@@ -152,34 +152,93 @@
             </div>
           </div>
 
-          <!-- Site Land Walkthrough Video URL (User's choice to add or leave empty) -->
-          <div class="pt-2 border-t border-slate-100">
-            <div class="flex items-center justify-between mb-1">
-              <label class="block text-[10px] font-bold text-slate-700 uppercase flex items-center gap-1.5">
-                <span class="text-rose-600 font-black">▶</span>
-                <span>Reference Site / Land Walkthrough Video (Optional)</span>
+          <!-- Site Land Walkthrough Video Control (Checkbox Toggle & Browser File Picker / URL) -->
+          <div class="pt-3 border-t border-slate-100 space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="flex items-center gap-2 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  v-model="society.showVideo"
+                  class="w-4 h-4 rounded text-[#16B4E8] focus:ring-[#16B4E8] border-slate-300 cursor-pointer"
+                />
+                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                  <span class="text-rose-600 font-black">▶</span>
+                  <span>Show Video Walkthrough on Website</span>
+                </span>
               </label>
-              <span class="text-[10px] text-slate-400">YouTube / Vimeo / MP4</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <input
-                v-model="society.videoUrl"
-                type="url"
-                placeholder="https://www.youtube.com/watch?v=... (Leave empty if no video)"
-                class="flex-1 px-3 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8] bg-slate-50/50 focus:bg-white"
-              />
-              <button
-                v-if="society.videoUrl"
-                type="button"
-                @click="previewVideo(society.videoUrl, society.name)"
-                class="px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-[10px] font-bold transition-colors whitespace-nowrap border border-rose-200 flex items-center gap-1"
+              <span
+                class="text-[10px] px-2 py-0.5 rounded-full font-bold"
+                :class="society.showVideo ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-500'"
               >
-                <span>▶</span>
-                <span>Test Video</span>
-              </button>
+                {{ society.showVideo ? '✓ Video Enabled' : '✗ Video Hidden' }}
+              </span>
             </div>
-            <p class="text-[10px] text-slate-400 mt-0.5">
-              {{ society.videoUrl ? '✓ Active: Drone / ground walkthrough video will show on public society card and details modal' : 'Optional: Leave blank to hide video button from public card' }}
+
+            <!-- Shown only when checkbox is checked -->
+            <div v-if="society.showVideo" class="p-3 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2.5">
+              <!-- Option 1: Add Video from Browser File -->
+              <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-200/60">
+                <div>
+                  <span class="text-[11px] font-bold text-slate-700 block">Option 1: Add Video from Browser / Device</span>
+                  <span class="text-[10px] text-slate-500">Pick MP4 / WebM / MOV file from your computer</span>
+                </div>
+                <div>
+                  <input
+                    type="file"
+                    accept="video/*"
+                    class="hidden"
+                    :id="`video-file-moqa-${key}`"
+                    @change="handleVideoFileUpload($event, society)"
+                  />
+                  <label
+                    :for="`video-file-moqa-${key}`"
+                    class="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-xs transition-colors"
+                  >
+                    <span>📁 Choose File from Browser</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Attached file indicator if any -->
+              <div v-if="society.videoFileName || (society.videoUrl && (society.videoUrl.startsWith('data:') || society.videoUrl.startsWith('blob:')))" class="flex items-center justify-between text-xs bg-emerald-50 text-emerald-800 px-3 py-1.5 rounded-lg border border-emerald-200">
+                <span class="truncate max-w-xs font-semibold flex items-center gap-1.5">
+                  <span>🎥</span>
+                  <span>{{ society.videoFileName || 'Attached Video File' }}</span>
+                </span>
+                <button
+                  type="button"
+                  @click="clearVideoFile(society)"
+                  class="text-[11px] text-rose-600 font-bold hover:underline ml-2"
+                >
+                  Remove File
+                </button>
+              </div>
+
+              <!-- Option 2: Enter Video URL -->
+              <div>
+                <label class="block text-[11px] font-bold text-slate-700 mb-1">Option 2: OR Enter Video URL (YouTube, Vimeo, MP4 link)</label>
+                <div class="flex items-center gap-2">
+                  <input
+                    v-model="society.videoUrl"
+                    type="url"
+                    placeholder="https://www.youtube.com/watch?v=... or direct MP4 URL"
+                    class="flex-1 px-3 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8] bg-white"
+                  />
+                  <button
+                    v-if="society.videoUrl"
+                    type="button"
+                    @click="previewVideo(society.videoUrl, society.name)"
+                    class="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition-colors whitespace-nowrap flex items-center gap-1 shadow-xs cursor-pointer"
+                  >
+                    <span>▶ Test Video</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Unchecked note -->
+            <p v-else class="text-[10px] text-slate-400 italic">
+              Video is unchecked. No video button or player will be shown for this society on the website.
             </p>
           </div>
         </div>
@@ -260,34 +319,93 @@
             </div>
           </div>
 
-          <!-- Installment Society Site / Earthwork Video URL -->
-          <div class="pt-2 border-t border-slate-100">
-            <div class="flex items-center justify-between mb-1">
-              <label class="block text-[10px] font-bold text-slate-700 uppercase flex items-center gap-1.5">
-                <span class="text-rose-600 font-black">▶</span>
-                <span>Reference Site / Earthwork Video URL (Optional)</span>
+          <!-- Installment Society Site / Earthwork Video Control (Checkbox Toggle & Browser File Picker / URL) -->
+          <div class="pt-3 border-t border-slate-100 space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="flex items-center gap-2 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  v-model="plan.showVideo"
+                  class="w-4 h-4 rounded text-[#16B4E8] focus:ring-[#16B4E8] border-slate-300 cursor-pointer"
+                />
+                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                  <span class="text-rose-600 font-black">▶</span>
+                  <span>Show Video Walkthrough on Website</span>
+                </span>
               </label>
-              <span class="text-[10px] text-slate-400">YouTube / Vimeo / MP4</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <input
-                v-model="plan.videoUrl"
-                type="url"
-                placeholder="https://www.youtube.com/watch?v=... (Leave empty if no video)"
-                class="flex-1 px-3 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8] bg-slate-50/50 focus:bg-white"
-              />
-              <button
-                v-if="plan.videoUrl"
-                type="button"
-                @click="previewVideo(plan.videoUrl, plan.name)"
-                class="px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-[10px] font-bold transition-colors whitespace-nowrap border border-rose-200 flex items-center gap-1"
+              <span
+                class="text-[10px] px-2 py-0.5 rounded-full font-bold"
+                :class="plan.showVideo ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-500'"
               >
-                <span>▶</span>
-                <span>Test Video</span>
-              </button>
+                {{ plan.showVideo ? '✓ Video Enabled' : '✗ Video Hidden' }}
+              </span>
             </div>
-            <p class="text-[10px] text-slate-400 mt-0.5">
-              {{ plan.videoUrl ? '✓ Active: Earthwork / development video will show on public project card' : 'Optional: Leave blank to hide video button from public card' }}
+
+            <!-- Shown only when checkbox is checked -->
+            <div v-if="plan.showVideo" class="p-3 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2.5">
+              <!-- Option 1: Add Video from Browser File -->
+              <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-200/60">
+                <div>
+                  <span class="text-[11px] font-bold text-slate-700 block">Option 1: Add Video from Browser / Device</span>
+                  <span class="text-[10px] text-slate-500">Pick MP4 / WebM / MOV file from your computer</span>
+                </div>
+                <div>
+                  <input
+                    type="file"
+                    accept="video/*"
+                    class="hidden"
+                    :id="`video-file-plan-${key}`"
+                    @change="handleVideoFileUpload($event, plan)"
+                  />
+                  <label
+                    :for="`video-file-plan-${key}`"
+                    class="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-xs transition-colors"
+                  >
+                    <span>📁 Choose File from Browser</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Attached file indicator if any -->
+              <div v-if="plan.videoFileName || (plan.videoUrl && (plan.videoUrl.startsWith('data:') || plan.videoUrl.startsWith('blob:')))" class="flex items-center justify-between text-xs bg-emerald-50 text-emerald-800 px-3 py-1.5 rounded-lg border border-emerald-200">
+                <span class="truncate max-w-xs font-semibold flex items-center gap-1.5">
+                  <span>🎥</span>
+                  <span>{{ plan.videoFileName || 'Attached Video File' }}</span>
+                </span>
+                <button
+                  type="button"
+                  @click="clearVideoFile(plan)"
+                  class="text-[11px] text-rose-600 font-bold hover:underline ml-2"
+                >
+                  Remove File
+                </button>
+              </div>
+
+              <!-- Option 2: Enter Video URL -->
+              <div>
+                <label class="block text-[11px] font-bold text-slate-700 mb-1">Option 2: OR Enter Video URL (YouTube, Vimeo, MP4 link)</label>
+                <div class="flex items-center gap-2">
+                  <input
+                    v-model="plan.videoUrl"
+                    type="url"
+                    placeholder="https://www.youtube.com/watch?v=... or direct MP4 URL"
+                    class="flex-1 px-3 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8] bg-white"
+                  />
+                  <button
+                    v-if="plan.videoUrl"
+                    type="button"
+                    @click="previewVideo(plan.videoUrl, plan.name)"
+                    class="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition-colors whitespace-nowrap flex items-center gap-1 shadow-xs cursor-pointer"
+                  >
+                    <span>▶ Test Video</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Unchecked note -->
+            <p v-else class="text-[10px] text-slate-400 italic">
+              Video is unchecked. No video button or player will be shown for this installment plan on the website.
             </p>
           </div>
         </div>
@@ -343,34 +461,93 @@
               <input v-model="flat.specs" type="text" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-medium" />
             </div>
 
-            <!-- Flat / Building Video Walkthrough URL -->
-            <div class="pt-2 border-t border-slate-100">
-              <div class="flex items-center justify-between mb-1">
-                <label class="block text-[10px] font-bold text-slate-700 uppercase flex items-center gap-1.5">
-                  <span class="text-rose-600 font-black">▶</span>
-                  <span>Reference Building / Flat Video URL (Optional)</span>
+            <!-- Flat / Building Video Walkthrough Control (Checkbox Toggle & Browser File Picker / URL) -->
+            <div class="pt-3 border-t border-slate-100 space-y-2">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-2 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    v-model="flat.showVideo"
+                    class="w-4 h-4 rounded text-[#16B4E8] focus:ring-[#16B4E8] border-slate-300 cursor-pointer"
+                  />
+                  <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                    <span class="text-rose-600 font-black">▶</span>
+                    <span>Show Video Walkthrough on Website</span>
+                  </span>
                 </label>
-                <span class="text-[10px] text-slate-400">YouTube / Vimeo / MP4</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <input
-                  v-model="flat.videoUrl"
-                  type="url"
-                  placeholder="https://www.youtube.com/watch?v=... (Leave empty if no video)"
-                  class="flex-1 px-3 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8] bg-slate-50/50 focus:bg-white"
-                />
-                <button
-                  v-if="flat.videoUrl"
-                  type="button"
-                  @click="previewVideo(flat.videoUrl, flat.name)"
-                  class="px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-[10px] font-bold transition-colors whitespace-nowrap border border-rose-200 flex items-center gap-1"
+                <span
+                  class="text-[10px] px-2 py-0.5 rounded-full font-bold"
+                  :class="flat.showVideo ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-500'"
                 >
-                  <span>▶</span>
-                  <span>Test Video</span>
-                </button>
+                  {{ flat.showVideo ? '✓ Video Enabled' : '✗ Video Hidden' }}
+                </span>
               </div>
-              <p class="text-[10px] text-slate-400 mt-0.5">
-                {{ flat.videoUrl ? '✓ Active: Flat / building walkthrough video enabled' : 'Optional: Leave blank to hide video button from public card' }}
+
+              <!-- Shown only when checkbox is checked -->
+              <div v-if="flat.showVideo" class="p-3 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2.5">
+                <!-- Option 1: Add Video from Browser File -->
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-200/60">
+                  <div>
+                    <span class="text-[11px] font-bold text-slate-700 block">Option 1: Add Video from Browser / Device</span>
+                    <span class="text-[10px] text-slate-500">Pick MP4 / WebM / MOV file from your computer</span>
+                  </div>
+                  <div>
+                    <input
+                      type="file"
+                      accept="video/*"
+                      class="hidden"
+                      :id="`video-file-flat-${key}`"
+                      @change="handleVideoFileUpload($event, flat)"
+                    />
+                    <label
+                      :for="`video-file-flat-${key}`"
+                      class="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-xs transition-colors"
+                    >
+                      <span>📁 Choose File from Browser</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Attached file indicator if any -->
+                <div v-if="flat.videoFileName || (flat.videoUrl && (flat.videoUrl.startsWith('data:') || flat.videoUrl.startsWith('blob:')))" class="flex items-center justify-between text-xs bg-emerald-50 text-emerald-800 px-3 py-1.5 rounded-lg border border-emerald-200">
+                  <span class="truncate max-w-xs font-semibold flex items-center gap-1.5">
+                    <span>🎥</span>
+                    <span>{{ flat.videoFileName || 'Attached Video File' }}</span>
+                  </span>
+                  <button
+                    type="button"
+                    @click="clearVideoFile(flat)"
+                    class="text-[11px] text-rose-600 font-bold hover:underline ml-2"
+                  >
+                    Remove File
+                  </button>
+                </div>
+
+                <!-- Option 2: Enter Video URL -->
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Option 2: OR Enter Video URL (YouTube, Vimeo, MP4 link)</label>
+                  <div class="flex items-center gap-2">
+                    <input
+                      v-model="flat.videoUrl"
+                      type="url"
+                      placeholder="https://www.youtube.com/watch?v=... or direct MP4 URL"
+                      class="flex-1 px-3 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8] bg-white"
+                    />
+                    <button
+                      v-if="flat.videoUrl"
+                      type="button"
+                      @click="previewVideo(flat.videoUrl, flat.name)"
+                      class="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition-colors whitespace-nowrap flex items-center gap-1 shadow-xs cursor-pointer"
+                    >
+                      <span>▶ Test Video</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Unchecked note -->
+              <p v-else class="text-[10px] text-slate-400 italic">
+                Video is unchecked. No video button or player will be shown for this flat category on the website.
               </p>
             </div>
           </div>
@@ -590,10 +767,50 @@
                 <input v-model="draftItem.k1" type="text" required placeholder="PKR 1.5 - 2.2 Cr" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs" />
               </div>
             </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Reference Video Walkthrough URL (Optional)</label>
-              <input v-model="draftItem.videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=... (Leave blank if no video)" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8]" />
-              <p class="text-[10px] text-slate-400 mt-0.5">Optional: Leave empty if no video is available yet.</p>
+            <!-- Video Walkthrough Toggle + File Upload / URL -->
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2">
+              <label class="flex items-center gap-2 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  v-model="draftItem.showVideo"
+                  class="w-4 h-4 rounded text-[#16B4E8] focus:ring-[#16B4E8] border-slate-300 cursor-pointer"
+                />
+                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                  <span class="text-rose-600 font-black">▶</span>
+                  <span>Enable Video Walkthrough for this Card</span>
+                </span>
+              </label>
+
+              <div v-if="draftItem.showVideo" class="space-y-2 pt-1">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-[11px] font-semibold text-slate-600">Option 1: Add File from Browser</span>
+                  <div>
+                    <input
+                      type="file"
+                      accept="video/*"
+                      class="hidden"
+                      id="video-file-draft-installments"
+                      @change="handleVideoFileUpload($event, draftItem)"
+                    />
+                    <label
+                      for="video-file-draft-installments"
+                      class="cursor-pointer inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-[11px] font-semibold shadow-xs"
+                    >
+                      📁 Choose File
+                    </label>
+                  </div>
+                </div>
+
+                <div v-if="draftItem.videoFileName" class="flex items-center justify-between text-xs bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded border border-emerald-200">
+                  <span class="truncate max-w-xs font-semibold">🎥 {{ draftItem.videoFileName }}</span>
+                  <button type="button" @click="clearVideoFile(draftItem)" class="text-[10px] text-rose-600 font-bold hover:underline">Remove</button>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 mb-1">Option 2: OR Enter Video URL</label>
+                  <input v-model="draftItem.videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=... or direct MP4 link" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white focus:outline-none focus:border-[#16B4E8]" />
+                </div>
+              </div>
             </div>
           </template>
 
@@ -629,10 +846,50 @@
                 <input v-model="draftItem.k1Down" type="text" required placeholder="PKR 13.5 Lac" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs" />
               </div>
             </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Reference Video Walkthrough URL (Optional)</label>
-              <input v-model="draftItem.videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=... (Leave blank if no video)" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8]" />
-              <p class="text-[10px] text-slate-400 mt-0.5">Optional: Leave empty if no video is available yet.</p>
+            <!-- Video Walkthrough Toggle + File Upload / URL -->
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2">
+              <label class="flex items-center gap-2 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  v-model="draftItem.showVideo"
+                  class="w-4 h-4 rounded text-[#16B4E8] focus:ring-[#16B4E8] border-slate-300 cursor-pointer"
+                />
+                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                  <span class="text-rose-600 font-black">▶</span>
+                  <span>Enable Video Walkthrough for this Card</span>
+                </span>
+              </label>
+
+              <div v-if="draftItem.showVideo" class="space-y-2 pt-1">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-[11px] font-semibold text-slate-600">Option 1: Add File from Browser</span>
+                  <div>
+                    <input
+                      type="file"
+                      accept="video/*"
+                      class="hidden"
+                      id="video-file-draft-installments"
+                      @change="handleVideoFileUpload($event, draftItem)"
+                    />
+                    <label
+                      for="video-file-draft-installments"
+                      class="cursor-pointer inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-[11px] font-semibold shadow-xs"
+                    >
+                      📁 Choose File
+                    </label>
+                  </div>
+                </div>
+
+                <div v-if="draftItem.videoFileName" class="flex items-center justify-between text-xs bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded border border-emerald-200">
+                  <span class="truncate max-w-xs font-semibold">🎥 {{ draftItem.videoFileName }}</span>
+                  <button type="button" @click="clearVideoFile(draftItem)" class="text-[10px] text-rose-600 font-bold hover:underline">Remove</button>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 mb-1">Option 2: OR Enter Video URL</label>
+                  <input v-model="draftItem.videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=... or direct MP4 link" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white focus:outline-none focus:border-[#16B4E8]" />
+                </div>
+              </div>
             </div>
           </template>
 
@@ -650,10 +907,50 @@
               <label class="block text-xs font-semibold text-slate-700 mb-1">Specs *</label>
               <input v-model="draftItem.specs" type="text" required placeholder="e.g. 3 Bed • 4 Bath" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8]" />
             </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Reference Video Walkthrough URL (Optional)</label>
-              <input v-model="draftItem.videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=... (Leave blank if no video)" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8]" />
-              <p class="text-[10px] text-slate-400 mt-0.5">Optional: Leave empty if no video is available yet.</p>
+            <!-- Video Walkthrough Toggle + File Upload / URL -->
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2">
+              <label class="flex items-center gap-2 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  v-model="draftItem.showVideo"
+                  class="w-4 h-4 rounded text-[#16B4E8] focus:ring-[#16B4E8] border-slate-300 cursor-pointer"
+                />
+                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                  <span class="text-rose-600 font-black">▶</span>
+                  <span>Enable Video Walkthrough for this Card</span>
+                </span>
+              </label>
+
+              <div v-if="draftItem.showVideo" class="space-y-2 pt-1">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-[11px] font-semibold text-slate-600">Option 1: Add File from Browser</span>
+                  <div>
+                    <input
+                      type="file"
+                      accept="video/*"
+                      class="hidden"
+                      id="video-file-draft-installments"
+                      @change="handleVideoFileUpload($event, draftItem)"
+                    />
+                    <label
+                      for="video-file-draft-installments"
+                      class="cursor-pointer inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-[11px] font-semibold shadow-xs"
+                    >
+                      📁 Choose File
+                    </label>
+                  </div>
+                </div>
+
+                <div v-if="draftItem.videoFileName" class="flex items-center justify-between text-xs bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded border border-emerald-200">
+                  <span class="truncate max-w-xs font-semibold">🎥 {{ draftItem.videoFileName }}</span>
+                  <button type="button" @click="clearVideoFile(draftItem)" class="text-[10px] text-rose-600 font-bold hover:underline">Remove</button>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 mb-1">Option 2: OR Enter Video URL</label>
+                  <input v-model="draftItem.videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=... or direct MP4 link" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white focus:outline-none focus:border-[#16B4E8]" />
+                </div>
+              </div>
             </div>
           </template>
 
@@ -766,6 +1063,64 @@ if (!Array.isArray(ratesForm.hrSukhSuites)) {
   ratesForm.hrSukhSuites = []
 }
 
+// Helper to ensure showVideo & videoFileName exist on all editable rate cards
+const initVideoFlags = (collection) => {
+  if (!collection || typeof collection !== 'object') return
+  Object.values(collection).forEach((item) => {
+    if (item && typeof item === 'object') {
+      if (item.showVideo === undefined) {
+        item.showVideo = Boolean(item.videoUrl && item.videoUrl.trim())
+      }
+      if (!item.videoFileName) {
+        item.videoFileName = ''
+      }
+    }
+  })
+}
+initVideoFlags(ratesForm.moqaPlots)
+initVideoFlags(ratesForm.installmentPlans)
+initVideoFlags(ratesForm.phaFlats)
+
+// Video File Upload from Browser Handler (Data URL for <=8MB or Object URL)
+const handleVideoFileUpload = (event, target) => {
+  const file = event.target?.files?.[0]
+  if (!file) return
+
+  const isVideo = file.type.startsWith('video/') || /\.(mp4|webm|ogg|mov|m4v)$/i.test(file.name)
+  if (!isVideo) {
+    adminStore.showToast('Please select a valid video file (.mp4, .webm, .mov, etc.)', 'error')
+    return
+  }
+
+  const sizeMb = (file.size / (1024 * 1024)).toFixed(1)
+  target.videoFileName = `${file.name} (${sizeMb} MB)`
+  target.showVideo = true
+
+  if (file.size <= 8 * 1024 * 1024) {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      target.videoUrl = e.target.result
+      adminStore.showToast(`Video loaded: ${file.name} (${sizeMb} MB)`)
+    }
+    reader.onerror = () => {
+      adminStore.showToast('Failed to read video file', 'error')
+    }
+    reader.readAsDataURL(file)
+  } else {
+    target.videoUrl = URL.createObjectURL(file)
+    adminStore.showToast(`Video attached from browser (${sizeMb} MB). Ready for testing!`, 'info')
+  }
+
+  if (event.target) event.target.value = ''
+}
+
+const clearVideoFile = (target) => {
+  target.videoUrl = ''
+  target.videoFileName = ''
+  target.showVideo = false
+  adminStore.showToast('Video cleared and hidden on website.', 'info')
+}
+
 // Unified Add Modal Form State
 const addModalOpen = ref(false)
 const addModalType = ref('moqa')
@@ -785,11 +1140,11 @@ const modalTitle = computed(() => {
 const openAddModal = (type) => {
   addModalType.value = type
   if (type === 'moqa') {
-    draftItem.value = { name: '', tag: 'Cash Possession', description: '', m5: '', m10: '', k1: '', videoUrl: '' }
+    draftItem.value = { name: '', tag: 'Cash Possession', description: '', m5: '', m10: '', k1: '', showVideo: false, videoFileName: '', videoUrl: '' }
   } else if (type === 'installments') {
-    draftItem.value = { name: '', duration: '4-Year Flexible Quarterly Plan', m5Down: '', m5Total: '', m10Down: '', k1Down: '', videoUrl: '' }
+    draftItem.value = { name: '', duration: '4-Year Flexible Quarterly Plan', m5Down: '', m5Total: '', m10Down: '', k1Down: '', showVideo: false, videoFileName: '', videoUrl: '' }
   } else if (type === 'flats') {
-    draftItem.value = { name: '', rate: '', specs: '', videoUrl: '' }
+    draftItem.value = { name: '', rate: '', specs: '', showVideo: false, videoFileName: '', videoUrl: '' }
   } else if (type === 'solar') {
     draftItem.value = { name: '', quote: '', savings: '' }
   } else if (type === 'hrsukh') {
@@ -819,6 +1174,8 @@ const submitAddModal = () => {
       m5: d.m5.trim(),
       m10: d.m10.trim(),
       k1: d.k1.trim(),
+      showVideo: Boolean(d.showVideo),
+      videoFileName: d.videoFileName || '',
       videoUrl: (d.videoUrl || '').trim()
     }
     adminStore.saveLiveRates(ratesForm)
@@ -832,6 +1189,8 @@ const submitAddModal = () => {
       m8: { down: d.m5Down.trim(), total: (d.m5Total || 'On Request').trim(), quarterly: 'Quarterly Plan' },
       m10: { down: d.m10Down.trim(), total: 'On Request', quarterly: 'Quarterly Plan' },
       k1: { down: d.k1Down.trim(), total: 'On Request', quarterly: 'Quarterly Plan' },
+      showVideo: Boolean(d.showVideo),
+      videoFileName: d.videoFileName || '',
       videoUrl: (d.videoUrl || '').trim()
     }
     adminStore.saveLiveRates(ratesForm)
@@ -842,6 +1201,8 @@ const submitAddModal = () => {
       name: d.name.trim(),
       rate: d.rate.trim(),
       specs: d.specs.trim(),
+      showVideo: Boolean(d.showVideo),
+      videoFileName: d.videoFileName || '',
       videoUrl: (d.videoUrl || '').trim()
     }
     adminStore.saveLiveRates(ratesForm)

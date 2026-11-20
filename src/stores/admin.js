@@ -481,6 +481,7 @@ export const useAdminStore = defineStore('admin', () => {
         m5: 'PKR 25 - 45 Lac',
         m10: 'PKR 65 - 95 Lac',
         k1: 'PKR 1.25 - 1.95 Cr',
+        showVideo: true,
         videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
       },
       topCity: {
@@ -489,6 +490,7 @@ export const useAdminStore = defineStore('admin', () => {
         m5: 'PKR 55 - 85 Lac',
         m10: 'PKR 85 Lac - 2.75 Cr',
         k1: 'PKR 1.80 - 4.00 Cr',
+        showVideo: true,
         videoUrl: 'https://www.youtube.com/watch?v=F0f8u84_0c0'
       },
       agg: {
@@ -497,6 +499,7 @@ export const useAdminStore = defineStore('admin', () => {
         m5: 'PKR 35 - 65 Lac',
         m10: 'PKR 55 Lac - 1.05 Cr',
         k1: 'PKR 1.10 - 1.85 Cr',
+        showVideo: true,
         videoUrl: 'https://www.youtube.com/watch?v=q6gS_u4z2-o'
       },
       topResidencia: {
@@ -505,6 +508,7 @@ export const useAdminStore = defineStore('admin', () => {
         m5: 'PKR 40 - 60 Lac',
         m10: 'PKR 80 - 1.2 Cr',
         k1: 'PKR 1.6 - 2.2 Cr',
+        showVideo: false,
         videoUrl: ''
       }
     },
@@ -517,6 +521,7 @@ export const useAdminStore = defineStore('admin', () => {
         m8: { down: 'PKR 19.20 Lac', total: 'PKR 54.90 Lac', quarterly: 'PKR 85,000/mo', lumpSum: 'PKR 46.50 Lac' },
         m10: { down: 'PKR 26.30 Lac', total: 'PKR 72.50 Lac', quarterly: 'PKR 110,000/mo', lumpSum: 'PKR 61.50 Lac' },
         k1: { down: 'PKR 43.10 Lac', total: 'PKR 1.229 Cr', quarterly: 'PKR 190,000/mo', lumpSum: 'PKR 1.039 Cr' },
+        showVideo: true,
         videoUrl: 'https://www.youtube.com/watch?v=fDvyuX8e370'
       },
       blueWorld: {
@@ -526,6 +531,7 @@ export const useAdminStore = defineStore('admin', () => {
         m7: { down: 'PKR 2.45 Lac', total: 'PKR 24.5 Lac', monthly: 'PKR 24,500' },
         m10: { down: 'PKR 3.25 Lac', total: 'PKR 32.5 Lac', monthly: 'PKR 32,500' },
         k1: { down: 'PKR 5.8 Lac', total: 'PKR 58.0 Lac', monthly: 'PKR 58,000' },
+        showVideo: false,
         videoUrl: ''
       }
     },
@@ -1685,6 +1691,7 @@ export const useAdminStore = defineStore('admin', () => {
     description: 'Banu Hafeez Luxury Apartments is an approved 17-storey landmark residential tower developed by Waheed Group of Companies (Chairman Mr. Abdul Waheed Sheikh, CEO Mr. Faad Waheed) in Top City-1, Islamabad. Perfectly connected via M-1/M-2 Motorways and Srinagar Highway, just 15 minutes from Islamabad Airport. Offering high-end 1-Bedroom (546 sq.ft.), 2-Bedroom (1,089–1,215 sq.ft.), and 3-Bedroom (1,881–2,010 sq.ft.) residences on a 3-year flexible installment plan with 15% booking and possession in 2 years. Features an exclusive resident swimming pool, modern gym, 2 basements parking (281 cars, 41 servant quarters), high-speed elevators, and 24/7 RFID security.',
     image: 'https://banuhafeez.com/assets/building.jpg',
     link: '/featured-building',
+    showVideo: true,
     videoUrl: 'https://banuhafeez.com/assets/bh-video.mp4',
     gallery: [
       'https://banuhafeez.com/assets/building.jpg',

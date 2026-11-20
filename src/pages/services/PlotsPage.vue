@@ -855,16 +855,24 @@ const activeVideo = ref({ url: '', title: '', subtitle: '' })
 
 const getSocietyVideo = (key) => {
   if (key === 'topcity') {
-    return adminStore.liveRates?.moqaPlots?.topCity?.videoUrl ?? plotsData.topcity?.videoUrl ?? ''
+    const entry = adminStore.liveRates?.moqaPlots?.topCity
+    if (entry && entry.showVideo === false) return ''
+    return entry?.videoUrl ?? plotsData.topcity?.videoUrl ?? ''
   }
   if (key === 'agg') {
-    return adminStore.liveRates?.moqaPlots?.agg?.videoUrl ?? plotsData.agg?.videoUrl ?? ''
+    const entry = adminStore.liveRates?.moqaPlots?.agg
+    if (entry && entry.showVideo === false) return ''
+    return entry?.videoUrl ?? plotsData.agg?.videoUrl ?? ''
   }
   if (key === 'pechs') {
-    return adminStore.liveRates?.moqaPlots?.pechs?.videoUrl ?? plotsData.pechs?.videoUrl ?? ''
+    const entry = adminStore.liveRates?.moqaPlots?.pechs
+    if (entry && entry.showVideo === false) return ''
+    return entry?.videoUrl ?? plotsData.pechs?.videoUrl ?? ''
   }
   if (key === 'faisal-town') {
-    return adminStore.liveRates?.installmentPlans?.faisalTown?.videoUrl ?? plotsData['faisal-town']?.videoUrl ?? ''
+    const entry = adminStore.liveRates?.installmentPlans?.faisalTown
+    if (entry && entry.showVideo === false) return ''
+    return entry?.videoUrl ?? plotsData['faisal-town']?.videoUrl ?? ''
   }
   return plotsData[key]?.videoUrl ?? ''
 }

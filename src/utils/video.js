@@ -8,8 +8,8 @@ export function parseVideoUrl(url) {
   const clean = url.trim()
   if (!clean) return null
 
-  // Direct MP4 / WebM / OGG video file
-  if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(clean)) {
+  // Direct MP4 / WebM / OGG video file, Data URL, or Blob URL
+  if (/\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i.test(clean) || clean.startsWith('data:video/') || clean.startsWith('blob:')) {
     return {
       type: 'direct',
       src: clean,

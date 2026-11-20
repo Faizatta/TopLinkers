@@ -139,7 +139,7 @@
       </section>
 
       <!-- Optional Ground Progress / Site Video Walkthrough -->
-      <section v-if="building.videoUrl" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+      <section v-if="building.showVideo !== false && building.videoUrl" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
         <div class="mb-5">
           <div class="flex items-center gap-2 mb-1.5">
             <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-rose-100 text-rose-700 border border-rose-200">

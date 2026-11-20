@@ -638,22 +638,82 @@
             </div>
           </div>
 
-          <!-- Reference Site / Land Walkthrough Video Field (Optional choice) -->
-          <div class="p-3.5 rounded-xl border border-gray-200 bg-slate-50/70 space-y-1.5">
+          <!-- Reference Site / Land Walkthrough Video Control (Checkbox Toggle & Browser File Picker / URL) -->
+          <div class="p-3.5 rounded-xl border border-gray-200 bg-slate-50 space-y-2">
             <div class="flex items-center justify-between">
-              <label class="block text-xs font-extrabold text-[#0F2A44] uppercase flex items-center gap-1.5">
-                <span class="text-rose-600 font-bold">▶</span>
-                <span>Reference Site / Land Walkthrough Video URL (Optional)</span>
+              <label class="flex items-center gap-2 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  v-model="propertyForm.showVideo"
+                  class="w-4 h-4 rounded text-[#16B4E8] focus:ring-[#16B4E8] border-slate-300 cursor-pointer"
+                />
+                <span class="text-xs font-extrabold text-[#0F2A44] uppercase flex items-center gap-1.5">
+                  <span class="text-rose-600 font-bold">▶</span>
+                  <span>Show Video Walkthrough on Website</span>
+                </span>
               </label>
-              <span class="text-[10px] text-gray-400">YouTube / Vimeo / MP4</span>
+              <span
+                class="text-[10px] px-2 py-0.5 rounded-full font-bold"
+                :class="propertyForm.showVideo ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-500'"
+              >
+                {{ propertyForm.showVideo ? '✓ Video Enabled' : '✗ Video Hidden' }}
+              </span>
             </div>
-            <p class="text-[11px] text-gray-500">Attach drone footage or on-ground video tour for this plot, flat, or construction project. Leave empty if no video is available.</p>
-            <input
-              v-model="propertyForm.videoUrl"
-              type="url"
-              class="w-full px-3 py-2 rounded-xl border border-gray-200 bg-white text-xs focus:outline-none focus:border-[#16B4E8]"
-              placeholder="https://www.youtube.com/watch?v=... (Optional - choice to add or leave empty)"
-            />
+
+            <div v-if="propertyForm.showVideo" class="p-3 bg-white rounded-xl border border-slate-200/80 space-y-2.5">
+              <!-- Option 1: Browser File Upload -->
+              <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-200/60">
+                <div>
+                  <span class="text-[11px] font-bold text-slate-700 block">Option 1: Add Video from Browser / Device</span>
+                  <span class="text-[10px] text-slate-500">Pick MP4 / WebM / MOV file from your computer</span>
+                </div>
+                <div>
+                  <input
+                    type="file"
+                    accept="video/*"
+                    class="hidden"
+                    id="property-video-file-input"
+                    @change="handlePropertyVideoFileUpload"
+                  />
+                  <label
+                    for="property-video-file-input"
+                    class="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 border border-blue-200 hover:bg-blue-100 text-blue-700 text-xs font-semibold transition-colors"
+                  >
+                    <span>📁 Choose Video from Browser</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Attached file indicator if any -->
+              <div v-if="propertyForm.videoFileName || (propertyForm.videoUrl && (propertyForm.videoUrl.startsWith('data:') || propertyForm.videoUrl.startsWith('blob:')))" class="flex items-center justify-between text-xs bg-emerald-50 text-emerald-800 px-3 py-1.5 rounded-lg border border-emerald-200">
+                <span class="truncate max-w-sm font-semibold flex items-center gap-1.5">
+                  <span>🎥 Attached Video:</span>
+                  <span>{{ propertyForm.videoFileName || 'Selected Video File' }}</span>
+                </span>
+                <button
+                  type="button"
+                  @click="clearPropertyVideoFile"
+                  class="text-[11px] text-rose-600 font-bold hover:underline ml-2"
+                >
+                  Remove
+                </button>
+              </div>
+
+              <!-- Option 2: Enter Video URL -->
+              <div>
+                <label class="block text-[11px] font-bold text-slate-700 mb-1">Option 2: OR Enter Video URL (YouTube, Vimeo, MP4 link)</label>
+                <input
+                  v-model="propertyForm.videoUrl"
+                  type="url"
+                  class="w-full px-3 py-2 rounded-xl border border-gray-200 bg-white text-xs focus:outline-none focus:border-[#16B4E8]"
+                  placeholder="https://www.youtube.com/watch?v=... or direct MP4 link"
+                />
+              </div>
+            </div>
+
+            <p v-else class="text-[10px] text-slate-400 italic">
+              Video is unchecked. No video button or player will be shown on the website for this property.
+            </p>
           </div>
 
           <!-- Description / Notes -->
@@ -859,6 +919,8 @@ const propertyForm = ref({
   bedrooms: 0,
   bathrooms: 0,
   images: [],
+  showVideo: false,
+  videoFileName: '',
   videoUrl: '',
   featured: true,
   hotOffer: false,
@@ -1097,6 +1159,46 @@ const removeImage = (idx) => {
   propertyForm.value.images.splice(idx, 1)
 }
 
+// Browser Video File Upload & Clear Handlers
+const handlePropertyVideoFileUpload = (event) => {
+  const file = event.target?.files?.[0]
+  if (!file) return
+
+  const isVideo = file.type.startsWith('video/') || /\.(mp4|webm|ogg|mov|m4v)$/i.test(file.name)
+  if (!isVideo) {
+    adminStore.showToast('Please select a valid video file (.mp4, .webm, .mov, etc.)', 'error')
+    return
+  }
+
+  const sizeMb = (file.size / (1024 * 1024)).toFixed(1)
+  propertyForm.value.videoFileName = `${file.name} (${sizeMb} MB)`
+  propertyForm.value.showVideo = true
+
+  if (file.size <= 8 * 1024 * 1024) {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      propertyForm.value.videoUrl = e.target.result
+      adminStore.showToast(`Video loaded: ${file.name} (${sizeMb} MB)`)
+    }
+    reader.onerror = () => {
+      adminStore.showToast('Failed to read video file', 'error')
+    }
+    reader.readAsDataURL(file)
+  } else {
+    propertyForm.value.videoUrl = URL.createObjectURL(file)
+    adminStore.showToast(`Video attached from browser (${sizeMb} MB). Ready for testing!`, 'info')
+  }
+
+  if (event.target) event.target.value = ''
+}
+
+const clearPropertyVideoFile = () => {
+  propertyForm.value.videoUrl = ''
+  propertyForm.value.videoFileName = ''
+  propertyForm.value.showVideo = false
+  adminStore.showToast('Video cleared and hidden on website.', 'info')
+}
+
 const setOfferPresetDays = (days) => {
   const d = new Date()
   d.setDate(d.getDate() + days)
@@ -1171,6 +1273,8 @@ const editProperty = (prop) => {
     bedrooms: prop.beds ?? prop.bedrooms ?? 0,
     bathrooms: prop.baths ?? prop.bathrooms ?? 0,
     images: Array.isArray(prop.images) && prop.images.length > 0 ? [...prop.images] : (prop.image ? [prop.image] : []),
+    showVideo: prop.showVideo !== false && Boolean(prop.videoUrl || prop.video),
+    videoFileName: '',
     videoUrl: prop.videoUrl || prop.video || '',
     featured: Boolean(prop.featured),
     hotOffer: Boolean(prop.hotOffer),
@@ -1231,6 +1335,7 @@ const saveProperty = () => {
     bedrooms: Number(propertyForm.value.bedrooms) || 0,
     bathrooms: Number(propertyForm.value.bathrooms) || 0,
     images: finalImages,
+    showVideo: Boolean(propertyForm.value.showVideo),
     videoUrl: propertyForm.value.videoUrl || '',
     featured: Boolean(propertyForm.value.featured),
     hotOffer: Boolean(propertyForm.value.hotOffer),

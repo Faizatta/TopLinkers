@@ -454,31 +454,93 @@
           </div>
         </div>
 
-        <!-- Optional Site / Project Walkthrough Video URL -->
-        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+        <!-- Optional Site / Project Walkthrough Video URL & Browser Upload -->
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-2.5">
           <div class="flex items-center justify-between">
-            <label class="block text-[11px] font-bold text-slate-700 uppercase flex items-center gap-1.5">
-              <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-rose-600 text-white text-[9px]">▶</span>
-              <span>Project Site Video Walkthrough (Optional YouTube, Vimeo, or MP4)</span>
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                v-model="customBuildingForm.showVideo"
+                class="w-4 h-4 rounded text-[#16B4E8] focus:ring-[#16B4E8] border-slate-300 cursor-pointer"
+              />
+              <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-rose-600 text-white text-[9px]">▶</span>
+                <span>Show Project Video Walkthrough on Website</span>
+              </span>
             </label>
-            <span class="text-[10px] text-slate-500 font-semibold">User choice to show/hide on full page</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <input
-              v-model="customBuildingForm.videoUrl"
-              type="url"
-              placeholder="e.g. https://www.youtube.com/watch?v=ScMzIvxBSi4 or direct MP4 link"
-              class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-amber-500 bg-white"
-            />
-            <button
-              v-if="customBuildingForm.videoUrl"
-              type="button"
-              @click="previewVideo(customBuildingForm.videoUrl, customBuildingForm.title || customBuildingForm.name)"
-              class="px-3.5 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold whitespace-nowrap flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+            <span
+              class="text-[10px] px-2 py-0.5 rounded-full font-bold"
+              :class="customBuildingForm.showVideo ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-500'"
             >
-              <span>▶ Test Video</span>
-            </button>
+              {{ customBuildingForm.showVideo ? '✓ Video Enabled' : '✗ Video Hidden' }}
+            </span>
           </div>
+
+          <!-- Shown only when checkbox is checked -->
+          <div v-if="customBuildingForm.showVideo" class="p-3 bg-white rounded-xl border border-slate-200/80 space-y-2.5">
+            <!-- Option 1: Browser File Upload -->
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-200/60">
+              <div>
+                <span class="text-[11px] font-bold text-slate-700 block">Option 1: Add Video from Browser / Device</span>
+                <span class="text-[10px] text-slate-500">Pick MP4 / WebM / MOV file directly from your computer</span>
+              </div>
+              <div>
+                <input
+                  type="file"
+                  accept="video/*"
+                  class="hidden"
+                  id="custom-building-video-file"
+                  @change="handleBuildingVideoFileUpload"
+                />
+                <label
+                  for="custom-building-video-file"
+                  class="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 border border-blue-200 hover:bg-blue-100 text-blue-700 text-xs font-semibold transition-colors"
+                >
+                  <span>📁 Choose Video from Browser</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Attached file indicator if any -->
+            <div v-if="customBuildingForm.videoFileName || (customBuildingForm.videoUrl && (customBuildingForm.videoUrl.startsWith('data:') || customBuildingForm.videoUrl.startsWith('blob:')))" class="flex items-center justify-between text-xs bg-emerald-50 text-emerald-800 px-3 py-1.5 rounded-lg border border-emerald-200">
+              <span class="truncate max-w-sm font-semibold flex items-center gap-1.5">
+                <span>🎥 Attached Video:</span>
+                <span>{{ customBuildingForm.videoFileName || 'Selected Video File' }}</span>
+              </span>
+              <button
+                type="button"
+                @click="clearBuildingVideoFile"
+                class="text-[11px] text-rose-600 font-bold hover:underline ml-2"
+              >
+                Remove
+              </button>
+            </div>
+
+            <!-- Option 2: Enter Video URL -->
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 mb-1">Option 2: OR Enter Video URL (YouTube, Vimeo, or MP4 link)</label>
+              <div class="flex items-center gap-2">
+                <input
+                  v-model="customBuildingForm.videoUrl"
+                  type="url"
+                  placeholder="e.g. https://www.youtube.com/watch?v=... or direct MP4 link"
+                  class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-amber-500 bg-white"
+                />
+                <button
+                  v-if="customBuildingForm.videoUrl"
+                  type="button"
+                  @click="previewVideo(customBuildingForm.videoUrl, customBuildingForm.title || customBuildingForm.name)"
+                  class="px-3.5 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold whitespace-nowrap flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+                >
+                  <span>▶ Test Video</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <p v-else class="text-[10px] text-slate-400 italic">
+            Video is unchecked. No video button or player will be shown on the website for this featured building.
+          </p>
         </div>
 
         <!-- Live Preview Bar with Test Modal & Save Actions -->
@@ -1035,6 +1097,8 @@ const customBuildingForm = ref({
   description: adminStore.customBuilding?.description || 'Banu Hafeez Luxury Apartments is an approved 17-storey landmark residential tower developed by Waheed Group of Companies (Chairman Mr. Abdul Waheed Sheikh, CEO Mr. Faad Waheed) in Top City-1, Islamabad. Perfectly connected via M-1/M-2 Motorways and Srinagar Highway, just 15 minutes from Islamabad Airport. Offering high-end 1-Bedroom (546 sq.ft.), 2-Bedroom (1,089–1,215 sq.ft.), and 3-Bedroom (1,881–2,010 sq.ft.) residences on a 3-year flexible installment plan with 15% booking and possession in 2 years. Features an exclusive resident swimming pool, modern gym, 2 basements parking (281 cars, 41 servant quarters), high-speed elevators, and 24/7 RFID security.',
   image: adminStore.customBuilding?.image || 'https://banuhafeez.com/assets/building.jpg',
   link: adminStore.customBuilding?.link || '/featured-building',
+  showVideo: adminStore.customBuilding?.showVideo !== false,
+  videoFileName: adminStore.customBuilding?.videoFileName || '',
   videoUrl: adminStore.customBuilding?.videoUrl || 'https://banuhafeez.com/assets/bh-video.mp4',
   featuresText: formatFeaturesForForm(adminStore.customBuilding?.features || [
     'RDA, CAA, Rescue & Building Control Department Approved',
@@ -1144,9 +1208,51 @@ const applyBuildingPreset = (presetKey) => {
   customBuildingForm.value.description = p.description
   customBuildingForm.value.image = p.image
   customBuildingForm.value.link = p.link || '/featured-building'
+  customBuildingForm.value.showVideo = true
+  customBuildingForm.value.videoFileName = ''
   customBuildingForm.value.videoUrl = p.videoUrl || ''
   customBuildingForm.value.featuresText = p.features
   adminStore.showToast(`Loaded building preset: ${p.name}`)
+}
+
+// Browser Video File Upload & Clear Handlers for Featured Building
+const handleBuildingVideoFileUpload = (event) => {
+  const file = event.target?.files?.[0]
+  if (!file) return
+
+  const isVideo = file.type.startsWith('video/') || /\.(mp4|webm|ogg|mov|m4v)$/i.test(file.name)
+  if (!isVideo) {
+    adminStore.showToast('Please select a valid video file (.mp4, .webm, .mov, etc.)', 'error')
+    return
+  }
+
+  const sizeMb = (file.size / (1024 * 1024)).toFixed(1)
+  customBuildingForm.value.videoFileName = `${file.name} (${sizeMb} MB)`
+  customBuildingForm.value.showVideo = true
+
+  if (file.size <= 8 * 1024 * 1024) {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      customBuildingForm.value.videoUrl = e.target.result
+      adminStore.showToast(`Video loaded: ${file.name} (${sizeMb} MB)`)
+    }
+    reader.onerror = () => {
+      adminStore.showToast('Failed to read video file', 'error')
+    }
+    reader.readAsDataURL(file)
+  } else {
+    customBuildingForm.value.videoUrl = URL.createObjectURL(file)
+    adminStore.showToast(`Video attached from browser (${sizeMb} MB). Ready for testing!`, 'info')
+  }
+
+  if (event.target) event.target.value = ''
+}
+
+const clearBuildingVideoFile = () => {
+  customBuildingForm.value.videoUrl = ''
+  customBuildingForm.value.videoFileName = ''
+  customBuildingForm.value.showVideo = false
+  adminStore.showToast('Video cleared and hidden on website.', 'info')
 }
 
 // Browser File Picker & Image Upload Handler
