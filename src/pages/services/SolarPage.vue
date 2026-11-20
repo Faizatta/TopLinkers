@@ -1031,17 +1031,18 @@
           </section>
 
           <!-- Certified Engineering Leadership -->
-          <section class="bg-white p-7 sm:p-8 rounded-3xl border border-gray-200 shadow-xs space-y-6">
+          <section class="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-xs space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-gray-100">
               <div>
-                <span class="text-[10px] font-black uppercase tracking-wider text-[#6CC24A] bg-emerald-50 px-2.5 py-1 rounded-md">
+                <span class="text-[10px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md inline-flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                   PEC REGISTERED TECHNICAL DIVISION
                 </span>
                 <h2 class="text-xl sm:text-2xl font-black text-[#0F2A44] mt-2">
-                  Certified Solar &amp; Net-Metering Engineers
+                  Certified Solar &amp; Net-Metering Leadership
                 </h2>
                 <p class="text-xs text-slate-500 mt-1">
-                  Direct engineering oversight for 3D load calculations, structural stress certifications, and IESCO green meter approvals.
+                  Direct engineering oversight for 3D load calculations, structural stress certifications, and turnkey IESCO green meter approvals.
                 </p>
               </div>
               <router-link
@@ -1053,114 +1054,93 @@
               </router-link>
             </div>
 
-            <!-- Engineers Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <!-- Engr. Asad Ur Rehman -->
-              <div class="p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-sky-50/40 border border-slate-200/90 hover:border-[#16B4E8] transition-all flex flex-col justify-between space-y-4 group">
-                <div class="flex items-start gap-4">
-                  <div class="relative flex-shrink-0">
-                    <img
-                      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
-                      alt="Engr. Asad Ur Rehman - Solar Engineer TopLinkers"
-                      class="w-16 h-16 rounded-xl object-cover border-2 border-white shadow-md group-hover:scale-105 transition-transform"
-                      width="64"
-                      height="64"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#25D366] border-2 border-white flex items-center justify-center text-white" title="PEC Active">
-                      <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                    </span>
-                  </div>
-
-                  <div class="min-w-0 flex-1">
-                    <span class="text-[9px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded inline-block mb-1">
-                      PEC Registered Solar Eng.
-                    </span>
-                    <h3 class="text-base font-black text-[#0F2A44] leading-tight">
-                      Engr. Asad Ur Rehman
-                    </h3>
-                    <p class="text-xs font-bold text-[#16B4E8] mt-0.5 leading-snug">
-                      Lead Solar Energy &amp; Photovoltaic Systems Engineer
-                    </p>
-                    <span class="text-[11px] font-semibold text-slate-500 block mt-0.5">
-                      9+ Years Experience &bull; Energy Storage Specialist
-                    </span>
-                  </div>
+            <!-- Single Featured Executive Engineer Profile Card -->
+            <div class="p-5 sm:p-7 rounded-2xl bg-gradient-to-br from-slate-50 via-white to-sky-50/50 border border-slate-200/90 hover:border-[#16B4E8] transition-all shadow-sm">
+              <div class="flex flex-col md:flex-row items-start md:items-center gap-5 sm:gap-6">
+                <!-- High-Resolution Engineer Portrait -->
+                <div class="relative flex-shrink-0 mx-auto md:mx-0">
+                  <img
+                    src="/images/team/engr-asad-ur-rehman.webp"
+                    alt="Engr. Asad Ur Rehman - Lead Solar &amp; Photovoltaic Systems Engineer TopLinkers"
+                    class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl object-cover border-2 border-white shadow-lg"
+                    width="128"
+                    height="128"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="absolute -bottom-1.5 -right-1.5 px-2 py-0.5 rounded-full bg-emerald-600 border-2 border-white text-white text-[9px] font-black tracking-wider uppercase flex items-center gap-1 shadow-sm" title="PEC Active License">
+                    <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    <span>PEC Verified</span>
+                  </span>
                 </div>
 
-                <p class="text-xs text-slate-600 leading-relaxed font-normal">
-                  Leads solar PV plant electrical architecture, rooftop structural stress testing, battery storage synchronizations, and utility-scale IESCO net-metering grid clearances.
-                </p>
+                <!-- Profile Info & Badges -->
+                <div class="min-w-0 flex-1 space-y-2">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full">
+                      PEC Registered Solar Engineer
+                    </span>
+                    <span class="text-[10px] font-black uppercase tracking-wider text-[#071E33] bg-sky-100 px-2.5 py-0.5 rounded-full">
+                      AEDB Certified
+                    </span>
+                    <span class="text-[10px] font-bold text-slate-500 bg-gray-100 px-2 py-0.5 rounded-full">
+                      9+ Years Experience
+                    </span>
+                  </div>
 
-                <!-- Actions -->
-                <div class="pt-3 border-t border-slate-200/60 flex items-center justify-between gap-2">
+                  <h3 class="text-xl sm:text-2xl font-black text-[#0F2A44] leading-tight">
+                    Engr. Asad Ur Rehman
+                  </h3>
+
+                  <p class="text-xs sm:text-sm font-extrabold text-[#16B4E8] leading-snug">
+                    Lead Solar Energy, Photovoltaic Systems &amp; Net-Metering Engineer
+                  </p>
+
+                  <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal pt-1">
+                    Leads TopLinkers' renewable electrification division with end-to-end technical oversight. Specializes in 3D Helioscope shadow simulations, structural rooftop stress analysis, Tier-1 TOPCon bifacial string sizing, hybrid battery storage (BESS) integration, and guaranteed turnkey IESCO bidirectional green meter approvals across Islamabad and Rawalpindi.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Key Engineering Competencies Strip -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-5 mt-5 border-t border-slate-200/70 text-center">
+                <div class="p-2.5 bg-white rounded-xl border border-slate-100 shadow-2xs">
+                  <span class="text-[9px] uppercase tracking-wider font-bold text-slate-400 block">System Design</span>
+                  <span class="text-xs font-black text-[#0F2A44] block mt-0.5">3D Shading &amp; Yield</span>
+                </div>
+                <div class="p-2.5 bg-white rounded-xl border border-slate-100 shadow-2xs">
+                  <span class="text-[9px] uppercase tracking-wider font-bold text-slate-400 block">Hardware Standard</span>
+                  <span class="text-xs font-black text-[#16B4E8] block mt-0.5">Tier-1 TOPCon &amp; BESS</span>
+                </div>
+                <div class="p-2.5 bg-white rounded-xl border border-slate-100 shadow-2xs">
+                  <span class="text-[9px] uppercase tracking-wider font-bold text-slate-400 block">IESCO Clearance</span>
+                  <span class="text-xs font-black text-emerald-600 block mt-0.5">100% Green Meter</span>
+                </div>
+                <div class="p-2.5 bg-white rounded-xl border border-slate-100 shadow-2xs">
+                  <span class="text-[9px] uppercase tracking-wider font-bold text-slate-400 block">System Capacities</span>
+                  <span class="text-xs font-black text-[#0F2A44] block mt-0.5">10kW to 500kW+</span>
+                </div>
+              </div>
+
+              <!-- Direct Contact & Consultation CTAs -->
+              <div class="pt-5 mt-5 border-t border-slate-200/70 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span class="text-xs font-bold text-slate-700">Available for Residential &amp; Commercial Solar Feasibilities</span>
+                </div>
+
+                <div class="flex items-center gap-2">
                   <a
-                    href="https://wa.me/923324004884?text=Hello%20Engr.%20Asad%20Ur%20Rehman,%20I%20need%20solar%20net%20metering%20engineering%20consultation"
+                    href="https://wa.me/923324004884?text=Hello%20Engr.%20Asad%20Ur%20Rehman,%20I%20am%20inquiring%20about%20solar%20net%20metering%20engineering%20consultation"
                     target="_blank"
-                    class="flex-1 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1.5 shadow-xs"
+                    class="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm whitespace-nowrap"
                   >
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.065-2.227-.568-1.745-.721-2.859-2.529-2.946-2.645-.087-.116-.708-.941-.708-1.799s.448-1.28.607-1.454c.159-.174.347-.217.462-.217l.333.006c.116.002.261-.044.407.306.159.384.542 1.32.589 1.417.047.098.078.212.015.341-.064.129-.096.208-.189.317-.093.109-.196.243-.28.326-.093.093-.19.195-.082.381.108.186.48 1.002 1.395 1.817 1.176 1.048 2.169 1.373 2.477 1.526.307.153.487.133.668-.076.181-.208.78-1.026.989-1.378.209-.352.417-.294.708-.186.291.108 1.847.87 2.164 1.028.318.158.53.236.608.368.077.133.077.773-.067 1.178z"/></svg>
                     <span>WhatsApp Engr. Asad</span>
                   </a>
                   <a
                     href="tel:+923324004884"
-                    class="px-3 py-2 rounded-xl border border-slate-300 hover:border-[#0F2A44] text-[#0F2A44] text-xs font-bold transition-colors"
-                  >
-                    Call
-                  </a>
-                </div>
-              </div>
-
-              <!-- Engr. Salman Qureshi -->
-              <div class="p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-sky-50/40 border border-slate-200/90 hover:border-[#16B4E8] transition-all flex flex-col justify-between space-y-4 group">
-                <div class="flex items-start gap-4">
-                  <div class="relative flex-shrink-0">
-                    <img
-                      src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80"
-                      alt="Engr. Salman Qureshi - Solar Engineer TopLinkers"
-                      class="w-16 h-16 rounded-xl object-cover border-2 border-white shadow-md group-hover:scale-105 transition-transform"
-                      width="64"
-                      height="64"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#25D366] border-2 border-white flex items-center justify-center text-white" title="PEC Active">
-                      <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                    </span>
-                  </div>
-
-                  <div class="min-w-0 flex-1">
-                    <span class="text-[9px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded inline-block mb-1">
-                      PEC &amp; AEDB Certified
-                    </span>
-                    <h3 class="text-base font-black text-[#0F2A44] leading-tight">
-                      Engr. Salman Qureshi
-                    </h3>
-                    <p class="text-xs font-bold text-[#16B4E8] mt-0.5 leading-snug">
-                      Lead Solar &amp; IESCO Net-Metering Engineer
-                    </p>
-                    <span class="text-[11px] font-semibold text-slate-500 block mt-0.5">
-                      10+ Years Experience &bull; IESCO Liaison
-                    </span>
-                  </div>
-                </div>
-
-                <p class="text-xs text-slate-600 leading-relaxed font-normal">
-                  Expert in 10kW to 50kW on-grid inverter commissioning (Huawei, Sungrow, Growatt), bi-directional green meter documentation, and sub-station approvals.
-                </p>
-
-                <!-- Actions -->
-                <div class="pt-3 border-t border-slate-200/60 flex items-center justify-between gap-2">
-                  <a
-                    href="https://wa.me/923324004884?text=Hello%20Engr.%20Salman%20Qureshi,%20I%20am%20inquiring%20about%20IESCO%20solar%20net%20metering"
-                    target="_blank"
-                    class="flex-1 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1.5 shadow-xs"
-                  >
-                    <span>WhatsApp Engr. Salman</span>
-                  </a>
-                  <a
-                    href="tel:+923324004884"
-                    class="px-3 py-2 rounded-xl border border-slate-300 hover:border-[#0F2A44] text-[#0F2A44] text-xs font-bold transition-colors"
+                    class="px-4 py-2.5 rounded-xl border border-slate-300 hover:border-[#0F2A44] hover:bg-slate-50 text-[#0F2A44] text-xs font-bold transition-colors whitespace-nowrap"
                   >
                     Call
                   </a>

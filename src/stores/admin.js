@@ -821,7 +821,7 @@ export const useAdminStore = defineStore('admin', () => {
       phone: '+92 332 4004884',
       whatsapp: '923324004884',
       email: 'toplinkers69@gmail.com',
-      photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+      photo: '/images/team/engr-asad-ur-rehman.webp',
       bio: 'PEC-registered renewable energy engineer leading solar PV plant designs, industrial 50kW+ setups, hybrid battery storage integration, and IESCO net-metering grid interconnections. Specializes in optimal solar yield engineering and energy audits.',
       quote: 'Designing sustainable, high-efficiency solar infrastructure that delivers lifetime energy independence and verified ROI for residential and commercial clients across Islamabad.',
       address: 'Al Hameed Plaza, G-11 Markaz, Islamabad'
