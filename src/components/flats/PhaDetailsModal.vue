@@ -82,15 +82,6 @@
 
       <!-- 3. Scrollable Modal Body -->
       <div class="p-5 sm:p-6 overflow-y-auto space-y-5 text-xs text-slate-700">
-        <!-- Optional Site Video Walkthrough -->
-        <div v-if="sector.videoUrl">
-          <SiteVideoPlayer
-            :video-url="sector.videoUrl"
-            :title="`${sector.name} — On-Ground Video Tour`"
-            caption="Verified PHA tower elevation, road access, and completed interiors."
-          />
-        </div>
-
         <!-- Overview Description -->
         <div>
           <h4 class="font-extrabold text-[#0F2A44] text-sm uppercase tracking-wide mb-1.5 flex items-center gap-1.5">
@@ -158,6 +149,15 @@
               TopLinkers executes direct file verification, legal NDC clearance, and biometric transfer at Pakistan Housing Authority Foundation Headquarters. Complete peace of mind with 100% genuine allotment files.
             </p>
           </div>
+        </div>
+
+        <!-- On-Ground Video Walkthrough (Positioned at End of Card) -->
+        <div v-if="sector.videoUrl" class="pt-2">
+          <SiteVideoPlayer
+            :video-url="sector.videoUrl"
+            :title="`${sector.name} — On-Ground Video Tour`"
+            caption="Verified PHA tower elevation, road access, and completed interiors."
+          />
         </div>
       </div>
 

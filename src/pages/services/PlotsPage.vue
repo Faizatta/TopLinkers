@@ -724,15 +724,6 @@
 
         <!-- Scrollable Modal Body -->
         <div class="p-5 sm:p-6 overflow-y-auto space-y-5 text-xs text-slate-700">
-          <!-- Reference Site & Drone Video Walkthrough (Optional: choice to display based on backend videoUrl) -->
-          <div v-if="selectedPlotVideo">
-            <SiteVideoPlayer
-              :video-url="selectedPlotVideo"
-              :title="`${selectedPlot.title} — On-Ground Site &amp; Drone Tour`"
-              caption="Live demarcated land, access boulevards, and development progress."
-            />
-          </div>
-
           <!-- Overview Description -->
           <div>
             <h4 class="font-extrabold text-[#0F2A44] text-sm uppercase tracking-wide mb-1.5">Society Overview</h4>
@@ -784,6 +775,15 @@
                 Every plot is physically inspected with boundary pillars demarcated. We coordinate societal transfer, CVT, stamp duty, and computer transfer slips directly with official management.
               </p>
             </div>
+          </div>
+
+          <!-- Reference Site & Drone Video Walkthrough (Positioned at End of Card) -->
+          <div v-if="selectedPlotVideo" class="pt-2">
+            <SiteVideoPlayer
+              :video-url="selectedPlotVideo"
+              :title="`${selectedPlot.title} — On-Ground Site &amp; Drone Tour`"
+              caption="Live demarcated land, access boulevards, and development progress."
+            />
           </div>
         </div>
 
