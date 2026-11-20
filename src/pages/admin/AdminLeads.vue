@@ -552,7 +552,7 @@ const getInitials = (name) => {
 }
 
 const cleanPhone = (phone) => {
-  if (!phone) return '923235963375'
+  if (!phone) return '923349522157'
   const digits = phone.replace(/[^0-9]/g, '')
   if (digits.startsWith('0')) return '92' + digits.substring(1)
   return digits

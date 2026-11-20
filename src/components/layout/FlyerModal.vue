@@ -147,7 +147,7 @@
 
                 <div class="pt-2">
                   <a
-                    href="https://wa.me/923235963375?text=Hello%20TopLinkers,%20I%20am%20inquiring%20about%20PHA%20Flats%20Sector%20I-12%20and%20I-16."
+                    href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20inquiring%20about%20PHA%20Flats%20Sector%20I-12%20and%20I-16."
                     target="_blank"
                     rel="noopener noreferrer"
                     class="w-full py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold rounded flex items-center justify-center gap-1.5 shadow"

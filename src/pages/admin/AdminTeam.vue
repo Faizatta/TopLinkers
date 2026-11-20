@@ -256,7 +256,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Phone / WhatsApp *</label>
-              <input v-model="form.phone" type="text" required class="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs" placeholder="0323-5963375" />
+              <input v-model="form.phone" type="text" required class="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs" placeholder="0334-9522157" />
             </div>
             <div>
               <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email</label>
@@ -343,7 +343,7 @@ const form = ref({
   category: 'agent',
   tag: 'Senior Agent',
   experience: '5+ Years',
-  phone: '0323-5963375',
+  phone: '0334-9522157',
   email: 'toplinkers69@gmail.com',
   photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80',
   bio: '',
@@ -384,7 +384,7 @@ const openModalForCategory = (category) => {
     category,
     tag: category === 'ceo' ? 'Founder & CEO' : category === 'engineer' ? 'PEC Registered Engineer' : 'Verified Consultant',
     experience: '7+ Years',
-    phone: '0323-5963375',
+    phone: '0334-9522157',
     email: 'toplinkers69@gmail.com',
     photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80',
     bio: '',

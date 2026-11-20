@@ -46,12 +46,12 @@
             </router-link>
 
             <a
-              href="https://wa.me/923235963375"
+              href="https://wa.me/923349522157"
               target="_blank"
               rel="noopener noreferrer"
               class="px-6 py-3.5 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold uppercase tracking-wider rounded-[4px] shadow transition-colors flex items-center gap-2"
             >
-              <span>WhatsApp Us: 0323-5963375</span>
+              <span>WhatsApp Us: 0334-9522157</span>
             </a>
           </div>
         </div>

@@ -280,7 +280,7 @@
                 v-model="newLeadForm.phone" 
                 type="tel" 
                 required 
-                placeholder="0323-5963375" 
+                placeholder="0334-9522157" 
                 class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#16B4E8] focus:ring-2 focus:ring-[#16B4E8]/20"
               />
             </div>

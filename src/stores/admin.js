@@ -484,11 +484,11 @@ export const useAdminStore = defineStore('admin', () => {
         videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
       },
       topCity: {
-        name: 'TopCity-1',
-        tag: 'Airport Metro Link',
-        m5: 'PKR 65 - 90 Lac',
-        m10: 'PKR 1.2 - 2.5 Cr',
-        k1: 'PKR 2.2 - 3.4 Cr',
+        name: 'TopCity-1 Islamabad',
+        tag: 'RDA Approved • 9,081 Kanals • KMKC',
+        m5: 'PKR 55 - 85 Lac',
+        m10: 'PKR 85 Lac - 2.75 Cr',
+        k1: 'PKR 1.80 - 4.00 Cr',
         videoUrl: 'https://www.youtube.com/watch?v=F0f8u84_0c0'
       },
       agg: {

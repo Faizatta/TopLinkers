@@ -467,30 +467,10 @@
                   Side-by-side evaluation of 5 &amp; 10 Marla cash rates, exact location, utilities, and title status.
                 </p>
               </div>
-
-              <!-- Comparison Mode Toggle -->
-              <div class="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 flex-shrink-0 self-start sm:self-auto text-xs font-bold">
-                <button
-                  type="button"
-                  @click="activeCompareView = 'topcity-agg'"
-                  class="px-3 py-1.5 rounded-lg transition-all"
-                  :class="activeCompareView === 'topcity-agg' ? 'bg-[#0F2A44] text-white shadow-xs' : 'text-slate-600 hover:text-[#0F2A44]'"
-                >
-                  TopCity vs AGG
-                </button>
-                <button
-                  type="button"
-                  @click="activeCompareView = 'cash-installments'"
-                  class="px-3 py-1.5 rounded-lg transition-all"
-                  :class="activeCompareView === 'cash-installments' ? 'bg-[#0F2A44] text-white shadow-xs' : 'text-slate-600 hover:text-[#0F2A44]'"
-                >
-                  Cash vs. Installments
-                </button>
-              </div>
             </div>
 
-            <!-- View A: TopCity-1 vs. Airport Green Garden (AGG) Detailed Matrix -->
-            <div v-if="activeCompareView === 'topcity-agg'" class="space-y-4">
+            <!-- TopCity-1 vs. Airport Green Garden (AGG) Detailed Matrix -->
+            <div class="space-y-4">
               <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs border-collapse">
                   <thead>
@@ -510,12 +490,12 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="divide-y divide-slate-100 text-slate-700">
+                  <tbody class="divide-y border-slate-100 text-slate-700">
                     <!-- Location -->
                     <tr class="hover:bg-slate-50/60">
                       <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Location &amp; Access</td>
                       <td class="py-3.5 px-4 border-l border-slate-200 font-semibold text-[#0F2A44]">
-                        Directly on Srinagar Highway opposite Airport Junction (1 min to terminal gate).
+                        Directly on Srinagar Highway &amp; M-1/M-2 Interchange (1 km / 3 mins to Airport Gate &amp; Metro Bus).
                       </td>
                       <td class="py-3.5 px-4 border-l border-slate-200 font-semibold text-[#0F2A44]">
                         Adjoining Airport Cargo boundary wall via Link Road / Fateh Jang (3 mins to Airport).
@@ -526,8 +506,8 @@
                     <tr class="hover:bg-slate-50/60 bg-sky-50/20">
                       <td class="py-3.5 px-4 font-bold text-[#0F2A44]">5 Marla Cash Moqa Rate</td>
                       <td class="py-3.5 px-4 border-l border-slate-200 font-black text-[#16B4E8] text-sm">
-                        PKR 75 Lac &ndash; 95 Lac
-                        <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Ready for immediate house building</span>
+                        PKR 55 Lac &ndash; 85 Lac
+                        <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Demarcated possession in Blocks C, D &amp; E</span>
                       </td>
                       <td class="py-3.5 px-4 border-l border-slate-200 font-black text-emerald-700 text-sm">
                         PKR 48 Lac &ndash; 55 Lac
@@ -539,8 +519,8 @@
                     <tr class="hover:bg-slate-50/60 bg-sky-50/20">
                       <td class="py-3.5 px-4 font-bold text-[#0F2A44]">10 Marla Cash Moqa Rate</td>
                       <td class="py-3.5 px-4 border-l border-slate-200 font-black text-[#16B4E8] text-sm">
-                        PKR 1.35 Cr &ndash; 1.65 Cr
-                        <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Block B / C on-ground possession</span>
+                        PKR 85 Lac &ndash; 2.75 Cr
+                        <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Prime Block B &amp; C avenues, 100% on-ground</span>
                       </td>
                       <td class="py-3.5 px-4 border-l border-slate-200 font-black text-emerald-700 text-sm">
                         PKR 88 Lac &ndash; 1.05 Cr
@@ -552,7 +532,8 @@
                     <tr class="hover:bg-slate-50/60">
                       <td class="py-3.5 px-4 font-bold text-[#0F2A44]">1 Kanal Executive Rate</td>
                       <td class="py-3.5 px-4 border-l border-slate-200 font-bold text-slate-800">
-                        PKR 2.25 Cr &ndash; 3.40 Cr
+                        PKR 1.80 Cr &ndash; 4.00 Cr
+                        <span class="block text-[10px] font-normal text-slate-500 mt-0.5">Inhabited luxury villas &amp; Lake District waterfront</span>
                       </td>
                       <td class="py-3.5 px-4 border-l border-slate-200 font-bold text-slate-800">
                         PKR 1.65 Cr &ndash; 2.10 Cr
@@ -563,7 +544,7 @@
                     <tr class="hover:bg-slate-50/60">
                       <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Utilities &amp; Grid</td>
                       <td class="py-3.5 px-4 border-l border-slate-200 font-medium text-slate-700">
-                        100% Underground electricity cabling, Sui Gas network pipeline active, optical fiber internet.
+                        100% Underground electricity cabling, Sui Gas pipeline active, smart city waste management &amp; high-speed fiber internet.
                       </td>
                       <td class="py-3.5 px-4 border-l border-slate-200 font-medium text-slate-700">
                         Overhead electricity poles installed, groundwater boring available, wide paved roads.
@@ -574,7 +555,7 @@
                     <tr class="hover:bg-slate-50/60">
                       <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Possession &amp; Title</td>
                       <td class="py-3.5 px-4 border-l border-slate-200 font-semibold text-emerald-700">
-                        Immediate Demarcation in Block B &bull; Direct Registry &amp; Societal Transfer
+                        RDA Approved (9,081 Kanals) &bull; CAA &amp; NHA Clearances &bull; Immediate Registry &amp; Transfer
                       </td>
                       <td class="py-3.5 px-4 border-l border-slate-200 font-semibold text-emerald-700">
                         Immediate Physical Possession &bull; Clear Title Letter
@@ -645,43 +626,6 @@
                           View AGG Details &rarr;
                         </button>
                       </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- View B: Cash Ready vs. Installments -->
-            <div v-else class="space-y-4">
-              <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs border-collapse">
-                  <thead>
-                    <tr class="border-b border-gray-200 bg-slate-50 text-[11px] font-black uppercase text-slate-700">
-                      <th class="py-3 px-4">Evaluation Factor</th>
-                      <th class="py-3 px-4 bg-sky-50/50 text-[#0F2A44] border-l border-slate-200">Cash Moqa (TopCity / AGG / PECHS)</th>
-                      <th class="py-3 px-4 bg-emerald-50/40 text-[#0F2A44] border-l border-slate-200">Installments (Faisal Town Phase 2)</th>
-                    </tr>
-                  </thead>
-                  <tbody class="divide-y divide-gray-100 text-slate-700">
-                    <tr>
-                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Possession Status</td>
-                      <td class="py-3.5 px-4 border-l border-slate-200 text-emerald-700 font-bold">100% Immediate Physical On-Ground</td>
-                      <td class="py-3.5 px-4 border-l border-slate-200 text-gray-600">Balloting &bull; Phased Possession</td>
-                    </tr>
-                    <tr>
-                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Payment Structure</td>
-                      <td class="py-3.5 px-4 border-l border-slate-200">100% Cash / Swift Registry Transfer</td>
-                      <td class="py-3.5 px-4 border-l border-slate-200 text-emerald-700 font-bold">20% Down &bull; 18 Easy Quarterly Installments</td>
-                    </tr>
-                    <tr>
-                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Construction Timeline</td>
-                      <td class="py-3.5 px-4 border-l border-slate-200 text-emerald-700 font-bold">Immediate House Construction Permitted</td>
-                      <td class="py-3.5 px-4 border-l border-slate-200">Long-term Investment &bull; Future Residence</td>
-                    </tr>
-                    <tr>
-                      <td class="py-3.5 px-4 font-bold text-[#0F2A44]">Capital Growth Driver</td>
-                      <td class="py-3.5 px-4 border-l border-slate-200">High Occupancy &bull; Established Families</td>
-                      <td class="py-3.5 px-4 border-l border-slate-200 text-emerald-700 font-bold">Rapid Land Value Escalation by Zedem</td>
                     </tr>
                   </tbody>
                 </table>
@@ -944,27 +888,29 @@ const openVideoModal = (key) => {
 
 const plotsData = {
   topcity: {
-    title: 'TopCity-1 Islamabad (Cash Possession Plots)',
-    tag: 'Srinagar Highway • RDA Approved • 100% Cash Ready',
-    location: 'Airport Junction, Srinagar Highway, Islamabad',
+    title: 'TopCity-1 Islamabad (Official KMKC Smart City)',
+    tag: 'Srinagar Highway • 9,081 Kanals • RDA Approved (NOC Clear)',
+    location: 'AAA-Grade Intersection, Srinagar Highway & M-1/M-2 Interchange, Islamabad Airport',
     badge: 'Immediate Demarcation',
     badgeClass: 'bg-[#0F2A44] text-white',
     image: '/images/hero-moqa-plot.webp',
     videoUrl: 'https://www.youtube.com/watch?v=F0f8u84_0c0',
-    description: 'TopCity-1 is an ultra-modern gated community situated directly on Srinagar Highway opposite New Islamabad Airport. Direct physical possession is actively available in Blocks B, C & D with on-ground boundary demarcation, paved carpeted roads, underground electricity, and operational Sui Gas network. Ideal for buyers ready to begin construction immediately.',
+    description: 'TopCity-1 is an RDA-approved master-planned smart community spanning over 9,081 kanals, developed by Kunwar Moeez Khan Constructions (KMKC) and Dynasty Associates. Strategically positioned at the primary junction of Srinagar Highway, M-1 & M-2 Motorways, and the Green Line Metro Bus corridor (1 km / 3 mins from Islamabad Airport Gate). Features 100% operational underground utilities, smart traffic control, automated waste systems, the landmark Masjid Khulfa-e-Rashideen, Lake District waterfront, and ready on-ground possession across Blocks A, B, C, D, E, F & H for immediate construction.',
     rates: [
-      { size: '5 Marla (25x50)', terms: '100% Upfront Cash Possession', price: 'PKR 75 - 95 Lac' },
-      { size: '10 Marla (35x70)', terms: 'Immediate Demarcation & Transfer', price: 'PKR 1.35 - 1.65 Cr' },
-      { size: '1 Kanal (50x90)', terms: 'Executive / Main Boulevard', price: 'PKR 2.25 - 3.40 Cr' }
+      { size: '5 Marla (25x50)', terms: 'Ready Construction (Blocks C, D, E)', price: 'PKR 55 - 85 Lac' },
+      { size: '10 Marla (35x65)', terms: 'On-Ground Possession & Main Avenue', price: 'PKR 85 Lac - 2.75 Cr' },
+      { size: '1 Kanal (50x90)', terms: 'Inhabited Block B Luxury & Lake District', price: 'PKR 1.80 - 4.00 Cr' },
+      { size: '2 Kanal (75x120)', terms: 'Signature Executive Mansions', price: 'PKR 3.80 - 7.50 Cr' },
+      { size: '5 Marla Commercial', terms: 'Central Business Hub & Main Blvd', price: 'PKR 3.50 - 6.50 Cr' }
     ],
     features: [
-      'Underground Electricity & Gas Pipeline Active',
-      'Direct Srinagar Highway & M-1/M-2 Motorway Interchange',
-      'Immediate House Construction Permitted',
-      '24/7 Gated Security & Rapid Societal Transfer',
-      'Lush Community Parks & Commercial Business Hub'
+      'Approved by RDA (NOC No. RDA/MP&TE/F-PHS-TAX-07/145), CAA, NHA & ICT',
+      '100% Underground Electricity, Sui Gas Active & High-Speed Fiber Internet',
+      'Masjid Khulfa-e-Rashideen, Lake District Waterfront & Themed Parks',
+      'Direct Srinagar Highway, M-1/M-2 Interchange & Metro Bus Terminal',
+      '24/7 Block-Level Maintenance Offices & Rapid Verified Computerized Transfer'
     ],
-    whatsappMsg: 'Hello TopLinkers, I am inquiring about TopCity-1 Cash Possession plots (5 Marla, 10 Marla, 1 Kanal) and would like an on-ground site visit.',
+    whatsappMsg: 'Hello TopLinkers, I am inquiring about TopCity-1 plots (5 Marla, 10 Marla, 1 Kanal, 2 Kanal or Commercial) based on the latest 2026 rates.',
     listingsLink: '/listings?search=TopCity'
   },
   agg: {

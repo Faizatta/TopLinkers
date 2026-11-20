@@ -61,7 +61,7 @@ The layout follows the clean luxury property architecture inspired by the **Houz
 - Property specifications (Beds, Baths, Area in Marla & Sq Ft, Society, NOC Status).
 - Direct PHA Floor Plan button triggering the user-uploaded architectural drawing popup.
 - Localized PKR Mortgage & Installment Financing Calculator.
-- Sticky Agent Card with direct **WhatsApp link** (`wa.me/923235963375`).
+- Sticky Agent Card with direct **WhatsApp link** (`wa.me/923349522157`).
 - Similar listings carousel.
 
 ### 4. About Page (`/about`)
