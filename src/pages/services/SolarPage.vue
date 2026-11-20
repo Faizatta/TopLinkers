@@ -62,29 +62,41 @@
             </a>
 
             <!-- Sleek Compact Category Switcher Tabs -->
-            <div class="w-full sm:w-auto grid grid-cols-2 sm:inline-flex items-stretch p-1 bg-black/60 backdrop-blur-md rounded-xl border border-white/20 shadow-lg gap-1 sm:h-[48px]">
+            <div class="w-full sm:w-auto grid grid-cols-3 sm:inline-flex items-stretch p-1 bg-black/60 backdrop-blur-md rounded-xl border border-white/20 shadow-lg gap-1 sm:h-[48px]">
               <button
                 type="button"
                 @click="switchSolarTab('ongrid')"
-                class="w-full sm:w-auto h-full py-2.5 sm:py-0 px-3 sm:px-5 rounded-lg text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-2 whitespace-nowrap"
+                class="w-full sm:w-auto h-full py-2 sm:py-0 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap"
                 :class="activeSolarTab === 'ongrid'
                   ? 'bg-[#16B4E8] text-[#071E33] shadow-md ring-1 ring-white/60'
                   : 'text-slate-300 hover:text-white hover:bg-white/10'"
               >
                 <span v-if="activeSolarTab === 'ongrid'" class="w-2 h-2 rounded-full bg-[#071E33] animate-pulse"></span>
-                <span>On-Grid Net Meter</span>
+                <span>1. Grid-Tied</span>
               </button>
 
               <button
                 type="button"
                 @click="switchSolarTab('hybrid')"
-                class="w-full sm:w-auto h-full py-2.5 sm:py-0 px-3 sm:px-5 rounded-lg text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-2 whitespace-nowrap"
+                class="w-full sm:w-auto h-full py-2 sm:py-0 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap"
                 :class="activeSolarTab === 'hybrid'
                   ? 'bg-emerald-500 text-white shadow-md ring-1 ring-white/60'
                   : 'text-slate-300 hover:text-white hover:bg-white/10'"
               >
                 <span v-if="activeSolarTab === 'hybrid'" class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                <span>Hybrid + Storage</span>
+                <span>2. Hybrid Solar</span>
+              </button>
+
+              <button
+                type="button"
+                @click="switchSolarTab('bess')"
+                class="w-full sm:w-auto h-full py-2 sm:py-0 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap"
+                :class="activeSolarTab === 'bess'
+                  ? 'bg-amber-500 text-white shadow-md ring-1 ring-white/60'
+                  : 'text-slate-300 hover:text-white hover:bg-white/10'"
+              >
+                <span v-if="activeSolarTab === 'bess'" class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                <span>3. Battery Storage</span>
               </button>
             </div>
           </div>
@@ -202,21 +214,22 @@
 
             <!-- 3 Architectural Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-              <!-- Card 1: On-Grid System -->
+              <!-- Card 1: Grid-Tied Solar Solution -->
               <div
-                class="p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between space-y-4"
-                :class="activeSolarTab === 'ongrid' ? 'border-[#16B4E8] bg-sky-50/30 ring-2 ring-[#16B4E8]/20' : 'border-gray-200 bg-white hover:border-gray-300'"
+                @click="switchSolarTab('ongrid')"
+                class="p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between space-y-4 cursor-pointer select-none"
+                :class="activeSolarTab === 'ongrid' ? 'border-[#16B4E8] bg-sky-50/40 ring-2 ring-[#16B4E8] shadow-md -translate-y-0.5' : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'"
               >
                 <div>
                   <div class="flex items-center justify-between mb-3">
                     <span class="w-10 h-10 rounded-xl bg-sky-100 text-[#16B4E8] flex items-center justify-center font-black">
                       <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5zm6 14.5l-6 3.75-6-3.75V8.5l6-3.75 6 3.75v8z"/></svg>
                     </span>
-                    <span class="text-[10px] font-black uppercase tracking-wider text-[#16B4E8] bg-sky-50 px-2 py-0.5 rounded-full">
+                    <span class="text-[10px] font-black uppercase tracking-wider text-[#16B4E8] bg-sky-50 px-2 py-0.5 rounded-full border border-sky-100">
                       Most Popular
                     </span>
                   </div>
-                  <h3 class="font-extrabold text-[#0F2A44] text-base mb-1">On-Grid (Net-Metered)</h3>
+                  <h3 class="font-extrabold text-[#0F2A44] text-base mb-1">1. Grid-Tied Solar Solution</h3>
                   <p class="text-xs text-slate-600 leading-relaxed mb-3">
                     Seamless synchronization with the WAPDA/IESCO grid. Surplus daytime units export through a bi-directional green meter to offset nighttime usage.
                   </p>
@@ -235,28 +248,33 @@
                     </li>
                   </ul>
                 </div>
-                <div class="pt-3 border-t border-gray-100">
+                <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
                   <span class="text-[11px] font-bold text-[#0F2A44] block">Best for: Homes &amp; Offices with reliable grid</span>
+                  <span v-if="activeSolarTab === 'ongrid'" class="text-[10px] font-black uppercase text-[#16B4E8] flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#16B4E8] animate-pulse"></span>
+                    Selected
+                  </span>
                 </div>
               </div>
 
-              <!-- Card 2: Hybrid + Battery Storage -->
+              <!-- Card 2: Hybrid Solar Solution -->
               <div
-                class="p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between space-y-4"
-                :class="activeSolarTab === 'hybrid' ? 'border-emerald-500 bg-emerald-50/30 ring-2 ring-emerald-500/20' : 'border-gray-200 bg-white hover:border-gray-300'"
+                @click="switchSolarTab('hybrid')"
+                class="p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between space-y-4 cursor-pointer select-none"
+                :class="activeSolarTab === 'hybrid' ? 'border-emerald-500 bg-emerald-50/40 ring-2 ring-emerald-500 shadow-md -translate-y-0.5' : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'"
               >
                 <div>
                   <div class="flex items-center justify-between mb-3">
                     <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-black">
                       <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.88 0-.33-.75-.31-.78C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15-5.9 10.34z"/></svg>
                     </span>
-                    <span class="text-[10px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+                    <span class="text-[10px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
                       24/7 Resilience
                     </span>
                   </div>
-                  <h3 class="font-extrabold text-[#0F2A44] text-base mb-1">Hybrid + Storage (BESS)</h3>
+                  <h3 class="font-extrabold text-[#0F2A44] text-base mb-1">2. Hybrid Solar Solution</h3>
                   <p class="text-xs text-slate-600 leading-relaxed mb-3">
-                    Combines solar generation, grid net metering, and advanced High-Voltage Lithium (LiFePO4) battery storage for zero blackout interruptions.
+                    Combines solar generation, grid net metering, and automated Lithium (LiFePO4) battery storage for zero blackout interruptions and round-the-clock power.
                   </p>
                   <ul class="text-xs text-slate-600 space-y-1.5 border-t border-gray-100 pt-3">
                     <li class="flex items-start gap-1.5">
@@ -273,46 +291,217 @@
                     </li>
                   </ul>
                 </div>
-                <div class="pt-3 border-t border-gray-100">
-                  <span class="text-[11px] font-bold text-[#0F2A44] block">Best for: Executive villas, critical clinics, data nodes</span>
+                <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
+                  <span class="text-[11px] font-bold text-[#0F2A44] block">Best for: Executive villas, critical clinics &amp; labs</span>
+                  <span v-if="activeSolarTab === 'hybrid'" class="text-[10px] font-black uppercase text-emerald-600 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Selected
+                  </span>
                 </div>
               </div>
 
-              <!-- Card 3: Commercial & Industrial Solar -->
-              <div class="p-5 rounded-2xl border border-gray-200 bg-white hover:border-gray-300 transition-all duration-200 flex flex-col justify-between space-y-4">
+              <!-- Card 3: Battery Energy Storage System (BESS) -->
+              <div
+                @click="switchSolarTab('bess')"
+                class="p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between space-y-4 cursor-pointer select-none"
+                :class="activeSolarTab === 'bess' ? 'border-amber-500 bg-amber-50/40 ring-2 ring-amber-500 shadow-md -translate-y-0.5' : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'"
+              >
                 <div>
                   <div class="flex items-center justify-between mb-3">
-                    <span class="w-10 h-10 rounded-xl bg-slate-100 text-[#0F2A44] flex items-center justify-center font-black">
-                      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
+                    <span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-black">
+                      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M16 20H8V6h8v14zm-3-18h-2c-.55 0-1 .45-1 1v1h4V3c0-.55-.45-1-1-1zm5 4h-1v15c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1V6H5c-.55 0-1 .45-1 1v14c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V7c0-.55-.45-1-1-1z"/></svg>
                     </span>
-                    <span class="text-[10px] font-black uppercase tracking-wider text-[#0F2A44] bg-slate-100 px-2 py-0.5 rounded-full">
-                      High Return
+                    <span class="text-[10px] font-black uppercase tracking-wider text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-100">
+                      High Capacity BESS
                     </span>
                   </div>
-                  <h3 class="font-extrabold text-[#0F2A44] text-base mb-1">Commercial &amp; Industrial</h3>
+                  <h3 class="font-extrabold text-[#0F2A44] text-base mb-1">3. Battery Energy Storage System</h3>
                   <p class="text-xs text-slate-600 leading-relaxed mb-3">
-                    Turnkey EPC engineering for plazas, factories, schools, and hospitals (50kW to 1MW+). Offsets high commercial tariffs and protects operational margins.
+                    High-voltage modular Lithium (LiFePO4) BESS units for residential, commercial &amp; industrial energy independence, microgrid support, and heavy load backup.
                   </p>
                   <ul class="text-xs text-slate-600 space-y-1.5 border-t border-gray-100 pt-3">
                     <li class="flex items-start gap-1.5">
                       <span class="text-emerald-500 font-bold">&check;</span>
-                      <span>High-voltage HT interconnection &amp; transformer coordination</span>
+                      <span>6,000+ deep discharge cycles with smart BMS</span>
                     </li>
                     <li class="flex items-start gap-1.5">
                       <span class="text-emerald-500 font-bold">&check;</span>
-                      <span>Substantial corporate tax depreciation write-offs</span>
+                      <span>Modular rack expansion from 10kWh to 200kWh+</span>
                     </li>
                     <li class="flex items-start gap-1.5">
                       <span class="text-emerald-500 font-bold">&check;</span>
-                      <span>PPA / Bank Green Refinancing facilitation</span>
+                      <span>Peak load shifting &amp; generator diesel replacement</span>
                     </li>
                   </ul>
                 </div>
-                <div class="pt-3 border-t border-gray-100">
-                  <span class="text-[11px] font-bold text-[#0F2A44] block">Best for: Plazas, factories, colleges, warehouses</span>
+                <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
+                  <span class="text-[11px] font-bold text-[#0F2A44] block">Best for: Plazas, hospitals, data centers &amp; estates</span>
+                  <span v-if="activeSolarTab === 'bess'" class="text-[10px] font-black uppercase text-amber-600 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                    Selected
+                  </span>
                 </div>
               </div>
             </div>
+
+            <!-- Dynamic Detailed Architecture Spotlight (Reveals on Click) -->
+            <transition name="fade" mode="out-in">
+              <!-- Detail 1: Grid-Tied Solar Solution -->
+              <div
+                v-if="activeSolarTab === 'ongrid'"
+                key="ongrid-details"
+                class="p-5 sm:p-7 rounded-2xl bg-gradient-to-br from-sky-50/80 via-white to-blue-50/50 border border-[#16B4E8]/40 shadow-sm space-y-5"
+              >
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-sky-100 pb-4">
+                  <div>
+                    <span class="text-[10px] font-black uppercase tracking-wider text-[#16B4E8] bg-sky-100/80 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5">
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#16B4E8] animate-pulse"></span>
+                      SYSTEM SPECIFICATIONS &bull; ARCHITECTURE 01
+                    </span>
+                    <h4 class="text-lg sm:text-xl font-black text-[#0F2A44] mt-1.5">
+                      Grid-Tied (On-Grid) Solar Solution with Net Metering
+                    </h4>
+                    <p class="text-xs text-slate-500 mt-0.5">
+                      Direct grid interconnection with bidirectional green meter export to slash WAPDA bills to zero.
+                    </p>
+                  </div>
+                  <a
+                    href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20a%20Grid-Tied%20Solar%20Solution%20with%20IESCO%20Net%20Metering."
+                    target="_blank"
+                    class="self-start sm:self-center px-4 py-2 bg-[#16B4E8] hover:bg-[#0ea5e9] text-[#071E33] text-xs font-black uppercase tracking-wider rounded-xl shadow-sm transition-all flex items-center gap-1.5 whitespace-nowrap"
+                  >
+                    <span>Request On-Grid Quote &rarr;</span>
+                  </a>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div class="bg-white p-4 rounded-xl border border-sky-100 shadow-xs">
+                    <span class="text-[10px] font-bold uppercase text-slate-400 block">How It Works</span>
+                    <p class="text-xs text-slate-700 mt-1.5 leading-relaxed">
+                      Generates high solar power during daytime to run domestic/commercial loads directly. Excess solar units are pushed to WAPDA via bidirectional green meter, turning the electricity meter backwards.
+                    </p>
+                  </div>
+                  <div class="bg-white p-4 rounded-xl border border-sky-100 shadow-xs">
+                    <span class="text-[10px] font-bold uppercase text-slate-400 block">Core Equipment</span>
+                    <ul class="text-xs text-slate-700 mt-1.5 space-y-1">
+                      <li>&bull; Tier-1 N-Type TOPCon bifacial panels (580W – 620W)</li>
+                      <li>&bull; Three-phase string inverters (Huawei, Sungrow, Growatt)</li>
+                      <li>&bull; Lightning arrestors, SPD protection &amp; earthing bores</li>
+                    </ul>
+                  </div>
+                  <div class="bg-white p-4 rounded-xl border border-sky-100 shadow-xs">
+                    <span class="text-[10px] font-bold uppercase text-slate-400 block">ROI &amp; Payback</span>
+                    <p class="text-xs text-slate-700 mt-1.5 leading-relaxed">
+                      <strong>2.2 to 3.0 Years Payback</strong>. Because there is zero battery cost, 100% of capital investment directly offsets WAPDA billing units at peak rates (PKR 75+/unit).
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Detail 2: Hybrid Solar Solution -->
+              <div
+                v-else-if="activeSolarTab === 'hybrid'"
+                key="hybrid-details"
+                class="p-5 sm:p-7 rounded-2xl bg-gradient-to-br from-emerald-50/80 via-white to-green-50/50 border border-emerald-400/40 shadow-sm space-y-5"
+              >
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-emerald-100 pb-4">
+                  <div>
+                    <span class="text-[10px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-100/80 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      SYSTEM SPECIFICATIONS &bull; ARCHITECTURE 02
+                    </span>
+                    <h4 class="text-lg sm:text-xl font-black text-[#0F2A44] mt-1.5">
+                      Hybrid Solar Solution (Solar + Grid Net Metering + Energy Storage)
+                    </h4>
+                    <p class="text-xs text-slate-500 mt-0.5">
+                      Round-the-clock power security combining net-meter export with intelligent lithium battery reserve.
+                    </p>
+                  </div>
+                  <a
+                    href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20a%20Hybrid%20Solar%20Solution%20with%20Battery%20Storage."
+                    target="_blank"
+                    class="self-start sm:self-center px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-sm transition-all flex items-center gap-1.5 whitespace-nowrap"
+                  >
+                    <span>Request Hybrid Quote &rarr;</span>
+                  </a>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div class="bg-white p-4 rounded-xl border border-emerald-100 shadow-xs">
+                    <span class="text-[10px] font-bold uppercase text-slate-400 block">Dual Benefit Mode</span>
+                    <p class="text-xs text-slate-700 mt-1.5 leading-relaxed">
+                      Gives the complete net-metering bill reduction of an on-grid system while keeping a smart lithium battery fully charged to power your ACs, fans, lights, and appliances instantly during grid outages.
+                    </p>
+                  </div>
+                  <div class="bg-white p-4 rounded-xl border border-emerald-100 shadow-xs">
+                    <span class="text-[10px] font-bold uppercase text-slate-400 block">Core Equipment</span>
+                    <ul class="text-xs text-slate-700 mt-1.5 space-y-1">
+                      <li>&bull; Tier-1 N-Type TOPCon bifacial modules</li>
+                      <li>&bull; Smart Hybrid Inverters (Deye, Solis, GoodWe, Invt)</li>
+                      <li>&bull; High-Voltage Lithium (LiFePO4) 10-year warranty batteries</li>
+                    </ul>
+                  </div>
+                  <div class="bg-white p-4 rounded-xl border border-emerald-100 shadow-xs">
+                    <span class="text-[10px] font-bold uppercase text-slate-400 block">10ms UPS Switchover</span>
+                    <p class="text-xs text-slate-700 mt-1.5 leading-relaxed">
+                      Microsecond automatic transfer prevents computers, routers, and medical appliances from resetting when grid fails. Eliminates noisy, high-fuel diesel/gas generators.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Detail 3: Battery Energy Storage System (BESS) -->
+              <div
+                v-else-if="activeSolarTab === 'bess'"
+                key="bess-details"
+                class="p-5 sm:p-7 rounded-2xl bg-gradient-to-br from-amber-50/80 via-white to-orange-50/50 border border-amber-400/40 shadow-sm space-y-5"
+              >
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-amber-100 pb-4">
+                  <div>
+                    <span class="text-[10px] font-black uppercase tracking-wider text-amber-700 bg-amber-100/80 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5">
+                      <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                      SYSTEM SPECIFICATIONS &bull; ARCHITECTURE 03
+                    </span>
+                    <h4 class="text-lg sm:text-xl font-black text-[#0F2A44] mt-1.5">
+                      Battery Energy Storage System (BESS) &bull; High-Capacity Lithium Racks
+                    </h4>
+                    <p class="text-xs text-slate-500 mt-0.5">
+                      High-density modular lithium iron phosphate (LiFePO4) banks for large-scale energy autonomy.
+                    </p>
+                  </div>
+                  <a
+                    href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20a%20Battery%20Energy%20Storage%20System%20(BESS)."
+                    target="_blank"
+                    class="self-start sm:self-center px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-sm transition-all flex items-center gap-1.5 whitespace-nowrap"
+                  >
+                    <span>Consult BESS Engineers &rarr;</span>
+                  </a>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div class="bg-white p-4 rounded-xl border border-amber-100 shadow-xs">
+                    <span class="text-[10px] font-bold uppercase text-slate-400 block">High-Density Storage</span>
+                    <p class="text-xs text-slate-700 mt-1.5 leading-relaxed">
+                      Custom server-rack modular lithium iron phosphate (LiFePO4) energy banks configured from 10kWh to 200kWh+. Engineered for high sustained discharge without thermal risk.
+                    </p>
+                  </div>
+                  <div class="bg-white p-4 rounded-xl border border-amber-100 shadow-xs">
+                    <span class="text-[10px] font-bold uppercase text-slate-400 block">Intelligent BMS Management</span>
+                    <ul class="text-xs text-slate-700 mt-1.5 space-y-1">
+                      <li>&bull; 6,000+ deep cycles at 90% Depth of Discharge (DoD)</li>
+                      <li>&bull; Active balancing, cell-level telemetry &amp; temperature regulation</li>
+                      <li>&bull; Compatible with existing solar or standalone grid charging</li>
+                    </ul>
+                  </div>
+                  <div class="bg-white p-4 rounded-xl border border-amber-100 shadow-xs">
+                    <span class="text-[10px] font-bold uppercase text-slate-400 block">Commercial Peak Shaving</span>
+                    <p class="text-xs text-slate-700 mt-1.5 leading-relaxed">
+                      Stores cheap off-peak or solar power and automatically discharges during peak tariff hours, slashing commercial Maximum Demand Indicator (MDI) charges by millions of rupees annually.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </transition>
 
             <!-- Zero Export Feature Callout -->
             <div class="p-4 bg-gradient-to-r from-sky-50 to-blue-50/60 rounded-2xl border border-blue-100 flex items-start gap-3">

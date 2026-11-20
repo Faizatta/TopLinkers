@@ -335,23 +335,19 @@ const staticRoutes = [
       </section>
 
       <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Solar System Architectures &amp; Standard Packages</h2>
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">3 Primary Solar Architectures</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:16px;">
           <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
-            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">5kW Residential System</h3>
-            <p style="font-size:13px;color:#475569;margin-top:4px;">Generates ~600 - 720 units/month. Ideal for 5 Marla and 7 Marla homes running 1x inverter AC, refrigerator, and water pump. Saves PKR 35,000 – 45,000/month.</p>
+            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">1. Grid-Tied Solar Solution</h3>
+            <p style="font-size:13px;color:#475569;margin-top:4px;">Direct grid-connected solar with bi-directional green meter export. Zero battery capital costs, fastest 2.2–3 year ROI, and 100% WAPDA bill elimination.</p>
           </div>
           <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
-            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">10kW Executive Home System</h3>
-            <p style="font-size:13px;color:#475569;margin-top:4px;">Generates ~1,250 - 1,450 units/month. Ideal for 10 Marla and 1 Kanal residences running 2 to 3 inverter ACs. Typical payback is 2.2 to 2.6 years with PKR 80,000 – 105,000/month savings.</p>
+            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">2. Hybrid Solar Solution</h3>
+            <p style="font-size:13px;color:#475569;margin-top:4px;">Combines solar generation, grid net-metering export, and automated Lithium (LiFePO4) storage for 24/7 power resilience and instant 10ms UPS switchover.</p>
           </div>
           <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
-            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">20kW Luxury Villa System</h3>
-            <p style="font-size:13px;color:#475569;margin-top:4px;">Generates ~2,500 - 2,850 units/month. Tailored for double-unit Kanal houses with high daytime consumption, EV charging, and nighttime net-meter export. Saves PKR 160,000 – 220,000/month.</p>
-          </div>
-          <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
-            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">50kW+ Commercial Solar EPC</h3>
-            <p style="font-size:13px;color:#475569;margin-top:4px;">Generates ~6,200 - 7,500 units/month. Eliminates commercial tariff penalties for plazas, hospitals, schools, and manufacturing units with sub-station coordination.</p>
+            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">3. Battery Energy Storage System (BESS)</h3>
+            <p style="font-size:13px;color:#475569;margin-top:4px;">High-density modular lithium rack systems (10kWh to 200kWh+) for commercial peak-shaving, microgrid independence, and generator replacement.</p>
           </div>
         </div>
       </section>
