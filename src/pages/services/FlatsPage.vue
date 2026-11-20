@@ -518,52 +518,92 @@
 
             <!-- Luxury Projects Cards -->
             <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <!-- Harsukh Residencies Nathia Gali -->
-              <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
+              <!-- Card 1: Harsukh Residencies Nathia Gali -->
+              <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col justify-between group">
                 <div>
-                  <div class="h-48 w-full overflow-hidden relative bg-slate-100">
+                  <router-link to="/hr-sukh" class="block h-52 w-full overflow-hidden relative bg-slate-900 group cursor-pointer">
                     <picture>
                       <source srcset="/images/hero-harsukh.webp" type="image/webp" />
-                      <img src="/images/hero-harsukh.jpg" alt="Harsukh Residencies Nathia Gali" class="w-full h-full object-cover" />
+                      <img src="/images/hero-harsukh.jpg" alt="Harsukh Residencies Nathia Gali" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                     </picture>
-                    <span class="absolute top-3 left-3 bg-amber-500 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow">
-                      Alpine Luxury &bull; 8,200 Ft Elevation
-                    </span>
-                  </div>
+                    <div class="absolute top-3 inset-x-3 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
+                      <span class="bg-amber-500 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow-md">
+                        Alpine Luxury &bull; 8,200 Ft
+                      </span>
+                      <span class="bg-[#0F2A44]/90 backdrop-blur-xs text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow-md">
+                        Kuza Gali &bull; Nathia Gali
+                      </span>
+                    </div>
+                  </router-link>
                   <div class="p-6">
-                    <h3 class="font-bold text-[#0F2A44] text-lg mb-2">Harsukh Residencies Nathia Gali</h3>
+                    <h3 class="font-extrabold text-[#0F2A44] text-lg mb-2">
+                      <router-link to="/hr-sukh" class="hover:text-amber-600 transition-colors">
+                        Harsukh Residencies Nathia Gali
+                      </router-link>
+                    </h3>
                     <p class="text-xs text-gray-600 leading-relaxed mb-4">
                       Luxury alpine holiday suites at 8,200 ft elevation. Fully furnished 1 &amp; 2-bed chalets with central heating, infinity balconies overlooking the pine valley, and flexible 3-year installment plans.
                     </p>
-                    <div class="bg-amber-50/70 p-3 rounded-xl border border-amber-100 text-xs text-amber-900 mb-4">
-                      <strong>Tourism Rental Yield:</strong> Optional managed rental pool delivering guaranteed seasonal returns credited directly to your bank account.
+
+                    <div class="space-y-2 text-xs mb-4">
+                      <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+                        <span class="font-bold text-[#0F2A44]">Studio Vacation Suites</span>
+                        <span class="text-amber-700 font-black">PKR 75 Lac <span class="text-[9px] text-slate-400 font-normal">(15% Down)</span></span>
+                      </div>
+                      <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+                        <span class="font-bold text-[#0F2A44]">1-Bed Family Chalet</span>
+                        <span class="text-amber-700 font-black">PKR 1.25 Cr <span class="text-[9px] text-slate-400 font-normal">(36 Monthly)</span></span>
+                      </div>
+                      <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+                        <span class="font-bold text-[#0F2A44]">2-Bed Valley Penthouse</span>
+                        <span class="text-amber-700 font-black">PKR 1.95 Cr <span class="text-[9px] text-slate-400 font-normal">(Rental Pool)</span></span>
+                      </div>
+                    </div>
+
+                    <div class="bg-amber-50/70 p-2.5 rounded-xl border border-amber-100 text-[11px] text-amber-900 mb-2 flex items-start gap-1.5">
+                      <span class="text-amber-600 font-black text-xs">★</span>
+                      <span><strong>Tourism Rental Yield:</strong> Optional managed rental pool delivering guaranteed seasonal returns credited directly to your bank account.</span>
                     </div>
                   </div>
                 </div>
-                <div class="p-6 pt-0">
+                <div class="p-6 pt-0 flex items-center gap-2">
                   <router-link
                     to="/hr-sukh"
-                    class="block w-full text-center py-3 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs uppercase rounded-xl transition shadow-sm"
+                    class="flex-1 text-center py-3 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs uppercase rounded-xl transition shadow-sm"
                   >
                     Explore Harsukh Suites &rarr;
                   </router-link>
+                  <a
+                    href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20Harsukh%20Residencies%20Nathia%20Gali%20Flats"
+                    target="_blank"
+                    class="px-3.5 py-3 bg-slate-100 hover:bg-slate-200 text-[#0F2A44] font-bold text-xs uppercase rounded-xl text-center transition"
+                    title="Chat on WhatsApp"
+                  >
+                    WhatsApp
+                  </a>
                 </div>
               </div>
 
-              <!-- Banu Hafeez Luxury Suites -->
-              <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
+              <!-- Card 2: Banu Hafeez Luxury Suites -->
+              <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col justify-between group">
                 <div>
-                  <div class="h-48 w-full overflow-hidden relative bg-slate-900">
-                    <img src="/images/banu-hafeez-hero.webp" alt="Banu Hafeez Luxury Apartments TopCity-1" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                    <span class="absolute top-3 left-3 bg-[#0F2A44] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow">
-                      15% Booking &bull; 3-Year Plan
-                    </span>
-                    <span class="absolute top-3 right-3 bg-amber-400 text-[#0F2A44] text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
-                      17-Storey Tower
-                    </span>
-                  </div>
+                  <router-link to="/featured-building" class="block h-52 w-full overflow-hidden relative bg-slate-900 group cursor-pointer">
+                    <img src="/images/banu-hafeez/bh-hero.webp" alt="Banu Hafeez Luxury Apartments TopCity-1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    <div class="absolute top-3 inset-x-3 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
+                      <span class="bg-[#0F2A44]/95 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow-md backdrop-blur-xs">
+                        15% Booking &bull; 3-Yr Plan
+                      </span>
+                      <span class="bg-amber-400 text-[#0F2A44] text-[9px] font-black uppercase px-2 py-0.5 rounded shadow-md">
+                        17-Storey Tower
+                      </span>
+                    </div>
+                  </router-link>
                   <div class="p-6">
-                    <h3 class="font-bold text-[#0F2A44] text-lg mb-2">Banu Hafeez Luxury Apartments</h3>
+                    <h3 class="font-extrabold text-[#0F2A44] text-lg mb-2">
+                      <router-link to="/featured-building" class="hover:text-[#16B4E8] transition-colors">
+                        Banu Hafeez Luxury Apartments
+                      </router-link>
+                    </h3>
                     <p class="text-xs text-gray-600 leading-relaxed mb-4">
                       Approved 17-storey landmark by Waheed Group of Companies in TopCity-1 (15 mins to Airport). Featuring swimming pool, gym, 2 basements parking (281 cars), servant quarters, and 2-year possession.
                     </p>
@@ -581,32 +621,50 @@
                         <span class="text-[#16B4E8] font-black">PKR 33.86M <span class="text-[9px] text-slate-400 font-normal">(5.07M down)</span></span>
                       </div>
                     </div>
+                    <div class="bg-blue-50/70 p-2.5 rounded-xl border border-blue-100 text-[11px] text-[#0F2A44] mb-2 flex items-start gap-1.5">
+                      <span class="text-[#16B4E8] font-black text-xs">★</span>
+                      <span><strong>Executive Amenities:</strong> 2-Level Basement Parking, Dedicated High-Speed Lifts, Gym &amp; Swimming Pool.</span>
+                    </div>
                   </div>
                 </div>
-                <div class="p-6 pt-0">
+                <div class="p-6 pt-0 flex items-center gap-2">
                   <router-link
                     to="/featured-building"
-                    class="block w-full text-center py-3 bg-[#0F2A44] hover:bg-[#16B4E8] text-white font-bold text-xs uppercase rounded-xl transition shadow-sm"
+                    class="flex-1 text-center py-3 bg-[#0F2A44] hover:bg-[#16B4E8] text-white font-bold text-xs uppercase rounded-xl transition shadow-sm"
                   >
-                    Explore Banu Hafeez Project &rarr;
+                    Explore Banu Hafeez &rarr;
                   </router-link>
+                  <a
+                    href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20Banu%20Hafeez%20Flats%20Cash%20and%20Installments"
+                    target="_blank"
+                    class="px-3.5 py-3 bg-slate-100 hover:bg-slate-200 text-[#0F2A44] font-bold text-xs uppercase rounded-xl text-center transition"
+                    title="Chat on WhatsApp"
+                  >
+                    WhatsApp
+                  </a>
                 </div>
               </div>
 
-              <!-- Faisal Heights Luxury Apartments (Zedem International) -->
-              <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
+              <!-- Card 3: Faisal Heights Luxury Apartments (Zedem International) -->
+              <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col justify-between group">
                 <div>
-                  <div class="h-48 w-full overflow-hidden relative bg-slate-900">
-                    <img src="/images/faisal-heights/fh-building.webp" alt="Faisal Heights Luxury Apartments" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                    <span class="absolute top-3 left-3 bg-[#0F2A44] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow">
-                      NOC Approved &bull; 1M Sq.Ft
-                    </span>
-                    <span class="absolute top-3 right-3 bg-emerald-500 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
-                      Pure Luxury Flats
-                    </span>
-                  </div>
+                  <router-link to="/property/faisal-heights-luxury-executive-apartment" class="block h-52 w-full overflow-hidden relative bg-slate-900 group cursor-pointer">
+                    <img src="/images/faisal-heights/fh-building.webp" alt="Faisal Heights Luxury Apartments" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    <div class="absolute top-3 inset-x-3 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
+                      <span class="bg-[#0F2A44]/95 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow-md backdrop-blur-xs">
+                        NOC Approved &bull; 1M Sq.Ft
+                      </span>
+                      <span class="bg-emerald-600 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow-md">
+                        Pure Luxury Flats
+                      </span>
+                    </div>
+                  </router-link>
                   <div class="p-6">
-                    <h3 class="font-bold text-[#0F2A44] text-lg mb-2">Faisal Heights Luxury Apartments</h3>
+                    <h3 class="font-extrabold text-[#0F2A44] text-lg mb-2">
+                      <router-link to="/property/faisal-heights-luxury-executive-apartment" class="hover:text-emerald-600 transition-colors">
+                        Faisal Heights Luxury Apartments
+                      </router-link>
+                    </h3>
                     <p class="text-xs text-gray-600 leading-relaxed mb-4">
                       Purely luxury residential tower project spanning over 1 Million Sq.Ft by Zedem / Faisal Town. Featuring Studio to 4-Bed lofts with private theater, resident pool, gym, café, rooftop sky garden, and dedicated multi-level parking.
                     </p>
@@ -624,15 +682,26 @@
                         <span class="text-emerald-700 font-black">1,815 – 2,654+ Sq.Ft</span>
                       </div>
                     </div>
+                    <div class="bg-emerald-50/70 p-2.5 rounded-xl border border-emerald-100 text-[11px] text-emerald-900 mb-2 flex items-start gap-1.5">
+                      <span class="text-emerald-600 font-black text-xs">★</span>
+                      <span><strong>Zedem Luxury Signature:</strong> Soundproof Double-Glazed Glass, Private Cinema &amp; Rooftop Sky Garden.</span>
+                    </div>
                   </div>
                 </div>
-                <div class="p-6 pt-0">
-                  <a
-                    href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20inquiring%20about%20Faisal%20Heights%20Luxury%20Apartments%20(Studio,%201-Bed,%202-Bed,%203-Bed%20or%20Loft)."
-                    target="_blank"
-                    class="block w-full text-center py-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs uppercase rounded-xl transition shadow-sm"
+                <div class="p-6 pt-0 flex items-center gap-2">
+                  <router-link
+                    to="/property/faisal-heights-luxury-executive-apartment"
+                    class="flex-1 text-center py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase rounded-xl transition shadow-sm"
                   >
-                    Inquire Faisal Heights on WhatsApp &rarr;
+                    Explore Faisal Heights &rarr;
+                  </router-link>
+                  <a
+                    href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20inquiring%20about%20Faisal%20Heights%20Luxury%20Apartments"
+                    target="_blank"
+                    class="px-3.5 py-3 bg-slate-100 hover:bg-slate-200 text-[#0F2A44] font-bold text-xs uppercase rounded-xl text-center transition"
+                    title="Chat on WhatsApp"
+                  >
+                    WhatsApp
                   </a>
                 </div>
               </div>

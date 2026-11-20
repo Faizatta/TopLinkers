@@ -550,7 +550,11 @@
                 </div>
               </div>
 
-              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors cursor-pointer" @click="openPhaModal('i12')">PHA Official Apartments</h3>
+              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors">
+                <router-link to="/services/apartments-flats?open=i12" class="hover:text-[#16B4E8]">
+                  PHA Official Apartments
+                </router-link>
+              </h3>
               <p class="text-xs text-gray-500 mt-1 leading-relaxed">
                 Pakistan Housing Authority government-allocated flats with verified allotment files, fast CDA transfer, and immediate possession.
               </p>
@@ -616,7 +620,11 @@
                 </div>
               </div>
 
-              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors cursor-pointer" @click="openInstallmentModal('banu-hafeez')">Banu Hafeez Luxury Apartments</h3>
+              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors">
+                <router-link to="/featured-building" class="hover:text-[#16B4E8]">
+                  Banu Hafeez Luxury Apartments
+                </router-link>
+              </h3>
               <p class="text-xs text-gray-500 mt-1 leading-relaxed">
                 Approved 17-storey landmark tower by Waheed Group in TopCity-1, Islamabad (15 min from Airport). 1, 2 &amp; 3 Bed suites on a 3-year flexible installment plan with resident swimming pool, gym &amp; 2 basements parking.
               </p>
@@ -656,13 +664,12 @@
               >
                 View Schedule
               </button>
-              <a
-                href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20Banu%20Hafeez%20Flats%20Cash%20and%20Installments"
-                target="_blank"
-                class="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-[#0F2A44] font-bold text-xs uppercase rounded-xl text-center transition-all"
+              <router-link
+                to="/featured-building"
+                class="px-3.5 py-2.5 bg-gray-100 hover:bg-gray-200 text-[#0F2A44] font-bold text-xs uppercase rounded-xl text-center transition-all"
               >
-                WhatsApp
-              </a>
+                Details &rarr;
+              </router-link>
             </div>
           </div>
 
@@ -693,7 +700,11 @@
                 </div>
               </div>
 
-              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-emerald-600 transition-colors cursor-pointer" @click="openInstallmentModal('faisal-heights')">Faisal Heights Luxury Apartments</h3>
+              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-emerald-600 transition-colors">
+                <router-link to="/property/faisal-heights-luxury-executive-apartment" class="hover:text-emerald-600">
+                  Faisal Heights Luxury Apartments
+                </router-link>
+              </h3>
               <p class="text-xs text-gray-500 mt-1 leading-relaxed">
                 Purely luxury residential tower project spanning over 1 Million Sq.Ft by Zedem / Faisal Town. Studio to 4-Bed Lofts with private theater, pool, gym, café, and rooftop garden.
               </p>
@@ -733,13 +744,12 @@
               >
                 View Schedule
               </button>
-              <a
-                href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20Faisal%20Heights%20Luxury%20Apartments"
-                target="_blank"
-                class="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-[#0F2A44] font-bold text-xs uppercase rounded-xl text-center transition-all"
+              <router-link
+                to="/property/faisal-heights-luxury-executive-apartment"
+                class="px-3.5 py-2.5 bg-gray-100 hover:bg-gray-200 text-[#0F2A44] font-bold text-xs uppercase rounded-xl text-center transition-all"
               >
-                WhatsApp
-              </a>
+                Details &rarr;
+              </router-link>
             </div>
           </div>
 
@@ -770,7 +780,11 @@
                 </div>
               </div>
 
-              <h3 class="text-lg font-extrabold text-white group-hover:text-[#16B4E8] transition-colors cursor-pointer" @click="openInstallmentModal('hrsukh')">Harsukh Residencies</h3>
+              <h3 class="text-lg font-extrabold text-white group-hover:text-[#16B4E8] transition-colors">
+                <router-link to="/hr-sukh" class="hover:text-[#16B4E8]">
+                  Harsukh Residencies
+                </router-link>
+              </h3>
               <p class="text-xs text-gray-300 mt-1 leading-relaxed">
                 Hot selling holiday flats at the highest elevation in Nathia Gali. Designed for family vacations and high-yield tourist rental income.
               </p>
