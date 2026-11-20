@@ -111,7 +111,7 @@
     </div>
 
     <!-- Content Section -->
-    <main class="max-w-[1280px] mx-auto px-4 pb-12 sm:pb-16">
+    <main class="max-w-[1280px] mx-auto px-4 pb-28 sm:pb-24">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <article class="lg:col-span-2 space-y-12">
 
@@ -165,20 +165,22 @@
                       <source srcset="/images/hero-moqa-plot.webp" type="image/webp" />
                       <img src="/images/hero-moqa-plot.jpg" alt="TopCity-1 Cash Possession Plots" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     </picture>
-                    <span class="absolute top-2.5 left-2.5 bg-[#0F2A44] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
-                      Srinagar Highway &bull; RDA Approved
-                    </span>
-                    <!-- Video Badge (Optional: shown only when video is added in backend) -->
-                    <button
-                      v-if="getSocietyVideo('topcity')"
-                      type="button"
-                      @click.stop="openVideoModal('topcity')"
-                      class="absolute top-2.5 right-2.5 bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 transition-transform hover:scale-105 z-10"
-                      title="Watch TopCity-1 Site Video"
-                    >
-                      <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                      <span>▶ Watch Video</span>
-                    </button>
+                    <div class="absolute top-2.5 inset-x-2.5 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
+                      <span class="pointer-events-auto bg-[#0F2A44] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
+                        Srinagar Highway &bull; RDA Approved
+                      </span>
+                      <!-- Video Badge (Optional: shown only when video is added in backend) -->
+                      <button
+                        v-if="getSocietyVideo('topcity')"
+                        type="button"
+                        @click.stop="openVideoModal('topcity')"
+                        class="pointer-events-auto bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 transition-transform hover:scale-105 z-10"
+                        title="Watch TopCity-1 Site Video"
+                      >
+                        <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                        <span>▶ Watch Video</span>
+                      </button>
+                    </div>
                     <span class="absolute bottom-2.5 right-2.5 bg-black/60 backdrop-blur-xs text-white text-[9px] font-bold px-2 py-0.5 rounded">
                       Click for Details &bull; Rates &rarr;
                     </span>
@@ -231,20 +233,22 @@
                       <source srcset="/images/agg/agg-plots-hero.webp" type="image/webp" />
                       <img src="/images/agg/agg-plots-hero.webp" alt="Airport Green Garden Plots" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     </picture>
-                    <span class="absolute top-2.5 left-2.5 bg-[#16B4E8] text-[#0F2A44] text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
-                      Adjacent Airport &bull; RDA Approved
-                    </span>
-                    <!-- Video Badge (Optional: shown only when video is added in backend) -->
-                    <button
-                      v-if="getSocietyVideo('agg')"
-                      type="button"
-                      @click.stop="openVideoModal('agg')"
-                      class="absolute top-2.5 right-2.5 bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 transition-transform hover:scale-105 z-10"
-                      title="Watch AGG Site Video"
-                    >
-                      <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                      <span>▶ Watch Video</span>
-                    </button>
+                    <div class="absolute top-2.5 inset-x-2.5 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
+                      <span class="pointer-events-auto bg-[#16B4E8] text-[#0F2A44] text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
+                        Adjacent Airport &bull; RDA Approved
+                      </span>
+                      <!-- Video Badge (Optional: shown only when video is added in backend) -->
+                      <button
+                        v-if="getSocietyVideo('agg')"
+                        type="button"
+                        @click.stop="openVideoModal('agg')"
+                        class="pointer-events-auto bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 transition-transform hover:scale-105 z-10"
+                        title="Watch AGG Site Video"
+                      >
+                        <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                        <span>▶ Watch Video</span>
+                      </button>
+                    </div>
                     <span class="absolute bottom-2.5 right-2.5 bg-black/60 backdrop-blur-xs text-white text-[9px] font-bold px-2 py-0.5 rounded">
                       Click for Details &bull; Rates &rarr;
                     </span>
@@ -297,20 +301,22 @@
                       <source srcset="/images/hero-construction.webp" type="image/webp" />
                       <img src="/images/hero-construction.jpg" alt="PECHS Islamabad Plots" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     </picture>
-                    <span class="absolute top-2.5 left-2.5 bg-indigo-600 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
-                      Airport Runway &bull; CPEC Hakla
-                    </span>
-                    <!-- Video Badge (Optional: shown only when video is added in backend) -->
-                    <button
-                      v-if="getSocietyVideo('pechs')"
-                      type="button"
-                      @click.stop="openVideoModal('pechs')"
-                      class="absolute top-2.5 right-2.5 bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 transition-transform hover:scale-105 z-10"
-                      title="Watch PECHS Site Video"
-                    >
-                      <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                      <span>▶ Watch Video</span>
-                    </button>
+                    <div class="absolute top-2.5 inset-x-2.5 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
+                      <span class="pointer-events-auto bg-indigo-600 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
+                        Airport Runway &bull; CPEC Hakla
+                      </span>
+                      <!-- Video Badge (Optional: shown only when video is added in backend) -->
+                      <button
+                        v-if="getSocietyVideo('pechs')"
+                        type="button"
+                        @click.stop="openVideoModal('pechs')"
+                        class="pointer-events-auto bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 transition-transform hover:scale-105 z-10"
+                        title="Watch PECHS Site Video"
+                      >
+                        <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                        <span>▶ Watch Video</span>
+                      </button>
+                    </div>
                     <span class="absolute bottom-2.5 right-2.5 bg-black/60 backdrop-blur-xs text-white text-[9px] font-bold px-2 py-0.5 rounded">
                       Click for Details &bull; Rates &rarr;
                     </span>
@@ -375,51 +381,58 @@
               <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                 <div class="md:col-span-5 h-56 rounded-2xl overflow-hidden bg-slate-100 relative">
                   <picture>
-                    <source srcset="/images/hero-moqa-plot.webp" type="image/webp" />
-                    <img src="/images/hero-moqa-plot.jpg" alt="Faisal Town Phase 2 Installments" class="w-full h-full object-cover" />
+                    <source srcset="/images/faisal-town-2/ft2-sector-w-plan.webp" type="image/webp" />
+                    <img src="/images/faisal-town-2/ft2-sector-w-plan.webp" alt="Faisal Town Phase 2 Master Plan & Installments" class="w-full h-full object-cover" />
                   </picture>
-                  <span class="absolute top-3 left-3 bg-emerald-600 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow">
-                    Direct M-2 &bull; Airport Motorway Access
-                  </span>
-                  <!-- Video Badge (Optional: shown only when video is added in backend) -->
-                  <button
-                    v-if="getSocietyVideo('faisal-town')"
-                    type="button"
-                    @click.stop="openVideoModal('faisal-town')"
-                    class="absolute top-3 right-3 bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 transition-transform hover:scale-105 z-10"
-                    title="Watch Faisal Town Phase 2 Earthwork Video"
-                  >
-                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                    <span>▶ Watch Earthwork Video</span>
-                  </button>
+                  <div class="absolute top-3 inset-x-3 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
+                    <span class="pointer-events-auto bg-emerald-600 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow-md">
+                      Direct M-2 &bull; Airport Motorway Access
+                    </span>
+                    <!-- Video Badge (Optional: shown only when video is added in backend) -->
+                    <button
+                      v-if="getSocietyVideo('faisal-town')"
+                      type="button"
+                      @click.stop="openVideoModal('faisal-town')"
+                      class="pointer-events-auto bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 transition-transform hover:scale-105 z-10"
+                      title="Watch Faisal Town Phase 2 Earthwork Video"
+                    >
+                      <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                      <span>▶ Watch Earthwork Video</span>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="md:col-span-7 space-y-4">
                   <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-800">
-                    4.5-Year Installment Plan &bull; 18 Quarterly Installments
+                    4.5-Year Installment Plan &bull; 42 Monthly Installments
                   </div>
                   <h4 class="text-xl sm:text-2xl font-extrabold text-[#0F2A44]">
                     Faisal Town Phase 2 (Zedem International)
                   </h4>
                   <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    Strategically located directly between the Thalian Interchange and the New Islamabad Airport link corridor. Backed by the unmatched development track record of Chaudhry Abdul Majeed.
+                    Strategically located directly between the Thalian Interchange and the New Islamabad Airport link corridor. Purely residential &amp; commercial plots backed by Chaudhry Abdul Majeed.
                   </p>
 
-                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs">
-                    <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
-                      <span class="text-[10px] text-gray-500 block">5.56 Marla (25x50)</span>
-                      <strong class="font-bold text-[#0F2A44]">PKR 27.95 Lac Total</strong>
-                      <span class="text-[10px] text-emerald-600 block mt-0.5">Booking: ~5.95 Lac</span>
+                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                    <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex flex-col justify-between">
+                      <span class="text-[10px] text-gray-500 font-bold block">5.56 Marla (25x50)</span>
+                      <strong class="font-extrabold text-[#0F2A44] block text-xs my-0.5">PKR 39.95 Lac</strong>
+                      <span class="text-[10px] text-emerald-600 block font-medium">Down: PKR 14.75 Lac</span>
                     </div>
-                    <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
-                      <span class="text-[10px] text-gray-500 block">8 Marla (30x60)</span>
-                      <strong class="font-bold text-[#0F2A44]">PKR 38.25 Lac Total</strong>
-                      <span class="text-[10px] text-emerald-600 block mt-0.5">Booking: ~7.25 Lac</span>
+                    <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex flex-col justify-between">
+                      <span class="text-[10px] text-gray-500 font-bold block">8 Marla (30x60)</span>
+                      <strong class="font-extrabold text-[#0F2A44] block text-xs my-0.5">PKR 54.90 Lac</strong>
+                      <span class="text-[10px] text-emerald-600 block font-medium">Down: PKR 19.20 Lac</span>
                     </div>
-                    <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
-                      <span class="text-[10px] text-gray-500 block">10 Marla (35x70)</span>
-                      <strong class="font-bold text-[#0F2A44]">PKR 49.25 Lac Total</strong>
-                      <span class="text-[10px] text-emerald-600 block mt-0.5">Booking: ~8.45 Lac</span>
+                    <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex flex-col justify-between">
+                      <span class="text-[10px] text-gray-500 font-bold block">10.89 Marla (35x70)</span>
+                      <strong class="font-extrabold text-[#0F2A44] block text-xs my-0.5">PKR 72.50 Lac</strong>
+                      <span class="text-[10px] text-emerald-600 block font-medium">Down: PKR 26.30 Lac</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex flex-col justify-between">
+                      <span class="text-[10px] text-gray-500 font-bold block">1 Kanal (50x90)</span>
+                      <strong class="font-extrabold text-[#0F2A44] block text-xs my-0.5">PKR 1.229 Cr</strong>
+                      <span class="text-[10px] text-emerald-600 block font-medium">Down: PKR 43.10 Lac</span>
                     </div>
                   </div>
 
@@ -454,8 +467,8 @@
           </div>
 
           <!-- Dedicated Head-to-Head Comparison: TopCity-1 vs Airport Green Garden (AGG) -->
-          <section class="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200/90 shadow-sm">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 pb-4 border-b border-gray-100">
+          <section class="bg-white p-5 sm:p-8 rounded-3xl border border-gray-200/90 shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5 pb-4 border-b border-gray-100">
               <div>
                 <span class="text-[10px] font-black uppercase tracking-widest text-[#16B4E8] bg-sky-50 px-2.5 py-0.5 rounded-full inline-block mb-1">
                   Airport Corridor Head-to-Head
@@ -469,10 +482,189 @@
               </div>
             </div>
 
-            <!-- TopCity-1 vs. Airport Green Garden (AGG) Detailed Matrix -->
-            <div class="space-y-4">
+            <!-- 1. MOBILE USER-FRIENDLY COMPARISON CARDS (md:hidden) -->
+            <div class="md:hidden space-y-3.5">
+              <!-- Society Identity Headers -->
+              <div class="grid grid-cols-2 gap-2 bg-slate-50 p-2 rounded-2xl border border-slate-200">
+                <div class="bg-white p-2.5 rounded-xl border border-sky-200 text-center shadow-xs">
+                  <span class="inline-block px-1.5 py-0.5 rounded text-[8px] font-black uppercase bg-[#0F2A44] text-white mb-1">
+                    RDA Approved
+                  </span>
+                  <h4 class="font-black text-[#0F2A44] text-xs leading-tight">TopCity-1</h4>
+                  <span class="text-[9px] text-slate-500 block">KMKC Smart City</span>
+                </div>
+
+                <div class="bg-white p-2.5 rounded-xl border border-emerald-200 text-center shadow-xs">
+                  <span class="inline-block px-1.5 py-0.5 rounded text-[8px] font-black uppercase bg-emerald-700 text-white mb-1">
+                    RDA Approved
+                  </span>
+                  <h4 class="font-black text-emerald-900 text-xs leading-tight">Airport Green Garden</h4>
+                  <span class="text-[9px] text-slate-500 block">AGG Pvt Ltd</span>
+                </div>
+              </div>
+
+              <!-- Feature: 5 Marla Cash Moqa Rate -->
+              <div class="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-2xs space-y-2">
+                <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
+                  <span class="text-[11px] font-extrabold text-[#0F2A44] uppercase tracking-wide">
+                    💰 5 Marla Cash Moqa Rate
+                  </span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                  <div class="bg-sky-50/70 p-2.5 rounded-xl border border-sky-100 flex flex-col justify-between">
+                    <span class="text-[9px] font-black uppercase text-[#0F2A44] tracking-wider mb-0.5">TopCity-1</span>
+                    <strong class="text-xs font-black text-[#16B4E8]">PKR 55 &ndash; 85 Lac</strong>
+                    <span class="text-[10px] text-slate-500 mt-1 leading-tight">Demarcated in Blocks C, D &amp; E</span>
+                  </div>
+                  <div class="bg-emerald-50/70 p-2.5 rounded-xl border border-emerald-100 flex flex-col justify-between">
+                    <span class="text-[9px] font-black uppercase text-emerald-800 tracking-wider mb-0.5">AGG</span>
+                    <strong class="text-xs font-black text-emerald-700">PKR 48 &ndash; 55 Lac</strong>
+                    <span class="text-[10px] text-slate-500 mt-1 leading-tight">Budget entry ticket on airport belt</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Feature: 10 Marla Cash Moqa Rate -->
+              <div class="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-2xs space-y-2">
+                <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
+                  <span class="text-[11px] font-extrabold text-[#0F2A44] uppercase tracking-wide">
+                    💎 10 Marla Cash Moqa Rate
+                  </span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                  <div class="bg-sky-50/70 p-2.5 rounded-xl border border-sky-100 flex flex-col justify-between">
+                    <span class="text-[9px] font-black uppercase text-[#0F2A44] tracking-wider mb-0.5">TopCity-1</span>
+                    <strong class="text-xs font-black text-[#16B4E8]">PKR 85 Lac &ndash; 2.75 Cr</strong>
+                    <span class="text-[10px] text-slate-500 mt-1 leading-tight">Prime Block B &amp; C avenues, 100% on-ground</span>
+                  </div>
+                  <div class="bg-emerald-50/70 p-2.5 rounded-xl border border-emerald-100 flex flex-col justify-between">
+                    <span class="text-[9px] font-black uppercase text-emerald-800 tracking-wider mb-0.5">AGG</span>
+                    <strong class="text-xs font-black text-emerald-700">PKR 88 Lac &ndash; 1.05 Cr</strong>
+                    <span class="text-[10px] text-slate-500 mt-1 leading-tight">Solid demarcated land &amp; pillars</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Feature: 1 Kanal Executive Rate -->
+              <div class="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-2xs space-y-2">
+                <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
+                  <span class="text-[11px] font-extrabold text-[#0F2A44] uppercase tracking-wide">
+                    🏡 1 Kanal Executive Rate
+                  </span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                  <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+                    <span class="text-[9px] font-black uppercase text-[#0F2A44] tracking-wider mb-0.5">TopCity-1</span>
+                    <strong class="text-xs font-black text-slate-800">PKR 1.80 &ndash; 4.00 Cr</strong>
+                    <span class="text-[10px] text-slate-500 mt-1 leading-tight">Inhabited villas &amp; Lake District</span>
+                  </div>
+                  <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+                    <span class="text-[9px] font-black uppercase text-emerald-800 tracking-wider mb-0.5">AGG</span>
+                    <strong class="text-xs font-black text-slate-800">PKR 1.65 &ndash; 2.10 Cr</strong>
+                    <span class="text-[10px] text-slate-500 mt-1 leading-tight">Scenic wide avenue plots</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Feature: Location & Access -->
+              <div class="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-2xs space-y-2">
+                <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
+                  <span class="text-[11px] font-extrabold text-[#0F2A44] uppercase tracking-wide">
+                    📍 Location &amp; Access
+                  </span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-[11px]">
+                  <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 leading-snug">
+                    <span class="text-[9px] font-black uppercase text-[#0F2A44] block mb-1">TopCity-1</span>
+                    Directly on Srinagar Highway &amp; M-1/M-2 Interchange (1 km / 3 mins to Airport Gate &amp; Metro Bus).
+                  </div>
+                  <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 leading-snug">
+                    <span class="text-[9px] font-black uppercase text-emerald-800 block mb-1">AGG</span>
+                    Adjoining Airport Cargo boundary wall via Link Road / Fateh Jang (3 mins to Airport).
+                  </div>
+                </div>
+              </div>
+
+              <!-- Feature: Utilities & Grid -->
+              <div class="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-2xs space-y-2">
+                <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
+                  <span class="text-[11px] font-extrabold text-[#0F2A44] uppercase tracking-wide">
+                    ⚡ Utilities &amp; Grid
+                  </span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-[11px]">
+                  <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 leading-snug">
+                    <span class="text-[9px] font-black uppercase text-[#0F2A44] block mb-1">TopCity-1</span>
+                    100% Underground electricity, Sui Gas active, smart city waste management &amp; fiber internet.
+                  </div>
+                  <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 leading-snug">
+                    <span class="text-[9px] font-black uppercase text-emerald-800 block mb-1">AGG</span>
+                    Overhead electricity poles installed, groundwater boring available, wide paved roads.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Feature: Title & Possession -->
+              <div class="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-2xs space-y-2">
+                <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
+                  <span class="text-[11px] font-extrabold text-[#0F2A44] uppercase tracking-wide">
+                    📜 Title &amp; Possession
+                  </span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-[11px]">
+                  <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 text-emerald-950 leading-snug font-medium">
+                    <span class="text-[9px] font-black uppercase text-[#0F2A44] block mb-1">TopCity-1</span>
+                    RDA Approved (9,081 Kanals) &bull; CAA &amp; NHA Clear &bull; Immediate Registry &amp; Transfer
+                  </div>
+                  <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 text-emerald-950 leading-snug font-medium">
+                    <span class="text-[9px] font-black uppercase text-emerald-800 block mb-1">AGG</span>
+                    Immediate Physical Possession (1,500 delivered + 2,200 coming) &bull; Clear Title Letter
+                  </div>
+                </div>
+              </div>
+
+              <!-- Feature: Best Fit For -->
+              <div class="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-2xs space-y-2">
+                <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
+                  <span class="text-[11px] font-extrabold text-[#0F2A44] uppercase tracking-wide">
+                    🎯 Best Fit For
+                  </span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-[11px]">
+                  <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-slate-600 leading-snug">
+                    <span class="text-[9px] font-black uppercase text-[#0F2A44] block mb-1">TopCity-1</span>
+                    Luxury residence seekers, airport executives, immediate construction with upscale amenities.
+                  </div>
+                  <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-slate-600 leading-snug">
+                    <span class="text-[9px] font-black uppercase text-emerald-800 block mb-1">AGG</span>
+                    High-ROI investors and budget homebuilders seeking maximum capital growth.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mobile Direct Action Buttons -->
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button
+                  type="button"
+                  @click="openPlotDetails('topcity')"
+                  class="w-full py-2.5 rounded-xl bg-[#0F2A44] hover:bg-[#16B4E8] text-white font-bold text-xs text-center transition-colors shadow-xs"
+                >
+                  TopCity-1 Rates &rarr;
+                </button>
+                <button
+                  type="button"
+                  @click="openPlotDetails('agg')"
+                  class="w-full py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs text-center transition-colors shadow-xs"
+                >
+                  AGG Rates &rarr;
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. DESKTOP / TABLET DETAILED MATRIX (hidden md:block) -->
+            <div class="hidden md:block space-y-4">
               <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs border-collapse">
+                <table class="w-full text-left text-xs border-collapse min-w-[680px]">
                   <thead>
                     <tr class="border-b border-slate-200 bg-slate-50 text-[11px] font-black uppercase text-slate-700">
                       <th class="py-3 px-4 w-1/4">Feature / Factor</th>
@@ -574,7 +766,7 @@
                     </tr>
 
                     <!-- Site Land & Drone Video Comparison Row -->
-                    <tr class="hover:bg-slate-50/60 bg-rose-50/30">
+                    <tr v-if="getSocietyVideo('topcity') || getSocietyVideo('agg')" class="hover:bg-slate-50/60 bg-rose-50/30">
                       <td class="py-3.5 px-4 font-bold text-[#0F2A44] flex items-center gap-1.5">
                         <span class="text-rose-600 font-black">▶</span>
                         <span>Site Land Video</span>
