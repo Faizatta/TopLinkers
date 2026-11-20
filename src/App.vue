@@ -35,7 +35,6 @@
     <BuildingDetailsModal
       v-if="deferredUiReady || ui.isBuildingModalOpen"
       :is-open="ui.isBuildingModalOpen"
-      :building="adminStore.customBuilding"
       @close="ui.closeBuildingModal"
     />
 
@@ -51,7 +50,6 @@ import AppHeader from './components/layout/AppHeader.vue'
 import AppFooter from './components/layout/AppFooter.vue'
 import Toast from './components/ui/Toast.vue'
 import { useUiStore } from './stores/ui'
-import { useAdminStore } from './stores/admin'
 import { whenIdle } from './utils/idle'
 import { initLenis, destroyLenis } from './services/lenis'
 
@@ -70,7 +68,6 @@ const BuildingDetailsModal = defineAsyncComponent(() => import('./components/ui/
 const route = useRoute()
 const router = useRouter()
 const ui = useUiStore()
-const adminStore = useAdminStore()
 
 // The router renders nothing until the first navigation resolves, so the first page
 // would otherwise "enter" with the fade (opacity 0 + 6px slide), delaying the very
@@ -90,10 +87,9 @@ onMounted(() => {
     window.history.scrollRestoration = 'auto'
   }
   initLenis()
-  // Use a small fixed delay (200ms) so floating widgets appear promptly after
-  // first paint, without blocking the hero or waiting for a full idle callback.
+  // Defer non-critical floating widgets and popups until after initial paint & idle
   cancelIdle = whenIdle(() => { deferredUiReady.value = true })
-  setTimeout(() => { deferredUiReady.value = true }, 200)
+  setTimeout(() => { deferredUiReady.value = true }, 1500)
 })
 
 onUnmounted(() => {

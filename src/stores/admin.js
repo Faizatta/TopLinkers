@@ -1978,12 +1978,15 @@ export const useAdminStore = defineStore('admin', () => {
   const contactedLeadsCount = computed(() => leads.value.filter(l => l.status === 'Contacted').length)
   const closedLeadsCount = computed(() => leads.value.filter(l => l.status === 'Closed / Won').length)
 
-  // Trigger initial backend sync deferred in background so public page rendering is 100% instant
+  // Trigger backend sync only for admin sessions or admin routes to keep public visits 100% lightweight
   if (typeof window !== 'undefined') {
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(() => { syncFromBackend() }, { timeout: 2000 })
-    } else {
-      setTimeout(() => { syncFromBackend() }, 200)
+    const isAtAdmin = window.location.pathname.startsWith('/admin')
+    if (isAtAdmin || isAuthenticated.value) {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => { syncFromBackend() }, { timeout: 3000 })
+      } else {
+        setTimeout(() => { syncFromBackend() }, 1000)
+      }
     }
   }
 

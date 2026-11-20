@@ -168,6 +168,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useAdminStore } from '../../stores/admin'
 
 const props = defineProps({
   isOpen: {
@@ -176,19 +177,23 @@ const props = defineProps({
   },
   building: {
     type: Object,
-    default: () => ({})
+    default: null
   }
 })
 
 const emit = defineEmits(['close'])
 
+const adminStore = useAdminStore()
+const building = computed(() => (props.building && Object.keys(props.building).length > 0) ? props.building : (adminStore.customBuilding || {}))
+
 const activeImageIndex = ref(0)
 
 const allImages = computed(() => {
   const list = []
-  if (props.building.image) list.push(props.building.image)
-  if (Array.isArray(props.building.gallery)) {
-    props.building.gallery.forEach(img => {
+  const b = building.value
+  if (b.image) list.push(b.image)
+  if (Array.isArray(b.gallery)) {
+    b.gallery.forEach(img => {
       if (img && !list.includes(img)) list.push(img)
     })
   }
@@ -200,7 +205,8 @@ const currentImage = computed(() => {
 })
 
 const whatsappUrl = computed(() => {
-  const msg = props.building.whatsappMsg || `Hello TopLinkers, I am inquiring about the featured building project: ${props.building.name || props.building.title}.`
+  const b = building.value
+  const msg = b.whatsappMsg || `Hello TopLinkers, I am inquiring about the featured building project: ${b.name || b.title}.`
   return `https://wa.me/923349522157?text=${encodeURIComponent(msg)}`
 })
 

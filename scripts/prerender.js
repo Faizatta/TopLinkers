@@ -995,8 +995,126 @@ export function prerender() {
 
     // 6. Crawlable Semantic Content injected directly inside <div id="app">
     // Gives search engine crawlers, bots, and speed auditors an immediate, full-page semantic DOM
-    // with genuine <h1>, content sections, and internal links. When Vue boots on the client, it seamlessly mounts.
-    const crawlableHtml = `
+    // with genuine <h1>, content sections, and internal links.
+    // For the homepage, we include the authentic visual header and hero slide skeleton so that
+    // the preloaded LCP picture element is present in the initial server HTML, giving sub-second LCP.
+    let crawlableHtml
+    if (r.path === '/') {
+      crawlableHtml = `
+    <div id="app">
+      <div class="min-h-screen flex flex-col bg-[#F6F8FA] text-gray-800 font-sans w-full overflow-x-hidden">
+        <header class="fixed top-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md text-[#0F2A44] shadow-sm py-3.5 border-b border-gray-100/60 select-none">
+          <div class="max-w-[1280px] mx-auto px-3 sm:px-4 flex items-center justify-between gap-2">
+            <a href="/" class="flex items-center gap-2 sm:gap-3 focus:outline-none group min-w-0">
+              <img src="/toplinkers-logo-mark.webp" alt="Top Linkers" width="367" height="488" loading="eager" fetchpriority="high" decoding="async" class="h-10 sm:h-12 md:h-14 w-auto object-contain flex-shrink-0" />
+              <div class="flex flex-col min-w-0">
+                <span class="text-base sm:text-xl font-black leading-tight tracking-tight truncate">
+                  <span class="text-[#E53935]">Top</span> <span class="text-black">Linkers</span>
+                </span>
+                <span class="text-[8px] sm:text-[10px] font-black uppercase tracking-wider text-gray-500 leading-none mt-0.5 truncate">
+                  Real Estate &bull; Construction &bull; Solar
+                </span>
+              </div>
+            </a>
+            <nav class="hidden lg:flex items-center space-x-7" aria-label="Main Navigation">
+              <a href="/" class="text-sm font-bold text-[#16B4E8]">Home</a>
+              <a href="/about" class="text-sm font-bold text-[#0F2A44] hover:text-[#16B4E8]">About</a>
+              <a href="/services" class="text-sm font-bold text-[#0F2A44] hover:text-[#16B4E8]">Services</a>
+              <a href="/listings" class="text-sm font-bold text-[#0F2A44] hover:text-[#16B4E8]">Properties</a>
+              <a href="/team" class="text-sm font-bold text-[#0F2A44] hover:text-[#16B4E8]">Our Team</a>
+              <a href="/blog" class="text-sm font-bold text-[#0F2A44] hover:text-[#16B4E8]">Blog</a>
+              <a href="/contact" class="text-sm font-bold text-[#0F2A44] hover:text-[#16B4E8]">Contact</a>
+            </nav>
+            <div class="flex items-center gap-2.5">
+              <a href="https://wa.me/923349522157" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 bg-[#25D366] text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-sm">
+                <span>WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </header>
+
+        <main class="flex-1 min-h-screen">
+          <div class="home-page pt-[66px] sm:pt-[80px]">
+            <h1 class="sr-only">${r.h1}</h1>
+            <div class="hero-swiper-container relative w-full h-[600px] sm:h-[660px] md:h-[740px] bg-gray-950 overflow-hidden select-none group">
+              <div class="hero-slide hero-static absolute inset-0 z-[2] w-full h-full">
+                <div class="absolute inset-0 w-full h-full overflow-hidden">
+                  <picture class="block w-full h-full">
+                    <source media="(max-width: 639px)" type="image/avif" srcset="/images/hero-moqa-plot-m.avif" />
+                    <source media="(max-width: 639px)" type="image/webp" srcset="/images/hero-moqa-plot-m.webp" />
+                    <source type="image/avif" srcset="/images/hero-moqa-plot.avif" />
+                    <img
+                      src="/images/hero-moqa-plot.webp"
+                      alt="Prime Moqa Ka Plot in TopCity-1 (Block B) - TopLinkers Islamabad"
+                      loading="eager"
+                      fetchpriority="high"
+                      decoding="sync"
+                      width="1440"
+                      height="960"
+                      class="slide-bg-image w-full h-full object-cover object-center"
+                    />
+                  </picture>
+                  <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-transparent sm:w-4/5 md:w-3/5 pointer-events-none"></div>
+                  <div class="absolute inset-0 bg-black/45 sm:hidden pointer-events-none"></div>
+                  <div class="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-black/85 via-black/35 to-transparent pointer-events-none"></div>
+                </div>
+                <div class="relative max-w-[1280px] mx-auto h-full px-4 sm:px-6 md:px-8 flex flex-col justify-center pb-32 sm:pb-40 md:pb-48 z-10 pointer-events-none">
+                  <div class="max-w-xl text-left select-none pointer-events-auto">
+                    <div class="slide-specs mb-2 sm:mb-3 flex flex-wrap items-center gap-2">
+                      <span class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wider text-white/95 uppercase drop-shadow">
+                        <span class="w-2 h-2 rounded-full bg-[#16B4E8]"></span>
+                        <span>10 Marla • Immediate Physical Possession • RDA Approved</span>
+                      </span>
+                      <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#16B4E8] text-[#0F2A44] shadow-md">
+                        Cash Moqa Ready
+                      </span>
+                    </div>
+                    <h2 class="slide-title text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-black tracking-tight text-white leading-[1.12] mb-2 sm:mb-3 drop-shadow-md">
+                      Prime Moqa Ka Plot in TopCity-1 (Block B)
+                    </h2>
+                    <p class="slide-desc text-xs sm:text-sm md:text-base text-gray-200/90 font-normal leading-relaxed line-clamp-2 max-w-lg mb-4 sm:mb-5 drop-shadow">
+                      Direct on-ground demarcated plot adjoining New Islamabad Airport gate &amp; Srinagar Highway. Immediate physical possession with swift registry transfer.
+                    </p>
+                    <div class="slide-price-cta flex flex-wrap items-center gap-3 sm:gap-4 pt-1">
+                      <a href="/property/corner-plot-topcity" class="btn-arrow-slide px-6 sm:px-8 py-3 sm:py-3.5 bg-[#16B4E8] text-[#0F2A44] text-xs sm:text-sm font-black uppercase tracking-wider rounded-xl shadow-lg shadow-cyan-500/25 flex items-center justify-center">
+                        <span>Explore Plot</span>
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prerendered-content" style="max-width:1200px;margin:32px auto;padding:0 20px;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+              ${r.content}
+              <section style="background:#F1F5F9;border-radius:8px;padding:20px;border:1px solid #CBD5E1;margin-top:32px;">
+                <h2 style="font-size:16px;font-weight:700;color:#0F2A44;margin-bottom:8px;">Essential Company &amp; Legal Verification</h2>
+                <p style="font-size:13px;color:#64748B;margin-bottom:12px;">
+                  Head Office: 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad | Phone: +92-334-9522157
+                </p>
+                <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:13px;">
+                  <a href="/about" style="color:#0F2A44;font-weight:700;">About TopLinkers</a>
+                  <a href="/services" style="color:#0F2A44;font-weight:700;">All Services</a>
+                  <a href="/listings" style="color:#0F2A44;font-weight:700;">Verified Properties</a>
+                  <a href="/blog" style="color:#0F2A44;font-weight:700;">Market Insights Blog</a>
+                  <a href="/contact" style="color:#0F2A44;font-weight:700;">Contact Us</a>
+                  <a href="/terms-and-conditions" style="color:#0F2A44;font-weight:700;">Terms &amp; Conditions</a>
+                  <a href="/privacy-policy" style="color:#0F2A44;font-weight:700;">Privacy Policy</a>
+                  <a href="/disclaimer" style="color:#0F2A44;font-weight:700;">Legal Disclaimer</a>
+                  <a href="/llms.txt" style="color:#16B4E8;font-weight:700;">llms.txt (Agent Guide)</a>
+                </div>
+              </section>
+              <footer style="background:#081322;color:#94A3B8;padding:24px;text-align:center;font-size:13px;margin-top:48px;">
+                <p>&copy; 2026 Top Linkers Real Estate, Construction &amp; Solar. Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan.</p>
+              </footer>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>`
+    } else {
+      crawlableHtml = `
     <div id="app">
       <div class="prerendered-content" style="max-width:1200px;margin:32px auto;padding:0 20px;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
         <h1 style="font-size:28px;font-weight:900;color:#0F2A44;margin-bottom:16px;line-height:1.25;">
@@ -1028,6 +1146,7 @@ export function prerender() {
         </footer>
       </div>
     </div>`
+    }
 
     html = html.replace('<div id="app"></div>', crawlableHtml)
 

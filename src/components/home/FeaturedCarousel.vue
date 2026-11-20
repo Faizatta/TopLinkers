@@ -77,11 +77,13 @@ import PropertyCard from '../property/PropertyCard.vue'
 import { api } from '../../services/api'
 import { useAutoplayWhenVisible } from '../../composables/useAutoplayWhenVisible'
 
+import propertiesData from '../../data/properties.json'
+
 const router = useRouter()
 const modules = [Autoplay, Pagination]
 // Autoplay only while the carousel is on screen (same behaviour when visible)
 const { onSwiper } = useAutoplayWhenVisible()
-const featuredProperties = ref([])
+const featuredProperties = ref(propertiesData.filter(p => p.featured).slice(0, 12))
 
 const onSwiperClick = (swiper, event) => {
   const target = event?.target
@@ -97,7 +99,12 @@ const onSwiperClick = (swiper, event) => {
 }
 
 onMounted(async () => {
-  featuredProperties.value = await api.getFeaturedProperties(12)
+  try {
+    const list = await api.getFeaturedProperties(12)
+    if (list && list.length > 0) {
+      featuredProperties.value = list
+    }
+  } catch (e) {}
 })
 </script>
 

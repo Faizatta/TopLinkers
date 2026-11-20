@@ -99,12 +99,19 @@ import SectionHeading from '../ui/SectionHeading.vue'
 import { api } from '../../services/api'
 import { useAutoplayWhenVisible } from '../../composables/useAutoplayWhenVisible'
 
+import typesData from '../../data/types.json'
+
 const modules = [Autoplay, Pagination]
 // Autoplay only while the carousel is on screen (same behaviour when visible)
 const { onSwiper } = useAutoplayWhenVisible()
-const types = ref([])
+const types = ref(typesData)
 
 onMounted(async () => {
-  types.value = await api.getTypes()
+  try {
+    const list = await api.getTypes()
+    if (list && list.length > 0) {
+      types.value = list
+    }
+  } catch (e) {}
 })
 </script>
