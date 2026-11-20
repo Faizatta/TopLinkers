@@ -59,14 +59,8 @@
         {{ slide.description }}
       </p>
 
-      <!-- 4. Price Badge & Action CTAs (Redirect to Listings) -->
+      <!-- 4. Action CTA (Redirect to Listings) -->
       <div class="slide-price-cta flex flex-wrap items-center gap-3 sm:gap-4 pt-1">
-        <!-- Live Price Pill -->
-        <div v-if="slide.price" class="px-3.5 py-2 rounded-xl bg-white/15 backdrop-blur-md border border-white/20 text-white shadow-md flex items-center gap-1.5 flex-shrink-0">
-          <span class="text-[10px] uppercase font-bold text-[#16B4E8]">Demand:</span>
-          <span class="text-xs sm:text-sm font-black text-white">{{ slide.price }}</span>
-        </div>
-
         <!-- Primary Action Button: View Property in Listings -->
         <router-link
           :to="slide.listingLink || slide.link"
@@ -77,16 +71,6 @@
           <svg class="arrow-icon w-4 h-4 ml-1.5 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
-        </router-link>
-
-        <!-- Secondary Button: Direct Property Page (if distinct) -->
-        <router-link
-          v-if="slide.link && slide.link !== slide.listingLink"
-          :to="slide.link"
-          class="px-4 py-2.5 sm:py-3 bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-bold rounded-xl border border-white/20 backdrop-blur-xs transition-all flex items-center justify-center flex-shrink-0"
-          @click.stop
-        >
-          <span>Full Detail &rarr;</span>
         </router-link>
       </div>
     </div>
