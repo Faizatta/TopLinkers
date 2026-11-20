@@ -814,16 +814,16 @@ export const useAdminStore = defineStore('admin', () => {
     {
       id: 'eng-3',
       name: 'Engr. Asad Ur Rehman',
-      role: 'Lead Solar Energy & Photovoltaic Systems Engineer',
+      role: 'Chief Electrical & Turnkey Construction Engineer',
       category: 'engineer',
-      tag: 'PEC Registered Solar Eng.',
-      experience: '9+ Years',
+      tag: '10 Kilowatts to Megawatts (MW)',
+      experience: '10+ Years',
       phone: '+92 300 6222886',
       whatsapp: '923006222886',
       email: 'mengr625@gmail.com',
       photo: '/images/team/engr-asad-ur-rehman.webp',
-      bio: 'PEC-registered renewable energy engineer leading solar PV plant designs, industrial 50kW+ setups, hybrid battery storage integration, and IESCO net-metering grid interconnections. Specializes in optimal solar yield engineering and energy audits.',
-      quote: 'Designing sustainable, high-efficiency solar infrastructure that delivers lifetime energy independence and verified ROI for residential and commercial clients across Islamabad.',
+      bio: 'PEC-licensed Chief Electrical & Turnkey Construction Engineer leading commercial and residential solar plant electrification, 10kW to Megawatts (MW) system engineering, structural analysis, and turnkey IESCO net-metering grid clearances.',
+      quote: 'Delivering precision solar electrification from 10kW residential setups to Megawatt-scale commercial plants with certified PEC engineering oversight and verified ROI.',
       address: 'Al Hameed Plaza, G-11 Markaz, Islamabad'
     }
   ]

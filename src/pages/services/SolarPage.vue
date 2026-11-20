@@ -1058,13 +1058,17 @@
             <div class="p-5 sm:p-7 rounded-2xl bg-gradient-to-br from-slate-50 via-white to-sky-50/50 border border-slate-200/90 hover:border-[#16B4E8] transition-all shadow-sm">
               <div class="flex flex-col md:flex-row items-start md:items-center gap-5 sm:gap-6">
                 <!-- High-Resolution Engineer Portrait -->
-                <div class="relative flex-shrink-0 mx-auto md:mx-0">
+                <div
+                  @click="openSolarLightbox('/images/team/engr-asad-ur-rehman.webp')"
+                  class="relative flex-shrink-0 mx-auto md:mx-0 cursor-pointer group"
+                  title="Click to view full portrait"
+                >
                   <img
                     src="/images/team/engr-asad-ur-rehman.webp"
-                    alt="Engr. Asad Ur Rehman - Lead Solar &amp; Photovoltaic Systems Engineer TopLinkers"
-                    class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl object-cover border-2 border-white shadow-lg"
-                    width="128"
-                    height="128"
+                    alt="Engr. Asad Ur Rehman - Chief Electrical &amp; Turnkey Construction Engineer TopLinkers"
+                    class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl object-cover object-top border-2 border-white shadow-lg group-hover:scale-105 transition-transform duration-300"
+                    width="144"
+                    height="144"
                     loading="lazy"
                     decoding="async"
                   />
@@ -1078,13 +1082,13 @@
                 <div class="min-w-0 flex-1 space-y-2">
                   <div class="flex flex-wrap items-center gap-2">
                     <span class="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full">
-                      PEC Registered Solar Engineer
+                      Civil / Solar Engineer (PEC)
                     </span>
                     <span class="text-[10px] font-black uppercase tracking-wider text-[#071E33] bg-sky-100 px-2.5 py-0.5 rounded-full">
-                      AEDB Certified
+                      10 Kilowatts to Megawatts (MW)
                     </span>
                     <span class="text-[10px] font-bold text-slate-500 bg-gray-100 px-2 py-0.5 rounded-full">
-                      9+ Years Experience
+                      10+ Years Experience
                     </span>
                   </div>
 
@@ -1093,11 +1097,11 @@
                   </h3>
 
                   <p class="text-xs sm:text-sm font-extrabold text-[#16B4E8] leading-snug">
-                    Lead Solar Energy, Photovoltaic Systems &amp; Net-Metering Engineer
+                    Chief Electrical &amp; Turnkey Construction Engineer
                   </p>
 
                   <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal pt-1">
-                    Leads TopLinkers' renewable electrification division with end-to-end technical oversight. Specializes in 3D Helioscope shadow simulations, structural rooftop stress analysis, Tier-1 TOPCon bifacial string sizing, hybrid battery storage (BESS) integration, and guaranteed turnkey IESCO bidirectional green meter approvals across Islamabad and Rawalpindi.
+                    PEC-licensed Chief Electrical &amp; Turnkey Construction Engineer leading commercial and residential solar electrification, 10kW to Megawatts (MW) infrastructure, 3D Helioscope shadow simulations, Tier-1 TOPCon bifacial arrays, battery storage (BESS) integration, and guaranteed turnkey IESCO green meter approvals.
                   </p>
                 </div>
               </div>
@@ -1118,7 +1122,7 @@
                 </div>
                 <div class="p-2.5 bg-white rounded-xl border border-slate-100 shadow-2xs">
                   <span class="text-[9px] uppercase tracking-wider font-bold text-slate-400 block">System Capacities</span>
-                  <span class="text-xs font-black text-[#0F2A44] block mt-0.5">10kW to 500kW+</span>
+                  <span class="text-xs font-black text-[#0F2A44] block mt-0.5">10kW to Megawatts (MW)</span>
                 </div>
               </div>
 
