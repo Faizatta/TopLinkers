@@ -7,7 +7,7 @@
         <span>/</span>
         <router-link to="/services" class="hover:text-[#16B4E8] font-medium">Services</router-link>
         <span>/</span>
-        <span class="text-[#0F2A44] font-bold">Solar Solutions &amp; Net Metering</span>
+        <span class="text-[#0F2A44] font-bold">Solar Energy Solution</span>
       </div>
     </nav>
 
@@ -15,7 +15,7 @@
     <div class="relative min-h-[520px] sm:h-[560px] md:h-[620px] bg-gray-900 overflow-hidden flex items-end">
       <img
         src="/images/hero-solar.webp"
-        alt="Tier-1 Solar Net Metering & Energy Systems Islamabad"
+        alt="Solar Energy Solution — TopLinkers Islamabad"
         class="absolute inset-0 block w-full h-full object-cover transform scale-105"
         loading="eager"
         fetchpriority="high"
@@ -32,22 +32,22 @@
           <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
             <span class="bg-[#6CC24A] text-[#071E33] text-[9px] sm:text-[10px] font-black uppercase tracking-wider px-2.5 sm:px-3 py-1 rounded shadow-md flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-[#071E33] animate-pulse"></span>
-              AEDB &amp; PEC LICENSED EPC
+              PEC REGISTERED TECHNICAL TEAMS
             </span>
             <span class="bg-[#16B4E8] text-[#071E33] text-[9px] sm:text-[10px] font-black uppercase tracking-wider px-2.5 sm:px-3 py-1 rounded shadow-md">
-              TIER-1 N-TYPE BIFACIAL
+              TIER-1 PANELS, INVERTERS &amp; BATTERIES
             </span>
             <span class="bg-white/20 backdrop-blur-md text-white text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded">
-              IESCO GREEN NET METERING
+              ZERO ELECTRICITY BILLS
             </span>
           </div>
 
           <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
-            Turnkey Solar EPC &amp; IESCO Net-Metering Solutions in Islamabad
+            Solar Energy Solution
           </h1>
 
           <p class="text-xs sm:text-sm md:text-base text-gray-200 leading-relaxed max-w-2xl font-medium">
-            Engineered on-grid, hybrid energy storage (BESS), and commercial rooftop solar installations (5kW to 500kW+) with <strong class="text-white">Tier-1 N-Type TOPCon bifacial modules</strong>, European smart inverters, and guaranteed <strong class="text-white">IESCO bidirectional green meter</strong> commissioning to slash electricity bills by up to 90%.
+            Turnkey on-grid, hybrid energy storage, and commercial solar electrification engineered with <strong class="text-white">Tier-1 panels, smart inverters &amp; lithium batteries</strong> by our <strong class="text-white">PEC registered technical teams</strong> with complete net metering commissioning to eliminate electricity bills.
           </p>
 
           <!-- Direct Actions & Full-Width Tab Controls -->
@@ -96,27 +96,85 @@
     <div class="max-w-[1280px] mx-auto px-4 sm:px-6 -mt-6 sm:-mt-8 relative z-20">
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 bg-white rounded-2xl p-3.5 sm:p-6 shadow-xl border border-gray-100 mb-8 sm:mb-12">
         <div class="text-center p-3 sm:p-4 rounded-xl bg-gray-50/80 border border-gray-100">
-          <span class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase block">System Capacities</span>
-          <span class="text-base sm:text-2xl font-black text-[#16B4E8] block mt-0.5">5kW to 500kW+</span>
-          <span class="text-[9px] sm:text-[10px] text-gray-500 block mt-0.5">Residential, Commercial &amp; Industrial</span>
+          <span class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase block">Completed Projects</span>
+          <span class="text-base sm:text-2xl font-black text-[#16B4E8] block mt-0.5">50+</span>
+          <span class="text-[9px] sm:text-[10px] text-gray-500 block mt-0.5">Residential &amp; Commercial</span>
         </div>
 
         <div class="text-center p-3 sm:p-4 rounded-xl bg-gray-50/80 border border-gray-100">
-          <span class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase block">Capital Payback</span>
-          <span class="text-base sm:text-2xl font-black text-emerald-600 block mt-0.5">2.2 – 3.2 Yrs</span>
-          <span class="text-[9px] sm:text-[10px] text-gray-500 block mt-0.5">Rapid ROI with Rising Tariffs</span>
+          <span class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase block">System Reliability</span>
+          <span class="text-base sm:text-2xl font-black text-emerald-600 block mt-0.5">99%</span>
+          <span class="text-[9px] sm:text-[10px] text-gray-500 block mt-0.5">Uptime with Monitoring Systems</span>
         </div>
 
         <div class="text-center p-3 sm:p-4 rounded-xl bg-gray-50/80 border border-gray-100">
-          <span class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase block">Module Warranty</span>
-          <span class="text-base sm:text-2xl font-black text-[#0F2A44] block mt-0.5">30-Yr Linear Power</span>
-          <span class="text-[9px] sm:text-[10px] text-gray-500 block mt-0.5">Tier-1 N-Type TOPCon Bifacial</span>
+          <span class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase block">Carbon Offset</span>
+          <span class="text-base sm:text-2xl font-black text-[#0F2A44] block mt-0.5">20K+</span>
+          <span class="text-[9px] sm:text-[10px] text-gray-500 block mt-0.5">Tons CO2 Offset Since 2019</span>
         </div>
 
         <div class="text-center p-3 sm:p-4 rounded-xl bg-gray-50/80 border border-gray-100">
-          <span class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase block">IESCO Net-Metering</span>
-          <span class="text-base sm:text-2xl font-black text-[#0F2A44] block mt-0.5">100% Turnkey</span>
-          <span class="text-[9px] sm:text-[10px] text-gray-500 block mt-0.5">AEDB &bull; NEPRA &bull; Green Meter</span>
+          <span class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase block">Engineering Standard</span>
+          <span class="text-base sm:text-2xl font-black text-[#0F2A44] block mt-0.5">PEC Registered</span>
+          <span class="text-[9px] sm:text-[10px] text-gray-500 block mt-0.5">Tier-1 Panels, Inverters &amp; Battery</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Projects Completed Milestones Showcase Strip (Visual Photo Strip) -->
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 mb-10 sm:mb-14">
+      <div class="relative overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 shadow-xl">
+        <img
+          src="/images/hero-solar.webp"
+          alt="TopLinkers 50+ Completed Solar Projects"
+          class="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.25]"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-[#071E33]/95 via-[#0F2A44]/85 to-[#071E33]/95"></div>
+
+        <div class="relative z-10 p-6 sm:p-8 md:p-10">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-white/10">
+            <div>
+              <span class="text-[10px] font-black uppercase tracking-wider text-[#16B4E8] bg-white/10 px-3 py-1 rounded-full border border-white/10 inline-flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#16B4E8] animate-pulse"></span>
+                PROVEN SOLAR TRACK RECORD &bull; ISLAMABAD &amp; RAWALPINDI
+              </span>
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-black text-white mt-2">
+                Delivering Clean Solar Power &bull; 50+ Projects Completed
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl font-medium">
+                Engineered with Tier-1 panels, high-efficiency inverters, and lithium energy storage by our PEC registered technical teams.
+              </p>
+            </div>
+            <a
+              href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20inquiring%20about%20your%2050%2B%20completed%20solar%20projects."
+              target="_blank"
+              class="self-start sm:self-center px-5 py-3 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-lg transition-all flex items-center gap-2 whitespace-nowrap"
+            >
+              <span>Request Project Portfolio</span>
+            </a>
+          </div>
+
+          <!-- 3 Translucent Metric Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15">
+              <span class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight block">50+</span>
+              <span class="text-sm font-bold text-white mt-1 block">Projects Completed</span>
+              <span class="text-[11px] text-slate-300 mt-0.5 block">On-grid &amp; hybrid rooftop installations across twin cities</span>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15">
+              <span class="text-3xl sm:text-4xl lg:text-5xl font-black text-[#16B4E8] tracking-tight block">99%</span>
+              <span class="text-sm font-bold text-white mt-1 block">Uptime with monitoring systems</span>
+              <span class="text-[11px] text-slate-300 mt-0.5 block">24/7 intelligent cloud telemetry &amp; live generation tracking</span>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15">
+              <span class="text-3xl sm:text-4xl lg:text-5xl font-black text-[#6CC24A] tracking-tight block">20K+</span>
+              <span class="text-sm font-bold text-white mt-1 block">Tons CO2 offset since 2019</span>
+              <span class="text-[11px] text-slate-300 mt-0.5 block">Zero-carbon sustainable energy produced for homeowners</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

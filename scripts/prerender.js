@@ -320,17 +320,17 @@ const staticRoutes = [
   },
   {
     path: '/services/solar',
-    title: 'Turnkey Solar EPC & IESCO Net Metering Islamabad | TopLinkers',
-    description: 'Engineered on-grid, hybrid & commercial solar systems (5kW to 500kW+) with Tier-1 N-Type bifacial panels, European inverters & IESCO green net metering in Islamabad.',
-    h1: 'Turnkey Solar EPC & IESCO Net-Metering Solutions in Islamabad',
+    title: 'Solar Energy Solution & Net Metering Islamabad | TopLinkers',
+    description: 'Engineered solar energy solutions with Tier-1 panels, inverters & battery storage by PEC registered technical teams with net metering in Islamabad.',
+    h1: 'Solar Energy Solution',
     content: `
       <section style="margin-bottom:28px;">
-        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Eliminate High WAPDA Electricity Bills with Tier-1 Solar Net Metering</h2>
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Eliminate High WAPDA Electricity Bills with Solar Energy Solutions</h2>
         <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
-          With escalating peak power tariffs, fuel price adjustments (FPA), and fixed capacity surcharges across Pakistan, investing in an engineered Tier-1 solar net-metering system delivers a rapid capital payback period of 2.2 to 3.2 years. TopLinkers Solar Division is an AEDB and PEC-licensed renewable energy EPC contractor providing turnkey residential, commercial, and industrial photovoltaic installations throughout Islamabad and Rawalpindi.
+          With escalating peak power tariffs, fuel price adjustments (FPA), and fixed capacity surcharges across Pakistan, investing in an engineered Tier-1 solar net-metering system delivers a rapid capital payback period of 2.2 to 3.2 years. TopLinkers Solar Division features PEC registered technical teams providing turnkey residential, commercial, and industrial photovoltaic installations throughout Islamabad and Rawalpindi.
         </p>
         <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
-          We handle the entire engineering lifecycle: 3D rooftop shadow simulations (Helioscope / PVsyst), BloombergNEF Tier-1 N-Type TOPCon bifacial modules, smart three-phase inverters (Huawei, Sungrow, Growatt), IESCO net-metering regulatory documentation, and bidirectional green meter commissioning.
+          With over 50+ completed solar projects, 99% uptime with intelligent monitoring systems, and 20K+ tons of CO2 offset, we install BloombergNEF Tier-1 panels, smart inverters, and lithium energy storage batteries with full net-metering regulatory documentation and green meter commissioning.
         </p>
       </section>
 
