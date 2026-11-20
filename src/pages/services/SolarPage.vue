@@ -1129,9 +1129,9 @@
                   <span class="text-xs font-bold text-slate-700">Available for Residential &amp; Commercial Solar Feasibilities</span>
                 </div>
 
-                <div class="flex items-center gap-2">
+                <div class="flex flex-wrap items-center gap-2">
                   <a
-                    href="https://wa.me/923324004884?text=Hello%20Engr.%20Asad%20Ur%20Rehman,%20I%20am%20inquiring%20about%20solar%20net%20metering%20engineering%20consultation"
+                    href="https://wa.me/923006222886?text=Hello%20Engr.%20Asad%20Ur%20Rehman,%20I%20am%20inquiring%20about%20solar%20net%20metering%20engineering%20consultation"
                     target="_blank"
                     class="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm whitespace-nowrap"
                   >
@@ -1139,10 +1139,16 @@
                     <span>WhatsApp Engr. Asad</span>
                   </a>
                   <a
-                    href="tel:+923324004884"
+                    href="tel:+923006222886"
                     class="px-4 py-2.5 rounded-xl border border-slate-300 hover:border-[#0F2A44] hover:bg-slate-50 text-[#0F2A44] text-xs font-bold transition-colors whitespace-nowrap"
                   >
-                    Call
+                    Call (+92 300 6222886)
+                  </a>
+                  <a
+                    href="mailto:mengr625@gmail.com"
+                    class="px-4 py-2.5 rounded-xl border border-slate-300 hover:border-[#0F2A44] hover:bg-slate-50 text-[#0F2A44] text-xs font-bold transition-colors whitespace-nowrap"
+                  >
+                    Email
                   </a>
                 </div>
               </div>

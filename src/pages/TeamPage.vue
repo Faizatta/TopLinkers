@@ -246,8 +246,7 @@
         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#07111D]/80 backdrop-blur-md overflow-y-auto"
       >
         <div
-          class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-2xl w-full overflow-hidden relative animate-popup-in max-h-[88vh] flex flex-col"
-          :class="isExecutive(popupMember) ? 'max-w-3xl' : 'max-w-2xl'"
+          class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-2xl w-full max-w-3xl lg:max-w-4xl overflow-hidden relative animate-popup-in max-h-[90vh] flex flex-col"
         >
           <!-- Close Button -->
           <button
@@ -349,26 +348,26 @@
                 </div>
 
                 <!-- Structured Verified Contact Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
-                  <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-2">
+                  <div class="p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center gap-2.5 sm:gap-3">
                     <div class="w-8 h-8 rounded-lg bg-[#16B4E8]/10 text-[#16B4E8] flex items-center justify-center flex-shrink-0">
                       <PhoneIcon class="w-4 h-4" />
                     </div>
-                    <div class="min-w-0">
-                      <span class="block text-[10px] font-bold uppercase text-slate-400">Direct Phone Desk</span>
-                      <a :href="`tel:${cleanWa(popupMember.phone)}`" class="text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] transition-colors block">
+                    <div class="min-w-0 flex-1">
+                      <span class="block text-[10px] font-bold uppercase tracking-wider text-slate-400">Direct Phone Desk</span>
+                      <a :href="`tel:${cleanWa(popupMember.phone)}`" class="text-xs sm:text-[13px] font-extrabold text-[#0F2A44] hover:text-[#16B4E8] transition-colors whitespace-nowrap block mt-0.5">
                         {{ popupMember.phone }}
                       </a>
                     </div>
                   </div>
 
-                  <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center gap-3">
+                  <div class="p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center gap-2.5 sm:gap-3">
                     <div class="w-8 h-8 rounded-lg bg-[#0F2A44]/5 text-[#0F2A44] flex items-center justify-center flex-shrink-0">
                       <EnvelopeIcon class="w-4 h-4" />
                     </div>
-                    <div class="min-w-0">
-                      <span class="block text-[10px] font-bold uppercase text-slate-400">Official Email</span>
-                      <a :href="`mailto:${popupMember.email || 'toplinkers69@gmail.com'}`" class="text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] transition-colors truncate block">
+                    <div class="min-w-0 flex-1">
+                      <span class="block text-[10px] font-bold uppercase tracking-wider text-slate-400">Official Email</span>
+                      <a :href="`mailto:${popupMember.email || 'toplinkers69@gmail.com'}`" class="text-[11px] sm:text-xs font-extrabold text-[#0F2A44] hover:text-[#16B4E8] transition-colors break-all leading-tight block mt-0.5" :title="popupMember.email || 'toplinkers69@gmail.com'">
                         {{ popupMember.email || 'toplinkers69@gmail.com' }}
                       </a>
                     </div>
