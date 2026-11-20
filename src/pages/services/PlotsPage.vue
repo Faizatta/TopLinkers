@@ -902,7 +902,7 @@ const plotsData = {
     badge: 'Immediate Demarcation',
     badgeClass: 'bg-[#0F2A44] text-white',
     image: '/images/hero-moqa-plot.webp',
-    videoUrl: 'https://www.youtube.com/watch?v=F0f8u84_0c0',
+    videoUrl: '',
     description: 'TopCity-1 is an RDA-approved master-planned smart community spanning over 9,081 kanals, developed by Kunwar Moeez Khan Constructions (KMKC) and Dynasty Associates. Strategically positioned at the primary junction of Srinagar Highway, M-1 & M-2 Motorways, and the Green Line Metro Bus corridor (1 km / 3 mins from Islamabad Airport Gate). Features 100% operational underground utilities, smart traffic control, automated waste systems, the landmark Masjid Khulfa-e-Rashideen, Lake District waterfront, and ready on-ground possession across Blocks A, B, C, D, E, F & H for immediate construction.',
     rates: [
       { size: '5 Marla (25x50)', terms: 'Ready Construction (Blocks C, D, E)', price: 'PKR 55 - 85 Lac' },
@@ -928,7 +928,7 @@ const plotsData = {
     badge: '1,500 Delivered • 2,200 Dec 2026',
     badgeClass: 'bg-emerald-600 text-white',
     image: '/images/agg/agg-plots-hero.webp',
-    videoUrl: 'https://www.youtube.com/watch?v=q6gS_u4z2-o',
+    videoUrl: '',
     description: 'Airport Green Garden (AGG) is an RDA-approved master-planned gated housing community by Airport Green Garden Pvt. Ltd., located adjacent to New Islamabad International Airport with direct access via Kashmir Highway (Srinagar Highway) and CPEC Cargo Road. 1,500 plots have already been handed over possession, with an additional 2,200 plots possession in December 2026. Featuring Jamia Mosque Abu Bakar Siddique, 24/7 underground electrification (zero load shedding), gated security with CCTV, and wide winding boulevards.',
     rates: [
       { size: '5 Marla (25x50)', terms: 'Non-Possession: PKR 35 - 40 Lac | Ready Moqa: PKR 55 - 65 Lac', price: 'PKR 35 - 65 Lac' },
@@ -955,7 +955,7 @@ const plotsData = {
     badge: 'CPEC Hakla & Airport Runway',
     badgeClass: 'bg-indigo-600 text-white',
     image: '/images/hero-construction.webp',
-    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: '',
     description: 'Pakistan Employees Cooperative Housing Society (PECHS) offers budget-friendly on-ground residential land adjacent to the airport runway and the CPEC Hakla-D.I. Khan Motorway interchange. An established community with existing families, operational schools, and active commercial markets.',
     rates: [
       { size: '5 Marla (25x50)', terms: '100% Cash Ready Plot', price: 'PKR 25 - 35 Lac' },
@@ -980,7 +980,7 @@ const plotsData = {
     badge: '4.5-Year Plots Plan • 15% Cash Discount',
     badgeClass: 'bg-emerald-600 text-white',
     image: '/images/faisal-town-2/ft2-sector-w-plan.webp',
-    videoUrl: 'https://www.youtube.com/watch?v=fDvyuX8e370',
+    videoUrl: '',
     description: 'Faisal Town Phase 2 is Zedem International premier master-planned PLOTS community by Chaudhry Abdul Majeed, located along the M-2 Motorway near the Rawalpindi Ring Road and Chakri Road interchange. Offering purely residential & commercial plots on an affordable 4.5-year schedule (42 monthly installments) with 15% discount on lump-sum payments and all development charges included in plot cost.',
     rates: [
       { size: '5.56 Marla (25x50)', terms: 'Down Payment: PKR 14.75 Lac | 42 Monthly: PKR 60,000 | 15% Cash Disc: PKR 33.80 Lac', price: 'PKR 39.95 Lac Total' },

@@ -505,7 +505,7 @@ const form = reactive({
   baths: 4.5,
   sqft: 3800,
   garages: 2,
-  videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+  videoUrl: '',
   features: ['Air Conditioning', 'Swimming Pool', 'Central Heating', 'Gym', 'Balcony'],
   images: [
     'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80',

@@ -18,7 +18,7 @@ export const phaSectors = {
       { src: '/images/pha/pha-i12-int-2.webp', caption: 'Executive Bedroom Daylight' },
       { src: '/images/pha/pha-i12-street.webp', caption: 'Carpeted Wide Access Boulevard' }
     ],
-    videoUrl: 'https://www.youtube.com/watch?v=ScMzIvxBSi4',
+    videoUrl: '',
     description: 'The Sector I-12/1 PHA Foundation Housing Scheme is one of the most prominent government residential developments in Islamabad, comprising over 3,200 modern multi-storey apartments. Designed for modern family living with dual high-speed elevators per block, dedicated car parking grounds, uninterrupted CDA utility infrastructure, and verified allotment files transferable at PHA Foundation Headquarters.',
     types: [
       { type: 'Type D (Executive 2-Bed)', area: '~870 Sq.Ft', specs: '2 Bed • 2 Bath • Balcony • Lounge', price: 'PKR 95 Lac – 1.15 Cr' },
@@ -55,7 +55,7 @@ export const phaSectors = {
       { src: '/images/pha/pha-i16-balcony.webp', caption: 'Private Balcony View & Railing' },
       { src: '/images/pha/pha-i16-int-2.webp', caption: 'Finished Bedroom & Ceiling Fans' }
     ],
-    videoUrl: 'https://www.youtube.com/watch?v=ScMzIvxBSi4',
+    videoUrl: '',
     description: 'Fully completed and handed-over G+6 residential apartment blocks by Pakistan Housing Authority Foundation in Sector I-16/3, Islamabad. Inhabited family community with active electricity, gas, water supply, dual elevators, tiled flooring, commercial markets on ground, and immediate on-the-spot physical keys handover upon cash transfer.',
     types: [
       { type: 'Type E (Family 2-Bed)', area: '~912 Sq.Ft', specs: '2 Bed • 2 Bath • Balcony • Tile Finish', price: 'PKR 85 Lac – 1.05 Cr' },

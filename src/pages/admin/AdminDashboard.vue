@@ -1157,7 +1157,7 @@ const buildingPresets = [
     description: 'Strategically located on the main entrance avenue of TopCity-1 near New Islamabad Airport. Ground floor retail shops and upper-floor corporate office suites with glass facades and modern high-speed infrastructure.',
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
     link: '/featured-building',
-    videoUrl: 'https://www.youtube.com/watch?v=ScMzIvxBSi4',
+    videoUrl: '',
     features: 'Main Boulevard frontage, 24/7 generator backup, High-speed capsule elevators, Dedicated corporate lobby, Underground parking, 100% legal RDA approved'
   },
   {
@@ -1173,7 +1173,7 @@ const buildingPresets = [
     description: 'Experience tranquil luxury living in Sector D-12 Islamabad. Exclusive boutique suites with floor-to-ceiling glass windows, smart home automation, Italian kitchenettes, and uninterrupted panoramic views of the Margallas.',
     image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
     link: '/featured-building',
-    videoUrl: 'https://www.youtube.com/watch?v=ScMzIvxBSi4',
+    videoUrl: '',
     features: 'Direct Margalla views, Smart home automation, Italian fitted kitchens, Rooftop barbecue terrace, 24/7 manned security, Dedicated covered parking'
   },
   {
@@ -1189,7 +1189,7 @@ const buildingPresets = [
     description: 'Premier commercial business hub in G-11 Markaz Islamabad. Fully completed Grade-A corporate office suites suitable for multinational companies, software houses, engineering consultancies, and financial firms.',
     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
     link: '/featured-building',
-    videoUrl: 'https://www.youtube.com/watch?v=ScMzIvxBSi4',
+    videoUrl: '',
     features: 'Centrally air-conditioned lobby, Redundant high-speed fiber internet, Dual commercial elevators, Secure access control, Ample plaza visitor parking, Bank and pharmacy on ground floor'
   }
 ]

@@ -312,7 +312,9 @@ export const useAdminStore = defineStore('admin', () => {
       const ratesData = await readJson(ratesRes)
       if (ratesData !== undefined) {
         if (ratesData && Object.keys(ratesData).length > 0) {
+          cleanDummyVideoUrls(ratesData)
           liveRates.value = { ...liveRates.value, ...ratesData }
+          cleanDummyVideoUrls(liveRates.value)
           localStorage.setItem(STORAGE_KEYS.RATES, JSON.stringify(liveRates.value))
         }
         apiConnected.value = true
@@ -481,8 +483,8 @@ export const useAdminStore = defineStore('admin', () => {
         m5: 'PKR 25 - 45 Lac',
         m10: 'PKR 65 - 95 Lac',
         k1: 'PKR 1.25 - 1.95 Cr',
-        showVideo: true,
-        videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+        showVideo: false,
+        videoUrl: ''
       },
       topCity: {
         name: 'TopCity-1 Islamabad',
@@ -490,8 +492,8 @@ export const useAdminStore = defineStore('admin', () => {
         m5: 'PKR 55 - 85 Lac',
         m10: 'PKR 85 Lac - 2.75 Cr',
         k1: 'PKR 1.80 - 4.00 Cr',
-        showVideo: true,
-        videoUrl: 'https://www.youtube.com/watch?v=F0f8u84_0c0'
+        showVideo: false,
+        videoUrl: ''
       },
       agg: {
         name: 'Airport Green Garden (AGG)',
@@ -499,8 +501,8 @@ export const useAdminStore = defineStore('admin', () => {
         m5: 'PKR 35 - 65 Lac',
         m10: 'PKR 55 Lac - 1.05 Cr',
         k1: 'PKR 1.10 - 1.85 Cr',
-        showVideo: true,
-        videoUrl: 'https://www.youtube.com/watch?v=q6gS_u4z2-o'
+        showVideo: false,
+        videoUrl: ''
       },
       topResidencia: {
         name: 'Top Residencia',
@@ -521,8 +523,8 @@ export const useAdminStore = defineStore('admin', () => {
         m8: { down: 'PKR 19.20 Lac', total: 'PKR 54.90 Lac', quarterly: 'PKR 85,000/mo', lumpSum: 'PKR 46.50 Lac' },
         m10: { down: 'PKR 26.30 Lac', total: 'PKR 72.50 Lac', quarterly: 'PKR 110,000/mo', lumpSum: 'PKR 61.50 Lac' },
         k1: { down: 'PKR 43.10 Lac', total: 'PKR 1.229 Cr', quarterly: 'PKR 190,000/mo', lumpSum: 'PKR 1.039 Cr' },
-        showVideo: true,
-        videoUrl: 'https://www.youtube.com/watch?v=fDvyuX8e370'
+        showVideo: false,
+        videoUrl: ''
       },
       blueWorld: {
         name: 'Blue World City',
@@ -645,8 +647,34 @@ export const useAdminStore = defineStore('admin', () => {
     ]
   }
 
+  const cleanDummyVideoUrls = (rates) => {
+    if (!rates || typeof rates !== 'object') return
+    const dummyPatterns = ['dQw4w9WgXcQ', 'ScMzIvxBSi4', 'F0f8u84_0c0', 'q6gS_u4z2-o', 'fDvyuX8e370', 'BenMarquezTX']
+    const isDummy = (url) => typeof url === 'string' && dummyPatterns.some(p => url.includes(p))
+
+    const cleanGroup = (group) => {
+      if (!group || typeof group !== 'object') return
+      for (const item of Object.values(group)) {
+        if (item && typeof item === 'object') {
+          if (isDummy(item.videoUrl)) {
+            item.videoUrl = ''
+            item.showVideo = false
+          }
+        }
+      }
+    }
+
+    cleanGroup(rates.moqaPlots)
+    cleanGroup(rates.installmentPlans)
+    cleanGroup(rates.phaFlats)
+  }
+
   const storedRates = JSON.parse(localStorage.getItem(STORAGE_KEYS.RATES) || 'null')
-  const liveRates = ref({
+  if (storedRates) {
+    cleanDummyVideoUrls(storedRates)
+  }
+
+  const initialRates = {
     ...defaultRates,
     ...(storedRates || {}),
     phaFlats: (storedRates?.phaFlats && Object.keys(storedRates.phaFlats).some(k => k.startsWith('i16_') || k.startsWith('i12_') || k.startsWith('kurri_')))
@@ -658,7 +686,9 @@ export const useAdminStore = defineStore('admin', () => {
     hrSukhSuites: (storedRates?.hrSukhSuites && storedRates.hrSukhSuites.length > 0)
       ? storedRates.hrSukhSuites
       : defaultRates.hrSukhSuites
-  })
+  }
+  cleanDummyVideoUrls(initialRates)
+  const liveRates = ref(initialRates)
 
   const saveLiveRates = async (newRates) => {
     liveRates.value = { ...liveRates.value, ...newRates }
