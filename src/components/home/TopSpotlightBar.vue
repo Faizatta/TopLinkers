@@ -8,7 +8,6 @@
       <img
         src="/images/hero-harsukh-800.webp"
         alt="Nathia Gali Pines"
-        loading="lazy"
         decoding="async"
         width="600"
         height="120"
@@ -23,7 +22,6 @@
             <img
               src="/images/hero-harsukh-800.webp"
               alt="Harsukh Residencies"
-              loading="lazy"
               decoding="async"
               width="80"
               height="80"

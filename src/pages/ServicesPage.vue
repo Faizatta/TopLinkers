@@ -536,17 +536,17 @@
               <!-- Few Images Preview Row (Authentic On-Ground Photos) -->
               <div class="mb-4 rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
                 <div class="h-36 w-full overflow-hidden relative cursor-pointer" @click="openPhaModal('i12')">
-                  <img src="/images/pha/pha-i12-ext-1.webp" alt="Sector I-12 PHA Flats" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img src="/images/pha/pha-i12-ext-1.webp" alt="Sector I-12 PHA Flats" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" width="400" height="144" />
                   <span class="absolute bottom-2 right-2 bg-black/75 text-white text-[9px] font-bold px-2 py-0.5 rounded backdrop-blur-xs flex items-center gap-1">
                     <span>📸</span>
                     <span>Few Images &bull; 6 Photos</span>
                   </span>
                 </div>
                 <div class="p-1.5 flex items-center gap-1.5 overflow-x-auto bg-slate-100/70">
-                  <img src="/images/pha/pha-i12-ext-1.webp" alt="I-12 Elevation" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openPhaModal('i12')" />
-                  <img src="/images/pha/pha-i16-ext-1.webp" alt="I-16 Blocks" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openPhaModal('i16')" />
-                  <img src="/images/pha/pha-i12-elevation.webp" alt="Tower Façade" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openPhaModal('i12')" />
-                  <img src="/images/pha/pha-i16-int-1.webp" alt="Interior Finish" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openPhaModal('i16')" />
+                  <img src="/images/pha/pha-i12-ext-1.webp" alt="I-12 Elevation" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openPhaModal('i12')" />
+                  <img src="/images/pha/pha-i16-ext-1.webp" alt="I-16 Blocks" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openPhaModal('i16')" />
+                  <img src="/images/pha/pha-i12-elevation.webp" alt="Tower Façade" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openPhaModal('i12')" />
+                  <img src="/images/pha/pha-i16-int-1.webp" alt="Interior Finish" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openPhaModal('i16')" />
                 </div>
               </div>
 
@@ -606,17 +606,17 @@
               <!-- Few Images Preview Row (Banu Hafeez TopCity-1) -->
               <div class="mb-4 rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
                 <div class="h-36 w-full overflow-hidden relative cursor-pointer" @click="openInstallmentModal('banu-hafeez')">
-                  <img src="/images/banu-hafeez/bh-hero.webp" alt="Banu Hafeez 17-Storey Tower TopCity-1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  <img src="/images/banu-hafeez/bh-hero.webp" alt="Banu Hafeez 17-Storey Tower TopCity-1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" width="400" height="144" />
                   <span class="absolute bottom-2 right-2 bg-black/75 text-white text-[9px] font-bold px-2 py-0.5 rounded backdrop-blur-xs flex items-center gap-1">
                     <span>📸</span>
                     <span>Few Images &bull; 5 Photos</span>
                   </span>
                 </div>
                 <div class="p-1.5 flex items-center gap-1.5 overflow-x-auto bg-slate-100/70">
-                  <img src="/images/banu-hafeez/bh-hero.webp" alt="Tower Façade" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
-                  <img src="/images/banu-hafeez/bh-tower.webp" alt="17-Storey Elevation" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
-                  <img src="/images/banu-hafeez/bh-interior.webp" alt="Luxury Suite Interior" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
-                  <img src="/images/banu-hafeez/bh-plan.webp" alt="Floor Layout Plan" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
+                  <img src="/images/banu-hafeez/bh-hero.webp" alt="Tower Façade" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
+                  <img src="/images/banu-hafeez/bh-tower.webp" alt="17-Storey Elevation" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
+                  <img src="/images/banu-hafeez/bh-interior.webp" alt="Luxury Suite Interior" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
+                  <img src="/images/banu-hafeez/bh-plan.webp" alt="Floor Layout Plan" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
                 </div>
               </div>
 
@@ -686,17 +686,17 @@
               <!-- Few Images Preview Row (Faisal Heights Zedem) -->
               <div class="mb-4 rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
                 <div class="h-36 w-full overflow-hidden relative cursor-pointer" @click="openInstallmentModal('faisal-heights')">
-                  <img src="/images/faisal-heights/fh-building.webp" alt="Faisal Heights Luxury Residential Tower" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  <img src="/images/faisal-heights/fh-building.webp" alt="Faisal Heights Luxury Residential Tower" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" width="400" height="144" />
                   <span class="absolute bottom-2 right-2 bg-black/75 text-white text-[9px] font-bold px-2 py-0.5 rounded backdrop-blur-xs flex items-center gap-1">
                     <span>📸</span>
                     <span>Few Images &bull; 6 Photos</span>
                   </span>
                 </div>
                 <div class="p-1.5 flex items-center gap-1.5 overflow-x-auto bg-slate-100/70">
-                  <img src="/images/faisal-heights/fh-building.webp" alt="Tower Overview" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('faisal-heights')" />
-                  <img src="/images/faisal-heights/fh-elevation.webp" alt="High-Rise Façade" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('faisal-heights')" />
-                  <img src="/images/faisal-heights/fh-4bed.webp" alt="Executive Loft Plan" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('faisal-heights')" />
-                  <img src="/images/faisal-heights/fh-2bed.webp" alt="2-Bed Luxury Suite" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('faisal-heights')" />
+                  <img src="/images/faisal-heights/fh-building.webp" alt="Tower Overview" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('faisal-heights')" />
+                  <img src="/images/faisal-heights/fh-elevation.webp" alt="High-Rise Façade" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('faisal-heights')" />
+                  <img src="/images/faisal-heights/fh-4bed.webp" alt="Executive Loft Plan" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('faisal-heights')" />
+                  <img src="/images/faisal-heights/fh-2bed.webp" alt="2-Bed Luxury Suite" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('faisal-heights')" />
                 </div>
               </div>
 
@@ -766,17 +766,17 @@
               <!-- Few Images Preview Row (Harsukh Residencies Nathia Gali) -->
               <div class="mb-4 rounded-xl overflow-hidden border border-white/10 bg-white/5">
                 <div class="h-36 w-full overflow-hidden relative cursor-pointer" @click="openInstallmentModal('hrsukh')">
-                  <img src="/images/harsukh/harsukh-valley.webp" alt="Harsukh Residencies Pine Valley Nathia Gali" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  <img src="/images/harsukh/harsukh-valley.webp" alt="Harsukh Residencies Pine Valley Nathia Gali" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" width="400" height="144" />
                   <span class="absolute bottom-2 right-2 bg-black/75 text-white text-[9px] font-bold px-2 py-0.5 rounded backdrop-blur-xs flex items-center gap-1">
                     <span>📸</span>
                     <span>Few Images &bull; 4 Photos</span>
                   </span>
                 </div>
                 <div class="p-1.5 flex items-center gap-1.5 overflow-x-auto bg-black/30">
-                  <img src="/images/harsukh/harsukh-valley.webp" alt="Pine Valley View" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('hrsukh')" />
-                  <img src="/images/harsukh/harsukh-exterior.webp" alt="Alpine Chalet Exterior" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('hrsukh')" />
-                  <img src="/images/harsukh/harsukh-interior.webp" alt="Luxury Suite Interior" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('hrsukh')" />
-                  <img src="/images/harsukh/harsukh-balcony.webp" alt="Mountain Deck Balcony" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('hrsukh')" />
+                  <img src="/images/harsukh/harsukh-valley.webp" alt="Pine Valley View" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('hrsukh')" />
+                  <img src="/images/harsukh/harsukh-exterior.webp" alt="Alpine Chalet Exterior" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('hrsukh')" />
+                  <img src="/images/harsukh/harsukh-interior.webp" alt="Luxury Suite Interior" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('hrsukh')" />
+                  <img src="/images/harsukh/harsukh-balcony.webp" alt="Mountain Deck Balcony" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('hrsukh')" />
                 </div>
               </div>
 

@@ -524,7 +524,7 @@
                   <router-link to="/hr-sukh" class="block h-52 w-full overflow-hidden relative bg-slate-900 group cursor-pointer">
                     <picture>
                       <source srcset="/images/hero-harsukh.webp" type="image/webp" />
-                      <img src="/images/hero-harsukh.jpg" alt="Harsukh Residencies Nathia Gali" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                      <img src="/images/hero-harsukh.jpg" alt="Harsukh Residencies Nathia Gali" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" width="600" height="208" />
                     </picture>
                     <div class="absolute top-3 inset-x-3 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
                       <span class="bg-amber-500 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow-md">
@@ -588,7 +588,7 @@
               <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col justify-between group">
                 <div>
                   <router-link to="/featured-building" class="block h-52 w-full overflow-hidden relative bg-slate-900 group cursor-pointer">
-                    <img src="/images/banu-hafeez/bh-hero.webp" alt="Banu Hafeez Luxury Apartments TopCity-1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    <img src="/images/banu-hafeez/bh-hero.webp" alt="Banu Hafeez Luxury Apartments TopCity-1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" width="600" height="208" />
                     <div class="absolute top-3 inset-x-3 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
                       <span class="bg-[#0F2A44]/95 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow-md backdrop-blur-xs">
                         15% Booking &bull; 3-Yr Plan
@@ -649,7 +649,7 @@
               <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col justify-between group">
                 <div>
                   <router-link to="/property/faisal-heights-luxury-executive-apartment" class="block h-52 w-full overflow-hidden relative bg-slate-900 group cursor-pointer">
-                    <img src="/images/faisal-heights/fh-building.webp" alt="Faisal Heights Luxury Apartments" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    <img src="/images/faisal-heights/fh-building.webp" alt="Faisal Heights Luxury Apartments" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" width="600" height="208" />
                     <div class="absolute top-3 inset-x-3 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
                       <span class="bg-[#0F2A44]/95 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow-md backdrop-blur-xs">
                         NOC Approved &bull; 1M Sq.Ft

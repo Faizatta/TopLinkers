@@ -18,6 +18,10 @@
         <img
           :src="building.image || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80'"
           :alt="building.title || building.name"
+          fetchpriority="high"
+          decoding="async"
+          width="1600"
+          height="800"
           class="w-full h-full object-cover opacity-25 filter blur-[1px] scale-105"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-[#07111D] via-[#0F2A44]/80 to-transparent"></div>
@@ -121,6 +125,10 @@
             <img
               :src="currentImage"
               :alt="building.title || building.name"
+              loading="eager"
+              decoding="async"
+              width="800"
+              height="384"
               class="w-full h-full object-cover transition-all duration-300 hover:scale-105"
             />
           </div>
@@ -132,7 +140,7 @@
               class="h-24 sm:h-28 rounded-xl overflow-hidden cursor-pointer border-2 transition-all relative group"
               :class="activeImageIndex === idx ? 'border-[#16B4E8] shadow-md' : 'border-slate-200 opacity-70 hover:opacity-100'"
             >
-              <img :src="img" :alt="`View ${idx+1}`" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <img :src="img" :alt="`View ${idx+1}`" loading="lazy" decoding="async" width="260" height="112" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
             </div>
           </div>
         </div>

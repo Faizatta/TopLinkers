@@ -36,7 +36,11 @@ const adminLoadingHtml = `<div id="app">
   </div>
 </div>`
 
-const adminShellHtml = rawViteTemplate.replace('<div id="app"></div>', adminLoadingHtml)
+const adminShellHtml = rawViteTemplate
+  .replace('<title>TopLinkers | Real Estate, Construction &amp; Solar Islamabad</title>', '<title>TopLinkers Executive Suite | Secure Management Portal</title>')
+  .replace('<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />', '<meta name="robots" content="noindex, nofollow" />')
+  .replace('<link rel="canonical" href="https://toplinkersgroup.com/" />', '<link rel="canonical" href="https://toplinkersgroup.com/admin/login" />')
+  .replace('<div id="app"></div>', adminLoadingHtml)
 
 const BASE_URL = 'https://toplinkersgroup.com'
 
@@ -972,13 +976,12 @@ export function prerender() {
       html = html.replace('</head>', `${propJsonLd}\n  </head>`)
     }
 
-    // 6. Crawlable Semantic Fallback for Non-JS Search Engine Crawlers & Bots (Inside <noscript> so JS browsers never show FOUC)
-    const crawlableNoscript = `
-    <div id="app"></div>
-
-    <!-- Crawlable Semantic Fallback for Non-JS Search Engine Crawlers & Bots -->
-    <noscript>
-      <div style="max-width:1200px;margin:32px auto;padding:0 20px;font-family:sans-serif;">
+    // 6. Crawlable Semantic Content injected directly inside <div id="app">
+    // Gives search engine crawlers, bots, and speed auditors an immediate, full-page semantic DOM
+    // with genuine <h1>, content sections, and internal links. When Vue boots on the client, it seamlessly mounts.
+    const crawlableHtml = `
+    <div id="app">
+      <div class="prerendered-content" style="max-width:1200px;margin:32px auto;padding:0 20px;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
         <h1 style="font-size:28px;font-weight:900;color:#0F2A44;margin-bottom:16px;line-height:1.25;">
           ${r.h1}
         </h1>
@@ -1007,10 +1010,9 @@ export function prerender() {
           <p>&copy; 2026 Top Linkers Real Estate, Construction &amp; Solar. Al Hameed Plaza, G-11 Markaz, Islamabad, Pakistan.</p>
         </footer>
       </div>
-    </noscript>`
+    </div>`
 
-    // Inject Crawlable Noscript directly after clean <div id="app"></div>
-    html = html.replace('<div id="app"></div>', crawlableNoscript)
+    html = html.replace('<div id="app"></div>', crawlableHtml)
 
     // Write file to target destinations:
     // 1. root index.html (for '/')
