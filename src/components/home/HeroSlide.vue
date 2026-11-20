@@ -1,6 +1,9 @@
 <template>
-  <!-- Background Image with Soft Ken Burns Zoom -->
-  <div class="absolute inset-0 w-full h-full overflow-hidden">
+  <!-- Background Image with Soft Ken Burns Zoom (Clickable to single project page) -->
+  <div
+    class="absolute inset-0 w-full h-full overflow-hidden cursor-pointer"
+    @click="$router.push(slide.link)"
+  >
     <!-- Art-directed responsive local image OR direct high-res photo -->
     <picture v-if="isLocalArtDirected" class="block w-full h-full">
       <source media="(max-width: 639px)" type="image/avif" :srcset="`${base}-m.avif`" />
@@ -49,8 +52,11 @@
         </span>
       </div>
 
-      <!-- 2. Main Title (Animated entry: large clean Houzez typography) -->
-      <h2 class="slide-title text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-black tracking-tight text-white leading-[1.12] mb-2 sm:mb-3 drop-shadow-md">
+      <!-- 2. Main Title (Animated entry: large clean Houzez typography, clickable to single page) -->
+      <h2
+        class="slide-title text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-black tracking-tight text-white leading-[1.12] mb-2 sm:mb-3 drop-shadow-md cursor-pointer hover:text-[#16B4E8] transition-colors"
+        @click="$router.push(slide.link)"
+      >
         {{ slide.title }}
       </h2>
 
@@ -59,16 +65,15 @@
         {{ slide.description }}
       </p>
 
-      <!-- 4. Action CTA (Redirect to Listings) -->
+      <!-- 4. Action CTA: Explore Button (Direct to Single Project Page) -->
       <div class="slide-price-cta flex flex-wrap items-center gap-3 sm:gap-4 pt-1">
-        <!-- Primary Action Button: View Property in Listings -->
         <router-link
-          :to="slide.listingLink || slide.link"
-          class="btn-arrow-slide px-5 sm:px-6 py-2.5 sm:py-3 bg-[#16B4E8] hover:bg-[#119ecf] text-[#0F2A44] text-xs sm:text-sm font-black uppercase tracking-wider rounded-xl shadow-lg shadow-cyan-500/25 transition-all flex items-center justify-center group flex-shrink-0"
+          :to="slide.link"
+          class="btn-arrow-slide px-6 sm:px-8 py-3 sm:py-3.5 bg-[#16B4E8] hover:bg-[#119ecf] text-[#0F2A44] text-xs sm:text-sm font-black uppercase tracking-wider rounded-xl shadow-lg shadow-cyan-500/25 transition-all flex items-center justify-center group flex-shrink-0"
           @click.stop
         >
-          <span>{{ slide.ctaText || 'View in Listings' }}</span>
-          <svg class="arrow-icon w-4 h-4 ml-1.5 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <span>{{ slide.ctaText || 'Explore Project' }}</span>
+          <svg class="arrow-icon w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
         </router-link>

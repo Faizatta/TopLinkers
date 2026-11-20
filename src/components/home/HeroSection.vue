@@ -27,7 +27,7 @@
       class="hero-slide hero-static absolute inset-0 z-[2] w-full h-full cursor-pointer"
       :class="{ 'swiper-slide-active': staticActive, 'pointer-events-none': carouselReady }"
       :inert="carouselReady || undefined"
-      @click="goToSlideLink(slides[0].listingLink || slides[0].link)"
+      @click="goToSlideLink(slides[0].link)"
     >
       <HeroSlide :slide="slides[0]" :priority="true" />
     </div>
@@ -51,9 +51,7 @@ const slides = [
     specs: '10 Marla • Immediate Physical Possession • RDA Approved',
     badge: 'Cash Moqa Ready',
     description: 'Direct on-ground demarcated plot adjoining New Islamabad Airport gate & Srinagar Highway. Immediate physical possession with swift registry transfer.',
-    price: 'PKR 1.25 Crore',
-    ctaText: 'View Plot in Listings',
-    listingLink: '/listings?keyword=TopCity&type=plot',
+    ctaText: 'Explore Plot',
     link: '/property/corner-plot-topcity',
     image: '/images/hero-moqa-plot.webp'
   },
@@ -63,9 +61,7 @@ const slides = [
     specs: '2 & 3 Bed Apartments • Ready Possession & Installments',
     badge: 'Government Housing',
     description: 'Authorized government-allocated PHA flats in Islamabad with fast CDA transfer, dual elevators, 24/7 security, and verified allotment files.',
-    price: 'PKR 55 Lac – 1.45 Crore',
-    ctaText: 'View Flats in Listings',
-    listingLink: '/listings?keyword=PHA&type=apartment',
+    ctaText: 'Explore PHA Flats',
     link: '/property/pha-flats-sector-i12-furnished-apartment',
     image: '/images/hero-pha-flats.webp'
   },
@@ -75,9 +71,7 @@ const slides = [
     specs: 'Furnished Mountain Suites & Penthouses • 8,200 Ft',
     badge: '20%+ Rental ROI',
     description: 'Wake up above the clouds in serene Nathia Gali pine forests. Timber-and-stone luxury suites with thermal terrace pools and hands-off rental management.',
-    price: 'PKR 1.65 Crore (3-Yr Plan)',
-    ctaText: 'View in Listings',
-    listingLink: '/listings?keyword=Harsukh',
+    ctaText: 'Explore Harsukh',
     link: '/hr-sukh',
     image: '/images/hero-harsukh.webp'
   },
@@ -87,9 +81,7 @@ const slides = [
     specs: '1, 2 & 3 Bed Residences • 15% Booking • 3-Year Plan',
     badge: '17-Storey Landmark Tower',
     description: 'Approved 17-storey luxury landmark by Waheed Group in TopCity-1, Islamabad. Resident swimming pool, gym, 2 basements parking (281 cars), 2-year possession.',
-    price: 'PKR 98.3 Lac – 3.38 Cr',
-    ctaText: 'View Banu Hafeez Details',
-    listingLink: '/featured-building',
+    ctaText: 'Explore Banu Hafeez',
     link: '/featured-building',
     image: '/images/banu-hafeez-hero.webp'
   },
@@ -99,9 +91,7 @@ const slides = [
     specs: '1 Kanal (500 Sq Yds) • 5 Beds • 20kW Tier-1 Solar Net Metering',
     badge: 'Turnkey Ready',
     description: 'Custom turnkey designer residence with Italian kitchen, landscaped private lawn, Grade-60 steel seismic structure, and zero electricity bills via solar.',
-    price: 'PKR 7.50 Crore',
-    ctaText: 'View Villa in Listings',
-    listingLink: '/listings?keyword=Gulberg',
+    ctaText: 'Explore Villa',
     link: '/property/spanish-luxury-villa-gulberg-greens',
     image: '/images/hero-real-estate.webp'
   },
@@ -111,9 +101,7 @@ const slides = [
     specs: '5, 8, 10 Marla & 1 Kanal • 3,700 Plots Possession • RDA Approved',
     badge: '7 KM to Airport • Kashmir Highway',
     description: 'RDA-approved master-planned community adjoining New Islamabad Airport & Kashmir Highway. 1,500 plots possession delivered with 2,200 more in Dec 2026. Wide carpeted boulevards & underground utilities.',
-    price: 'PKR 35 Lac – 1.85 Crore',
-    ctaText: 'View AGG Plots in Listings',
-    listingLink: '/listings?keyword=AGG&type=plot',
+    ctaText: 'Explore AGG Plots',
     link: '/property/agg-airport-green-garden-5-marla-moqa-ka-plot',
     image: '/images/agg/agg-plots-hero.webp'
   }
