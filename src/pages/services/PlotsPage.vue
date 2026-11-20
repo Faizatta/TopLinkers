@@ -57,23 +57,48 @@
               <span>Instant WhatsApp Inquiry</span>
             </a>
 
-            <!-- Professional Category Switcher Pills -->
-            <div class="inline-flex p-1 bg-black/40 backdrop-blur-md rounded-xl border border-white/20 text-xs">
+            <!-- Full-Width High-Contrast Category Switcher Tabs -->
+            <div class="w-full sm:w-auto grid grid-cols-2 sm:inline-flex p-1.5 bg-black/60 backdrop-blur-md rounded-2xl border border-white/25 shadow-2xl gap-1.5 sm:gap-2">
               <button
                 type="button"
-                @click="activePlotFilter = 'cash'"
-                class="px-4 py-2 rounded-lg font-bold transition-all"
-                :class="activePlotFilter === 'cash' ? 'bg-[#16B4E8] text-[#0F2A44] shadow' : 'text-slate-300 hover:text-white'"
+                @click="switchPlotTab('cash')"
+                class="w-full sm:w-auto flex flex-col items-center justify-center py-2.5 px-3 sm:px-6 rounded-xl transition-all duration-200"
+                :class="activePlotFilter === 'cash'
+                  ? 'bg-gradient-to-r from-[#16B4E8] to-[#0ea0d1] text-[#071E33] font-black shadow-lg shadow-[#16B4E8]/35 ring-2 ring-white/70 scale-[1.01]'
+                  : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 font-bold'"
               >
-                Cash Possession Plots
+                <div class="flex items-center gap-1.5 text-xs sm:text-sm font-extrabold leading-tight">
+                  <span v-if="activePlotFilter === 'cash'" class="w-2.5 h-2.5 rounded-full bg-[#071E33] animate-pulse"></span>
+                  <span v-else class="w-2 h-2 rounded-full bg-slate-500/60"></span>
+                  <span>Cash Plots</span>
+                </div>
+                <span
+                  class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider mt-1 px-2 py-0.5 rounded-md"
+                  :class="activePlotFilter === 'cash' ? 'bg-[#071E33]/15 text-[#071E33]' : 'text-slate-400 bg-white/5'"
+                >
+                  TopCity &amp; AGG
+                </span>
               </button>
+
               <button
                 type="button"
-                @click="activePlotFilter = 'installments'"
-                class="px-4 py-2 rounded-lg font-bold transition-all"
-                :class="activePlotFilter === 'installments' ? 'bg-emerald-500 text-white shadow' : 'text-slate-300 hover:text-white'"
+                @click="switchPlotTab('installments')"
+                class="w-full sm:w-auto flex flex-col items-center justify-center py-2.5 px-3 sm:px-6 rounded-xl transition-all duration-200"
+                :class="activePlotFilter === 'installments'
+                  ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-black shadow-lg shadow-emerald-500/35 ring-2 ring-emerald-200/70 scale-[1.01]'
+                  : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 font-bold'"
               >
-                Installment Plans
+                <div class="flex items-center gap-1.5 text-xs sm:text-sm font-extrabold leading-tight">
+                  <span v-if="activePlotFilter === 'installments'" class="w-2.5 h-2.5 rounded-full bg-white animate-pulse"></span>
+                  <span v-else class="w-2 h-2 rounded-full bg-slate-500/60"></span>
+                  <span>Installments</span>
+                </div>
+                <span
+                  class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider mt-1 px-2 py-0.5 rounded-md"
+                  :class="activePlotFilter === 'installments' ? 'bg-white/20 text-white' : 'text-slate-400 bg-white/5'"
+                >
+                  Faisal Town 2
+                </span>
               </button>
             </div>
           </div>
@@ -140,7 +165,7 @@
           <!-- ======================================================== -->
           <!-- SECTION 1: CASH POSSESSION PLOTS (TOPCITY, AGG, PECHS)   -->
           <!-- ======================================================== -->
-          <div v-if="activePlotFilter === 'all' || activePlotFilter === 'cash'" class="space-y-6">
+          <div id="cash-plots-section" v-if="activePlotFilter === 'all' || activePlotFilter === 'cash'" class="space-y-6 scroll-mt-24">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-gray-200">
               <div>
                 <span class="text-[10px] font-black uppercase tracking-widest text-[#16B4E8] bg-sky-50 px-2.5 py-0.5 rounded-full inline-block mb-1">
@@ -363,7 +388,7 @@
           <!-- ======================================================== -->
           <!-- SECTION 2: INSTALLMENT PLOTS (FAISAL TOWN PHASE 2)       -->
           <!-- ======================================================== -->
-          <div v-if="activePlotFilter === 'all' || activePlotFilter === 'installments'" class="space-y-6">
+          <div id="installment-plots-section" v-if="activePlotFilter === 'all' || activePlotFilter === 'installments'" class="space-y-6 scroll-mt-24">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-gray-200">
               <div>
                 <span class="text-[10px] font-black uppercase tracking-widest text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full inline-block mb-1">
@@ -1036,10 +1061,21 @@ const adminStore = useAdminStore()
 const faqs = computed(() => adminStore.getFaqsByService('plots'))
 
 const route = useRoute()
-const activePlotFilter = ref('all') // 'all' | 'cash' | 'installments'
+const activePlotFilter = ref('cash') // 'cash' | 'installments' | 'all'
 const selectedPlot = ref(null)
 const selectedPlotKey = ref('')
 const activeCompareView = ref('topcity-agg') // 'topcity-agg' | 'cash-installments'
+
+const switchPlotTab = (tab) => {
+  activePlotFilter.value = tab
+  const targetId = tab === 'cash' ? 'cash-plots-section' : 'installment-plots-section'
+  if (typeof window !== 'undefined' && window.scrollY > 350) {
+    const el = document.getElementById(targetId)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+}
 
 // Dedicated Video Modal State for Quick Play
 const videoModalOpen = ref(false)
@@ -1201,10 +1237,12 @@ const openPlotDetails = (key) => {
 }
 
 const applyRouteFilter = () => {
-  if (route.query.filter === 'cash' || route.hash === '#cash') {
-    activePlotFilter.value = 'cash'
-  } else if (route.query.filter === 'installments' || route.hash === '#installments') {
+  if (route.query.filter === 'installments' || route.hash === '#installments') {
     activePlotFilter.value = 'installments'
+  } else if (route.query.filter === 'all' || route.hash === '#all') {
+    activePlotFilter.value = 'all'
+  } else {
+    activePlotFilter.value = 'cash'
   }
 }
 

@@ -57,23 +57,48 @@
               <span>Instant WhatsApp Booking</span>
             </a>
 
-            <!-- Category Switcher Pills -->
-            <div class="inline-flex p-1 bg-black/40 backdrop-blur-md rounded-xl border border-white/20 text-xs">
+            <!-- Full-Width High-Contrast Category Switcher Tabs -->
+            <div class="w-full sm:w-auto grid grid-cols-2 sm:inline-flex p-1.5 bg-black/60 backdrop-blur-md rounded-2xl border border-white/25 shadow-2xl gap-1.5 sm:gap-2">
               <button
                 type="button"
-                @click="activeMainTab = 'pha'"
-                class="px-4 py-2 rounded-lg font-bold transition-all"
-                :class="activeMainTab === 'pha' ? 'bg-[#16B4E8] text-[#0F2A44] shadow' : 'text-slate-300 hover:text-white'"
+                @click="switchTab('pha')"
+                class="w-full sm:w-auto flex flex-col items-center justify-center py-2.5 px-3 sm:px-6 rounded-xl transition-all duration-200"
+                :class="activeMainTab === 'pha'
+                  ? 'bg-gradient-to-r from-[#16B4E8] to-[#0ea0d1] text-[#071E33] font-black shadow-lg shadow-[#16B4E8]/35 ring-2 ring-white/70 scale-[1.01]'
+                  : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 font-bold'"
               >
-                PHA Govt Flats
+                <div class="flex items-center gap-1.5 text-xs sm:text-sm font-extrabold leading-tight">
+                  <span v-if="activeMainTab === 'pha'" class="w-2.5 h-2.5 rounded-full bg-[#071E33] animate-pulse"></span>
+                  <span v-else class="w-2 h-2 rounded-full bg-slate-500/60"></span>
+                  <span>PHA Govt Flats</span>
+                </div>
+                <span
+                  class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider mt-1 px-2 py-0.5 rounded-md"
+                  :class="activeMainTab === 'pha' ? 'bg-[#071E33]/15 text-[#071E33]' : 'text-slate-400 bg-white/5'"
+                >
+                  100% Cash Ready
+                </span>
               </button>
+
               <button
                 type="button"
-                @click="activeMainTab = 'luxury'"
-                class="px-4 py-2 rounded-lg font-bold transition-all"
-                :class="activeMainTab === 'luxury' ? 'bg-amber-500 text-white shadow' : 'text-slate-300 hover:text-white'"
+                @click="switchTab('luxury')"
+                class="w-full sm:w-auto flex flex-col items-center justify-center py-2.5 px-3 sm:px-6 rounded-xl transition-all duration-200"
+                :class="activeMainTab === 'luxury'
+                  ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-black shadow-lg shadow-amber-500/35 ring-2 ring-amber-200/70 scale-[1.01]'
+                  : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 font-bold'"
               >
-                Luxury &amp; Vacation Suites
+                <div class="flex items-center gap-1.5 text-xs sm:text-sm font-extrabold leading-tight">
+                  <span v-if="activeMainTab === 'luxury'" class="w-2.5 h-2.5 rounded-full bg-white animate-pulse"></span>
+                  <span v-else class="w-2 h-2 rounded-full bg-slate-500/60"></span>
+                  <span>Luxury &amp; Suites</span>
+                </div>
+                <span
+                  class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider mt-1 px-2 py-0.5 rounded-md"
+                  :class="activeMainTab === 'luxury' ? 'bg-white/20 text-white' : 'text-slate-400 bg-white/5'"
+                >
+                  3-Yr Installments
+                </span>
               </button>
             </div>
           </div>
@@ -118,7 +143,7 @@
           <!-- ======================================================== -->
           <!-- OPTION 1: PHA GOVERNMENT FLATS DIVISION                 -->
           <!-- ======================================================== -->
-          <div v-if="activeMainTab === 'all' || activeMainTab === 'pha'" class="space-y-10">
+          <div id="pha-section" v-if="activeMainTab === 'all' || activeMainTab === 'pha'" class="space-y-10 scroll-mt-24">
             
             <!-- PHA Foundation Official Header & About Box -->
             <section class="bg-white rounded-3xl border border-blue-100 p-6 sm:p-8 shadow-sm relative overflow-hidden">
@@ -496,7 +521,7 @@
           <!-- ======================================================== -->
           <!-- OPTION 2: LUXURY FLATS DIVISION                         -->
           <!-- ======================================================== -->
-          <div v-if="activeMainTab === 'all' || activeMainTab === 'luxury'" class="space-y-10">
+          <div id="luxury-section" v-if="activeMainTab === 'all' || activeMainTab === 'luxury'" class="space-y-10 scroll-mt-24">
             
             <section class="bg-white rounded-3xl border border-amber-200 p-6 sm:p-8 shadow-sm relative overflow-hidden">
               <div class="absolute top-0 right-0 w-32 h-32 bg-amber-50 rounded-bl-full pointer-events-none"></div>
@@ -788,7 +813,18 @@ const adminStore = useAdminStore()
 const faqs = computed(() => adminStore.getFaqsByService('flats'))
 
 const route = useRoute()
-const activeMainTab = ref('all') // 'all' | 'pha' | 'luxury'
+const activeMainTab = ref('pha') // 'pha' | 'luxury' | 'all'
+
+const switchTab = (tab) => {
+  activeMainTab.value = tab
+  const targetId = tab === 'pha' ? 'pha-section' : 'luxury-section'
+  if (typeof window !== 'undefined' && window.scrollY > 350) {
+    const el = document.getElementById(targetId)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+}
 
 // PHA Details Modal State
 const selectedPhaSectorKey = ref(null)
@@ -806,10 +842,12 @@ const openPhaSector = (key) => {
 }
 
 const applyRouteTab = () => {
-  if (route.query.option === 'pha' || route.hash === '#pha') {
-    activeMainTab.value = 'pha'
-  } else if (route.query.option === 'luxury' || route.hash === '#luxury') {
+  if (route.query.option === 'luxury' || route.hash === '#luxury') {
     activeMainTab.value = 'luxury'
+  } else if (route.query.option === 'all' || route.hash === '#all') {
+    activeMainTab.value = 'all'
+  } else {
+    activeMainTab.value = 'pha'
   }
 
   // Handle direct open query e.g. /services/flats?open=i12 or ?open=pha
