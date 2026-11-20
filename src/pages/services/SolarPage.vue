@@ -271,19 +271,17 @@
           </section>
 
           <!-- Interactive Solar Savings & System Sizing Calculator -->
-          <section id="solar-calculator-section" class="bg-gradient-to-br from-[#071E33] to-[#0F2A44] text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden scroll-mt-24">
-            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-[#16B4E8]/10 rounded-full blur-3xl pointer-events-none"></div>
-
+          <section id="solar-calculator-section" class="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-sm relative overflow-hidden scroll-mt-24">
             <div class="relative z-10 space-y-6">
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-gray-100">
                 <div>
-                  <span class="text-[10px] font-black uppercase tracking-wider text-[#6CC24A] bg-emerald-950/70 border border-emerald-500/30 px-2.5 py-1 rounded-md">
+                  <span class="text-[10px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">
                     FINANCIAL RETURN ESTIMATOR
                   </span>
-                  <h2 class="text-xl sm:text-2xl font-black text-white mt-2">
+                  <h2 class="text-xl sm:text-2xl font-black text-[#0F2A44] mt-2">
                     Interactive Solar Savings &amp; Capacity Calculator
                   </h2>
-                  <p class="text-xs text-slate-300 mt-1">
+                  <p class="text-xs sm:text-sm text-slate-500 mt-1">
                     Select your average monthly WAPDA electricity bill to calculate the recommended system size and estimated annual returns.
                   </p>
                 </div>
@@ -291,7 +289,7 @@
 
               <!-- Bill Selector Presets -->
               <div>
-                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2.5">
+                <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2.5">
                   Select Your Average Monthly Electricity Bill:
                 </label>
                 <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
@@ -300,10 +298,10 @@
                     :key="tier.id"
                     type="button"
                     @click="selectedBillTier = tier"
-                    class="py-2.5 px-3 rounded-xl text-xs font-black transition-all border text-center"
+                    class="py-2.5 px-3 rounded-xl text-xs font-bold transition-all border text-center"
                     :class="selectedBillTier.id === tier.id
-                      ? 'bg-[#16B4E8] text-[#071E33] border-[#16B4E8] shadow-lg shadow-[#16B4E8]/30 scale-[1.02]'
-                      : 'bg-white/10 hover:bg-white/15 text-slate-200 border-white/10'"
+                      ? 'bg-[#16B4E8] text-[#071E33] border-[#16B4E8] shadow-md font-black scale-[1.02]'
+                      : 'bg-gray-50 hover:bg-gray-100 text-slate-700 border-gray-200'"
                   >
                     {{ tier.label }}
                   </button>
@@ -311,51 +309,51 @@
               </div>
 
               <!-- Calculation Result Cards -->
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white/5 backdrop-blur-md p-4 rounded-2xl border border-white/10">
-                <div class="p-3 bg-white/5 rounded-xl border border-white/5 text-center">
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200/80">
+                <div class="p-3 bg-white rounded-xl border border-gray-200 text-center shadow-xs">
                   <span class="text-[10px] text-slate-400 font-bold uppercase block">Recommended Capacity</span>
                   <span class="text-lg sm:text-2xl font-black text-[#16B4E8] block mt-1">
                     {{ selectedBillTier.capacity }}
                   </span>
-                  <span class="text-[10px] text-slate-300 block mt-0.5">{{ selectedBillTier.panels }} Panels</span>
+                  <span class="text-[10px] text-slate-500 block mt-0.5">{{ selectedBillTier.panels }} Panels</span>
                 </div>
 
-                <div class="p-3 bg-white/5 rounded-xl border border-white/5 text-center">
+                <div class="p-3 bg-white rounded-xl border border-gray-200 text-center shadow-xs">
                   <span class="text-[10px] text-slate-400 font-bold uppercase block">Monthly Output</span>
-                  <span class="text-lg sm:text-2xl font-black text-[#6CC24A] block mt-1">
+                  <span class="text-lg sm:text-2xl font-black text-emerald-600 block mt-1">
                     ~{{ selectedBillTier.monthlyUnits }} Units
                   </span>
-                  <span class="text-[10px] text-slate-300 block mt-0.5">IESCO Net-Metered</span>
+                  <span class="text-[10px] text-slate-500 block mt-0.5">IESCO Net-Metered</span>
                 </div>
 
-                <div class="p-3 bg-white/5 rounded-xl border border-white/5 text-center">
+                <div class="p-3 bg-white rounded-xl border border-gray-200 text-center shadow-xs">
                   <span class="text-[10px] text-slate-400 font-bold uppercase block">Monthly Bill Savings</span>
-                  <span class="text-lg sm:text-2xl font-black text-amber-400 block mt-1">
+                  <span class="text-lg sm:text-2xl font-black text-amber-600 block mt-1">
                     {{ selectedBillTier.monthlySavings }}
                   </span>
-                  <span class="text-[10px] text-slate-300 block mt-0.5">{{ selectedBillTier.annualSavings }} / Year</span>
+                  <span class="text-[10px] text-slate-500 block mt-0.5">{{ selectedBillTier.annualSavings }} / Year</span>
                 </div>
 
-                <div class="p-3 bg-white/5 rounded-xl border border-white/5 text-center">
+                <div class="p-3 bg-white rounded-xl border border-gray-200 text-center shadow-xs">
                   <span class="text-[10px] text-slate-400 font-bold uppercase block">Payback Period</span>
-                  <span class="text-lg sm:text-2xl font-black text-white block mt-1">
+                  <span class="text-lg sm:text-2xl font-black text-[#0F2A44] block mt-1">
                     {{ selectedBillTier.payback }}
                   </span>
-                  <span class="text-[10px] text-slate-300 block mt-0.5">25+ Yrs Free Energy</span>
+                  <span class="text-[10px] text-slate-500 block mt-0.5">25+ Yrs Free Energy</span>
                 </div>
               </div>
 
               <!-- Action Link -->
               <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-                <p class="text-xs text-slate-300">
+                <p class="text-xs text-slate-500">
                   Calculated based on average NEPRA peak/off-peak protected and unprotected residential tariffs in Islamabad.
                 </p>
                 <a
                   :href="`https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20used%20the%20Solar%20Calculator%20for%20bill%20${encodeURIComponent(selectedBillTier.label)}.%20Please%20provide%20a%20detailed%20quotation%20for%20a%20${encodeURIComponent(selectedBillTier.capacity)}%20system.`"
                   target="_blank"
-                  class="px-5 py-3 bg-[#6CC24A] hover:bg-[#5db23c] text-[#071E33] text-xs font-black uppercase tracking-wider rounded-xl transition-colors flex items-center justify-center gap-1.5 shadow-md flex-shrink-0"
+                  class="px-5 py-3 bg-[#6CC24A] hover:bg-[#5db23c] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-colors flex items-center justify-center gap-1.5 shadow-md flex-shrink-0"
                 >
-                  <span>Book {{ selectedBillTier.capacity }} System Quote</span>
+                  <span>Book {{ selectedBillTier.capacity }} Quote</span>
                   <span>&rarr;</span>
                 </a>
               </div>
@@ -607,50 +605,6 @@
                   <h4 class="text-sm font-bold text-[#0F2A44]">{{ step.title }}</h4>
                   <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">{{ step.description }}</p>
                 </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- 24/7 Smart Digital Cloud Monitoring Platform -->
-          <section class="bg-gradient-to-r from-slate-900 to-[#0F2A44] text-white p-6 sm:p-8 rounded-3xl shadow-md space-y-6">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div>
-                <span class="text-[10px] font-black uppercase tracking-wider text-[#16B4E8] bg-sky-950 px-2.5 py-1 rounded-md border border-[#16B4E8]/30">
-                  SMART IOT MONITORING
-                </span>
-                <h3 class="text-xl sm:text-2xl font-black text-white mt-2">
-                  Live Cloud &amp; Mobile App Generation Dashboard
-                </h3>
-              </div>
-              <span class="text-xs text-emerald-400 font-bold bg-emerald-950/80 border border-emerald-500/30 px-3 py-1 rounded-full self-start sm:self-auto">
-                ● Live 24/7 Telemetry
-              </span>
-            </div>
-
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">
-              Track your system's performance anytime from your smartphone. Our intelligent cloud portal monitors instantaneous solar wattage, daily units produced, home consumption, export units, battery state of charge (SOC), and lifetime PKR financial savings.
-            </p>
-
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-              <div class="p-3 bg-white/5 rounded-xl border border-white/10">
-                <span class="text-lg block">📱</span>
-                <strong class="text-xs text-white block mt-1">iOS &amp; Android App</strong>
-                <span class="text-[10px] text-slate-400">Instant Access</span>
-              </div>
-              <div class="p-3 bg-white/5 rounded-xl border border-white/10">
-                <span class="text-lg block">📊</span>
-                <strong class="text-xs text-white block mt-1">Export Analytics</strong>
-                <span class="text-[10px] text-slate-400">Hourly/Daily Trends</span>
-              </div>
-              <div class="p-3 bg-white/5 rounded-xl border border-white/10">
-                <span class="text-lg block">🔔</span>
-                <strong class="text-xs text-white block mt-1">Fault Notifications</strong>
-                <span class="text-[10px] text-slate-400">Automated Alerts</span>
-              </div>
-              <div class="p-3 bg-white/5 rounded-xl border border-white/10">
-                <span class="text-lg block">🌱</span>
-                <strong class="text-xs text-white block mt-1">CO₂ Offset Tracker</strong>
-                <span class="text-[10px] text-slate-400">Environmental Impact</span>
               </div>
             </div>
           </section>
