@@ -109,7 +109,7 @@
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 bg-white rounded-2xl p-3.5 sm:p-6 shadow-xl border border-gray-100 mb-8 sm:mb-12">
         <div class="text-center p-3 sm:p-4 rounded-xl bg-gray-50/80 border border-gray-100">
           <span class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase block">Completed Projects</span>
-          <span class="text-base sm:text-2xl font-black text-[#16B4E8] block mt-0.5">50+</span>
+          <span class="text-base sm:text-2xl font-black text-[#16B4E8] block mt-0.5">1000+</span>
           <span class="text-[9px] sm:text-[10px] text-gray-500 block mt-0.5">Residential &amp; Commercial</span>
         </div>
 
@@ -138,7 +138,7 @@
       <div class="relative overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 shadow-xl">
         <img
           src="/images/hero-solar.webp"
-          alt="TopLinkers 50+ Completed Solar Projects"
+          alt="TopLinkers 1000+ Completed Solar Projects"
           class="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.25]"
           loading="lazy"
         />
@@ -152,14 +152,14 @@
                 PROVEN SOLAR TRACK RECORD &bull; ISLAMABAD &amp; RAWALPINDI
               </span>
               <h2 class="text-xl sm:text-2xl md:text-3xl font-black text-white mt-2">
-                Delivering Clean Solar Power &bull; 50+ Projects Completed
+                Delivering Clean Solar Power &bull; 1000+ Projects Completed
               </h2>
               <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl font-medium">
                 Engineered with Tier-1 panels, high-efficiency inverters, and lithium energy storage by our PEC registered technical teams.
               </p>
             </div>
             <a
-              href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20inquiring%20about%20your%2050%2B%20completed%20solar%20projects."
+              href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20inquiring%20about%20your%201000%2B%20completed%20solar%20projects."
               target="_blank"
               class="self-start sm:self-center px-5 py-3 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-lg transition-all flex items-center gap-2 whitespace-nowrap"
             >
@@ -170,7 +170,7 @@
           <!-- 3 Translucent Metric Cards -->
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15">
-              <span class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight block">50+</span>
+              <span class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight block">1000+</span>
               <span class="text-sm font-bold text-white mt-1 block">Projects Completed</span>
               <span class="text-[11px] text-slate-300 mt-0.5 block">On-grid &amp; hybrid rooftop installations across twin cities</span>
             </div>
@@ -217,12 +217,40 @@
               <!-- Card 1: Grid-Tied Solar Solution -->
               <div
                 @click="switchSolarTab('ongrid')"
-                class="p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between space-y-4 cursor-pointer select-none"
+                class="p-4 sm:p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between space-y-4 cursor-pointer select-none group"
                 :class="activeSolarTab === 'ongrid' ? 'border-[#16B4E8] bg-sky-50/40 ring-2 ring-[#16B4E8] shadow-md -translate-y-0.5' : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'"
               >
                 <div>
+                  <!-- Equipment Photo Showcase -->
+                  <div class="relative h-44 w-full rounded-xl overflow-hidden mb-4 border border-gray-100 bg-slate-900">
+                    <img
+                      src="/images/solar/solar-grid-tied-inverter.webp"
+                      alt="Tier-1 Solar Panels &amp; On-Grid Inverter"
+                      class="w-full h-full object-cover transition-transform duration-500"
+                      :class="activeSolarTab === 'ongrid' ? 'scale-105 filter brightness-100' : 'filter brightness-90 group-hover:scale-105'"
+                      loading="lazy"
+                      width="640"
+                      height="360"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                      <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-white bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-white/20">
+                        Tier-1 Panels &bull; Inverter
+                      </span>
+                      <button
+                        type="button"
+                        @click.stop="openSolarLightbox('/images/solar/solar-grid-tied-inverter.webp')"
+                        class="text-[9px] sm:text-[10px] font-bold text-white bg-white/20 hover:bg-white/30 backdrop-blur-md px-2 py-0.5 rounded border border-white/30 flex items-center gap-1 transition-colors"
+                        title="View High-Resolution Image"
+                      >
+                        <svg class="w-3 h-3 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                        <span>Enlarge</span>
+                      </button>
+                    </div>
+                  </div>
+
                   <div class="flex items-center justify-between mb-3">
-                    <span class="w-10 h-10 rounded-xl bg-sky-100 text-[#16B4E8] flex items-center justify-center font-black">
+                    <span class="w-9 h-9 rounded-xl bg-sky-100 text-[#16B4E8] flex items-center justify-center font-black">
                       <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5zm6 14.5l-6 3.75-6-3.75V8.5l6-3.75 6 3.75v8z"/></svg>
                     </span>
                     <span class="text-[10px] font-black uppercase tracking-wider text-[#16B4E8] bg-sky-50 px-2 py-0.5 rounded-full border border-sky-100">
@@ -260,12 +288,40 @@
               <!-- Card 2: Hybrid Solar Solution -->
               <div
                 @click="switchSolarTab('hybrid')"
-                class="p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between space-y-4 cursor-pointer select-none"
+                class="p-4 sm:p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between space-y-4 cursor-pointer select-none group"
                 :class="activeSolarTab === 'hybrid' ? 'border-emerald-500 bg-emerald-50/40 ring-2 ring-emerald-500 shadow-md -translate-y-0.5' : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'"
               >
                 <div>
+                  <!-- Equipment Photo Showcase -->
+                  <div class="relative h-44 w-full rounded-xl overflow-hidden mb-4 border border-gray-100 bg-slate-900">
+                    <img
+                      src="/images/solar/solar-hybrid-inverter.webp"
+                      alt="Smart Hybrid Inverter &amp; Solar Panels"
+                      class="w-full h-full object-cover transition-transform duration-500"
+                      :class="activeSolarTab === 'hybrid' ? 'scale-105 filter brightness-100' : 'filter brightness-90 group-hover:scale-105'"
+                      loading="lazy"
+                      width="640"
+                      height="360"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                      <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-white bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-white/20">
+                        Hybrid Inverter &bull; Panels
+                      </span>
+                      <button
+                        type="button"
+                        @click.stop="openSolarLightbox('/images/solar/solar-hybrid-inverter.webp')"
+                        class="text-[9px] sm:text-[10px] font-bold text-white bg-white/20 hover:bg-white/30 backdrop-blur-md px-2 py-0.5 rounded border border-white/30 flex items-center gap-1 transition-colors"
+                        title="View High-Resolution Image"
+                      >
+                        <svg class="w-3 h-3 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                        <span>Enlarge</span>
+                      </button>
+                    </div>
+                  </div>
+
                   <div class="flex items-center justify-between mb-3">
-                    <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-black">
+                    <span class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-black">
                       <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.88 0-.33-.75-.31-.78C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15-5.9 10.34z"/></svg>
                     </span>
                     <span class="text-[10px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
@@ -303,12 +359,40 @@
               <!-- Card 3: Battery Energy Storage System (BESS) -->
               <div
                 @click="switchSolarTab('bess')"
-                class="p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between space-y-4 cursor-pointer select-none"
+                class="p-4 sm:p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between space-y-4 cursor-pointer select-none group"
                 :class="activeSolarTab === 'bess' ? 'border-amber-500 bg-amber-50/40 ring-2 ring-amber-500 shadow-md -translate-y-0.5' : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'"
               >
                 <div>
+                  <!-- Equipment Photo Showcase -->
+                  <div class="relative h-44 w-full rounded-xl overflow-hidden mb-4 border border-gray-100 bg-slate-900">
+                    <img
+                      src="/images/solar/solar-bess-battery-storage.webp"
+                      alt="Lithium Battery Energy Storage &amp; Hybrid Inverter"
+                      class="w-full h-full object-cover transition-transform duration-500"
+                      :class="activeSolarTab === 'bess' ? 'scale-105 filter brightness-100' : 'filter brightness-90 group-hover:scale-105'"
+                      loading="lazy"
+                      width="640"
+                      height="360"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                      <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-white bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-white/20">
+                        Lithium BESS &bull; Battery Rack
+                      </span>
+                      <button
+                        type="button"
+                        @click.stop="openSolarLightbox('/images/solar/solar-bess-battery-storage.webp')"
+                        class="text-[9px] sm:text-[10px] font-bold text-white bg-white/20 hover:bg-white/30 backdrop-blur-md px-2 py-0.5 rounded border border-white/30 flex items-center gap-1 transition-colors"
+                        title="View High-Resolution Image"
+                      >
+                        <svg class="w-3 h-3 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                        <span>Enlarge</span>
+                      </button>
+                    </div>
+                  </div>
+
                   <div class="flex items-center justify-between mb-3">
-                    <span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-black">
+                    <span class="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-black">
                       <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M16 20H8V6h8v14zm-3-18h-2c-.55 0-1 .45-1 1v1h4V3c0-.55-.45-1-1-1zm5 4h-1v15c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1V6H5c-.55 0-1 .45-1 1v14c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V7c0-.55-.45-1-1-1z"/></svg>
                     </span>
                     <span class="text-[10px] font-black uppercase tracking-wider text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-100">
@@ -374,6 +458,36 @@
                   </a>
                 </div>
 
+                <!-- High-Definition Hardware Picture Spotlight -->
+                <div
+                  @click="openSolarLightbox('/images/solar/solar-grid-tied-inverter.webp')"
+                  class="relative h-60 sm:h-72 lg:h-80 w-full rounded-2xl overflow-hidden shadow-md border border-sky-200 group cursor-pointer"
+                >
+                  <img
+                    src="/images/solar/solar-grid-tied-inverter.webp"
+                    alt="Tier-1 Solar Panels &amp; On-Grid Inverter Hardware"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                    width="1280"
+                    height="720"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#071E33]/90 via-[#071E33]/30 to-transparent"></div>
+                  <div class="absolute bottom-4 left-4 right-4 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                    <div>
+                      <span class="text-[10px] font-black uppercase tracking-wider text-[#16B4E8] bg-black/70 backdrop-blur-md px-2.5 py-1 rounded inline-flex items-center gap-1.5 border border-[#16B4E8]/40">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#16B4E8] animate-pulse"></span>
+                        PHOTO &bull; TIER-1 BIFACIAL SOLAR PANELS &amp; ON-GRID INVERTER
+                      </span>
+                      <h5 class="text-white font-extrabold text-base sm:text-lg mt-1.5">Commercial Grade Solar Array &amp; Smart Inverter Installation</h5>
+                      <p class="text-xs text-slate-300 max-w-xl">Precision rooftop racking engineered for maximum solar insolation with high-efficiency 3-phase string inverter integration.</p>
+                    </div>
+                    <span class="text-xs font-bold text-white bg-white/20 hover:bg-white/30 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/30 flex items-center gap-1.5 self-start sm:self-auto shrink-0 shadow-sm transition-all">
+                      <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                      <span>View Fullscreen</span>
+                    </span>
+                  </div>
+                </div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div class="bg-white p-4 rounded-xl border border-sky-100 shadow-xs">
                     <span class="text-[10px] font-bold uppercase text-slate-400 block">How It Works</span>
@@ -426,6 +540,36 @@
                   </a>
                 </div>
 
+                <!-- High-Definition Hardware Picture Spotlight -->
+                <div
+                  @click="openSolarLightbox('/images/solar/solar-hybrid-inverter.webp')"
+                  class="relative h-60 sm:h-72 lg:h-80 w-full rounded-2xl overflow-hidden shadow-md border border-emerald-300 group cursor-pointer"
+                >
+                  <img
+                    src="/images/solar/solar-hybrid-inverter.webp"
+                    alt="Smart Hybrid Solar Inverter Hardware"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                    width="1280"
+                    height="720"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#071E33]/90 via-[#071E33]/30 to-transparent"></div>
+                  <div class="absolute bottom-4 left-4 right-4 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                    <div>
+                      <span class="text-[10px] font-black uppercase tracking-wider text-emerald-400 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded inline-flex items-center gap-1.5 border border-emerald-500/40">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        PHOTO &bull; SMART HYBRID INVERTER &amp; BACKUP CONTROLLER
+                      </span>
+                      <h5 class="text-white font-extrabold text-base sm:text-lg mt-1.5">Intelligent Multi-MPPT Hybrid Inverter Unit</h5>
+                      <p class="text-xs text-slate-300 max-w-xl">Wall-mounted high-frequency hybrid inverter with digital telemetry screen, automatic transfer switch, and seamless grid-battery sync.</p>
+                    </div>
+                    <span class="text-xs font-bold text-white bg-white/20 hover:bg-white/30 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/30 flex items-center gap-1.5 self-start sm:self-auto shrink-0 shadow-sm transition-all">
+                      <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                      <span>View Fullscreen</span>
+                    </span>
+                  </div>
+                </div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div class="bg-white p-4 rounded-xl border border-emerald-100 shadow-xs">
                     <span class="text-[10px] font-bold uppercase text-slate-400 block">Dual Benefit Mode</span>
@@ -476,6 +620,36 @@
                   >
                     <span>Consult BESS Engineers &rarr;</span>
                   </a>
+                </div>
+
+                <!-- High-Definition Hardware Picture Spotlight -->
+                <div
+                  @click="openSolarLightbox('/images/solar/solar-bess-battery-storage.webp')"
+                  class="relative h-60 sm:h-72 lg:h-80 w-full rounded-2xl overflow-hidden shadow-md border border-amber-300 group cursor-pointer"
+                >
+                  <img
+                    src="/images/solar/solar-bess-battery-storage.webp"
+                    alt="High-Capacity Lithium Battery Storage Rack"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                    width="1280"
+                    height="720"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#071E33]/90 via-[#071E33]/30 to-transparent"></div>
+                  <div class="absolute bottom-4 left-4 right-4 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                    <div>
+                      <span class="text-[10px] font-black uppercase tracking-wider text-amber-400 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded inline-flex items-center gap-1.5 border border-amber-500/40">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                        PHOTO &bull; HIGH-VOLTAGE MODULAR LITHIUM (LiFePO4) BATTERY RACK
+                      </span>
+                      <h5 class="text-white font-extrabold text-base sm:text-lg mt-1.5">Modular Battery Energy Storage System (BESS) Enclosure</h5>
+                      <p class="text-xs text-slate-300 max-w-xl">Heavy-duty server-rack battery modules engineered with active BMS safety protection, 6000+ deep cycles, and commercial peak shaving.</p>
+                    </div>
+                    <span class="text-xs font-bold text-white bg-white/20 hover:bg-white/30 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/30 flex items-center gap-1.5 self-start sm:self-auto shrink-0 shadow-sm transition-all">
+                      <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                      <span>View Fullscreen</span>
+                    </span>
+                  </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -1119,6 +1293,15 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { MapPinIcon, PhoneIcon } from '@heroicons/vue/24/outline'
+import { useUiStore } from '../../stores/ui'
+
+const uiStore = useUiStore()
+
+const openSolarLightbox = (imagePath) => {
+  if (uiStore && uiStore.openLightbox) {
+    uiStore.openLightbox([imagePath], 0)
+  }
+}
 
 // Active tab switcher state: 'ongrid' | 'hybrid' | 'all'
 const activeSolarTab = ref('ongrid')
