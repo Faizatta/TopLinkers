@@ -96,7 +96,7 @@
                   : 'text-slate-300 hover:text-white hover:bg-white/10'"
               >
                 <span v-if="activeSolarTab === 'bess'" class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                <span>3. Battery Storage</span>
+                <span>3. Battery Energy Storage System (BESS)</span>
               </button>
             </div>
           </div>
@@ -367,7 +367,7 @@
                   <div class="relative h-44 w-full rounded-xl overflow-hidden mb-4 border border-gray-100 bg-slate-900">
                     <img
                       src="/images/solar/solar-bess-battery-storage.webp"
-                      alt="Lithium Battery Energy Storage &amp; Hybrid Inverter"
+                      alt="Battery Energy Storage System (BESS) &amp; Hybrid Inverter"
                       class="w-full h-full object-cover transition-transform duration-500"
                       :class="activeSolarTab === 'bess' ? 'scale-105 filter brightness-100' : 'filter brightness-90 group-hover:scale-105'"
                       loading="lazy"
@@ -396,10 +396,10 @@
                       <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M16 20H8V6h8v14zm-3-18h-2c-.55 0-1 .45-1 1v1h4V3c0-.55-.45-1-1-1zm5 4h-1v15c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1V6H5c-.55 0-1 .45-1 1v14c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V7c0-.55-.45-1-1-1z"/></svg>
                     </span>
                     <span class="text-[10px] font-black uppercase tracking-wider text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-100">
-                      High Capacity BESS
+                      Battery Energy Storage System (BESS)
                     </span>
                   </div>
-                  <h3 class="font-extrabold text-[#0F2A44] text-base mb-1">3. Battery Energy Storage System</h3>
+                  <h3 class="font-extrabold text-[#0F2A44] text-base mb-1">3. Battery Energy Storage System (BESS)</h3>
                   <p class="text-xs text-slate-600 leading-relaxed mb-3">
                     High-voltage modular Lithium (LiFePO4) BESS units for residential, commercial &amp; industrial energy independence, microgrid support, and heavy load backup.
                   </p>
