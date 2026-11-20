@@ -320,40 +320,57 @@ const staticRoutes = [
   },
   {
     path: '/services/solar',
-    title: 'Solar Solutions & IESCO Net Metering | TopLinkers Energy',
-    description: 'Slash electricity bills with 10kW, 20kW & 50kW Tier-1 solar systems in Islamabad. Turnkey IESCO green net metering approvals by TopLinkers.',
-    h1: 'Commercial & Residential Solar Solutions with IESCO Net Metering',
+    title: 'Turnkey Solar EPC & IESCO Net Metering Islamabad | TopLinkers',
+    description: 'Engineered on-grid, hybrid & commercial solar systems (5kW to 500kW+) with Tier-1 N-Type bifacial panels, European inverters & IESCO green net metering in Islamabad.',
+    h1: 'Turnkey Solar EPC & IESCO Net-Metering Solutions in Islamabad',
     content: `
       <section style="margin-bottom:28px;">
-        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Zero Out WAPDA Electricity Bills with Tier-1 Solar Net Metering</h2>
+        <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Eliminate High WAPDA Electricity Bills with Tier-1 Solar Net Metering</h2>
         <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
-          Escalating peak power tariffs, fuel price adjustments, and fixed charges make solar net metering the highest-yield capital investment for Pakistani homeowners, corporate offices, and commercial plazas. Top Linkers Solar Division delivers customized 10kW, 20kW, and 50kW on-grid and hybrid photovoltaic systems.
+          With escalating peak power tariffs, fuel price adjustments (FPA), and fixed capacity surcharges across Pakistan, investing in an engineered Tier-1 solar net-metering system delivers a rapid capital payback period of 2.2 to 3.2 years. TopLinkers Solar Division is an AEDB and PEC-licensed renewable energy EPC contractor providing turnkey residential, commercial, and industrial photovoltaic installations throughout Islamabad and Rawalpindi.
         </p>
         <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
-          We utilize exclusively Tier-1 Bloomberg NEF-listed N-Type TopCon bifacial solar panels (Longi, JA Solar, Jinko) paired with premium European and Asian on-grid inverters (Huawei, Sungrow, Growatt, Solis) covered by 25-year linear performance warranties.
+          We handle the entire engineering lifecycle: 3D rooftop shadow simulations (Helioscope / PVsyst), BloombergNEF Tier-1 N-Type TOPCon bifacial modules, smart three-phase inverters (Huawei, Sungrow, Growatt), IESCO net-metering regulatory documentation, and bidirectional green meter commissioning.
         </p>
       </section>
 
       <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">System Sizes &amp; Payback Benchmarks</h2>
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Solar System Architectures &amp; Standard Packages</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:16px;">
           <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
-            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">10kW Residential On-Grid System</h3>
-            <p style="font-size:13px;color:#475569;margin-top:4px;">Generates ~1,350 - 1,500 units/month. Ideal for 10 Marla and 1 Kanal homes running 3 to 4 inverter ACs. Typical payback period is 2.5 to 3 years.</p>
+            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">5kW Residential System</h3>
+            <p style="font-size:13px;color:#475569;margin-top:4px;">Generates ~600 - 720 units/month. Ideal for 5 Marla and 7 Marla homes running 1x inverter AC, refrigerator, and water pump. Saves PKR 35,000 – 45,000/month.</p>
           </div>
           <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
-            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">20kW Executive Home System</h3>
-            <p style="font-size:13px;color:#475569;margin-top:4px;">Generates ~2,700 - 3,000 units/month. Designed for double-unit Kanal houses with high summer daytime consumption and nighttime grid export.</p>
+            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">10kW Executive Home System</h3>
+            <p style="font-size:13px;color:#475569;margin-top:4px;">Generates ~1,250 - 1,450 units/month. Ideal for 10 Marla and 1 Kanal residences running 2 to 3 inverter ACs. Typical payback is 2.2 to 2.6 years with PKR 80,000 – 105,000/month savings.</p>
           </div>
           <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
-            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">50kW Commercial Plaza System</h3>
-            <p style="font-size:13px;color:#475569;margin-top:4px;">Generates ~6,500 - 7,200 units/month. Eliminates peak tariff penalties for corporate buildings, plazas, and educational campuses.</p>
+            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">20kW Luxury Villa System</h3>
+            <p style="font-size:13px;color:#475569;margin-top:4px;">Generates ~2,500 - 2,850 units/month. Tailored for double-unit Kanal houses with high daytime consumption, EV charging, and nighttime net-meter export. Saves PKR 160,000 – 220,000/month.</p>
+          </div>
+          <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
+            <h3 style="font-size:15px;font-weight:700;color:#0F2A44;">50kW+ Commercial Solar EPC</h3>
+            <p style="font-size:13px;color:#475569;margin-top:4px;">Generates ~6,200 - 7,500 units/month. Eliminates commercial tariff penalties for plazas, hospitals, schools, and manufacturing units with sub-station coordination.</p>
           </div>
         </div>
       </section>
 
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">7-Step Turnkey IESCO Net-Metering Workflow</h2>
+        <ol style="font-size:14px;color:#334155;line-height:1.8;padding-left:20px;">
+          <li><strong>Digital 3D Rooftop Survey:</strong> Shading modeling and structural load analysis.</li>
+          <li><strong>Single Line Diagram (SLD):</strong> Engineering electrical design with PEC certification.</li>
+          <li><strong>IESCO Application Submission:</strong> Formal filing with the relevant sub-division.</li>
+          <li><strong>Tier-1 Equipment Verification:</strong> BNEF N-type TOPCon modules and smart inverters.</li>
+          <li><strong>Precision Installation:</strong> Hot-dipped galvanized elevated mounting structures and chemical earthing.</li>
+          <li><strong>IESCO Surveillance Inspection:</strong> Anti-islanding safety relay testing and lab calibration.</li>
+          <li><strong>Green Meter Commissioning:</strong> Activation of bi-directional net-meter billing offset.</li>
+        </ol>
+      </section>
+
       <p style="font-size:14px;color:#475569;">
-        Calculate your electricity savings and <a href="/contact" style="color:#16B4E8;font-weight:700;">Book a Free Solar Site Assessment</a>.
+        Calculate your electricity savings and <a href="/contact" style="color:#16B4E8;font-weight:700;">Book a Free Solar Site Assessment</a> or WhatsApp our engineering desk at +92-334-9522157.
       </p>
     `
   },

@@ -114,8 +114,9 @@ const routes = [
     name: 'ServiceSolar',
     component: SolarPage,
     meta: {
-      title: 'Solar Net Metering & Tier-1 Panels Islamabad | TopLinkers',
-      description: 'Authorized on-grid and hybrid solar installations (10kW, 20kW, 50kW) with IESCO net metering approval in Islamabad. Reduce electricity bills by 85%.'
+      title: 'Turnkey Solar EPC & IESCO Net Metering Islamabad | TopLinkers',
+      description: 'Engineered on-grid, hybrid & commercial solar systems (5kW to 500kW+) with Tier-1 N-Type bifacial panels, European inverters & IESCO green net metering in Islamabad.',
+      keywords: 'solar net metering Islamabad, solar company Islamabad, on grid solar system, hybrid solar storage, IESCO green meter, Tier 1 solar panels, 10kW solar system price Pakistan'
     }
   },
   {
