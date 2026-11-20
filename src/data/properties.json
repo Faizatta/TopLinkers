@@ -382,9 +382,10 @@
     "shortDescription": "Roughly 700–900+ sq. ft. layouts (2-bed/2-bath). Comprises 3,200 units nearing completion, with limited re-balloted units.",
     "description": "TopLinkers presents official Pakistan Housing Authority (PHA) Sector I-12/1 Type D & Type E apartments. Roughly 700–900+ sq. ft. layouts (2-bed/2-bath and slightly larger configurations). Comprises 3,200 units nearing completion, with limited re-balloted units available on cash and resale with direct CDA transfer.",
     "images": [
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+      "/images/pha/pha-i12-elevation.webp",
+      "/images/pha/pha-i12-ext-2.webp",
+      "/images/pha/pha-i12-int-1.webp",
+      "/images/pha/pha-i12-int-2.webp"
     ],
     "features": [
       "24/7 Security",
@@ -395,7 +396,8 @@
       "CCTV Monitoring",
       "Balcony View"
     ],
-    "agentId": "agent-1"
+    "agentId": "agent-1",
+    "image": "/images/pha/pha-i12-elevation.webp"
   },
   {
     "id": "tl-102",
@@ -426,9 +428,10 @@
     "shortDescription": "Affordable PHA D-Type apartment (870 Sq Ft) with 2 bedrooms, American kitchen and drawing room.",
     "description": "Ideal for small families and long-term capital appreciation. PHA D-Type apartment in Sector I-12 Islamabad. Offers 870 Sq Ft, dual elevators, standby generator, and prime location adjacent to Sector I-11 fruit market and Kashmir Highway.",
     "images": [
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+      "/images/pha/pha-i12-elevation.webp",
+      "/images/pha/pha-i12-ext-2.webp",
+      "/images/pha/pha-i12-int-1.webp",
+      "/images/pha/pha-i12-int-2.webp"
     ],
     "features": [
       "24/7 Security",
@@ -437,7 +440,8 @@
       "Balcony",
       "Emergency Backup"
     ],
-    "agentId": "agent-1"
+    "agentId": "agent-1",
+    "image": "/images/pha/pha-i12-elevation.webp"
   },
   {
     "id": "tl-103",
@@ -468,9 +472,12 @@
     "shortDescription": "Type B is ~1,496 sq. ft. (3 beds, servant quarter). G+6 blocks with completed/active resale market.",
     "description": "TopLinkers exclusive direct listing. PHA Sector I-16/3 Type B 3-bed apartment spanning ~1,496 sq. ft. with 3 beds, servant quarter, attached designer baths, wide sunlit balcony, corner orientation, and peaceful CDA developed community in completed G+6 blocks with active resale market.",
     "images": [
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
+      "/images/pha/pha-i16-ext-1.webp",
+      "/images/pha/pha-i16-elevation.webp",
+      "/images/pha/pha-i16-blocks.webp",
+      "/images/pha/pha-i16-int-1.webp",
+      "/images/pha/pha-i16-balcony.webp",
+      "/images/pha/pha-i16-int-2.webp"
     ],
     "features": [
       "3 En-Suite Baths",
@@ -481,7 +488,8 @@
       "Security Patrols",
       "Mosque & Park Nearby"
     ],
-    "agentId": "agent-2"
+    "agentId": "agent-2",
+    "image": "/images/pha/pha-i16-ext-1.webp"
   },
   {
     "id": "tl-104",
@@ -512,9 +520,12 @@
     "shortDescription": "Type E is ~912 sq. ft. (2 beds, 2 baths). G+6 blocks with completed/active resale market.",
     "description": "High-demand PHA Sector I-16/3 Type E apartment (~912 sq. ft., 2 beds, 2 baths). Situated in completed G+6 blocks with active resale market, high-speed elevators, uninterrupted utilities, and swift CDA transfer.",
     "images": [
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80"
+      "/images/pha/pha-i16-ext-1.webp",
+      "/images/pha/pha-i16-elevation.webp",
+      "/images/pha/pha-i16-blocks.webp",
+      "/images/pha/pha-i16-int-1.webp",
+      "/images/pha/pha-i16-balcony.webp",
+      "/images/pha/pha-i16-int-2.webp"
     ],
     "features": [
       "Ready Possession",
@@ -523,7 +534,8 @@
       "Security Guards",
       "G+6 Completed Block"
     ],
-    "agentId": "agent-2"
+    "agentId": "agent-2",
+    "image": "/images/pha/pha-i16-ext-1.webp"
   },
   {
     "id": "tl-105-exec",
@@ -2052,9 +2064,11 @@
     "shortDescription": "Move-in ready 2-bed apartment in Sector I-12/1 complete with new furnishings, air conditioning, modern kitchen setup, and verified PHA transfer docume...",
     "description": "Move-in ready 2-bed apartment in Sector I-12/1 complete with new furnishings, air conditioning, modern kitchen setup, and verified PHA transfer documents.",
     "images": [
-      "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+      "/images/pha/pha-i12-ext-1.webp",
+      "/images/pha/pha-i12-elevation.webp",
+      "/images/pha/pha-i12-int-1.webp",
+      "/images/pha/pha-i12-int-2.webp",
+      "/images/pha/pha-i12-street.webp"
     ],
     "features": [
       "Sui Gas Connection",
@@ -2064,7 +2078,8 @@
       "Mosque Nearby",
       "Parks & Playgrounds"
     ],
-    "agentId": "agent-4"
+    "agentId": "agent-4",
+    "image": "/images/pha/pha-i12-ext-1.webp"
   },
   {
     "id": "tl-140",
@@ -2095,9 +2110,12 @@
     "shortDescription": "912 sq ft 2-bed apartment with scenic Margalla backdrop. Lowest demand price in Sector I-16 with clean transfer verification through TopLinkers....",
     "description": "912 sq ft 2-bed apartment with scenic Margalla backdrop. Lowest demand price in Sector I-16 with clean transfer verification through TopLinkers.",
     "images": [
-      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80"
+      "/images/pha/pha-i16-ext-1.webp",
+      "/images/pha/pha-i16-elevation.webp",
+      "/images/pha/pha-i16-blocks.webp",
+      "/images/pha/pha-i16-int-1.webp",
+      "/images/pha/pha-i16-balcony.webp",
+      "/images/pha/pha-i16-int-2.webp"
     ],
     "features": [
       "Sui Gas Connection",
@@ -2107,7 +2125,8 @@
       "Mosque Nearby",
       "Parks & Playgrounds"
     ],
-    "agentId": "agent-1"
+    "agentId": "agent-1",
+    "image": "/images/pha/pha-i16-ext-1.webp"
   },
   {
     "id": "tl-pha-i12-typed",

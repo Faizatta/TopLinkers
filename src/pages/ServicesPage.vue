@@ -533,7 +533,24 @@
                 <span class="text-xs font-bold text-gray-400">Sector I-16/3, I-12/1 &amp; Kurri Road</span>
               </div>
 
-              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors">PHA Official Apartments</h3>
+              <!-- Few Images Preview Row (Authentic On-Ground Photos) -->
+              <div class="mb-4 rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
+                <div class="h-36 w-full overflow-hidden relative cursor-pointer" @click="openPhaModal('i12')">
+                  <img src="/images/pha/pha-i12-ext-1.webp" alt="Sector I-12 PHA Flats" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <span class="absolute bottom-2 right-2 bg-black/75 text-white text-[9px] font-bold px-2 py-0.5 rounded backdrop-blur-xs flex items-center gap-1">
+                    <span>📸</span>
+                    <span>Few Images &bull; 6 Photos</span>
+                  </span>
+                </div>
+                <div class="p-1.5 flex items-center gap-1.5 overflow-x-auto bg-slate-100/70">
+                  <img src="/images/pha/pha-i12-ext-1.webp" alt="I-12 Elevation" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openPhaModal('i12')" />
+                  <img src="/images/pha/pha-i16-ext-1.webp" alt="I-16 Blocks" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openPhaModal('i16')" />
+                  <img src="/images/pha/pha-i12-elevation.webp" alt="Tower Façade" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openPhaModal('i12')" />
+                  <img src="/images/pha/pha-i16-int-1.webp" alt="Interior Finish" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openPhaModal('i16')" />
+                </div>
+              </div>
+
+              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors cursor-pointer" @click="openPhaModal('i12')">PHA Official Apartments</h3>
               <p class="text-xs text-gray-500 mt-1 leading-relaxed">
                 Pakistan Housing Authority government-allocated flats with verified allotment files, fast CDA transfer, and immediate possession.
               </p>
@@ -554,13 +571,20 @@
               </div>
             </div>
 
-            <div class="mt-6 pt-4 border-t border-gray-100">
+            <div class="mt-6 pt-4 border-t border-gray-100 flex flex-col sm:flex-row items-center gap-2">
+              <button
+                type="button"
+                @click="openPhaModal('i12')"
+                class="w-full sm:flex-1 py-2.5 bg-[#0F2A44] hover:bg-[#16B4E8] text-white font-bold text-xs uppercase rounded-xl text-center transition-all shadow-sm"
+              >
+                Explore Details &amp; Photos &rarr;
+              </button>
               <a
                 href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20PHA%20Flats%20(Sector%20I-16/3,%20I-12/1,%20Kurri%20Road)%20on%20Cash"
                 target="_blank"
-                class="w-full py-2.5 bg-[#0F2A44] hover:bg-[#16B4E8] text-white font-bold text-xs uppercase rounded-xl text-center transition-all flex items-center justify-center gap-1 shadow-sm"
+                class="w-full sm:w-auto px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-[#0F2A44] font-bold text-xs uppercase rounded-xl text-center transition-all"
               >
-                Inquire PHA Cash Flats
+                WhatsApp
               </a>
             </div>
           </div>
@@ -1803,6 +1827,13 @@
       :subtitle="activeVideo.subtitle"
       @close="videoModalOpen = false"
     />
+
+    <!-- Standalone PHA Sector Details Modal with Photo Gallery & Specs -->
+    <PhaDetailsModal
+      :is-open="phaModalOpen"
+      :sector="selectedPhaSector"
+      @close="phaModalOpen = false"
+    />
   </div>
 </template>
 
@@ -1811,6 +1842,8 @@ import { ref, computed, watch, nextTick, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { scrollTo } from '../services/lenis'
 import SiteVideoModal from '../components/common/SiteVideoModal.vue'
+import PhaDetailsModal from '../components/flats/PhaDetailsModal.vue'
+import { phaSectors } from '../data/phaData'
 import {
   Squares2X2Icon,
   MapIcon,
@@ -1831,6 +1864,16 @@ const route = useRoute()
 const adminStore = useAdminStore()
 const activeTab = ref('all')
 const plotPaymentFilter = ref('all') // 'all' | 'cash' | 'installments'
+
+// PHA Details Modal State
+const phaModalOpen = ref(false)
+const selectedPhaSectorKey = ref('i12')
+const selectedPhaSector = computed(() => phaSectors[selectedPhaSectorKey.value] || phaSectors.i12)
+
+const openPhaModal = (key = 'i12') => {
+  selectedPhaSectorKey.value = key
+  phaModalOpen.value = true
+}
 
 // Video Lightbox State for Societies & Packages
 const videoModalOpen = ref(false)

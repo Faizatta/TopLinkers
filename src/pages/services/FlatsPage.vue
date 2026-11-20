@@ -186,92 +186,176 @@
 
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <!-- 1. Sector I-12/1 -->
-                <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
+                <div
+                  @click="openPhaSector('i12')"
+                  class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-lg hover:border-[#16B4E8] transition-all flex flex-col justify-between group cursor-pointer"
+                >
                   <div>
-                    <div class="h-36 w-full overflow-hidden relative bg-slate-100">
-                      <picture>
-                        <source srcset="/images/pha/pha-i12-ext-1.webp" type="image/webp" />
-                        <img src="/images/pha/pha-i12-ext-1.jpg" alt="Sector I-12 PHA Flats" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                      </picture>
-                      <span class="absolute top-2 left-2 bg-[#16B4E8] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
-                        Sector I-12/1
+                    <div class="h-44 w-full overflow-hidden relative bg-slate-900">
+                      <img
+                        :src="phaSectors.i12.image"
+                        alt="Sector I-12 PHA Flats"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <span class="absolute top-2.5 left-2.5 bg-[#16B4E8] text-[#0F2A44] text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
+                        Sector I-12/1 &bull; 3,200 Units
+                      </span>
+                      <span class="absolute bottom-2 right-2 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded backdrop-blur-xs flex items-center gap-1">
+                        <span>📸</span>
+                        <span>{{ phaSectors.i12.gallery.length }} Photos</span>
                       </span>
                     </div>
+
+                    <!-- Few Images Preview Thumbnails Row -->
+                    <div class="p-2 bg-slate-50 border-b border-gray-100 flex items-center gap-1.5 overflow-x-auto">
+                      <div
+                        v-for="(img, idx) in phaSectors.i12.gallery.slice(0, 4)"
+                        :key="idx"
+                        class="w-12 h-9 rounded overflow-hidden flex-shrink-0 border border-slate-200"
+                      >
+                        <img :src="img.src" :alt="img.caption" class="w-full h-full object-cover" />
+                      </div>
+                      <span class="text-[9px] text-[#16B4E8] font-bold px-1 whitespace-nowrap">
+                        +{{ phaSectors.i12.gallery.length - 4 }} More
+                      </span>
+                    </div>
+
                     <div class="p-4">
-                      <h4 class="font-extrabold text-[#0F2A44] text-sm">Sector I-12/1 Apartments</h4>
+                      <h4 class="font-extrabold text-[#0F2A44] text-sm group-hover:text-[#16B4E8] transition-colors">
+                        Sector I-12/1 Apartments
+                      </h4>
                       <p class="text-[11px] text-gray-600 mt-1 leading-relaxed">
-                        3,200 units project featuring Type D (~870 sq. ft.) and Type E (~710 sq. ft.) 2-bed &amp; 3-bed configurations with dual elevators.
+                        3,200 units project featuring Type D (~870 sq. ft.) and Type E (~710 sq. ft.) with dual high-speed elevators &amp; CDA computerized transfer.
                       </p>
                       <div class="mt-3 pt-2 border-t border-gray-100 text-[11px] font-bold text-[#16B4E8] flex justify-between">
-                        <span>Rate: 95 Lac - 1.25 Cr</span>
-                        <span>Near Completion</span>
+                        <span>Demand: 75 Lac – 1.35 Cr</span>
+                        <span class="text-emerald-600">Near Handover</span>
                       </div>
                     </div>
                   </div>
                   <div class="p-4 pt-0">
-                    <router-link to="/listings?search=I-12" class="block w-full text-center py-2 bg-slate-100 hover:bg-[#0F2A44] hover:text-white text-[#0F2A44] font-bold text-xs rounded-lg transition-colors">
-                      View I-12 Deals &rarr;
-                    </router-link>
+                    <button
+                      type="button"
+                      @click.stop="openPhaSector('i12')"
+                      class="block w-full text-center py-2.5 bg-[#0F2A44] group-hover:bg-[#16B4E8] group-hover:text-[#0F2A44] text-white font-extrabold text-xs rounded-xl transition-all shadow-xs"
+                    >
+                      Explore Details &amp; Photos &rarr;
+                    </button>
                   </div>
                 </div>
 
                 <!-- 2. Sector I-16/3 -->
-                <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
+                <div
+                  @click="openPhaSector('i16')"
+                  class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-lg hover:border-emerald-500 transition-all flex flex-col justify-between group cursor-pointer"
+                >
                   <div>
-                    <div class="h-36 w-full overflow-hidden relative bg-slate-100">
-                      <picture>
-                        <source srcset="/images/pha/pha-i16-ext-1.webp" type="image/webp" />
-                        <img src="/images/pha/pha-i16-ext-1.jpg" alt="Sector I-16 PHA Flats" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                      </picture>
-                      <span class="absolute top-2 left-2 bg-emerald-600 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
-                        Sector I-16/3
+                    <div class="h-44 w-full overflow-hidden relative bg-slate-900">
+                      <img
+                        :src="phaSectors.i16.image"
+                        alt="Sector I-16 PHA Flats"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <span class="absolute top-2.5 left-2.5 bg-emerald-600 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
+                        Sector I-16/3 &bull; 100% Ready
+                      </span>
+                      <span class="absolute bottom-2 right-2 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded backdrop-blur-xs flex items-center gap-1">
+                        <span>📸</span>
+                        <span>{{ phaSectors.i16.gallery.length }} Photos</span>
                       </span>
                     </div>
+
+                    <!-- Few Images Preview Thumbnails Row -->
+                    <div class="p-2 bg-slate-50 border-b border-gray-100 flex items-center gap-1.5 overflow-x-auto">
+                      <div
+                        v-for="(img, idx) in phaSectors.i16.gallery.slice(0, 4)"
+                        :key="idx"
+                        class="w-12 h-9 rounded overflow-hidden flex-shrink-0 border border-slate-200"
+                      >
+                        <img :src="img.src" :alt="img.caption" class="w-full h-full object-cover" />
+                      </div>
+                      <span class="text-[9px] text-emerald-600 font-bold px-1 whitespace-nowrap">
+                        +{{ phaSectors.i16.gallery.length - 4 }} More
+                      </span>
+                    </div>
+
                     <div class="p-4">
-                      <h4 class="font-extrabold text-[#0F2A44] text-sm">Sector I-16/3 Apartments</h4>
+                      <h4 class="font-extrabold text-[#0F2A44] text-sm group-hover:text-emerald-700 transition-colors">
+                        Sector I-16/3 Apartments
+                      </h4>
                       <p class="text-[11px] text-gray-600 mt-1 leading-relaxed">
                         G+6 completed apartment blocks with Type E (2-bed, ~912 sq. ft.) and Type B (3-bed, ~1,496 sq. ft.). Ready for immediate possession.
                       </p>
                       <div class="mt-3 pt-2 border-t border-gray-100 text-[11px] font-bold text-emerald-600 flex justify-between">
-                        <span>Rate: 85 Lac - 1.35 Cr</span>
-                        <span>100% Ready</span>
+                        <span>Demand: 85 Lac – 1.45 Cr</span>
+                        <span class="text-emerald-700 font-black">100% Ready</span>
                       </div>
                     </div>
                   </div>
                   <div class="p-4 pt-0">
-                    <router-link to="/listings?search=I-16" class="block w-full text-center py-2 bg-slate-100 hover:bg-[#0F2A44] hover:text-white text-[#0F2A44] font-bold text-xs rounded-lg transition-colors">
-                      View I-16 Deals &rarr;
-                    </router-link>
+                    <button
+                      type="button"
+                      @click.stop="openPhaSector('i16')"
+                      class="block w-full text-center py-2.5 bg-[#0F2A44] group-hover:bg-emerald-600 text-white font-extrabold text-xs rounded-xl transition-all shadow-xs"
+                    >
+                      Explore Details &amp; Photos &rarr;
+                    </button>
                   </div>
                 </div>
 
                 <!-- 3. Sector G-11/3 & G-11/4 -->
-                <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
+                <div
+                  @click="openPhaSector('g11')"
+                  class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-lg hover:border-indigo-500 transition-all flex flex-col justify-between group cursor-pointer"
+                >
                   <div>
-                    <div class="h-36 w-full overflow-hidden relative bg-slate-100">
-                      <picture>
-                        <source srcset="/images/hero-real-estate.webp" type="image/webp" />
-                        <img src="/images/hero-real-estate.jpg" alt="Sector G-11 PHA Flats" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                      </picture>
-                      <span class="absolute top-2 left-2 bg-indigo-600 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
+                    <div class="h-44 w-full overflow-hidden relative bg-slate-900">
+                      <img
+                        :src="phaSectors.g11.image"
+                        alt="Sector G-11 PHA Flats"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <span class="absolute top-2.5 left-2.5 bg-indigo-600 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
                         Sector G-11 Markaz
                       </span>
+                      <span class="absolute bottom-2 right-2 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded backdrop-blur-xs flex items-center gap-1">
+                        <span>📸</span>
+                        <span>{{ phaSectors.g11.gallery.length }} Photos</span>
+                      </span>
                     </div>
+
+                    <!-- Few Images Preview Thumbnails Row -->
+                    <div class="p-2 bg-slate-50 border-b border-gray-100 flex items-center gap-1.5 overflow-x-auto">
+                      <div
+                        v-for="(img, idx) in phaSectors.g11.gallery"
+                        :key="idx"
+                        class="w-12 h-9 rounded overflow-hidden flex-shrink-0 border border-slate-200"
+                      >
+                        <img :src="img.src" :alt="img.caption" class="w-full h-full object-cover" />
+                      </div>
+                    </div>
+
                     <div class="p-4">
-                      <h4 class="font-extrabold text-[#0F2A44] text-sm">Sector G-11 Apartments</h4>
+                      <h4 class="font-extrabold text-[#0F2A44] text-sm group-hover:text-indigo-600 transition-colors">
+                        Sector G-11 Apartments
+                      </h4>
                       <p class="text-[11px] text-gray-600 mt-1 leading-relaxed">
                         Established PHA apartments in G-11/3 &amp; G-11/4 (Type C &amp; E). High rental demand, walking distance to courts, metro, and G-11 Markaz.
                       </p>
                       <div class="mt-3 pt-2 border-t border-gray-100 text-[11px] font-bold text-indigo-600 flex justify-between">
-                        <span>Rate: 1.15 Cr - 1.75 Cr</span>
-                        <span>Prime Location</span>
+                        <span>Demand: 1.15 – 1.95 Cr</span>
+                        <span class="text-indigo-700">Prime Location</span>
                       </div>
                     </div>
                   </div>
                   <div class="p-4 pt-0">
-                    <router-link to="/listings?search=G-11" class="block w-full text-center py-2 bg-slate-100 hover:bg-[#0F2A44] hover:text-white text-[#0F2A44] font-bold text-xs rounded-lg transition-colors">
-                      View G-11 Deals &rarr;
-                    </router-link>
+                    <button
+                      type="button"
+                      @click.stop="openPhaSector('g11')"
+                      class="block w-full text-center py-2.5 bg-[#0F2A44] group-hover:bg-indigo-600 text-white font-extrabold text-xs rounded-xl transition-all shadow-xs"
+                    >
+                      Explore Details &amp; Photos &rarr;
+                    </button>
                   </div>
                 </div>
               </div>
@@ -614,6 +698,13 @@
         </aside>
       </div>
     </main>
+
+    <!-- Standalone PHA Sector Details Modal with Photo Gallery & Specs -->
+    <PhaDetailsModal
+      :is-open="isPhaModalOpen"
+      :sector="selectedPhaSector"
+      @close="isPhaModalOpen = false"
+    />
   </div>
 </template>
 
@@ -621,6 +712,8 @@
 import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAdminStore } from '../../stores/admin'
+import { phaSectors } from '../../data/phaData'
+import PhaDetailsModal from '../../components/flats/PhaDetailsModal.vue'
 
 const adminStore = useAdminStore()
 const faqs = computed(() => adminStore.getFaqsByService('flats'))
@@ -628,11 +721,39 @@ const faqs = computed(() => adminStore.getFaqsByService('flats'))
 const route = useRoute()
 const activeMainTab = ref('all') // 'all' | 'pha' | 'luxury'
 
+// PHA Details Modal State
+const selectedPhaSectorKey = ref(null)
+const isPhaModalOpen = ref(false)
+
+const selectedPhaSector = computed(() => {
+  if (!selectedPhaSectorKey.value) return null
+  return phaSectors[selectedPhaSectorKey.value] || null
+})
+
+const openPhaSector = (key) => {
+  if (!phaSectors[key]) return
+  selectedPhaSectorKey.value = key
+  isPhaModalOpen.value = true
+}
+
 const applyRouteTab = () => {
   if (route.query.option === 'pha' || route.hash === '#pha') {
     activeMainTab.value = 'pha'
   } else if (route.query.option === 'luxury' || route.hash === '#luxury') {
     activeMainTab.value = 'luxury'
+  }
+
+  // Handle direct open query e.g. /services/flats?open=i12 or ?open=pha
+  const openParam = (route.query.open || route.query.sector || '').toLowerCase()
+  if (openParam === 'i12' || openParam === 'pha') {
+    activeMainTab.value = 'pha'
+    openPhaSector('i12')
+  } else if (openParam === 'i16') {
+    activeMainTab.value = 'pha'
+    openPhaSector('i16')
+  } else if (openParam === 'g11') {
+    activeMainTab.value = 'pha'
+    openPhaSector('g11')
   }
 }
 
@@ -641,7 +762,7 @@ onMounted(() => {
 })
 
 watch(
-  () => [route.query.option, route.hash],
+  () => [route.query.option, route.query.open, route.hash],
   () => {
     applyRouteTab()
   }

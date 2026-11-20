@@ -62,7 +62,7 @@ const slides = [
     badge: 'Government Housing',
     description: 'Authorized government-allocated PHA flats in Islamabad with fast CDA transfer, dual elevators, 24/7 security, and verified allotment files.',
     ctaText: 'Explore PHA Flats',
-    link: '/property/pha-flats-sector-i12-furnished-apartment',
+    link: '/services/apartments-flats?open=i12',
     image: '/images/hero-pha-flats.webp'
   },
   {
