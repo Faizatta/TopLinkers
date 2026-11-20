@@ -67,7 +67,7 @@ const slides = [
     ctaText: 'View Flats in Listings',
     listingLink: '/listings?keyword=PHA&type=apartment',
     link: '/property/pha-flats-sector-i12-furnished-apartment',
-    image: '/images/pha/pha-i12-elevation.jpg'
+    image: '/images/hero-pha-flats.webp'
   },
   {
     id: 3,
@@ -83,15 +83,15 @@ const slides = [
   },
   {
     id: 4,
-    title: 'Banu Hafeez Executive Residences (G-11 Markaz)',
-    specs: '1, 2 & 3 Bed Luxury Suites • 20% Down • 2.5-Yr Plan',
-    badge: '18% Expected Yield',
-    description: 'Premier modern architecture in the commercial core of Islamabad G-11 Markaz. Dedicated basement parking, high-speed elevators, and Margalla views.',
-    price: 'PKR 1.45 Cr – 3.20 Cr',
-    ctaText: 'View in Listings',
-    listingLink: '/listings?keyword=Banu+Hafeez',
+    title: 'Banu Hafeez Luxury Apartments (TopCity-1)',
+    specs: '1, 2 & 3 Bed Residences • 15% Booking • 3-Year Plan',
+    badge: '17-Storey Landmark Tower',
+    description: 'Approved 17-storey luxury landmark by Waheed Group in TopCity-1, Islamabad. Resident swimming pool, gym, 2 basements parking (281 cars), 2-year possession.',
+    price: 'PKR 98.3 Lac – 3.38 Cr',
+    ctaText: 'View Banu Hafeez Details',
+    listingLink: '/featured-building',
     link: '/featured-building',
-    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=85'
+    image: '/images/banu-hafeez-hero.webp'
   },
   {
     id: 5,

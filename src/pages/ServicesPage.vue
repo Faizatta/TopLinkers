@@ -565,44 +565,44 @@
             </div>
           </div>
 
-          <!-- Card 2: Banu Hafeez Apartments (Cash & Installments) -->
+          <!-- Card 2: Banu Hafeez Luxury Apartments (TopCity-1) -->
           <div class="bg-white rounded-2xl border border-gray-200/90 hover:border-[#16B4E8] shadow-sm hover:shadow-lg transition-all p-6 flex flex-col justify-between group">
             <div>
               <div class="flex items-center justify-between mb-3">
                 <span class="bg-[#16B4E8] text-[#0F2A44] text-[9px] font-black uppercase px-2.5 py-0.5 rounded">
-                  Cash &amp; Installments
+                  15% Booking &bull; 3-Yr Plan
                 </span>
-                <span class="text-xs font-bold text-gray-400">Marla &amp; Kanal Share</span>
+                <span class="text-xs font-bold text-gray-400">TopCity-1 &bull; 17 Storeys</span>
               </div>
 
-              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors">Banu Hafeez Residences</h3>
+              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors">Banu Hafeez Luxury Apartments</h3>
               <p class="text-xs text-gray-500 mt-1 leading-relaxed">
-                Available on both 100% Cash payment and easy flexible installment schedules. Differentiated by unit size, floor heights, and land share categories.
+                Approved 17-storey landmark tower by Waheed Group in TopCity-1, Islamabad (15 min from Airport). 1, 2 &amp; 3 Bed suites on a 3-year flexible installment plan with resident swimming pool, gym &amp; 2 basements parking.
               </p>
 
               <div class="mt-5 space-y-2.5 text-xs">
                 <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
                   <div class="flex items-center justify-between font-bold text-[#0F2A44]">
-                    <span>2-Bed Executive Suite</span>
-                    <span class="text-[#16B4E8] font-black">PKR 85 - 98 Lac</span>
+                    <span>1-Bed Luxury Suite (Type-C &bull; 546 Sq.Ft)</span>
+                    <span class="text-[#16B4E8] font-black">PKR 98.3 Lac</span>
                   </div>
-                  <p class="text-[11px] text-gray-500 mt-0.5">2 Attached Bathrooms &bull; Kitchen &bull; Available on Cash &amp; 3-Yr Plan</p>
+                  <p class="text-[11px] text-gray-500 mt-0.5">Booking: PKR 14.74 Lac &bull; 36 Monthly: PKR 49,140</p>
                 </div>
 
                 <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
                   <div class="flex items-center justify-between font-bold text-[#0F2A44]">
-                    <span>3-Bed Luxury Family Unit</span>
-                    <span class="text-[#16B4E8] font-black">PKR 1.25 - 1.55 Cr</span>
+                    <span>2-Bed Executive Suite (Type-B &bull; 1,089 Sq.Ft)</span>
+                    <span class="text-[#16B4E8] font-black">PKR 1.96 Cr</span>
                   </div>
-                  <p class="text-[11px] text-gray-500 mt-0.5">3 Washrooms &bull; Drawing Room &bull; Balcony with open panoramic views</p>
+                  <p class="text-[11px] text-gray-500 mt-0.5">Booking: PKR 29.40 Lac &bull; 36 Monthly: PKR 98,010</p>
                 </div>
 
                 <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
                   <div class="flex items-center justify-between font-bold text-[#0F2A44]">
-                    <span>Installment Plan Terms</span>
-                    <span class="text-[#16B4E8] font-black">25% Booking</span>
+                    <span>3-Bed Royal Suite (Type-A &bull; 1,881 Sq.Ft)</span>
+                    <span class="text-[#16B4E8] font-black">PKR 3.38 Cr</span>
                   </div>
-                  <p class="text-[11px] text-gray-500 mt-0.5">36 Monthly or 12 Quarterly installments with fast possession</p>
+                  <p class="text-[11px] text-gray-500 mt-0.5">Booking: PKR 50.78 Lac &bull; 36 Monthly: PKR 169,290</p>
                 </div>
               </div>
             </div>
@@ -1883,25 +1883,33 @@ const installmentProjects = [
   },
   {
     id: 'banu-hafeez',
-    name: 'Banu Hafeez Flats',
+    name: 'Banu Hafeez Luxury Apartments (TopCity-1)',
     tabName: 'Banu Hafeez',
-    duration: '3-Year Flexible Apartment Installment Plan',
+    duration: '3-Year Flexible Apartment Installment Plan (15% Booking)',
     sizes: [
       {
-        label: '2-Bed (1,100 Sq Ft)',
-        totalPrice: 'PKR 8,500,000',
-        downPayment: 'PKR 2,125,000 (25% Booking)',
-        installmentRate: 'PKR 125,000 / month (36 Months)',
-        halfYearly: 'PKR 150,000 (6 Semi-Annual)',
-        possession: 'PKR 975,000'
+        label: '1-Bed (Type-C · 546 Sq Ft)',
+        totalPrice: 'PKR 9,828,000',
+        downPayment: 'PKR 1,474,200 (15% Booking)',
+        installmentRate: 'PKR 49,140 / month (36 Months)',
+        halfYearly: 'PKR 491,400 (6 Semi-Annual)',
+        possession: 'PKR 1,474,200'
       },
       {
-        label: '3-Bed (1,500 Sq Ft)',
-        totalPrice: 'PKR 12,500,000',
-        downPayment: 'PKR 3,125,000 (25% Booking)',
-        installmentRate: 'PKR 185,000 / month (36 Months)',
-        halfYearly: 'PKR 220,000 (6 Semi-Annual)',
-        possession: 'PKR 1,395,000'
+        label: '2-Bed (Type-B · 1,089 Sq Ft)',
+        totalPrice: 'PKR 19,602,000',
+        downPayment: 'PKR 2,940,300 (15% Booking)',
+        installmentRate: 'PKR 98,010 / month (36 Months)',
+        halfYearly: 'PKR 980,100 (6 Semi-Annual)',
+        possession: 'PKR 2,940,300'
+      },
+      {
+        label: '3-Bed (Type-A · 1,881 Sq Ft)',
+        totalPrice: 'PKR 33,858,000',
+        downPayment: 'PKR 5,078,700 (15% Booking)',
+        installmentRate: 'PKR 169,290 / month (36 Months)',
+        halfYearly: 'PKR 1,692,900 (6 Semi-Annual)',
+        possession: 'PKR 5,078,700'
       }
     ]
   },
