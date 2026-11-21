@@ -62,41 +62,43 @@
             </a>
 
             <!-- Sleek Compact Category Switcher Tabs -->
-            <div class="w-full sm:w-auto inline-flex items-center p-1 bg-black/60 backdrop-blur-md rounded-xl border border-white/20 shadow-lg gap-1 sm:h-[48px] overflow-x-auto">
+            <div class="w-full sm:w-auto grid grid-cols-3 sm:flex items-center p-1 bg-black/70 backdrop-blur-md rounded-xl border border-white/20 shadow-lg gap-1 sm:h-[48px]">
               <button
                 type="button"
                 @click="switchSolarTab('ongrid')"
-                class="py-2 sm:py-0 px-3 sm:px-4 h-full rounded-lg text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0"
+                class="w-full sm:w-auto h-full py-2.5 sm:py-0 px-1 sm:px-4 rounded-lg text-[11px] sm:text-xs md:text-sm font-extrabold transition-all flex items-center justify-center gap-1 sm:gap-1.5 text-center min-w-0"
                 :class="activeSolarTab === 'ongrid'
                   ? 'bg-[#16B4E8] text-[#071E33] shadow-md ring-1 ring-white/60'
                   : 'text-slate-300 hover:text-white hover:bg-white/10'"
               >
-                <span v-if="activeSolarTab === 'ongrid'" class="w-2 h-2 rounded-full bg-[#071E33] animate-pulse"></span>
-                <span>1. Grid-Tied</span>
+                <span v-if="activeSolarTab === 'ongrid'" class="w-1.5 h-1.5 rounded-full bg-[#071E33] animate-pulse shrink-0"></span>
+                <span class="truncate">1. Grid-Tied</span>
               </button>
 
               <button
                 type="button"
                 @click="switchSolarTab('hybrid')"
-                class="py-2 sm:py-0 px-3 sm:px-4 h-full rounded-lg text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0"
+                class="w-full sm:w-auto h-full py-2.5 sm:py-0 px-1 sm:px-4 rounded-lg text-[11px] sm:text-xs md:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 text-center min-w-0"
                 :class="activeSolarTab === 'hybrid'
                   ? 'bg-emerald-500 text-white shadow-md ring-1 ring-white/60'
                   : 'text-slate-300 hover:text-white hover:bg-white/10'"
               >
-                <span v-if="activeSolarTab === 'hybrid'" class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                <span>2. Hybrid Solar</span>
+                <span v-if="activeSolarTab === 'hybrid'" class="w-1.5 h-1.5 rounded-full bg-white animate-pulse shrink-0"></span>
+                <span class="truncate">2. Hybrid Solar</span>
               </button>
 
               <button
                 type="button"
                 @click="switchSolarTab('bess')"
-                class="py-2 sm:py-0 px-3 sm:px-4 h-full rounded-lg text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0"
+                class="w-full sm:w-auto h-full py-2.5 sm:py-0 px-1 sm:px-4 rounded-lg text-[11px] sm:text-xs md:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 text-center min-w-0"
                 :class="activeSolarTab === 'bess'
                   ? 'bg-amber-500 text-white shadow-md ring-1 ring-white/60'
                   : 'text-slate-300 hover:text-white hover:bg-white/10'"
               >
-                <span v-if="activeSolarTab === 'bess'" class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                <span>3. Battery Storage (BESS)</span>
+                <span v-if="activeSolarTab === 'bess'" class="w-1.5 h-1.5 rounded-full bg-white animate-pulse shrink-0"></span>
+                <span class="hidden md:inline whitespace-nowrap">3. Battery Energy Storage System (BESS)</span>
+                <span class="hidden sm:inline md:hidden whitespace-nowrap">3. Battery Storage (BESS)</span>
+                <span class="sm:hidden truncate">3. BESS (Storage)</span>
               </button>
             </div>
           </div>
