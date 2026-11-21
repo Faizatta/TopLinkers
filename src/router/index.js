@@ -154,7 +154,7 @@ const routes = [
     meta: {
       title: 'Search Verified Properties in Islamabad & Rawalpindi | TopLinkers',
       description: 'Instant property search with price filter, installment schedules, location matching, and verified registry checks across Islamabad and Galyat.',
-      keywords: 'search property Islamabad, plot finder Islamabad, cheap plots Islamabad, installment plots'
+      noindex: true
     }
   },
   {

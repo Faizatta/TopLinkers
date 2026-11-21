@@ -425,26 +425,42 @@ const staticRoutes = [
       <section style="margin-bottom:28px;">
         <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Visit Our Corporate Headquarters in G-11 Markaz Islamabad</h2>
         <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
-          Top Linkers welcomes clients, property buyers, sellers, and building contractors to our corporate offices located at 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad. We are open Monday through Saturday from 9:30 AM to 7:00 PM PKT.
+          Top Linkers welcomes local homeowners, property buyers, sellers, corporate builders, and overseas Pakistani investors to our corporate headquarters located at 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad. Our advisory desks are open Monday through Saturday from 9:30 AM to 7:00 PM PKT.
+        </p>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Located immediately off Srinagar Highway (Kashmir Highway), our offices offer rapid, direct transit connectivity from Islamabad International Airport (18 minutes), Blue Area Islamabad (12 minutes), and the twin cities motorway interchanges (M-1 &amp; M-2). Ample plaza parking and elevator access are provided for client convenience.
         </p>
       </section>
 
       <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
-        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:16px;">Direct Advisory Lines &amp; Communications</h2>
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:16px;">Direct Departmental Desks &amp; Communications</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:16px;">
-          <div style="padding:14px;background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;">
-            <p style="font-size:13px;font-weight:700;color:#0F2A44;margin-bottom:4px;">Corporate Headquarters</p>
-            <p style="font-size:13px;color:#475569;">2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad, 44000, Pakistan</p>
+          <div style="padding:16px;background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;">
+            <p style="font-size:14px;font-weight:800;color:#0F2A44;margin-bottom:6px;">1. Real Estate Diligence Desk</p>
+            <p style="font-size:13px;color:#475569;line-height:1.6;margin-bottom:8px;">CDA/RDA registry checks, Token Biyana escrow, and official allotment transfer facilitation for TopCity-1, PECHS, and PHA I-12 / I-16.</p>
+            <p style="font-size:13px;color:#0F2A44;font-weight:700;">Phone: +92-334-9522157</p>
           </div>
-          <div style="padding:14px;background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;">
-            <p style="font-size:13px;font-weight:700;color:#0F2A44;margin-bottom:4px;">Telephone &amp; WhatsApp</p>
-            <p style="font-size:13px;color:#475569;">Primary Line: +92-334-9522157<br/>Secondary Line: +92-332-4004884</p>
+          <div style="padding:16px;background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;">
+            <p style="font-size:14px;font-weight:800;color:#0F2A44;margin-bottom:6px;">2. Civil Engineering &amp; Construction Desk</p>
+            <p style="font-size:13px;color:#475569;line-height:1.6;margin-bottom:8px;">PEC-licensed architectural design, grey structure milestone contracts, BOQ budgeting, and luxury turnkey villa finishes.</p>
+            <p style="font-size:13px;color:#0F2A44;font-weight:700;">Phone: +92-332-4004884</p>
           </div>
-          <div style="padding:14px;background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;">
-            <p style="font-size:13px;font-weight:700;color:#0F2A44;margin-bottom:4px;">Email Support</p>
-            <p style="font-size:13px;color:#475569;">General Inquiries: toplinkers69@gmail.com<br/>Executive Desk: info@toplinkersgroup.com</p>
+          <div style="padding:16px;background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;">
+            <p style="font-size:14px;font-weight:800;color:#0F2A44;margin-bottom:6px;">3. Solar Net Metering &amp; Energy Desk</p>
+            <p style="font-size:13px;color:#475569;line-height:1.6;margin-bottom:8px;">10kW to 500kW turnkey solar installations, Tier-1 TOPCon panels, hybrid battery storage (BESS), and IESCO green-meter approvals.</p>
+            <p style="font-size:13px;color:#0F2A44;font-weight:700;">WhatsApp: +92-334-9522157</p>
           </div>
         </div>
+      </section>
+
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Overseas Pakistani Advisory &amp; Digital Video Diligence</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          For overseas clients residing in the United Kingdom, United States, Canada, Saudi Arabia, and the United Arab Emirates, TopLinkers provides dedicated virtual consultations. Our senior consultants conduct live video walkthroughs of plots and building sites, verify official allotment records with housing directorates, and coordinate Power of Attorney (POA) registrations with embassy consular desks.
+        </p>
+        <p style="font-size:14px;color:#475569;">
+          Official Email: <a href="mailto:toplinkers69@gmail.com" style="color:#16B4E8;font-weight:700;">toplinkers69@gmail.com</a> | Executive Secretariat: <a href="mailto:info@toplinkersgroup.com" style="color:#16B4E8;font-weight:700;">info@toplinkersgroup.com</a>
+        </p>
       </section>
     `
   },
@@ -460,23 +476,33 @@ const staticRoutes = [
           Situated in scenic Kuza Gali just minutes from main Nathia Gali on the Murree-Abbottabad Highway, Harsukh Residencies is an exclusive mountain retreat offering hotel-serviced luxury apartments and vacation suites. Top Linkers is the authorized primary marketing and advisory partner.
         </p>
         <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
-          The project caters to investors seeking a hassle-free, fully managed tourist rental asset. With over 2 million tourists visiting the Galyat region annually, professional hotel management ensures steady rental revenue projected at 20%+ annual yield, alongside complimentary personal vacation stays for owners.
+          The project caters to investors seeking a hassle-free, fully managed tourist rental asset. With over 2.5 million tourists visiting the Galyat region annually during summer escapes and winter snow seasons, professional hotel management ensures steady rental revenue projected at 20%+ annual yield, alongside complimentary personal vacation stays for owners.
+        </p>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          Each suite is designed with floor-to-ceiling panoramic glass windows capturing unobstructed pine forest valleys, snow-capped mountain ridges, and cloudscapes. The building features reinforced RCC earthquake-resistant engineering, thermal insulation, centralized biomass heating conduits, and heavy-duty backup power generators designed for rugged alpine climates.
         </p>
       </section>
 
       <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
         <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Project Specifications &amp; Payment Structure</h2>
-        <ul style="line-height:2;color:#334155;font-size:14px;padding-left:20px;">
+        <ul style="line-height:2.2;color:#334155;font-size:14px;padding-left:20px;">
           <li><strong>Suite Variants:</strong> Studio Executive Suites, 1-Bedroom Mountain View Suites, and 2-Bedroom Family Penthouses.</li>
           <li><strong>Booking Terms:</strong> 15% down payment with balance payable in 36 easy monthly installments.</li>
           <li><strong>Full Furnishing Option:</strong> Turnkey interior decor including heating, wooden flooring, panoramic double glazing, and designer fixtures.</li>
           <li><strong>Rental Management:</strong> On-site concierge, housekeeping, 24/7 security, backup generators, and digital income statements.</li>
+          <li><strong>Access &amp; Connectivity:</strong> Direct frontage on main Murree-Nathia Gali road, 75 minutes scenic drive from Islamabad via Murree Expressway.</li>
         </ul>
       </section>
 
-      <p style="font-size:14px;color:#475569;">
-        Contact our <a href="/contact" style="color:#16B4E8;font-weight:700;">Harsukh Booking Desk</a> to reserve your suite.
-      </p>
+      <section style="margin-bottom:28px;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Guaranteed Asset Security &amp; Ownership Verification</h2>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          All land titles, building permissions, and environmental NOCs for Harsukh Residencies have been fully vetted by TopLinkers legal counsel. Buyers receive clear registry and sub-lease ownership titles with transparent quarterly financial reports on rental pool disbursements.
+        </p>
+        <p style="font-size:14px;color:#475569;">
+          Contact our <a href="/contact" style="color:#16B4E8;font-weight:700;">Harsukh Booking Desk</a> to reserve your suite or schedule an accompanied site inspection in Kuza Gali.
+        </p>
+      </section>
     `
   },
   {
@@ -490,30 +516,32 @@ const staticRoutes = [
         <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
           Banu Hafeez Residences offers modern apartment living in Block B, TopCity-1, Islamabad, near Srinagar Highway. Developed by Waheed Group of Companies, this residential project features thoughtfully designed 1-bed, 2-bed and 3-bed apartments, with spacious layouts, contemporary kitchens, balconies and terraces. Enjoy convenient access to Islamabad International Airport, major motorways and key destinations across the twin cities.
         </p>
+        <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+          TopCity-1 represents one of the most strategically positioned master-planned developments in the federal capital region. Situated at the confluence of Srinagar Highway, M-1 Motorway, and M-2 Motorway, residents benefit from direct access to the operational Metro Bus line, reducing commute times to Islamabad\'s central business districts to under 20 minutes.
+        </p>
       </section>
 
       <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
         <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Features &amp; Amenities</h2>
         <ul style="line-height:2.2;color:#334155;font-size:14px;padding-left:20px;">
-          <li>Prime Location in Block B, TopCity-1, Islamabad</li>
-          <li>Modern Earthquake-Resistant Structural Design*</li>
-          <li>Two Dedicated Basement Parking Floors</li>
-          <li>Modern Passenger &amp; Service Elevators</li>
-          <li>24/7 CCTV Surveillance &amp; Security Arrangements</li>
-          <li>Backup Power Generator for Added Convenience</li>
+          <li>Prime Location in Block B, TopCity-1, Islamabad adjoining the airport gate</li>
+          <li>Modern Earthquake-Resistant Structural Design vetted by certified structural engineers</li>
+          <li>Two Dedicated Basement Parking Floors with automated barrier entry</li>
+          <li>High-speed Passenger &amp; Service Elevators with smart power failover</li>
+          <li>24/7 CCTV Surveillance &amp; Gated Security Arrangements with central control desk</li>
+          <li>Heavy-duty Standby Backup Generator for 100% uninterrupted common area and lift power</li>
+          <li>Underground utility infrastructure: gas, electricity, high-speed fiber internet, and potable water filtration</li>
         </ul>
-        <p style="font-size:11px;color:#94a3b8;font-style:italic;margin-top:12px;padding-top:12px;border-top:1px solid #e2e8f0;">
-          *Subject to confirmation through approved structural specifications.
-        </p>
       </section>
 
       <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
         <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Unit Specifications &amp; Payment Breakdown</h2>
-        <ul style="line-height:2;color:#334155;font-size:14px;padding-left:20px;">
-          <li><strong>Units:</strong> 1, 2 &amp; 3 Bed Executive Apartments</li>
-          <li><strong>Down Payment:</strong> 15% Booking</li>
-          <li><strong>Installments:</strong> 3-Year Flexible Payment Plan</li>
-          <li><strong>Possession:</strong> Planned within 2 Years</li>
+        <ul style="line-height:2.2;color:#334155;font-size:14px;padding-left:20px;">
+          <li><strong>Units:</strong> 1, 2 &amp; 3 Bed Executive Apartments with ensuite bathrooms and private balconies</li>
+          <li><strong>Down Payment:</strong> 15% Booking with immediate official allotment letter</li>
+          <li><strong>Installments:</strong> 3-Year Flexible Quarterly Payment Plan</li>
+          <li><strong>Possession:</strong> Planned within 2 Years with guaranteed structural delivery timeline</li>
+          <li><strong>Rental Potential:</strong> High corporate and transit rental demand due to airport staff and multinational travelers</li>
         </ul>
       </section>
 
@@ -650,12 +678,29 @@ const staticRoutes = [
       </section>
 
       <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Official Property Title &amp; Allotment Verification Protocols</h2>
+        <p style="font-size:14px;line-height:1.75;color:#334155;margin-bottom:12px;">
+          All property listings on this website are subject to prior sale, lease, or price adjustments by the respective registered property owners without prior digital notice. TopLinkers verifies seller identification, CNIC authenticity, official society transfer letters, and registry records with housing authorities including CDA, RDA, and FGEHA.
+        </p>
+        <p style="font-size:14px;line-height:1.75;color:#334155;margin-bottom:12px;">
+          Token payments (Biyana) should only be executed via verified crossed pay orders or bank drafts in the name of the legal title holder as recorded in official housing directorate records, accompanied by written tripartite sale agreements witnessed by licensed legal counsel.
+        </p>
+      </section>
+
+      <section style="margin-bottom:28px;background:#fff;border-radius:10px;padding:24px;border:1px solid #E2E8F0;">
         <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Engineering &amp; Energy Projections</h2>
         <p style="font-size:14px;line-height:1.75;color:#334155;margin-bottom:12px;">
-          Construction cost estimates per square foot represent market averages based on prevailing cement, steel, and labor rates in Islamabad and are finalized via formal project-specific engineering contracts.
+          Construction cost estimates per square foot represent market averages based on prevailing cement, steel, and labor rates in Islamabad and are finalized via formal project-specific engineering contracts bound by detailed Bills of Quantities (BOQ).
         </p>
         <p style="font-size:14px;line-height:1.75;color:#334155;">
           Solar energy production figures and financial payback periods are calculated based on Islamabad\'s average annual solar irradiance (5.2 peak sun hours/day) and standard IESCO net-metering regulations. Actual energy generation may vary depending on weather conditions, roof orientation, and shading.
+        </p>
+      </section>
+
+      <section style="margin-bottom:24px;">
+        <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Legal Jurisdiction &amp; Dispute Resolution</h2>
+        <p style="font-size:14px;line-height:1.75;color:#334155;">
+          All business interactions, agency representations, and consulting contracts undertaken by TopLinkers are governed by the applicable laws of the Islamabad Capital Territory and the Islamic Republic of Pakistan. In case of legal queries, contact our legal transfer department at <a href="mailto:info@toplinkersgroup.com" style="color:#16B4E8;font-weight:700;">info@toplinkersgroup.com</a>.
         </p>
       </section>
     `
@@ -741,45 +786,47 @@ const staticRoutes = [
   }
 ]
 
-// 2. Load Blog Articles from blogData.js
-const blogFilePath = path.resolve(__dirname, '../src/data/blogData.js')
+// 2. Load Blog Articles from posts.json
+const blogFilePath = path.resolve(__dirname, '../src/data/posts.json')
 let dynamicBlogRoutes = []
 if (fs.existsSync(blogFilePath)) {
-  const blogContent = fs.readFileSync(blogFilePath, 'utf-8')
-  const postsMatch = blogContent.match(/export const blogPosts = (\[[\s\S]*?\n\])/)
-  if (postsMatch) {
-    try {
-      const posts = eval(postsMatch[1])
-      dynamicBlogRoutes = posts.map(post => ({
-        path: `/blog/${post.slug}`,
-        title: `${post.title.length > 55 ? post.title.substring(0, 55) + '...' : post.title} | TopLinkers`,
-        description: post.excerpt?.length > 155 ? post.excerpt.substring(0, 152) + '...' : post.excerpt,
-        h1: post.title,
-        isArticle: true,
-        articleData: post,
-        content: `
-          <article style="margin-bottom:28px;">
-            <div style="font-size:14px;color:#64748B;margin-bottom:16px;">
-              Published on <strong>${post.date || '2026-11-17'}</strong> by <strong>${post.author || 'Syed Usman Hammad'}</strong> &bull; Category: <strong>${post.category || 'Market Intelligence'}</strong>
-            </div>
-            <p style="font-size:16px;line-height:1.75;color:#334155;margin-bottom:20px;font-weight:500;">
-              ${post.excerpt || ''}
+  try {
+    const posts = JSON.parse(fs.readFileSync(blogFilePath, 'utf-8'))
+    dynamicBlogRoutes = posts.map(post => ({
+      path: `/blog/${post.slug}`,
+      title: `${post.title.length > 55 ? post.title.substring(0, 55) + '...' : post.title} | TopLinkers`,
+      description: post.summary?.length > 155 ? post.summary.substring(0, 152) + '...' : (post.summary || ''),
+      h1: post.title,
+      isArticle: true,
+      articleData: post,
+      ogImage: post.image || 'https://toplinkersgroup.com/toplinkers-logo.jpg',
+      content: `
+        <article style="margin-bottom:28px;">
+          <div style="font-size:14px;color:#64748B;margin-bottom:16px;">
+            Published on <strong>${post.date || '2026-11-17'}</strong> by <strong>${post.author || 'Syed Usman Hammad'}</strong> &bull; Category: <strong>${post.category || 'Market Intelligence'}</strong>
+          </div>
+          <p style="font-size:16px;line-height:1.75;color:#334155;margin-bottom:20px;font-weight:500;">
+            ${post.summary || ''}
+          </p>
+          <div style="font-size:15px;line-height:1.8;color:#334155;margin-bottom:24px;">
+            ${post.content || ''}
+          </div>
+          <section style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:22px;margin-top:28px;">
+            <h3 style="font-size:17px;font-weight:800;color:#0F2A44;margin-bottom:8px;">Consult Our Senior Property Advisory Desk</h3>
+            <p style="font-size:14px;color:#475569;margin-bottom:14px;line-height:1.6;">
+              Top Linkers provides verified land title checks, CDA/RDA layout scrutiny, turnkey construction estimates, and Tier-1 solar net metering engineering across Islamabad and Rawalpindi.
             </p>
-            <div style="font-size:15px;line-height:1.8;color:#334155;">
-              ${post.content || ''}
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <a href="/contact" style="background:#0F2A44;color:#fff;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;">Schedule Advisory Session</a>
+              <a href="/listings" style="background:#16B4E8;color:#0F2A44;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:800;text-decoration:none;">Browse 66 Verified Properties</a>
             </div>
-            <div style="margin-top:32px;padding:20px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;">
-              <h3 style="font-size:16px;font-weight:700;color:#0F2A44;margin-bottom:8px;">Consult Our Advisory Desk on This Topic</h3>
-              <p style="font-size:14px;color:#475569;margin-bottom:12px;">Top Linkers provides verified market diligence, title checks, and consulting in Islamabad.</p>
-              <a href="/contact" style="color:#16B4E8;font-weight:700;text-decoration:none;">Contact Our Consultants &rarr;</a>
-            </div>
-          </article>
-        `
-      }))
-      console.log(`  📚 Loaded ${dynamicBlogRoutes.length} blog articles for pre-rendering.`)
-    } catch (e) {
-      console.error('Failed to parse blogData.js:', e.message)
-    }
+          </section>
+        </article>
+      `
+    }))
+    console.log(`  📚 Loaded ${dynamicBlogRoutes.length} blog articles for pre-rendering.`)
+  } catch (e) {
+    console.error('Failed to parse posts.json:', e.message)
   }
 }
 
@@ -915,6 +962,7 @@ if (listingsRoute && allProperties.length > 0) {
   `
 }
 
+const disallowedPaths = new Set(['/404', '/compare', '/create-listing', '/favorites', '/search'])
 const allRoutes = [...staticRoutes, ...dynamicBlogRoutes, ...dynamicPropertyRoutes]
 
 export function prerender() {
@@ -935,9 +983,24 @@ export function prerender() {
     // 2. Replace <meta name="description">
     html = html.replace(/<meta name="description" content="[^"]*"/i, `<meta name="description" content="${r.description}"`)
 
-    // 3. Replace Canonical Link
-    const fullCanonical = `${BASE_URL}${r.path === '/' ? '/' : r.path}`
+    // 3. Replace Canonical Link (Canonical normalization: /search points to /listings)
+    const canonicalPath = r.path === '/search' ? '/listings' : (r.path === '/' ? '/' : r.path)
+    const fullCanonical = `${BASE_URL}${canonicalPath}`
     html = html.replace(/<link rel="canonical" href="[^"]*"/i, `<link rel="canonical" href="${fullCanonical}"`)
+
+    // 3B. Replace Robots Meta Directive (Explicit noindex for utility / client-side routes)
+    const isNoIndex = disallowedPaths.has(r.path) || r.path.startsWith('/admin') || r.noindex === true
+    if (isNoIndex) {
+      html = html.replace(
+        /<meta name="robots" content="[^"]*"/i,
+        '<meta name="robots" content="noindex, follow" />'
+      )
+    } else {
+      html = html.replace(
+        /<meta name="robots" content="[^"]*"/i,
+        '<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />'
+      )
+    }
 
     // 4. Replace OpenGraph & Twitter tags
     html = html.replace(/<meta property="og:title" content="[^"]*"/i, `<meta property="og:title" content="${r.title}"`)
@@ -1307,7 +1370,6 @@ export function prerender() {
 
   // Synchronize sitemap.xml with canonical URLs (excluding admin, 404, and disallowed utility tools)
   const todayIso = new Date().toISOString().split('T')[0]
-  const disallowedPaths = new Set(['/404', '/compare', '/create-listing', '/favorites', '/search'])
   const canonicalRoutes = allRoutes.filter(r => !r.path.startsWith('/admin') && !disallowedPaths.has(r.path))
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

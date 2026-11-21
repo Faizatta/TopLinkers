@@ -33,7 +33,11 @@ const removeMetaTag = (attrName, attrValue) => {
 
 const setCanonicalUrl = (path) => {
   // Normalize canonical URL: strip query parameters like ?page, ?utm_*, ?ref
-  const cleanPath = path === '/' ? '/' : path.replace(/\/+$/, '')
+  let cleanPath = path === '/' ? '/' : path.replace(/\/+$/, '')
+  // Internal search points canonical to the main listings directory
+  if (cleanPath === '/search') {
+    cleanPath = '/listings'
+  }
   const fullCanonical = `${BASE_URL}${cleanPath}`
 
   let link = document.querySelector('link[rel="canonical"]')
