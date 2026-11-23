@@ -115,6 +115,11 @@ body {
   transform: translateY(-6px);
 }
 
+/* Leaflet Stacking Context Isolation */
+.leaflet-container {
+  z-index: 1 !important;
+}
+
 /* Leaflet Pill Marker & Popup styling (loaded together with Leaflet itself) */
 .leaflet-pill-marker {
   background: #ffffff;

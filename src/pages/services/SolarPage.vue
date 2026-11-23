@@ -66,7 +66,7 @@
               <button
                 type="button"
                 @click="switchSolarTab('ongrid')"
-                class="w-full sm:w-auto h-full py-2.5 sm:py-0 px-1 sm:px-4 rounded-lg text-[11px] sm:text-xs md:text-sm font-extrabold transition-all flex items-center justify-center gap-1 sm:gap-1.5 text-center min-w-0"
+                class="w-full sm:w-auto h-full py-2.5 sm:py-0 px-1.5 sm:px-4 rounded-lg text-[11px] sm:text-xs md:text-sm font-extrabold transition-all flex items-center justify-center gap-1 sm:gap-1.5 text-center min-w-0"
                 :class="activeSolarTab === 'ongrid'
                   ? 'bg-[#16B4E8] text-[#071E33] shadow-md ring-1 ring-white/60'
                   : 'text-slate-300 hover:text-white hover:bg-white/10'"
@@ -78,27 +78,26 @@
               <button
                 type="button"
                 @click="switchSolarTab('hybrid')"
-                class="w-full sm:w-auto h-full py-2.5 sm:py-0 px-1 sm:px-4 rounded-lg text-[11px] sm:text-xs md:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 text-center min-w-0"
+                class="w-full sm:w-auto h-full py-2.5 sm:py-0 px-1.5 sm:px-4 rounded-lg text-[11px] sm:text-xs md:text-sm font-extrabold transition-all flex items-center justify-center gap-1 sm:gap-1.5 text-center min-w-0"
                 :class="activeSolarTab === 'hybrid'
                   ? 'bg-emerald-500 text-white shadow-md ring-1 ring-white/60'
                   : 'text-slate-300 hover:text-white hover:bg-white/10'"
               >
                 <span v-if="activeSolarTab === 'hybrid'" class="w-1.5 h-1.5 rounded-full bg-white animate-pulse shrink-0"></span>
-                <span class="truncate">2. Hybrid Solar</span>
+                <span class="truncate">2. Hybrid</span>
               </button>
 
               <button
                 type="button"
                 @click="switchSolarTab('bess')"
-                class="w-full sm:w-auto h-full py-2.5 sm:py-0 px-1 sm:px-4 rounded-lg text-[11px] sm:text-xs md:text-sm font-extrabold transition-all flex items-center justify-center gap-1.5 text-center min-w-0"
+                class="w-full sm:w-auto h-full py-2.5 sm:py-0 px-1.5 sm:px-4 rounded-lg text-[11px] sm:text-xs md:text-sm font-extrabold transition-all flex items-center justify-center gap-1 sm:gap-1.5 text-center min-w-0"
                 :class="activeSolarTab === 'bess'
                   ? 'bg-amber-500 text-white shadow-md ring-1 ring-white/60'
                   : 'text-slate-300 hover:text-white hover:bg-white/10'"
               >
                 <span v-if="activeSolarTab === 'bess'" class="w-1.5 h-1.5 rounded-full bg-white animate-pulse shrink-0"></span>
-                <span class="hidden md:inline whitespace-nowrap">3. Battery Energy Storage System (BESS)</span>
-                <span class="hidden sm:inline md:hidden whitespace-nowrap">3. Battery Storage (BESS)</span>
-                <span class="sm:hidden truncate">3. BESS (Storage)</span>
+                <span class="hidden md:inline whitespace-nowrap">3. Battery Storage (BESS)</span>
+                <span class="md:hidden truncate">3. BESS</span>
               </button>
             </div>
           </div>

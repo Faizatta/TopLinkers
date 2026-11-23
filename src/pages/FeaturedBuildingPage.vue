@@ -1,18 +1,18 @@
 <template>
-  <div class="min-h-screen bg-[#F6F8FA]">
+  <div class="min-h-screen bg-[#F6F8FA] pt-20">
     <!-- Top Breadcrumbs -->
     <div class="bg-white border-b border-slate-200">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 text-xs text-slate-500 flex items-center gap-2">
-        <router-link to="/" class="hover:text-[#0F2A44] transition-colors">Home</router-link>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-xs text-slate-500 flex items-center gap-2">
+        <router-link to="/" class="hover:text-[#16B4E8] font-medium transition-colors">Home</router-link>
         <span>/</span>
-        <router-link to="/services" class="hover:text-[#0F2A44] transition-colors">Services</router-link>
+        <router-link to="/services" class="hover:text-[#16B4E8] font-medium transition-colors">Services</router-link>
         <span>/</span>
         <span class="font-bold text-[#0F2A44] truncate">{{ building.name || building.title }}</span>
       </div>
     </div>
 
     <!-- Cinematic Hero Section with Dynamic Background Cover -->
-    <section class="relative bg-gradient-to-br from-[#07111D] via-[#0F2A44] to-[#142D42] text-white pt-16 pb-28 sm:pb-32 overflow-hidden">
+    <section class="relative bg-gradient-to-br from-[#07111D] via-[#0F2A44] to-[#142D42] text-white pt-10 sm:pt-16 pb-20 sm:pb-28 overflow-hidden">
       <!-- Background Image with Dark Vignette Overlay -->
       <div class="absolute inset-0 z-0">
         <img
@@ -30,78 +30,82 @@
 
       <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
         <!-- Top Pill Badges -->
-        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-4">
-          <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#E53935] text-white shadow-md">
+        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+          <span class="px-2.5 sm:px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#E53935] text-white shadow-xs">
             HOT FEATURED PROJECT
           </span>
-          <span v-if="building.badge" class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#16B4E8] text-[#0F2A44] shadow-md">
+          <span v-if="building.badge" class="px-2.5 sm:px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#16B4E8] text-[#0F2A44] shadow-xs">
             {{ building.badge }}
           </span>
-          <span v-if="building.downPayment" class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500 text-white shadow-md">
+          <span v-if="building.downPayment" class="px-2.5 sm:px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500 text-white shadow-xs">
             {{ building.downPayment }}
           </span>
         </div>
 
-        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl">
+        <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto sm:mx-0">
           {{ building.title || building.name }}
         </h1>
 
-        <p class="mt-4 text-base sm:text-lg text-slate-200 max-w-3xl leading-relaxed font-normal">
+        <p class="mt-2.5 sm:mt-4 text-xs sm:text-base text-slate-200 max-w-3xl leading-relaxed font-normal mx-auto sm:mx-0">
           {{ building.subtitle || building.description }}
         </p>
 
-        <!-- CTA Action Buttons -->
-        <div class="mt-8 flex flex-wrap items-center justify-center sm:justify-start gap-3">
-          <a
-            :href="whatsappUrl"
-            target="_blank"
-            class="px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#1ebd59] text-white font-black text-sm uppercase tracking-wider shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
-          >
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-            <span>Book Via WhatsApp</span>
-          </a>
+        <!-- CTA Action Buttons (Mobile-optimized 2-col + full width model trigger) -->
+        <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-2.5 sm:gap-3 max-w-md mx-auto sm:mx-0 sm:max-w-none">
+          <div class="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:gap-3">
+            <a
+              :href="whatsappUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-4 py-2.5 sm:px-6 sm:py-3.5 rounded-xl bg-[#25D366] hover:bg-[#1ebd59] text-white font-black text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-1.5"
+            >
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-current flex-shrink-0" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+              <span>WhatsApp</span>
+            </a>
 
-          <a
-            :href="`tel:${building.phone?.replace(/[^0-9]/g, '') || '+923349522157'}`"
-            class="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all flex items-center gap-2"
-          >
-            <svg class="w-4 h-4 text-[#16B4E8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-            <span>Call {{ building.phone || '0334-9522157' }}</span>
-          </a>
+            <a
+              :href="`tel:${building.phone?.replace(/[^0-9]/g, '') || '+923349522157'}`"
+              class="px-4 py-2.5 sm:px-6 sm:py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm border border-white/20 transition-all flex items-center justify-center gap-1.5"
+            >
+              <svg class="w-4 h-4 text-[#16B4E8] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              <span>Call Direct</span>
+            </a>
+          </div>
 
           <button
             type="button"
             @click="uiStore.openBuildingModal()"
-            class="px-6 py-3.5 rounded-xl bg-[#16B4E8] hover:bg-[#129bc7] text-[#0F2A44] font-black text-sm uppercase tracking-wider shadow-lg transition-all"
+            class="px-5 py-2.5 sm:py-3.5 rounded-xl bg-[#16B4E8] hover:bg-[#129bc7] text-[#0F2A44] font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg transition-all flex items-center justify-center gap-1.5"
           >
-            Open Interactive Modal
+            <span>Explore 3D Project Model</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
           </button>
         </div>
       </div>
     </section>
 
     <!-- Floating 4-Metric Fast Facts Dock -->
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 sm:-mt-20 relative z-20">
-      <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-[0_20px_50px_rgba(15,42,68,0.12)] border border-slate-100 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
-        <div class="text-center pt-2 sm:pt-0">
-          <span class="text-[11px] font-black uppercase tracking-wider text-slate-400 block">Down Payment</span>
-          <span class="text-xl sm:text-2xl font-black text-emerald-600 block mt-1">{{ building.downPayment || '20% Down' }}</span>
-          <span class="text-[11px] text-slate-500 block mt-0.5">Flexible Installments</span>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-14 relative z-20">
+      <div class="bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-[0_15px_40px_rgba(15,42,68,0.10)] border border-slate-100 grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+        <div class="bg-slate-50/80 rounded-xl p-3 sm:p-4 text-center border border-slate-100">
+          <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-slate-400 block">Down Payment</span>
+          <span class="text-base sm:text-2xl font-black text-emerald-600 block mt-0.5 sm:mt-1">{{ building.downPayment || '20% Down' }}</span>
+          <span class="text-[10px] sm:text-[11px] text-slate-500 block mt-0.5">Flexible Installments</span>
         </div>
-        <div class="text-center pt-2 sm:pt-0 sm:pl-4">
-          <span class="text-[11px] font-black uppercase tracking-wider text-slate-400 block">Price Range</span>
-          <span class="text-xl sm:text-2xl font-black text-[#0F2A44] block mt-1">{{ building.price || 'Market Rates' }}</span>
-          <span class="text-[11px] text-slate-500 block mt-0.5">Commercial &amp; Residential</span>
+        <div class="bg-slate-50/80 rounded-xl p-3 sm:p-4 text-center border border-slate-100">
+          <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-slate-400 block">Price Range</span>
+          <span class="text-base sm:text-2xl font-black text-[#0F2A44] block mt-0.5 sm:mt-1">{{ building.price || 'Market Rates' }}</span>
+          <span class="text-[10px] sm:text-[11px] text-slate-500 block mt-0.5">Commercial &amp; Residential</span>
         </div>
-        <div class="text-center pt-2 sm:pt-0 sm:pl-4">
-          <span class="text-[11px] font-black uppercase tracking-wider text-slate-400 block">Location</span>
-          <span class="text-base sm:text-lg font-black text-[#16B4E8] block mt-1 truncate">{{ building.location || 'Islamabad' }}</span>
-          <span class="text-[11px] text-slate-500 block mt-0.5">Prime Road Frontage</span>
+        <div class="bg-slate-50/80 rounded-xl p-3 sm:p-4 text-center border border-slate-100">
+          <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-slate-400 block">Location</span>
+          <span class="text-xs sm:text-lg font-black text-[#16B4E8] block mt-0.5 sm:mt-1 truncate">{{ building.location || 'TopCity-1, Islamabad' }}</span>
+          <span class="text-[10px] sm:text-[11px] text-slate-500 block mt-0.5">Prime Main Boulevard</span>
         </div>
-        <div class="text-center pt-2 sm:pt-0 sm:pl-4">
-          <span class="text-[11px] font-black uppercase tracking-wider text-slate-400 block">Legal Status</span>
-          <span class="text-xl sm:text-2xl font-black text-emerald-600 block mt-1">100% Verified</span>
-          <span class="text-[11px] text-slate-500 block mt-0.5">CDA / RDA Clear Title</span>
+        <div class="bg-slate-50/80 rounded-xl p-3 sm:p-4 text-center border border-slate-100">
+          <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-slate-400 block">Legal Status</span>
+          <span class="text-base sm:text-2xl font-black text-emerald-600 block mt-0.5 sm:mt-1">100% Verified</span>
+          <span class="text-[10px] sm:text-[11px] text-slate-500 block mt-0.5">RDA Clear NOC Title</span>
         </div>
       </div>
     </div>

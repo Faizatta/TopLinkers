@@ -115,9 +115,9 @@
       </div>
     </div>
 
-    <!-- VIEW 2: MAP (Leaflet) -->
-    <div v-show="activeView === 'map'" class="relative h-[260px] sm:h-[380px] md:h-[500px] w-full bg-gray-200">
-      <div ref="mapContainer" class="w-full h-full"></div>
+    <!-- VIEW 2: MAP (Leaflet with isolated stacking context) -->
+    <div v-show="activeView === 'map'" class="relative z-0 isolate h-[260px] sm:h-[380px] md:h-[500px] w-full bg-gray-200 overflow-hidden">
+      <div ref="mapContainer" class="w-full h-full relative z-0"></div>
     </div>
 
     <!-- VIEW 3: VIDEO (Optional) -->

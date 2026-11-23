@@ -30,7 +30,7 @@
         <div class="flex items-start gap-4 p-4 rounded-lg hover:bg-[#F6F8FA] transition-colors group">
           <div class="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 shadow-md border-2 border-white group-hover:border-[#16B4E8] transition-colors">
             <img
-              src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=200&q=80"
+              src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?auto=format&fit=crop&w=200&q=80"
               alt="Trusted by Thousands"
               loading="lazy"
               decoding="async"
@@ -78,7 +78,7 @@
         <div class="flex items-start gap-4 p-4 rounded-lg hover:bg-[#F6F8FA] transition-colors group">
           <div class="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 shadow-md border-2 border-white group-hover:border-[#16B4E8] transition-colors">
             <img
-              src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=200&q=80"
+              src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=200&q=80"
               alt="Expert Support"
               loading="lazy"
               decoding="async"

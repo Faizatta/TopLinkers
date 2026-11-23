@@ -299,14 +299,14 @@
 
     <!-- Mobile Slide-in Drawer -->
     <Teleport to="body">
-      <div v-if="mobileDrawerOpen" class="fixed inset-0 z-50 overflow-hidden lg:hidden">
+      <div v-if="mobileDrawerOpen" class="fixed inset-0 z-[99999] overflow-hidden lg:hidden">
         <!-- Backdrop Blur -->
         <div
-          class="absolute inset-0 bg-[#0F2A44]/60 backdrop-blur-sm transition-opacity duration-300"
+          class="absolute inset-0 bg-[#0F2A44]/70 backdrop-blur-md transition-opacity duration-300 z-[99998]"
           @click="mobileDrawerOpen = false"
         ></div>
 
-        <div class="fixed inset-y-0 right-0 max-w-full flex pl-8">
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-8 z-[99999]">
           <div class="w-screen max-w-xs bg-white text-[#0F2A44] h-full flex flex-col shadow-2xl border-l border-slate-100 overflow-y-auto" data-lenis-prevent>
             <!-- Drawer Header with Logo & Name -->
             <div class="flex items-center justify-between p-5 border-b border-slate-100 flex-shrink-0 bg-white sticky top-0 z-10">

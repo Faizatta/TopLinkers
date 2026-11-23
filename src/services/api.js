@@ -344,9 +344,9 @@ export const api = {
     // 1. Direct slug or id match
     let found = list.find(p => 
       p.slug === slug || 
-      p.id === slug ||
+      String(p.id) === String(slug) ||
       (p.slug && p.slug.toLowerCase().trim() === decoded) ||
-      (p.id && p.id.toLowerCase().trim() === decoded) ||
+      (p.id != null && String(p.id).toLowerCase().trim() === decoded) ||
       encodeURIComponent(p.slug || '') === slug
     )
 
@@ -356,9 +356,9 @@ export const api = {
       list = getLivePropertyList()
       found = list.find(p => 
         p.slug === slug || 
-        p.id === slug ||
+        String(p.id) === String(slug) ||
         (p.slug && p.slug.toLowerCase().trim() === decoded) ||
-        (p.id && p.id.toLowerCase().trim() === decoded) ||
+        (p.id != null && String(p.id).toLowerCase().trim() === decoded) ||
         encodeURIComponent(p.slug || '') === slug
       )
     }

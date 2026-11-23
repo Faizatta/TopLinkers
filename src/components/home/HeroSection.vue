@@ -87,23 +87,13 @@ const slides = [
   },
   {
     id: 5,
-    title: 'Spanish Architecture Luxury Villa (Gulberg Greens)',
-    specs: '1 Kanal (500 Sq Yds) • 5 Beds • 20kW Tier-1 Solar Net Metering',
-    badge: 'Turnkey Ready',
-    description: 'Custom turnkey designer residence with Italian kitchen, landscaped private lawn, Grade-60 steel seismic structure, and zero electricity bills via solar.',
-    ctaText: 'Explore Villa',
-    link: '/property/spanish-luxury-villa-gulberg-greens',
-    image: '/images/hero-real-estate.webp'
-  },
-  {
-    id: 6,
-    title: 'Airport Green Garden (AGG) Moqa Plots',
-    specs: '5, 8, 10 Marla & 1 Kanal • 3,700 Plots Possession • RDA Approved',
-    badge: '7 KM to Airport • Kashmir Highway',
-    description: 'RDA-approved master-planned community adjoining New Islamabad Airport & Kashmir Highway. 1,500 plots possession delivered with 2,200 more in Dec 2026. Wide carpeted boulevards & underground utilities.',
-    ctaText: 'Explore AGG Plots',
-    link: '/property/agg-airport-green-garden-5-marla-moqa-ka-plot',
-    image: '/images/agg/agg-plots-hero.webp'
+    title: 'Faisal Town Phase 2 (FT-II) Installment Plots',
+    specs: '5.56, 8, 10 Marla & 1 Kanal • 42 Monthly Installments',
+    badge: '4.5-Year Plots Plan',
+    description: 'Zedem International premier master-planned community by Chaudhry Abdul Majeed with direct M-2 Motorway interchange and 15% lump-sum discount.',
+    ctaText: 'Explore Faisal Town Plots',
+    link: '/property/faisal-town-phase-2-installment-plot',
+    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80'
   }
 ]
 
