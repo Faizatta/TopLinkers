@@ -16,6 +16,9 @@ DirectorySlash Off
   # Allow direct access to .well-known for RFC 8615 and SEP-1649 MCP discovery
   RewriteRule ^\.well-known/ - [L]
 
+  # Direct access to AdSense verification and crawler files (Serves HTTP 200 directly with zero redirects)
+  RewriteRule ^(ads\.txt|app-ads\.txt|robots\.txt|sitemap\.xml)$ - [L]
+
   # ----------------------------------------------------
   # CANONICAL REDIRECTS (Resolves GSC "Alternate Page" Status)
   # ----------------------------------------------------
@@ -166,6 +169,16 @@ DirectorySlash Off
   ForceType text/plain
   Header set Content-Type "text/plain; charset=utf-8"
   Header set Access-Control-Allow-Origin "*"
+  Header set Cache-Control "public, max-age=3600"
+  Header unset X-Frame-Options
+</Files>
+
+<Files "app-ads.txt">
+  ForceType text/plain
+  Header set Content-Type "text/plain; charset=utf-8"
+  Header set Access-Control-Allow-Origin "*"
+  Header set Cache-Control "public, max-age=3600"
+  Header unset X-Frame-Options
 </Files>
 
 <Files "llms.txt">

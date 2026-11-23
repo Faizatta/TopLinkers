@@ -1,8 +1,27 @@
 # Top Linkers Real Estate, Construction & Solar - robots.txt
 Content-Signal: search=yes, ai-train=no
 
+# Google AdSense Crawler Explicit Authorization
+User-agent: Mediapartners-Google
+Allow: /
+
+# Google Search & AdsBot Crawlers
+User-agent: Googlebot
+Allow: /
+Allow: /ads.txt
+Allow: /app-ads.txt
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api
+Disallow: /api/
+
+User-agent: AdsBot-Google
+Allow: /
+
 User-agent: *
 Allow: /
+Allow: /ads.txt
+Allow: /app-ads.txt
 Disallow: /admin
 Disallow: /admin/
 Disallow: /api

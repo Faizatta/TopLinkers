@@ -1396,6 +1396,17 @@ ${canonicalRoutes.map(r => {
   fs.writeFileSync(distSitemap, sitemapXml, 'utf-8')
   console.log(`  📄 Synchronized sitemap.xml with ${canonicalRoutes.length} canonical indexable URLs.`)
 
+  // Ensure ads.txt, app-ads.txt, robots.txt and .htaccess are in dist
+  const rootFilesToSync = ['ads.txt', 'app-ads.txt', 'robots.txt', '.htaccess']
+  rootFilesToSync.forEach(file => {
+    const src = path.resolve(__dirname, `../public/${file}`)
+    const dst = path.resolve(distDir, file)
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, dst)
+    }
+  })
+  console.log(`  🛡️ Synchronized ads.txt, app-ads.txt, robots.txt, and .htaccess into dist.`)
+
   console.log(`🎉 Pre-rendering completed successfully for all ${allRoutes.length} routes!`)
 }
 
