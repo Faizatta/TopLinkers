@@ -12,7 +12,7 @@
     </div>
 
     <!-- Cinematic Hero Section with Dynamic Background Cover -->
-    <section class="relative bg-gradient-to-br from-[#07111D] via-[#0F2A44] to-[#142D42] text-white pt-10 sm:pt-16 pb-20 sm:pb-28 overflow-hidden">
+    <section class="relative bg-gradient-to-br from-[#07111D] via-[#0F2A44] to-[#142D42] text-white pt-6 sm:pt-16 pb-12 sm:pb-28 overflow-hidden">
       <!-- Background Image with Dark Vignette Overlay -->
       <div class="absolute inset-0 z-0">
         <img
@@ -85,7 +85,7 @@
     </section>
 
     <!-- Floating 4-Metric Fast Facts Dock -->
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-14 relative z-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-14 relative z-20">
       <div class="bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-[0_15px_40px_rgba(15,42,68,0.10)] border border-slate-100 grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
         <div class="bg-slate-50/80 rounded-xl p-3 sm:p-4 text-center border border-slate-100">
           <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-slate-400 block">Down Payment</span>

@@ -366,16 +366,26 @@ export const api = {
     // 2. Common aliases fallback
     if (!found) {
       const aliases = {
-        'executive-designer-villa-gulberg': 'executive-designer-villa-gulberg',
+        'executive-designer-villa-gulberg': 'faisal-town-phase-2-installment-plot',
+        'spanish-luxury-villa-gulberg-greens': 'faisal-town-phase-2-installment-plot',
         'corner-plot-topcity': 'corner-plot-topcity',
-        'pha-flats-i12': 'pha-flats-i12-c-type-2bed',
-        'pha-flats-i16': 'pha-flats-i16-b-type-3bed',
+        'topcity': 'corner-plot-topcity',
+        'topcity-1': 'corner-plot-topcity',
+        'top-city': 'corner-plot-topcity',
+        'top-city-1': 'corner-plot-topcity',
+        'topcity-block-b': 'corner-plot-topcity',
+        'pha-flats-i12': 'pha-flats-i12-1-type-d-e-2bed',
+        'pha-flats-i16': 'pha-flats-i16-3-type-b-3bed',
         'harsukh': 'hr-sukh-luxury-flats-nathia-gali',
-        'hr-sukh': 'hr-sukh-luxury-flats-nathia-gali'
+        'hr-sukh': 'hr-sukh-luxury-flats-nathia-gali',
+        'faisal-town': 'faisal-town-phase-2-installment-plot',
+        'faisal-town-2': 'faisal-town-phase-2-installment-plot',
+        'pechs': 'pechs-islamabad-5-marla-plot',
+        'pechs-5-marla': 'pechs-islamabad-5-marla-plot'
       }
       const targetSlug = aliases[decoded]
       if (targetSlug) {
-        found = list.find(p => p.slug === targetSlug || p.id === targetSlug)
+        found = list.find(p => p.slug === targetSlug || String(p.id) === String(targetSlug))
       }
     }
 
