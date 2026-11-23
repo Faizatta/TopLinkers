@@ -228,139 +228,18 @@
           </div>
         </div>
 
-        <!-- View Controls Bar: View Toggle (Grid / 3D Stage) -->
-        <div class="flex items-center justify-between mb-5">
+        <!-- Member Count Header with 3D Interaction Hint (3D Stage Exclusive) -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
           <p class="text-xs text-slate-500 font-medium">
             Showing {{ filteredMembers.length }} specialized team members
           </p>
-
-          <!-- Toggle View Button (Grid vs 3D Carousel) -->
-          <div class="inline-flex items-center p-0.5 bg-slate-100 rounded-lg border border-slate-200 text-xs font-bold">
-            <button
-              type="button"
-              @click="viewMode = 'grid'"
-              class="px-2.5 py-1 rounded-md transition-all flex items-center gap-1.5 text-[11px]"
-              :class="viewMode === 'grid' ? 'bg-[#0F2A44] text-white shadow-xs' : 'text-slate-600 hover:text-[#0F2A44]'"
-              title="Grid View (Easy to See All)"
-            >
-              <Squares2X2Icon class="w-3.5 h-3.5" />
-              <span>Grid View</span>
-            </button>
-            <button
-              type="button"
-              @click="viewMode = 'carousel'"
-              class="px-2.5 py-1 rounded-md transition-all flex items-center gap-1.5 text-[11px]"
-              :class="viewMode === 'carousel' ? 'bg-[#0F2A44] text-white shadow-xs' : 'text-slate-600 hover:text-[#0F2A44]'"
-              title="Interactive 3D Carousel"
-            >
-              <ViewColumnsIcon class="w-3.5 h-3.5" />
-              <span>3D Stage</span>
-            </button>
-          </div>
+          <span class="text-[11px] font-bold text-[#16B4E8] flex items-center gap-1">
+            <span>Swipe or click any card to inspect full profile &amp; direct contacts &rarr;</span>
+          </span>
         </div>
 
-        <!-- 1. RESPONSIVE GRID VIEW (DEFAULT ON MOBILE / EASY TO SEE ALL THAT) -->
-        <div v-if="viewMode === 'grid'" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-          <div
-            v-for="member in filteredMembers"
-            :key="member.id"
-            @click="openMemberPopup(member)"
-            class="group cursor-pointer bg-white rounded-2xl p-4 sm:p-5 border border-gray-200/90 hover:border-[#16B4E8]/60 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between relative overflow-hidden"
-          >
-            <!-- Top Subtle Accent -->
-            <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#16B4E8] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-
-            <div>
-              <!-- Portrait Image & Badges -->
-              <div class="relative w-full h-56 sm:h-60 rounded-xl overflow-hidden bg-slate-100 mb-3.5">
-                <img
-                  :src="member.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80'"
-                  :alt="member.name"
-                  loading="lazy"
-                  decoding="async"
-                  width="320"
-                  height="240"
-                  class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
-
-                <!-- Top Category & Tag Badge -->
-                <div class="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-1.5">
-                  <span
-                    class="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider backdrop-blur-md shadow-sm inline-flex items-center gap-1"
-                    :class="member.category === 'engineer' ? 'bg-emerald-600/90 text-white' : 'bg-[#0F2A44]/90 text-[#16B4E8] border border-[#16B4E8]/30'"
-                  >
-                    <ShieldCheckIcon class="w-3 h-3" />
-                    <span>{{ member.category === 'engineer' ? 'PEC Engineer' : 'Property Consultant' }}</span>
-                  </span>
-
-                  <span v-if="member.experience" class="px-2 py-0.5 rounded-md text-[9px] font-black bg-black/60 backdrop-blur-xs text-white">
-                    {{ member.experience }}
-                  </span>
-                </div>
-
-                <!-- Bottom Photo Name Overlay -->
-                <div class="absolute bottom-2.5 left-3 right-3 text-white">
-                  <p class="text-sm font-black truncate leading-tight drop-shadow-sm">{{ member.name }}</p>
-                  <p class="text-[11px] text-[#16B4E8] truncate font-bold mt-0.5">{{ member.role }}</p>
-                </div>
-              </div>
-
-              <!-- Specialty Tag Pill (Clean & Prominent Tag Look) -->
-              <div class="mb-2">
-                <span
-                  class="inline-block px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider"
-                  :class="member.category === 'engineer' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-sky-50 text-[#0F2A44] border border-sky-200'"
-                >
-                  {{ member.tag || (member.category === 'engineer' ? 'Registered Engineer' : 'Property Advisor') }}
-                </span>
-              </div>
-
-              <!-- Brief Bio / Specialty -->
-              <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed font-normal mb-3">
-                {{ member.bio || member.specialty }}
-              </p>
-            </div>
-
-            <!-- Bottom Action Row: WhatsApp, Phone & Full Dossier -->
-            <div class="pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
-              <div class="flex items-center gap-1.5 flex-1 min-w-0">
-                <a
-                  :href="`https://wa.me/${cleanWa(member.whatsapp || member.phone)}?text=${encodeURIComponent(`Assalam o Alaikum ${member.name}, I am contacting you through TopLinkers directory regarding a property advisory.`)}`"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  @click.stop
-                  title="WhatsApp"
-                  class="flex-1 py-1.5 px-2.5 rounded-lg bg-emerald-50 hover:bg-[#25D366] text-emerald-700 hover:text-white text-[11px] font-black transition-colors flex items-center justify-center gap-1"
-                >
-                  <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24">
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
-                  </svg>
-                  <span>WhatsApp</span>
-                </a>
-
-                <a
-                  :href="`tel:${cleanWa(member.phone)}`"
-                  @click.stop
-                  title="Direct Call"
-                  class="py-1.5 px-2.5 rounded-lg bg-slate-100 hover:bg-[#0F2A44] text-[#0F2A44] hover:text-white text-[11px] font-black transition-colors flex items-center justify-center gap-1"
-                >
-                  <PhoneIcon class="w-3 h-3" />
-                  <span>Call</span>
-                </a>
-              </div>
-
-              <span class="text-[11px] font-black text-[#16B4E8] group-hover:translate-x-0.5 transition-transform shrink-0 flex items-center gap-0.5">
-                <span>Details</span>
-                <span>&rarr;</span>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2. INTERACTIVE 3D PERSPECTIVE CAROUSEL VIEW -->
+        <!-- INTERACTIVE 3D PERSPECTIVE CAROUSEL STAGE -->
         <div
-          v-else
           class="select-none relative py-4"
           @mouseenter="isHovered = true"
           @mouseleave="isHovered = false"
@@ -368,13 +247,13 @@
           @pointerup="onPointerUp"
         >
           <!-- 3D Perspective Fanned Carousel Viewport -->
-          <div class="relative h-[330px] sm:h-[380px] flex items-center justify-center overflow-hidden perspective-stage px-4">
+          <div class="relative h-[340px] sm:h-[400px] flex items-center justify-center overflow-hidden perspective-stage px-4">
             <div
               v-for="(member, idx) in filteredMembers"
               :key="member.id"
               @click="handleCardClick(idx, member)"
               :style="getCard3DStyle(idx)"
-              class="absolute w-52 sm:w-64 h-[270px] sm:h-[320px] rounded-2xl overflow-hidden cursor-pointer border-2 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-xl group bg-white"
+              class="absolute w-56 sm:w-64 h-[285px] sm:h-[330px] rounded-2xl overflow-hidden cursor-pointer border-2 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-xl group bg-white"
               :class="idx === activeIndex ? 'border-[#16B4E8] ring-4 ring-[#16B4E8]/20 shadow-2xl' : 'border-white hover:border-[#16B4E8]/60'"
             >
               <img
@@ -441,6 +320,40 @@
             >
               <ChevronRightIcon class="w-4 h-4" />
             </button>
+          </div>
+
+          <!-- Active Member Quick Action Bar (Mobile-first direct WhatsApp & call dock) -->
+          <div v-if="filteredMembers[activeIndex]" class="max-w-md mx-auto mt-4 px-2">
+            <div class="bg-white rounded-2xl p-3 border border-slate-200/90 shadow-sm flex items-center justify-between gap-3">
+              <div class="min-w-0 cursor-pointer flex-1" @click="openMemberPopup(filteredMembers[activeIndex])">
+                <p class="text-xs font-black text-[#0F2A44] truncate">{{ filteredMembers[activeIndex].name }}</p>
+                <p class="text-[10px] text-slate-500 font-bold truncate">{{ filteredMembers[activeIndex].role }} &bull; {{ filteredMembers[activeIndex].experience || 'TopLinkers Desk' }}</p>
+              </div>
+              <div class="flex items-center gap-1.5 flex-shrink-0">
+                <a
+                  :href="`https://wa.me/${cleanWa(filteredMembers[activeIndex].whatsapp || filteredMembers[activeIndex].phone)}?text=${encodeURIComponent(`Assalam o Alaikum ${filteredMembers[activeIndex].name}, I am contacting you through TopLinkers directory regarding a property advisory.`)}`"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  @click.stop
+                  title="WhatsApp"
+                  class="py-1.5 px-3 rounded-lg bg-[#25D366] hover:bg-[#1ebe5a] text-white text-[11px] font-black transition-colors flex items-center gap-1 shadow-xs"
+                >
+                  <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+                  </svg>
+                  <span>WhatsApp</span>
+                </a>
+
+                <button
+                  type="button"
+                  @click="openMemberPopup(filteredMembers[activeIndex])"
+                  class="py-1.5 px-3 rounded-lg bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-[11px] font-black transition-colors flex items-center gap-1 shadow-xs"
+                >
+                  <span>Details</span>
+                  <span>&rarr;</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -653,8 +566,6 @@ import {
   ShieldCheckIcon,
   XMarkIcon,
   ArrowRightIcon,
-  Squares2X2Icon,
-  ViewColumnsIcon,
   ChevronLeftIcon,
   ChevronRightIcon
 } from '@heroicons/vue/24/outline'
@@ -673,7 +584,6 @@ const activeIndex = ref(0)
 const popupMember = ref(null)
 const isHovered = ref(false)
 const viewportWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1024)
-const viewMode = ref(typeof window !== 'undefined' && window.innerWidth < 1024 ? 'grid' : 'carousel')
 
 const updateViewportWidth = () => {
   viewportWidth.value = window.innerWidth
