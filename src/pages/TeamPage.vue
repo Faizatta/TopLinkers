@@ -59,19 +59,6 @@
                 height="240"
                 class="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.05] group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <div class="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/75 via-black/30 to-transparent pointer-events-none"></div>
-
-              <!-- Top Mobile Tag Overlay on Photo -->
-              <div class="absolute top-2.5 left-2.5 sm:hidden z-10">
-                <span
-                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider backdrop-blur-md shadow-md"
-                  :class="idx === 0 ? 'bg-[#0F2A44]/90 text-[#16B4E8] border border-[#16B4E8]/40' : 'bg-[#0F2A44]/90 text-amber-400 border border-amber-400/40'"
-                >
-                  <span class="w-1.5 h-1.5 rounded-full animate-pulse" :class="idx === 0 ? 'bg-[#16B4E8]' : 'bg-amber-400'"></span>
-                  <span>{{ idx === 0 ? 'Founder & CEO' : 'Co-Founder & CEO' }}</span>
-                </span>
-              </div>
-
               <!-- Hover / Tap Prompt -->
               <span class="absolute bottom-2.5 inset-x-2.5 py-1.5 rounded-lg bg-black/70 backdrop-blur-xs text-[10px] font-bold text-white text-center flex items-center justify-center gap-1 shadow-sm">
                 <span>View Full Dossier</span>
@@ -82,8 +69,8 @@
             <!-- Executive Information -->
             <div class="flex flex-col justify-between flex-1 min-w-0 py-1">
               <div>
-                <!-- Desktop Tag Pill -->
-                <div class="hidden sm:flex items-center gap-1.5 mb-2.5">
+                <!-- Tag Pill (Mobile & Desktop) -->
+                <div class="flex items-center gap-1.5 mb-2.5">
                   <span
                     class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider shadow-xs"
                     :class="idx === 0 ? 'bg-sky-50 text-[#16B4E8] border border-[#16B4E8]/30' : 'bg-amber-50 text-amber-700 border border-amber-200'"
@@ -247,13 +234,13 @@
           @pointerup="onPointerUp"
         >
           <!-- 3D Perspective Fanned Carousel Viewport -->
-          <div class="relative h-[340px] sm:h-[400px] flex items-center justify-center overflow-hidden perspective-stage px-4">
+          <div class="relative h-[370px] sm:h-[415px] flex items-center justify-center overflow-hidden perspective-stage px-4">
             <div
               v-for="(member, idx) in filteredMembers"
               :key="member.id"
               @click="handleCardClick(idx, member)"
               :style="getCard3DStyle(idx)"
-              class="absolute w-56 sm:w-64 h-[285px] sm:h-[330px] rounded-2xl overflow-hidden cursor-pointer border-2 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-xl group bg-white"
+              class="absolute w-56 sm:w-64 h-[320px] sm:h-[360px] rounded-2xl overflow-hidden cursor-pointer border-2 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-xl group bg-white"
               :class="idx === activeIndex ? 'border-[#16B4E8] ring-4 ring-[#16B4E8]/20 shadow-2xl' : 'border-white hover:border-[#16B4E8]/60'"
             >
               <img
@@ -262,28 +249,23 @@
                 loading="lazy"
                 decoding="async"
                 width="256"
-                height="320"
+                height="360"
                 class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 draggable="false"
               />
 
-              <!-- Top Left Tag on Card -->
-              <div class="absolute top-2.5 left-2.5 z-10">
+              <!-- Bottom Name & Category Overlay (Leaves top 75% face area completely clear) -->
+              <div class="absolute inset-x-0 bottom-0 pt-10 pb-3.5 px-3.5 bg-gradient-to-t from-black/90 via-black/55 to-transparent pointer-events-none text-white">
                 <span
-                  class="px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-wider backdrop-blur-md shadow-md text-white"
-                  :class="member.category === 'engineer' ? 'bg-emerald-600/90' : 'bg-[#0F2A44]/90 text-[#16B4E8] border border-[#16B4E8]/30'"
+                  class="inline-block px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider mb-1.5 shadow-xs"
+                  :class="member.category === 'engineer' ? 'bg-emerald-600 text-white' : 'bg-[#16B4E8] text-[#0F2A44]'"
                 >
-                  {{ member.tag || (member.category === 'engineer' ? 'PEC Engineer' : 'Property Consultant') }}
+                  {{ member.category === 'engineer' ? 'PEC Registered Engineer' : 'Property Consultant' }}
                 </span>
-              </div>
-
-              <!-- Bottom Name Overlay -->
-              <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none"></div>
-              <div class="absolute bottom-3 left-3.5 right-3.5 text-white">
-                <h3 class="text-sm font-black leading-tight truncate drop-shadow-sm">
+                <h3 class="text-sm sm:text-base font-black leading-tight truncate drop-shadow-sm">
                   {{ member.name }}
                 </h3>
-                <p class="text-[11px] text-[#16B4E8] truncate font-bold mt-0.5">{{ member.role }}</p>
+                <p class="text-[11px] text-cyan-300 truncate font-bold mt-0.5">{{ member.role }}</p>
               </div>
             </div>
           </div>
@@ -383,7 +365,7 @@
 
           <div class="grid grid-cols-1 md:grid-cols-12 items-stretch overflow-y-auto flex-1">
             <!-- LEFT SIDE: High-Definition Portrait & Identity Badge -->
-            <div class="md:col-span-5 relative h-56 sm:h-auto sm:min-h-[400px] bg-[#0B1B2B] overflow-hidden group flex flex-col justify-between p-5 sm:p-6">
+            <div class="md:col-span-5 relative h-72 sm:h-auto sm:min-h-[420px] bg-[#0B1B2B] overflow-hidden group flex flex-col justify-between p-4 sm:p-6">
               <img
                 :src="popupMember.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80'"
                 :alt="popupMember.name"
@@ -393,12 +375,12 @@
                 height="400"
                 class="absolute inset-0 w-full h-full object-cover object-top filter brightness-[1.03] transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#08121E]/95 via-[#08121E]/30 to-black/20"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-[#08121E]/95 via-[#08121E]/30 to-black/20 hidden sm:block"></div>
 
               <!-- Top Left Category Pill -->
               <div class="relative z-10">
                 <span
-                  class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-lg inline-flex items-center gap-1.5"
+                  class="px-2.5 py-1 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-wider shadow-lg inline-flex items-center gap-1.5"
                   :class="popupMember.category === 'engineer' ? 'bg-emerald-500 text-white' : isExecutive(popupMember) ? 'bg-[#0F2A44] text-[#16B4E8] border border-[#16B4E8]/40' : 'bg-[#16B4E8] text-white'"
                 >
                   <ShieldCheckIcon class="w-3.5 h-3.5" />
@@ -406,8 +388,8 @@
                 </span>
               </div>
 
-              <!-- Bottom Left Name & Title Overlay on Portrait -->
-              <div class="relative z-10 pt-6 mt-auto">
+              <!-- Bottom Left Name & Title Overlay on Portrait (Only on Desktop so mobile portrait is 100% visible) -->
+              <div class="hidden sm:block relative z-10 pt-6 mt-auto">
                 <span class="inline-block text-[9px] font-black tracking-widest text-[#16B4E8] uppercase mb-1">TopLinkers Official Profile</span>
                 <p class="text-white text-base sm:text-lg font-black leading-tight drop-shadow-md">{{ popupMember.name }}</p>
                 <p class="text-slate-300 text-xs font-semibold drop-shadow-sm mt-0.5">{{ popupMember.role }}</p>
