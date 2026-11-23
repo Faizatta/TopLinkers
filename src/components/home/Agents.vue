@@ -59,15 +59,18 @@
                 <p class="text-[11px] font-bold text-[#16B4E8] leading-tight line-clamp-1 mt-0.5">
                   {{ agent.role }}
                 </p>
-                <div class="mt-1">
-                  <span v-if="agent.role?.toLowerCase().includes('solar')" class="inline-block px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-amber-100 text-amber-800">
-                    Solar Engineering Division
+                <div class="mt-1.5">
+                  <span v-if="agent.role?.toLowerCase().includes('solar')" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-amber-50 text-amber-900 border border-amber-200 shadow-xs">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                    <span>Solar Division</span>
                   </span>
-                  <span v-else-if="agent.role?.toLowerCase().includes('civil')" class="inline-block px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800">
-                    Civil &amp; Turnkey Division
+                  <span v-else-if="agent.role?.toLowerCase().includes('civil')" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-900 border border-emerald-200 shadow-xs">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+                    <span>Civil &amp; Turnkey</span>
                   </span>
-                  <span v-else class="inline-block px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-sky-100 text-[#0F2A44]">
-                    Property Advisory
+                  <span v-else class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-sky-50 text-[#0F2A44] border border-[#16B4E8]/30 shadow-xs">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#16B4E8]"></span>
+                    <span>Property Advisory</span>
                   </span>
                 </div>
               </div>

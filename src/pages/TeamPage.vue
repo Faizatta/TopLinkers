@@ -2,42 +2,44 @@
   <div class="team-page pt-28 sm:pt-32 md:pt-36 pb-16 bg-[#F8FAFC] min-h-screen">
     <div class="max-w-[1260px] mx-auto px-4 sm:px-6">
       <!-- Page Title Header -->
-      <div class="max-w-2xl mx-auto text-center mb-6 sm:mb-8 animate-fade-down">
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-[#0F2A44] tracking-tight">
+      <div class="max-w-2xl mx-auto text-center mb-8 sm:mb-10 animate-fade-down">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-[#16B4E8]/10 text-[#16B4E8] border border-[#16B4E8]/25 mb-3 shadow-xs">
+          <span class="w-2 h-2 rounded-full bg-[#16B4E8] animate-pulse"></span>
+          TOPLINKERS PROFESSIONAL DIRECTORY
+        </span>
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-[#0F2A44] tracking-tight">
           Founders, Agents &amp; PEC Engineers
         </h1>
-        <p class="text-xs sm:text-sm text-gray-500 mt-2.5 leading-relaxed">
+        <p class="text-xs sm:text-sm text-gray-500 mt-2.5 leading-relaxed font-medium">
           Led by visionary founders and powered by CDA/RDA property specialists and PEC-registered civil &amp; solar engineers across Islamabad &amp; Rawalpindi.
         </p>
       </div>
 
       <!-- ============================================================== -->
-      <!-- ============================================================== -->
       <!-- PART 1 (TOP): EXECUTIVE BOARD & FOUNDERS LEADERSHIP SHOWCASE   -->
-      <!-- CLEAN ELEGANT PRESENTATION DIRECTLY ON PAGE (NO BLUE BG BOX)   -->
       <!-- ============================================================== -->
       <section class="mb-14 sm:mb-16">
         <!-- Section Header Meta -->
-        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-[#16B4E8]/10 text-[#16B4E8] border border-[#16B4E8]/25 mb-3 shadow-xs">
+        <div class="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-slate-100 text-[#0F2A44] border border-slate-200 mb-2.5 shadow-xs">
             <span class="w-1.5 h-1.5 rounded-full bg-[#16B4E8]"></span>
             TOPLINKERS EXECUTIVE BOARD
           </span>
-          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F2A44] tracking-tight">
+          <h2 class="text-xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F2A44] tracking-tight">
             Founding Leadership &amp; CEOs
           </h2>
-          <p class="text-xs sm:text-sm text-gray-500 mt-2 font-medium">
-            Click any executive card to open their full strategic dossier, direct contact &amp; verified portfolio.
+          <p class="text-xs sm:text-sm text-gray-500 mt-1.5 font-medium">
+            Tap any executive card to view full strategic dossier, direct contact &amp; verified portfolio.
           </p>
         </div>
 
-        <!-- The 2 Executive Cards Grid (Width-Wise Layout: 2 Across, Sized Generously) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-7 lg:gap-8 max-w-6xl mx-auto">
+        <!-- The 2 Executive Cards Grid (Mobile-First Responsive Layout) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-7 lg:gap-8 max-w-6xl mx-auto">
           <div
             v-for="(ceo, idx) in ceos"
             :key="ceo.id"
             @click="openMemberPopup(ceo)"
-            class="group cursor-pointer flex flex-row items-center p-5 sm:p-6 lg:p-7 rounded-2xl sm:rounded-3xl bg-white border border-gray-200/90 hover:border-[#16B4E8]/60 shadow-md hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 hover:-translate-y-1 relative gap-5 sm:gap-6 overflow-hidden"
+            class="group cursor-pointer flex flex-col sm:flex-row items-stretch p-4 sm:p-6 lg:p-7 rounded-2xl sm:rounded-3xl bg-white border border-gray-200 hover:border-[#16B4E8]/60 shadow-md hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 hover:-translate-y-1 relative gap-4 sm:gap-6 overflow-hidden"
             :style="{ animationDelay: `${idx * 140}ms` }"
           >
             <!-- Top Subtle Accent Gradient Bar on Hover -->
@@ -46,8 +48,8 @@
               :class="idx === 0 ? 'from-[#16B4E8] to-blue-600' : 'from-amber-400 to-[#16B4E8]'"
             ></div>
 
-            <!-- Left: Executive Portrait Photo (Prominent & Elegantly Sized) -->
-            <div class="relative w-32 h-44 sm:w-44 sm:h-56 lg:w-48 lg:h-60 rounded-2xl overflow-hidden border border-gray-200/80 shadow-md group-hover:border-[#16B4E8]/50 flex-shrink-0 bg-slate-100">
+            <!-- Portrait Photo (Full Width on Mobile, Elegantly Sized on Desktop) -->
+            <div class="relative w-full h-64 sm:w-44 sm:h-auto lg:w-48 lg:h-64 rounded-xl sm:rounded-2xl overflow-hidden border border-gray-200/80 shadow-md group-hover:border-[#16B4E8]/50 flex-shrink-0 bg-slate-100">
               <img
                 :src="ceo.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80'"
                 :alt="ceo.name"
@@ -57,21 +59,36 @@
                 height="240"
                 class="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.05] group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <div class="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
-              
-              <!-- Subtle Hover Hint Badge -->
-              <span class="absolute bottom-2 inset-x-2 py-1 rounded-lg bg-black/70 backdrop-blur-xs text-[9px] sm:text-[10px] font-bold text-white text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 truncate">
-                View Dossier &rarr;
+              <div class="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/75 via-black/30 to-transparent pointer-events-none"></div>
+
+              <!-- Top Mobile Tag Overlay on Photo -->
+              <div class="absolute top-2.5 left-2.5 sm:hidden z-10">
+                <span
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider backdrop-blur-md shadow-md"
+                  :class="idx === 0 ? 'bg-[#0F2A44]/90 text-[#16B4E8] border border-[#16B4E8]/40' : 'bg-[#0F2A44]/90 text-amber-400 border border-amber-400/40'"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full animate-pulse" :class="idx === 0 ? 'bg-[#16B4E8]' : 'bg-amber-400'"></span>
+                  <span>{{ idx === 0 ? 'Founder & CEO' : 'Co-Founder & CEO' }}</span>
+                </span>
+              </div>
+
+              <!-- Hover / Tap Prompt -->
+              <span class="absolute bottom-2.5 inset-x-2.5 py-1.5 rounded-lg bg-black/70 backdrop-blur-xs text-[10px] font-bold text-white text-center flex items-center justify-center gap-1 shadow-sm">
+                <span>View Full Dossier</span>
+                <span>&rarr;</span>
               </span>
             </div>
 
-            <!-- Right: Executive Information (Width-Wise, Generously Spaced) -->
+            <!-- Executive Information -->
             <div class="flex flex-col justify-between flex-1 min-w-0 py-1">
               <div>
-                <!-- Top Tag Pill -->
-                <div class="flex items-center gap-1.5 mb-2">
-                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200 shadow-xs">
-                    <span class="w-2 h-2 rounded-full" :class="idx === 0 ? 'bg-[#16B4E8]' : 'bg-amber-500'"></span>
+                <!-- Desktop Tag Pill -->
+                <div class="hidden sm:flex items-center gap-1.5 mb-2.5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider shadow-xs"
+                    :class="idx === 0 ? 'bg-sky-50 text-[#16B4E8] border border-[#16B4E8]/30' : 'bg-amber-50 text-amber-700 border border-amber-200'"
+                  >
+                    <span class="w-2 h-2 rounded-full animate-pulse" :class="idx === 0 ? 'bg-[#16B4E8]' : 'bg-amber-500'"></span>
                     <span>{{ ceo.tag || (idx === 0 ? 'Founder & Chief Executive' : 'Co-Founder & Managing CEO') }}</span>
                   </span>
                 </div>
@@ -81,30 +98,30 @@
                   {{ ceo.name }}
                 </h3>
 
-                <!-- Role / Title (No Truncate: Let full title display) -->
-                <p class="text-xs sm:text-sm font-bold text-[#16B4E8] mt-1 tracking-wide leading-snug">
+                <!-- Role / Title -->
+                <p class="text-xs sm:text-sm font-extrabold text-[#16B4E8] mt-1 tracking-wide leading-snug">
                   {{ ceo.role }}
                 </p>
 
+                <!-- Experience & Verification Chip -->
+                <div class="flex items-center gap-2 mt-2">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-extrabold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <ShieldCheckIcon class="w-3.5 h-3.5 text-emerald-600" />
+                    <span>{{ ceo.experience || (idx === 0 ? '15+ Years Experience' : '14+ Years Experience') }}</span>
+                  </span>
+                  <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Verified Executive</span>
+                </div>
+
                 <!-- Specialty / Scope Summary -->
-                <p class="text-xs sm:text-[13px] text-slate-600 mt-2 line-clamp-3 leading-relaxed">
-                  {{ idx === 0 ? 'CDA/RDA Land Acquisitions, TopCity-1, PECHS & Harsukh luxury developments.' : 'PEC Registered Civil Engineer, turnkey construction, Grade-60 steel & solar net metering.' }}
+                <p class="text-xs sm:text-[13px] text-slate-600 mt-2.5 line-clamp-3 leading-relaxed font-normal">
+                  {{ idx === 0 ? 'CDA/RDA Land Acquisitions, TopCity-1, PECHS, Faisal Town Phase 2 & Harsukh luxury developments.' : 'PEC Registered Civil Engineer, turnkey villa construction, Grade-60 seismic steel & solar net metering.' }}
                 </p>
               </div>
 
-              <!-- Action & Direct Contact Row (Clean & Direct) -->
-              <div class="flex items-center justify-between gap-2 mt-4 pt-3 border-t border-gray-100">
-                <div class="flex items-center gap-2">
-                  <!-- Executive Direct Phone Call -->
-                  <a
-                    :href="`tel:${cleanWa(ceo.phone)}`"
-                    @click.stop
-                    title="Executive Direct Line"
-                    class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-emerald-600 text-slate-600 hover:text-white flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-xs"
-                  >
-                    <PhoneIcon class="w-4 h-4" />
-                  </a>
-
+              <!-- Action & Direct Contact Row (Mobile-Friendly Grid & Tap Targets) -->
+              <div class="mt-4 pt-3 border-t border-gray-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+                <!-- Action Buttons: WhatsApp & Phone -->
+                <div class="grid grid-cols-2 sm:flex sm:items-center gap-2">
                   <!-- WhatsApp Direct Chat -->
                   <a
                     :href="`https://wa.me/${cleanWa(ceo.whatsapp || ceo.phone)}?text=${encodeURIComponent(`Assalam o Alaikum ${ceo.name}, I am contacting you directly from TopLinkers executive portal for advisory.`)}`"
@@ -112,51 +129,66 @@
                     rel="noopener noreferrer"
                     @click.stop
                     title="Direct WhatsApp"
-                    class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-[#25D366] text-slate-600 hover:text-white flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-xs"
+                    class="py-2 px-3 sm:px-3.5 rounded-xl bg-emerald-50 hover:bg-[#25D366] text-emerald-700 hover:text-white flex items-center justify-center gap-1.5 text-xs font-black transition-all shadow-xs"
                   >
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
                       <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
                     </svg>
+                    <span>WhatsApp</span>
                   </a>
 
-                  <!-- Social Links on Card (Just Icons) -->
+                  <!-- Executive Direct Phone Call -->
                   <a
-                    v-for="social in getMemberSocials(ceo)"
-                    :key="social.key"
-                    :href="social.href"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    :href="`tel:${cleanWa(ceo.phone)}`"
                     @click.stop
-                    :title="social.label"
-                    class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-xs"
-                    :class="social.chipClass"
+                    title="Executive Direct Line"
+                    class="py-2 px-3 sm:px-3.5 rounded-xl bg-slate-100 hover:bg-[#0F2A44] text-[#0F2A44] hover:text-white flex items-center justify-center gap-1.5 text-xs font-black transition-all shadow-xs"
                   >
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                      <path :d="social.svgPath" />
-                    </svg>
+                    <PhoneIcon class="w-3.5 h-3.5 shrink-0" />
+                    <span>Call Direct</span>
                   </a>
                 </div>
 
-                <!-- Subtle View Dossier Link on Card (Desktop / Tablet) -->
-                <span class="hidden sm:inline-flex text-[11px] sm:text-xs font-bold text-[#16B4E8] group-hover:translate-x-0.5 transition-transform items-center gap-1 whitespace-nowrap">
-                  <span>Full Dossier</span>
-                  <span>&rarr;</span>
-                </span>
+                <!-- Right: Social Links & Dossier Hint -->
+                <div class="flex items-center justify-between sm:justify-end gap-2">
+                  <div class="flex items-center gap-1.5">
+                    <a
+                      v-for="social in getMemberSocials(ceo)"
+                      :key="social.key"
+                      :href="social.href"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      @click.stop
+                      :title="social.label"
+                      class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-xs"
+                      :class="social.chipClass"
+                    >
+                      <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                        <path :d="social.svgPath" />
+                      </svg>
+                    </a>
+                  </div>
+
+                  <span class="text-[11px] sm:text-xs font-black text-[#16B4E8] group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1 whitespace-nowrap">
+                    <span>Full Profile</span>
+                    <span>&rarr;</span>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-
       <!-- ====================================================================== -->
-      <!-- PART 2 (BELOW): 3D PERSPECTIVE GALLERY FOR AGENTS & PEC ENGINEERS      -->
-      <!-- + CLICK CARD TO SHOW PHOTO ON LEFT & ANIMATED DETAILS ON RIGHT         -->
+      <!-- PART 2 (BELOW): REAL ESTATE AGENTS & REGISTERED PEC ENGINEERS          -->
+      <!-- RESPONSIVE CARD GRID + OPTIONAL 3D CAROUSEL FOR DESKTOP                -->
       <!-- ====================================================================== -->
       <section>
         <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 pb-3 border-b border-gray-200/80 gap-3">
           <div>
-            <span class="inline-block text-[10px] font-black uppercase tracking-wider text-[#16B4E8] bg-[#16B4E8]/10 px-2.5 py-1 rounded-md mb-2">
+            <span class="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-[#16B4E8] bg-[#16B4E8]/10 px-2.5 py-1 rounded-md mb-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#16B4E8]"></span>
               FIELD ADVISORS &amp; TECHNICAL DIVISION
             </span>
             <h2 class="text-xl sm:text-2xl font-extrabold text-[#0F2A44]">
@@ -164,37 +196,171 @@
             </h2>
           </div>
 
-          <!-- Category Filter Tabs -->
-          <div class="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-bold self-start sm:self-auto">
+          <!-- Category Filter Tabs (Responsive 3-Column on Mobile, Inline on Desktop) -->
+          <div class="w-full sm:w-auto grid grid-cols-3 sm:flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-bold gap-1">
             <button
               type="button"
               @click="activeFilter = 'all'; activeIndex = 0"
-              class="px-3.5 py-1.5 rounded-lg transition-all"
+              class="px-2 sm:px-3.5 py-2 sm:py-1.5 rounded-lg transition-all text-center justify-center items-center flex min-w-0"
               :class="activeFilter === 'all' ? 'bg-[#0F2A44] text-white shadow-xs' : 'text-slate-600 hover:text-[#0F2A44]'"
             >
-              All Field Team ({{ fieldTeam.length }})
+              <span class="sm:hidden text-[11px] truncate">All ({{ fieldTeam.length }})</span>
+              <span class="hidden sm:inline">All Field Team ({{ fieldTeam.length }})</span>
             </button>
             <button
               type="button"
               @click="activeFilter = 'agent'; activeIndex = 0"
-              class="px-3.5 py-1.5 rounded-lg transition-all"
+              class="px-2 sm:px-3.5 py-2 sm:py-1.5 rounded-lg transition-all text-center justify-center items-center flex min-w-0"
               :class="activeFilter === 'agent' ? 'bg-[#0F2A44] text-white shadow-xs' : 'text-slate-600 hover:text-[#0F2A44]'"
             >
-              Property Agents ({{ agentsList.length }})
+              <span class="sm:hidden text-[11px] truncate">Agents ({{ agentsList.length }})</span>
+              <span class="hidden sm:inline">Property Agents ({{ agentsList.length }})</span>
             </button>
             <button
               type="button"
               @click="activeFilter = 'engineer'; activeIndex = 0"
-              class="px-3.5 py-1.5 rounded-lg transition-all"
+              class="px-2 sm:px-3.5 py-2 sm:py-1.5 rounded-lg transition-all text-center justify-center items-center flex min-w-0"
               :class="activeFilter === 'engineer' ? 'bg-[#0F2A44] text-white shadow-xs' : 'text-slate-600 hover:text-[#0F2A44]'"
             >
-              PEC Engineers ({{ engineersList.length }})
+              <span class="sm:hidden text-[11px] truncate">Engineers ({{ engineersList.length }})</span>
+              <span class="hidden sm:inline">PEC Engineers ({{ engineersList.length }})</span>
             </button>
           </div>
         </div>
 
-        <!-- Transparent Auto-Scrolling 3D Portrait Carousel (Click Image for Popup) -->
+        <!-- View Controls Bar: View Toggle (Grid / 3D Stage) -->
+        <div class="flex items-center justify-between mb-5">
+          <p class="text-xs text-slate-500 font-medium">
+            Showing {{ filteredMembers.length }} specialized team members
+          </p>
+
+          <!-- Toggle View Button (Grid vs 3D Carousel) -->
+          <div class="inline-flex items-center p-0.5 bg-slate-100 rounded-lg border border-slate-200 text-xs font-bold">
+            <button
+              type="button"
+              @click="viewMode = 'grid'"
+              class="px-2.5 py-1 rounded-md transition-all flex items-center gap-1.5 text-[11px]"
+              :class="viewMode === 'grid' ? 'bg-[#0F2A44] text-white shadow-xs' : 'text-slate-600 hover:text-[#0F2A44]'"
+              title="Grid View (Easy to See All)"
+            >
+              <Squares2X2Icon class="w-3.5 h-3.5" />
+              <span>Grid View</span>
+            </button>
+            <button
+              type="button"
+              @click="viewMode = 'carousel'"
+              class="px-2.5 py-1 rounded-md transition-all flex items-center gap-1.5 text-[11px]"
+              :class="viewMode === 'carousel' ? 'bg-[#0F2A44] text-white shadow-xs' : 'text-slate-600 hover:text-[#0F2A44]'"
+              title="Interactive 3D Carousel"
+            >
+              <ViewColumnsIcon class="w-3.5 h-3.5" />
+              <span>3D Stage</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 1. RESPONSIVE GRID VIEW (DEFAULT ON MOBILE / EASY TO SEE ALL THAT) -->
+        <div v-if="viewMode === 'grid'" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          <div
+            v-for="member in filteredMembers"
+            :key="member.id"
+            @click="openMemberPopup(member)"
+            class="group cursor-pointer bg-white rounded-2xl p-4 sm:p-5 border border-gray-200/90 hover:border-[#16B4E8]/60 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between relative overflow-hidden"
+          >
+            <!-- Top Subtle Accent -->
+            <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#16B4E8] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+            <div>
+              <!-- Portrait Image & Badges -->
+              <div class="relative w-full h-56 sm:h-60 rounded-xl overflow-hidden bg-slate-100 mb-3.5">
+                <img
+                  :src="member.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80'"
+                  :alt="member.name"
+                  loading="lazy"
+                  decoding="async"
+                  width="320"
+                  height="240"
+                  class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+
+                <!-- Top Category & Tag Badge -->
+                <div class="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-1.5">
+                  <span
+                    class="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider backdrop-blur-md shadow-sm inline-flex items-center gap-1"
+                    :class="member.category === 'engineer' ? 'bg-emerald-600/90 text-white' : 'bg-[#0F2A44]/90 text-[#16B4E8] border border-[#16B4E8]/30'"
+                  >
+                    <ShieldCheckIcon class="w-3 h-3" />
+                    <span>{{ member.category === 'engineer' ? 'PEC Engineer' : 'Property Consultant' }}</span>
+                  </span>
+
+                  <span v-if="member.experience" class="px-2 py-0.5 rounded-md text-[9px] font-black bg-black/60 backdrop-blur-xs text-white">
+                    {{ member.experience }}
+                  </span>
+                </div>
+
+                <!-- Bottom Photo Name Overlay -->
+                <div class="absolute bottom-2.5 left-3 right-3 text-white">
+                  <p class="text-sm font-black truncate leading-tight drop-shadow-sm">{{ member.name }}</p>
+                  <p class="text-[11px] text-[#16B4E8] truncate font-bold mt-0.5">{{ member.role }}</p>
+                </div>
+              </div>
+
+              <!-- Specialty Tag Pill (Clean & Prominent Tag Look) -->
+              <div class="mb-2">
+                <span
+                  class="inline-block px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider"
+                  :class="member.category === 'engineer' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-sky-50 text-[#0F2A44] border border-sky-200'"
+                >
+                  {{ member.tag || (member.category === 'engineer' ? 'Registered Engineer' : 'Property Advisor') }}
+                </span>
+              </div>
+
+              <!-- Brief Bio / Specialty -->
+              <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed font-normal mb-3">
+                {{ member.bio || member.specialty }}
+              </p>
+            </div>
+
+            <!-- Bottom Action Row: WhatsApp, Phone & Full Dossier -->
+            <div class="pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
+              <div class="flex items-center gap-1.5 flex-1 min-w-0">
+                <a
+                  :href="`https://wa.me/${cleanWa(member.whatsapp || member.phone)}?text=${encodeURIComponent(`Assalam o Alaikum ${member.name}, I am contacting you through TopLinkers directory regarding a property advisory.`)}`"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  @click.stop
+                  title="WhatsApp"
+                  class="flex-1 py-1.5 px-2.5 rounded-lg bg-emerald-50 hover:bg-[#25D366] text-emerald-700 hover:text-white text-[11px] font-black transition-colors flex items-center justify-center gap-1"
+                >
+                  <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+                  </svg>
+                  <span>WhatsApp</span>
+                </a>
+
+                <a
+                  :href="`tel:${cleanWa(member.phone)}`"
+                  @click.stop
+                  title="Direct Call"
+                  class="py-1.5 px-2.5 rounded-lg bg-slate-100 hover:bg-[#0F2A44] text-[#0F2A44] hover:text-white text-[11px] font-black transition-colors flex items-center justify-center gap-1"
+                >
+                  <PhoneIcon class="w-3 h-3" />
+                  <span>Call</span>
+                </a>
+              </div>
+
+              <span class="text-[11px] font-black text-[#16B4E8] group-hover:translate-x-0.5 transition-transform shrink-0 flex items-center gap-0.5">
+                <span>Details</span>
+                <span>&rarr;</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. INTERACTIVE 3D PERSPECTIVE CAROUSEL VIEW -->
         <div
+          v-else
           class="select-none relative py-4"
           @mouseenter="isHovered = true"
           @mouseleave="isHovered = false"
@@ -222,15 +388,59 @@
                 draggable="false"
               />
 
-              <!-- Subtle Bottom Name Overlay on Hover / Active -->
-              <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/80 via-black/35 to-transparent pointer-events-none"></div>
+              <!-- Top Left Tag on Card -->
+              <div class="absolute top-2.5 left-2.5 z-10">
+                <span
+                  class="px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-wider backdrop-blur-md shadow-md text-white"
+                  :class="member.category === 'engineer' ? 'bg-emerald-600/90' : 'bg-[#0F2A44]/90 text-[#16B4E8] border border-[#16B4E8]/30'"
+                >
+                  {{ member.tag || (member.category === 'engineer' ? 'PEC Engineer' : 'Property Consultant') }}
+                </span>
+              </div>
+
+              <!-- Bottom Name Overlay -->
+              <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none"></div>
               <div class="absolute bottom-3 left-3.5 right-3.5 text-white">
-                <h3 class="text-sm font-bold leading-tight truncate drop-shadow-sm">
+                <h3 class="text-sm font-black leading-tight truncate drop-shadow-sm">
                   {{ member.name }}
                 </h3>
-                <p class="text-[11px] text-white/85 truncate font-medium">{{ member.role }}</p>
+                <p class="text-[11px] text-[#16B4E8] truncate font-bold mt-0.5">{{ member.role }}</p>
               </div>
             </div>
+          </div>
+
+          <!-- Carousel Controls: Prev / Next Navigation Arrows -->
+          <div class="flex items-center justify-center gap-3 mt-4">
+            <button
+              type="button"
+              @click="prevCard"
+              class="w-9 h-9 rounded-full bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-sm flex items-center justify-center transition-all hover:scale-105"
+              aria-label="Previous Team Member"
+            >
+              <ChevronLeftIcon class="w-4 h-4" />
+            </button>
+
+            <!-- Dots Indicator -->
+            <div class="flex items-center gap-1.5">
+              <button
+                v-for="(_, idx) in filteredMembers"
+                :key="idx"
+                type="button"
+                @click="activeIndex = idx"
+                class="h-2 rounded-full transition-all"
+                :class="idx === activeIndex ? 'w-6 bg-[#16B4E8]' : 'w-2 bg-slate-300 hover:bg-slate-400'"
+                :aria-label="`Slide to member ${idx + 1}`"
+              ></button>
+            </div>
+
+            <button
+              type="button"
+              @click="nextCard"
+              class="w-9 h-9 rounded-full bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-sm flex items-center justify-center transition-all hover:scale-105"
+              aria-label="Next Team Member"
+            >
+              <ChevronRightIcon class="w-4 h-4" />
+            </button>
           </div>
         </div>
       </section>
@@ -442,7 +652,11 @@ import {
   MapPinIcon,
   ShieldCheckIcon,
   XMarkIcon,
-  ArrowRightIcon
+  ArrowRightIcon,
+  Squares2X2Icon,
+  ViewColumnsIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon
 } from '@heroicons/vue/24/outline'
 import { useAdminStore } from '../stores/admin'
 import { onDataChanged } from '../utils/syncBus'
@@ -459,6 +673,7 @@ const activeIndex = ref(0)
 const popupMember = ref(null)
 const isHovered = ref(false)
 const viewportWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1024)
+const viewMode = ref(typeof window !== 'undefined' && window.innerWidth < 1024 ? 'grid' : 'carousel')
 
 const updateViewportWidth = () => {
   viewportWidth.value = window.innerWidth
