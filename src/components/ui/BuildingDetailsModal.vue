@@ -183,6 +183,14 @@ const props = defineProps({
 
 const emit = defineEmits(['close'])
 
+const BANU_HAFEEZ_GALLERY = [
+  '/images/banu-hafeez/bh-hero.webp',
+  '/images/banu-hafeez/bh-tower.webp',
+  '/images/banu-hafeez/bh-interior.webp',
+  '/images/banu-hafeez/bh-living.webp',
+  '/images/banu-hafeez/bh-plan.webp'
+]
+
 const adminStore = useAdminStore()
 const building = computed(() => (props.building && Object.keys(props.building).length > 0) ? props.building : (adminStore.customBuilding || {}))
 
@@ -191,17 +199,18 @@ const activeImageIndex = ref(0)
 const allImages = computed(() => {
   const list = []
   const b = building.value
-  if (b.image) list.push(b.image)
-  if (Array.isArray(b.gallery)) {
+  if (b?.image) list.push(b.image)
+  if (Array.isArray(b?.gallery)) {
     b.gallery.forEach(img => {
       if (img && !list.includes(img)) list.push(img)
     })
   }
-  return list.length > 0 ? list : ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80']
+  const cleanList = list.filter(img => typeof img === 'string' && !img.includes('unsplash.com'))
+  return cleanList.length > 0 ? cleanList : BANU_HAFEEZ_GALLERY
 })
 
 const currentImage = computed(() => {
-  return allImages.value[activeImageIndex.value] || allImages.value[0]
+  return allImages.value[activeImageIndex.value] || allImages.value[0] || BANU_HAFEEZ_GALLERY[0]
 })
 
 const whatsappUrl = computed(() => {

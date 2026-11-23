@@ -113,39 +113,79 @@
     <!-- Main Content Body -->
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
       <!-- Image Gallery & Architecture Showcase -->
-      <section class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
-        <div class="flex items-center justify-between mb-6">
-          <div>
-            <h2 class="text-xl sm:text-2xl font-black text-[#0F2A44]">Project Architecture &amp; Visuals</h2>
-            <p class="text-xs text-slate-500 mt-1">High-resolution building elevations and interior suites</p>
-          </div>
-          <span class="px-3 py-1 rounded-full text-xs font-bold bg-sky-50 text-[#16B4E8] border border-sky-100">
-            {{ allImages.length }} Photos
-          </span>
+      <section class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-sm">
+        <div class="mb-4 sm:mb-6">
+          <h2 class="text-xl sm:text-2xl font-black text-[#0F2A44]">Project Architecture &amp; Visuals</h2>
+          <p class="text-xs text-slate-500 mt-1">High-resolution building elevations and interior suites</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="md:col-span-2 rounded-2xl overflow-hidden h-72 sm:h-96 bg-slate-900 border border-slate-100 shadow-inner">
+        <div class="space-y-3 sm:space-y-4">
+          <!-- Main Showcase Image Container -->
+          <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden h-72 sm:h-96 md:h-[480px] bg-slate-950 border border-slate-100 shadow-md group">
             <img
               :src="currentImage"
               :alt="building.title || building.name"
               loading="eager"
               decoding="async"
-              width="800"
-              height="384"
-              class="w-full h-full object-cover transition-all duration-300 hover:scale-105"
+              width="1200"
+              height="675"
+              class="w-full h-full object-cover transition-all duration-300"
             />
-          </div>
-          <div class="flex flex-col gap-3 justify-between">
-            <div
-              v-for="(img, idx) in allImages.slice(0, 3)"
-              :key="idx"
-              @click="activeImageIndex = idx"
-              class="h-24 sm:h-28 rounded-xl overflow-hidden cursor-pointer border-2 transition-all relative group"
-              :class="activeImageIndex === idx ? 'border-[#16B4E8] shadow-md' : 'border-slate-200 opacity-70 hover:opacity-100'"
+
+            <!-- Prev / Next Navigation Arrows -->
+            <button
+              v-if="allImages.length > 1"
+              type="button"
+              @click.stop="prevImage"
+              class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-900/70 hover:bg-[#16B4E8] text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm shadow-md active:scale-95"
+              aria-label="Previous image"
             >
-              <img :src="img" :alt="`View ${idx+1}`" loading="lazy" decoding="async" width="260" height="112" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              v-if="allImages.length > 1"
+              type="button"
+              @click.stop="nextImage"
+              class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-900/70 hover:bg-[#16B4E8] text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm shadow-md active:scale-95"
+              aria-label="Next image"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            <!-- Bottom Information Overlay -->
+            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3 sm:p-4 flex items-end justify-between pointer-events-none">
+              <span class="text-xs sm:text-sm font-semibold text-white/95 drop-shadow truncate max-w-[70%]">
+                {{ getImageCaption(activeImageIndex) }}
+              </span>
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-black/60 backdrop-blur-sm text-white border border-white/20">
+                {{ activeImageIndex + 1 }} / {{ allImages.length }}
+              </span>
             </div>
+          </div>
+
+          <!-- Thumbnails Row (proportional 4:3 cards on mobile and desktop) -->
+          <div v-if="allImages.length > 1" class="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1 no-scrollbar sm:grid sm:grid-cols-5">
+            <button
+              v-for="(img, idx) in allImages"
+              :key="idx"
+              type="button"
+              @click="activeImageIndex = idx"
+              class="relative flex-shrink-0 w-20 sm:w-auto aspect-[4/3] rounded-xl overflow-hidden cursor-pointer border-2 transition-all duration-200 focus:outline-none"
+              :class="activeImageIndex === idx ? 'border-[#16B4E8] ring-2 ring-[#16B4E8]/40 scale-102 shadow-md' : 'border-slate-200 opacity-70 hover:opacity-100 hover:border-slate-300'"
+            >
+              <img
+                :src="img"
+                :alt="`Thumbnail ${idx + 1}`"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover"
+              />
+              <div v-if="activeImageIndex === idx" class="absolute inset-0 bg-[#16B4E8]/10 pointer-events-none"></div>
+            </button>
           </div>
         </div>
       </section>
@@ -253,24 +293,54 @@ const uiStore = useUiStore()
 
 const activeImageIndex = ref(0)
 
+const BANU_HAFEEZ_GALLERY = [
+  '/images/banu-hafeez/bh-hero.webp',
+  '/images/banu-hafeez/bh-tower.webp',
+  '/images/banu-hafeez/bh-interior.webp',
+  '/images/banu-hafeez/bh-living.webp',
+  '/images/banu-hafeez/bh-plan.webp'
+]
+
 const building = computed(() => {
   return adminStore.customBuilding || adminStore.defaultCustomBuilding
 })
 
 const allImages = computed(() => {
   const list = []
-  if (building.value.image) list.push(building.value.image)
-  if (Array.isArray(building.value.gallery)) {
+  if (building.value?.image) list.push(building.value.image)
+  if (Array.isArray(building.value?.gallery)) {
     building.value.gallery.forEach(img => {
       if (img && !list.includes(img)) list.push(img)
     })
   }
-  return list.length > 0 ? list : ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80']
+  const cleanList = list.filter(img => typeof img === 'string' && !img.includes('unsplash.com'))
+  return cleanList.length > 0 ? cleanList : BANU_HAFEEZ_GALLERY
 })
 
 const currentImage = computed(() => {
-  return allImages.value[activeImageIndex.value] || allImages.value[0]
+  return allImages.value[activeImageIndex.value] || allImages.value[0] || BANU_HAFEEZ_GALLERY[0]
 })
+
+const prevImage = () => {
+  if (allImages.value.length === 0) return
+  activeImageIndex.value = (activeImageIndex.value - 1 + allImages.value.length) % allImages.value.length
+}
+
+const nextImage = () => {
+  if (allImages.value.length === 0) return
+  activeImageIndex.value = (activeImageIndex.value + 1) % allImages.value.length
+}
+
+const getImageCaption = (index) => {
+  const captions = [
+    'Exterior Elevation & Architectural Facade',
+    'Modern Residential Tower Perspective',
+    'Executive Master Bedroom & Contemporary Interior',
+    'Spacious Living Lounge & Family Suite',
+    'Standard Floor Plan & Unit Layout'
+  ]
+  return captions[index] || `Architectural View ${index + 1}`
+}
 
 const whatsappUrl = computed(() => {
   const msg = building.value.whatsappMsg || `Hello TopLinkers, I am inquiring about the featured building project: ${building.value.name || building.value.title}.`

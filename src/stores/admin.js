@@ -1753,6 +1753,13 @@ export const useAdminStore = defineStore('admin', () => {
     try {
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEYS.CUSTOM_BUILDING) || 'null')
       if (stored && typeof stored === 'object' && stored.location?.includes('TopCity-1') && !stored.description?.includes('G-11') && stored.features?.some(f => f.includes('Block B'))) {
+        const hasUnsplash = (Array.isArray(stored.gallery) && stored.gallery.some(img => typeof img === 'string' && img.includes('unsplash.com'))) ||
+          (typeof stored.image === 'string' && stored.image.includes('unsplash.com'))
+        if (hasUnsplash || !Array.isArray(stored.gallery) || stored.gallery.length < 5) {
+          stored.gallery = defaultCustomBuilding.gallery
+          stored.image = defaultCustomBuilding.image
+          localStorage.setItem(STORAGE_KEYS.CUSTOM_BUILDING, JSON.stringify({ ...defaultCustomBuilding, ...stored }))
+        }
         return { ...defaultCustomBuilding, ...stored }
       }
     } catch (e) {}
