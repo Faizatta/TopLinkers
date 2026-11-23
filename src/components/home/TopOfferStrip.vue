@@ -322,7 +322,7 @@ const defaultOffers = [
     code: 'TOP-PLOT10',
     headline: 'Prime Moqa Ka Plot (TopCity-1 & PECHS)',
     desc: 'Special 10% Cash Rebate + Instant Possession & RDA/CDA Demarcation Transfer on Block B Plots!',
-    ctaLink: '/property/corner-plot-topcity',
+    ctaLink: '/property/topcity1-10-marla-prime-plot',
     ctaLabel: 'View Plot'
   },
   {

@@ -170,7 +170,7 @@
                   <div class="h-40 w-full overflow-hidden relative bg-slate-100">
                     <picture>
                       <source srcset="/images/hero-moqa-plot.webp" type="image/webp" />
-                      <img src="/images/hero-moqa-plot.jpg" alt="TopCity-1 Cash Possession Plots" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <img src="/images/hero-moqa-plot.webp" alt="TopCity-1 Cash Possession Plots" loading="lazy" decoding="async" width="600" height="300" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     </picture>
                     <div class="absolute top-2.5 inset-x-2.5 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
                       <span class="pointer-events-auto bg-[#0F2A44] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
@@ -238,7 +238,7 @@
                   <div class="h-40 w-full overflow-hidden relative bg-slate-100">
                     <picture>
                       <source srcset="/images/agg/agg-plots-hero.webp" type="image/webp" />
-                      <img src="/images/agg/agg-plots-hero.webp" alt="Airport Green Garden Plots" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <img src="/images/agg/agg-plots-hero.webp" alt="Airport Green Garden Plots" loading="lazy" decoding="async" width="600" height="300" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     </picture>
                     <div class="absolute top-2.5 inset-x-2.5 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
                       <span class="pointer-events-auto bg-[#16B4E8] text-[#0F2A44] text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
@@ -306,7 +306,7 @@
                   <div class="h-40 w-full overflow-hidden relative bg-slate-100">
                     <picture>
                       <source srcset="/images/hero-construction.webp" type="image/webp" />
-                      <img src="/images/hero-construction.jpg" alt="PECHS Islamabad Plots" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <img src="/images/hero-construction.webp" alt="PECHS Islamabad Plots" loading="lazy" decoding="async" width="600" height="300" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     </picture>
                     <div class="absolute top-2.5 inset-x-2.5 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
                       <span class="pointer-events-auto bg-indigo-600 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
@@ -389,7 +389,7 @@
                 <div class="md:col-span-5 h-56 rounded-2xl overflow-hidden bg-slate-100 relative">
                   <picture>
                     <source srcset="/images/faisal-town-2/ft2-sector-w-plan.webp" type="image/webp" />
-                    <img src="/images/faisal-town-2/ft2-sector-w-plan.webp" alt="Faisal Town Phase 2 Master Plan & Installments" class="w-full h-full object-cover" />
+                    <img src="/images/faisal-town-2/ft2-sector-w-plan.webp" alt="Faisal Town Phase 2 Master Plan & Installments" loading="lazy" decoding="async" width="600" height="300" class="w-full h-full object-cover" />
                   </picture>
                   <div class="absolute top-3 inset-x-3 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
                     <span class="pointer-events-auto bg-emerald-600 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow-md">

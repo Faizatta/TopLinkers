@@ -368,12 +368,12 @@ export const api = {
       const aliases = {
         'executive-designer-villa-gulberg': 'faisal-town-phase-2-installment-plot',
         'spanish-luxury-villa-gulberg-greens': 'faisal-town-phase-2-installment-plot',
-        'corner-plot-topcity': 'corner-plot-topcity',
-        'topcity': 'corner-plot-topcity',
-        'topcity-1': 'corner-plot-topcity',
-        'top-city': 'corner-plot-topcity',
-        'top-city-1': 'corner-plot-topcity',
-        'topcity-block-b': 'corner-plot-topcity',
+        'corner-plot-topcity': 'topcity1-10-marla-prime-plot',
+        'topcity': 'topcity1-10-marla-prime-plot',
+        'topcity-1': 'topcity1-10-marla-prime-plot',
+        'top-city': 'topcity1-10-marla-prime-plot',
+        'top-city-1': 'topcity1-10-marla-prime-plot',
+        'topcity-block-b': 'topcity1-10-marla-prime-plot',
         'pha-flats-i12': 'pha-flats-i12-1-type-d-e-2bed',
         'pha-flats-i16': 'pha-flats-i16-3-type-b-3bed',
         'harsukh': 'hr-sukh-luxury-flats-nathia-gali',
@@ -399,6 +399,16 @@ export const api = {
           return words.filter(w => titleLower.includes(w) || slugLower.includes(w)).length >= Math.ceil(words.length * 0.7)
         })
       }
+    }
+
+    // 4. Fallback to properties.json static data if server data is still populating
+    if (!found) {
+      found = propertiesData.find(p =>
+        p.slug === slug ||
+        p.slug === decoded ||
+        String(p.id) === String(slug) ||
+        String(p.id) === String(decoded)
+      )
     }
 
     return found || null

@@ -575,7 +575,7 @@
                   <router-link to="/hr-sukh" class="block h-52 w-full overflow-hidden relative bg-slate-900 group cursor-pointer">
                     <picture>
                       <source srcset="/images/hero-harsukh.webp" type="image/webp" />
-                      <img src="/images/hero-harsukh.jpg" alt="Harsukh Residencies Nathia Gali" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" width="600" height="208" />
+                      <img src="/images/hero-harsukh.webp" alt="Harsukh Residencies Nathia Gali" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" width="600" height="208" />
                     </picture>
                     <div class="absolute top-3 inset-x-3 flex items-center justify-between gap-1.5 flex-wrap pointer-events-none">
                       <span class="bg-amber-500 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow-md">

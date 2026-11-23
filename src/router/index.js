@@ -139,6 +139,7 @@ const routes = [
   },
   {
     path: '/listings',
+    alias: ['/properties', '/all-properties'],
     name: 'Listings',
     component: ListingsPage,
     meta: {
@@ -168,6 +169,7 @@ const routes = [
   },
   {
     path: '/property/:slug',
+    alias: '/properties/:slug',
     name: 'PropertyDetail',
     component: PropertyPage,
     meta: {

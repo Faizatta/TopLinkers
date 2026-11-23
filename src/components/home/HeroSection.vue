@@ -52,7 +52,7 @@ const slides = [
     badge: 'Cash Moqa Ready',
     description: 'Direct on-ground demarcated plot adjoining New Islamabad Airport gate & Srinagar Highway. Immediate physical possession with swift registry transfer.',
     ctaText: 'Explore Plot',
-    link: '/property/corner-plot-topcity',
+    link: '/property/topcity1-10-marla-prime-plot',
     image: '/images/hero-moqa-plot.webp'
   },
   {

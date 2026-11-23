@@ -21,9 +21,10 @@
       <video
         v-if="parsedVideo.type === 'direct'"
         :src="parsedVideo.src"
+        :poster="poster || '/images/banu-hafeez/bh-hero.webp'"
         controls
         playsinline
-        preload="metadata"
+        preload="none"
         class="w-full h-full object-contain"
       ></video>
 
@@ -57,6 +58,10 @@ const props = defineProps({
     default: ''
   },
   title: {
+    type: String,
+    default: ''
+  },
+  poster: {
     type: String,
     default: ''
   },

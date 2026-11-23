@@ -191,3 +191,38 @@ body {
 .pause-on-hover:hover .animate-marquee-reverse {
   animation-play-state: paused;
 }
+
+/* Prevent Leaflet maps and 3D transforms from bleeding through mobile drawers, modals, and sticky navbars */
+.leaflet-container {
+  isolation: isolate !important;
+  z-index: 1 !important;
+}
+
+.leaflet-pane {
+  z-index: 2 !important;
+}
+
+.leaflet-tile-pane {
+  z-index: 2 !important;
+}
+
+.leaflet-overlay-pane {
+  z-index: 3 !important;
+}
+
+.leaflet-marker-pane {
+  z-index: 4 !important;
+}
+
+.leaflet-tooltip-pane {
+  z-index: 5 !important;
+}
+
+.leaflet-popup-pane {
+  z-index: 6 !important;
+}
+
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 10 !important;
+}
