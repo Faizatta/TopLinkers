@@ -93,7 +93,7 @@ const staticRoutes = [
           Whether you are an overseas Pakistani seeking a safe 1 Kanal villa plot, a first-time homebuyer looking for an affordable 2-bed PHA flat in Sector I-12, or an investor seeking commercial storefronts with high rental yield, TopLinkers provides complete title verification and transparent escrow handling.
         </p>
         <p style="font-size:14px;color:#475569;">
-          Explore our <a href="/listings" style="color:#16B4E8;font-weight:700;">66 Verified Property Listings</a>, read our <a href="/blog" style="color:#16B4E8;font-weight:700;">Market Intelligence Blog</a>, or schedule an in-person consultation with our <a href="/team" style="color:#16B4E8;font-weight:700;">Senior Advisory Desk</a>.
+          Explore our <a href="/listings" style="color:#16B4E8;font-weight:700;">Verified Property Listings</a>, read our <a href="/blog" style="color:#16B4E8;font-weight:700;">Market Intelligence Blog</a>, or schedule an in-person consultation with our <a href="/team" style="color:#16B4E8;font-weight:700;">Senior Advisory Desk</a>.
         </p>
       </section>
     `
@@ -762,7 +762,7 @@ const staticRoutes = [
       <section style="margin-bottom:28px;">
         <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Search Verified Real Estate Portfolios</h2>
         <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
-          Filter over 66 verified listings by location (TopCity-1, PECHS, Sector I-12, Sector I-16, Gulberg Greens, DHA Islamabad), price range, and property category.
+          Filter verified listings by location (TopCity-1, PECHS, Sector I-12, Sector I-16, Faisal Town, Nathia Gali), price range, and property category.
         </p>
         <p style="font-size:14px;color:#475569;">
           Explore the full catalog on our <a href="/listings" style="color:#16B4E8;font-weight:700;">Listings Directory</a>.
@@ -818,7 +818,7 @@ if (fs.existsSync(blogFilePath)) {
             </p>
             <div style="display:flex;gap:12px;flex-wrap:wrap;">
               <a href="/contact" style="background:#0F2A44;color:#fff;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;">Schedule Advisory Session</a>
-              <a href="/listings" style="background:#16B4E8;color:#0F2A44;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:800;text-decoration:none;">Browse 66 Verified Properties</a>
+              <a href="/listings" style="background:#16B4E8;color:#0F2A44;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:800;text-decoration:none;">Browse Verified Properties</a>
             </div>
           </section>
         </article>
@@ -920,7 +920,7 @@ const listingsRoute = staticRoutes.find(r => r.path === '/listings')
 if (listingsRoute && allProperties.length > 0) {
   listingsRoute.content = `
     <section style="margin-bottom:28px;">
-      <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Complete Directory of 66 Verified Properties in Islamabad &amp; Rawalpindi</h2>
+      <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Complete Directory of Verified Properties in Islamabad &amp; Rawalpindi</h2>
       <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:20px;">
         Every listing in TopLinkers\' portfolio has undergone preliminary ownership, layout, and registry verification with the Capital Development Authority (CDA), Rawalpindi Development Authority (RDA), or Federal Government Employees Housing Authority (FGEHA). Explore our full on-ground plot inventories, government flats, and luxury vacation residences below:
       </p>

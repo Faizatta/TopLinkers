@@ -61,29 +61,33 @@ export async function syncServerProperties({ force = false } = {}) {
       .then(res => (res.ok && isJson(res) ? res.json() : null))
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {
-          serverPropertiesCache = data.map(p => ({
-            id: p.id,
-            propertyId: p.slug || ('TL-' + p.id),
-            slug: p.slug,
-            title: p.title,
-            price: Number(p.price || 0),
-            type: p.type || 'plot',
-            typeName: p.type === 'apartment' ? 'Flat / Apartment' : p.type === 'house' ? 'House / Villa' : 'Plot / File',
-            purpose: p.purpose || 'for-sale',
-            status: p.purpose || 'for-sale',
-            address: p.location || 'Islamabad',
-            city: p.location?.includes('Rawalpindi') ? 'Rawalpindi' : p.location?.includes('Nathia Gali') ? 'Murree & Galyat' : 'Islamabad',
-            area: p.area || '10 Marla',
-            beds: Number(p.bedrooms || 0),
-            baths: Number(p.bathrooms || 0),
-            images: p.image ? [p.image] : ['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80'],
-            featured: Boolean(p.featured),
-            description: p.description || '',
-            offerEnabled: Boolean(p.offer_enabled),
-            offerLabel: p.offer_label || '',
-            offerPrice: Number(p.offer_price || 0),
-            offerExpiresAt: p.offer_expires_at || ''
-          }))
+          serverPropertiesCache = data.map(p => {
+            const base = propertiesData.find(d => d.slug === p.slug || d.id === p.id) || {}
+            return {
+              ...base,
+              id: p.id,
+              propertyId: p.slug || ('TL-' + p.id),
+              slug: p.slug,
+              title: p.title,
+              price: Number(p.price || 0),
+              type: p.type || base.type || 'plot',
+              typeName: p.type === 'apartment' ? 'Flat / Apartment' : p.type === 'house' ? 'House / Villa' : 'Plot / File',
+              purpose: p.purpose || base.purpose || 'for-sale',
+              status: p.purpose || base.status || 'for-sale',
+              address: p.location || base.address || 'Islamabad',
+              city: p.location?.includes('Rawalpindi') ? 'Rawalpindi' : (p.location?.includes('Nathia Gali') ? 'Murree & Galyat' : (base.city || 'Islamabad')),
+              area: p.area || base.area || '10 Marla',
+              beds: Number(p.bedrooms !== undefined ? p.bedrooms : (base.beds || 0)),
+              baths: Number(p.bathrooms !== undefined ? p.bathrooms : (base.baths || 0)),
+              images: p.image ? [p.image, ...(base.images?.slice(1) || [])] : (base.images || ['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80']),
+              featured: Boolean(p.featured),
+              description: p.description || base.description || '',
+              offerEnabled: Boolean(p.offer_enabled),
+              offerLabel: p.offer_label || '',
+              offerPrice: Number(p.offer_price || 0),
+              offerExpiresAt: p.offer_expires_at || ''
+            }
+          })
           lastPropertiesSync = Date.now()
           try {
             localStorage.setItem('toplinkers_server_properties', JSON.stringify(serverPropertiesCache))

@@ -1274,22 +1274,27 @@ const toggleSelection = (property) => {
 const loadPreset = (mode) => {
   activePresetMode.value = mode
   let targetIds = []
+  let targetSlugs = []
 
   if (mode === 'flats') {
-    // 1-on-1 Head-to-Head: PHA Sector I-12 vs PHA Sector I-16 (from Zameen.com & official PHA matrix)
-    targetIds = ['tl-101', 'tl-103']
+    // 1-on-1 Head-to-Head: PHA Sector I-12 vs PHA Sector I-16
+    targetIds = ['tl-101', 'tl-103', 4, 5]
+    targetSlugs = ['pha-flats-i12-1-type-d-e-2bed', 'pha-flats-i16-3-type-b-3bed']
   } else if (mode === 'plots') {
     // 1-on-1 Head-to-Head: Cash Possession (TopCity-1) vs Installment Plan (Faisal Town Phase 2)
-    targetIds = ['tl-hero-topcity', 'tl-ft-phase2-plan']
+    targetIds = ['tl-hero-topcity', 'tl-ft-phase2-plan', 1, 3]
+    targetSlugs = ['corner-plot-topcity', 'faisal-town-phase-2-installment-plot']
   } else if (mode === 'harsukh') {
-    // 1-on-1 Head-to-Head: Harsukh Residencies Nathia Gali vs Banu Hafeez Suites Islamabad
-    targetIds = ['tl-hrsukh', 'tl-banu-hafeez']
+    // 1-on-1 Head-to-Head: Harsukh Residencies Nathia Gali vs PHA Suites
+    targetIds = ['tl-hrsukh', 'tl-banu-hafeez', 2, 4]
+    targetSlugs = ['hr-sukh-luxury-flats-nathia-gali', 'pha-flats-i12-1-type-d-e-2bed']
   } else if (mode === 'villas') {
-    // 1-on-1 Head-to-Head: Executive Designer Villa vs Designer Penthouse
-    targetIds = ['tl-hero-villa', 'tl-111']
+    // 1-on-1 Head-to-Head: TopCity-1 Plot vs PECHS Plot
+    targetIds = ['tl-hero-villa', 'tl-111', 1, 6]
+    targetSlugs = ['corner-plot-topcity', 'pechs-islamabad-5-marla-plot']
   }
 
-  let chosen = allAvailableProperties.value.filter(p => targetIds.includes(p.id))
+  let chosen = allAvailableProperties.value.filter(p => targetIds.includes(p.id) || targetSlugs.includes(p.slug))
 
   if (chosen.length < 2) {
     let pool = []
