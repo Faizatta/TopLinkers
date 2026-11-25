@@ -24,8 +24,8 @@
     <!-- 3. Back To Top Button (Navy/Cyan Square, bottom right) -->
     <BackToTop v-if="!isAdminRoute && deferredUiReady" />
 
-    <!-- 4. Global Footer (Navy) - Shown on all standard pages -->
-    <AppFooter v-if="!isAdminRoute" />
+    <!-- 4. Global Footer (Navy) - Shown on all standard pages, deferred until idle or scroll -->
+    <AppFooter v-if="!isAdminRoute && deferredUiReady" />
 
     <!-- 5. Global Modal Overlays (mounted once idle, or immediately if opened earlier) -->
     <AuthModal v-if="!isAdminRoute && (deferredUiReady || ui.isAuthModalOpen)" />

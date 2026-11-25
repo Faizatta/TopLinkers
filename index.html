@@ -79,38 +79,6 @@
     <meta name="twitter:description" content="Verified CDA sector plots, PHA flats, turnkey home construction &amp; solar net metering in Islamabad. Contact TopLinkers for trusted property deals." />
     <meta name="twitter:image" content="https://toplinkersgroup.com/toplinkers-logo.jpg" />
 
-    <!-- Preconnect & DNS-Prefetch for Core Web Vitals -->
-    <link rel="preconnect" href="https://images.unsplash.com" />
-
-    <!-- WebMCP (In-Browser Model Context Protocol) Early Agent Tool Registration -->
-    <script>
-      (function() {
-        if (typeof window === 'undefined') return;
-        if (!navigator.modelContext) {
-          navigator.modelContext = {
-            tools: new Map(),
-            registerTool: function(t) { if (t && t.name) this.tools.set(t.name, t); },
-            getTools: function() { return Array.from(this.tools.values()); }
-          };
-        }
-        navigator.modelContext.registerTool({
-          name: 'search_properties',
-          description: 'Search verified plots, PHA flats, and villas in Islamabad',
-          inputSchema: { type: 'object', properties: { query: { type: 'string' } } }
-        });
-        navigator.modelContext.registerTool({
-          name: 'calculate_solar_savings',
-          description: 'Calculate solar net metering capacity and bill savings under IESCO in Islamabad',
-          inputSchema: { type: 'object', properties: { monthlyBillPKR: { type: 'number' } }, required: ['monthlyBillPKR'] }
-        });
-        navigator.modelContext.registerTool({
-          name: 'calculate_installment_plan',
-          description: 'Calculate 3-year installment breakdown for Harsukh Residencies or plots',
-          inputSchema: { type: 'object', properties: { totalPricePKR: { type: 'number' } }, required: ['totalPricePKR'] }
-        });
-      })();
-    </script>
-
     <!-- Schema.org Comprehensive Structured Data (Organization, LocalBusiness, RealEstateAgent, WebSite, Service, Product, FAQPage) -->
     <script type="application/ld+json">
     {

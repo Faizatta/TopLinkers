@@ -3,8 +3,8 @@
     :class="[
       'fixed top-0 left-0 right-0 z-40 transition-all duration-300 select-none',
       isScrolled || !isHomePage
-        ? 'bg-white/95 backdrop-blur-xl text-[#0F2A44] shadow-[0_4px_25px_rgba(15,42,68,0.08)] py-3 border-b border-gray-100'
-        : 'bg-white/90 backdrop-blur-md text-[#0F2A44] shadow-sm py-3.5 border-b border-gray-100/60'
+        ? 'bg-white/95 lg:backdrop-blur-xl text-[#0F2A44] shadow-[0_4px_25px_rgba(15,42,68,0.08)] py-3 border-b border-gray-100'
+        : 'bg-white/95 lg:bg-white/90 lg:backdrop-blur-md text-[#0F2A44] shadow-sm py-3.5 border-b border-gray-100/60'
     ]"
   >
     <!-- Main Navigation Bar -->

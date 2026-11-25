@@ -3,8 +3,6 @@ import { createPinia } from 'pinia'
 import router from './router'
 import App from './App.vue'
 import './assets/main.css'
-import { initLenis } from './services/lenis'
-import { initWebMCP } from './services/webmcp'
 
 // Expose WebMCP tools to in-browser AI agents upon user interaction or long idle
 if (typeof window !== 'undefined') {
@@ -13,7 +11,7 @@ if (typeof window !== 'undefined') {
     if (mcpDone) return
     mcpDone = true
     cleanupMCP()
-    initWebMCP()
+    import('./services/webmcp').then(({ initWebMCP }) => initWebMCP()).catch(() => {})
   }
   const mcpEvts = ['pointerdown', 'scroll', 'touchstart', 'keydown']
   const cleanupMCP = () => {
@@ -57,6 +55,3 @@ app.use(router)
 router.isReady().then(() => {
   app.mount('#app')
 })
-
-// Initialize native smooth scroll engine
-initLenis()

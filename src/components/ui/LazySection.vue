@@ -15,7 +15,7 @@ const props = defineProps({
   },
   rootMargin: {
     type: String,
-    default: '400px'
+    default: '150px'
   }
 })
 

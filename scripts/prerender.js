@@ -1194,25 +1194,6 @@ export function prerender() {
         <main class="flex-1 min-h-screen">
           <div class="home-page pt-[66px] sm:pt-[80px]">
             <h1 class="sr-only">${r.h1}</h1>
-            <div class="top-offer-fully-sliding-strip bg-gradient-to-r from-[#071320] via-[#0E253D] to-[#071320] text-white border-b border-[#16B4E8]/25 relative z-30 shadow-md select-none group">
-              <div class="w-full flex items-center py-2 sm:py-2.5">
-                <div class="flex-shrink-0 flex items-center pl-3.5 sm:pl-6 pr-2 sm:pr-3 z-20">
-                  <div class="inline-flex items-center gap-1.5 text-amber-400 font-black text-[10px] sm:text-xs uppercase tracking-wider">
-                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                    <span class="whitespace-nowrap">PROMOTIONS</span>
-                    <span class="text-white/25 font-light ml-1 hidden sm:inline">|</span>
-                  </div>
-                </div>
-                <div class="flex-1 overflow-hidden relative mask-fade-marquee h-7 sm:h-8 flex items-center">
-                  <div class="marquee-track flex items-center">
-                    <div class="inline-flex items-center gap-2 sm:gap-2.5 px-4 sm:px-6 flex-shrink-0">
-                      <span class="px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-black uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">TOPCITY-1</span>
-                      <span class="text-xs font-bold text-white">Moqa Plot Possession Special</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="hero-swiper-container relative w-full h-[600px] sm:h-[660px] md:h-[740px] bg-gray-950 overflow-hidden select-none group">
               <div class="hero-slide hero-static absolute inset-0 z-[2] w-full h-full">
                 <div class="absolute inset-0 w-full h-full overflow-hidden">
@@ -1265,7 +1246,17 @@ export function prerender() {
               </div>
             </div>
 
-            <div class="prerendered-content" style="max-width:1200px;margin:32px auto;padding:0 20px;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+            <div class="relative -mt-10 sm:-mt-16 md:-mt-20 z-30 max-w-[1280px] mx-auto px-3 sm:px-4">
+              <div class="max-w-5xl mx-auto">
+                <div class="flex items-center space-x-1 sm:pl-2">
+                  <span class="flex-1 sm:flex-initial text-center px-2.5 sm:px-6 py-2.5 sm:py-3 rounded-t-[6px] text-[10px] sm:text-xs font-black uppercase tracking-wider bg-white text-[#0F2A44] shadow-sm">All Properties</span>
+                  <span class="flex-1 sm:flex-initial text-center px-2.5 sm:px-6 py-2.5 sm:py-3 rounded-t-[6px] text-[10px] sm:text-xs font-black uppercase tracking-wider bg-[#0F2A44] text-white/80">For Sale</span>
+                </div>
+                <div class="bg-white rounded-[6px] sm:rounded-tl-none p-4 sm:p-5 md:p-6 shadow-2xl border border-gray-100 h-[320px] sm:h-[180px] lg:h-[112px]"></div>
+              </div>
+            </div>
+
+            <div class="prerendered-content" style="content-visibility:auto;contain-intrinsic-size:800px;max-width:1200px;margin:32px auto;padding:0 20px;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
               ${r.content}
               <section style="background:#F1F5F9;border-radius:8px;padding:20px;border:1px solid #CBD5E1;margin-top:32px;">
                 <h2 style="font-size:16px;font-weight:700;color:#0F2A44;margin-bottom:8px;">Essential Company &amp; Legal Verification</h2>
