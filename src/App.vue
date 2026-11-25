@@ -47,11 +47,13 @@
 import { ref, computed, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AppHeader from './components/layout/AppHeader.vue'
-import AppFooter from './components/layout/AppFooter.vue'
 import Toast from './components/ui/Toast.vue'
 import { useUiStore } from './stores/ui'
 import { whenIdle } from './utils/idle'
 import { initLenis, destroyLenis } from './services/lenis'
+
+// AppFooter and floating overlays are code-split so initial execution focuses exclusively on above-the-fold content
+const AppFooter = defineAsyncComponent(() => import('./components/layout/AppFooter.vue'))
 
 // Floating widgets and modals are not needed for the first paint. They are loaded
 // after the page has finished loading, so they never compete with the hero.
@@ -80,20 +82,31 @@ router.isReady().then(() => {
 const isAdminRoute = computed(() => route.path.startsWith('/admin'))
 
 const deferredUiReady = ref(false)
-let cancelIdle = null
+let cleanupDeferredUi = null
 
 onMounted(() => {
   if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
     window.history.scrollRestoration = 'auto'
   }
   initLenis()
-  // Defer non-critical floating widgets and popups until after initial paint & idle
-  cancelIdle = whenIdle(() => { deferredUiReady.value = true })
-  setTimeout(() => { deferredUiReady.value = true }, 1500)
+
+  // Defer non-critical floating widgets and popups until user interaction or idle
+  const activateDeferredUi = () => {
+    if (deferredUiReady.value) return
+    deferredUiReady.value = true
+    if (cleanupDeferredUi) cleanupDeferredUi()
+  }
+  const events = ['pointerdown', 'touchstart', 'scroll', 'keydown']
+  cleanupDeferredUi = () => {
+    events.forEach(e => window.removeEventListener(e, activateDeferredUi))
+    if (idleTimer) clearTimeout(idleTimer)
+  }
+  events.forEach(e => window.addEventListener(e, activateDeferredUi, { once: true, passive: true }))
+  const idleTimer = setTimeout(activateDeferredUi, 6000)
 })
 
 onUnmounted(() => {
-  if (cancelIdle) cancelIdle()
+  if (cleanupDeferredUi) cleanupDeferredUi()
   destroyLenis()
 })
 </script>

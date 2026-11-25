@@ -499,16 +499,8 @@ onMounted(() => {
   if (typeof window !== 'undefined') {
     window.addEventListener('storage', onStorageChange)
   }
-  cancelIdle = whenIdle(async () => {
-    const store = await loadAdminStore()
-    await store.syncFromBackend()
-    if (store.promoStrip) {
-      localPromo.value = store.promoStrip
-    }
-  })
 })
 onUnmounted(() => {
-  if (cancelIdle) cancelIdle()
   if (typeof window !== 'undefined') {
     window.removeEventListener('storage', onStorageChange)
   }

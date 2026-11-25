@@ -1,8 +1,3 @@
-/* Swiper styles (must precede Tailwind so utility classes on carousels still win) */
-@import 'swiper/css';
-@import 'swiper/css/navigation';
-@import 'swiper/css/pagination';
-
 /*
   Plus Jakarta Sans, self-hosted: the same variable-font files Google Fonts serves
   (one file per subset covers every weight). Served from our own origin and preloaded
@@ -193,6 +188,14 @@ body {
 }
 
 /* Prevent Leaflet maps and 3D transforms from bleeding through mobile drawers, modals, and sticky navbars */
+body.mobile-drawer-open .leaflet-container,
+body.modal-open .leaflet-container,
+.drawer-open .leaflet-container {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 .leaflet-container {
   isolation: isolate !important;
   z-index: 1 !important;

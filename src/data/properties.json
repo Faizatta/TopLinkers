@@ -264,5 +264,53 @@
       "Transfer Ready"
     ],
     "agentId": "agent-4"
+  },
+  {
+    "id": 7,
+    "slug": "faisal-heights-luxury-executive-apartment",
+    "title": "Faisal Heights Luxury Executive Apartments (Zedem)",
+    "propertyId": "TL-7",
+    "type": "apartment",
+    "typeName": "Luxury Apartment",
+    "status": "for-sale",
+    "badge": "ZEDEM SIGNATURE",
+    "featured": true,
+    "hotOffer": true,
+    "price": 14500000,
+    "priceFormatted": "PKR 1.45 Cr – 3.20 Cr",
+    "pricePerSqft": "Flexible 4-Year Installments",
+    "pricePostfix": "20% Down Payment",
+    "beds": 2,
+    "baths": 2,
+    "sqft": 1350,
+    "marla": "Luxury Suite",
+    "garages": 1,
+    "yearBuilt": 2025,
+    "address": "Main Boulevard, Faisal Hills / Faisal Town, Islamabad-Rawalpindi",
+    "city": "Islamabad",
+    "areaName": "Faisal Town / Faisal Hills",
+    "lat": 33.6844,
+    "lng": 72.8250,
+    "shortDescription": "Pure luxury residential towers spanning 1 Million+ Sq.Ft by Zedem. Studio, 1, 2, 3 & 4-Bed executive lofts with private theater, resident gym, and dedicated basement parking.",
+    "description": "Faisal Heights Luxury Executive Apartments by Zedem International / Chaudhry Abdul Majeed is a landmark luxury high-rise residential complex.\n\nFeaturing soundproof double-glazed architecture, private cinema, rooftop sky garden, high-speed capsule elevators, 24/7 backup power generation, and dedicated multi-level basement parking.\n\nAvailable on 20% initial down payment followed by structured 4-year installment plan.",
+    "images": [
+      "/images/faisal-heights/fh-building.webp",
+      "/images/faisal-heights/fh-main.webp",
+      "/images/faisal-heights/fh-1bed.webp",
+      "/images/faisal-heights/fh-3bed.webp",
+      "/images/faisal-heights/fh-4bed.webp",
+      "/images/faisal-heights/fh-studio.webp"
+    ],
+    "features": [
+      "20% Down Payment Booking",
+      "4-Year Installment Plan",
+      "Double-Glazed Soundproof Glass",
+      "Private Cinema & Sky Lounge",
+      "Resident Fitness Center & Spa",
+      "High-Speed Smart Elevators",
+      "Full Standby Power Generator",
+      "Dedicated Basement Parking"
+    ],
+    "agentId": "agent-1"
   }
 ]

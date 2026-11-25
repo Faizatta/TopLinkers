@@ -10,7 +10,7 @@
     <!-- 2. ONE Proper Unified Property Hub (Search + Handpicked Portfolio in One Flow, Not in Chunks) -->
     <section class="bg-[#F6F8FA] pb-12 sm:pb-16 border-b border-gray-200/60">
       <HeroSearch />
-      <LazySection min-height="450px" root-margin="300px">
+      <LazySection min-height="450px" root-margin="50px">
         <FeaturedCarousel />
       </LazySection>
     </section>

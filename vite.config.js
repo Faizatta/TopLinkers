@@ -12,7 +12,8 @@ export default defineConfig({
     __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false'
   },
   esbuild: {
-    legalComments: 'none'
+    legalComments: 'none',
+    drop: ['console', 'debugger']
   },
   build: {
     target: 'esnext',

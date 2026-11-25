@@ -175,7 +175,7 @@ const desktopBottom = computed(() => {
 
 const isHiddenRoute = computed(() => {
   const p = (route.path || '').toLowerCase()
-  return p.startsWith('/admin') || p === '/contact'
+  return p.startsWith('/admin') || p === '/contact' || p.startsWith('/featured') || p === '/featured-building'
 })
 
 const triggerPopup = () => {

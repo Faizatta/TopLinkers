@@ -380,6 +380,9 @@ export const api = {
         'hr-sukh': 'hr-sukh-luxury-flats-nathia-gali',
         'faisal-town': 'faisal-town-phase-2-installment-plot',
         'faisal-town-2': 'faisal-town-phase-2-installment-plot',
+        'faisal-heights': 'faisal-heights-luxury-executive-apartment',
+        'faisal-heights-luxury-executive-apartment': 'faisal-heights-luxury-executive-apartment',
+        'faisal-heights-apartments': 'faisal-heights-luxury-executive-apartment',
         'pechs': 'pechs-islamabad-5-marla-plot',
         'pechs-5-marla': 'pechs-islamabad-5-marla-plot'
       }

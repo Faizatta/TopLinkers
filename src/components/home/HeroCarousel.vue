@@ -62,3 +62,7 @@ const onSwiper = (swiper) => {
   }))
 }
 </script>
+
+<style>
+@import 'swiper/css';
+</style>

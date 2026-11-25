@@ -115,3 +115,8 @@ onMounted(async () => {
   } catch (e) {}
 })
 </script>
+
+<style>
+@import 'swiper/css';
+@import 'swiper/css/pagination';
+</style>

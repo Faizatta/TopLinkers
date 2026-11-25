@@ -6,8 +6,23 @@ import './assets/main.css'
 import { initLenis } from './services/lenis'
 import { initWebMCP } from './services/webmcp'
 
-// Expose WebMCP tools to in-browser AI agents
-initWebMCP()
+// Expose WebMCP tools to in-browser AI agents upon user interaction or long idle
+if (typeof window !== 'undefined') {
+  let mcpDone = false
+  const runMCP = () => {
+    if (mcpDone) return
+    mcpDone = true
+    cleanupMCP()
+    initWebMCP()
+  }
+  const mcpEvts = ['pointerdown', 'scroll', 'touchstart', 'keydown']
+  const cleanupMCP = () => {
+    mcpEvts.forEach(e => window.removeEventListener(e, runMCP))
+    if (mcpTimer) clearTimeout(mcpTimer)
+  }
+  mcpEvts.forEach(e => window.addEventListener(e, runMCP, { once: true, passive: true }))
+  const mcpTimer = setTimeout(runMCP, 8000)
+}
 
 // Enable standard hardware-accelerated scroll restoration
 if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {

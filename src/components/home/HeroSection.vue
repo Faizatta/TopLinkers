@@ -99,7 +99,7 @@ const slides = [
 
 const staticSlideEl = ref(null)
 const staticVisible = ref(true)
-const staticActive = ref(false)
+const staticActive = ref(true)
 const carouselRequested = ref(false)
 const carouselReady = ref(false)
 
@@ -113,23 +113,25 @@ const goToSlideLink = (link) => {
   }
 }
 
-let cancelIdle = null
-let rafId = null
+let cleanupHeroListeners = null
 
 onMounted(() => {
-  // Start the entrance animation (text slide-up + Ken Burns zoom) after the first
-  // paint, exactly like the carousel does when a slide becomes active.
-  rafId = requestAnimationFrame(() => {
-    rafId = requestAnimationFrame(() => {
-      staticActive.value = true
-    })
-  })
-  cancelIdle = whenIdle(requestCarousel)
+  const activateCarousel = () => {
+    if (carouselRequested.value) return
+    carouselRequested.value = true
+    if (cleanupHeroListeners) cleanupHeroListeners()
+  }
+  const events = ['pointerdown', 'touchstart', 'mousedown', 'keydown']
+  cleanupHeroListeners = () => {
+    events.forEach(e => window.removeEventListener(e, activateCarousel))
+    if (heroIdleTimer) clearTimeout(heroIdleTimer)
+  }
+  events.forEach(e => window.addEventListener(e, activateCarousel, { once: true, passive: true }))
+  const heroIdleTimer = setTimeout(activateCarousel, 5000)
 })
 
 onUnmounted(() => {
-  if (cancelIdle) cancelIdle()
-  if (rafId) cancelAnimationFrame(rafId)
+  if (cleanupHeroListeners) cleanupHeroListeners()
 })
 </script>
 
@@ -143,53 +145,68 @@ onUnmounted(() => {
   contain: strict;
 }
 
-/* Houzez demo02 Signature Horizontal Slider Animations */
+/* Static LCP hero slide: MUST BE IMMEDIATELY VISIBLE with zero opacity/transform delays */
+.hero-swiper-container .hero-static .slide-specs,
+.hero-swiper-container .hero-static .slide-title,
+.hero-swiper-container .hero-static .slide-desc,
+.hero-swiper-container .hero-static .slide-price-cta {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.hero-swiper-container .hero-static .slide-bg-image {
+  transform: none !important;
+  animation: none !important;
+}
+
+/* Houzez demo02 Signature Horizontal Slider Animations (for dynamic swiper slides only) */
 
 /* 1. Inactive slide text initial state */
-.hero-swiper-container .hero-slide .slide-specs {
+.hero-swiper-container .swiper-slide:not(.swiper-slide-active) .slide-specs {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.hero-swiper-container .hero-slide .slide-title {
+.hero-swiper-container .swiper-slide:not(.swiper-slide-active) .slide-title {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.hero-swiper-container .hero-slide .slide-desc {
+.hero-swiper-container .swiper-slide:not(.swiper-slide-active) .slide-desc {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.hero-swiper-container .hero-slide .slide-price-cta {
+.hero-swiper-container .swiper-slide:not(.swiper-slide-active) .slide-price-cta {
   opacity: 0;
   transform: translateY(22px);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 /* 2. Active slide staggered entrance animation (Cascading slide-up + fade-in) */
-.hero-swiper-container .swiper-slide-active .slide-specs {
+.hero-swiper-container .swiper-slide-active:not(.hero-static) .slide-specs {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.6s ease 0.15s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
 }
 
-.hero-swiper-container .swiper-slide-active .slide-title {
+.hero-swiper-container .swiper-slide-active:not(.hero-static) .slide-title {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.7s ease 0.3s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
 }
 
-.hero-swiper-container .swiper-slide-active .slide-desc {
+.hero-swiper-container .swiper-slide-active:not(.hero-static) .slide-desc {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.6s ease 0.45s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.45s;
 }
 
-.hero-swiper-container .swiper-slide-active .slide-price-cta {
+.hero-swiper-container .swiper-slide-active:not(.hero-static) .slide-price-cta {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.7s ease 0.6s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;

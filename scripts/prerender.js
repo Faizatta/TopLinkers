@@ -1206,7 +1206,7 @@ export function prerender() {
                       alt="Prime Moqa Ka Plot in TopCity-1 (Block B) - TopLinkers Islamabad"
                       loading="eager"
                       fetchpriority="high"
-                      decoding="sync"
+                      decoding="async"
                       width="1440"
                       height="960"
                       class="slide-bg-image w-full h-full object-cover object-center"

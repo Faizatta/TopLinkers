@@ -109,6 +109,9 @@ onMounted(async () => {
 </script>
 
 <style>
+@import 'swiper/css';
+@import 'swiper/css/pagination';
+
 .featured-swiper .swiper-wrapper {
   align-items: stretch;
 }

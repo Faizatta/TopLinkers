@@ -299,15 +299,15 @@
 
     <!-- Mobile Slide-in Drawer -->
     <Teleport to="body">
-      <div v-if="mobileDrawerOpen" class="fixed inset-0 z-[99999] overflow-hidden lg:hidden" style="isolation: isolate; transform: translateZ(0);">
+      <div v-if="mobileDrawerOpen" class="fixed inset-0 z-[999999] overflow-hidden lg:hidden" style="isolation: isolate;">
         <!-- Backdrop Blur -->
         <div
-          class="absolute inset-0 bg-[#0F2A44]/75 backdrop-blur-md transition-opacity duration-300 z-[99998]"
+          class="fixed inset-0 bg-[#0F2A44]/75 backdrop-blur-md transition-opacity duration-300 z-[999998]"
           @click="mobileDrawerOpen = false"
         ></div>
 
-        <div class="fixed inset-y-0 right-0 max-w-full flex z-[99999]">
-          <div class="w-screen max-w-[320px] sm:max-w-xs bg-white text-[#0F2A44] h-full flex flex-col shadow-2xl border-l border-slate-100 overflow-y-auto relative z-[99999]" style="isolation: isolate; transform: translateZ(0);" data-lenis-prevent>
+        <div class="fixed inset-y-0 right-0 max-w-full flex z-[999999]">
+          <div class="w-screen max-w-[320px] sm:max-w-xs bg-white text-[#0F2A44] h-full flex flex-col shadow-2xl border-l border-slate-100 overflow-y-auto relative z-[999999]" style="isolation: isolate;" data-lenis-prevent>
             <!-- Drawer Header with Logo & Name -->
             <div class="flex items-center justify-between p-5 border-b border-slate-100 flex-shrink-0 bg-white sticky top-0 z-10">
               <router-link to="/" class="flex items-center gap-2.5 min-w-0" @click="mobileDrawerOpen = false">
@@ -496,7 +496,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useUiStore } from '../../stores/ui'
 import {
@@ -511,6 +511,16 @@ const ui = useUiStore()
 const isScrolled = ref(false)
 const mobileDrawerOpen = ref(false)
 const mobileServicesOpen = ref(true)
+
+watch(mobileDrawerOpen, (isOpen) => {
+  if (typeof document !== 'undefined') {
+    if (isOpen) {
+      document.body.classList.add('mobile-drawer-open')
+    } else {
+      document.body.classList.remove('mobile-drawer-open')
+    }
+  }
+})
 
 const onServiceClick = (section) => {
   mobileDrawerOpen.value = false
@@ -534,5 +544,8 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  if (typeof document !== 'undefined') {
+    document.body.classList.remove('mobile-drawer-open')
+  }
 })
 </script>

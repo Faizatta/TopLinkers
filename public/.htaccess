@@ -240,10 +240,20 @@ DirectorySlash Off
 
 # Brotli & Gzip Compression
 <IfModule mod_brotli.c>
-  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css text/javascript application/javascript application/json image/svg+xml text/markdown
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css text/javascript application/javascript application/json image/svg+xml text/markdown application/ld+json
 </IfModule>
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json image/svg+xml text/markdown
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json image/svg+xml text/markdown application/ld+json
+  <IfModule mod_filter.c>
+    FilterDeclare Compression CONTENT_SET
+    FilterProvider Compression DEFLATE "%{CONTENT_TYPE} = 'text/html'"
+    FilterProvider Compression DEFLATE "%{CONTENT_TYPE} = 'text/css'"
+    FilterProvider Compression DEFLATE "%{CONTENT_TYPE} = 'application/javascript'"
+    FilterProvider Compression DEFLATE "%{CONTENT_TYPE} = 'application/json'"
+    FilterProvider Compression DEFLATE "%{CONTENT_TYPE} = 'image/svg+xml'"
+    FilterProvider Compression DEFLATE "%{CONTENT_TYPE} = 'application/ld+json'"
+    FilterChain Compression
+  </IfModule>
 </IfModule>
 
 # Security & Header Protections
