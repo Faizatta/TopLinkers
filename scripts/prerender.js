@@ -1194,21 +1194,42 @@ export function prerender() {
         <main class="flex-1 min-h-screen">
           <div class="home-page pt-[66px] sm:pt-[80px]">
             <h1 class="sr-only">${r.h1}</h1>
+            <div class="top-offer-fully-sliding-strip bg-gradient-to-r from-[#071320] via-[#0E253D] to-[#071320] text-white border-b border-[#16B4E8]/25 relative z-30 shadow-md select-none group">
+              <div class="w-full flex items-center py-2 sm:py-2.5">
+                <div class="flex-shrink-0 flex items-center pl-3.5 sm:pl-6 pr-2 sm:pr-3 z-20">
+                  <div class="inline-flex items-center gap-1.5 text-amber-400 font-black text-[10px] sm:text-xs uppercase tracking-wider">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                    <span class="whitespace-nowrap">PROMOTIONS</span>
+                    <span class="text-white/25 font-light ml-1 hidden sm:inline">|</span>
+                  </div>
+                </div>
+                <div class="flex-1 overflow-hidden relative mask-fade-marquee h-7 sm:h-8 flex items-center">
+                  <div class="marquee-track flex items-center">
+                    <div class="inline-flex items-center gap-2 sm:gap-2.5 px-4 sm:px-6 flex-shrink-0">
+                      <span class="px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-black uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">TOPCITY-1</span>
+                      <span class="text-xs font-bold text-white">Moqa Plot Possession Special</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="hero-swiper-container relative w-full h-[600px] sm:h-[660px] md:h-[740px] bg-gray-950 overflow-hidden select-none group">
               <div class="hero-slide hero-static absolute inset-0 z-[2] w-full h-full">
                 <div class="absolute inset-0 w-full h-full overflow-hidden">
                   <picture class="block w-full h-full">
-                    <source media="(max-width: 639px)" type="image/avif" srcset="/images/hero-moqa-plot-m.avif" />
-                    <source media="(max-width: 639px)" type="image/webp" srcset="/images/hero-moqa-plot-m.webp" />
-                    <source type="image/avif" srcset="/images/hero-moqa-plot.avif" />
+                    <source media="(max-width: 639px)" type="image/webp" srcset="/images/hero-moqa-plot-m.webp" width="768" height="512" />
+                    <source media="(max-width: 639px)" type="image/avif" srcset="/images/hero-moqa-plot-m.avif" width="768" height="512" />
+                    <source type="image/avif" srcset="/images/hero-moqa-plot.avif" width="1440" height="960" />
                     <img
-                      src="/images/hero-moqa-plot.webp"
+                      src="/images/hero-moqa-plot-m.webp"
+                      srcset="/images/hero-moqa-plot-m.webp 768w, /images/hero-moqa-plot.webp 1440w"
+                      sizes="(max-width: 639px) 100vw, 1440px"
                       alt="Prime Moqa Ka Plot in TopCity-1 (Block B) - TopLinkers Islamabad"
                       loading="eager"
                       fetchpriority="high"
                       decoding="async"
-                      width="1440"
-                      height="960"
+                      width="768"
+                      height="512"
                       class="slide-bg-image w-full h-full object-cover object-center"
                     />
                   </picture>

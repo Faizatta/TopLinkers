@@ -1,16 +1,8 @@
 <template>
-  <transition
-    enter-active-class="transition-all duration-300 ease-out"
-    enter-from-class="opacity-0 -translate-y-2"
-    enter-to-class="opacity-100 translate-y-0"
-    leave-active-class="transition-all duration-200 ease-in"
-    leave-from-class="opacity-100 translate-y-0"
-    leave-to-class="opacity-0 -translate-y-2"
+  <div
+    v-if="isVisible"
+    class="top-offer-fully-sliding-strip bg-gradient-to-r from-[#071320] via-[#0E253D] to-[#071320] text-white border-b border-[#16B4E8]/25 relative z-30 shadow-md select-none group"
   >
-    <div
-      v-if="isVisible"
-      class="top-offer-fully-sliding-strip bg-gradient-to-r from-[#071320] via-[#0E253D] to-[#071320] text-white border-b border-[#16B4E8]/25 relative z-30 shadow-md select-none group"
-    >
       <div class="w-full flex items-center py-2 sm:py-2.5">
         
         <!-- Left: Simple Clean Promotion Tag (Not a button) -->
@@ -87,7 +79,6 @@
         </div>
       </div>
     </div>
-  </transition>
 
   <!-- ====================================================================== -->
   <!-- SLIDING DISCOUNT INQUIRY & VOUCHER CLAIM FORM (MODAL / SLIDE DRAWER)   -->

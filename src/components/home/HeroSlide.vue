@@ -6,17 +6,19 @@
   >
     <!-- Art-directed responsive local image OR direct high-res photo -->
     <picture v-if="isLocalArtDirected" class="block w-full h-full">
-      <source media="(max-width: 639px)" type="image/avif" :srcset="`${base}-m.avif`" />
-      <source media="(max-width: 639px)" type="image/webp" :srcset="`${base}-m.webp`" />
-      <source type="image/avif" :srcset="`${base}.avif`" />
+      <source media="(max-width: 639px)" type="image/webp" :srcset="`${base}-m.webp`" width="768" height="512" />
+      <source media="(max-width: 639px)" type="image/avif" :srcset="`${base}-m.avif`" width="768" height="512" />
+      <source type="image/avif" :srcset="`${base}.avif`" width="1440" height="960" />
       <img
-        :src="`${base}.webp`"
+        :src="`${base}-m.webp`"
+        :srcset="`${base}-m.webp 768w, ${base}.webp 1440w`"
+        sizes="(max-width: 639px) 100vw, 1440px"
         :alt="`${slide.title} - TopLinkers Islamabad`"
         :loading="priority ? 'eager' : 'lazy'"
         :fetchpriority="priority ? 'high' : 'low'"
         decoding="async"
-        width="1440"
-        height="960"
+        width="768"
+        height="512"
         class="slide-bg-image w-full h-full object-cover object-center"
       />
     </picture>
