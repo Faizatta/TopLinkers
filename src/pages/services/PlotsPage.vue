@@ -489,162 +489,143 @@
               </div>
             </div>
 
-            <!-- 1. MOBILE USER-FRIENDLY COMPARISON CARDS (md:hidden) -->
-            <div class="md:hidden space-y-3.5">
-              <!-- Society Identity Headers -->
-              <div class="grid grid-cols-2 gap-2 bg-slate-50 p-2 rounded-2xl border border-slate-200">
-                <div class="bg-white p-2.5 rounded-xl border border-sky-200 text-center shadow-xs">
-                  <span class="inline-block px-1.5 py-0.5 rounded text-[8px] font-black uppercase bg-[#0F2A44] text-white mb-1">
+            <!-- 1. MOBILE EXECUTIVE COMPARISON MATRIX (md:hidden) -->
+            <div class="md:hidden space-y-3">
+              <!-- Unified Society Header -->
+              <div class="relative grid grid-cols-2 gap-2.5 bg-slate-50 p-2.5 rounded-2xl border border-slate-200/90">
+                <div class="bg-white p-3 rounded-xl border-t-2 border-t-[#0F2A44] border border-slate-200/80 text-center shadow-2xs">
+                  <span class="inline-block px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-sky-50 text-[#0F2A44] border border-sky-200 mb-1">
                     RDA Approved
                   </span>
-                  <h4 class="font-black text-[#0F2A44] text-xs leading-tight">TopCity-1</h4>
-                  <span class="text-[9px] text-slate-500 block">KMKC Smart City</span>
+                  <h4 class="font-extrabold text-[#0F2A44] text-sm leading-tight">TopCity-1</h4>
+                  <span class="text-[10px] text-slate-500 block mt-0.5">Smart City • Airport Gate</span>
                 </div>
 
-                <div class="bg-white p-2.5 rounded-xl border border-emerald-200 text-center shadow-xs">
-                  <span class="inline-block px-1.5 py-0.5 rounded text-[8px] font-black uppercase bg-emerald-700 text-white mb-1">
+                <div class="bg-white p-3 rounded-xl border-t-2 border-t-emerald-600 border border-slate-200/80 text-center shadow-2xs">
+                  <span class="inline-block px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 mb-1">
                     RDA Approved
                   </span>
-                  <h4 class="font-black text-emerald-900 text-xs leading-tight">Airport Green Garden</h4>
-                  <span class="text-[9px] text-slate-500 block">AGG Pvt Ltd</span>
+                  <h4 class="font-extrabold text-emerald-900 text-sm leading-tight">AGG</h4>
+                  <span class="text-[10px] text-slate-500 block mt-0.5">Airport Green Garden</span>
                 </div>
+
+                <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-[#0F2A44] text-white text-[10px] font-black flex items-center justify-center shadow-md border-2 border-white">
+                  VS
+                </span>
               </div>
 
-              <!-- Feature: 5 Marla Cash Moqa Rate -->
-              <div class="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-2xs space-y-2">
-                <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
-                  <span class="text-[11px] font-extrabold text-[#0F2A44] uppercase tracking-wide">
-                    💰 5 Marla Cash Moqa Rate
-                  </span>
-                </div>
-                <div class="grid grid-cols-2 gap-2 text-xs">
-                  <div class="bg-sky-50/70 p-2.5 rounded-xl border border-sky-100 flex flex-col justify-between">
-                    <span class="text-[9px] font-black uppercase text-[#0F2A44] tracking-wider mb-0.5">TopCity-1</span>
-                    <strong class="text-xs font-black text-[#16B4E8]">PKR 55 &ndash; 85 Lac</strong>
-                    <span class="text-[10px] text-slate-500 mt-1 leading-tight">Demarcated in Blocks C, D &amp; E</span>
+              <!-- Unified Clean Comparison Table Card -->
+              <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden divide-y divide-slate-100">
+                <!-- Row: 5 Marla -->
+                <div>
+                  <div class="bg-slate-50/90 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">
+                    5 Marla Cash Moqa Rate
                   </div>
-                  <div class="bg-emerald-50/70 p-2.5 rounded-xl border border-emerald-100 flex flex-col justify-between">
-                    <span class="text-[9px] font-black uppercase text-emerald-800 tracking-wider mb-0.5">AGG</span>
-                    <strong class="text-xs font-black text-emerald-700">PKR 48 &ndash; 55 Lac</strong>
-                    <span class="text-[10px] text-slate-500 mt-1 leading-tight">Budget entry ticket on airport belt</span>
+                  <div class="grid grid-cols-2 divide-x divide-slate-100">
+                    <div class="p-3">
+                      <div class="text-xs font-extrabold text-[#0F2A44]">PKR 55 &ndash; 85 Lac</div>
+                      <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">Demarcated in Blocks C, D &amp; E</p>
+                    </div>
+                    <div class="p-3">
+                      <div class="text-xs font-extrabold text-emerald-700">PKR 48 &ndash; 55 Lac</div>
+                      <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">Budget entry on airport belt</p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <!-- Feature: 10 Marla Cash Moqa Rate -->
-              <div class="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-2xs space-y-2">
-                <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
-                  <span class="text-[11px] font-extrabold text-[#0F2A44] uppercase tracking-wide">
-                    💎 10 Marla Cash Moqa Rate
-                  </span>
-                </div>
-                <div class="grid grid-cols-2 gap-2 text-xs">
-                  <div class="bg-sky-50/70 p-2.5 rounded-xl border border-sky-100 flex flex-col justify-between">
-                    <span class="text-[9px] font-black uppercase text-[#0F2A44] tracking-wider mb-0.5">TopCity-1</span>
-                    <strong class="text-xs font-black text-[#16B4E8]">PKR 85 Lac &ndash; 2.75 Cr</strong>
-                    <span class="text-[10px] text-slate-500 mt-1 leading-tight">Prime Block B &amp; C avenues, 100% on-ground</span>
+                <!-- Row: 10 Marla -->
+                <div>
+                  <div class="bg-slate-50/90 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">
+                    10 Marla Cash Moqa Rate
                   </div>
-                  <div class="bg-emerald-50/70 p-2.5 rounded-xl border border-emerald-100 flex flex-col justify-between">
-                    <span class="text-[9px] font-black uppercase text-emerald-800 tracking-wider mb-0.5">AGG</span>
-                    <strong class="text-xs font-black text-emerald-700">PKR 88 Lac &ndash; 1.05 Cr</strong>
-                    <span class="text-[10px] text-slate-500 mt-1 leading-tight">Solid demarcated land &amp; pillars</span>
+                  <div class="grid grid-cols-2 divide-x divide-slate-100">
+                    <div class="p-3">
+                      <div class="text-xs font-extrabold text-[#0F2A44]">PKR 85 Lac &ndash; 2.75 Cr</div>
+                      <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">Prime avenues, 100% on-ground</p>
+                    </div>
+                    <div class="p-3">
+                      <div class="text-xs font-extrabold text-emerald-700">PKR 88 Lac &ndash; 1.05 Cr</div>
+                      <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">Solid demarcated land &amp; pillars</p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <!-- Feature: 1 Kanal Executive Rate -->
-              <div class="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-2xs space-y-2">
-                <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
-                  <span class="text-[11px] font-extrabold text-[#0F2A44] uppercase tracking-wide">
-                    🏡 1 Kanal Executive Rate
-                  </span>
-                </div>
-                <div class="grid grid-cols-2 gap-2 text-xs">
-                  <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-                    <span class="text-[9px] font-black uppercase text-[#0F2A44] tracking-wider mb-0.5">TopCity-1</span>
-                    <strong class="text-xs font-black text-slate-800">PKR 1.80 &ndash; 4.00 Cr</strong>
-                    <span class="text-[10px] text-slate-500 mt-1 leading-tight">Inhabited villas &amp; Lake District</span>
+                <!-- Row: 1 Kanal -->
+                <div>
+                  <div class="bg-slate-50/90 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">
+                    1 Kanal Executive Rate
                   </div>
-                  <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-                    <span class="text-[9px] font-black uppercase text-emerald-800 tracking-wider mb-0.5">AGG</span>
-                    <strong class="text-xs font-black text-slate-800">PKR 1.65 &ndash; 2.10 Cr</strong>
-                    <span class="text-[10px] text-slate-500 mt-1 leading-tight">Scenic wide avenue plots</span>
+                  <div class="grid grid-cols-2 divide-x divide-slate-100">
+                    <div class="p-3">
+                      <div class="text-xs font-extrabold text-[#0F2A44]">PKR 1.80 &ndash; 4.00 Cr</div>
+                      <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">Inhabited villas &amp; Lake District</p>
+                    </div>
+                    <div class="p-3">
+                      <div class="text-xs font-extrabold text-emerald-700">PKR 1.65 &ndash; 2.10 Cr</div>
+                      <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">Scenic wide-avenue plots</p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <!-- Feature: Location & Access -->
-              <div class="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-2xs space-y-2">
-                <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
-                  <span class="text-[11px] font-extrabold text-[#0F2A44] uppercase tracking-wide">
-                    📍 Location &amp; Access
-                  </span>
-                </div>
-                <div class="grid grid-cols-2 gap-2 text-[11px]">
-                  <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 leading-snug">
-                    <span class="text-[9px] font-black uppercase text-[#0F2A44] block mb-1">TopCity-1</span>
-                    Directly on Srinagar Highway &amp; M-1/M-2 Interchange (1 km / 3 mins to Airport Gate &amp; Metro Bus).
+                <!-- Row: Location & Access -->
+                <div>
+                  <div class="bg-slate-50/90 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">
+                    Location &amp; Airport Access
                   </div>
-                  <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 leading-snug">
-                    <span class="text-[9px] font-black uppercase text-emerald-800 block mb-1">AGG</span>
-                    Adjoining Airport Cargo boundary wall via Link Road / Fateh Jang (3 mins to Airport).
+                  <div class="grid grid-cols-2 divide-x divide-slate-100 text-[11px] text-slate-700 leading-snug">
+                    <div class="p-3">
+                      Direct Srinagar Hwy &amp; M-1/M-2 Interchange (3 mins to Airport &amp; Metro).
+                    </div>
+                    <div class="p-3">
+                      Adjoining Airport Cargo boundary via Link Road / Fateh Jang (3 mins to Airport).
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <!-- Feature: Utilities & Grid -->
-              <div class="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-2xs space-y-2">
-                <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
-                  <span class="text-[11px] font-extrabold text-[#0F2A44] uppercase tracking-wide">
-                    ⚡ Utilities &amp; Grid
-                  </span>
-                </div>
-                <div class="grid grid-cols-2 gap-2 text-[11px]">
-                  <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 leading-snug">
-                    <span class="text-[9px] font-black uppercase text-[#0F2A44] block mb-1">TopCity-1</span>
-                    100% Underground electricity, Sui Gas active, smart city waste management &amp; fiber internet.
+                <!-- Row: Utilities -->
+                <div>
+                  <div class="bg-slate-50/90 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">
+                    Utilities &amp; Infrastructure
                   </div>
-                  <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 leading-snug">
-                    <span class="text-[9px] font-black uppercase text-emerald-800 block mb-1">AGG</span>
-                    Overhead electricity poles installed, groundwater boring available, wide paved roads.
+                  <div class="grid grid-cols-2 divide-x divide-slate-100 text-[11px] text-slate-700 leading-snug">
+                    <div class="p-3">
+                      Underground electricity, Sui Gas active, fiber internet &amp; waste management.
+                    </div>
+                    <div class="p-3">
+                      Overhead electricity poles, groundwater boring &amp; wide paved roads.
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <!-- Feature: Title & Possession -->
-              <div class="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-2xs space-y-2">
-                <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
-                  <span class="text-[11px] font-extrabold text-[#0F2A44] uppercase tracking-wide">
-                    📜 Title &amp; Possession
-                  </span>
-                </div>
-                <div class="grid grid-cols-2 gap-2 text-[11px]">
-                  <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 text-emerald-950 leading-snug font-medium">
-                    <span class="text-[9px] font-black uppercase text-[#0F2A44] block mb-1">TopCity-1</span>
-                    RDA Approved (9,081 Kanals) &bull; CAA &amp; NHA Clear &bull; Immediate Registry &amp; Transfer
+                <!-- Row: Title & Possession -->
+                <div>
+                  <div class="bg-slate-50/90 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">
+                    NOC &amp; Possession Status
                   </div>
-                  <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 text-emerald-950 leading-snug font-medium">
-                    <span class="text-[9px] font-black uppercase text-emerald-800 block mb-1">AGG</span>
-                    Immediate Physical Possession (1,500 delivered + 2,200 coming) &bull; Clear Title Letter
+                  <div class="grid grid-cols-2 divide-x divide-slate-100 text-[11px] leading-snug">
+                    <div class="p-3 bg-emerald-50/30 text-emerald-950 font-medium">
+                      RDA Approved (9,081 Kanals) • Immediate Registry &amp; Transfer
+                    </div>
+                    <div class="p-3 bg-emerald-50/30 text-emerald-950 font-medium">
+                      Immediate Physical Possession (1,500+ delivered) • Clear Title
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <!-- Feature: Best Fit For -->
-              <div class="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-2xs space-y-2">
-                <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
-                  <span class="text-[11px] font-extrabold text-[#0F2A44] uppercase tracking-wide">
-                    🎯 Best Fit For
-                  </span>
-                </div>
-                <div class="grid grid-cols-2 gap-2 text-[11px]">
-                  <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-slate-600 leading-snug">
-                    <span class="text-[9px] font-black uppercase text-[#0F2A44] block mb-1">TopCity-1</span>
-                    Luxury residence seekers, airport executives, immediate construction with upscale amenities.
+                <!-- Row: Best Fit -->
+                <div>
+                  <div class="bg-slate-50/90 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">
+                    Recommended Buyer Profile
                   </div>
-                  <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-slate-600 leading-snug">
-                    <span class="text-[9px] font-black uppercase text-emerald-800 block mb-1">AGG</span>
-                    High-ROI investors and budget homebuilders seeking maximum capital growth.
+                  <div class="grid grid-cols-2 divide-x divide-slate-100 text-[11px] text-slate-600 leading-snug">
+                    <div class="p-3">
+                      <span class="font-bold text-[#0F2A44] block mb-0.5">Ready Living &amp; Luxury</span>
+                      Immediate home construction with upscale smart-city amenities.
+                    </div>
+                    <div class="p-3">
+                      <span class="font-bold text-emerald-800 block mb-0.5">Value &amp; Capital Growth</span>
+                      Lower entry budget on the airport belt with strong appreciation.
+                    </div>
                   </div>
                 </div>
               </div>
