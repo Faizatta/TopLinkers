@@ -6,7 +6,7 @@
       <div class="absolute inset-0 opacity-[0.06] pointer-events-none" style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 40px 40px;"></div>
       <div class="absolute -right-24 -top-24 w-80 h-80 rounded-full bg-[#16B4E8]/15 blur-3xl pointer-events-none"></div>
 
-      <div class="relative max-w-[1260px] mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:py-14 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+      <div class="relative max-w-[1260px] mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:py-14 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         <div class="max-w-2xl">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/10 text-cyan-300 border border-white/15 mb-3">
             <span class="w-1.5 h-1.5 rounded-full bg-[#16B4E8]"></span>
@@ -20,20 +20,17 @@
           </p>
         </div>
 
-        <!-- Compact Live Team Composition Strip -->
-        <div class="grid grid-cols-3 gap-2.5 sm:gap-3 lg:flex lg:items-center flex-shrink-0">
-          <div class="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xs text-center sm:text-left">
-            <div class="text-lg sm:text-xl font-black text-white leading-none">{{ ceos.length }}</div>
-            <div class="text-[10px] sm:text-[11px] font-medium text-cyan-300 mt-1">Founders &amp; CEOs</div>
-          </div>
-          <div class="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xs text-center sm:text-left">
-            <div class="text-lg sm:text-xl font-black text-white leading-none">{{ agentsList.length }}</div>
-            <div class="text-[10px] sm:text-[11px] font-medium text-slate-300 mt-1">Consultants</div>
-          </div>
-          <div class="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xs text-center sm:text-left">
-            <div class="text-lg sm:text-xl font-black text-white leading-none">{{ engineersList.length }}</div>
-            <div class="text-[10px] sm:text-[11px] font-medium text-slate-300 mt-1">PEC Engineers</div>
-          </div>
+        <!-- Professional Credentials & Office Pillar -->
+        <div class="lg:max-w-sm w-full border-t lg:border-t-0 lg:border-l border-white/15 pt-4 lg:pt-0 lg:pl-7 space-y-2 flex-shrink-0">
+          <p class="text-[11px] font-bold uppercase tracking-widest text-cyan-300">
+            Verified Expertise &amp; Integrity
+          </p>
+          <p class="text-xs sm:text-sm font-semibold text-white leading-snug">
+            Direct Advisory, Legal Title Diligence &amp; Turnkey Engineering
+          </p>
+          <p class="text-[11px] text-slate-300 leading-relaxed">
+            Head Office: Al Hameed Plaza, G-11 Markaz, Islamabad &bull; Mon–Sat, 9 AM – 8 PM
+          </p>
         </div>
       </div>
     </header>
