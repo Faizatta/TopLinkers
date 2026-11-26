@@ -1,5 +1,5 @@
 <template>
-  <div ref="rootEl" class="lazy-section-wrapper">
+  <div ref="rootEl" class="lazy-section-wrapper" style="content-visibility: auto; contain-intrinsic-size: auto 400px;">
     <slot v-if="shouldRender" />
     <div v-else :style="{ minHeight }" class="w-full transition-opacity" aria-hidden="true"></div>
   </div>

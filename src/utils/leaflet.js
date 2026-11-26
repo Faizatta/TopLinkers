@@ -13,6 +13,7 @@
  */
 import L from 'leaflet'
 import leafletCss from 'leaflet/dist/leaflet.css?inline'
+import '../assets/leaflet-overrides.css'
 
 if (typeof document !== 'undefined' && !document.getElementById('leaflet-css')) {
   const style = document.createElement('style')

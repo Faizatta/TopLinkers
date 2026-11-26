@@ -46,7 +46,7 @@
       <!-- 1. Specs Line & Category Badge (Animated entry) -->
       <div class="slide-specs mb-2 sm:mb-3 flex flex-wrap items-center gap-2">
         <span class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wider text-white/95 uppercase drop-shadow">
-          <span class="w-2 h-2 rounded-full bg-[#16B4E8] shadow-sm animate-pulse"></span>
+          <span class="w-2 h-2 rounded-full bg-[#16B4E8] shadow-sm"></span>
           <span>{{ slide.specs }}</span>
         </span>
         <span v-if="slide.badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#16B4E8] text-[#0F2A44] shadow-md">

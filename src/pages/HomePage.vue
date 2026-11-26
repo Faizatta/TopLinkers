@@ -65,10 +65,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, defineAsyncComponent } from 'vue'
+import { ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
 import LazySection from '../components/ui/LazySection.vue'
 import HeroSection from '../components/home/HeroSection.vue'
 import HeroSearch from '../components/home/HeroSearch.vue'
+import { whenIdle } from '../utils/idle'
 
 const TopOfferStrip = defineAsyncComponent(() => import('../components/home/TopOfferStrip.vue'))
 const showOfferStrip = ref(false)
@@ -92,19 +93,30 @@ const LatestBlogSection = defineAsyncComponent(() => import('../components/home/
 import { scrollTo } from '../services/lenis'
 
 const belowFoldReady = ref(false)
+let cancelBelowFold = null
 
 onMounted(() => {
   document.title = 'TopLinkers | Premier Real Estate, Turnkey Construction & Solar | Islamabad'
   if (typeof window !== 'undefined' && window.scrollY > 0) {
     scrollTo(0, { immediate: true })
   }
-  // Yield one frame so the hero paints immediately before initializing below-fold observers
-  if (typeof requestAnimationFrame !== 'undefined') {
-    requestAnimationFrame(() => {
-      setTimeout(() => { belowFoldReady.value = true }, 0)
-    })
-  } else {
+
+  const activateBelowFold = () => {
+    if (belowFoldReady.value) return
     belowFoldReady.value = true
+    if (cancelBelowFold) cancelBelowFold()
   }
+
+  const events = ['scroll', 'pointerdown', 'touchstart', 'keydown']
+  const cancelIdle = whenIdle(activateBelowFold, { timeout: 1400, maxWait: 2200 })
+  events.forEach(e => window.addEventListener(e, activateBelowFold, { once: true, passive: true }))
+  cancelBelowFold = () => {
+    events.forEach(e => window.removeEventListener(e, activateBelowFold))
+    cancelIdle()
+  }
+})
+
+onUnmounted(() => {
+  if (cancelBelowFold) cancelBelowFold()
 })
 </script>

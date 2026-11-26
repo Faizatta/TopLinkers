@@ -110,45 +110,6 @@ body {
   transform: translateY(-6px);
 }
 
-/* Leaflet Stacking Context Isolation */
-.leaflet-container {
-  z-index: 1 !important;
-}
-
-/* Leaflet Pill Marker & Popup styling (loaded together with Leaflet itself) */
-.leaflet-pill-marker {
-  background: #ffffff;
-  color: #0F2A44;
-  font-weight: 700;
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 9999px;
-  border: 1.5px solid #16B4E8;
-  box-shadow: 0 4px 12px rgba(15, 42, 68, 0.18);
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-.leaflet-pill-marker:hover, .leaflet-pill-marker.active {
-  background: #0F2A44;
-  color: #ffffff;
-  border-color: #0F2A44;
-  transform: scale(1.08);
-}
-.leaflet-popup-content-wrapper {
-  padding: 0;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-.leaflet-popup-content {
-  margin: 0 !important;
-  line-height: normal;
-}
-
 /* Continuous Testimonial Marquee Animation */
 @keyframes marquee {
   0% {
@@ -185,47 +146,4 @@ body {
 .pause-on-hover:hover .animate-marquee,
 .pause-on-hover:hover .animate-marquee-reverse {
   animation-play-state: paused;
-}
-
-/* Prevent Leaflet maps and 3D transforms from bleeding through mobile drawers, modals, and sticky navbars */
-body.mobile-drawer-open .leaflet-container,
-body.modal-open .leaflet-container,
-.drawer-open .leaflet-container {
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-.leaflet-container {
-  isolation: isolate !important;
-  z-index: 1 !important;
-}
-
-.leaflet-pane {
-  z-index: 2 !important;
-}
-
-.leaflet-tile-pane {
-  z-index: 2 !important;
-}
-
-.leaflet-overlay-pane {
-  z-index: 3 !important;
-}
-
-.leaflet-marker-pane {
-  z-index: 4 !important;
-}
-
-.leaflet-tooltip-pane {
-  z-index: 5 !important;
-}
-
-.leaflet-popup-pane {
-  z-index: 6 !important;
-}
-
-.leaflet-top,
-.leaflet-bottom {
-  z-index: 10 !important;
 }
