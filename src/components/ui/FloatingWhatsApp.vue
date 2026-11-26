@@ -1,7 +1,6 @@
 <template>
   <div
-    class="fixed right-4 sm:right-6 z-50 select-none transition-[bottom] duration-200 ease-out"
-    :style="{ bottom: `${bottomOffset}px` }"
+    class="fixed right-4 sm:right-6 bottom-5 sm:bottom-6 z-50 select-none"
   >
     <!-- WhatsApp Floating Action Button -->
     <div class="relative">
@@ -162,15 +161,12 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useUiStore } from '../../stores/ui'
-import { useFooterClearance } from '../../composables/useFooterClearance'
 
 const uiStore = useUiStore()
 const isOpen = ref(false)
 const customMessage = ref('')
 const primaryWhatsApp = '923349522157' // Land, Plots & Real Estate
 const engineeringWhatsApp = '923324004884' // Construction & Solar
-// Shared, frame-throttled footer clearance (one measurement for all floating widgets)
-const { bottomOffset } = useFooterClearance()
 
 watch(isOpen, (val) => {
   uiStore.isWhatsAppOpen = val
