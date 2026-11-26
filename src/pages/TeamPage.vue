@@ -209,13 +209,10 @@
         </div>
 
         <!-- Member Count Header with 3D Interaction Hint (3D Stage Exclusive) -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+        <div class="mb-4">
           <p class="text-xs text-slate-500 font-medium">
             Showing {{ filteredMembers.length }} specialized team members
           </p>
-          <span class="text-[11px] font-bold text-[#16B4E8] flex items-center gap-1">
-            <span>Swipe or click any card to inspect full profile &amp; direct contacts &rarr;</span>
-          </span>
         </div>
 
         <!-- INTERACTIVE 3D PERSPECTIVE CAROUSEL STAGE -->
