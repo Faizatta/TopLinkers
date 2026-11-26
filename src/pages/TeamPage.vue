@@ -290,40 +290,6 @@
             </div>
           </div>
 
-          <!-- Carousel Controls: Prev / Next Navigation Arrows -->
-          <div class="flex items-center justify-center gap-3 mt-4">
-            <button
-              type="button"
-              @click="prevCard"
-              class="w-9 h-9 rounded-full bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-sm flex items-center justify-center transition-all hover:scale-105"
-              aria-label="Previous Team Member"
-            >
-              <ChevronLeftIcon class="w-4 h-4" />
-            </button>
-
-            <!-- Dots Indicator -->
-            <div class="flex items-center gap-1.5">
-              <button
-                v-for="(_, idx) in filteredMembers"
-                :key="idx"
-                type="button"
-                @click="activeIndex = idx"
-                class="h-2 rounded-full transition-all"
-                :class="idx === activeIndex ? 'w-6 bg-[#16B4E8]' : 'w-2 bg-slate-300 hover:bg-slate-400'"
-                :aria-label="`Slide to member ${idx + 1}`"
-              ></button>
-            </div>
-
-            <button
-              type="button"
-              @click="nextCard"
-              class="w-9 h-9 rounded-full bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-sm flex items-center justify-center transition-all hover:scale-105"
-              aria-label="Next Team Member"
-            >
-              <ChevronRightIcon class="w-4 h-4" />
-            </button>
-          </div>
-
           <!-- Active Member Quick Action Bar (Mobile-first direct WhatsApp & call dock) -->
           <div v-if="filteredMembers[activeIndex]" class="max-w-md mx-auto mt-4 px-2">
             <div class="bg-white rounded-2xl p-3 border border-slate-200/90 shadow-sm flex items-center justify-between gap-3">
@@ -356,6 +322,40 @@
                 </button>
               </div>
             </div>
+          </div>
+
+          <!-- Carousel Controls: Prev / Next Navigation Arrows -->
+          <div class="flex items-center justify-center gap-3 mt-4">
+            <button
+              type="button"
+              @click="prevCard"
+              class="w-9 h-9 rounded-full bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-sm flex items-center justify-center transition-all hover:scale-105"
+              aria-label="Previous Team Member"
+            >
+              <ChevronLeftIcon class="w-4 h-4" />
+            </button>
+
+            <!-- Dots Indicator -->
+            <div class="flex items-center gap-1.5">
+              <button
+                v-for="(_, idx) in filteredMembers"
+                :key="idx"
+                type="button"
+                @click="activeIndex = idx"
+                class="h-2 rounded-full transition-all"
+                :class="idx === activeIndex ? 'w-6 bg-[#16B4E8]' : 'w-2 bg-slate-300 hover:bg-slate-400'"
+                :aria-label="`Slide to member ${idx + 1}`"
+              ></button>
+            </div>
+
+            <button
+              type="button"
+              @click="nextCard"
+              class="w-9 h-9 rounded-full bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-sm flex items-center justify-center transition-all hover:scale-105"
+              aria-label="Next Team Member"
+            >
+              <ChevronRightIcon class="w-4 h-4" />
+            </button>
           </div>
         </div>
       </section>
