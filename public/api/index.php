@@ -115,6 +115,11 @@ if (!function_exists('slugify')) {
 // ROUTING ENGINE
 // -------------------------------------------------------------
 
+require_once __DIR__ . '/services_cms.php';
+if (handleServicesCmsRequest($pdo, $resource, $subResource, $segments, $method, $secretKey)) {
+    exit;
+}
+
 switch ($resource) {
 
     // 1. Health Check

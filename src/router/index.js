@@ -37,6 +37,7 @@ const AdminTeam = () => import('../pages/admin/AdminTeam.vue')
 const AdminRoles = () => import('../pages/admin/AdminRoles.vue')
 const AdminReviews = () => import('../pages/admin/AdminReviews.vue')
 const AdminBlogs = () => import('../pages/admin/AdminBlogs.vue')
+const AdminServices = () => import('../pages/admin/AdminServices.vue')
 
 const routes = [
   {
@@ -368,6 +369,12 @@ const routes = [
         name: 'AdminBlogs',
         component: AdminBlogs,
         meta: { title: 'Articles & Blogs | TopLinkers Admin Portal' }
+      },
+      {
+        path: 'services',
+        name: 'AdminServices',
+        component: AdminServices,
+        meta: { title: 'Services CMS | TopLinkers Admin Portal' }
       }
     ]
   },

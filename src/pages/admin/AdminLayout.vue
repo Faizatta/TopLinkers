@@ -143,6 +143,16 @@
             {{ adminStore.blogs.length }}
           </span>
         </router-link>
+
+        <router-link
+          v-if="adminStore.canAccessModule('services')"
+          to="/admin/services"
+          @click="mobileSidebarOpen = false"
+          class="flex items-center px-3.5 py-2.5 rounded-lg text-xs transition-colors duration-150"
+          :class="$route.path.startsWith('/admin/services') ? 'bg-white/10 text-white font-bold border-l-2 border-[#16B4E8]' : 'text-slate-300 hover:text-white hover:bg-white/5 font-medium'"
+        >
+          <span class="flex-1">Services CMS</span>
+        </router-link>
       </nav>
 
       <!-- Bottom Avatar Profile Trigger & Popover Logout Menu -->

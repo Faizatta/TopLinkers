@@ -8,17 +8,40 @@
         <span class="text-[#0F2A44] font-bold">Services &amp; Advisory Divisions</span>
       </nav>
 
-      <!-- Page Header -->
-      <div class="mb-8 text-center max-w-3xl mx-auto">
-        <span class="text-xs font-black uppercase tracking-widest text-[#16B4E8] bg-[#16B4E8]/10 px-3 py-1 rounded-full inline-block mb-2">
-          Integrated Property Solutions
+      <!-- Page Header (CMS Controlled Hero Section) -->
+      <div v-if="heroSection" class="mb-8 text-center max-w-3xl mx-auto">
+        <span v-if="heroSection.badge_text || heroSection.subtitle" class="text-xs font-black uppercase tracking-widest text-[#16B4E8] bg-[#16B4E8]/10 px-3 py-1 rounded-full inline-block mb-2">
+          {{ heroSection.badge_text || heroSection.subtitle }}
         </span>
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0F2A44] tracking-tight">
-          TopLinkers Advisory &amp; Services
+          {{ heroSection.title || 'TopLinkers Advisory & Services' }}
         </h1>
         <p class="text-xs sm:text-sm text-gray-600 mt-2.5 max-w-2xl mx-auto leading-relaxed">
-          From verified on-ground plots and installment files to PHA cash flats, turnkey construction, and IESCO Tier-1 solar net metering across Islamabad &amp; Rawalpindi.
+          {{ heroSection.description }}
         </p>
+        <div v-if="heroSection.hero_image" class="mt-5 rounded-2xl overflow-hidden shadow-md border border-gray-200 max-h-64">
+          <img :src="heroSection.hero_image" :alt="heroSection.image_alt || heroSection.title" class="w-full h-full object-cover" loading="eager" />
+        </div>
+        <div v-if="heroSection.cta_text || heroSection.secondary_cta_text" class="mt-4 flex flex-wrap items-center justify-center gap-3">
+          <router-link v-if="heroSection.cta_text && heroSection.cta_link?.startsWith('/')" :to="heroSection.cta_link" class="px-5 py-2.5 rounded-xl bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-xs font-black uppercase tracking-wider transition">
+            {{ heroSection.cta_text }}
+          </router-link>
+          <a v-else-if="heroSection.cta_text" :href="heroSection.cta_link" target="_blank" rel="noopener" class="px-5 py-2.5 rounded-xl bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-xs font-black uppercase tracking-wider transition">
+            {{ heroSection.cta_text }}
+          </a>
+          <router-link v-if="heroSection.secondary_cta_text && heroSection.secondary_cta_link?.startsWith('/')" :to="heroSection.secondary_cta_link" class="px-5 py-2.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 text-[#0F2A44] text-xs font-bold uppercase tracking-wider transition">
+            {{ heroSection.secondary_cta_text }}
+          </router-link>
+        </div>
+      </div>
+
+      <div v-if="cmsLoading" class="mb-6 flex items-center justify-center gap-2 text-xs text-slate-500">
+        <span class="w-2 h-2 rounded-full bg-[#16B4E8] animate-ping"></span>
+        <span>Syncing live services &amp; packages...</span>
+      </div>
+      <div v-else-if="cmsError" class="mb-6 p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs flex items-center justify-between max-w-2xl mx-auto">
+        <span>Showing cached layout ({{ cmsError }})</span>
+        <button type="button" @click="loadCmsData" class="font-bold underline">Retry</button>
       </div>
 
       <!-- Compact & User-Friendly Division Selector -->
@@ -142,20 +165,28 @@
 
       <!-- ========================================== -->
       <!-- FEATURED SPOTLIGHT: HARSUKH NATHIA GALI    -->
-      <!-- (Shown on Property/Construction/All tabs)  -->
+      <!-- (CMS Controlled & Shown on Property/All)   -->
       <!-- ========================================== -->
       <div
-        v-if="activeTab !== 'solar'"
+        v-if="spotlightSection && spotlightSection.is_enabled && activeTab !== 'solar'"
         class="mb-14 bg-gradient-to-r from-[#0F2A44] via-[#143452] to-[#0F2A44] text-white rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden"
       >
         <div class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-[#16B4E8]/10 pointer-events-none"></div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
           <div class="lg:col-span-4 h-56 sm:h-64 rounded-2xl overflow-hidden bg-gray-900 border border-white/10 shadow-lg">
-            <!-- Near the top of the page (the LCP image on phones): loaded eagerly -->
+            <img
+              v-if="spotlightSection.hero_image && spotlightSection.hero_image.startsWith('/uploads/')"
+              :src="spotlightSection.hero_image"
+              :alt="spotlightSection.image_alt || spotlightSection.title"
+              loading="eager"
+              fetchpriority="high"
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            />
             <LocalPicture
+              v-else
               name="hero-harsukh"
-              alt="Harsukh Nathia Gali"
+              :alt="spotlightSection.image_alt || spotlightSection.title"
               sizes="(max-width: 1023px) 100vw, 400px"
               loading="eager"
               fetchpriority="high"
@@ -168,27 +199,27 @@
           <div class="lg:col-span-8 space-y-3.5">
             <div class="flex items-center gap-2">
               <span class="bg-[#16B4E8] text-[#0F2A44] text-[9px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded shadow">
-                HOT SELLING PROJECT
+                {{ spotlightSection.badge_text || 'HOT SELLING PROJECT' }}
               </span>
-              <span class="text-xs text-[#16B4E8] font-bold">Kuza Gali • Nathia Gali</span>
+              <span class="text-xs text-[#16B4E8] font-bold">{{ spotlightSection.subtitle || 'Kuza Gali • Nathia Gali' }}</span>
             </div>
 
             <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Harsukh Residencies — Luxury Vacation &amp; Investment Flats
+              {{ spotlightSection.title || 'Harsukh Residencies — Luxury Vacation & Investment Flats' }}
             </h2>
 
             <p class="text-xs sm:text-sm text-gray-300 leading-relaxed max-w-2xl">
-              Prime scenic location in Nathia Gali for memorable family holidays and high-yield tourist rental investment. Executive Studio, 1-Bed, and 2-Bed suites with panoramic pine-valley views.
+              {{ spotlightSection.description }}
             </p>
 
             <div class="pt-2 flex flex-wrap items-center gap-3">
               <a
-                href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20Harsukh%20luxury%20flats%20in%20Nathia%20Gali"
+                :href="spotlightSection.cta_link || 'https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20Harsukh%20luxury%20flats%20in%20Nathia%20Gali'"
                 target="_blank"
                 class="px-6 py-3 bg-[#16B4E8] hover:bg-[#119ecf] text-[#0F2A44] text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow flex items-center gap-2"
               >
                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                <span>Inquire Harsukh Booking</span>
+                <span>{{ spotlightSection.cta_text || 'Inquire Harsukh Booking' }}</span>
               </a>
 
               <button
@@ -197,7 +228,7 @@
                 class="px-5 py-3 bg-white/10 hover:bg-white hover:text-[#0F2A44] text-white text-xs font-bold uppercase rounded-xl transition-colors flex items-center gap-1.5"
               >
                 <svg class="w-4 h-4 text-[#16B4E8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                <span>View 3-Year Payment Schedule</span>
+                <span>{{ spotlightSection.secondary_cta_text || 'View 3-Year Payment Schedule' }}</span>
               </button>
             </div>
           </div>
@@ -208,7 +239,7 @@
       <!-- 1. PLOT SERVICE & CATEGORIES (SEGREGATED CASH VS INSTALLMENTS) -->
       <!-- ========================================== -->
       <section
-        v-if="activeTab === 'all' || activeTab === 'plot'"
+        v-if="isDivisionEnabled('plot') && (activeTab === 'all' || activeTab === 'plot')"
         id="plot"
         class="mb-16 scroll-mt-36 sm:scroll-mt-32 pt-4 sm:pt-0"
       >
@@ -468,7 +499,7 @@
       <!-- 2. FLATS & APARTMENTS (PHA CASH & LUXURY)  -->
       <!-- ========================================== -->
       <section
-        v-if="activeTab === 'all' || activeTab === 'flats'"
+        v-if="isDivisionEnabled('flats') && (activeTab === 'all' || activeTab === 'flats')"
         id="flats"
         class="mb-16 scroll-mt-36 sm:scroll-mt-32 pt-4 sm:pt-0"
       >
@@ -1018,7 +1049,7 @@
       <!-- 3. CONSTRUCTION SERVICE & CATEGORIES       -->
       <!-- ========================================== -->
       <section
-        v-if="activeTab === 'all' || activeTab === 'construction'"
+        v-if="isDivisionEnabled('construction') && (activeTab === 'all' || activeTab === 'construction')"
         id="construction"
         class="mb-16 scroll-mt-36 sm:scroll-mt-32 pt-4 sm:pt-0"
       >
@@ -1261,7 +1292,7 @@
       <!-- 4. SOLAR SERVICE & CATEGORIES              -->
       <!-- ========================================== -->
       <section
-        v-if="activeTab === 'all' || activeTab === 'solar'"
+        v-if="isDivisionEnabled('solar') && (activeTab === 'all' || activeTab === 'solar')"
         id="solar"
         class="mb-16 scroll-mt-36 sm:scroll-mt-32 pt-4 sm:pt-0"
       >
@@ -1527,7 +1558,212 @@
           </div>
         </div>
       </section>
+
+      <!-- ======================================================== -->
+      <!-- DYNAMIC CMS SERVICES & ADDITIONAL PAGE SECTIONS          -->
+      <!-- (Rendered in backend display_order)                      -->
+      <!-- ======================================================== -->
+      <section v-if="extraPublishedServices.length > 0 && activeTab === 'all'" class="mb-16">
+        <div class="mb-6 pb-4 border-b border-gray-200 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+          <div>
+            <span class="text-[10px] font-black uppercase tracking-widest text-[#16B4E8]">Specialized Advisory</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-[#0F2A44] mt-1">Additional &amp; Featured Services</h2>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            v-for="svc in extraPublishedServices"
+            :key="svc.id"
+            class="bg-white rounded-2xl border border-gray-200 hover:border-[#16B4E8] shadow-sm hover:shadow-lg transition-all overflow-hidden flex flex-col justify-between group"
+          >
+            <div>
+              <div v-if="svc.main_image" class="h-44 w-full overflow-hidden relative bg-slate-900 cursor-pointer" @click="openServiceDetail(svc)">
+                <img :src="svc.main_image" :alt="svc.main_image_alt || svc.title" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <span v-if="svc.pricing_info" class="absolute bottom-2.5 left-2.5 bg-[#0F2A44]/90 text-white text-[10px] font-bold px-2.5 py-1 rounded">
+                  {{ svc.pricing_info }}
+                </span>
+              </div>
+              <div class="p-5 space-y-2.5">
+                <div class="text-[10px] font-black uppercase tracking-wider text-[#16B4E8]">{{ svc.category_name || 'Advisory Service' }}</div>
+                <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors cursor-pointer" @click="openServiceDetail(svc)">
+                  {{ svc.title }}
+                </h3>
+                <p class="text-xs text-gray-600 leading-relaxed">{{ svc.short_description }}</p>
+                <ul v-if="svc.features?.length" class="space-y-1.5 pt-2 border-t border-gray-100 text-xs text-slate-600">
+                  <li v-for="f in svc.features.slice(0, 3)" :key="f.id" class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#16B4E8] flex-shrink-0"></span>
+                    <span class="truncate">{{ f.title }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="p-5 pt-0 flex items-center gap-2">
+              <button type="button" @click="openServiceDetail(svc)" class="flex-1 py-2.5 bg-[#0F2A44] hover:bg-[#16B4E8] text-white font-bold text-xs rounded-xl transition">
+                View Details &rarr;
+              </button>
+              <a
+                v-if="svc.whatsapp_number"
+                :href="`https://wa.me/${svc.whatsapp_number}?text=${encodeURIComponent(svc.whatsapp_text || 'Hello TopLinkers, I am inquiring about ' + svc.title)}`"
+                target="_blank"
+                class="px-3.5 py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs rounded-xl transition"
+              >
+                WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <template v-for="sec in dynamicExtraSections" :key="sec.id">
+        <section v-if="sec.section_type === 'intro' || sec.section_type === 'banner' || sec.section_type === 'custom'" class="mb-14 bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-xs">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div :class="sec.hero_image ? 'lg:col-span-8' : 'lg:col-span-12'" class="space-y-3">
+              <span v-if="sec.badge_text || sec.subtitle" class="inline-block px-3 py-1 rounded-full bg-[#16B4E8]/10 text-[#16B4E8] text-[10px] font-black uppercase tracking-wider">
+                {{ sec.badge_text || sec.subtitle }}
+              </span>
+              <h2 class="text-xl sm:text-2xl font-extrabold text-[#0F2A44]">{{ sec.title }}</h2>
+              <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">{{ sec.description }}</p>
+              <div v-if="sec.cta_text" class="pt-2 flex flex-wrap gap-3">
+                <router-link v-if="sec.cta_link?.startsWith('/')" :to="sec.cta_link" class="px-5 py-2.5 rounded-xl bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-xs font-bold transition">
+                  {{ sec.cta_text }} &rarr;
+                </router-link>
+                <a v-else-if="sec.cta_link" :href="sec.cta_link" target="_blank" class="px-5 py-2.5 rounded-xl bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-xs font-bold transition">
+                  {{ sec.cta_text }} &rarr;
+                </a>
+              </div>
+            </div>
+            <div v-if="sec.hero_image" class="lg:col-span-4 h-48 rounded-2xl overflow-hidden border border-gray-100">
+              <img :src="sec.hero_image" :alt="sec.image_alt || sec.title" loading="lazy" class="w-full h-full object-cover" />
+            </div>
+          </div>
+          <div v-if="sec.blocks?.length" class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div v-for="blk in sec.blocks" :key="blk.id" class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+              <div class="font-bold text-sm text-[#0F2A44]">{{ blk.title }}</div>
+              <p class="text-xs text-slate-600 mt-1">{{ blk.description }}</p>
+            </div>
+          </div>
+        </section>
+
+        <section v-else-if="sec.section_type === 'features'" class="mb-14">
+          <div class="text-center max-w-2xl mx-auto mb-8">
+            <span v-if="sec.badge_text || sec.subtitle" class="text-[10px] font-black uppercase tracking-widest text-[#16B4E8]">{{ sec.badge_text || sec.subtitle }}</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0F2A44] mt-1">{{ sec.title }}</h2>
+            <p class="text-xs sm:text-sm text-gray-500 mt-1.5">{{ sec.description }}</p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div v-for="blk in sec.blocks" :key="blk.id" class="bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-[#16B4E8] transition">
+              <span v-if="blk.badge" class="inline-block px-2 py-0.5 rounded bg-cyan-50 text-[#0F2A44] text-[10px] font-black uppercase mb-2">{{ blk.badge }}</span>
+              <h3 class="text-sm font-extrabold text-[#0F2A44]">{{ blk.title }}</h3>
+              <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">{{ blk.description }}</p>
+            </div>
+          </div>
+        </section>
+
+        <section v-else-if="sec.section_type === 'stats'" class="mb-14 bg-[#0F2A44] text-white rounded-3xl p-6 sm:p-10 shadow-lg">
+          <div class="text-center max-w-2xl mx-auto mb-8">
+            <span v-if="sec.subtitle" class="text-[10px] font-black uppercase tracking-widest text-[#16B4E8]">{{ sec.subtitle }}</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">{{ sec.title }}</h2>
+          </div>
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
+            <div v-for="blk in sec.blocks" :key="blk.id" class="p-4 rounded-2xl bg-white/5 border border-white/10 text-center">
+              <div class="text-2xl sm:text-3xl font-black text-[#16B4E8]">{{ blk.title }}</div>
+              <div class="text-xs font-bold text-white mt-1">{{ blk.subtitle }}</div>
+              <p class="text-[11px] text-slate-300 mt-1">{{ blk.description }}</p>
+            </div>
+          </div>
+        </section>
+
+        <section v-else-if="sec.section_type === 'steps'" class="mb-14 bg-white rounded-3xl border border-gray-200 p-6 sm:p-8">
+          <div class="text-center max-w-2xl mx-auto mb-8">
+            <span v-if="sec.subtitle" class="text-[10px] font-black uppercase tracking-widest text-[#16B4E8]">{{ sec.subtitle }}</span>
+            <h2 class="text-2xl font-extrabold text-[#0F2A44] mt-1">{{ sec.title }}</h2>
+            <p class="text-xs text-gray-500 mt-1">{{ sec.description }}</p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div v-for="blk in sec.blocks" :key="blk.id" class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+              <span v-if="blk.subtitle" class="text-[10px] font-black uppercase text-[#16B4E8]">{{ blk.subtitle }}</span>
+              <h3 class="text-sm font-extrabold text-[#0F2A44] mt-1">{{ blk.title }}</h3>
+              <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">{{ blk.description }}</p>
+            </div>
+          </div>
+        </section>
+
+        <section v-else-if="sec.section_type === 'contact' || sec.section_type === 'cta'" class="mb-8 bg-gradient-to-r from-[#0F2A44] to-[#133554] text-white rounded-3xl p-6 sm:p-10 shadow-xl flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="space-y-2 max-w-2xl">
+            <span v-if="sec.badge_text" class="inline-block px-2.5 py-0.5 rounded bg-[#16B4E8] text-[#0F2A44] text-[10px] font-black uppercase">{{ sec.badge_text }}</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold">{{ sec.title }}</h2>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">{{ sec.description }}</p>
+            <div v-if="sec.contact_phone" class="text-xs text-[#16B4E8] font-bold pt-1">
+              Direct Desk: <a :href="`tel:${sec.contact_phone.replace(/[^+\d]/g, '')}`" class="underline">{{ sec.contact_phone }}</a>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 flex-shrink-0">
+            <a
+              v-if="sec.whatsapp_number"
+              :href="`https://wa.me/${sec.whatsapp_number}?text=${encodeURIComponent(sec.whatsapp_text || 'Hello TopLinkers!')}`"
+              target="_blank"
+              class="px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-black uppercase tracking-wider transition"
+            >
+              {{ sec.cta_text || 'Chat on WhatsApp' }}
+            </a>
+            <router-link
+              v-if="sec.secondary_cta_text && sec.secondary_cta_link"
+              :to="sec.secondary_cta_link"
+              class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white hover:text-[#0F2A44] text-white text-xs font-bold uppercase tracking-wider transition"
+            >
+              {{ sec.secondary_cta_text }}
+            </router-link>
+          </div>
+        </section>
+      </template>
     </div>
+
+    <!-- MODAL: CMS SERVICE DETAILS VIEWER -->
+    <Teleport to="body">
+      <div v-if="selectedServiceDetail" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 overflow-y-auto" @click.self="selectedServiceDetail = null">
+        <div class="bg-white rounded-3xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+          <div class="bg-[#0F2A44] text-white px-6 py-4 flex items-center justify-between flex-shrink-0">
+            <div>
+              <span class="text-[10px] font-black uppercase tracking-wider text-[#16B4E8]">{{ selectedServiceDetail.category_name || 'Service Details' }}</span>
+              <h3 class="text-lg font-black">{{ selectedServiceDetail.title }}</h3>
+            </div>
+            <button type="button" @click="selectedServiceDetail = null" class="w-8 h-8 rounded-full bg-white/10 text-lg">&times;</button>
+          </div>
+          <div class="p-6 overflow-y-auto space-y-5 text-xs">
+            <img v-if="selectedServiceDetail.main_image" :src="selectedServiceDetail.main_image" :alt="selectedServiceDetail.main_image_alt || selectedServiceDetail.title" class="w-full h-56 object-cover rounded-2xl border border-slate-200" />
+            <div v-if="selectedServiceDetail.full_description" class="prose prose-sm max-w-none text-slate-700" v-html="selectedServiceDetail.full_description"></div>
+            <p v-else class="text-slate-600 leading-relaxed">{{ selectedServiceDetail.short_description }}</p>
+
+            <div v-if="selectedServiceDetail.features?.length" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div v-for="f in selectedServiceDetail.features" :key="f.id" class="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="font-bold text-[#0F2A44]">{{ f.title }}</div>
+                <p class="text-slate-600 mt-0.5">{{ f.description }}</p>
+              </div>
+            </div>
+
+            <div v-if="selectedServiceDetail.gallery?.length" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+              <figure v-for="g in selectedServiceDetail.gallery" :key="g.id" class="rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
+                <img :src="g.image_url" :alt="g.alt_text || g.caption" class="w-full h-28 object-cover" />
+                <figcaption v-if="g.caption" class="p-1.5 text-[10px] text-slate-600 truncate">{{ g.caption }}</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between flex-shrink-0">
+            <router-link v-if="selectedServiceDetail.cta_link?.startsWith('/')" :to="selectedServiceDetail.cta_link" @click="selectedServiceDetail = null" class="px-5 py-2.5 rounded-xl bg-[#0F2A44] text-white text-xs font-bold">
+              {{ selectedServiceDetail.cta_text || 'Open Guide' }} &rarr;
+            </router-link>
+            <a
+              v-if="selectedServiceDetail.whatsapp_number"
+              :href="`https://wa.me/${selectedServiceDetail.whatsapp_number}?text=${encodeURIComponent(selectedServiceDetail.whatsapp_text || 'Hello TopLinkers, I am inquiring about ' + selectedServiceDetail.title)}`"
+              target="_blank"
+              class="px-5 py-2.5 rounded-xl bg-[#25D366] text-white text-xs font-black"
+            >
+              Inquire on WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </Teleport>
 
     <!-- ======================================================== -->
     <!-- MODAL 1: INTERACTIVE INSTALLMENT SCHEDULE PLANS VIEWER   -->
@@ -1872,11 +2108,93 @@ import {
 } from '@heroicons/vue/24/outline'
 import { useAdminStore } from '../stores/admin'
 import LocalPicture from '../components/ui/LocalPicture.vue'
+import { fetchPublicServicesCms } from '../services/servicesCmsApi'
 
 const route = useRoute()
 const adminStore = useAdminStore()
 const activeTab = ref('all')
 const plotPaymentFilter = ref('all') // 'all' | 'cash' | 'installments'
+
+// CMS Live State
+const cmsLoading = ref(false)
+const cmsError = ref('')
+const cmsServices = ref([])
+const cmsSections = ref([])
+const cmsPageSeo = ref(null)
+const selectedServiceDetail = ref(null)
+
+const coreDivisionKeys = ['plot', 'flats', 'construction', 'solar']
+const coreTemplateSectionKeys = ['hero', 'harsukh_spotlight', 'division_plot', 'division_flats', 'division_construction', 'division_solar']
+
+const sectionByKey = (key) => cmsSections.value.find(s => s.section_key === key) || null
+const heroSection = computed(() => sectionByKey('hero') || {
+  title: 'TopLinkers Advisory & Services',
+  badge_text: 'Integrated Property Solutions',
+  description: 'From verified on-ground plots and installment files to PHA cash flats, turnkey construction, and IESCO Tier-1 solar net metering across Islamabad & Rawalpindi.'
+})
+const spotlightSection = computed(() => sectionByKey('harsukh_spotlight'))
+
+const isDivisionEnabled = (divKey) => {
+  if (cmsServices.value.length === 0 && cmsSections.value.length === 0) return true
+  const sec = sectionByKey(`division_${divKey}`)
+  if (sec && !sec.is_enabled) return false
+  const matchingSvc = cmsServices.value.find(s => s.division_key === divKey)
+  if (cmsServices.value.length > 0 && matchingSvc === undefined) return false
+  return true
+}
+
+const extraPublishedServices = computed(() => {
+  return cmsServices.value.filter(s => !coreDivisionKeys.includes(s.division_key))
+})
+
+const dynamicExtraSections = computed(() => {
+  return cmsSections.value
+    .filter(s => s.is_enabled && !coreTemplateSectionKeys.includes(s.section_key))
+    .sort((a, b) => (a.display_order || 0) - (b.display_order || 0))
+})
+
+const openServiceDetail = (svc) => {
+  selectedServiceDetail.value = svc
+}
+
+const applyDynamicPageSeo = (seo) => {
+  if (!seo || typeof document === 'undefined') return
+  if (seo.seo_title) document.title = seo.seo_title
+  const setMeta = (attr, val, content) => {
+    if (!content) return
+    let el = document.querySelector(`meta[${attr}="${val}"]`)
+    if (!el) {
+      el = document.createElement('meta')
+      el.setAttribute(attr, val)
+      document.head.appendChild(el)
+    }
+    el.setAttribute('content', content)
+  }
+  setMeta('name', 'description', seo.meta_description)
+  setMeta('property', 'og:title', seo.og_title || seo.seo_title)
+  setMeta('property', 'og:description', seo.og_description || seo.meta_description)
+  setMeta('property', 'og:image', seo.og_image)
+  if (seo.canonical_url) {
+    let link = document.querySelector('link[rel="canonical"]')
+    if (link) link.setAttribute('href', seo.canonical_url)
+  }
+}
+
+const loadCmsData = async () => {
+  cmsLoading.value = true
+  cmsError.value = ''
+  try {
+    const data = await fetchPublicServicesCms()
+    cmsServices.value = data.services || []
+    cmsSections.value = data.sections || []
+    cmsPageSeo.value = data.pageSeo || null
+    if (cmsPageSeo.value) applyDynamicPageSeo(cmsPageSeo.value)
+  } catch (err) {
+    cmsError.value = err.message || 'Unable to sync live CMS'
+  } finally {
+    cmsLoading.value = false
+  }
+}
 
 // PHA Details Modal State
 const phaModalOpen = ref(false)
@@ -2244,6 +2562,7 @@ const onServiceNav = (e) => {
 onMounted(() => {
   window.addEventListener('toplinkers:navigate-service', onServiceNav)
   document.title = 'Our Services: Plots, PHA Flats, Turnkey Construction & Solar | TopLinkers'
+  loadCmsData()
   if (route.hash) {
     handleSectionChange(route.hash)
   }
