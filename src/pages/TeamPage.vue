@@ -1,35 +1,58 @@
 <template>
-  <div class="team-page pt-28 sm:pt-32 md:pt-36 pb-16 bg-[#F8FAFC] min-h-screen">
-    <div class="max-w-[1260px] mx-auto px-4 sm:px-6">
-      <!-- Page Title Header -->
-      <div class="max-w-2xl mx-auto text-center mb-8 sm:mb-10 animate-fade-down">
-        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-[#16B4E8]/10 text-[#16B4E8] border border-[#16B4E8]/25 mb-3 shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-[#16B4E8] animate-pulse"></span>
-          TOPLINKERS PROFESSIONAL DIRECTORY
-        </span>
-        <h1 class="text-2xl sm:text-4xl font-extrabold text-[#0F2A44] tracking-tight">
-          Founders, Agents &amp; PEC Engineers
-        </h1>
-        <p class="text-xs sm:text-sm text-gray-500 mt-2.5 leading-relaxed font-medium">
-          Led by visionary founders and powered by CDA/RDA property specialists and PEC-registered civil &amp; solar engineers across Islamabad &amp; Rawalpindi.
-        </p>
-      </div>
+  <div class="team-page pt-[66px] sm:pt-[80px] pb-16 bg-[#F8FAFC] min-h-screen">
+    <!-- Unique Architectural Executive Team Header (Mobile & Desktop) -->
+    <header class="relative bg-gradient-to-br from-[#081322] via-[#0F2A44] to-[#13385B] text-white overflow-hidden border-b border-slate-800/70 mb-10 sm:mb-12">
+      <!-- Subtle Architectural Grid & Radial Accent -->
+      <div class="absolute inset-0 opacity-[0.06] pointer-events-none" style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 40px 40px;"></div>
+      <div class="absolute -right-24 -top-24 w-80 h-80 rounded-full bg-[#16B4E8]/15 blur-3xl pointer-events-none"></div>
 
+      <div class="relative max-w-[1260px] mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:py-14 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/10 text-cyan-300 border border-white/15 mb-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#16B4E8]"></span>
+            <span>TopLinkers Leadership &amp; Specialists</span>
+          </div>
+          <h1 class="text-2xl sm:text-4xl lg:text-[42px] font-black tracking-tight text-white leading-[1.12]">
+            Founders, Agents &amp; PEC Engineers
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-300 mt-2.5 leading-relaxed max-w-xl">
+            Led by visionary founders and powered by CDA/RDA property specialists and PEC-registered civil &amp; solar engineers across Islamabad &amp; Rawalpindi.
+          </p>
+        </div>
+
+        <!-- Compact Live Team Composition Strip -->
+        <div class="grid grid-cols-3 gap-2.5 sm:gap-3 lg:flex lg:items-center flex-shrink-0">
+          <div class="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xs text-center sm:text-left">
+            <div class="text-lg sm:text-xl font-black text-white leading-none">{{ ceos.length }}</div>
+            <div class="text-[10px] sm:text-[11px] font-medium text-cyan-300 mt-1">Founders &amp; CEOs</div>
+          </div>
+          <div class="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xs text-center sm:text-left">
+            <div class="text-lg sm:text-xl font-black text-white leading-none">{{ agentsList.length }}</div>
+            <div class="text-[10px] sm:text-[11px] font-medium text-slate-300 mt-1">Consultants</div>
+          </div>
+          <div class="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xs text-center sm:text-left">
+            <div class="text-lg sm:text-xl font-black text-white leading-none">{{ engineersList.length }}</div>
+            <div class="text-[10px] sm:text-[11px] font-medium text-slate-300 mt-1">PEC Engineers</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="max-w-[1260px] mx-auto px-4 sm:px-6">
       <!-- ============================================================== -->
       <!-- PART 1 (TOP): EXECUTIVE BOARD & FOUNDERS LEADERSHIP SHOWCASE   -->
       <!-- ============================================================== -->
       <section class="mb-14 sm:mb-16">
-        <!-- Section Header Meta -->
-        <div class="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
-          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-slate-100 text-[#0F2A44] border border-slate-200 mb-2.5 shadow-xs">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#16B4E8]"></span>
-            TOPLINKERS EXECUTIVE BOARD
-          </span>
-          <h2 class="text-xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F2A44] tracking-tight">
-            Founding Leadership &amp; CEOs
-          </h2>
-          <p class="text-xs sm:text-sm text-gray-500 mt-1.5 font-medium">
-            Tap any executive card to view full strategic dossier, direct contact &amp; verified portfolio.
+        <!-- Clean Compact Section Header -->
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6 sm:mb-8 pb-3 border-b border-slate-200/80 max-w-6xl mx-auto">
+          <div>
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#16B4E8]">Executive Board</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-[#0F2A44] tracking-tight mt-0.5">
+              Founding Leadership &amp; CEOs
+            </h2>
+          </div>
+          <p class="text-xs text-slate-500 font-medium">
+            Tap any executive card to view full dossier, direct contact &amp; portfolio.
           </p>
         </div>
 
