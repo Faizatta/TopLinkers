@@ -3,14 +3,19 @@
     <!-- Simple, Clean Team Page Header -->
     <header class="bg-white border-b border-slate-200/80 mb-8 sm:mb-10">
       <div class="max-w-[1260px] mx-auto px-4 sm:px-6 py-7 sm:py-10 text-center">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[#16B4E8]">
-          Our Team
-        </p>
+        <div class="flex items-center justify-center gap-3 mb-2">
+          <span class="h-[2px] w-10 bg-[#16B4E8] rounded-full"></span>
+          <p class="text-[11px] font-bold uppercase tracking-widest text-[#16B4E8]">
+            Our Team
+          </p>
+          <span class="h-[2px] w-10 bg-[#16B4E8] rounded-full"></span>
+        </div>
         <h1 class="text-2xl sm:text-4xl font-extrabold text-[#0F2A44] tracking-tight mt-1.5">
           Founders, Agents &amp; PEC Engineers
         </h1>
         <p class="text-xs sm:text-sm text-slate-500 mt-2 max-w-xl mx-auto leading-relaxed">
-          Meet the leadership, CDA/RDA property specialists, and PEC-registered engineers behind TopLinkers.
+          Meet the leadership, CDA/RDA property specialists, and PEC-registered engineers
+          behind TopLinkers' real estate, construction, and solar solutions.
         </p>
       </div>
     </header>
@@ -20,8 +25,9 @@
       <!-- PART 1 (TOP): EXECUTIVE BOARD & FOUNDERS LEADERSHIP SHOWCASE   -->
       <!-- ============================================================== -->
       <section class="mb-14 sm:mb-16">
-        <div class="mb-5 max-w-6xl mx-auto">
-          <h2 class="text-base sm:text-lg font-bold text-[#0F2A44]">
+        <div class="mb-5 max-w-6xl mx-auto flex items-center justify-between">
+          <h2 class="text-base sm:text-lg font-bold text-[#0F2A44] flex items-center gap-2">
+            <span class="w-1 h-6 bg-[#0F2A44] rounded-full inline-block"></span>
             Founding Leadership &amp; CEOs
           </h2>
         </div>
@@ -52,11 +58,7 @@
                 height="240"
                 class="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.05] group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <!-- Hover / Tap Prompt -->
-              <span class="absolute bottom-2.5 inset-x-2.5 py-1.5 rounded-lg bg-black/70 backdrop-blur-xs text-[10px] font-bold text-white text-center flex items-center justify-center gap-1 shadow-sm">
-                <span>View Full Dossier</span>
-                <span>&rarr;</span>
-              </span>
+
             </div>
 
             <!-- Executive Information -->
@@ -99,9 +101,9 @@
               </div>
 
               <!-- Action & Direct Contact Row (Mobile-Friendly Grid & Tap Targets) -->
-              <div class="mt-4 pt-3 border-t border-gray-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
-                <!-- Action Buttons: WhatsApp & Phone -->
-                <div class="grid grid-cols-2 sm:flex sm:items-center gap-2">
+              <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between gap-2.5">
+                <!-- Action Buttons: WhatsApp & Phone (Icons Only) -->
+                <div class="flex items-center gap-2">
                   <!-- WhatsApp Direct Chat -->
                   <a
                     :href="`https://wa.me/${cleanWa(ceo.whatsapp || ceo.phone)}?text=${encodeURIComponent(`Assalam o Alaikum ${ceo.name}, I am contacting you directly from TopLinkers executive portal for advisory.`)}`"
@@ -109,12 +111,11 @@
                     rel="noopener noreferrer"
                     @click.stop
                     title="Direct WhatsApp"
-                    class="py-2 px-3 sm:px-3.5 rounded-xl bg-emerald-50 hover:bg-[#25D366] text-emerald-700 hover:text-white flex items-center justify-center gap-1.5 text-xs font-black transition-all shadow-xs"
+                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-emerald-50 hover:bg-[#25D366] text-emerald-700 hover:text-white flex items-center justify-center transition-all shadow-xs"
                   >
                     <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
                       <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
                     </svg>
-                    <span>WhatsApp</span>
                   </a>
 
                   <!-- Executive Direct Phone Call -->
@@ -122,37 +123,29 @@
                     :href="`tel:${cleanWa(ceo.phone)}`"
                     @click.stop
                     title="Executive Direct Line"
-                    class="py-2 px-3 sm:px-3.5 rounded-xl bg-slate-100 hover:bg-[#0F2A44] text-[#0F2A44] hover:text-white flex items-center justify-center gap-1.5 text-xs font-black transition-all shadow-xs"
+                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-100 hover:bg-[#0F2A44] text-[#0F2A44] hover:text-white flex items-center justify-center transition-all shadow-xs"
                   >
-                    <PhoneIcon class="w-3.5 h-3.5 shrink-0" />
-                    <span>Call Direct</span>
+                    <PhoneIcon class="w-4 h-4 shrink-0" />
                   </a>
                 </div>
 
-                <!-- Right: Social Links & Dossier Hint -->
-                <div class="flex items-center justify-between sm:justify-end gap-2">
-                  <div class="flex items-center gap-1.5">
-                    <a
-                      v-for="social in getMemberSocials(ceo)"
-                      :key="social.key"
-                      :href="social.href"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      @click.stop
-                      :title="social.label"
-                      class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-xs"
-                      :class="social.chipClass"
-                    >
-                      <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                        <path :d="social.svgPath" />
-                      </svg>
-                    </a>
-                  </div>
-
-                  <span class="text-[11px] sm:text-xs font-black text-[#16B4E8] group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1 whitespace-nowrap">
-                    <span>Full Profile</span>
-                    <span>&rarr;</span>
-                  </span>
+                <!-- Right: Social Links Only (No Full Profile text) -->
+                <div class="flex items-center gap-1.5">
+                  <a
+                    v-for="social in getMemberSocials(ceo)"
+                    :key="social.key"
+                    :href="social.href"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    @click.stop
+                    :title="social.label"
+                    class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-xs"
+                    :class="social.chipClass"
+                  >
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                      <path :d="social.svgPath" />
+                    </svg>
+                  </a>
                 </div>
               </div>
             </div>
