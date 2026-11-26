@@ -238,8 +238,7 @@ const routes = [
     component: ComparePage,
     meta: {
       title: 'Compare Real Estate Properties & Apartments | TopLinkers',
-      description: 'Compare prices, square footage, bedrooms, payment plans, and location amenities side by side across verified plots, PHA flats, and Harsukh suites.',
-      noindex: true
+      description: 'Compare prices, square footage, bedrooms, payment plans, and location amenities side by side across verified plots, PHA flats, and Harsukh suites.'
     }
   },
   {

@@ -987,7 +987,7 @@ const propertyTypeRoutes = [
   `
 }))
 
-const disallowedPaths = new Set(['/404', '/compare', '/create-listing', '/favorites', '/search'])
+const disallowedPaths = new Set(['/404', '/create-listing', '/favorites', '/search'])
 const allRoutes = [...staticRoutes, ...propertyTypeRoutes, ...dynamicBlogRoutes, ...dynamicPropertyRoutes]
 
 export function prerender() {

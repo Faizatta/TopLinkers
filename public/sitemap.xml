@@ -103,6 +103,12 @@
     <priority>0.70</priority>
   </url>
   <url>
+    <loc>https://toplinkersgroup.com/compare</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
     <loc>https://toplinkersgroup.com/property-type/apartment</loc>
     <lastmod>2026-11-26</lastmod>
     <changefreq>monthly</changefreq>

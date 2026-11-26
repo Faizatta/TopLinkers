@@ -14,7 +14,7 @@
           Return Home
         </router-link>
         <router-link
-          to="/search"
+          to="/listings"
           class="px-5 py-3 bg-[#00AEEF] hover:bg-[#0098d3] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors"
         >
           Browse Listings

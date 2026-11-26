@@ -64,38 +64,38 @@ DirectorySlash Off
   RewriteRule ^(index\.html)?$ /index.md [L]
 
   # ----------------------------------------------------
-  # Legacy Property URL 301 Redirects (30 cleaned slugs)
+  # Legacy Property URL 301 Redirects (Mapped to live canonical targets)
   # ----------------------------------------------------
-  RewriteRule ^property/luxury-corner-penthouse-bano-qadeer-heights-11/?$ /property/luxury-corner-penthouse-bano-qadeer-heights [R=301,L]
-  RewriteRule ^property/executive-family-house-gulberg-greens-residencia-12/?$ /property/executive-family-house-gulberg-greens [R=301,L]
-  RewriteRule ^property/commercial-retail-plaza-storefront-faisal-town-phase-ii-ft-ii-13/?$ /property/commercial-retail-storefront-faisal-town-phase-2 [R=301,L]
-  RewriteRule ^property/contemporary-farmhouse-estate-topcity-1-top-residencia-14/?$ /property/farmhouse-residential-plot-topcity-1 [R=301,L]
-  RewriteRule ^property/lake-view-duplex-apartment-pha-flats-sector-i-12-15/?$ /property/pha-flats-sector-i12-executive-apartment [R=301,L]
-  RewriteRule ^property/spanish-architecture-villa-pha-flats-sector-i-16-16/?$ /property/pha-flats-sector-i16-luxury-apartment [R=301,L]
-  RewriteRule ^property/prime-commercial-office-suite-pechs-society-17/?$ /property/prime-commercial-office-suite-pechs-islamabad [R=301,L]
-  RewriteRule ^property/scenic-hillside-residence-dha-phase-2-5-18/?$ /property/luxury-designer-villa-dha-phase-2 [R=301,L]
-  RewriteRule ^property/turnkey-furnished-townhouse-bahria-town-phase-7-8-19/?$ /property/furnished-luxury-townhouse-bahria-town-phase-8 [R=301,L]
-  RewriteRule ^property/modern-designer-villa-blue-world-city-20/?$ /property/overseas-executive-villa-blue-world-city [R=301,L]
-  RewriteRule ^property/luxury-corner-penthouse-b-17-multi-gardens-21/?$ /property/luxury-corner-penthouse-b17-multi-gardens [R=301,L]
-  RewriteRule ^property/executive-family-house-h-r-luxury-suites-gulberg-22/?$ /property/executive-luxury-suite-gulberg-greens [R=301,L]
-  RewriteRule ^property/commercial-retail-plaza-storefront-bano-qadeer-heights-23/?$ /property/commercial-retail-storefront-bano-qadeer-heights [R=301,L]
-  RewriteRule ^property/contemporary-farmhouse-estate-gulberg-greens-residencia-24/?$ /property/luxury-farmhouse-residence-gulberg-greens [R=301,L]
-  RewriteRule ^property/lake-view-duplex-apartment-faisal-town-phase-ii-ft-ii-25/?$ /property/luxury-duplex-apartment-faisal-town-phase-2 [R=301,L]
-  RewriteRule ^property/spanish-architecture-villa-topcity-1-top-residencia-26/?$ /property/spanish-designer-villa-topcity-1 [R=301,L]
-  RewriteRule ^property/prime-commercial-office-suite-pha-flats-sector-i-12-27/?$ /property/pha-sector-i12-commercial-shop [R=301,L]
-  RewriteRule ^property/scenic-hillside-residence-pha-flats-sector-i-16-28/?$ /property/pha-flats-sector-i16-corner-executive-flat [R=301,L]
-  RewriteRule ^property/turnkey-furnished-townhouse-pechs-society-29/?$ /property/furnished-executive-house-pechs-islamabad [R=301,L]
-  RewriteRule ^property/modern-designer-villa-dha-phase-2-5-30/?$ /property/contemporary-designer-villa-dha-phase-5 [R=301,L]
-  RewriteRule ^property/luxury-corner-penthouse-bahria-town-phase-7-8-31/?$ /property/luxury-corner-penthouse-bahria-town-phase-7 [R=301,L]
-  RewriteRule ^property/executive-family-house-blue-world-city-32/?$ /property/executive-family-home-blue-world-city [R=301,L]
-  RewriteRule ^property/commercial-retail-plaza-storefront-b-17-multi-gardens-33/?$ /property/commercial-retail-shop-b17-multi-gardens [R=301,L]
-  RewriteRule ^property/contemporary-farmhouse-estate-h-r-luxury-suites-gulberg-34/?$ /property/luxury-penthouse-suite-gulberg-greens [R=301,L]
-  RewriteRule ^property/lake-view-duplex-apartment-bano-qadeer-heights-35/?$ /property/executive-duplex-apartment-bano-qadeer-heights [R=301,L]
-  RewriteRule ^property/spanish-architecture-villa-gulberg-greens-residencia-36/?$ /property/spanish-luxury-villa-gulberg-greens [R=301,L]
-  RewriteRule ^property/prime-commercial-office-suite-faisal-town-phase-ii-ft-ii-37/?$ /property/prime-commercial-office-suite-faisal-town-phase-2 [R=301,L]
-  RewriteRule ^property/scenic-hillside-residence-topcity-1-top-residencia-38/?$ /property/prime-10-marla-residential-plot-topcity-1 [R=301,L]
-  RewriteRule ^property/turnkey-furnished-townhouse-pha-flats-sector-i-12-39/?$ /property/pha-flats-sector-i12-furnished-apartment [R=301,L]
-  RewriteRule ^property/modern-designer-villa-pha-flats-sector-i-16-40/?$ /property/pha-flats-sector-i16-modern-apartment [R=301,L]
+  RewriteRule ^property/luxury-corner-penthouse-bano-qadeer-heights-11/?$ /listings [R=301,L]
+  RewriteRule ^property/executive-family-house-gulberg-greens-residencia-12/?$ /listings [R=301,L]
+  RewriteRule ^property/commercial-retail-plaza-storefront-faisal-town-phase-ii-ft-ii-13/?$ /property/faisal-town-phase-2-installment-plot [R=301,L]
+  RewriteRule ^property/contemporary-farmhouse-estate-topcity-1-top-residencia-14/?$ /property/corner-plot-topcity [R=301,L]
+  RewriteRule ^property/lake-view-duplex-apartment-pha-flats-sector-i-12-15/?$ /property/pha-flats-i12-1-type-d-e-2bed [R=301,L]
+  RewriteRule ^property/spanish-architecture-villa-pha-flats-sector-i-16-16/?$ /property/pha-flats-i16-3-type-b-3bed [R=301,L]
+  RewriteRule ^property/prime-commercial-office-suite-pechs-society-17/?$ /property/pechs-islamabad-5-marla-plot [R=301,L]
+  RewriteRule ^property/scenic-hillside-residence-dha-phase-2-5-18/?$ /listings [R=301,L]
+  RewriteRule ^property/turnkey-furnished-townhouse-bahria-town-phase-7-8-19/?$ /listings [R=301,L]
+  RewriteRule ^property/modern-designer-villa-blue-world-city-20/?$ /listings [R=301,L]
+  RewriteRule ^property/luxury-corner-penthouse-b-17-multi-gardens-21/?$ /listings [R=301,L]
+  RewriteRule ^property/executive-family-house-h-r-luxury-suites-gulberg-22/?$ /property/hr-sukh-luxury-flats-nathia-gali [R=301,L]
+  RewriteRule ^property/commercial-retail-plaza-storefront-bano-qadeer-heights-23/?$ /listings [R=301,L]
+  RewriteRule ^property/contemporary-farmhouse-estate-gulberg-greens-residencia-24/?$ /listings [R=301,L]
+  RewriteRule ^property/lake-view-duplex-apartment-faisal-town-phase-ii-ft-ii-25/?$ /property/faisal-town-phase-2-installment-plot [R=301,L]
+  RewriteRule ^property/spanish-architecture-villa-topcity-1-top-residencia-26/?$ /property/corner-plot-topcity [R=301,L]
+  RewriteRule ^property/prime-commercial-office-suite-pha-flats-sector-i-12-27/?$ /property/pha-flats-i12-1-type-d-e-2bed [R=301,L]
+  RewriteRule ^property/scenic-hillside-residence-pha-flats-sector-i-16-28/?$ /property/pha-flats-i16-3-type-b-3bed [R=301,L]
+  RewriteRule ^property/turnkey-furnished-townhouse-pechs-society-29/?$ /property/pechs-islamabad-5-marla-plot [R=301,L]
+  RewriteRule ^property/modern-designer-villa-dha-phase-2-5-30/?$ /listings [R=301,L]
+  RewriteRule ^property/luxury-corner-penthouse-bahria-town-phase-7-8-31/?$ /listings [R=301,L]
+  RewriteRule ^property/executive-family-house-blue-world-city-32/?$ /listings [R=301,L]
+  RewriteRule ^property/commercial-retail-plaza-storefront-b-17-multi-gardens-33/?$ /listings [R=301,L]
+  RewriteRule ^property/contemporary-farmhouse-estate-h-r-luxury-suites-gulberg-34/?$ /property/hr-sukh-luxury-flats-nathia-gali [R=301,L]
+  RewriteRule ^property/lake-view-duplex-apartment-bano-qadeer-heights-35/?$ /listings [R=301,L]
+  RewriteRule ^property/spanish-architecture-villa-gulberg-greens-residencia-36/?$ /listings [R=301,L]
+  RewriteRule ^property/prime-commercial-office-suite-faisal-town-phase-ii-ft-ii-37/?$ /property/faisal-town-phase-2-installment-plot [R=301,L]
+  RewriteRule ^property/scenic-hillside-residence-topcity-1-top-residencia-38/?$ /property/corner-plot-topcity [R=301,L]
+  RewriteRule ^property/turnkey-furnished-townhouse-pha-flats-sector-i-12-39/?$ /property/pha-flats-i12-1-type-d-e-2bed [R=301,L]
+  RewriteRule ^property/modern-designer-villa-pha-flats-sector-i-16-40/?$ /property/pha-flats-i16-3-type-b-3bed [R=301,L]
 
   # ----------------------------------------------------
   # 3. Server-Side Protection and Routing for /admin Executive Suite
@@ -264,7 +264,7 @@ DirectorySlash Off
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 
   # Direct Googlebot and search crawlers to exclude client-state utility pages
-  <If "%{REQUEST_URI} =~ m#^/(compare|favorites|create-listing|search)(/.*)?$#">
+  <If "%{REQUEST_URI} =~ m#^/(favorites|create-listing|search)(/.*)?$#">
     Header set X-Robots-Tag "noindex, follow"
   </If>
 </IfModule>
