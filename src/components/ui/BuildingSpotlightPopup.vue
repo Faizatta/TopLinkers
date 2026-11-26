@@ -13,7 +13,7 @@
       <div v-if="adminStore.customBuilding?.enabled && showTeaser && !isHiddenRoute && !uiStore.isWhatsAppOpen">
         <!-- Mobile: Sleek Floating Circle Badge with Building Preview (Bottom-Left, Stacked) -->
         <div
-          class="sm:hidden fixed left-3 z-40 select-none transition-[bottom] duration-200 ease-out"
+          class="sm:hidden fixed left-3 z-40 select-none"
           :style="{ bottom: `${mobileBottom}px` }"
         >
           <div class="relative">
@@ -55,7 +55,7 @@
 
         <!-- Desktop / Tablet: Floating Architectural Glass Spotlight Card (Bottom-Left) -->
         <div
-          class="hidden sm:block fixed left-6 w-[390px] z-40 cursor-pointer group select-none transition-[bottom] duration-200 ease-out"
+          class="hidden sm:block fixed left-6 w-[390px] z-40 cursor-pointer group select-none"
           :style="{ bottom: `${desktopBottom}px` }"
           @click="goToBuildingPage"
         >
@@ -173,13 +173,11 @@ const isHarsukhActive = computed(() => {
 })
 
 const mobileBottom = computed(() => {
-  // If Harsukh is enabled, stack above it by 58px
-  return isHarsukhActive.value ? bottomOffset.value + 58 : bottomOffset.value
+  return isHarsukhActive.value ? 78 : 20
 })
 
 const desktopBottom = computed(() => {
-  // If Harsukh is enabled, stack above it by 115px
-  return isHarsukhActive.value ? bottomOffset.value + 115 : bottomOffset.value
+  return isHarsukhActive.value ? 139 : 24
 })
 
 const isHiddenRoute = computed(() => {

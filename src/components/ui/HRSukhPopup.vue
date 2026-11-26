@@ -13,8 +13,7 @@
       <div v-if="adminStore.spotlightPopup?.enabled && showTeaser && !isHiddenRoute && !uiStore.isWhatsAppOpen">
         <!-- Mobile: Compact Floating Circle Badge (Bottom-Left) -->
         <div
-          class="sm:hidden fixed left-3 z-40 select-none transition-[bottom] duration-200 ease-out"
-          :style="{ bottom: `${bottomOffset}px` }"
+          class="sm:hidden fixed left-3 bottom-5 z-40 select-none"
         >
           <div class="relative">
             <span class="absolute -inset-1 rounded-full bg-gradient-to-tr from-[#16B4E8] to-emerald-400 opacity-60 animate-ping"></span>
@@ -55,8 +54,7 @@
 
         <!-- Desktop / Tablet: Floating Alpine Curiosity Spotlight Card (Bottom-Left) -->
         <div
-          class="hidden sm:block fixed left-6 w-[390px] z-40 cursor-pointer group select-none transition-[bottom] duration-200 ease-out"
-          :style="{ bottom: `${bottomOffset}px` }"
+          class="hidden sm:block fixed left-6 bottom-6 w-[390px] z-40 cursor-pointer group select-none"
           @click="goToSpotlightPage"
         >
           <!-- Outer Animated Gradient Halo Frame -->

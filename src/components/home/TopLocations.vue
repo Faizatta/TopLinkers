@@ -23,7 +23,7 @@
               :srcset="responsiveSrcset(loc.image, [400, 600, 800])"
               sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 300px"
               :alt="loc.name"
-              loading="lazy"
+              loading="eager"
               decoding="async"
               width="400"
               height="256"
