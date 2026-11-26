@@ -72,37 +72,5 @@ export const phaSectors = {
     ],
     whatsappMsg: 'Hello TopLinkers, I want full details and ready possession availability for PHA Sector I-16/3 Apartments in Islamabad.',
     listingsLink: '/listings?search=I-16'
-  },
-  g11: {
-    key: 'g11',
-    name: 'Sector G-11/3 & G-11/4 PHA Apartments',
-    shortName: 'Sector G-11 Markaz',
-    title: 'PHA Prime Markaz Apartments — Sector G-11 Islamabad',
-    tag: 'Prime Central Capital Sector • High Rental Yield',
-    badge: 'Walking to Markaz & Courts',
-    badgeClass: 'bg-indigo-600 text-white',
-    location: 'Sector G-11/3 & G-11/4, Islamabad (Direct G-11 Markaz)',
-    demand: 'PKR 1.15 – 1.95 Cr',
-    image: '/images/hero-real-estate.webp',
-    gallery: [
-      { src: '/images/hero-real-estate.webp', caption: 'G-11 Established Residential Community' },
-      { src: '/images/pha/pha-i12-ext-3.webp', caption: 'Building Elevation & Parking Area' },
-      { src: '/images/pha/pha-i16-int-3.webp', caption: 'Interior Family Lounge' }
-    ],
-    videoUrl: '',
-    description: 'Established and prestigious PHA apartment residential complexes in Sector G-11/3 and G-11/4, Islamabad. Walking distance to Islamabad District Courts, Metro Bus Station, and G-11 Markaz commercial plazas. Generates consistent, high monthly rental returns (PKR 55,000 to PKR 85,000/mo) with full CDA ownership and fast transfer.',
-    types: [
-      { type: 'Type E (2-Bed Prime)', area: '~850 Sq.Ft', specs: '2 Bed • 2 Bath • Central Location', price: 'PKR 1.15 – 1.40 Cr' },
-      { type: 'Type C (3-Bed Corner)', area: '~1,350 Sq.Ft', specs: '3 Bed • 3 Bath • Dedicated Parking', price: 'PKR 1.45 – 1.95 Cr' }
-    ],
-    features: [
-      'Prime Islamabad Central Location in Sector G-11',
-      'Walking Distance to G-11 Markaz, Banks & Metro Station',
-      'High Rental Demand & Rapid Capital Appreciation',
-      'Peaceful Gated Community with Inhabited Environment',
-      'Instant CDA Biometric Title Transfer'
-    ],
-    whatsappMsg: 'Hello TopLinkers, I am inquiring about PHA Sector G-11 Apartments for investment/residence.',
-    listingsLink: '/listings?search=G-11'
   }
 }

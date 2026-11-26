@@ -312,7 +312,7 @@ const defaultOffers = [
     badgeClass: 'bg-gradient-to-r from-amber-400 to-amber-500 text-[#0F2A44]',
     code: 'TOP-PLOT10',
     headline: 'Prime Moqa Ka Plot (TopCity-1 & PECHS)',
-    desc: 'Special 10% Cash Rebate + Instant Possession & RDA/CDA Demarcation Transfer on Block B Plots!',
+    desc: 'Special 10% Cash Rebate + Instant Possession & RDA/CDA Demarcation Transfer on TopCity-1 Plots!',
     ctaLink: '/property/topcity1-10-marla-prime-plot',
     ctaLabel: 'View Plot'
   },

@@ -517,7 +517,7 @@
             </div>
             <div class="bg-white p-3 rounded-xl border border-blue-100 shadow-2xs text-center flex-shrink-0">
               <div class="text-[10px] font-black uppercase tracking-wider text-[#16B4E8]">TopLinkers Primary Sectors</div>
-              <div class="text-xs font-black text-[#0F2A44] mt-0.5">We Deal in I-12, I-16 &amp; G-11</div>
+              <div class="text-xs font-black text-[#0F2A44] mt-0.5">We Deal in I-12 &amp; I-16</div>
             </div>
           </div>
         </div>
@@ -530,7 +530,7 @@
                 <span class="bg-[#0F2A44] text-white text-[9px] font-black uppercase px-2.5 py-0.5 rounded">
                   100% Cash &bull; Ready
                 </span>
-                <span class="text-xs font-bold text-gray-400">Sector I-16/3, I-12/1 &amp; Kurri Road</span>
+                <span class="text-xs font-bold text-gray-400">Sector I-16/3 &amp; I-12/1</span>
               </div>
 
               <!-- Few Images Preview Row (Authentic On-Ground Photos) -->
@@ -552,7 +552,7 @@
 
               <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors">
                 <router-link to="/services/apartments-flats?open=i12" class="hover:text-[#16B4E8]">
-                  PHA Official Apartments
+                  PHA Apartments
                 </router-link>
               </h3>
               <p class="text-xs text-gray-500 mt-1 leading-relaxed">
@@ -584,7 +584,7 @@
                 Explore Details &amp; Photos &rarr;
               </button>
               <a
-                href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20PHA%20Flats%20(Sector%20I-16/3,%20I-12/1,%20Kurri%20Road)%20on%20Cash"
+                href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20PHA%20Flats%20(Sector%20I-16/3%20and%20I-12/1)%20on%20Cash"
                 target="_blank"
                 class="w-full sm:w-auto px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-[#0F2A44] font-bold text-xs uppercase rounded-xl text-center transition-all"
               >
@@ -967,47 +967,6 @@
                     </div>
                   </td>
                 </tr>
-
-                <!-- Row 3: Sector G-11/3 & G-11/4 -->
-                <tr class="hover:bg-slate-50/70 transition-colors group">
-                  <td class="py-5 px-6 align-top">
-                    <div class="font-bold text-[#0F2A44] text-sm group-hover:text-[#16B4E8] transition-colors flex items-center gap-1.5">
-                      <span>Sector G-11/3 &amp; G-11/4</span>
-                    </div>
-                    <span class="inline-block mt-1.5 px-2.5 py-0.5 rounded text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-100">
-                      Type C &amp; E &bull; Prime Markaz
-                    </span>
-                  </td>
-                  <td class="py-5 px-6 align-top">
-                    <div class="font-extrabold text-[#0F2A44] text-xs">
-                      Executive / Officers Residencia
-                    </div>
-                    <div class="text-[11px] text-gray-500 mt-1">
-                      BPS 20–22 &bull; Select Public Quota
-                    </div>
-                  </td>
-                  <td class="py-5 px-6 align-top">
-                    <p class="text-gray-700 text-xs leading-relaxed font-normal">
-                      Larger multi-bedroom apartments. Primarily targeted at senior officers (BPS 20–22) and select general public quotas.
-                    </p>
-                    <div class="mt-3 flex items-center gap-3">
-                      <router-link
-                        to="/listings?type=apartment"
-                        class="text-[11px] font-bold text-[#16B4E8] hover:underline flex items-center gap-1"
-                      >
-                        View Executive Apartments &rarr;
-                      </router-link>
-                      <span class="text-gray-300">&bull;</span>
-                      <a
-                        href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20G-11%20/%20Kurri%20Road%20Executive%20Officers%20Residencia"
-                        target="_blank"
-                        class="text-[11px] font-semibold text-emerald-600 hover:text-emerald-700"
-                      >
-                        Inquire on WhatsApp
-                      </a>
-                    </div>
-                  </td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -1049,24 +1008,6 @@
               <div class="pt-2 flex items-center justify-between text-xs border-t border-gray-200/50">
                 <router-link to="/listings?search=I-12" class="font-bold text-[#16B4E8]">View I-12 &rarr;</router-link>
                 <a href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20Sector%20I-12/1%20PHA%20Flats" target="_blank" class="font-bold text-emerald-600">WhatsApp &rarr;</a>
-              </div>
-            </div>
-
-            <!-- Row 3 Mobile -->
-            <div class="bg-gray-50/80 rounded-2xl p-4 border border-gray-100 space-y-2.5">
-              <div class="flex items-center justify-between">
-                <span class="font-extrabold text-sm text-[#0F2A44]">G-11 / Kurri Road</span>
-                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100/70 text-amber-800">Officers Residencia</span>
-              </div>
-              <div class="text-xs font-bold text-[#16B4E8]">
-                Executive / Officers Residencia
-              </div>
-              <p class="text-xs text-gray-600 leading-relaxed">
-                Larger multi-bedroom apartments. Primarily targeted at senior officers (BPS 20–22) and select general public quotas.
-              </p>
-              <div class="pt-2 flex items-center justify-between text-xs border-t border-gray-200/50">
-                <router-link to="/listings?type=apartment" class="font-bold text-[#16B4E8]">View Listings &rarr;</router-link>
-                <a href="https://wa.me/923349522157?text=Hello%20TopLinkers,%20I%20am%20interested%20in%20G-11%20/%20Kurri%20Road%20Officers%20Residencia" target="_blank" class="font-bold text-emerald-600">WhatsApp &rarr;</a>
               </div>
             </div>
           </div>

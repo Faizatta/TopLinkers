@@ -24,7 +24,7 @@ Welcome to **TopLinkers** — Islamabad and Rawalpindi's premier verified real e
 - **Highlights**: Ready possession executive apartments, dual elevators, backup power, 24/7 security, clean CDA registry.
 - **Link**: [Browse PHA Flats](https://toplinkersgroup.com/listings?category=pha-flats)
 
-### 3. Prime Moqa Ka Plot (TopCity-1, Block B)
+### 3. Prime Moqa Ka Plot (TopCity-1)
 - **Specs**: 10 Marla | Ready Possession | Clean CDA Allotment
 - **Price**: PKR 1.25 Crore
 - **Highlights**: 100% cash ready possession plot on ground. Immediate house construction permitted with underground utilities.

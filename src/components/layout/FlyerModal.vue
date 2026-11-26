@@ -115,7 +115,7 @@
 
               <div class="md:col-span-5 space-y-4 text-xs text-gray-700">
                 <div class="p-4 bg-emerald-50 rounded-lg border-l-4 border-[#6CC24A]">
-                  <h4 class="font-bold text-[#0F2A44] text-sm mb-1">Official PHA Government Flats</h4>
+                  <h4 class="font-bold text-[#0F2A44] text-sm mb-1">PHA Government Flats</h4>
                   <p class="text-gray-600">CDA developed sectors with high security and immediate utility access.</p>
                 </div>
 

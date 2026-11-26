@@ -399,14 +399,14 @@
                       class="block px-3 py-2 rounded-lg text-slate-700 hover:text-[#16B4E8] hover:bg-slate-50 font-medium transition-colors"
                       @click="mobileDrawerOpen = false"
                     >
-                      PHA Flats (I-12, I-16, G-11)
+                      PHA Flats (I-12 &amp; I-16)
                     </router-link>
                     <router-link
                       to="/services/apartments-flats?option=luxury"
                       class="block px-3 py-2 rounded-lg text-slate-700 hover:text-[#16B4E8] hover:bg-slate-50 font-medium transition-colors"
                       @click="mobileDrawerOpen = false"
                     >
-                      Luxury Flats (Banu Hafeez &amp; Suites)
+                      Luxury Flats (Faisal Heights &amp; Suites)
                     </router-link>
                     <router-link
                       to="/services/construction"

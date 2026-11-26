@@ -416,7 +416,7 @@
     <div v-show="activeTab === 'flats'" class="space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm">
         <div>
-          <h3 class="text-sm font-bold text-[#0F2A44]">PHA Official Apartments &amp; Cash Flats</h3>
+          <h3 class="text-sm font-bold text-[#0F2A44]">PHA Apartments &amp; Cash Flats</h3>
           <p class="text-[11px] text-slate-500">Edit existing PHA apartment types or add new apartment configurations.</p>
         </div>
         <button

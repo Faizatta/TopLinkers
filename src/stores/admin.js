@@ -537,7 +537,7 @@ export const useAdminStore = defineStore('admin', () => {
         videoUrl: ''
       }
     },
-    // PHA Flats (Official Islamabad Projects & Categories)
+    // PHA Flats (Islamabad Projects & Categories)
     phaFlats: {
       i16_typeE: {
         name: 'Sector I-16/3 — Type E (912 Sq Ft)',
@@ -556,12 +556,6 @@ export const useAdminStore = defineStore('admin', () => {
         rate: 'PKR 58 - 82 Lac',
         specs: '700–900+ sq. ft. (2-bed/2-bath) • 3,200 Units Nearing Completion',
         videoUrl: ''
-      },
-      kurri_g11: {
-        name: 'G-11 / Kurri Road — Executive Residencia',
-        rate: 'PKR 1.55 - 2.25 Cr',
-        specs: 'Multi-Bedroom • Senior Officers (BPS 20–22) & Select Public Quotas',
-        videoUrl: ''
       }
     },
     // Major Islamabad PHA Projects & Categories
@@ -579,13 +573,6 @@ export const useAdminStore = defineStore('admin', () => {
         specs: 'Roughly 700–900+ sq. ft. layouts (2-bed/2-bath and slightly larger configurations). Comprises 3,200 units nearing completion, with limited re-balloted units.',
         status: 'Nearing Completion / Limited Re-balloted',
         badge: '3,200 Units'
-      },
-      {
-        location: 'G-11 / Kurri Road',
-        categories: 'Executive / Officers Residencia',
-        specs: 'Larger multi-bedroom apartments. Primarily targeted at senior officers (BPS 20–22) and select general public quotas.',
-        status: 'Executive Quota & Resale',
-        badge: 'Officers Residencia'
       }
     ],
     // Solar Packages
@@ -677,7 +664,7 @@ export const useAdminStore = defineStore('admin', () => {
   const initialRates = {
     ...defaultRates,
     ...(storedRates || {}),
-    phaFlats: (storedRates?.phaFlats && Object.keys(storedRates.phaFlats).some(k => k.startsWith('i16_') || k.startsWith('i12_') || k.startsWith('kurri_')))
+    phaFlats: (storedRates?.phaFlats && Object.keys(storedRates.phaFlats).some(k => k.startsWith('i16_') || k.startsWith('i12_')))
       ? storedRates.phaFlats
       : defaultRates.phaFlats,
     phaProjectsTable: (storedRates?.phaProjectsTable && storedRates.phaProjectsTable.length > 0)
@@ -1427,15 +1414,6 @@ export const useAdminStore = defineStore('admin', () => {
       rating: 5
     },
     {
-      id: 'REV-110',
-      name: 'Mrs. Ayesha Haroon',
-      role: 'Government Officer (BPS-19)',
-      location: 'Sector G-11, Islamabad',
-      project: 'PHA G-11 Officers Residencia',
-      quote: 'TopLinkers facilitated the purchase of our 3-bed executive apartment in G-11 Officers Residencia. Legal clearance and allotment documentation were handled flawlessly.',
-      rating: 5
-    },
-    {
       id: 'REV-111',
       name: 'Raja Daniyal Kayani',
       role: 'Resident Owner — Sector I-16',
@@ -1469,15 +1447,6 @@ export const useAdminStore = defineStore('admin', () => {
       location: 'Faisalabad & Islamabad',
       project: 'Gulberg Greens Opal Square Suite',
       quote: 'Purchased a 2-bed corporate executive suite in Opal Square, Gulberg Greens. TopLinkers structured an easy installment schedule and ensured CDA compliance.',
-      rating: 5
-    },
-    {
-      id: 'REV-115',
-      name: 'Hajra Begum',
-      role: 'Retired School Principal',
-      location: 'Chaklala Scheme 3, Rawalpindi',
-      project: 'Kurri Road PHA Residencia',
-      quote: 'TopLinkers consultants are honest, polite, and extremely thorough with land registry details. My Kurri Road apartment transfer went without a single hitch.',
       rating: 5
     },
     {
@@ -1824,7 +1793,7 @@ export const useAdminStore = defineStore('admin', () => {
     {
       id: 'faq-flat-1',
       service: 'flats',
-      question: 'What is the transfer process for PHA flats in I-12, I-16, and G-11?',
+      question: 'What is the transfer process for PHA flats in I-12 and I-16?',
       answer: 'Transfer takes place directly at the Ministry of Housing & Works / PHA Foundation headquarters in Islamabad following biometric clearance, verification of original allotment letters, and NDC issuance.',
       order: 1,
       active: true
@@ -1832,8 +1801,8 @@ export const useAdminStore = defineStore('admin', () => {
     {
       id: 'faq-flat-2',
       service: 'flats',
-      question: 'Are PHA flats in Sector I-16 and G-11 ready for immediate living?',
-      answer: 'Yes, PHA Sector I-16/3 and Sector G-11 flats are fully constructed with active families residing, functional utilities, elevators, and dedicated parking.',
+      question: 'Are PHA flats in Sector I-16 ready for immediate living?',
+      answer: 'Yes, PHA Sector I-16/3 flats are fully constructed with active families residing, functional utilities, elevators, and dedicated parking.',
       order: 2,
       active: true
     },

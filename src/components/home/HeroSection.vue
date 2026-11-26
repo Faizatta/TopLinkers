@@ -47,7 +47,7 @@ const router = useRouter()
 const slides = [
   {
     id: 1,
-    title: 'Prime Moqa Ka Plot in TopCity-1 (Block B)',
+    title: 'Prime Moqa Ka Plot in TopCity-1',
     specs: '10 Marla • Immediate Physical Possession • RDA Approved',
     badge: 'Cash Moqa Ready',
     description: 'Direct on-ground demarcated plot adjoining New Islamabad Airport gate & Srinagar Highway. Immediate physical possession with swift registry transfer.',
@@ -57,7 +57,7 @@ const slides = [
   },
   {
     id: 2,
-    title: 'PHA Official Apartments (Sector I-12 & I-16)',
+    title: 'PHA Apartments (Sector I-12 & I-16)',
     specs: '2 & 3 Bed Apartments • Ready Possession & Installments',
     badge: 'Government Housing',
     description: 'Authorized government-allocated PHA flats in Islamabad with fast CDA transfer, dual elevators, 24/7 security, and verified allotment files.',

@@ -58,7 +58,7 @@ const staticRoutes = [
           Top Linkers is a premier real estate brokerage, PEC-licensed civil construction contractor, and Tier-1 solar net metering company headquartered at 2nd Floor, 7th Office, Al Hameed Plaza, G-11 Markaz, Islamabad. Spearheaded by Syed Usman Hammad, our multidisciplinary firm delivers institutional diligence, legal transparency, and end-to-end project execution for local homeowners, institutional investors, and overseas Pakistanis across the twin cities.
         </p>
         <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
-          Our real estate portfolio specializes in CDA and RDA layout-verified residential and commercial plots, including cash possession Moqa Ka Plots in TopCity-1, PECHS Islamabad near New Islamabad International Airport, and Faisal Town Phase 2. We also maintain verified official inventory for Pakistan Housing Authority (PHA) Sector I-12 and Sector I-16 executive apartments, as well as luxury vacation suites at Harsukh Residencies in Nathia Gali with guaranteed 20%+ annual tourist rental yield.
+          Our real estate portfolio specializes in CDA and RDA layout-verified residential and commercial plots, including cash possession Moqa Ka Plots in TopCity-1, PECHS Islamabad near New Islamabad International Airport, and Faisal Town Phase 2. We also maintain verified inventory for Pakistan Housing Authority (PHA) Sector I-12 and Sector I-16 executive apartments, as well as luxury vacation suites at Harsukh Residencies in Nathia Gali with guaranteed 20%+ annual tourist rental yield.
         </p>
       </section>
 
@@ -71,7 +71,7 @@ const staticRoutes = [
           </div>
           <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
             <h3 style="font-size:16px;font-weight:700;color:#0F2A44;margin-bottom:6px;"><a href="/services/apartments-flats" style="color:#0F2A44;text-decoration:none;">2. PHA Flats &amp; Holiday Suites</a></h3>
-            <p style="font-size:13px;color:#64748B;line-height:1.6;">Official allotment transfers for Sector I-12 &amp; I-16 apartments, plus luxury mountain view suites in Harsukh Nathia Gali.</p>
+            <p style="font-size:13px;color:#64748B;line-height:1.6;">Allotment transfers for Sector I-12 &amp; I-16 apartments, plus luxury mountain view suites in Harsukh Nathia Gali.</p>
           </div>
           <div style="padding:14px;border:1px solid #E2E8F0;border-radius:8px;">
             <h3 style="font-size:16px;font-weight:700;color:#0F2A44;margin-bottom:6px;"><a href="/services/construction" style="color:#0F2A44;text-decoration:none;">3. PEC-Licensed Construction</a></h3>
@@ -161,7 +161,7 @@ const staticRoutes = [
         </div>
         <div style="border:1px solid #E2E8F0;border-radius:10px;padding:20px;background:#fff;">
           <h3 style="font-size:18px;font-weight:800;color:#0F2A44;margin-bottom:8px;"><a href="/services/apartments-flats" style="color:#0F2A44;text-decoration:none;">3. PHA Government Flats &amp; Suites</a></h3>
-          <p style="font-size:14px;color:#475569;line-height:1.6;margin-bottom:12px;">Official allotment transfers for Sector I-12 and I-16 executive apartments, plus high-yield vacation suites at Harsukh Nathia Gali.</p>
+          <p style="font-size:14px;color:#475569;line-height:1.6;margin-bottom:12px;">Allotment transfers for Sector I-12 and I-16 executive apartments, plus high-yield vacation suites at Harsukh Nathia Gali.</p>
           <a href="/services/apartments-flats" style="color:#16B4E8;font-weight:700;font-size:13px;">Explore Apartment Options &rarr;</a>
         </div>
         <div style="border:1px solid #E2E8F0;border-radius:10px;padding:20px;background:#fff;">
@@ -259,7 +259,7 @@ const staticRoutes = [
       <section style="margin-bottom:28px;">
         <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Affordable Urban Living &amp; High-Yield Vacation Suites</h2>
         <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
-          From budget-friendly urban living to high-yield vacation real estate, Top Linkers is a recognized leader in apartment trading. We specialize in official allotment file transfers for Pakistan Housing Authority (PHA) Sector I-12 and Sector I-16 executive apartments. In addition, we are the exclusive marketing partner for Harsukh Residencies in Nathia Gali.
+          From budget-friendly urban living to high-yield vacation real estate, Top Linkers is a recognized leader in apartment trading. We specialize in allotment file transfers for Pakistan Housing Authority (PHA) Sector I-12 and Sector I-16 executive apartments. In addition, we are the exclusive marketing partner for Harsukh Residencies in Nathia Gali.
         </p>
         <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
           PHA apartments offer civil servants, overseas Pakistanis, and private investors government-backed apartment ownership in rapidly developing sectors with strong rental demand from university students, corporate employees, and families.
@@ -1205,7 +1205,7 @@ export function prerender() {
                       src="/images/hero-moqa-plot-m.webp"
                       srcset="/images/hero-moqa-plot-m.webp 768w, /images/hero-moqa-plot.webp 1440w"
                       sizes="(max-width: 639px) 100vw, 1440px"
-                      alt="Prime Moqa Ka Plot in TopCity-1 (Block B) - TopLinkers Islamabad"
+                      alt="Prime Moqa Ka Plot in TopCity-1 - TopLinkers Islamabad"
                       loading="eager"
                       fetchpriority="high"
                       decoding="async"
@@ -1230,7 +1230,7 @@ export function prerender() {
                       </span>
                     </div>
                     <h2 class="slide-title text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-black tracking-tight text-white leading-[1.12] mb-2 sm:mb-3 drop-shadow-md">
-                      Prime Moqa Ka Plot in TopCity-1 (Block B)
+                      Prime Moqa Ka Plot in TopCity-1
                     </h2>
                     <p class="slide-desc text-xs sm:text-sm md:text-base text-gray-200/90 font-normal leading-relaxed line-clamp-2 max-w-lg mb-4 sm:mb-5 drop-shadow">
                       Direct on-ground demarcated plot adjoining New Islamabad Airport gate &amp; Srinagar Highway. Immediate physical possession with swift registry transfer.
