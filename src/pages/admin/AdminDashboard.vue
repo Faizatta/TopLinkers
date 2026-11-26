@@ -451,10 +451,10 @@
           </div>
         </div>
 
-        <!-- Grid 2: Pricing, Phone & Route -->
+        <!-- Grid 2: Pricing, Cut Price Offer, Phone & Route -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
           <div>
-            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Price Range</label>
+            <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Current / New Price</label>
             <input v-model="customBuildingForm.price" type="text" placeholder="e.g. PKR 1.45 Cr – 3.20 Cr" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold focus:outline-none focus:border-amber-500" />
           </div>
 
@@ -466,6 +466,30 @@
           <div>
             <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Target Dedicated Page / Route</label>
             <input v-model="customBuildingForm.link" type="text" placeholder="/featured-building" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-medium focus:outline-none focus:border-amber-500" />
+          </div>
+        </div>
+
+        <!-- Offer Badge & Cut Previous Price -->
+        <div class="p-3.5 rounded-xl border border-rose-200/80 bg-rose-50/40 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="text-xs font-bold text-[#0F2A44]">Discount Offer Badge &amp; Cut Previous Price</span>
+              <p class="text-[11px] text-slate-500">Show an offer badge and strikethrough old price next to your new price.</p>
+            </div>
+            <label class="inline-flex items-center gap-2 cursor-pointer select-none text-xs font-bold text-[#0F2A44]">
+              <input v-model="customBuildingForm.offerEnabled" type="checkbox" class="rounded text-rose-600 w-4 h-4" />
+              <span>{{ customBuildingForm.offerEnabled ? 'Offer Badge Active' : 'Enable Offer Badge' }}</span>
+            </label>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Offer Badge Text</label>
+              <input v-model="customBuildingForm.offerBadge" type="text" placeholder="e.g. LIMITED OFFER or 15% OFF" class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white text-xs font-semibold" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Previous Price (Cut / Strikethrough)</label>
+              <input v-model="customBuildingForm.previousPrice" type="text" placeholder="e.g. PKR 1.95 Cr" class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white text-xs font-semibold" />
+            </div>
           </div>
         </div>
 
@@ -482,62 +506,61 @@
           </div>
         </div>
 
-        <!-- Direct Browser File Picker & Image Upload Area -->
-        <div class="p-4 rounded-xl border border-dashed border-amber-300 bg-amber-50/40 space-y-3">
-          <div class="flex items-center justify-between">
+        <!-- Easy Image Upload + Adjust / Crop -->
+        <AdminMediaUpload
+          v-model="customBuildingForm.image"
+          label="Building Cover Picture (Upload, Drag & Drop, Adjust/Crop, or Paste URL)"
+        />
+
+        <!-- Custom Sections Builder -->
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50/70 space-y-3">
+          <div class="flex items-center justify-between gap-2">
             <div>
-              <label class="block text-[11px] font-bold text-[#0F2A44] uppercase">
-                Building Picture (Upload Directly From Your Browser / Computer)
-              </label>
-              <p class="text-[10px] text-slate-500">
-                Select any photo from your computer (JPG, PNG, WebP). It will be saved directly to the server and shown on the popup &amp; details page.
-              </p>
+              <span class="text-xs font-bold text-[#0F2A44]">Custom Sections (Optional)</span>
+              <p class="text-[11px] text-slate-500">Add extra sections like Payment Plan, Floor Breakdown, or Special Notes.</p>
             </div>
             <button
               type="button"
-              @click="triggerBuildingImagePicker"
-              :disabled="isUploadingBuildingImage"
-              class="px-4 py-2 rounded-xl bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-2 cursor-pointer flex-shrink-0"
+              @click="addCustomBuildingSection"
+              class="px-3 py-1.5 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold"
             >
-              <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-              <span>{{ isUploadingBuildingImage ? 'Uploading Image...' : 'Browse Computer / Browser' }}</span>
+              + Add Section
             </button>
-            <input
-              type="file"
-              ref="buildingImageInput"
-              accept="image/*"
-              class="hidden"
-              @change="onBuildingImagePicked"
-            />
           </div>
 
-          <!-- Dual Mode: File Preview & Fallback Image URL Input -->
-          <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
-            <div class="md:col-span-8">
-              <label class="block text-[10px] font-semibold text-slate-500 uppercase mb-0.5">Or Paste Direct Image URL</label>
-              <input
-                v-model="customBuildingForm.image"
-                type="text"
-                placeholder="https://... or /uploads/blogs/..."
-                class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-amber-500 bg-white"
-              />
-            </div>
-
-            <div class="md:col-span-4 flex items-center gap-3">
-              <div class="relative w-14 h-14 rounded-lg overflow-hidden border border-amber-300 shadow-sm bg-slate-900 flex-shrink-0">
-                <img :src="customBuildingForm.image || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=200&q=80'" alt="Preview" class="w-full h-full object-cover" />
-              </div>
-              <div class="text-[11px] leading-tight">
-                <span class="font-bold text-[#0F2A44] block">Building Picture</span>
-                <span class="text-[10px] text-emerald-600 font-semibold block">✓ Ready for Popup</span>
+          <div v-if="(customBuildingForm.customSections || []).length > 0" class="space-y-2.5">
+            <div
+              v-for="(sec, sIdx) in customBuildingForm.customSections"
+              :key="sIdx"
+              class="p-3 rounded-lg bg-white border border-slate-200 space-y-2"
+            >
+              <div class="flex items-center gap-2">
+                <input
+                  v-model="sec.title"
+                  type="text"
+                  placeholder="Section Heading (e.g. Payment Schedule)"
+                  class="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs font-bold text-[#0F2A44]"
+                />
+                <input
+                  v-model="sec.badge"
+                  type="text"
+                  placeholder="Badge (optional)"
+                  class="w-36 px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs"
+                />
                 <button
                   type="button"
-                  @click="triggerBuildingImagePicker"
-                  class="text-[10px] text-amber-700 hover:underline font-bold mt-0.5 block"
+                  @click="customBuildingForm.customSections.splice(sIdx, 1)"
+                  class="px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-semibold"
                 >
-                  Change Photo &rarr;
+                  Remove
                 </button>
               </div>
+              <textarea
+                v-model="sec.content"
+                rows="2"
+                placeholder="Write section details..."
+                class="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs"
+              ></textarea>
             </div>
           </div>
         </div>
@@ -1079,6 +1102,7 @@ import { useAdminStore } from '../../stores/admin'
 import { usePropertiesStore } from '../../stores/properties'
 import { fetchAdminServicesDashboard } from '../../services/servicesCmsApi'
 import AdminStatCard from '../../components/admin/AdminStatCard.vue'
+import AdminMediaUpload from '../../components/admin/AdminMediaUpload.vue'
 import BuildingDetailsModal from '../../components/ui/BuildingDetailsModal.vue'
 import SiteVideoModal from '../../components/common/SiteVideoModal.vue'
 
@@ -1280,8 +1304,21 @@ const customBuildingForm = ref({
     '24/7 CCTV Surveillance & Backup Generator'
   ]),
   phone: adminStore.customBuilding?.phone || '0334-9522157',
-  whatsappMsg: adminStore.customBuilding?.whatsappMsg || 'Hello TopLinkers, I am inquiring about Faisal Heights Luxury Apartments in Sector F-18, Faisal Town.'
+  whatsappMsg: adminStore.customBuilding?.whatsappMsg || 'Hello TopLinkers, I am inquiring about Faisal Heights Luxury Apartments in Sector F-18, Faisal Town.',
+  offerEnabled: Boolean(adminStore.customBuilding?.offerEnabled),
+  offerBadge: adminStore.customBuilding?.offerBadge || '',
+  previousPrice: adminStore.customBuilding?.previousPrice || '',
+  customSections: Array.isArray(adminStore.customBuilding?.customSections)
+    ? adminStore.customBuilding.customSections.map(s => ({ ...s }))
+    : []
 })
+
+const addCustomBuildingSection = () => {
+  if (!Array.isArray(customBuildingForm.value.customSections)) {
+    customBuildingForm.value.customSections = []
+  }
+  customBuildingForm.value.customSections.push({ title: '', badge: '', content: '' })
+}
 
 watch(
   () => adminStore.customBuilding,
@@ -1289,6 +1326,10 @@ watch(
     if (val) {
       customBuildingForm.value = {
         ...val,
+        offerEnabled: Boolean(val.offerEnabled),
+        offerBadge: val.offerBadge || '',
+        previousPrice: val.previousPrice || '',
+        customSections: Array.isArray(val.customSections) ? val.customSections.map(s => ({ ...s })) : [],
         featuresText: formatFeaturesForForm(val.features)
       }
     }

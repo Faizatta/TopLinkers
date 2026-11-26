@@ -215,6 +215,23 @@
               </div>
             </div>
           </div>
+
+          <!-- Custom Admin Sections -->
+          <div v-if="Array.isArray(building.customSections) && building.customSections.length > 0" class="space-y-4 pt-2">
+            <div
+              v-for="(sec, secIdx) in building.customSections"
+              :key="secIdx"
+              class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1.5"
+            >
+              <div class="flex items-center gap-2 flex-wrap">
+                <h3 class="text-sm font-bold text-[#0F2A44]">{{ sec.title }}</h3>
+                <span v-if="sec.badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#16B4E8]/15 text-[#0F2A44]">
+                  {{ sec.badge }}
+                </span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed whitespace-pre-line">{{ sec.content }}</p>
+            </div>
+          </div>
         </div>
 
         <!-- Sidebar Features Checklist & Direct Contact -->

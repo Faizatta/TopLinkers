@@ -80,7 +80,12 @@
                 <span class="text-sm sm:text-base font-black text-emerald-600 block mt-0.5">{{ building.downPayment || '20% Down' }}</span>
               </div>
               <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-center">
-                <span class="text-[10px] text-slate-400 font-bold uppercase block">Price Range</span>
+                <span class="text-[10px] text-slate-400 font-bold uppercase block">
+                  {{ building.offerEnabled && building.offerBadge ? building.offerBadge : 'Price Range' }}
+                </span>
+                <span v-if="building.offerEnabled && building.previousPrice" class="text-[11px] font-medium text-slate-400 line-through block mt-0.5">
+                  {{ building.previousPrice }}
+                </span>
                 <span class="text-sm sm:text-base font-black text-[#0F2A44] block mt-0.5">{{ building.price || 'Market Rates' }}</span>
               </div>
               <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-center">
@@ -117,6 +122,23 @@
               <p v-if="building.structuralDisclaimer" class="text-[10px] text-slate-400 italic pt-2 leading-normal">
                 {{ building.structuralDisclaimer }}
               </p>
+            </div>
+
+            <!-- Custom Sections added from Admin -->
+            <div v-if="Array.isArray(building.customSections) && building.customSections.length > 0" class="space-y-3 pt-1">
+              <div
+                v-for="(sec, sIdx) in building.customSections"
+                :key="sIdx"
+                class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1"
+              >
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h4 class="font-extrabold text-[#0F2A44] text-xs uppercase tracking-wide">{{ sec.title }}</h4>
+                  <span v-if="sec.badge" class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-[#16B4E8]/15 text-[#0F2A44]">
+                    {{ sec.badge }}
+                  </span>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed whitespace-pre-line">{{ sec.content }}</p>
+              </div>
             </div>
           </div>
 

@@ -106,9 +106,18 @@
 
                 <!-- Text Copy -->
                 <div class="flex-1 min-w-0 pr-4">
-                  <div class="flex items-center gap-1.5 mb-1">
+                  <div class="flex flex-wrap items-center gap-1.5 mb-1">
+                    <span
+                      v-if="building.offerEnabled && building.offerBadge"
+                      class="text-[9px] font-black uppercase tracking-wider text-white bg-rose-600 px-1.5 py-0.5 rounded shadow-xs"
+                    >
+                      {{ building.offerBadge }}
+                    </span>
                     <span class="text-[9px] font-extrabold uppercase tracking-wider text-amber-300 bg-amber-500/15 border border-amber-400/30 px-1.5 py-0.5 rounded">
                       {{ building.badge || 'Featured Project' }}
+                    </span>
+                    <span v-if="building.offerEnabled && building.previousPrice" class="text-[9px] font-medium text-slate-400 line-through">
+                      {{ building.previousPrice }}
                     </span>
                     <span class="text-[9px] font-bold text-cyan-300">{{ building.price || 'Market Rates' }}</span>
                   </div>
