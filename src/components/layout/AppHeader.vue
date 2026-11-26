@@ -121,7 +121,7 @@
                 to="/services/apartments-flats?option=pha"
                 class="block px-3 py-1.5 rounded-lg text-xs font-bold text-[#0F2A44] hover:text-[#16B4E8] hover:bg-slate-50 transition-colors"
               >
-                PHA Flats (I-12, I-16, G-11)
+                PHA Flats (I-12 &amp; I-16)
               </router-link>
 
               <router-link
