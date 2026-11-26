@@ -94,10 +94,78 @@
       </div>
 
       <div v-if="loading" class="p-10 text-center text-xs text-slate-500">Loading services...</div>
-      <div v-else-if="paginatedServices.length === 0" class="p-10 text-center text-xs text-slate-500">
-        No services match your filters.
+      <AdminEmptyState
+        v-else-if="paginatedServices.length === 0"
+        title="No Services Found"
+        description="No services match your current search or filter. Clear filters or create a new service."
+      >
+        <template #action>
+          <button
+            type="button"
+            @click="searchQuery = ''; statusFilter = 'all'; categoryFilter = 'all'"
+            class="px-3.5 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700"
+          >
+            Reset Filters
+          </button>
+          <button
+            type="button"
+            @click="openCreateService"
+            class="px-3.5 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold"
+          >
+            + Add New Service
+          </button>
+        </template>
+      </AdminEmptyState>
+
+      <!-- Mobile Service Cards (md:hidden) -->
+      <div v-else class="md:hidden divide-y divide-slate-100">
+        <div v-for="(svc, idx) in paginatedServices" :key="`mob-${svc.id}`" class="p-4 space-y-3">
+          <div class="flex items-start gap-3">
+            <img
+              v-if="svc.main_image"
+              :src="svc.main_image"
+              :alt="svc.main_image_alt || svc.title"
+              class="w-14 h-12 rounded-lg object-cover border border-slate-200 flex-shrink-0 bg-slate-100"
+            />
+            <div class="min-w-0 flex-1">
+              <div class="font-bold text-[#0F2A44] text-sm truncate">{{ svc.title }}</div>
+              <div class="text-[11px] text-slate-400 truncate">/{{ svc.slug }}</div>
+              <div class="text-[11px] text-slate-500 mt-0.5">{{ svc.category_name || 'General' }} &bull; {{ (svc.features || []).length }} features</div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between gap-2">
+            <select
+              :value="svc.status"
+              @change="quickStatusChange(svc, $event.target.value)"
+              class="px-2.5 py-1.5 rounded-lg text-xs font-semibold border cursor-pointer"
+              :class="{
+                'bg-emerald-50 text-emerald-700 border-emerald-200': svc.status === 'published',
+                'bg-amber-50 text-amber-700 border-amber-200': svc.status === 'draft',
+                'bg-rose-50 text-rose-700 border-rose-200': svc.status === 'disabled'
+              }"
+            >
+              <option value="published">Published</option>
+              <option value="draft">Draft</option>
+              <option value="disabled">Disabled</option>
+            </select>
+
+            <div class="flex items-center gap-1">
+              <button type="button" @click="moveService(idx, -1)" :disabled="idx === 0" class="px-2 py-1 rounded border border-slate-200 text-xs disabled:opacity-30">&uarr;</button>
+              <button type="button" @click="moveService(idx, 1)" :disabled="idx === paginatedServices.length - 1" class="px-2 py-1 rounded border border-slate-200 text-xs disabled:opacity-30">&darr;</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-1.5">
+            <button type="button" @click="openEditService(svc)" class="py-2 rounded-lg bg-[#0F2A44] text-white text-xs font-semibold">Edit</button>
+            <button type="button" @click="handleDuplicate(svc)" class="py-2 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Duplicate</button>
+            <button type="button" @click="handleDeleteService(svc)" class="py-2 rounded-lg bg-rose-50 text-rose-700 text-xs font-semibold">Delete</button>
+          </div>
+        </div>
       </div>
-      <div v-else class="overflow-x-auto">
+
+      <!-- Desktop Table (hidden md:block) -->
+      <div v-if="!loading && paginatedServices.length > 0" class="hidden md:block overflow-x-auto">
         <table class="w-full text-left text-xs border-collapse">
           <thead>
             <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-black uppercase tracking-wider text-slate-500">
@@ -307,16 +375,22 @@
         </div>
 
         <!-- Modal Sub-Tabs -->
-        <div class="px-6 pt-3 pb-2 border-b border-slate-100 flex items-center gap-2 overflow-x-auto flex-shrink-0 bg-slate-50">
+        <div class="px-6 pt-3 pb-2.5 border-b border-slate-200 flex items-center gap-2 overflow-x-auto flex-shrink-0 bg-slate-50">
           <button
-            v-for="t in ['basic', 'media', 'features', 'cta', 'seo']"
-            :key="t"
+            v-for="(t, i) in [
+              { key: 'basic', label: '1. Basic Info' },
+              { key: 'media', label: '2. Photos & Gallery' },
+              { key: 'features', label: '3. Features & Specs' },
+              { key: 'cta', label: '4. Pricing & CTA' },
+              { key: 'seo', label: '5. Google SEO' }
+            ]"
+            :key="t.key"
             type="button"
-            @click="serviceModalTab = t"
-            :class="serviceModalTab === t ? 'bg-[#0F2A44] text-white' : 'bg-white text-slate-600 border border-slate-200'"
-            class="px-3 py-1.5 rounded-lg text-xs font-bold capitalize whitespace-nowrap"
+            @click="serviceModalTab = t.key"
+            :class="serviceModalTab === t.key ? 'bg-[#0F2A44] text-white shadow-2xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'"
+            class="px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors"
           >
-            {{ t === 'cta' ? 'CTA & Links' : t }}
+            {{ t.label }}
           </button>
         </div>
 
@@ -556,14 +630,22 @@
           </template>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between flex-shrink-0">
-          <button type="button" @click="serviceModalOpen = false" class="px-4 py-2 rounded-xl border border-slate-200 bg-white text-xs font-bold text-slate-600">Cancel</button>
-          <div class="flex items-center gap-2">
-            <button type="button" @click="saveService(true)" :disabled="saving" class="px-4 py-2 rounded-xl bg-[#16B4E8] text-[#0F2A44] text-xs font-black">
+        <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 flex-shrink-0">
+          <button type="button" @click="serviceModalOpen = false" class="px-4 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-xs font-semibold text-slate-600">Cancel</button>
+          <div class="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              @click="svcForm.status = 'draft'; saveService(false)"
+              :disabled="saving"
+              class="px-3.5 py-2 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 text-amber-800 text-xs font-semibold"
+            >
+              Save as Draft
+            </button>
+            <button type="button" @click="saveService(true)" :disabled="saving" class="px-4 py-2 rounded-lg bg-[#16B4E8] hover:bg-[#119ecf] text-[#0F2A44] text-xs font-bold">
               {{ saving ? 'Saving...' : 'Save & Preview' }}
             </button>
-            <button type="button" @click="saveService(false)" :disabled="saving" class="px-5 py-2 rounded-xl bg-[#0F2A44] text-white text-xs font-black">
-              {{ saving ? 'Saving...' : 'Save Service' }}
+            <button type="button" @click="svcForm.status = 'published'; saveService(false)" :disabled="saving" class="px-5 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold">
+              {{ saving ? 'Saving...' : 'Publish & Save' }}
             </button>
           </div>
         </div>
@@ -726,6 +808,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useAdminStore } from '../../stores/admin'
 import AdminPageHeader from '../../components/admin/AdminPageHeader.vue'
 import AdminStatCard from '../../components/admin/AdminStatCard.vue'
+import AdminEmptyState from '../../components/admin/AdminEmptyState.vue'
 import {
   fetchAdminServicesDashboard,
   createService,
