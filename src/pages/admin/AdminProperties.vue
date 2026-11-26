@@ -241,7 +241,7 @@
                 <option value="Faisal Town (FT-I & FT-II)">Faisal Town (FT-I & FT-II)</option>
                 <option value="Blue World City">Blue World City</option>
                 <option value="PHA Flats (I-12 / I-16)">PHA Flats (Sector I-12 / I-16)</option>
-                <option value="Banu Hafeez Residences">Banu Hafeez Residences</option>
+                <option value="Faisal Heights (F-18)">Faisal Heights (Faisal Town, F-18)</option>
                 <option value="Harsukh (Nathia Gali)">Harsukh (Nathia Gali)</option>
                 <option value="Gulberg Greens">Gulberg Greens, Islamabad</option>
                 <option value="DHA Islamabad">DHA Islamabad</option>
@@ -841,7 +841,7 @@ const societyCoords = {
   'Faisal Town (FT-I & FT-II)': [33.5681, 72.8615],
   'Blue World City': [33.4312, 72.8914],
   'PHA Flats (I-12 / I-16)': [33.6215, 72.9718],
-  'Banu Hafeez Residences': [33.6685, 72.9965],
+  'Faisal Heights (F-18)': [33.5681, 72.8615],
   'Harsukh (Nathia Gali)': [34.0163, 73.3928],
   'Gulberg Greens': [33.5986, 73.1539],
   'DHA Islamabad': [33.5245, 73.0956],
@@ -922,7 +922,7 @@ const categoryMap = {
     'PHA D-Type (870 Sq Ft)',
     'PHA B-Type (1,496 Sq Ft)',
     'PHA Executive Type',
-    'Banu Hafeez Apartment',
+    'Faisal Heights Apartment',
     'Harsukh Hillside Suite',
     'Hillside Suites',
     'Luxury Apartment'

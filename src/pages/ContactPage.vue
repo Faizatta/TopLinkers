@@ -182,7 +182,7 @@
                       class="w-full text-xs sm:text-sm p-3 rounded-xl border border-gray-200 bg-gray-50/50 focus:bg-white focus:outline-none focus:border-[#16B4E8] appearance-none pr-8 cursor-pointer font-bold text-[#0F2A44]"
                     >
                       <option value="Plots & Land">Plots &amp; Land (Moqa Ka Plot / Installments)</option>
-                      <option value="Flats & Apartments">Flats (PHA I-12 &amp; I-16, Banu Hafeez)</option>
+                      <option value="Flats & Apartments">Flats (PHA I-12 &amp; I-16, Faisal Heights)</option>
                       <option value="Turnkey Construction">Turnkey Construction (Gray Structure &amp; A+)</option>
                       <option value="Solar Net Metering">Solar Net Metering (10kW, 20kW, 50kW)</option>
                       <option value="Harsukh Nathia Gali">Harsukh Luxury Flats (Nathia Gali)</option>

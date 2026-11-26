@@ -515,7 +515,7 @@
               Flats &amp; Apartments — PHA &amp; Luxury Suites
             </h2>
             <p class="text-xs sm:text-sm text-gray-500 mt-1 max-w-2xl leading-relaxed">
-              Authorized PHA government flats in Sector I-12 &amp; Sector I-16, alongside premier luxury apartment projects: Banu Hafeez (TopCity-1), Faisal Heights (Zedem) &amp; Harsukh Residencies.
+              Authorized PHA government flats in Sector I-12 &amp; Sector I-16, alongside premier luxury apartment projects: Faisal Heights (Zedem, F-18) &amp; Harsukh Residencies.
             </p>
           </div>
           <div class="flex items-center gap-2 flex-shrink-0 w-full sm:w-auto">
@@ -2289,38 +2289,6 @@ const installmentProjects = [
         installmentRate: 'PKR 58,000 / month (40 Months)',
         halfYearly: 'PKR 290,000 (8 Half-Yearly)',
         possession: 'PKR 580,000'
-      }
-    ]
-  },
-  {
-    id: 'banu-hafeez',
-    name: 'Banu Hafeez Luxury Apartments (TopCity-1)',
-    tabName: 'Banu Hafeez',
-    duration: '3-Year Flexible Apartment Installment Plan (15% Booking)',
-    sizes: [
-      {
-        label: '1-Bed (Type-C · 546 Sq Ft)',
-        totalPrice: 'PKR 9,828,000',
-        downPayment: 'PKR 1,474,200 (15% Booking)',
-        installmentRate: 'PKR 49,140 / month (36 Months)',
-        halfYearly: 'PKR 491,400 (6 Semi-Annual)',
-        possession: 'PKR 1,474,200'
-      },
-      {
-        label: '2-Bed (Type-B · 1,089 Sq Ft)',
-        totalPrice: 'PKR 19,602,000',
-        downPayment: 'PKR 2,940,300 (15% Booking)',
-        installmentRate: 'PKR 98,010 / month (36 Months)',
-        halfYearly: 'PKR 980,100 (6 Semi-Annual)',
-        possession: 'PKR 2,940,300'
-      },
-      {
-        label: '3-Bed (Type-A · 1,881 Sq Ft)',
-        totalPrice: 'PKR 33,858,000',
-        downPayment: 'PKR 5,078,700 (15% Booking)',
-        installmentRate: 'PKR 169,290 / month (36 Months)',
-        halfYearly: 'PKR 1,692,900 (6 Semi-Annual)',
-        possession: 'PKR 5,078,700'
       }
     ]
   },

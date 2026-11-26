@@ -432,7 +432,7 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
           <div>
             <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-1">Building / Plaza Name *</label>
-            <input v-model="customBuildingForm.name" type="text" required placeholder="e.g. Banu Hafeez Residences" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-bold text-[#0F2A44] focus:outline-none focus:border-amber-500" />
+            <input v-model="customBuildingForm.name" type="text" required placeholder="e.g. Faisal Heights Luxury Apartments" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-bold text-[#0F2A44] focus:outline-none focus:border-amber-500" />
           </div>
 
           <div>
@@ -1198,16 +1198,16 @@ const spotlightPresets = [
     link: '/services/residential-plots#installments'
   },
   {
-    key: 'banu_hafeez',
-    name: 'Banu Hafeez Suites',
-    badgeText: '18% Yield',
-    tag: 'Banu Hafeez | TopCity-1',
-    badge: '18% Expected Yield',
-    downPayment: '20% Down',
-    planText: 'Cash & Installment',
-    title: 'Executive Luxury Suites & Penthouses',
-    subtitle: 'Modern architecture with dedicated parking & fast elevator ->',
-    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=300&q=80',
+    key: 'faisal_heights',
+    name: 'Faisal Heights Suites',
+    badgeText: 'F-18 Luxury',
+    tag: 'Faisal Heights | Sector F-18',
+    badge: 'Zedem International',
+    downPayment: 'Flexible Plan',
+    planText: 'Studio to 4-Bed Lofts',
+    title: 'Executive Luxury Suites & Lofts',
+    subtitle: 'Modern architecture with dedicated parking, gym, pool & rooftop garden ->',
+    image: '/images/faisal-heights/fh-main.webp',
     link: '/services/apartments-flats'
   }
 ]
@@ -1256,33 +1256,31 @@ const formatFeaturesForForm = (feats) => {
 }
 
 const customBuildingForm = ref({
-  enabled: adminStore.customBuilding?.enabled ?? true,
-  name: adminStore.customBuilding?.name || 'Banu Hafeez Luxury Apartments',
-  tag: adminStore.customBuilding?.tag || 'TopCity-1 | 17-Storey Landmark | RDA Approved',
-  badge: adminStore.customBuilding?.badge || '15% Down • 3-Yr Plan',
-  downPayment: adminStore.customBuilding?.downPayment || '15% Booking',
-  price: adminStore.customBuilding?.price || 'PKR 98.3 Lac – 3.38 Cr',
-  location: adminStore.customBuilding?.location || 'Top City-1, Islamabad (15 min from Airport)',
-  title: adminStore.customBuilding?.title || '17-Storey Luxury Residences on 3-Year Plan',
-  subtitle: adminStore.customBuilding?.subtitle || 'Approved 17-storey landmark by Waheed Group of Companies in TopCity-1, featuring swimming pool, modern gym, 2 basements parking for 281 cars, and 2-year possession.',
-  description: adminStore.customBuilding?.description || 'Banu Hafeez Luxury Apartments is an approved 17-storey landmark residential tower developed by Waheed Group of Companies (Chairman Mr. Abdul Waheed Sheikh, CEO Mr. Faad Waheed) in Top City-1, Islamabad. Perfectly connected via M-1/M-2 Motorways and Srinagar Highway, just 15 minutes from Islamabad Airport. Offering high-end 1-Bedroom (546 sq.ft.), 2-Bedroom (1,089–1,215 sq.ft.), and 3-Bedroom (1,881–2,010 sq.ft.) residences on a 3-year flexible installment plan with 15% booking and possession in 2 years. Features an exclusive resident swimming pool, modern gym, 2 basements parking (281 cars, 41 servant quarters), high-speed elevators, and 24/7 RFID security.',
-  image: adminStore.customBuilding?.image || 'https://banuhafeez.com/assets/building.jpg',
+  enabled: adminStore.customBuilding?.enabled ?? false,
+  name: adminStore.customBuilding?.name || 'Faisal Heights Luxury Apartments',
+  tag: adminStore.customBuilding?.tag || 'Sector F-18, Faisal Town | Zedem International',
+  badge: adminStore.customBuilding?.badge || 'Studio to 4-Bed Lofts',
+  downPayment: adminStore.customBuilding?.downPayment || 'Flexible Plan',
+  price: adminStore.customBuilding?.price || 'Market & Installment Rates',
+  location: adminStore.customBuilding?.location || 'Sector F-18, Faisal Town, Islamabad',
+  title: adminStore.customBuilding?.title || 'Faisal Heights — Luxury Residential Living in F-18',
+  subtitle: adminStore.customBuilding?.subtitle || 'Premier luxury residential tower project by Zedem International / Faisal Town in Sector F-18, Islamabad.',
+  description: adminStore.customBuilding?.description || 'Faisal Heights offers modern apartment living in Sector F-18, Faisal Town, Islamabad, near Srinagar Highway and M-1/M-2 Motorways. Developed by Zedem International, featuring studio, 1-bed, 2-bed, 3-bed, and 4-bed lofts with private pool, gym, café, and rooftop garden.',
+  image: adminStore.customBuilding?.image || '/images/faisal-heights/fh-main.webp',
   link: adminStore.customBuilding?.link || '/featured-building',
-  showVideo: adminStore.customBuilding?.showVideo !== false,
+  showVideo: adminStore.customBuilding?.showVideo === true,
   videoFileName: adminStore.customBuilding?.videoFileName || '',
-  videoUrl: adminStore.customBuilding?.videoUrl || 'https://banuhafeez.com/assets/bh-video.mp4',
+  videoUrl: adminStore.customBuilding?.videoUrl || '',
   featuresText: formatFeaturesForForm(adminStore.customBuilding?.features || [
-    'RDA, CAA, Rescue & Building Control Department Approved',
-    '17-Storey Landmark Tower by Waheed Group of Companies',
+    'NOC Approved by Zedem International / Faisal Town',
+    'Sector F-18 Prime Location near Srinagar Highway',
     'Exclusive Residents Swimming Pool & Modern Equipped Gym',
-    'Two Basements Parking for 281 Cars & 41 Servant Quarters',
+    'Dedicated Basement Parking Floors',
     'High-Speed Elevators Serving All Residential Floors',
-    '24/7 CCTV Surveillance, RFID Entry & Backup Generator',
-    'In-House Daily Essentials Grocery Mart & Concierge',
-    'Possession Planned Within 2 Years of Booking'
+    '24/7 CCTV Surveillance & Backup Generator'
   ]),
   phone: adminStore.customBuilding?.phone || '0334-9522157',
-  whatsappMsg: adminStore.customBuilding?.whatsappMsg || 'Hello TopLinkers, I am inquiring about Banu Hafeez Luxury Apartments in Top City-1 (1-Bed, 2-Bed, or 3-Bed unit).'
+  whatsappMsg: adminStore.customBuilding?.whatsappMsg || 'Hello TopLinkers, I am inquiring about Faisal Heights Luxury Apartments in Sector F-18, Faisal Town.'
 })
 
 watch(
@@ -1300,20 +1298,20 @@ watch(
 
 const buildingPresets = [
   {
-    key: 'banu_hafeez',
-    name: 'Banu Hafeez Residences',
-    tag: 'Block B, TopCity-1 | Waheed Group | RDA Approved',
-    badge: '15% Down • 3-Yr Plan',
-    downPayment: '15% Booking',
-    price: 'PKR 98.3 Lac – 3.38 Cr',
-    location: 'Block B, TopCity-1, Islamabad (near Srinagar Highway)',
-    title: 'Banu Hafeez Residences — TopCity-1 Modern Apartments',
-    subtitle: 'Modern apartment living in Block B, TopCity-1, Islamabad, near Srinagar Highway. Developed by Waheed Group of Companies.',
-    description: 'Banu Hafeez Residences offers modern apartment living in Block B, TopCity-1, Islamabad, near Srinagar Highway. Developed by Waheed Group of Companies, this residential project features thoughtfully designed 1-bed, 2-bed and 3-bed apartments, with spacious layouts, contemporary kitchens, balconies and terraces. Enjoy convenient access to Islamabad International Airport, major motorways and key destinations across the twin cities.',
-    image: '/images/banu-hafeez/bh-hero.webp',
+    key: 'faisal_heights',
+    name: 'Faisal Heights Luxury Apartments',
+    tag: 'Sector F-18, Faisal Town | Zedem International',
+    badge: 'Studio to 4-Bed Lofts',
+    downPayment: 'Flexible Plan',
+    price: 'Market & Installment Rates',
+    location: 'Sector F-18, Faisal Town, Islamabad',
+    title: 'Faisal Heights — Luxury Residential Living in F-18',
+    subtitle: 'Modern luxury residential tower by Zedem International / Faisal Town in Sector F-18, Islamabad.',
+    description: 'Faisal Heights offers modern apartment living in Sector F-18, Faisal Town, Islamabad, near Srinagar Highway. Developed by Zedem International, this residential project features studio, 1-bed, 2-bed, 3-bed and 4-bed lofts with contemporary layouts, private pool, gym, café, and rooftop garden.',
+    image: '/images/faisal-heights/fh-main.webp',
     link: '/featured-building',
-    videoUrl: 'https://banuhafeez.com/assets/bh-video.mp4',
-    features: 'Prime Location in Block B, TopCity-1, Islamabad, Modern Earthquake-Resistant Structural Design*, Two Dedicated Basement Parking Floors, Modern Passenger & Service Elevators, 24/7 CCTV Surveillance & Security Arrangements, Backup Power Generator for Added Convenience'
+    videoUrl: '',
+    features: 'Prime Location in Sector F-18, Faisal Town, Islamabad, Modern Earthquake-Resistant Structural Design*, Dedicated Basement Parking Floors, Modern Passenger & Service Elevators, 24/7 CCTV Surveillance & Security Arrangements, Backup Power Generator'
   },
   {
     key: 'airport_plaza',

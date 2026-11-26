@@ -1437,8 +1437,8 @@ export const useAdminStore = defineStore('admin', () => {
       name: 'Major (R) Waqas Abbasi',
       role: 'Overseas Investor — Riyadh KSA',
       location: 'Riyadh, Saudi Arabia',
-      project: 'Banu Hafeez Complex 3-Bed',
-      quote: 'Investing from Saudi Arabia was worry-free thanks to TopLinkers. They provided 4K walk-through videos and secured our 3-bed corner flat in Banu Hafeez Complex at developer price.',
+      project: 'Faisal Heights 3-Bed Loft',
+      quote: 'Investing from Saudi Arabia was worry-free thanks to TopLinkers. They provided 4K walk-through videos and secured our 3-bed corner flat in Faisal Heights at developer price.',
       rating: 5
     },
     {
@@ -1518,8 +1518,8 @@ export const useAdminStore = defineStore('admin', () => {
       name: 'Mrs. Samina Parveen',
       role: 'Overseas Pakistani — Toronto Canada',
       location: 'Toronto, Canada',
-      project: 'Banu Hafeez 2-Bed Master Suite',
-      quote: 'TopLinkers verified the land title, handled the power of attorney paperwork, and secured our apartment in Banu Hafeez Complex seamlessly while I stayed in Canada.',
+      project: 'Faisal Heights 2-Bed Master Suite',
+      quote: 'TopLinkers verified the land title, handled the power of attorney paperwork, and secured our apartment in Faisal Heights seamlessly while I stayed in Canada.',
       rating: 5
     },
     {
@@ -1688,43 +1688,43 @@ export const useAdminStore = defineStore('admin', () => {
 
   // 7.15 Custom Building / Project Spotlight (Separate 2nd Popup & Details Modal)
   const defaultCustomBuilding = {
-    enabled: true,
-    name: 'Banu Hafeez Residences',
-    tag: 'Block B, TopCity-1 | Waheed Group | RDA Approved',
-    badge: '15% Down • 3-Yr Plan',
-    downPayment: '15% Booking',
-    price: 'PKR 98.3 Lac – 3.38 Cr',
-    location: 'Block B, TopCity-1, Islamabad (near Srinagar Highway)',
-    title: 'Banu Hafeez Residences — TopCity-1 Modern Apartments',
-    subtitle: 'Banu Hafeez Residences offers modern apartment living in Block B, TopCity-1, Islamabad, near Srinagar Highway. Developed by Waheed Group of Companies.',
-    description: 'Banu Hafeez Residences offers modern apartment living in Block B, TopCity-1, Islamabad, near Srinagar Highway. Developed by Waheed Group of Companies, this residential project features thoughtfully designed 1-bed, 2-bed and 3-bed apartments, with spacious layouts, contemporary kitchens, balconies and terraces. Enjoy convenient access to Islamabad International Airport, major motorways and key destinations across the twin cities.',
+    enabled: false,
+    name: 'Faisal Heights Luxury Apartments',
+    tag: 'Sector F-18, Faisal Town | Zedem International',
+    badge: 'Studio to 4-Bed Lofts',
+    downPayment: 'Flexible Plan',
+    price: 'Market & Installment Rates',
+    location: 'Sector F-18, Faisal Town, Islamabad (near Srinagar Highway)',
+    title: 'Faisal Heights — Luxury Residential Living in F-18',
+    subtitle: 'Faisal Heights is a premier luxury residential tower project by Zedem International / Faisal Town in Sector F-18, Islamabad.',
+    description: 'Faisal Heights offers modern apartment living in Sector F-18, Faisal Town, Islamabad, near Srinagar Highway and M-1/M-2 Motorways. Developed by Zedem International, this residential project features studio, 1-bed, 2-bed, 3-bed, and 4-bed loft apartments with contemporary layouts, balconies, private pool, gym, café, and dedicated parking.',
     structuralDisclaimer: '*Subject to confirmation through approved structural specifications.',
-    image: '/images/banu-hafeez/bh-hero.webp',
+    image: '/images/faisal-heights/fh-main.webp',
     link: '/featured-building',
-    showVideo: true,
-    videoUrl: 'https://banuhafeez.com/assets/bh-video.mp4',
+    showVideo: false,
+    videoUrl: '',
     gallery: [
-      '/images/banu-hafeez/bh-hero.webp',
-      '/images/banu-hafeez/bh-tower.webp',
-      '/images/banu-hafeez/bh-interior.webp',
-      '/images/banu-hafeez/bh-living.webp',
-      '/images/banu-hafeez/bh-plan.webp'
+      '/images/faisal-heights/fh-main.webp',
+      '/images/faisal-heights/fh-building.webp',
+      '/images/faisal-heights/fh-1bed.webp',
+      '/images/faisal-heights/fh-2bed.webp',
+      '/images/faisal-heights/fh-3bed.webp'
     ],
     specs: [
-      { label: 'Units', value: '1, 2 & 3 Bed' },
-      { label: 'Down Payment', value: '15% Booking' },
-      { label: 'Installments', value: '3 Years' },
-      { label: 'Possession', value: '2 Years' }
+      { label: 'Units', value: 'Studio to 4-Bed' },
+      { label: 'Location', value: 'Sector F-18' },
+      { label: 'Developer', value: 'Zedem Int.' },
+      { label: 'Status', value: 'NOC Approved' }
     ],
     features: [
-      'Prime Location in Block B, TopCity-1, Islamabad',
+      'Prime Location in Sector F-18, Faisal Town, Islamabad',
       'Modern Earthquake-Resistant Structural Design*',
-      'Two Dedicated Basement Parking Floors',
+      'Dedicated Basement Parking Floors',
       'Modern Passenger & Service Elevators',
       '24/7 CCTV Surveillance & Security Arrangements',
       'Backup Power Generator for Added Convenience'
     ],
-    whatsappMsg: 'Hello TopLinkers, I am inquiring about Banu Hafeez Residences in Block B, TopCity-1 (1-Bed, 2-Bed, or 3-Bed unit).',
+    whatsappMsg: 'Hello TopLinkers, I am inquiring about Faisal Heights Luxury Apartments in Sector F-18, Faisal Town.',
     phone: '0334-9522157'
   }
 

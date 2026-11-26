@@ -507,14 +507,14 @@ const staticRoutes = [
   },
   {
     path: '/featured-building',
-    title: 'Banu Hafeez Residences TopCity-1 | Modern Apartments Islamabad',
-    description: 'Banu Hafeez Residences offers modern 1, 2 & 3-bed apartment living in Block B, TopCity-1, Islamabad, near Srinagar Highway. Developed by Waheed Group of Companies.',
-    h1: 'Banu Hafeez Residences — Modern Apartment Living in Block B, TopCity-1',
+    title: 'Faisal Heights Luxury Apartments | Sector F-18 Islamabad',
+    description: 'Faisal Heights is a premier luxury residential tower project by Zedem International / Faisal Town in Sector F-18, Islamabad.',
+    h1: 'Faisal Heights — Luxury Residential Living in Sector F-18, Islamabad',
     content: `
       <section style="margin-bottom:28px;">
         <h2 style="font-size:22px;font-weight:800;color:#0F2A44;margin-bottom:14px;">Comprehensive Project Description</h2>
         <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
-          Banu Hafeez Residences offers modern apartment living in Block B, TopCity-1, Islamabad, near Srinagar Highway. Developed by Waheed Group of Companies, this residential project features thoughtfully designed 1-bed, 2-bed and 3-bed apartments, with spacious layouts, contemporary kitchens, balconies and terraces. Enjoy convenient access to Islamabad International Airport, major motorways and key destinations across the twin cities.
+          Faisal Heights offers modern luxury apartment living in Sector F-18, Faisal Town, Islamabad, near Srinagar Highway and M-1/M-2 Motorways. Developed by Zedem International, this residential project features studio, 1-bed, 2-bed, 3-bed, and 4-bed loft apartments with contemporary layouts and dedicated parking.
         </p>
         <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
           TopCity-1 represents one of the most strategically positioned master-planned developments in the federal capital region. Situated at the confluence of Srinagar Highway, M-1 Motorway, and M-2 Motorway, residents benefit from direct access to the operational Metro Bus line, reducing commute times to Islamabad\'s central business districts to under 20 minutes.

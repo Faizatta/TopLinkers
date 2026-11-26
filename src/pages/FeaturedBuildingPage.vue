@@ -293,12 +293,12 @@ const uiStore = useUiStore()
 
 const activeImageIndex = ref(0)
 
-const BANU_HAFEEZ_GALLERY = [
-  '/images/banu-hafeez/bh-hero.webp',
-  '/images/banu-hafeez/bh-tower.webp',
-  '/images/banu-hafeez/bh-interior.webp',
-  '/images/banu-hafeez/bh-living.webp',
-  '/images/banu-hafeez/bh-plan.webp'
+const DEFAULT_BUILDING_GALLERY = [
+  '/images/faisal-heights/fh-main.webp',
+  '/images/faisal-heights/fh-building.webp',
+  '/images/faisal-heights/fh-1bed.webp',
+  '/images/faisal-heights/fh-2bed.webp',
+  '/images/faisal-heights/fh-3bed.webp'
 ]
 
 const building = computed(() => {
@@ -307,18 +307,18 @@ const building = computed(() => {
 
 const allImages = computed(() => {
   const list = []
-  if (building.value?.image) list.push(building.value.image)
+  if (building.value?.image && !building.value.image.includes('banu-hafeez')) list.push(building.value.image)
   if (Array.isArray(building.value?.gallery)) {
     building.value.gallery.forEach(img => {
-      if (img && !list.includes(img)) list.push(img)
+      if (img && !img.includes('banu-hafeez') && !list.includes(img)) list.push(img)
     })
   }
   const cleanList = list.filter(img => typeof img === 'string' && !img.includes('unsplash.com'))
-  return cleanList.length > 0 ? cleanList : BANU_HAFEEZ_GALLERY
+  return cleanList.length > 0 ? cleanList : DEFAULT_BUILDING_GALLERY
 })
 
 const currentImage = computed(() => {
-  return allImages.value[activeImageIndex.value] || allImages.value[0] || BANU_HAFEEZ_GALLERY[0]
+  return allImages.value[activeImageIndex.value] || allImages.value[0] || DEFAULT_BUILDING_GALLERY[0]
 })
 
 const prevImage = () => {
@@ -369,7 +369,7 @@ onMounted(() => {
   updateSEOMeta({
     title: `${building.value.title || building.value.name} | TopLinkers Featured Project`,
     description: building.value.subtitle || building.value.description,
-    keywords: 'building project Islamabad, luxury apartments, commercial plaza, Banu Hafeez, TopLinkers'
+    keywords: 'building project Islamabad, luxury apartments, commercial plaza, Faisal Heights, TopLinkers'
   })
 })
 </script>

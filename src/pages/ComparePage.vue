@@ -835,7 +835,7 @@
             <input
               v-model="selectorSearch"
               type="text"
-              placeholder="Search by title, sector, society (e.g. PHA, I-12, TopCity, Harsukh, Banu Hafeez)..."
+              placeholder="Search by title, sector, society (e.g. PHA, I-12, TopCity, Harsukh, Faisal Heights)..."
               class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-[#16B4E8] bg-slate-50 focus:bg-white transition-colors"
             />
             <button
@@ -1286,7 +1286,7 @@ const loadPreset = (mode) => {
     targetSlugs = ['corner-plot-topcity', 'faisal-town-phase-2-installment-plot']
   } else if (mode === 'harsukh') {
     // 1-on-1 Head-to-Head: Harsukh Residencies Nathia Gali vs PHA Suites
-    targetIds = ['tl-hrsukh', 'tl-banu-hafeez', 2, 4]
+    targetIds = ['tl-hrsukh', 2, 4]
     targetSlugs = ['hr-sukh-luxury-flats-nathia-gali', 'pha-flats-i12-1-type-d-e-2bed']
   } else if (mode === 'villas') {
     // 1-on-1 Head-to-Head: TopCity-1 Plot vs PECHS Plot

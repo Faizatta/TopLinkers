@@ -21,7 +21,7 @@
       <video
         v-if="parsedVideo.type === 'direct'"
         :src="parsedVideo.src"
-        :poster="poster || '/images/banu-hafeez/bh-hero.webp'"
+        :poster="poster || '/images/hero-harsukh.webp'"
         controls
         playsinline
         preload="none"

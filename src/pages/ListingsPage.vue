@@ -479,7 +479,6 @@ const quickTypes = [
   { value: 'moqa', label: 'Moqa Ka Plot (100% Cash)' },
   { value: 'installment', label: 'Installment Plots' },
   { value: 'pha', label: 'PHA Cash Flats' },
-  { value: 'banu-hafeez', label: 'Banu Hafeez (Cash/Plan)' },
   { value: 'hrsukh', label: 'Harsukh Suites' },
   { value: 'plot', label: 'Plots' },
   { value: 'apartment', label: 'Flats' },
@@ -606,9 +605,6 @@ const setQuickType = (val) => {
   } else if (val === 'pha') {
     propertiesStore.filters.type = 'apartment'
     propertiesStore.filters.keyword = 'PHA'
-  } else if (val === 'banu-hafeez') {
-    propertiesStore.filters.type = 'apartment'
-    propertiesStore.filters.keyword = 'Banu Hafeez'
   } else if (val === 'hrsukh') {
     propertiesStore.filters.type = 'apartment'
     propertiesStore.filters.keyword = 'Sukh'

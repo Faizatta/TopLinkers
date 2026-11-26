@@ -76,16 +76,6 @@ const slides = [
     image: '/images/hero-harsukh.webp'
   },
   {
-    id: 4,
-    title: 'Banu Hafeez Luxury Apartments (TopCity-1)',
-    specs: '1, 2 & 3 Bed Residences • 15% Booking • 3-Year Plan',
-    badge: '17-Storey Landmark Tower',
-    description: 'Approved 17-storey luxury landmark by Waheed Group in TopCity-1, Islamabad. Resident swimming pool, gym, 2 basements parking (281 cars), 2-year possession.',
-    ctaText: 'Explore Banu Hafeez',
-    link: '/featured-building',
-    image: '/images/banu-hafeez-hero.webp'
-  },
-  {
     id: 5,
     title: 'Faisal Town Phase 2 (FT-II) Installment Plots',
     specs: '5.56, 8, 10 Marla & 1 Kanal • 42 Monthly Installments',
