@@ -1,33 +1,27 @@
 <template>
   <div class="space-y-6">
-    <!-- Top Action Bar -->
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm">
-      <div>
-        <h2 class="text-base font-bold text-[#0F2A44]">Market Rates &amp; Package Catalog</h2>
-        <p class="text-xs text-slate-500 mt-0.5">
-          Add new society cards or update live pricing across
-          <router-link to="/services" target="_blank" class="text-[#16B4E8] font-semibold underline">/services</router-link>
-          and
-          <router-link to="/hr-sukh" target="_blank" class="text-[#16B4E8] font-semibold underline">/hr-sukh</router-link>
-        </p>
-      </div>
-
-      <div class="flex items-center gap-2.5">
+    <AdminPageHeader
+      title="Market Rates & Package Catalog"
+      subtitle="Add new society cards or update live pricing across /services and /hr-sukh."
+      live-url="/services"
+    >
+      <template #actions>
         <button
+          type="button"
           @click="resetToDefaults"
-          class="px-3.5 py-2 rounded-lg bg-white border border-slate-300 text-xs font-medium text-slate-700 hover:bg-slate-50 transition-colors shadow-xs"
+          class="px-3.5 py-2 rounded-lg bg-white border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
         >
           Reset Defaults
         </button>
-
         <button
+          type="button"
           @click="saveAllRates"
-          class="px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white font-semibold text-xs shadow-xs transition-colors"
+          class="px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white font-semibold text-xs shadow-2xs transition-colors"
         >
           Save &amp; Sync to Frontend
         </button>
-      </div>
-    </div>
+      </template>
+    </AdminPageHeader>
 
     <!-- Success Feedback Alert -->
     <div v-if="saveSuccess" class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-xs flex items-center justify-between shadow-xs">
@@ -1040,6 +1034,7 @@ import { ref, reactive, computed } from 'vue'
 import { CheckIcon, CheckCircleIcon, ArrowTopRightOnSquareIcon, PlusIcon, TrashIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { useAdminStore } from '../../stores/admin'
 import SiteVideoModal from '../../components/common/SiteVideoModal.vue'
+import AdminPageHeader from '../../components/admin/AdminPageHeader.vue'
 
 const adminStore = useAdminStore()
 const activeTab = ref('moqa')

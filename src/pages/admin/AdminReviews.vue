@@ -1,29 +1,94 @@
 <template>
   <div class="space-y-5">
-    <!-- Top Search & Add Review Bar -->
-    <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <AdminPageHeader
+      title="Client Reviews & Testimonials"
+      subtitle="Manage verified client testimonials displayed on the TopLinkers homepage."
+      :badge="`${filteredReviews.length} reviews`"
+      live-url="/"
+    >
+      <template #actions>
+        <button
+          type="button"
+          @click="openModal()"
+          class="px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-2xs"
+        >
+          + Add Client Review
+        </button>
+      </template>
+    </AdminPageHeader>
+
+    <!-- Search Bar -->
+    <div class="bg-white rounded-xl p-4 border border-slate-200/90 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
       <div class="relative flex-1 max-w-md">
         <MagnifyingGlassIcon class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
         <input
           v-model="searchQuery"
           type="text"
-          placeholder="Search client reviews by name, project, or text..."
-          class="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 focus:outline-none focus:border-[#16B4E8]"
+          placeholder="Search client reviews by name, project, or quote..."
+          class="w-full pl-9 pr-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-700 focus:outline-none focus:border-[#0F2A44] focus:bg-white"
         />
       </div>
 
-      <button
-        type="button"
-        @click="openModal()"
-        class="px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs"
+      <select
+        v-model="ratingFilter"
+        class="w-full sm:w-40 px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 focus:outline-none focus:border-[#0F2A44]"
       >
-        <span>Add Client Review</span>
-      </button>
+        <option value="all">All Ratings</option>
+        <option :value="5">5 Stars Only</option>
+        <option :value="4">4 Stars &amp; Above</option>
+      </select>
     </div>
 
-    <!-- Reviews Table -->
-    <div v-if="filteredReviews.length > 0" class="bg-white rounded-xl border border-slate-200/90 shadow-xs overflow-hidden">
-      <div class="overflow-x-auto">
+    <!-- Reviews List (Mobile Cards + Desktop Table) -->
+    <div v-if="filteredReviews.length > 0" class="bg-white rounded-xl border border-slate-200/90 shadow-2xs overflow-hidden">
+      <!-- Mobile Cards -->
+      <div class="md:hidden divide-y divide-slate-100">
+        <div
+          v-for="review in paginatedReviews"
+          :key="`mobile-rev-${review.id}`"
+          class="p-4 space-y-2.5"
+        >
+          <div class="flex items-start justify-between gap-2">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-8 h-8 rounded-lg bg-[#0F2A44] text-white font-bold text-xs flex items-center justify-center flex-shrink-0">
+                {{ getFirstLetter(review.name) }}
+              </div>
+              <div class="min-w-0">
+                <div class="font-bold text-[#0F2A44] text-xs truncate">{{ review.name }}</div>
+                <div class="text-[11px] text-slate-500 truncate">{{ review.role || review.location }}</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-0.5 text-amber-500 flex-shrink-0">
+              <StarIcon v-for="s in (review.rating || 5)" :key="s" class="w-3.5 h-3.5 fill-current" />
+            </div>
+          </div>
+
+          <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+            {{ review.project || 'TopLinkers Advisory' }}
+          </span>
+          <p class="text-xs text-slate-600 italic line-clamp-3">"{{ review.quote }}"</p>
+
+          <div class="flex items-center justify-end gap-2 pt-1">
+            <button
+              type="button"
+              @click="openModal(review)"
+              class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              @click="confirmDeleteReview(review)"
+              class="px-3 py-1.5 rounded-lg border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-medium"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop Table -->
+      <div class="hidden md:block overflow-x-auto">
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-slate-50 border-b border-slate-200/80 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
@@ -36,7 +101,7 @@
           </thead>
           <tbody class="divide-y divide-slate-100 text-xs">
             <tr
-              v-for="review in filteredReviews"
+              v-for="review in paginatedReviews"
               :key="review.id"
               class="hover:bg-slate-50/70 transition-colors"
             >
@@ -80,8 +145,7 @@
                   <button
                     type="button"
                     @click="confirmDeleteReview(review)"
-                    class="px-2 py-1 rounded-md border border-slate-200 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 text-slate-400 text-xs transition-colors"
-                    title="Delete review"
+                    class="px-2.5 py-1 rounded-md border border-slate-200 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 text-slate-500 text-xs font-medium transition-colors"
                   >
                     Delete
                   </button>
@@ -91,98 +155,111 @@
           </tbody>
         </table>
       </div>
+
+      <AdminPagination
+        v-model:page="page"
+        v-model:page-size="pageSize"
+        :total-items="filteredReviews.length"
+      />
     </div>
 
-    <div v-else class="bg-white rounded-2xl p-12 text-center border border-slate-200/80 shadow-sm text-xs text-slate-500">
-      No matching client reviews found.
-    </div>
+    <AdminEmptyState
+      v-else
+      title="No Client Reviews Found"
+      description="No testimonials match your current search or rating filter."
+      :icon="ChatBubbleBottomCenterTextIcon"
+    >
+      <template #action>
+        <button
+          type="button"
+          @click="searchQuery = ''; ratingFilter = 'all'"
+          class="px-3.5 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700"
+        >
+          Reset Filters
+        </button>
+        <button
+          type="button"
+          @click="openModal()"
+          class="px-3.5 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold"
+        >
+          + Add Client Review
+        </button>
+      </template>
+    </AdminEmptyState>
 
     <!-- Modal: Add / Edit Review -->
-    <div v-if="modalOpen" @click.self="modalOpen = false" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
-      <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200">
-        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+    <AdminModal
+      v-model="modalOpen"
+      :title="editingReview ? 'Edit Client Review' : 'Add Client Review'"
+      subtitle="Saves to backend and updates homepage reviews live."
+      size="md"
+    >
+      <form id="review-modal-form" @submit.prevent="submitReviewForm" class="space-y-3.5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <h3 class="text-base font-bold text-[#0F2A44]">
-              {{ editingReview ? 'Edit Client Review' : 'Add Client Review' }}
-            </h3>
-            <p class="text-xs text-slate-500">Saves to Laravel backend and updates homepage reviews live.</p>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Client Name *</label>
+            <input v-model="form.name" type="text" required placeholder="e.g. Tariq Mahmood" class="w-full px-3.5 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-[#0F2A44]" />
           </div>
-          <button
-            type="button"
-            @click="modalOpen = false"
-            class="p-1.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100"
-            aria-label="Close review modal"
-          >
-            <XMarkIcon class="w-5 h-5" />
-          </button>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Role / Title</label>
+            <input v-model="form.role" type="text" placeholder="e.g. Home Buyer — G-11" class="w-full px-3.5 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-[#0F2A44]" />
+          </div>
         </div>
 
-        <form @submit.prevent="submitReviewForm" class="space-y-3.5 pt-4">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Client Name *</label>
-              <input v-model="form.name" type="text" required placeholder="e.g. Tariq Mahmood" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8]" />
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Role / Title</label>
-              <input v-model="form.role" type="text" placeholder="e.g. Home Buyer — G-11" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8]" />
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">City / Location</label>
-              <input v-model="form.location" type="text" placeholder="Islamabad" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs" />
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Project Tag</label>
-              <input v-model="form.project" type="text" placeholder="TopCity-1 (10 Marla)" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs" />
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Rating</label>
-              <select v-model="form.rating" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white">
-                <option :value="5">5 Stars</option>
-                <option :value="4">4 Stars</option>
-                <option :value="3">3 Stars</option>
-                <option :value="2">2 Stars</option>
-                <option :value="1">1 Star</option>
-              </select>
-            </div>
-          </div>
-
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Client Review Quote / Description Note *</label>
-            <textarea v-model="form.quote" rows="4" required placeholder="Write the client's testimonial or testimonial notes..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#16B4E8]"></textarea>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">City / Location</label>
+            <input v-model="form.location" type="text" placeholder="Islamabad" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-[#0F2A44]" />
           </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Project Tag</label>
+            <input v-model="form.project" type="text" placeholder="TopCity-1 (10 Marla)" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-[#0F2A44]" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Rating</label>
+            <select v-model="form.rating" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white focus:outline-none focus:border-[#0F2A44]">
+              <option :value="5">5 Stars</option>
+              <option :value="4">4 Stars</option>
+              <option :value="3">3 Stars</option>
+              <option :value="2">2 Stars</option>
+              <option :value="1">1 Star</option>
+            </select>
+          </div>
+        </div>
 
-          <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-100">
-            <button type="button" @click="modalOpen = false" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100">
-              Cancel
-            </button>
-            <button type="submit" class="px-5 py-2 rounded-xl text-xs font-semibold bg-[#0F2A44] hover:bg-[#16B4E8] text-white shadow-sm transition-colors">
-              {{ editingReview ? 'Save Changes' : 'Add Review' }}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Client Review Quote *</label>
+          <textarea v-model="form.quote" rows="4" required placeholder="Write the client's testimonial..." class="w-full px-3.5 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-[#0F2A44]"></textarea>
+        </div>
+      </form>
+
+      <template #footer>
+        <button type="button" @click="modalOpen = false" class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-200/70">
+          Cancel
+        </button>
+        <button type="submit" form="review-modal-form" class="px-5 py-2 rounded-lg text-xs font-semibold bg-[#0F2A44] hover:bg-slate-800 text-white shadow-2xs transition-colors">
+          {{ editingReview ? 'Save Changes' : 'Add Review' }}
+        </button>
+      </template>
+    </AdminModal>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import {
-  MagnifyingGlassIcon,
-  PlusIcon,
-  PencilSquareIcon,
-  TrashIcon,
-  XMarkIcon
-} from '@heroicons/vue/24/outline'
+import { ref, computed, watch } from 'vue'
+import { MagnifyingGlassIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/vue/24/outline'
 import { StarIcon } from '@heroicons/vue/24/solid'
 import { useAdminStore } from '../../stores/admin'
+import AdminPageHeader from '../../components/admin/AdminPageHeader.vue'
+import AdminPagination from '../../components/admin/AdminPagination.vue'
+import AdminEmptyState from '../../components/admin/AdminEmptyState.vue'
+import AdminModal from '../../components/admin/AdminModal.vue'
 
 const adminStore = useAdminStore()
 const searchQuery = ref('')
+const ratingFilter = ref('all')
+const page = ref(1)
+const pageSize = ref(10)
 const modalOpen = ref(false)
 const editingReview = ref(null)
 
@@ -197,13 +274,26 @@ const form = ref({
 
 const filteredReviews = computed(() => {
   const q = searchQuery.value.trim().toLowerCase()
-  if (!q) return adminStore.reviews
-  return adminStore.reviews.filter(
-    r =>
+  return adminStore.reviews.filter((r) => {
+    if (ratingFilter.value !== 'all' && Number(r.rating || 5) < Number(ratingFilter.value)) {
+      return false
+    }
+    if (!q) return true
+    return (
       r.name?.toLowerCase().includes(q) ||
       r.project?.toLowerCase().includes(q) ||
       r.quote?.toLowerCase().includes(q)
-  )
+    )
+  })
+})
+
+const paginatedReviews = computed(() => {
+  const start = (page.value - 1) * pageSize.value
+  return filteredReviews.value.slice(start, start + pageSize.value)
+})
+
+watch([searchQuery, ratingFilter], () => {
+  page.value = 1
 })
 
 const getFirstLetter = (name) => {

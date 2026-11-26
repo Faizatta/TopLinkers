@@ -1,52 +1,34 @@
 <template>
   <div class="space-y-6">
-    <!-- Top Header -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-      <div>
-        <h1 class="text-xl sm:text-2xl font-extrabold text-[#0F2A44] tracking-tight">Services &amp; Page CMS</h1>
-        <p class="text-xs text-slate-500 mt-0.5">Manage every service division, page section, gallery image, CTA, and SEO setting on /services.</p>
-      </div>
-      <div class="flex items-center gap-2.5 flex-wrap">
-        <a
-          href="/services"
-          target="_blank"
-          rel="noopener"
-          class="px-3.5 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 transition"
-        >
-          Preview Live /services &rarr;
-        </a>
+    <AdminPageHeader
+      title="Services & Page CMS"
+      subtitle="Manage every service division, page section, gallery image, CTA, and SEO setting on /services."
+      live-url="/services"
+      live-label="Preview Live /services"
+    >
+      <template #actions>
         <button
           type="button"
           @click="openCreateService"
-          class="px-4 py-2 rounded-xl bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-xs font-black uppercase tracking-wider transition shadow-sm"
+          class="px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-2xs"
         >
           + Add New Service
         </button>
-      </div>
-    </div>
+      </template>
+    </AdminPageHeader>
 
     <!-- Dashboard Stats -->
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-      <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs">
-        <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Total Services</div>
-        <div class="text-2xl font-black text-[#0F2A44] mt-1">{{ stats.total }}</div>
-      </div>
-      <div class="bg-white rounded-2xl border border-emerald-200 p-4 shadow-2xs">
-        <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600">Published</div>
-        <div class="text-2xl font-black text-emerald-700 mt-1">{{ stats.published }}</div>
-      </div>
-      <div class="bg-white rounded-2xl border border-amber-200 p-4 shadow-2xs">
-        <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600">Draft</div>
-        <div class="text-2xl font-black text-amber-700 mt-1">{{ stats.draft }}</div>
-      </div>
-      <div class="bg-white rounded-2xl border border-rose-200 p-4 shadow-2xs">
-        <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600">Disabled</div>
-        <div class="text-2xl font-black text-rose-700 mt-1">{{ stats.disabled }}</div>
-      </div>
-      <div class="bg-white rounded-2xl border border-cyan-200 p-4 shadow-2xs col-span-2 sm:col-span-1">
-        <div class="text-[11px] font-bold uppercase tracking-wider text-[#16B4E8]">Active Sections</div>
-        <div class="text-2xl font-black text-[#0F2A44] mt-1">{{ stats.sections_enabled }} / {{ stats.sections_total }}</div>
-      </div>
+      <AdminStatCard label="Total Services" :value="stats.total" tone="slate" />
+      <AdminStatCard label="Published" :value="stats.published" tone="emerald" />
+      <AdminStatCard label="Draft" :value="stats.draft" tone="amber" />
+      <AdminStatCard label="Disabled" :value="stats.disabled" tone="rose" />
+      <AdminStatCard
+        label="Active Sections"
+        :value="`${stats.sections_enabled} / ${stats.sections_total}`"
+        tone="sky"
+        class="col-span-2 sm:col-span-1"
+      />
     </div>
 
     <!-- Error / Loading Banner -->
@@ -742,6 +724,8 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useAdminStore } from '../../stores/admin'
+import AdminPageHeader from '../../components/admin/AdminPageHeader.vue'
+import AdminStatCard from '../../components/admin/AdminStatCard.vue'
 import {
   fetchAdminServicesDashboard,
   createService,
@@ -1032,7 +1016,12 @@ async function handleDuplicate(svc) {
 }
 
 async function handleDeleteService(svc) {
-  if (!window.confirm(`Delete "${svc.title}" and its gallery/SEO data?`)) return
+  const ok = await adminStore.requestConfirm({
+    title: `Delete "${svc.title}"?`,
+    message: 'This will permanently delete this service along with its gallery images, features, and SEO settings.',
+    confirmText: 'Delete Service'
+  })
+  if (!ok) return
   try {
     await deleteService(svc.id)
     adminStore.showToast('Service deleted')
@@ -1124,8 +1113,14 @@ async function moveSection(idx, delta) {
 }
 
 async function handleDeleteSection(sec) {
-  if (!window.confirm(`Delete section "${sec.title}"?`)) return
+  const ok = await adminStore.requestConfirm({
+    title: `Delete Section "${sec.title}"?`,
+    message: 'This will permanently delete the page section and all content blocks inside it.',
+    confirmText: 'Delete Section'
+  })
+  if (!ok) return
   await deleteSection(sec.id)
+  adminStore.showToast('Section deleted.', 'info')
   await loadAll()
 }
 

@@ -1,38 +1,34 @@
 <template>
   <div class="space-y-6">
-    <!-- Header -->
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-      <div>
-        <h1 class="text-xl font-bold text-[#0F2A44] tracking-tight">Executives, Agents &amp; Engineers</h1>
-        <p class="text-xs text-slate-500 mt-0.5">
-          Manage founders, consultants, and PEC engineers — updates reflect live on 
-          <router-link to="/team" target="_blank" class="text-[#0F2A44] font-semibold underline">/team</router-link>
-        </p>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-2">
-        <button 
+    <AdminPageHeader
+      title="Executives, Agents & Engineers"
+      subtitle="Manage founders, consultants, and PEC engineers synced live to the public team page."
+      live-url="/team"
+    >
+      <template #actions>
+        <button
+          type="button"
           @click="openModalForCategory('ceo')"
-          class="px-3.5 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs"
+          class="px-3.5 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-2xs"
         >
-          Add Founder / CEO
+          + Add Founder / CEO
         </button>
-
-        <button 
+        <button
+          type="button"
           @click="openModalForCategory('agent')"
-          class="px-3.5 py-2 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-medium transition-colors shadow-xs"
+          class="px-3.5 py-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition-colors"
         >
-          Add Agent
+          + Add Agent
         </button>
-
-        <button 
+        <button
+          type="button"
           @click="openModalForCategory('engineer')"
-          class="px-3.5 py-2 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-medium transition-colors shadow-xs"
+          class="px-3.5 py-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition-colors"
         >
-          Add Engineer
+          + Add Engineer
         </button>
-      </div>
-    </div>
+      </template>
+    </AdminPageHeader>
 
     <!-- PART 1: CEOs & CO-FOUNDERS -->
     <div class="space-y-3">
@@ -131,7 +127,7 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div v-if="filteredFieldTeam.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div 
           v-for="member in filteredFieldTeam" 
           :key="member.id"
@@ -181,6 +177,22 @@
           </div>
         </div>
       </div>
+
+      <AdminEmptyState
+        v-else
+        title="No Team Members Found"
+        description="No agents or engineers match your current filter or search query."
+      >
+        <template #action>
+          <button
+            type="button"
+            @click="categoryFilter = 'all'; searchQuery = ''"
+            class="px-3.5 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700"
+          >
+            Reset Filters
+          </button>
+        </template>
+      </AdminEmptyState>
     </div>
 
     <!-- Modal: Add / Edit CEO, Agent or Engineer -->
@@ -328,6 +340,8 @@ import {
   FolderOpenIcon
 } from '@heroicons/vue/24/outline'
 import { useAdminStore } from '../../stores/admin'
+import AdminPageHeader from '../../components/admin/AdminPageHeader.vue'
+import AdminEmptyState from '../../components/admin/AdminEmptyState.vue'
 
 const adminStore = useAdminStore()
 

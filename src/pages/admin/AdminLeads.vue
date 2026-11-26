@@ -1,69 +1,110 @@
 <template>
   <div class="space-y-5">
+    <AdminPageHeader
+      title="Leads & Inquiries CRM"
+      subtitle="Track, filter, and follow up with client enquiries across all TopLinkers divisions."
+      :badge="`${filteredLeads.length} matching`"
+    >
+      <template #actions>
+        <button
+          type="button"
+          @click="exportToCSV"
+          class="px-3.5 py-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors"
+        >
+          Export CSV
+        </button>
+        <button
+          type="button"
+          @click="openAddModal = true"
+          class="px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-2xs"
+        >
+          + New Lead
+        </button>
+      </template>
+    </AdminPageHeader>
+
     <!-- Filter Toolbar & Actions -->
-    <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm space-y-4">
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-        <!-- Search & Filters -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 flex-1">
-          <div class="relative">
-            <MagnifyingGlassIcon class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-            <input
-              v-model="searchQuery"
-              type="text"
-              placeholder="Search name, phone, project..."
-              class="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 focus:outline-none focus:border-[#16B4E8] focus:ring-2 focus:ring-[#16B4E8]/15"
-            />
-          </div>
-
-          <select
-            v-model="selectedDivision"
-            class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 focus:outline-none focus:border-[#16B4E8]"
-          >
-            <option value="All">All Divisions</option>
-            <option value="Plots">Moqa Ka Plots</option>
-            <option value="Installment Plots">Installment Files</option>
-            <option value="Flats">PHA Luxury Flats</option>
-            <option value="Solar">Solar Power Energy</option>
-            <option value="Construction">Construction Turnkey</option>
-            <option value="Harsukh">Harsukh (Nathia Gali)</option>
-          </select>
-
-          <select
-            v-model="selectedStatus"
-            class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 focus:outline-none focus:border-[#16B4E8]"
-          >
-            <option value="All">All Statuses</option>
-            <option value="New">New</option>
-            <option value="Contacted">Contacted</option>
-            <option value="Site Visit Scheduled">Site Visit Scheduled</option>
-            <option value="Negotiation">Negotiation / Token</option>
-            <option value="Closed / Won">Closed / Won</option>
-            <option value="Lost">Lost</option>
-          </select>
+    <div class="bg-white rounded-xl p-4 border border-slate-200/90 shadow-2xs space-y-3.5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+        <div class="relative">
+          <MagnifyingGlassIcon class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Search name, phone, project..."
+            class="w-full pl-9 pr-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-700 focus:outline-none focus:border-[#0F2A44] focus:bg-white"
+          />
         </div>
 
-        <!-- Utility Action Buttons -->
-        <div class="flex items-center gap-2 flex-shrink-0">
-          <button
-            type="button"
-            @click="exportToCSV"
-            class="px-3.5 py-2 rounded-lg bg-white border border-slate-300 text-xs font-medium text-slate-700 hover:bg-slate-50 transition-colors shadow-xs"
-          >
-            <span>Export CSV</span>
-          </button>
+        <select
+          v-model="selectedDivision"
+          class="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 focus:outline-none focus:border-[#0F2A44]"
+        >
+          <option value="All">All Divisions</option>
+          <option value="Plots">Moqa Ka Plots</option>
+          <option value="Installment Plots">Installment Files</option>
+          <option value="Flats">PHA Luxury Flats</option>
+          <option value="Solar">Solar Power Energy</option>
+          <option value="Construction">Construction Turnkey</option>
+          <option value="Harsukh">Harsukh (Nathia Gali)</option>
+        </select>
 
+        <select
+          v-model="selectedStatus"
+          class="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 focus:outline-none focus:border-[#0F2A44]"
+        >
+          <option value="All">All Statuses</option>
+          <option value="New">New</option>
+          <option value="Contacted">Contacted</option>
+          <option value="Site Visit Scheduled">Site Visit Scheduled</option>
+          <option value="Negotiation">Negotiation / Token</option>
+          <option value="Closed / Won">Closed / Won</option>
+          <option value="Lost">Lost</option>
+        </select>
+
+        <select
+          v-model="sortBy"
+          class="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 focus:outline-none focus:border-[#0F2A44]"
+        >
+          <option value="newest">Sort: Newest First</option>
+          <option value="priority">Sort: High Priority First</option>
+          <option value="name">Sort: Client Name (A–Z)</option>
+        </select>
+      </div>
+
+      <!-- Bulk Action Bar -->
+      <div
+        v-if="selectedIds.length > 0"
+        class="flex flex-wrap items-center justify-between gap-2 px-3 py-2 rounded-lg bg-sky-50 border border-sky-200 text-xs"
+      >
+        <span class="font-semibold text-[#0F2A44]">{{ selectedIds.length }} lead(s) selected</span>
+        <div class="flex items-center gap-2">
           <button
             type="button"
-            @click="openAddModal = true"
-            class="px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs"
+            @click="bulkUpdateStatus('Contacted')"
+            class="px-2.5 py-1 rounded-md bg-white border border-slate-200 hover:bg-slate-50 font-semibold text-slate-700"
           >
-            <span>New Lead</span>
+            Mark Contacted
+          </button>
+          <button
+            type="button"
+            @click="bulkDelete"
+            class="px-2.5 py-1 rounded-md bg-rose-600 hover:bg-rose-700 text-white font-semibold"
+          >
+            Delete Selected
+          </button>
+          <button
+            type="button"
+            @click="selectedIds = []"
+            class="px-2 py-1 text-slate-500 hover:text-slate-800 font-medium"
+          >
+            Clear
           </button>
         </div>
       </div>
 
       <!-- Clean Status Pipeline Tabs -->
-      <div class="flex items-center gap-1.5 overflow-x-auto pt-1 border-t border-slate-100 text-xs">
+      <div class="flex items-center gap-1.5 overflow-x-auto pt-2 border-t border-slate-100 text-xs">
         <button
           v-for="st in statusPills"
           :key="st.key"
@@ -87,7 +128,7 @@
       <!-- Mobile Cards View (md:hidden) -->
       <div class="md:hidden divide-y divide-slate-100">
         <div
-          v-for="lead in filteredLeads"
+          v-for="lead in paginatedLeads"
           :key="`mobile-lead-${lead.id}`"
           class="p-4 space-y-3 hover:bg-slate-50/70 transition-colors"
         >
@@ -190,6 +231,15 @@
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-slate-50/80 border-b border-slate-200/80 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+              <th class="py-3.5 px-4 w-10">
+                <input
+                  type="checkbox"
+                  :checked="allPageSelected"
+                  @change="toggleSelectPage"
+                  class="rounded border-slate-300 text-[#0F2A44] focus:ring-[#0F2A44]"
+                  aria-label="Select all on page"
+                />
+              </th>
               <th class="py-3.5 px-4">Client &amp; Contact</th>
               <th class="py-3.5 px-4">Project &amp; Division</th>
               <th class="py-3.5 px-4">Budget</th>
@@ -200,10 +250,19 @@
 
           <tbody class="divide-y divide-slate-100 text-xs">
             <tr
-              v-for="lead in filteredLeads"
+              v-for="lead in paginatedLeads"
               :key="lead.id"
               class="hover:bg-slate-50/70 transition-colors"
             >
+              <td class="py-3.5 px-4 align-middle">
+                <input
+                  type="checkbox"
+                  :value="lead.id"
+                  v-model="selectedIds"
+                  class="rounded border-slate-300 text-[#0F2A44] focus:ring-[#0F2A44]"
+                  aria-label="Select lead"
+                />
+              </td>
               <!-- Client & Contact -->
               <td class="py-3.5 px-4 align-middle">
                 <div class="flex items-center gap-3">
@@ -308,16 +367,38 @@
           </tbody>
         </table>
       </div>
+
+      <AdminPagination
+        v-model:page="page"
+        v-model:page-size="pageSize"
+        :total-items="sortedLeads.length"
+      />
     </div>
 
     <!-- Empty State -->
-    <div v-else class="bg-white rounded-2xl p-12 text-center border border-slate-200/80 shadow-sm">
-      <div class="w-14 h-14 mx-auto rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mb-3">
-        <InboxIcon class="w-7 h-7" />
-      </div>
-      <h3 class="text-sm font-bold text-slate-800">No Inquiries Found</h3>
-      <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">No client leads match your current filter. Clear filters or log a new inquiry.</p>
-    </div>
+    <AdminEmptyState
+      v-else
+      title="No Inquiries Found"
+      description="No client leads match your current filter. Clear filters or log a new inquiry."
+      :icon="InboxIcon"
+    >
+      <template #action>
+        <button
+          type="button"
+          @click="searchQuery = ''; selectedDivision = 'All'; selectedStatus = 'All'"
+          class="px-3.5 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700"
+        >
+          Reset Filters
+        </button>
+        <button
+          type="button"
+          @click="openAddModal = true"
+          class="px-3.5 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold"
+        >
+          + New Lead
+        </button>
+      </template>
+    </AdminEmptyState>
 
     <!-- Modal: View Full Lead Details -->
     <div v-if="viewingLead" @click.self="viewingLead = null" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
@@ -459,7 +540,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import {
   ArrowDownTrayIcon,
   PlusIcon,
@@ -472,12 +553,19 @@ import {
   XMarkIcon
 } from '@heroicons/vue/24/outline'
 import { useAdminStore } from '../../stores/admin'
+import AdminPageHeader from '../../components/admin/AdminPageHeader.vue'
+import AdminPagination from '../../components/admin/AdminPagination.vue'
+import AdminEmptyState from '../../components/admin/AdminEmptyState.vue'
 
 const adminStore = useAdminStore()
 
 const searchQuery = ref('')
 const selectedDivision = ref('All')
 const selectedStatus = ref('All')
+const sortBy = ref('newest')
+const page = ref(1)
+const pageSize = ref(10)
+const selectedIds = ref([])
 const openAddModal = ref(false)
 const viewingLead = ref(null)
 
@@ -542,6 +630,63 @@ const filteredLeads = computed(() => {
 
     return true
   })
+})
+
+const sortedLeads = computed(() => {
+  const list = [...filteredLeads.value]
+  if (sortBy.value === 'name') {
+    return list.sort((a, b) => (a.name || '').localeCompare(b.name || ''))
+  }
+  if (sortBy.value === 'priority') {
+    const rank = { High: 0, Medium: 1, Normal: 2 }
+    return list.sort((a, b) => (rank[a.priority] ?? 3) - (rank[b.priority] ?? 3))
+  }
+  return list
+})
+
+const paginatedLeads = computed(() => {
+  const start = (page.value - 1) * pageSize.value
+  return sortedLeads.value.slice(start, start + pageSize.value)
+})
+
+const allPageSelected = computed(() =>
+  paginatedLeads.value.length > 0 && paginatedLeads.value.every(l => selectedIds.value.includes(l.id))
+)
+
+const toggleSelectPage = () => {
+  if (allPageSelected.value) {
+    const pageIds = new Set(paginatedLeads.value.map(l => l.id))
+    selectedIds.value = selectedIds.value.filter(id => !pageIds.has(id))
+  } else {
+    const merged = new Set([...selectedIds.value, ...paginatedLeads.value.map(l => l.id)])
+    selectedIds.value = Array.from(merged)
+  }
+}
+
+const bulkUpdateStatus = async (status) => {
+  for (const id of selectedIds.value) {
+    await adminStore.updateLeadStatus(id, status)
+  }
+  adminStore.showToast(`Updated ${selectedIds.value.length} lead(s) to "${status}".`)
+  selectedIds.value = []
+}
+
+const bulkDelete = async () => {
+  const ok = await adminStore.requestConfirm({
+    title: `Delete ${selectedIds.value.length} Selected Leads?`,
+    message: 'This will permanently remove all selected inquiries from the CRM.',
+    confirmText: 'Delete Selected'
+  })
+  if (!ok) return
+  for (const id of selectedIds.value) {
+    await adminStore.deleteLead(id)
+  }
+  adminStore.showToast(`Deleted ${selectedIds.value.length} lead(s).`, 'info')
+  selectedIds.value = []
+}
+
+watch([searchQuery, selectedDivision, selectedStatus, sortBy], () => {
+  page.value = 1
 })
 
 const getInitials = (name) => {

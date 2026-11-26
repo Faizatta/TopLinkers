@@ -1,98 +1,36 @@
 <template>
   <div class="space-y-6">
-    <!-- Header & Action Bar -->
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-      <div>
-        <h1 class="text-xl font-bold text-[#0F2A44] tracking-tight flex items-center gap-2">
-          <span>Blog &amp; Market Insights</span>
-          <span 
-            v-if="adminStore.isBlogsLoading" 
-            class="inline-block w-3.5 h-3.5 border-2 border-[#16B4E8] border-t-transparent rounded-full animate-spin"
-            title="Syncing with backend..."
-          ></span>
-        </h1>
-        <p class="text-xs text-slate-500 mt-0.5">
-          Publish, edit, and curate property analysis articles — changes sync directly to backend API and live on 
-          <router-link to="/blog" target="_blank" class="text-[#16B4E8] font-semibold underline hover:text-[#0F2A44]">/blog</router-link>
-        </p>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-2.5">
+    <AdminPageHeader
+      title="Blog & Market Insights"
+      subtitle="Publish, edit, and curate property analysis articles synced directly to the backend."
+      live-url="/blog"
+      :loading="adminStore.isBlogsLoading"
+    >
+      <template #actions>
         <button
           type="button"
           @click="refreshBlogs"
-          class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-medium transition-colors shadow-xs"
+          class="px-3 py-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition-colors"
           :disabled="adminStore.isBlogsLoading"
         >
-          <svg class="w-3.5 h-3.5" :class="{ 'animate-spin': adminStore.isBlogsLoading }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-          </svg>
-          <span>Refresh</span>
+          Refresh
         </button>
-
-        <button 
+        <button
           type="button"
           @click="openCreateModal"
-          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs"
+          class="px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-2xs"
         >
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-          </svg>
-          <span>New Article</span>
+          + New Article
         </button>
-      </div>
-    </div>
+      </template>
+    </AdminPageHeader>
 
     <!-- Metrics Cards Row -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-      <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex items-center justify-between">
-        <div>
-          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Total Articles</p>
-          <p class="text-2xl font-bold text-[#0F2A44] mt-1">{{ adminStore.blogs.length }}</p>
-        </div>
-        <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-          </svg>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex items-center justify-between">
-        <div>
-          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Published</p>
-          <p class="text-2xl font-bold text-emerald-600 mt-1">{{ publishedCount }}</p>
-        </div>
-        <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex items-center justify-between">
-        <div>
-          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Drafts</p>
-          <p class="text-2xl font-bold text-amber-600 mt-1">{{ draftCount }}</p>
-        </div>
-        <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-          </svg>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl p-4 border border-slate-200/80 shadow-xs flex items-center justify-between">
-        <div>
-          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Total Views</p>
-          <p class="text-2xl font-bold text-[#16B4E8] mt-1">{{ totalViewsCount }}</p>
-        </div>
-        <div class="w-10 h-10 rounded-lg bg-cyan-50 text-cyan-600 flex items-center justify-center">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-          </svg>
-        </div>
-      </div>
+      <AdminStatCard label="Total Articles" :value="adminStore.blogs.length" tone="slate" />
+      <AdminStatCard label="Published" :value="publishedCount" tone="emerald" />
+      <AdminStatCard label="Drafts" :value="draftCount" tone="amber" />
+      <AdminStatCard label="Total Views" :value="totalViewsCount" tone="sky" />
     </div>
 
     <!-- Filters & Search Toolbar -->
@@ -161,19 +99,21 @@
         <p class="text-sm font-medium text-slate-600">Loading articles from backend...</p>
       </div>
 
-      <div v-else-if="filteredBlogs.length === 0" class="p-12 text-center text-slate-400">
-        <svg class="w-12 h-12 mx-auto text-slate-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-        </svg>
-        <p class="text-sm font-semibold text-slate-700">No articles found</p>
-        <p class="text-xs text-slate-500 mt-1">Try adjusting your search filters or click "New Article" to create your first blog post.</p>
-        <button
-          @click="openCreateModal"
-          class="mt-4 px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors"
-        >
-          Create First Article
-        </button>
-      </div>
+      <AdminEmptyState
+        v-else-if="filteredBlogs.length === 0"
+        title="No articles found"
+        description="Try adjusting your search filters or click New Article to create your first blog post."
+      >
+        <template #action>
+          <button
+            type="button"
+            @click="openCreateModal"
+            class="px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors"
+          >
+            Create First Article
+          </button>
+        </template>
+      </AdminEmptyState>
 
       <div v-else class="overflow-x-auto">
         <table class="w-full text-left border-collapse text-xs">
@@ -190,7 +130,7 @@
           </thead>
           <tbody class="divide-y divide-slate-100">
             <tr 
-              v-for="post in filteredBlogs" 
+              v-for="post in paginatedBlogs" 
               :key="post.id || post.slug"
               class="hover:bg-slate-50/70 transition-colors"
             >
@@ -305,6 +245,13 @@
           </tbody>
         </table>
       </div>
+
+      <AdminPagination
+        v-if="filteredBlogs.length > 0"
+        v-model:page="page"
+        v-model:page-size="pageSize"
+        :total-items="filteredBlogs.length"
+      />
     </div>
 
     <!-- Create / Edit Modal -->
@@ -722,8 +669,13 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { useAdminStore } from '../../stores/admin'
+
+import AdminPageHeader from '../../components/admin/AdminPageHeader.vue'
+import AdminStatCard from '../../components/admin/AdminStatCard.vue'
+import AdminEmptyState from '../../components/admin/AdminEmptyState.vue'
+import AdminPagination from '../../components/admin/AdminPagination.vue'
 
 const adminStore = useAdminStore()
 
@@ -731,6 +683,8 @@ const adminStore = useAdminStore()
 const searchQuery = ref('')
 const statusFilter = ref('all')
 const selectedCategory = ref('')
+const page = ref(1)
+const pageSize = ref(10)
 const modalOpen = ref(false)
 const isEditing = ref(false)
 const isSubmitting = ref(false)
@@ -834,6 +788,15 @@ const filteredBlogs = computed(() => {
 
     return true
   })
+})
+
+const paginatedBlogs = computed(() => {
+  const start = (page.value - 1) * pageSize.value
+  return filteredBlogs.value.slice(start, start + pageSize.value)
+})
+
+watch([searchQuery, statusFilter, selectedCategory], () => {
+  page.value = 1
 })
 
 // Badge colors

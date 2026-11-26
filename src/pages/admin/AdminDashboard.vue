@@ -1,68 +1,180 @@
 <template>
   <div class="space-y-6">
-    <!-- Top Welcome Banner (Decent, Clean Corporate Slate-Navy) -->
-    <div class="bg-[#0F2A44] rounded-xl p-6 sm:p-7 text-white border border-slate-700/60 shadow-xs">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-5">
-        <div>
-          <div class="text-[11px] font-semibold text-cyan-300 uppercase tracking-wider mb-1.5">
-            TopLinkers Executive Portal • Head Office CRM
+    <!-- Top Dashboard Header & Quick Actions -->
+    <div class="bg-white rounded-xl p-5 sm:p-6 border border-slate-200/90 shadow-2xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider bg-sky-50 text-[#0F2A44] border border-sky-200">
+            Live Backend Connected
+          </span>
+          <span class="text-xs text-slate-400">Al Hameed Plaza, G-11 Markaz</span>
+        </div>
+        <h1 class="text-lg sm:text-xl font-bold tracking-tight text-[#0F2A44] mt-1.5">
+          Welcome back, {{ adminStore.adminUser?.name || 'Chief Administrator' }}
+        </h1>
+        <p class="text-slate-500 text-xs mt-0.5 max-w-2xl">
+          Real-time overview of services, properties, client enquiries, and active website campaigns.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <router-link
+          v-if="adminStore.canAccessModule('services')"
+          to="/admin/services"
+          class="px-3.5 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white font-semibold text-xs transition-colors shadow-2xs"
+        >
+          Manage Services
+        </router-link>
+        <router-link
+          v-if="adminStore.canAccessModule('properties')"
+          to="/admin/properties"
+          class="px-3.5 py-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold text-xs transition-colors"
+        >
+          Properties
+        </router-link>
+        <router-link
+          v-if="adminStore.canAccessModule('rates')"
+          to="/admin/rates"
+          class="px-3.5 py-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold text-xs transition-colors"
+        >
+          Live Rates
+        </router-link>
+        <router-link
+          v-if="adminStore.canAccessModule('leads')"
+          to="/admin/leads"
+          class="px-3.5 py-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold text-xs transition-colors"
+        >
+          All Leads ({{ adminStore.totalLeadsCount }})
+        </router-link>
+      </div>
+    </div>
+
+    <!-- Dashboard Section Tabs -->
+    <div class="flex items-center gap-1 p-1 bg-white rounded-xl border border-slate-200 w-full sm:w-fit overflow-x-auto shadow-2xs">
+      <button
+        type="button"
+        @click="dashboardTab = 'overview'"
+        class="px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors"
+        :class="dashboardTab === 'overview' ? 'bg-[#0F2A44] text-white' : 'text-slate-600 hover:bg-slate-50'"
+      >
+        Overview &amp; Analytics
+      </button>
+      <button
+        type="button"
+        @click="dashboardTab = 'campaigns'"
+        class="px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors"
+        :class="dashboardTab === 'campaigns' ? 'bg-[#0F2A44] text-white' : 'text-slate-600 hover:bg-slate-50'"
+      >
+        Campaigns &amp; Popups
+      </button>
+      <button
+        type="button"
+        @click="dashboardTab = 'faqs'"
+        class="px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors"
+        :class="dashboardTab === 'faqs' ? 'bg-[#0F2A44] text-white' : 'text-slate-600 hover:bg-slate-50'"
+      >
+        Service FAQs ({{ adminStore.faqs?.length || 0 }})
+      </button>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 1: REAL-DATA OVERVIEW & ANALYTICS                                 -->
+    <!-- ===================================================================== -->
+    <div v-show="dashboardTab === 'overview'" class="space-y-6">
+      <!-- Real KPI Metric Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <AdminStatCard
+          label="Total Services"
+          :value="serviceStats.total"
+          :hint="`${serviceStats.published} Published • ${serviceStats.draft} Draft`"
+          tone="sky"
+          :icon="Squares2X2Icon"
+        />
+        <AdminStatCard
+          label="Total Projects & Listings"
+          :value="propertiesStore.properties.length"
+          :hint="`${featuredPropertiesCount} Featured on site`"
+          tone="slate"
+          :icon="BuildingOffice2Icon"
+        />
+        <AdminStatCard
+          label="Total Enquiries"
+          :value="adminStore.totalLeadsCount"
+          :hint="`${adminStore.newLeadsCount} Pending attention`"
+          :tone="adminStore.newLeadsCount > 0 ? 'amber' : 'emerald'"
+          :icon="UsersIcon"
+        />
+        <AdminStatCard
+          label="Blogs & Reviews"
+          :value="adminStore.blogs.length"
+          :hint="`${adminStore.reviews.length} Client testimonials`"
+          tone="emerald"
+          :icon="NewspaperIcon"
+        />
+      </div>
+
+      <!-- Real-Data Charts: Enquiries by Division & Pipeline Status -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div class="bg-white rounded-xl p-5 border border-slate-200/90 shadow-2xs space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-sm font-bold text-[#0F2A44]">Enquiries by Division</h2>
+              <p class="text-[11px] text-slate-500">Live distribution from CRM leads</p>
+            </div>
+            <router-link to="/admin/leads" class="text-xs font-semibold text-[#16B4E8] hover:underline">
+              Open CRM &rarr;
+            </router-link>
           </div>
-          <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white">
-            Welcome, {{ adminStore.adminUser?.name || 'Chief Administrator' }}
-          </h1>
-          <p class="text-slate-300 text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed">
-            Centralized portal for managing client inquiries, market rate schedules (Moqa plots, installment plans, PHA flats &amp; Solar), and inventory.
-          </p>
+          <div class="space-y-3">
+            <div v-for="row in leadsByDivision" :key="row.label" class="space-y-1">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-medium text-slate-700">{{ row.label }}</span>
+                <span class="font-bold text-[#0F2A44]">{{ row.count }} ({{ row.pct }}%)</span>
+              </div>
+              <div class="h-2 rounded-full bg-slate-100 overflow-hidden">
+                <div class="h-full rounded-full bg-[#0F2A44] transition-all duration-300" :style="{ width: `${row.pct}%` }"></div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="flex flex-wrap items-center gap-2.5">
-          <router-link 
-            to="/admin/blogs" 
-            class="px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition-colors shadow-xs"
-          >
-            Manage Articles
-          </router-link>
-
-          <router-link 
-            to="/admin/rates" 
-            class="px-3.5 py-2 rounded-lg bg-[#16B4E8] hover:bg-[#119ecf] text-[#0F2A44] font-bold text-xs transition-colors shadow-xs"
-          >
-            Update Live Rates
-          </router-link>
-
-          <router-link 
-            to="/admin/leads" 
-            class="px-3.5 py-2 rounded-lg bg-white/10 hover:bg-white/15 text-white font-medium text-xs transition-colors border border-white/20"
-          >
-            View All Leads
-          </router-link>
+        <div class="bg-white rounded-xl p-5 border border-slate-200/90 shadow-2xs space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-sm font-bold text-[#0F2A44]">Recently Updated Services</h2>
+              <p class="text-[11px] text-slate-500">Latest changes synced to /services</p>
+            </div>
+            <router-link to="/admin/services" class="text-xs font-semibold text-[#16B4E8] hover:underline">
+              Manage CMS &rarr;
+            </router-link>
+          </div>
+          <div v-if="recentServices.length > 0" class="divide-y divide-slate-100">
+            <div v-for="svc in recentServices" :key="svc.id" class="py-2.5 flex items-center justify-between gap-3">
+              <div class="min-w-0">
+                <p class="text-xs font-semibold text-[#0F2A44] truncate">{{ svc.title }}</p>
+                <p class="text-[11px] text-slate-400 truncate">/{{ svc.slug }}</p>
+              </div>
+              <span
+                class="px-2 py-0.5 rounded-full text-[10px] font-semibold capitalize flex-shrink-0"
+                :class="svc.status === 'published'
+                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                  : svc.status === 'draft'
+                    ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                    : 'bg-slate-100 text-slate-600 border border-slate-200'"
+              >
+                {{ svc.status }}
+              </span>
+            </div>
+          </div>
+          <p v-else class="text-xs text-slate-400 py-6 text-center">No services loaded yet.</p>
         </div>
       </div>
     </div>
 
-    <!-- 3 Clean Executive Metric Cards (Decent, Minimalist, Non-Colory) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      <!-- Total Leads -->
-      <div class="bg-white rounded-xl p-5 border border-slate-200/90 shadow-xs">
-        <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Total Inquiries</p>
-        <p class="text-2xl font-bold text-slate-900 mt-1.5">{{ adminStore.totalLeadsCount }}</p>
-        <p class="text-[11px] text-slate-500 mt-1">Verified CRM database</p>
-      </div>
-
-      <!-- Pending Attention -->
-      <div class="bg-white rounded-xl p-5 border border-slate-200/90 shadow-xs">
-        <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Pending Attention</p>
-        <p class="text-2xl font-bold text-slate-900 mt-1.5">{{ adminStore.newLeadsCount }}</p>
-        <p class="text-[11px] text-amber-700 font-medium mt-1">Requires consultant action</p>
-      </div>
-
-      <!-- Pipeline Value -->
-      <div class="bg-white rounded-xl p-5 border border-slate-200/90 shadow-xs">
-        <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Estimated Pipeline</p>
-        <p class="text-2xl font-bold text-slate-900 mt-1.5">PKR 14.8 Cr</p>
-        <p class="text-[11px] text-slate-500 mt-1">Active client portfolio</p>
-      </div>
-    </div>
+    <!-- ===================================================================== -->
+    <!-- TAB 2: CAMPAIGNS, STRIP & POPUPS                                      -->
+    <!-- ===================================================================== -->
+    <div v-show="dashboardTab === 'campaigns'" class="space-y-6">
 
     <!-- Front Page Top Offer Strip Manager -->
     <div class="bg-white rounded-xl p-6 border border-slate-200/90 shadow-xs space-y-4">
@@ -588,9 +700,10 @@
         </div>
       </form>
     </div>
+    </div>
 
     <!-- Live Rates Glance Box -->
-    <div class="bg-white rounded-xl p-6 border border-slate-200/90 shadow-xs">
+    <div v-show="dashboardTab === 'overview'" class="bg-white rounded-xl p-6 border border-slate-200/90 shadow-2xs">
       <div class="flex items-center justify-between pb-4 border-b border-slate-100">
         <div>
           <h2 class="text-sm font-bold text-[#0F2A44] uppercase tracking-wide">
@@ -655,7 +768,7 @@
     </div>
 
     <!-- 5. Service FAQs & Knowledge Base Manager -->
-    <div class="bg-white rounded-xl p-6 border border-slate-200/90 shadow-xs space-y-5">
+    <div v-show="dashboardTab === 'faqs'" class="bg-white rounded-xl p-6 border border-slate-200/90 shadow-2xs space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
         <div>
           <div class="flex items-center gap-2">
@@ -757,7 +870,7 @@
     </div>
 
     <!-- Recent Inquiries Table -->
-    <div class="bg-white rounded-xl p-6 border border-slate-200/90 shadow-xs">
+    <div v-show="dashboardTab === 'overview'" class="bg-white rounded-xl p-6 border border-slate-200/90 shadow-2xs">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
         <div>
           <h2 class="text-sm font-bold text-[#0F2A44] uppercase tracking-wide">Recent Client Inquiries</h2>
@@ -950,20 +1063,78 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import {
   CurrencyDollarIcon,
   UsersIcon,
   ExclamationCircleIcon,
   CheckCircleIcon,
   ArrowTrendingUpIcon,
-  SparklesIcon
+  SparklesIcon,
+  Squares2X2Icon,
+  BuildingOffice2Icon,
+  NewspaperIcon
 } from '@heroicons/vue/24/outline'
 import { useAdminStore } from '../../stores/admin'
+import { usePropertiesStore } from '../../stores/properties'
+import { fetchAdminServicesDashboard } from '../../services/servicesCmsApi'
+import AdminStatCard from '../../components/admin/AdminStatCard.vue'
 import BuildingDetailsModal from '../../components/ui/BuildingDetailsModal.vue'
 import SiteVideoModal from '../../components/common/SiteVideoModal.vue'
 
 const adminStore = useAdminStore()
+const propertiesStore = usePropertiesStore()
+const dashboardTab = ref('overview')
+
+const serviceStats = ref({ total: 0, published: 0, draft: 0 })
+const recentServices = ref([])
+
+const featuredPropertiesCount = computed(() =>
+  (propertiesStore.properties || []).filter(p => p.featured).length
+)
+
+const leadsByDivision = computed(() => {
+  const list = adminStore.leads || []
+  const total = list.length || 1
+  const counts = {}
+  for (const item of list) {
+    const div = item.division || 'General'
+    counts[div] = (counts[div] || 0) + 1
+  }
+  return Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6)
+    .map(([label, count]) => ({
+      label,
+      count,
+      pct: Math.round((count / total) * 100)
+    }))
+})
+
+onMounted(async () => {
+  if (!propertiesStore.properties?.length && typeof propertiesStore.fetchProperties === 'function') {
+    propertiesStore.fetchProperties().catch(() => {})
+  }
+  if (adminStore.canAccessModule('services')) {
+    try {
+      const cms = await fetchAdminServicesDashboard()
+      if (cms?.stats) {
+        serviceStats.value = {
+          total: cms.stats.total ?? 0,
+          published: cms.stats.published ?? 0,
+          draft: cms.stats.draft ?? 0
+        }
+      }
+      if (Array.isArray(cms?.services)) {
+        recentServices.value = [...cms.services]
+          .sort((a, b) => String(b.updated_at || '').localeCompare(String(a.updated_at || '')))
+          .slice(0, 5)
+      }
+    } catch {
+      // Non-fatal
+    }
+  }
+})
 
 const promoForm = ref({ ...adminStore.promoStrip })
 

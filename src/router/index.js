@@ -38,6 +38,7 @@ const AdminRoles = () => import('../pages/admin/AdminRoles.vue')
 const AdminReviews = () => import('../pages/admin/AdminReviews.vue')
 const AdminBlogs = () => import('../pages/admin/AdminBlogs.vue')
 const AdminServices = () => import('../pages/admin/AdminServices.vue')
+const AdminSettings = () => import('../pages/admin/AdminSettings.vue')
 
 const routes = [
   {
@@ -375,6 +376,12 @@ const routes = [
         name: 'AdminServices',
         component: AdminServices,
         meta: { title: 'Services CMS | TopLinkers Admin Portal' }
+      },
+      {
+        path: 'settings',
+        name: 'AdminSettings',
+        component: AdminSettings,
+        meta: { title: 'Settings & Profile | TopLinkers Admin Portal' }
       }
     ]
   },

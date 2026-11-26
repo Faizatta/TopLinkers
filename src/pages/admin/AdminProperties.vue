@@ -1,19 +1,21 @@
 <template>
   <div class="space-y-6">
-    <!-- Header -->
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-      <div>
-        <h1 class="text-xl font-bold text-[#0F2A44] tracking-tight">Properties &amp; Inventory Manager</h1>
-        <p class="text-xs text-slate-500 mt-0.5">Manage public listings, cash/installment plot files, PHA flats, and photo galleries</p>
-      </div>
-
-      <button 
-        @click="openCreateModal"
-        class="px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs"
-      >
-        <span>Add New Property</span>
-      </button>
-    </div>
+    <AdminPageHeader
+      title="Properties & Inventory Manager"
+      subtitle="Manage public listings, cash/installment plot files, PHA flats, and photo galleries."
+      :badge="`${filteredProperties.length} listings`"
+      live-url="/listings"
+    >
+      <template #actions>
+        <button
+          type="button"
+          @click="openCreateModal"
+          class="px-4 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-2xs"
+        >
+          + Add New Property
+        </button>
+      </template>
+    </AdminPageHeader>
 
     <!-- Filter & Search Bar -->
     <div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col sm:flex-row gap-3">
@@ -48,10 +50,11 @@
     </div>
 
     <!-- Properties Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div 
-        v-for="prop in filteredProperties" 
-        :key="prop.id || prop.slug"
+    <div v-if="filteredProperties.length > 0" class="space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div
+          v-for="prop in paginatedProperties"
+          :key="prop.id || prop.slug"
         class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col hover:shadow-md transition-shadow"
       >
         <!-- Property Image Preview -->
@@ -156,7 +159,40 @@
           </div>
         </div>
       </div>
+      </div>
+
+      <div class="bg-white rounded-xl border border-slate-200/90 overflow-hidden shadow-2xs">
+        <AdminPagination
+          v-model:page="page"
+          v-model:page-size="pageSize"
+          :total-items="filteredProperties.length"
+          :page-sizes="[9, 18, 36]"
+        />
+      </div>
     </div>
+
+    <AdminEmptyState
+      v-else
+      title="No Properties Found"
+      description="No listings match your current search or filter criteria."
+    >
+      <template #action>
+        <button
+          type="button"
+          @click="search = ''; filterType = 'All'; filterPayment = 'All'"
+          class="px-3.5 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700"
+        >
+          Reset Filters
+        </button>
+        <button
+          type="button"
+          @click="openCreateModal"
+          class="px-3.5 py-2 rounded-lg bg-[#0F2A44] hover:bg-slate-800 text-white text-xs font-semibold"
+        >
+          + Add New Property
+        </button>
+      </template>
+    </AdminEmptyState>
 
     <!-- Modal: Add / Edit Property -->
     <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
@@ -770,6 +806,9 @@ import { useAdminStore } from '../../stores/admin'
 import { API_BASE_URL, invalidatePropertiesCache } from '../../services/api'
 import { notifyDataChanged } from '../../utils/syncBus'
 import { isPropertyOfferActive, getOfferRemainingLabel, calculateDiscount, formatPkrAmount } from '../../utils/offer'
+import AdminPageHeader from '../../components/admin/AdminPageHeader.vue'
+import AdminPagination from '../../components/admin/AdminPagination.vue'
+import AdminEmptyState from '../../components/admin/AdminEmptyState.vue'
 
 const adminStore = useAdminStore()
 
@@ -780,6 +819,8 @@ const DELETED_KEY = 'toplinkers_deleted_properties'
 const search = ref('')
 const filterType = ref('All')
 const filterPayment = ref('All')
+const page = ref(1)
+const pageSize = ref(9)
 const showModal = ref(false)
 const isEditing = ref(false)
 const uploadingImages = ref(false)
@@ -1088,6 +1129,15 @@ const filteredProperties = computed(() => {
     if (filterPayment.value !== 'All' && detectPaymentMode(p) !== filterPayment.value) return false
     return true
   })
+})
+
+const paginatedProperties = computed(() => {
+  const start = (page.value - 1) * pageSize.value
+  return filteredProperties.value.slice(start, start + pageSize.value)
+})
+
+watch([search, filterType, filterPayment], () => {
+  page.value = 1
 })
 
 const formatPrice = (price) => {
