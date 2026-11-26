@@ -230,6 +230,14 @@
                   <span>Browse Photo from Device</span>
                   <input type="file" accept="image/*" class="hidden" @change="handlePhotoUpload" />
                 </label>
+                <button
+                  v-if="form.photo"
+                  type="button"
+                  @click="openAdjustTeamPhoto(form.photo)"
+                  class="px-3 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 text-xs font-bold transition-colors"
+                >
+                  Adjust Photo
+                </button>
                 <span class="text-[11px] text-gray-400">or paste URL below</span>
               </div>
               <input v-model="form.photo" type="text" class="w-full px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs" placeholder="https://..." />
@@ -328,6 +336,15 @@
         </form>
       </div>
     </div>
+
+    <ImageAdjustModal
+      v-model="adjustModalOpen"
+      :src="adjustSrc"
+      aspect-ratio="1:1"
+      :output-width="600"
+      title="Adjust Team Member Photo"
+      @apply="onAdjustedTeamPhoto"
+    />
   </div>
 </template>
 
@@ -342,6 +359,7 @@ import {
 import { useAdminStore } from '../../stores/admin'
 import AdminPageHeader from '../../components/admin/AdminPageHeader.vue'
 import AdminEmptyState from '../../components/admin/AdminEmptyState.vue'
+import ImageAdjustModal from '../../components/common/ImageAdjustModal.vue'
 
 const adminStore = useAdminStore()
 
@@ -455,10 +473,28 @@ const compressImageFile = (file) => {
   })
 }
 
+const adjustModalOpen = ref(false)
+const adjustSrc = ref('')
+
+const openAdjustTeamPhoto = (src) => {
+  if (!src) return
+  adjustSrc.value = src
+  adjustModalOpen.value = true
+}
+
+const onAdjustedTeamPhoto = ({ dataUrl }) => {
+  if (dataUrl) {
+    form.value.photo = dataUrl
+    adminStore.showToast('Photo adjusted and applied.')
+  }
+}
+
 const handlePhotoUpload = async (event) => {
   const file = event.target.files?.[0]
   if (!file) return
-  form.value.photo = await compressImageFile(file)
+  const dataUrl = await compressImageFile(file)
+  form.value.photo = dataUrl
+  openAdjustTeamPhoto(dataUrl)
   event.target.value = ''
 }
 

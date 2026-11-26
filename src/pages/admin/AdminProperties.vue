@@ -505,6 +505,14 @@
                 <!-- Hover Actions -->
                 <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5">
                   <button
+                    type="button"
+                    @click="openAdjustPropertyImage(index)"
+                    class="px-2 py-1 rounded bg-white text-[#0F2A44] text-[10px] font-bold hover:bg-[#16B4E8] hover:text-white"
+                    title="Adjust & crop photo"
+                  >
+                    Adjust
+                  </button>
+                  <button
                     v-if="index !== 0"
                     type="button"
                     @click="setAsCover(index)"
@@ -783,6 +791,15 @@
         </form>
       </div>
     </div>
+
+    <ImageAdjustModal
+      v-model="adjustModalOpen"
+      :src="adjustSrc"
+      aspect-ratio="4:3"
+      :output-width="1200"
+      title="Adjust Property / House Photo"
+      @apply="onAdjustedPropertyImage"
+    />
   </div>
 </template>
 
@@ -809,6 +826,7 @@ import { isPropertyOfferActive, getOfferRemainingLabel, calculateDiscount, forma
 import AdminPageHeader from '../../components/admin/AdminPageHeader.vue'
 import AdminPagination from '../../components/admin/AdminPagination.vue'
 import AdminEmptyState from '../../components/admin/AdminEmptyState.vue'
+import ImageAdjustModal from '../../components/common/ImageAdjustModal.vue'
 
 const adminStore = useAdminStore()
 
@@ -1176,15 +1194,37 @@ const compressImageFile = (file) => {
   })
 }
 
+const adjustModalOpen = ref(false)
+const adjustSrc = ref('')
+const adjustTargetIndex = ref(-1)
+
+const openAdjustPropertyImage = (index) => {
+  const url = propertyForm.value.images?.[index]
+  if (!url) return
+  adjustTargetIndex.value = index
+  adjustSrc.value = url
+  adjustModalOpen.value = true
+}
+
+const onAdjustedPropertyImage = ({ dataUrl }) => {
+  if (!dataUrl || adjustTargetIndex.value < 0) return
+  propertyForm.value.images.splice(adjustTargetIndex.value, 1, dataUrl)
+  adminStore.showToast('Property photo adjusted.')
+}
+
 const handleMultiImageUpload = async (event) => {
   const files = Array.from(event.target.files || [])
   if (!files.length) return
   uploadingImages.value = true
   try {
+    const startLen = propertyForm.value.images.length
     for (const file of files) {
       if (!file.type.startsWith('image/')) continue
       const dataUrl = await compressImageFile(file)
       propertyForm.value.images.push(dataUrl)
+    }
+    if (files.length === 1 && propertyForm.value.images[startLen]) {
+      openAdjustPropertyImage(startLen)
     }
   } finally {
     uploadingImages.value = false

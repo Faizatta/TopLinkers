@@ -48,6 +48,15 @@
             <button
               v-if="modelValue"
               type="button"
+              @click="adjustOpen = true"
+              class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-700 transition-colors"
+            >
+              <span>Adjust</span>
+            </button>
+
+            <button
+              v-if="modelValue"
+              type="button"
               @click="$emit('update:modelValue', '')"
               class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 text-xs font-medium text-slate-600 transition-colors"
             >
@@ -69,6 +78,15 @@
         </div>
       </div>
     </div>
+
+    <ImageAdjustModal
+      v-model="adjustOpen"
+      :src="modelValue"
+      aspect-ratio="4:3"
+      :output-width="1200"
+      title="Adjust & Crop Image"
+      @apply="onAdjustedImage"
+    />
   </div>
 </template>
 
@@ -76,6 +94,7 @@
 import { ref } from 'vue'
 import { PhotoIcon, ArrowUpTrayIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import { useAdminStore } from '../../stores/admin'
+import ImageAdjustModal from '../common/ImageAdjustModal.vue'
 
 const props = defineProps({
   modelValue: { type: String, default: '' },
@@ -89,6 +108,15 @@ const adminStore = useAdminStore()
 const isDragging = ref(false)
 const uploading = ref(false)
 const errorMsg = ref('')
+const adjustOpen = ref(false)
+
+const onAdjustedImage = async ({ file, dataUrl }) => {
+  if (file) {
+    await processFile(file)
+  } else if (dataUrl) {
+    emit('update:modelValue', dataUrl)
+  }
+}
 
 const processFile = async (file) => {
   errorMsg.value = ''
