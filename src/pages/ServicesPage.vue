@@ -60,7 +60,7 @@
             >
               <option value="all">All Core Divisions (Plots, Flats, Construction, Solar)</option>
               <option value="plot">1. Plots (Moqa Ka Plot &amp; Installments)</option>
-              <option value="flats">2. Flats (PHA Cash &amp; Banu Hafeez)</option>
+              <option value="flats">2. Flats (PHA Cash &amp; Luxury Suites)</option>
               <option value="construction">3. Turnkey Construction Services</option>
               <option value="solar">4. Solar Services (10kW, 20kW, 50kW)</option>
             </select>
@@ -553,12 +553,12 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <!-- Card 1: PHA Flats (100% Cash Ready) -->
           <div class="bg-white rounded-2xl border border-gray-200/90 hover:border-[#16B4E8] shadow-sm hover:shadow-lg transition-all p-6 flex flex-col justify-between group">
             <div>
-              <div class="flex items-center justify-between mb-3">
-                <span class="bg-[#0F2A44] text-white text-[9px] font-black uppercase px-2.5 py-0.5 rounded">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <span class="bg-[#0F2A44] text-white text-[9px] font-black uppercase px-2.5 py-0.5 rounded whitespace-nowrap">
                   100% Cash &bull; Ready
                 </span>
                 <span class="text-xs font-bold text-gray-400">Sector I-16/3 &amp; I-12/1</span>
@@ -624,94 +624,14 @@
             </div>
           </div>
 
-          <!-- Card 2: Banu Hafeez Luxury Apartments (TopCity-1) -->
-          <div class="bg-white rounded-2xl border border-gray-200/90 hover:border-[#16B4E8] shadow-sm hover:shadow-lg transition-all p-6 flex flex-col justify-between group">
-            <div>
-              <div class="flex items-center justify-between mb-3">
-                <span class="bg-[#16B4E8] text-[#0F2A44] text-[9px] font-black uppercase px-2.5 py-0.5 rounded">
-                  15% Booking &bull; 3-Yr Plan
-                </span>
-                <span class="text-xs font-bold text-gray-400">TopCity-1 &bull; 17 Storeys</span>
-              </div>
-
-              <!-- Few Images Preview Row (Banu Hafeez TopCity-1) -->
-              <div class="mb-4 rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
-                <div class="h-36 w-full overflow-hidden relative cursor-pointer" @click="openInstallmentModal('banu-hafeez')">
-                  <img src="/images/banu-hafeez/bh-hero.webp" alt="Banu Hafeez 17-Storey Tower TopCity-1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" width="400" height="144" />
-                  <span class="absolute bottom-2 right-2 bg-black/75 text-white text-[9px] font-bold px-2 py-0.5 rounded backdrop-blur-xs flex items-center gap-1">
-                    <span>📸</span>
-                    <span>Few Images &bull; 5 Photos</span>
-                  </span>
-                </div>
-                <div class="p-1.5 flex items-center gap-1.5 overflow-x-auto bg-slate-100/70">
-                  <img src="/images/banu-hafeez/bh-hero.webp" alt="Tower Façade" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
-                  <img src="/images/banu-hafeez/bh-tower.webp" alt="17-Storey Elevation" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
-                  <img src="/images/banu-hafeez/bh-interior.webp" alt="Luxury Suite Interior" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
-                  <img src="/images/banu-hafeez/bh-plan.webp" alt="Floor Layout Plan" loading="lazy" decoding="async" width="48" height="36" class="w-12 h-9 rounded object-cover cursor-pointer hover:opacity-80 flex-shrink-0" @click="openInstallmentModal('banu-hafeez')" />
-                </div>
-              </div>
-
-              <h3 class="text-lg font-extrabold text-[#0F2A44] group-hover:text-[#16B4E8] transition-colors">
-                <router-link to="/featured-building" class="hover:text-[#16B4E8]">
-                  Banu Hafeez Luxury Apartments
-                </router-link>
-              </h3>
-              <p class="text-xs text-gray-500 mt-1 leading-relaxed">
-                Approved 17-storey landmark tower by Waheed Group in TopCity-1, Islamabad (15 min from Airport). 1, 2 &amp; 3 Bed suites on a 3-year flexible installment plan with resident swimming pool, gym &amp; 2 basements parking.
-              </p>
-
-              <div class="mt-5 space-y-2.5 text-xs">
-                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
-                  <div class="flex items-center justify-between font-bold text-[#0F2A44]">
-                    <span>1-Bed Luxury Suite (Type-C &bull; 546 Sq.Ft)</span>
-                    <span class="text-[#16B4E8] font-black">PKR 98.3 Lac</span>
-                  </div>
-                  <p class="text-[11px] text-gray-500 mt-0.5">Booking: PKR 14.74 Lac &bull; 36 Monthly: PKR 49,140</p>
-                </div>
-
-                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
-                  <div class="flex items-center justify-between font-bold text-[#0F2A44]">
-                    <span>2-Bed Executive Suite (Type-B &bull; 1,089 Sq.Ft)</span>
-                    <span class="text-[#16B4E8] font-black">PKR 1.96 Cr</span>
-                  </div>
-                  <p class="text-[11px] text-gray-500 mt-0.5">Booking: PKR 29.40 Lac &bull; 36 Monthly: PKR 98,010</p>
-                </div>
-
-                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
-                  <div class="flex items-center justify-between font-bold text-[#0F2A44]">
-                    <span>3-Bed Royal Suite (Type-A &bull; 1,881 Sq.Ft)</span>
-                    <span class="text-[#16B4E8] font-black">PKR 3.38 Cr</span>
-                  </div>
-                  <p class="text-[11px] text-gray-500 mt-0.5">Booking: PKR 50.78 Lac &bull; 36 Monthly: PKR 169,290</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-gray-100 flex items-center gap-2">
-              <button
-                type="button"
-                @click="openInstallmentModal('banu-hafeez')"
-                class="flex-1 py-2.5 bg-[#0F2A44] hover:bg-[#16B4E8] text-white font-bold text-xs uppercase rounded-xl text-center transition-all shadow-sm"
-              >
-                View Schedule
-              </button>
-              <router-link
-                to="/featured-building"
-                class="px-3.5 py-2.5 bg-gray-100 hover:bg-gray-200 text-[#0F2A44] font-bold text-xs uppercase rounded-xl text-center transition-all"
-              >
-                Details &rarr;
-              </router-link>
-            </div>
-          </div>
-
-          <!-- Card 3: Faisal Heights Luxury Apartments (Zedem International) -->
+          <!-- Card 2: Faisal Heights Luxury Apartments (Project of Faisal Town, F-18) -->
           <div class="bg-white rounded-2xl border border-gray-200/90 hover:border-emerald-500 shadow-sm hover:shadow-lg transition-all p-6 flex flex-col justify-between group">
             <div>
-              <div class="flex items-center justify-between mb-3">
-                <span class="bg-emerald-600 text-white text-[9px] font-black uppercase px-2.5 py-0.5 rounded">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <span class="bg-emerald-600 text-white text-[9px] font-black uppercase px-2.5 py-0.5 rounded whitespace-nowrap">
                   NOC Approved &bull; 1M Sq.Ft
                 </span>
-                <span class="text-xs font-bold text-gray-400">Zedem &bull; Luxury Living</span>
+                <span class="text-xs font-bold text-gray-400">Faisal Town &bull; Sector F-18</span>
               </div>
 
               <!-- Few Images Preview Row (Faisal Heights Zedem) -->
@@ -737,7 +657,7 @@
                 </router-link>
               </h3>
               <p class="text-xs text-gray-500 mt-1 leading-relaxed">
-                Purely luxury residential tower project spanning over 1 Million Sq.Ft by Zedem / Faisal Town. Studio to 4-Bed Lofts with private theater, pool, gym, café, and rooftop garden.
+                Purely luxury residential tower project spanning over 1 Million Sq.Ft — a project of Faisal Town, located in Sector F-18, Islamabad. Studio to 4-Bed Lofts with private theater, pool, gym, café, and rooftop garden.
               </p>
 
               <div class="mt-5 space-y-2.5 text-xs">
