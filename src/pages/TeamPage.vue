@@ -1,37 +1,17 @@
 <template>
   <div class="team-page pt-[66px] sm:pt-[80px] pb-16 bg-[#F8FAFC] min-h-screen">
-    <!-- Unique Architectural Executive Team Header (Mobile & Desktop) -->
-    <header class="relative bg-gradient-to-br from-[#081322] via-[#0F2A44] to-[#13385B] text-white overflow-hidden border-b border-slate-800/70 mb-10 sm:mb-12">
-      <!-- Subtle Architectural Grid & Radial Accent -->
-      <div class="absolute inset-0 opacity-[0.06] pointer-events-none" style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 40px 40px;"></div>
-      <div class="absolute -right-24 -top-24 w-80 h-80 rounded-full bg-[#16B4E8]/15 blur-3xl pointer-events-none"></div>
-
-      <div class="relative max-w-[1260px] mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:py-14 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-        <div class="max-w-2xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/10 text-cyan-300 border border-white/15 mb-3">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#16B4E8]"></span>
-            <span>TopLinkers Leadership &amp; Specialists</span>
-          </div>
-          <h1 class="text-2xl sm:text-4xl lg:text-[42px] font-black tracking-tight text-white leading-[1.12]">
-            Founders, Agents &amp; PEC Engineers
-          </h1>
-          <p class="text-xs sm:text-sm text-slate-300 mt-2.5 leading-relaxed max-w-xl">
-            Led by visionary founders and powered by CDA/RDA property specialists and PEC-registered civil &amp; solar engineers across Islamabad &amp; Rawalpindi.
-          </p>
-        </div>
-
-        <!-- Professional Credentials & Office Pillar -->
-        <div class="lg:max-w-sm w-full border-t lg:border-t-0 lg:border-l border-white/15 pt-4 lg:pt-0 lg:pl-7 space-y-2 flex-shrink-0">
-          <p class="text-[11px] font-bold uppercase tracking-widest text-cyan-300">
-            Verified Expertise &amp; Integrity
-          </p>
-          <p class="text-xs sm:text-sm font-semibold text-white leading-snug">
-            Direct Advisory, Legal Title Diligence &amp; Turnkey Engineering
-          </p>
-          <p class="text-[11px] text-slate-300 leading-relaxed">
-            Head Office: Al Hameed Plaza, G-11 Markaz, Islamabad &bull; Mon–Sat, 9 AM – 8 PM
-          </p>
-        </div>
+    <!-- Simple, Clean Team Page Header -->
+    <header class="bg-white border-b border-slate-200/80 mb-8 sm:mb-10">
+      <div class="max-w-[1260px] mx-auto px-4 sm:px-6 py-7 sm:py-10 text-center">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[#16B4E8]">
+          Our Team
+        </p>
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-[#0F2A44] tracking-tight mt-1.5">
+          Founders, Agents &amp; PEC Engineers
+        </h1>
+        <p class="text-xs sm:text-sm text-slate-500 mt-2 max-w-xl mx-auto leading-relaxed">
+          Meet the leadership, CDA/RDA property specialists, and PEC-registered engineers behind TopLinkers.
+        </p>
       </div>
     </header>
 
@@ -40,17 +20,11 @@
       <!-- PART 1 (TOP): EXECUTIVE BOARD & FOUNDERS LEADERSHIP SHOWCASE   -->
       <!-- ============================================================== -->
       <section class="mb-14 sm:mb-16">
-        <!-- Clean Compact Section Header -->
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6 sm:mb-8 pb-3 border-b border-slate-200/80 max-w-6xl mx-auto">
-          <div>
-            <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#16B4E8]">Executive Board</span>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-[#0F2A44] tracking-tight mt-0.5">
-              Founding Leadership &amp; CEOs
-            </h2>
-          </div>
-          <p class="text-xs text-slate-500 font-medium">
-            Tap any executive card to view full dossier, direct contact &amp; portfolio.
-          </p>
+        <div class="flex items-center justify-between mb-5 max-w-6xl mx-auto">
+          <h2 class="text-base sm:text-lg font-bold text-[#0F2A44]">
+            Founding Leadership &amp; CEOs
+          </h2>
+          <span class="text-xs text-slate-400 hidden sm:inline">Click a card for full profile</span>
         </div>
 
         <!-- The 2 Executive Cards Grid (Mobile-First Responsive Layout) -->
