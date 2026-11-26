@@ -86,7 +86,7 @@
                 <XMarkIcon class="w-3.5 h-3.5" />
               </button>
 
-              <div class="flex items-center gap-3.5 relative z-10">
+              <div class="flex items-center gap-3 relative z-10 pr-7">
                 <!-- Scenic Thumbnail with Live Down Payment Tag -->
                 <div class="relative w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-white/20 shadow-lg bg-slate-900">
                   <img
@@ -105,7 +105,7 @@
                 </div>
 
                 <!-- Dynamic Rotating Curiosity Copy -->
-                <div class="flex-1 min-w-0 pr-4">
+                <div class="flex-1 min-w-0">
                   <div class="flex items-center gap-1.5 mb-1">
                     <span class="text-[9px] font-extrabold uppercase tracking-wider text-emerald-300 bg-emerald-500/15 border border-emerald-400/30 px-1.5 py-0.5 rounded">
                       {{ spotlight.badge || '20%+ Rental ROI' }}
