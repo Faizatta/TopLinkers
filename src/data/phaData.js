@@ -21,9 +21,8 @@ export const phaSectors = {
     videoUrl: '',
     description: 'The Sector I-12/1 PHA Foundation Housing Scheme is one of the most prominent government residential developments in Islamabad, comprising over 3,200 modern multi-storey apartments. Designed for modern family living with dual high-speed elevators per block, dedicated car parking grounds, uninterrupted CDA utility infrastructure, and verified allotment files transferable at PHA Foundation Headquarters.',
     types: [
-      { type: 'Type D (Executive 2-Bed)', area: '~870 Sq.Ft', specs: '2 Bed • 2 Bath • Balcony • Lounge', price: 'PKR 95 Lac – 1.15 Cr' },
-      { type: 'Type E (Standard 2-Bed)', area: '~710 Sq.Ft', specs: '2 Bed • 1 Bath • Kitchen • Lounge', price: 'PKR 75 – 92 Lac' },
-      { type: 'Type C (Corner Deluxe)', area: '~1,100 Sq.Ft', specs: '3 Bed • 2 Bath • Corner Balconies', price: 'PKR 1.15 – 1.35 Cr' }
+      { type: 'Type D (Executive 2-Bed)', area: '870 Sq.Ft', specs: '2 Bed • 2 Bath • Balcony • Lounge', price: 'PKR 95 Lac – 1.15 Cr' },
+      { type: 'Type E (Standard 2-Bed)', area: '710 Sq.Ft', specs: '2 Bed • 1 Bath • Kitchen • Lounge', price: 'PKR 75 – 92 Lac' }
     ],
     features: [
       'Dual High-Speed Elevators in Each Residential Tower',
@@ -58,9 +57,8 @@ export const phaSectors = {
     videoUrl: '',
     description: 'Fully completed and handed-over G+6 residential apartment blocks by Pakistan Housing Authority Foundation in Sector I-16/3, Islamabad. Inhabited family community with active electricity, gas, water supply, dual elevators, tiled flooring, commercial markets on ground, and immediate on-the-spot physical keys handover upon cash transfer.',
     types: [
-      { type: 'Type E (Family 2-Bed)', area: '~912 Sq.Ft', specs: '2 Bed • 2 Bath • Balcony • Tile Finish', price: 'PKR 85 Lac – 1.05 Cr' },
-      { type: 'Type B (Executive 3-Bed)', area: '~1,496 Sq.Ft', specs: '3 Bed • 3 Bath • Servant Quarter • Balcony', price: 'PKR 1.15 – 1.45 Cr' },
-      { type: 'Type A (Corner Penthouse)', area: '~1,650 Sq.Ft', specs: '3 Bed • 4 Bath • Panoramic Views', price: 'PKR 1.35 – 1.65 Cr' }
+      { type: 'Type E (Family 2-Bed)', area: '912 Sq.Ft', specs: '2 Bed • 2 Bath • Balcony • Tile Finish', price: 'PKR 85 Lac – 1.05 Cr' },
+      { type: 'Type B (Executive 3-Bed)', area: '1,496 Sq.Ft', specs: '3 Bed • 3 Bath • Servant Quarter • Balcony', price: 'PKR 1.15 – 1.45 Cr' }
     ],
     features: [
       '100% Ready Physical Possession with Immediate Keys Handover',

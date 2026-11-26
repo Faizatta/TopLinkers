@@ -978,7 +978,7 @@
                   </td>
                   <td class="py-5 px-6 align-top">
                     <p class="text-gray-700 text-xs leading-relaxed font-normal">
-                      Roughly 700–900+ sq. ft. layouts (2-bed/2-bath and slightly larger configurations). Comprises 3,200 units nearing completion, with limited re-balloted units.
+                      <strong class="font-bold text-[#0F2A44]">Type D</strong> is 870 sq. ft. and <strong class="font-bold text-[#0F2A44]">Type E</strong> is 710 sq. ft. (2-bed/2-bath configurations). Comprises 3,200 units nearing completion, with limited re-balloted units.
                     </p>
                     <div class="mt-3 flex items-center gap-3">
                       <router-link
@@ -1034,7 +1034,7 @@
                 Type D &amp; Type E
               </div>
               <p class="text-xs text-gray-600 leading-relaxed">
-                Roughly 700–900+ sq. ft. layouts (2-bed/2-bath and slightly larger configurations). Comprises 3,200 units nearing completion, with limited re-balloted units.
+                <strong class="font-bold text-[#0F2A44]">Type D:</strong> 870 sq. ft. &bull; <strong class="font-bold text-[#0F2A44]">Type E:</strong> 710 sq. ft. (2-bed/2-bath). Comprises 3,200 units nearing completion, with limited re-balloted units.
               </p>
               <div class="pt-2 flex items-center justify-between text-xs border-t border-gray-200/50">
                 <router-link to="/listings?search=I-12" class="font-bold text-[#16B4E8]">View I-12 &rarr;</router-link>

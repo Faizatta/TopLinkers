@@ -552,9 +552,9 @@ export const useAdminStore = defineStore('admin', () => {
         videoUrl: ''
       },
       i12_typeDE: {
-        name: 'Sector I-12/1 — Type D & Type E',
+        name: 'Sector I-12/1 — Type D (870 Sq Ft) & Type E (710 Sq Ft)',
         rate: 'PKR 58 - 82 Lac',
-        specs: '700–900+ sq. ft. (2-bed/2-bath) • 3,200 Units Nearing Completion',
+        specs: 'Type D: 870 sq. ft. & Type E: 710 sq. ft. (2-bed/2-bath) • 3,200 Units Nearing Completion',
         videoUrl: ''
       }
     },
@@ -563,14 +563,14 @@ export const useAdminStore = defineStore('admin', () => {
       {
         location: 'Sector I-16/3',
         categories: 'Type E (2-Bed) & Type B (3-Bed)',
-        specs: 'Type E is ~912 sq. ft. (2 beds, 2 baths). Type B is ~1,496 sq. ft. (3 beds, servant quarter). G+6 blocks with completed/active resale market.',
+        specs: 'Type E is 912 sq. ft. (2 beds, 2 baths). Type B is 1,496 sq. ft. (3 beds, servant quarter). G+6 blocks with completed/active resale market.',
         status: 'Completed / Active Resale Market',
         badge: 'G+6 Completed Blocks'
       },
       {
         location: 'Sector I-12/1',
-        categories: 'Type D & Type E',
-        specs: 'Roughly 700–900+ sq. ft. layouts (2-bed/2-bath and slightly larger configurations). Comprises 3,200 units nearing completion, with limited re-balloted units.',
+        categories: 'Type D (870 Sq.Ft) & Type E (710 Sq.Ft)',
+        specs: 'Type D is 870 sq. ft. and Type E is 710 sq. ft. (2-bed/2-bath configurations). Comprises 3,200 units nearing completion, with limited re-balloted units.',
         status: 'Nearing Completion / Limited Re-balloted',
         badge: '3,200 Units'
       }
