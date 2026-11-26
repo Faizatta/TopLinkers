@@ -1373,12 +1373,13 @@ const saveProperty = () => {
 
   // Also sync to server database API
   try {
+    const token = localStorage.getItem('toplinkers_admin_token')
     const isEdit = isEditing.value
     const endpoint = isEdit ? `${API_BASE_URL}/properties/${encodeURIComponent(item.slug || item.id)}` : `${API_BASE_URL}/properties`
     const reqMethod = isEdit ? 'PUT' : 'POST'
     fetch(endpoint, {
       method: reqMethod,
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache', ...(token ? { 'Authorization': `Bearer ${token}` } : {}) },
       body: JSON.stringify({
         id: item.id,
         slug: item.slug,
@@ -1427,9 +1428,10 @@ const deleteProperty = async (idOrSlug) => {
 
     // Call server database to delete
     try {
+      const token = localStorage.getItem('toplinkers_admin_token')
       fetch(`${API_BASE_URL}/properties/${encodeURIComponent(idOrSlug)}`, {
         method: 'DELETE',
-        headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache' }
+        headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache', ...(token ? { 'Authorization': `Bearer ${token}` } : {}) }
       }).then(() => {
         notifyDataChanged('properties', { deleted: idOrSlug })
       }).catch(() => {})

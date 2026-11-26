@@ -962,8 +962,33 @@ if (listingsRoute && allProperties.length > 0) {
   `
 }
 
+const propertyTypeRoutes = [
+  { slug: 'apartment', label: 'Apartments & PHA Flats' },
+  { slug: 'single-family-home', label: 'Single Family Homes' },
+  { slug: 'studio', label: 'Studio Apartments & Suites' },
+  { slug: 'villa', label: 'Luxury Villas' },
+  { slug: 'office', label: 'Commercial Offices' },
+  { slug: 'shop', label: 'Commercial Shops & Plazas' }
+].map(t => ({
+  path: `/property-type/${t.slug}`,
+  title: `${t.label} in Islamabad | TopLinkers Verified Listings`,
+  description: `Browse verified ${t.label.toLowerCase()} in Islamabad & Rawalpindi with TopLinkers. Complete CDA/RDA title diligence and transparent deals.`,
+  h1: `${t.label} for Sale in Islamabad & Rawalpindi`,
+  content: `
+    <section style="margin-bottom:28px;">
+      <h2 style="font-size:20px;font-weight:800;color:#0F2A44;margin-bottom:12px;">Verified ${t.label} Portfolio</h2>
+      <p style="font-size:15px;line-height:1.75;color:#334155;margin-bottom:16px;">
+        Explore CDA and RDA verified ${t.label.toLowerCase()} across Islamabad and Rawalpindi, including TopCity-1, PHA Sector I-12 &amp; I-16, Faisal Town, PECHS, and Gulberg Greens.
+      </p>
+      <p style="font-size:14px;color:#475569;">
+        <a href="/listings" style="color:#16B4E8;font-weight:700;">View All Verified Properties &rarr;</a>
+      </p>
+    </section>
+  `
+}))
+
 const disallowedPaths = new Set(['/404', '/compare', '/create-listing', '/favorites', '/search'])
-const allRoutes = [...staticRoutes, ...dynamicBlogRoutes, ...dynamicPropertyRoutes]
+const allRoutes = [...staticRoutes, ...propertyTypeRoutes, ...dynamicBlogRoutes, ...dynamicPropertyRoutes]
 
 export function prerender() {
   if (!fs.existsSync(templatePath)) {

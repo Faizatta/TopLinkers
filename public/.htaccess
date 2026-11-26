@@ -57,6 +57,7 @@ DirectorySlash Off
   RewriteRule ^disclaimer-policy/?$ /disclaimer [R=301,L]
   RewriteRule ^harsukh/?$ /hr-sukh [R=301,L]
   RewriteRule ^harsukh-residencies/?$ /hr-sukh [R=301,L]
+  RewriteRule ^property/topcity1-10-marla-prime-plot/?$ /property/corner-plot-topcity [R=301,L]
 
   # Serve Markdown representation when agents request Accept: text/markdown
   RewriteCond %{HTTP:Accept} text/markdown [NC]

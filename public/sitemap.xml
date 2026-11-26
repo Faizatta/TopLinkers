@@ -103,6 +103,42 @@
     <priority>0.70</priority>
   </url>
   <url>
+    <loc>https://toplinkersgroup.com/property-type/apartment</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://toplinkersgroup.com/property-type/single-family-home</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://toplinkersgroup.com/property-type/studio</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://toplinkersgroup.com/property-type/villa</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://toplinkersgroup.com/property-type/office</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://toplinkersgroup.com/property-type/shop</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
     <loc>https://toplinkersgroup.com/blog/cda-sector-c-14-c-15-development-updates-2026</loc>
     <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>

@@ -5,6 +5,16 @@ import { notifyDataChanged } from '../utils/syncBus.js'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://127.0.0.1:8000/api' : '/api')
 
+function getAdminHeaders(extra = {}) {
+  const token = typeof localStorage !== 'undefined' ? localStorage.getItem('toplinkers_admin_token') : ''
+  return {
+    Accept: 'application/json',
+    'Cache-Control': 'no-cache',
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...extra
+  }
+}
+
 const STORAGE_KEYS = {
   AUTH: 'toplinkers_admin_auth',
   LEADS: 'toplinkers_admin_leads',
@@ -455,7 +465,7 @@ export const useAdminStore = defineStore('admin', () => {
       try {
         await fetch(`${API_BASE_URL}/leads/${id}/status`, {
           method: 'PATCH',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          headers: getAdminHeaders({ 'Content-Type': 'application/json' }),
           body: JSON.stringify({ status: newStatus })
         })
       } catch (e) {}
@@ -468,7 +478,7 @@ export const useAdminStore = defineStore('admin', () => {
     try {
       await fetch(`${API_BASE_URL}/leads/${id}`, {
         method: 'DELETE',
-        headers: { 'Accept': 'application/json' }
+        headers: getAdminHeaders()
       })
     } catch (e) {}
   }
@@ -684,7 +694,7 @@ export const useAdminStore = defineStore('admin', () => {
     try {
       const res = await fetch(`${API_BASE_URL}/rates`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
+        headers: getAdminHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(liveRates.value)
       })
       if (res.ok) {
@@ -879,7 +889,7 @@ export const useAdminStore = defineStore('admin', () => {
     try {
       const res = await fetch(`${API_BASE_URL}/team`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
+        headers: getAdminHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(item)
       })
       if (res.ok) {
@@ -900,7 +910,7 @@ export const useAdminStore = defineStore('admin', () => {
     try {
       const res = await fetch(`${API_BASE_URL}/team/${id}`, {
         method: 'DELETE',
-        headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache' }
+        headers: getAdminHeaders()
       })
       if (res.ok) {
         apiConnected.value = true
@@ -1563,7 +1573,7 @@ export const useAdminStore = defineStore('admin', () => {
     try {
       const res = await fetch(`${API_BASE_URL}/reviews`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
+        headers: getAdminHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(item)
       })
       if (res.ok) {
@@ -1583,7 +1593,7 @@ export const useAdminStore = defineStore('admin', () => {
     try {
       const res = await fetch(`${API_BASE_URL}/reviews/${encodeURIComponent(id)}`, {
         method: 'DELETE',
-        headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache' }
+        headers: getAdminHeaders()
       })
       if (res.ok) {
         apiConnected.value = true
@@ -1613,7 +1623,7 @@ export const useAdminStore = defineStore('admin', () => {
     try {
       const res = await fetch(`${API_BASE_URL}/promo-strip`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
+        headers: getAdminHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(promoStrip.value)
       })
       if (res.ok) {
@@ -1666,7 +1676,7 @@ export const useAdminStore = defineStore('admin', () => {
     try {
       const res = await fetch(`${API_BASE_URL}/spotlight-popup`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
+        headers: getAdminHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(spotlightPopup.value)
       })
       if (res.ok) {
@@ -1751,7 +1761,7 @@ export const useAdminStore = defineStore('admin', () => {
     try {
       const res = await fetch(`${API_BASE_URL}/custom-building`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
+        headers: getAdminHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(customBuilding.value)
       })
       if (res.ok) {
@@ -1909,7 +1919,7 @@ export const useAdminStore = defineStore('admin', () => {
     try {
       const res = await fetch(`${API_BASE_URL}/faqs`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Cache-Control': 'no-cache' },
+        headers: getAdminHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(faqs.value)
       })
       if (res.ok) {

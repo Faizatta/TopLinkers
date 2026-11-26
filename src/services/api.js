@@ -494,36 +494,42 @@ export const api = {
   },
 
   async uploadImage(file) {
+    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('toplinkers_admin_token') : ''
     const formData = new FormData()
     formData.append('image', file)
     const res = await fetch(`${API_BASE_URL}/upload`, {
       method: 'POST',
+      headers: token ? { 'Authorization': `Bearer ${token}` } : {},
       body: formData
     })
     return jsonOrThrow(res, 'Failed to upload image')
   },
 
   async createPost(postData) {
+    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('toplinkers_admin_token') : ''
     const res = await fetch(`${API_BASE_URL}/blogs`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...(token ? { 'Authorization': `Bearer ${token}` } : {}) },
       body: JSON.stringify(postData)
     })
     return jsonOrThrow(res, 'Failed to create blog post')
   },
 
   async updatePost(id, postData) {
+    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('toplinkers_admin_token') : ''
     const res = await fetch(`${API_BASE_URL}/blogs/${id}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...(token ? { 'Authorization': `Bearer ${token}` } : {}) },
       body: JSON.stringify(postData)
     })
     return jsonOrThrow(res, 'Failed to update blog post')
   },
 
   async deletePost(id) {
+    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('toplinkers_admin_token') : ''
     const res = await fetch(`${API_BASE_URL}/blogs/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: token ? { 'Authorization': `Bearer ${token}` } : {}
     })
     return jsonOrThrow(res, 'Failed to delete blog post')
   },

@@ -635,40 +635,57 @@ if (!function_exists('seedServicesCmsIfEmpty')) {
     }
 }
 
+if (!function_exists('formatServiceRowsBatch')) {
+    function formatServiceRowsBatch(PDO $pdo, array $rows): array {
+        if (empty($rows)) return [];
+        $ids = array_map(fn($r) => (int)$r['id'], $rows);
+        $placeholders = implode(',', array_fill(0, count($ids), '?'));
+
+        $featuresBySid = [];
+        $fStmt = $pdo->prepare("SELECT id, service_id, title, description, icon, highlight_badge, display_order FROM service_features WHERE service_id IN ($placeholders) ORDER BY display_order ASC, id ASC");
+        $fStmt->execute($ids);
+        foreach ($fStmt->fetchAll() as $f) {
+            $featuresBySid[(int)$f['service_id']][] = $f;
+        }
+
+        $galBySid = [];
+        $gStmt = $pdo->prepare("SELECT id, service_id, image_url, alt_text, caption, display_order FROM service_galleries WHERE service_id IN ($placeholders) ORDER BY display_order ASC, id ASC");
+        $gStmt->execute($ids);
+        foreach ($gStmt->fetchAll() as $g) {
+            $galBySid[(int)$g['service_id']][] = $g;
+        }
+
+        $seoBySid = [];
+        $sStmt = $pdo->prepare("SELECT entity_id, seo_title, meta_description, canonical_url, og_title, og_description, og_image, structured_data_json FROM service_seo WHERE entity_type = 'service' AND entity_id IN ($placeholders)");
+        $sStmt->execute($ids);
+        foreach ($sStmt->fetchAll() as $s) {
+            $eid = (int)$s['entity_id'];
+            unset($s['entity_id']);
+            $seoBySid[$eid] = $s;
+        }
+
+        $defaultSeo = ['seo_title' => '', 'meta_description' => '', 'canonical_url' => '', 'og_title' => '', 'og_description' => '', 'og_image' => '', 'structured_data_json' => ''];
+        return array_map(function ($row) use ($featuresBySid, $galBySid, $seoBySid, $defaultSeo) {
+            $sid = (int)$row['id'];
+            $row['id'] = $sid;
+            $row['category_id'] = $row['category_id'] !== null ? (int)$row['category_id'] : null;
+            $row['display_order'] = (int)$row['display_order'];
+            $row['benefits'] = json_decode($row['benefits'] ?: '[]', true) ?: [];
+            $row['specifications'] = json_decode($row['specifications'] ?: '[]', true) ?: [];
+            $row['additional_info'] = json_decode($row['additional_info'] ?: '{}', true) ?: [];
+            $row['related_service_ids'] = json_decode($row['related_service_ids'] ?: '[]', true) ?: [];
+            $row['features'] = $featuresBySid[$sid] ?? [];
+            $row['gallery'] = $galBySid[$sid] ?? [];
+            $row['seo'] = $seoBySid[$sid] ?? $defaultSeo;
+            return $row;
+        }, $rows);
+    }
+}
+
 if (!function_exists('formatServiceRow')) {
     function formatServiceRow(PDO $pdo, array $row): array {
-        $sid = (int)$row['id'];
-        $featuresStmt = $pdo->prepare("SELECT id, service_id, title, description, icon, highlight_badge, display_order FROM service_features WHERE service_id = ? ORDER BY display_order ASC, id ASC");
-        $featuresStmt->execute([$sid]);
-        $features = $featuresStmt->fetchAll();
-
-        $galStmt = $pdo->prepare("SELECT id, service_id, image_url, alt_text, caption, display_order FROM service_galleries WHERE service_id = ? ORDER BY display_order ASC, id ASC");
-        $galStmt->execute([$sid]);
-        $gallery = $galStmt->fetchAll();
-
-        $seoStmt = $pdo->prepare("SELECT seo_title, meta_description, canonical_url, og_title, og_description, og_image, structured_data_json FROM service_seo WHERE entity_type = 'service' AND entity_id = ?");
-        $seoStmt->execute([$sid]);
-        $seo = $seoStmt->fetch() ?: [
-            'seo_title' => '',
-            'meta_description' => '',
-            'canonical_url' => '',
-            'og_title' => '',
-            'og_description' => '',
-            'og_image' => '',
-            'structured_data_json' => ''
-        ];
-
-        $row['id'] = $sid;
-        $row['category_id'] = $row['category_id'] !== null ? (int)$row['category_id'] : null;
-        $row['display_order'] = (int)$row['display_order'];
-        $row['benefits'] = json_decode($row['benefits'] ?: '[]', true) ?: [];
-        $row['specifications'] = json_decode($row['specifications'] ?: '[]', true) ?: [];
-        $row['additional_info'] = json_decode($row['additional_info'] ?: '{}', true) ?: [];
-        $row['related_service_ids'] = json_decode($row['related_service_ids'] ?: '[]', true) ?: [];
-        $row['features'] = $features;
-        $row['gallery'] = $gallery;
-        $row['seo'] = $seo;
-        return $row;
+        $batch = formatServiceRowsBatch($pdo, [$row]);
+        return $batch[0];
     }
 }
 
@@ -772,7 +789,7 @@ if (!function_exists('handleServicesCmsRequest')) {
                 $stmt = $pdo->prepare("SELECT s.*, c.name AS category_name, c.slug AS category_slug FROM services s LEFT JOIN service_categories c ON s.category_id = c.id WHERE $where ORDER BY s.display_order ASC, s.id ASC");
                 $stmt->execute($params);
                 $rows = $stmt->fetchAll();
-                $items = array_map(fn($r) => formatServiceRow($pdo, $r), $rows);
+                $items = formatServiceRowsBatch($pdo, $rows);
 
                 if ($isAuthorized && $isAdminQuery) {
                     $stats = [
@@ -1371,27 +1388,25 @@ if (!function_exists('handleServicesCmsRequest')) {
             }
         }
 
-        // 6. SERVICES MEDIA UPLOAD & DELETE (validated, max 5MB)
+        // 6. SERVICES MEDIA UPLOAD & DELETE (validated, max 5MB, real image check)
         if ($resource === 'services-upload') {
             if ($method === 'POST' && isset($_FILES['image'])) {
                 $file = $_FILES['image'];
-                if ($file['error'] !== UPLOAD_ERR_OK) {
-                    http_response_code(400);
-                    echo json_encode(['error' => 'Upload error code: ' . $file['error']]);
-                    return true;
-                }
-                $maxBytes = 5 * 1024 * 1024; // 5MB limit
-                if (($file['size'] ?? 0) > $maxBytes) {
-                    http_response_code(422);
-                    echo json_encode(['error' => 'Image exceeds 5MB size limit.']);
-                    return true;
-                }
-                $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION) ?: 'webp');
-                $allowedExts = ['jpg', 'jpeg', 'png', 'webp', 'avif', 'gif', 'svg'];
-                if (!in_array($ext, $allowedExts, true)) {
-                    http_response_code(422);
-                    echo json_encode(['error' => 'Unsupported image format. Allowed: jpg, jpeg, png, webp, avif, gif, svg.']);
-                    return true;
+                if (function_exists('validateUploadedImage')) {
+                    $check = validateUploadedImage($file);
+                    if (!$check['ok']) {
+                        http_response_code($check['code']);
+                        echo json_encode(['error' => $check['error']]);
+                        return true;
+                    }
+                    $ext = $check['ext'];
+                } else {
+                    if ($file['error'] !== UPLOAD_ERR_OK) {
+                        http_response_code(400);
+                        echo json_encode(['error' => 'Upload error code: ' . $file['error']]);
+                        return true;
+                    }
+                    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION) ?: 'webp');
                 }
                 $filename = 'svc_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
                 $targetDir = dirname(__DIR__) . '/uploads/services';

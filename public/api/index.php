@@ -16,12 +16,18 @@ if (!headers_sent()) header('Cache-Control: no-store, no-cache, must-revalidate,
 if (!headers_sent()) header('Pragma: no-cache');
 if (!headers_sent()) header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 
-// CORS Headers for API flexibility
-$origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
-if (!headers_sent()) header("Access-Control-Allow-Origin: $origin");
+// CORS Headers (Restricted to trusted origins when credentials are used)
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+$isTrustedOrigin = (bool)preg_match('#^https?://((www\.)?toplinkersgroup\.com|localhost(:\d+)?|127\.0\.0\.1(:\d+)?)$#i', $origin);
+if ($isTrustedOrigin) {
+    if (!headers_sent()) header("Access-Control-Allow-Origin: $origin");
+    if (!headers_sent()) header('Access-Control-Allow-Credentials: true');
+    if (!headers_sent()) header('Vary: Origin');
+} else {
+    if (!headers_sent()) header('Access-Control-Allow-Origin: *');
+}
 if (!headers_sent()) header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS');
 if (!headers_sent()) header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Accept');
-if (!headers_sent()) header('Access-Control-Allow-Credentials: true');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(204);
@@ -99,6 +105,44 @@ if (!function_exists('verifyAuthToken')) {
     }
 }
 
+if (!function_exists('requireAdminAuth')) {
+    function requireAdminAuth(string $secret): void {
+        if (!verifyAuthToken($secret)) {
+            http_response_code(401);
+            echo json_encode(['error' => 'Unauthorized: Valid administrator token required.']);
+            exit;
+        }
+    }
+}
+
+if (!function_exists('validateUploadedImage')) {
+    function validateUploadedImage(array $file, int $maxBytes = 5242880): array {
+        if (($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
+            return ['ok' => false, 'code' => 400, 'error' => 'Upload error code: ' . ($file['error'] ?? -1)];
+        }
+        if (($file['size'] ?? 0) <= 0 || ($file['size'] ?? 0) > $maxBytes) {
+            return ['ok' => false, 'code' => 422, 'error' => 'Image must be between 1 byte and 5MB.'];
+        }
+        $ext = strtolower(pathinfo((string)($file['name'] ?? ''), PATHINFO_EXTENSION));
+        $allowed = ['jpg', 'jpeg', 'png', 'webp', 'avif', 'gif', 'svg'];
+        if (!in_array($ext, $allowed, true)) {
+            return ['ok' => false, 'code' => 422, 'error' => 'Invalid image file type.'];
+        }
+        $tmp = (string)($file['tmp_name'] ?? '');
+        if ($ext === 'svg') {
+            $svg = @file_get_contents($tmp) ?: '';
+            if (preg_match('#<\s*script|on\w+\s*=|javascript:#i', $svg)) {
+                return ['ok' => false, 'code' => 422, 'error' => 'Unsafe SVG content rejected.'];
+            }
+        } elseif ($ext !== 'avif') {
+            if (@getimagesize($tmp) === false) {
+                return ['ok' => false, 'code' => 422, 'error' => 'Uploaded file is not a valid image.'];
+            }
+        }
+        return ['ok' => true, 'ext' => $ext];
+    }
+}
+
 // Helper: Generate slug
 if (!function_exists('slugify')) {
     function slugify(string $text): string {
@@ -118,6 +162,13 @@ if (!function_exists('slugify')) {
 require_once __DIR__ . '/services_cms.php';
 if (handleServicesCmsRequest($pdo, $resource, $subResource, $segments, $method, $secretKey)) {
     exit;
+}
+
+// Enforce authentication for all admin mutations and sensitive reads
+$isPublicRead = ($method === 'GET' && in_array($resource, ['health', 'rates', 'promo-strip', 'spotlight-popup', 'faqs', 'custom-building', 'properties', 'team', 'reviews', 'blogs'], true) && !isset($_GET['admin']) && !isset($_GET['all']));
+$isPublicPost = ($method === 'POST' && in_array($resource, ['login', 'leads'], true));
+if (!$isPublicRead && !$isPublicPost) {
+    requireAdminAuth($secretKey);
 }
 
 switch ($resource) {
@@ -791,28 +842,25 @@ switch ($resource) {
     case 'upload':
         if ($method === 'POST' && isset($_FILES['image'])) {
             $file = $_FILES['image'];
-            if ($file['error'] === UPLOAD_ERR_OK) {
-                $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION) ?: 'jpg');
-                $allowed = ['jpg', 'jpeg', 'png', 'webp', 'avif', 'gif', 'svg'];
-                if (!in_array($ext, $allowed, true)) {
-                    http_response_code(400);
-                    echo json_encode(['error' => 'Invalid image file type.']);
-                    exit;
-                }
-                $filename = 'upload_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
-                $targetDir = dirname(__DIR__) . '/uploads/blogs';
-                if (!is_dir($targetDir)) {
-                    @mkdir($targetDir, 0755, true);
-                }
-                $targetFile = $targetDir . '/' . $filename;
-                if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-                    echo json_encode([
-                        'success' => true,
-                        'url' => '/uploads/blogs/' . $filename,
-                        'filename' => $filename
-                    ]);
-                    exit;
-                }
+            $check = validateUploadedImage($file);
+            if (!$check['ok']) {
+                http_response_code($check['code']);
+                echo json_encode(['error' => $check['error']]);
+                exit;
+            }
+            $filename = 'upload_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $check['ext'];
+            $targetDir = dirname(__DIR__) . '/uploads/blogs';
+            if (!is_dir($targetDir)) {
+                @mkdir($targetDir, 0755, true);
+            }
+            $targetFile = $targetDir . '/' . $filename;
+            if (move_uploaded_file($file['tmp_name'], $targetFile)) {
+                echo json_encode([
+                    'success' => true,
+                    'url' => '/uploads/blogs/' . $filename,
+                    'filename' => $filename
+                ]);
+                exit;
             }
             http_response_code(400);
             echo json_encode(['error' => 'File upload failed.']);
