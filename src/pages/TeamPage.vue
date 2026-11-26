@@ -20,11 +20,10 @@
       <!-- PART 1 (TOP): EXECUTIVE BOARD & FOUNDERS LEADERSHIP SHOWCASE   -->
       <!-- ============================================================== -->
       <section class="mb-14 sm:mb-16">
-        <div class="flex items-center justify-between mb-5 max-w-6xl mx-auto">
+        <div class="mb-5 max-w-6xl mx-auto">
           <h2 class="text-base sm:text-lg font-bold text-[#0F2A44]">
             Founding Leadership &amp; CEOs
           </h2>
-          <span class="text-xs text-slate-400 hidden sm:inline">Click a card for full profile</span>
         </div>
 
         <!-- The 2 Executive Cards Grid (Mobile-First Responsive Layout) -->
