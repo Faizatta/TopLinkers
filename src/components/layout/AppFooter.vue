@@ -171,9 +171,6 @@
                 <a href="mailto:toplinkers69@gmail.com" class="hover:text-[#16B4E8] transition-colors">
                   toplinkers69@gmail.com
                 </a>
-                <a href="mailto:syedusman@toplinkersgroup.com" class="hover:text-[#16B4E8] transition-colors text-[11px] text-slate-400">
-                  syedusman@toplinkersgroup.com
-                </a>
               </div>
             </li>
 

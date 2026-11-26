@@ -715,7 +715,7 @@ export const useAdminStore = defineStore('admin', () => {
       experience: '15+ Years',
       phone: '0334-9522157',
       whatsapp: '923349522157',
-      email: 'syedusman@toplinkersgroup.com',
+      email: 'toplinkers69@gmail.com',
       facebook: 'https://facebook.com/toplinkers',
       photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
       quote: 'At TopLinkers, our mission is straightforward: absolute transparency in property documentation, verified CDA/RDA titles, and rewarding real estate investments across Islamabad & Rawalpindi.',
