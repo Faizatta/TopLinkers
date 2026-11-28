@@ -243,6 +243,7 @@
               <th class="py-3.5 px-4">Client &amp; Contact</th>
               <th class="py-3.5 px-4">Project &amp; Division</th>
               <th class="py-3.5 px-4">Budget</th>
+              <th class="py-3.5 px-4">Notes</th>
               <th class="py-3.5 px-4">Pipeline Status</th>
               <th class="py-3.5 px-4 text-right">Actions</th>
             </tr>
@@ -308,6 +309,35 @@
               <!-- Budget -->
               <td class="py-3.5 px-4 align-middle whitespace-nowrap">
                 <span class="font-bold text-[#0F2A44]">{{ lead.budget || 'Open Discussion' }}</span>
+              </td>
+
+              <!-- Notes (Editable) -->
+              <td class="py-3.5 px-4 align-middle max-w-[220px]">
+                <div class="group/note relative">
+                  <p
+                    v-if="editingNoteId !== lead.id"
+                    class="text-[11px] text-slate-500 line-clamp-2 cursor-pointer hover:text-[#0F2A44] transition-colors"
+                    :title="lead.notes || 'Click to add note'"
+                    @click="startEditNote(lead)"
+                  >
+                    {{ lead.notes || '—' }}
+                    <span class="ml-1 text-[10px] text-slate-400 opacity-0 group-hover/note:opacity-100 transition-opacity">✎</span>
+                  </p>
+                  <div v-else class="flex flex-col gap-1">
+                    <textarea
+                      ref="noteTextarea"
+                      v-model="editNoteText"
+                      rows="2"
+                      class="w-full px-2 py-1.5 rounded-lg border border-[#16B4E8] text-[11px] text-slate-700 focus:outline-none resize-none"
+                      placeholder="Add a note..."
+                      @keydown.escape="editingNoteId = null"
+                    ></textarea>
+                    <div class="flex items-center gap-1">
+                      <button type="button" @click="saveEditNote(lead.id)" class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#0F2A44] text-white hover:bg-[#16B4E8]">Save</button>
+                      <button type="button" @click="editingNoteId = null" class="px-2 py-0.5 rounded text-[10px] font-medium text-slate-500 hover:text-slate-800">Cancel</button>
+                    </div>
+                  </div>
+                </div>
               </td>
 
               <!-- Status Selector -->
@@ -440,9 +470,23 @@
           </div>
         </div>
 
-        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-          <span class="block text-[10px] font-bold uppercase text-slate-400 mb-1">Inquiry Notes</span>
-          <p class="text-slate-700 leading-relaxed">{{ viewingLead.notes || 'No notes recorded.' }}</p>
+        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="block text-[10px] font-bold uppercase text-slate-400">Inquiry Notes</span>
+            <button
+              type="button"
+              @click="saveViewingLeadNote"
+              class="px-2.5 py-1 rounded-md bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-[10px] font-bold transition-colors"
+            >
+              Save Note
+            </button>
+          </div>
+          <textarea
+            v-model="viewingLeadNote"
+            rows="3"
+            class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white text-xs text-slate-700 focus:outline-none focus:border-[#16B4E8]"
+            placeholder="Add follow-up or contact notes..."
+          ></textarea>
         </div>
 
         <div class="flex items-center justify-end gap-2.5 pt-2 border-t border-slate-100">
@@ -536,6 +580,55 @@
         </form>
       </div>
     </div>
+
+    <!-- Modal: Status Change Note Prompt -->
+    <div v-if="showStatusNoteModal" @click.self="skipStatusNote" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
+      <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="text-base font-bold text-[#0F2A44]">Update Status &amp; Add Note</h3>
+            <p class="text-xs text-slate-500 mt-0.5">
+              Changing status to <span class="font-bold text-[#16B4E8]">{{ statusChangeNewStatus }}</span>
+            </p>
+          </div>
+          <button
+            type="button"
+            @click="skipStatusNote"
+            class="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100"
+            aria-label="Close"
+          >
+            <XMarkIcon class="w-5 h-5" />
+          </button>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Contact / Follow-up Note</label>
+          <textarea
+            v-model="statusChangeNote"
+            rows="3"
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs text-slate-700 focus:outline-none focus:border-[#16B4E8]"
+            placeholder="e.g. Called client, scheduled site visit for Saturday, or no answer yet..."
+          ></textarea>
+        </div>
+
+        <div class="flex items-center justify-end gap-2.5 pt-2 border-t border-slate-100">
+          <button
+            type="button"
+            @click="skipStatusNote"
+            class="px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:bg-slate-100 transition-colors"
+          >
+            Skip Note
+          </button>
+          <button
+            type="button"
+            @click="confirmStatusChange"
+            class="px-4 py-2 rounded-xl text-xs font-semibold bg-[#0F2A44] hover:bg-[#16B4E8] text-white transition-colors"
+          >
+            Save Status &amp; Note
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -568,6 +661,21 @@ const pageSize = ref(10)
 const selectedIds = ref([])
 const openAddModal = ref(false)
 const viewingLead = ref(null)
+const viewingLeadNote = ref('')
+const showStatusNoteModal = ref(false)
+const statusChangeLeadId = ref(null)
+const statusChangeNewStatus = ref('')
+const statusChangeNote = ref('')
+
+watch(viewingLead, (val) => {
+  viewingLeadNote.value = val ? (val.notes || '') : ''
+})
+
+const saveViewingLeadNote = () => {
+  if (!viewingLead.value) return
+  adminStore.updateLeadNotes(viewingLead.value.id, viewingLeadNote.value)
+  adminStore.showToast('Inquiry note saved.')
+}
 
 const form = ref({
   name: '',
@@ -704,8 +812,42 @@ const cleanPhone = (phone) => {
 }
 
 const handleStatusChange = (id, status) => {
-  adminStore.updateLeadStatus(id, status)
-  adminStore.showToast(`Lead status updated to "${status}".`)
+  statusChangeLeadId.value = id
+  statusChangeNewStatus.value = status
+  statusChangeNote.value = ''
+  showStatusNoteModal.value = true
+}
+
+const confirmStatusChange = () => {
+  adminStore.updateLeadStatus(statusChangeLeadId.value, statusChangeNewStatus.value, statusChangeNote.value)
+  adminStore.showToast(`Lead status updated to "${statusChangeNewStatus.value}".`)
+  showStatusNoteModal.value = false
+  statusChangeLeadId.value = null
+  statusChangeNewStatus.value = ''
+  statusChangeNote.value = ''
+}
+
+const skipStatusNote = () => {
+  adminStore.updateLeadStatus(statusChangeLeadId.value, statusChangeNewStatus.value)
+  adminStore.showToast(`Lead status updated to "${statusChangeNewStatus.value}".`)
+  showStatusNoteModal.value = false
+  statusChangeLeadId.value = null
+  statusChangeNewStatus.value = ''
+  statusChangeNote.value = ''
+}
+
+const editingNoteId = ref(null)
+const editNoteText = ref('')
+
+const startEditNote = (lead) => {
+  editingNoteId.value = lead.id
+  editNoteText.value = lead.notes || ''
+}
+
+const saveEditNote = (id) => {
+  adminStore.updateLeadNotes(id, editNoteText.value)
+  editingNoteId.value = null
+  adminStore.showToast('Note saved.')
 }
 
 const confirmDelete = async (id) => {

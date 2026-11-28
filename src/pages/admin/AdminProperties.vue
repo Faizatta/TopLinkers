@@ -228,26 +228,40 @@
           <!-- Society & Main Type -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Society / Project *</label>
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-xs font-bold text-gray-700 uppercase">Society / Project *</label>
+                <button
+                  type="button"
+                  @click="showNewSocietyInput = !showNewSocietyInput"
+                  class="text-[11px] font-bold text-[#16B4E8] hover:underline"
+                >
+                  {{ showNewSocietyInput ? 'Cancel' : '+ Add New Society' }}
+                </button>
+              </div>
               <select 
                 v-model="propertyForm.society" 
                 @change="onSocietyChange"
                 class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-xs bg-white focus:outline-none focus:border-[#16B4E8]"
               >
-                <option value="PECHS Islamabad">PECHS Islamabad</option>
-                <option value="TopCity-1">TopCity-1</option>
-                <option value="Airport Green Garden (AGG)">Airport Green Garden (AGG)</option>
-                <option value="Top Residencia">Top Residencia</option>
-                <option value="Faisal Town (FT-I & FT-II)">Faisal Town (FT-I & FT-II)</option>
-                <option value="Blue World City">Blue World City</option>
-                <option value="PHA Flats (I-12 / I-16)">PHA Flats (Sector I-12 / I-16)</option>
-                <option value="Faisal Heights (F-18)">Faisal Heights (Faisal Town, F-18)</option>
-                <option value="Harsukh (Nathia Gali)">Harsukh (Nathia Gali)</option>
-                <option value="Gulberg Greens">Gulberg Greens, Islamabad</option>
-                <option value="DHA Islamabad">DHA Islamabad</option>
-                <option value="Bahria Town">Bahria Town Islamabad/Rwp</option>
+                <option v-for="soc in adminStore.societies" :key="soc.value" :value="soc.value">{{ soc.label }}</option>
                 <option value="Other">Other Sector / Custom Location</option>
               </select>
+              <div v-if="showNewSocietyInput || propertyForm.society === 'Other'" class="mt-2 flex items-center gap-2">
+                <input
+                  v-model="newSocietyName"
+                  type="text"
+                  placeholder="Enter new society name (e.g. Capital Smart City)"
+                  class="flex-1 px-3 py-2 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#16B4E8]"
+                  @keydown.enter.prevent="handleAddSociety"
+                />
+                <button
+                  type="button"
+                  @click="handleAddSociety"
+                  class="px-3 py-2 rounded-lg bg-[#0F2A44] hover:bg-[#16B4E8] text-white text-xs font-bold transition-colors whitespace-nowrap"
+                >
+                  Add Society
+                </button>
+              </div>
             </div>
 
             <div>
@@ -843,6 +857,18 @@ const showModal = ref(false)
 const isEditing = ref(false)
 const uploadingImages = ref(false)
 const extraImageUrl = ref('')
+const showNewSocietyInput = ref(false)
+const newSocietyName = ref('')
+
+const handleAddSociety = () => {
+  const name = newSocietyName.value.trim()
+  if (!name) return
+  adminStore.addSociety(name)
+  propertyForm.value.society = name
+  newSocietyName.value = ''
+  showNewSocietyInput.value = false
+  adminStore.showToast(`Society "${name}" added to all dropdowns.`)
+}
 
 // Map Picker State
 const pickerMapEl = ref(null)
@@ -1378,6 +1404,12 @@ const editProperty = (prop) => {
 }
 
 const saveProperty = () => {
+  if (newSocietyName.value.trim()) {
+    handleAddSociety()
+  } else if (propertyForm.value.society && propertyForm.value.society !== 'Other') {
+    adminStore.addSociety(propertyForm.value.society)
+  }
+
   const finalImages = propertyForm.value.images.length > 0
     ? [...propertyForm.value.images]
     : ['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80']
@@ -1474,15 +1506,27 @@ const saveProperty = () => {
         id: item.id,
         slug: item.slug,
         title: item.title,
+        society: item.society,
+        type_name: item.typeName,
+        payment_mode: item.paymentMode,
+        down_payment: item.downPayment,
+        installment_plan: item.installmentPlan,
+        payment_note: item.pricePerSqft,
         price: item.price,
+        price_formatted: item.priceFormatted,
         type: item.type,
         purpose: item.purpose,
         location: item.address,
         area: item.area,
+        sqft: item.sqft,
+        lat: item.lat,
+        lng: item.lng,
         bedrooms: item.beds,
         bathrooms: item.baths,
         image: item.images?.[0]?.startsWith('http') ? item.images[0] : null,
+        images: item.images,
         featured: item.featured,
+        hot_offer: item.hotOffer,
         offer_enabled: item.offerEnabled,
         offer_label: item.offerLabel,
         offer_price: item.offerPrice,

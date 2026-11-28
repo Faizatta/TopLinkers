@@ -196,15 +196,9 @@
                   <option value="all">All Locations</option>
                   <option value="Islamabad">Islamabad</option>
                   <option value="Rawalpindi">Rawalpindi</option>
-                  <option value="PECHS">PECHS Society</option>
-                  <option value="TopCity">TopCity-1</option>
-                  <option value="PHA">PHA Flats (I-12 &amp; I-16)</option>
-                  <option value="Faisal">Faisal Town II (FT-II)</option>
-                  <option value="Gulberg">Gulberg Islamabad</option>
-                  <option value="Blue">Blue World City</option>
-                  <option value="DHA">DHA Islamabad</option>
-                  <option value="Bahria">Bahria Town</option>
-                  <option value="Murree">Nathia Gali</option>
+                  <option v-for="soc in adminStore.societies" :key="soc.value" :value="soc.keyword || soc.value">
+                    {{ soc.label }}
+                  </option>
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-gray-400">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -451,11 +445,13 @@ import ResultsHeader from '../components/listings/ResultsHeader.vue'
 import PropertyCard from '../components/property/PropertyCard.vue'
 import Skeleton from '../components/ui/Skeleton.vue'
 import { usePropertiesStore } from '../stores/properties'
+import { useAdminStore } from '../stores/admin'
 import { onDataChanged } from '../utils/syncBus'
 
 const route = useRoute()
 const router = useRouter()
 const propertiesStore = usePropertiesStore()
+const adminStore = useAdminStore()
 
 const mobileShowMap = ref(false)
 const isFilterDrawerOpen = ref(false)

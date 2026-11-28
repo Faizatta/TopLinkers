@@ -119,6 +119,16 @@
     <!-- Card Body (Clicking anywhere navigates to property details) -->
     <div class="p-4 sm:p-5 flex flex-col justify-between flex-1">
       <div class="min-w-0">
+        <!-- Society / Project Pill -->
+        <div v-if="property.society || property.city" class="flex items-center gap-1.5 mb-1.5 flex-wrap">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-[#0F2A44] bg-slate-100 px-2 py-0.5 rounded-md">
+            {{ property.society || property.city }}
+          </span>
+          <span v-if="property.paymentMode && property.paymentMode !== 'cash'" class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md">
+            {{ property.paymentMode === 'both' ? 'Cash / Installment' : 'Installments' }}
+          </span>
+        </div>
+
         <!-- Title strictly 1 line for equal card height -->
         <router-link
           :to="`/property/${property.slug}`"
@@ -133,10 +143,15 @@
           <MapPinIcon class="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
           <span class="truncate flex-1 min-w-0">{{ property.address }}</span>
         </p>
+
+        <!-- Description snippet (when provided) -->
+        <p v-if="property.description" class="text-[11px] text-slate-500 mt-2 line-clamp-2 leading-relaxed">
+          {{ property.description }}
+        </p>
       </div>
 
-      <!-- Specs Row: Beds, Baths, Area in Sq Ft + Property Type in uppercase -->
-      <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
+      <!-- Specs Row: Beds, Baths, Area + Property Type in uppercase -->
+      <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600 gap-2">
         <div class="flex items-center gap-3">
           <div v-if="property.beds > 0" class="flex items-center gap-1" title="Bedrooms">
             <HomeModernIcon class="w-3.5 h-3.5 text-gray-400" />
@@ -148,16 +163,16 @@
             <span class="font-bold">{{ property.baths }}</span>
           </div>
 
-          <div class="flex items-center gap-1" title="Area in Square Feet / Marla">
+          <div v-if="displayArea" class="flex items-center gap-1" title="Area in Square Feet / Marla">
             <ArrowsPointingOutIcon class="w-3.5 h-3.5 text-gray-400" />
-            <span class="font-bold">{{ property.sqft?.toLocaleString() }} <span class="text-[10px] text-gray-400">SqFt</span></span>
+            <span class="font-bold">{{ displayArea }}</span>
           </div>
         </div>
 
         <!-- Property Type Badge -->
         <div class="flex items-center gap-1.5 flex-shrink-0">
           <span class="text-[10px] font-extrabold uppercase tracking-wider text-[#16B4E8] bg-[#16B4E8]/10 px-2 py-0.5 rounded-full">
-            {{ property.typeName }}
+            {{ property.typeName || property.type }}
           </span>
         </div>
       </div>
@@ -216,6 +231,13 @@ const displayPrice = computed(() => {
     return `PKR ${formatPkrAmount(props.property.offerPrice)}`
   }
   return props.property?.priceFormatted || (props.property?.price ? `PKR ${props.property.price.toLocaleString()}` : '')
+})
+
+const displayArea = computed(() => {
+  if (props.property?.area) return props.property.area
+  if (props.property?.marla) return props.property.marla
+  if (props.property?.sqft) return `${props.property.sqft.toLocaleString()} SqFt`
+  return ''
 })
 
 const originalPriceFormatted = computed(() => {

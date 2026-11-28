@@ -302,6 +302,9 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useAdminStore } from '../../stores/admin'
+
+const adminStore = useAdminStore()
 
 const props = defineProps({
   filters: {
@@ -327,18 +330,13 @@ const typeOptions = [
   { value: 'farmhouse', label: 'Farmhouses', icon: '🌳' }
 ]
 
-const popularLocations = [
+const popularLocations = computed(() => [
   { value: 'all', label: 'All Sectors' },
-  { value: 'Gulberg', label: 'Gulberg Islamabad' },
-  { value: 'TopCity', label: 'TopCity-1' },
-  { value: 'PHA', label: 'PHA (I-12 / I-16)' },
-  { value: 'PECHS', label: 'PECHS Society' },
-  { value: 'Faisal', label: 'Faisal Town (FT-II)' },
-  { value: 'Blue', label: 'Blue World City' },
-  { value: 'DHA', label: 'DHA Islamabad' },
-  { value: 'Bahria', label: 'Bahria Town' },
-  { value: 'Nathia', label: 'Nathia Gali' }
-]
+  ...adminStore.societies.map(s => ({
+    value: s.keyword || s.value,
+    label: s.label
+  }))
+])
 
 const budgetPresets = [
   { label: 'Any Budget', min: '', max: '' },

@@ -457,16 +457,35 @@ export const useAdminStore = defineStore('admin', () => {
     return newLead
   }
 
-  const updateLeadStatus = async (id, newStatus) => {
+  const updateLeadStatus = async (id, newStatus, note) => {
     const lead = leads.value.find(l => l.id === id)
     if (lead) {
       lead.status = newStatus
+      lead.statusChangedAt = new Date().toISOString().replace('T', ' ').substring(0, 16)
+      if (note !== undefined && note !== null && note.trim() !== '') {
+        lead.notes = (lead.notes ? lead.notes + '\n' : '') + `[${lead.statusChangedAt} → ${newStatus}] ${note.trim()}`
+      }
       saveLeads()
       try {
         await fetch(`${API_BASE_URL}/leads/${id}/status`, {
           method: 'PATCH',
           headers: getAdminHeaders({ 'Content-Type': 'application/json' }),
-          body: JSON.stringify({ status: newStatus })
+          body: JSON.stringify({ status: newStatus, notes: lead.notes })
+        })
+      } catch (e) {}
+    }
+  }
+
+  const updateLeadNotes = async (id, notes) => {
+    const lead = leads.value.find(l => l.id === id)
+    if (lead) {
+      lead.notes = notes
+      saveLeads()
+      try {
+        await fetch(`${API_BASE_URL}/leads/${id}/notes`, {
+          method: 'PATCH',
+          headers: getAdminHeaders({ 'Content-Type': 'application/json' }),
+          body: JSON.stringify({ notes })
         })
       } catch (e) {}
     }
@@ -481,6 +500,57 @@ export const useAdminStore = defineStore('admin', () => {
         headers: getAdminHeaders()
       })
     } catch (e) {}
+  }
+
+  // ── Dynamic Societies / Project Names List ──
+  const DEFAULT_SOCIETIES = [
+    { value: 'PECHS Islamabad', label: 'PECHS Islamabad', keyword: 'PECHS' },
+    { value: 'TopCity-1', label: 'TopCity-1', keyword: 'TopCity' },
+    { value: 'Airport Green Garden (AGG)', label: 'Airport Green Garden (AGG)', keyword: 'AGG' },
+    { value: 'Top Residencia', label: 'Top Residencia', keyword: 'TopResidencia' },
+    { value: 'Faisal Town (FT-I & FT-II)', label: 'Faisal Town (FT-I & FT-II)', keyword: 'Faisal' },
+    { value: 'Blue World City', label: 'Blue World City', keyword: 'Blue' },
+    { value: 'PHA Flats (I-12 / I-16)', label: 'PHA Flats (Sector I-12 / I-16)', keyword: 'PHA' },
+    { value: 'Faisal Heights (F-18)', label: 'Faisal Heights (Faisal Town, F-18)', keyword: 'Faisal Heights' },
+    { value: 'Harsukh (Nathia Gali)', label: 'Harsukh (Nathia Gali)', keyword: 'Murree' },
+    { value: 'Gulberg Greens', label: 'Gulberg Greens, Islamabad', keyword: 'Gulberg' },
+    { value: 'DHA Islamabad', label: 'DHA Islamabad', keyword: 'DHA' },
+    { value: 'Bahria Town', label: 'Bahria Town Islamabad/Rwp', keyword: 'Bahria' }
+  ]
+
+  const loadSocieties = () => {
+    try {
+      const stored = JSON.parse(localStorage.getItem('toplinkers_societies') || 'null')
+      if (Array.isArray(stored) && stored.length > 0) {
+        // Merge any missing defaults
+        const vals = stored.map(s => s.value)
+        DEFAULT_SOCIETIES.forEach(d => {
+          if (!vals.includes(d.value)) stored.push(d)
+        })
+        return stored
+      }
+    } catch (e) {}
+    return [...DEFAULT_SOCIETIES]
+  }
+
+  const societies = ref(loadSocieties())
+
+  const saveSocieties = () => {
+    localStorage.setItem('toplinkers_societies', JSON.stringify(societies.value))
+  }
+
+  const addSociety = (name, keyword) => {
+    const trimmed = (name || '').trim()
+    if (!trimmed) return
+    if (societies.value.some(s => s.value === trimmed)) return
+    const kw = (keyword || '').trim() || trimmed.split(/[\s(]/)[0]
+    societies.value.push({ value: trimmed, label: trimmed, keyword: kw })
+    saveSocieties()
+  }
+
+  const removeSociety = (value) => {
+    societies.value = societies.value.filter(s => s.value !== value)
+    saveSocieties()
   }
 
   // 3. Live Market Rates & Details (Syncs with Frontend)
@@ -2059,7 +2129,11 @@ export const useAdminStore = defineStore('admin', () => {
     leads,
     addLead,
     updateLeadStatus,
+    updateLeadNotes,
     deleteLead,
+    societies,
+    addSociety,
+    removeSociety,
     liveRates,
     saveLiveRates,
     teamMembers,

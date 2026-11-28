@@ -63,24 +63,39 @@ export async function syncServerProperties({ force = false } = {}) {
         if (Array.isArray(data) && data.length > 0) {
           serverPropertiesCache = data.map(p => {
             const base = propertiesData.find(d => d.slug === p.slug || d.id === p.id) || {}
+            const rawPrice = Number(p.price || base.price || 0)
+            const parsedSqft = Number(p.sqft) || parseInt(String(p.area || '').replace(/[^0-9]/g, ''), 10) || base.sqft || 0
+            const typeLabel = p.type_name || base.typeName || (p.type === 'apartment' ? 'Flat / Apartment' : p.type === 'house' ? 'House / Villa' : p.type === 'commercial' ? 'Commercial' : 'Plot / File')
             return {
               ...base,
               id: p.id,
               propertyId: p.slug || ('TL-' + p.id),
               slug: p.slug,
               title: p.title,
-              price: Number(p.price || 0),
+              society: p.society || base.society || p.location || '',
+              areaName: p.society || base.areaName || '',
+              price: rawPrice,
+              priceFormatted: p.price_formatted || base.priceFormatted || (rawPrice ? `PKR ${rawPrice.toLocaleString()}` : ''),
+              pricePerSqft: p.payment_note || p.price_per_sqft || base.pricePerSqft || '100% Cash / Ready Possession',
+              paymentMode: p.payment_mode || base.paymentMode || 'cash',
+              downPayment: p.down_payment || base.downPayment || '',
+              installmentPlan: p.installment_plan || base.installmentPlan || '',
               type: p.type || base.type || 'plot',
-              typeName: p.type === 'apartment' ? 'Flat / Apartment' : p.type === 'house' ? 'House / Villa' : 'Plot / File',
+              typeName: typeLabel,
               purpose: p.purpose || base.purpose || 'for-sale',
               status: p.purpose || base.status || 'for-sale',
               address: p.location || base.address || 'Islamabad',
-              city: p.location?.includes('Rawalpindi') ? 'Rawalpindi' : (p.location?.includes('Nathia Gali') ? 'Murree & Galyat' : (base.city || 'Islamabad')),
+              city: p.society || (p.location?.includes('Rawalpindi') ? 'Rawalpindi' : (p.location?.includes('Nathia Gali') ? 'Murree & Galyat' : (base.city || 'Islamabad'))),
               area: p.area || base.area || '10 Marla',
+              marla: p.area || base.marla || '',
+              sqft: parsedSqft,
+              lat: Number(p.lat || base.lat || 33.6844),
+              lng: Number(p.lng || base.lng || 73.0479),
               beds: Number(p.bedrooms !== undefined ? p.bedrooms : (base.beds || 0)),
               baths: Number(p.bathrooms !== undefined ? p.bathrooms : (base.baths || 0)),
-              images: p.image ? [p.image, ...(base.images?.slice(1) || [])] : (base.images || ['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80']),
+              images: Array.isArray(p.images) && p.images.length > 0 ? p.images : (p.image ? [p.image, ...(base.images?.slice(1) || [])] : (base.images || ['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80'])),
               featured: Boolean(p.featured),
+              hotOffer: Boolean(p.hot_offer ?? base.hotOffer),
               description: p.description || base.description || '',
               offerEnabled: Boolean(p.offer_enabled),
               offerLabel: p.offer_label || '',

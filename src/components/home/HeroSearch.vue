@@ -76,14 +76,9 @@
                 class="w-full text-xs font-bold text-[#0F2A44] p-3 rounded-[4px] border border-gray-200 bg-white focus:outline-none focus:border-[#16B4E8] cursor-pointer appearance-none pr-8"
               >
                 <option value="all">All Islamabad & Rawalpindi</option>
-                <option value="Gulberg">Gulberg Islamabad</option>
-                <option value="Faisal">Faisal Town Phase II (FT-II)</option>
-                <option value="TopCity">TopCity-1 & Residencia</option>
-                <option value="PHA">PHA Flats (I-12 & I-16)</option>
-                <option value="PECHS">PECHS Society</option>
-                <option value="Blue">Blue World City</option>
-                <option value="DHA">DHA Islamabad</option>
-                <option value="Bahria">Bahria Town</option>
+                <option v-for="soc in adminStore.societies" :key="soc.value" :value="soc.keyword || soc.value">
+                  {{ soc.label }}
+                </option>
               </select>
               <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-gray-400">
                 <ChevronDownIcon class="w-3.5 h-3.5" />
@@ -159,8 +154,10 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ChevronDownIcon, ArrowRightIcon } from '@heroicons/vue/24/outline'
+import { useAdminStore } from '../../stores/admin'
 
 const router = useRouter()
+const adminStore = useAdminStore()
 
 const searchStatus = ref('all')
 const searchType = ref('all')
